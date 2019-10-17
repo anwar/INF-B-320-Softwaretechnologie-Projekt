@@ -30,6 +30,7 @@ import javax.validation.constraints.NotBlank;
 class GuestbookForm {
 
 	private final @NotBlank String name;
+	private final @NotBlank String email;
 	private final @NotBlank String text;
 
 	/**
@@ -42,9 +43,10 @@ class GuestbookForm {
 	 * @param name the value to bind to {@code name}
 	 * @param text the value to bind to {@code text}
 	 */
-	public GuestbookForm(String name, String text) {
+	public GuestbookForm(String name, String email, String text) {
 
 		this.name = name;
+		this.email = email;
 		this.text = text;
 	}
 
@@ -66,6 +68,7 @@ class GuestbookForm {
 	 *
 	 * @return the value bound to {@code text}
 	 */
+	public String getEmail() {return email; }
 	public String getText() {
 		return text;
 	}
@@ -77,6 +80,6 @@ class GuestbookForm {
 	 * @throws IllegalArgumentException if you call this on an instance without the name and text actually set.
 	 */
 	GuestbookEntry toNewEntry() {
-		return new GuestbookEntry(getName(), getText());
+		return new GuestbookEntry(getName(), getEmail(), getText());
 	}
 }
