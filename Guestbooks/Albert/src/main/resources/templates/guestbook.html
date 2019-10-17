@@ -12,6 +12,8 @@
 	</head>
 	<body>
 		<h1 class="text-center" th:text="#{guestbook.title}">Gästebuch</h1>
+
+
 	
 		<div class="checkbox text-center">
 			<input type="checkbox" id="use_ajax" />
@@ -24,8 +26,15 @@
 		</div>
 		
 		<br />
+		<div class="text-center">
+			<button class="btn btn-secondary" >Schrift größer</button>
+			<button class="btn btn-secondary">Schrift kleiner</button>
+		</div>
 
-		<div id="entries" class="mx-auto">			
+		<br />
+
+		<div id="entries" class="mx-auto">
+
 			<div th:each="entry, it : ${entries}" th:with="index = ${it.count}">
 				<div class="card" th:fragment="entry" th:id="entry+${entry.id}">
 					<div class="card-header">
@@ -39,6 +48,15 @@
 					<div class="card-body">
 						<blockquote class="entrytext" th:text="${entry.text}"></blockquote>
 					</div>
+
+					<div class="card-body">
+						<p th:text="${entry.email}" class="card-title">test</p>
+					</div>
+
+					<div class="card-body">
+						<p th:text="${entry.age}" class="card-title">test</p>
+					</div>
+
 					<div class="card-footer">
 						<footer class="date" th:text="${#temporals.format(entry.date, 'dd. MMMM yyyy - HH:mm')}">Datum</footer>
 					</div>
@@ -57,6 +75,16 @@
 				<label for="text" th:text="#{guestbook.form.text}">Text</label><br /> 
 				<textarea th:field="*{text}" th:errorclass="is-invalid" class="form-control" required="required"></textarea>
 				<div th:if="${#fields.hasErrors('text')}" class="invalid-feedback" th:text="#{guestbook.form.text.required}">Please provide a text.</div>
+			</div>
+			<div class="form-group">
+				<label for="email" th:text="#{guestbook.form.email}">E-Mail</label><br />
+				<input class="form-control" type="email" th:field="*{email}">
+				<div th:if="${#fields.hasErrors('email')}" class="invalid-feedback" th:text="#{guestbook.form.email}">Please provide a text.</div>
+			</div>
+			<div class="form-group">
+				<label for="age" th:text="#{guestbook.form.age}">E-Mail</label><br />
+				<input class="form-control" type="number" min="1" max="100" th:field="*{age}">
+				<div th:if="${#fields.hasErrors('age')}" class="invalid-feedback" th:text="#{guestbook.form.age}">Please provide a text.</div>
 			</div>
 			<input type="submit" class="btn btn-secondary" th:value="#{guestbook.form.submit}" value="Senden" />
 		</form>
