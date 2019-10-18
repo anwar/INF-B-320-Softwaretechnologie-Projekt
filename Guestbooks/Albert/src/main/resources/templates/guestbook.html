@@ -26,10 +26,6 @@
 		</div>
 		
 		<br />
-		<div class="text-center">
-			<button class="btn btn-secondary" >Schrift größer</button>
-			<button class="btn btn-secondary">Schrift kleiner</button>
-		</div>
 
 		<br />
 
@@ -46,17 +42,28 @@
 						<h4 th:text="${index} + '. ' + ${entry.name}" class="card-title">1. Posting</h4>
 					</div>
 					<div class="card-body">
+						<label>Nachricht</label>
+
 						<blockquote class="entrytext" th:text="${entry.text}"></blockquote>
 					</div>
-
+					<hr>
 					<div class="card-body">
-						<p th:text="${entry.email}" class="card-title">test</p>
-					</div>
+						<label>E-Mail</label>
 
+						<p th:text="${entry.email}" class="card-title"></p>
+					</div>
+					<hr>
 					<div class="card-body">
-						<p th:text="${entry.age}" class="card-title">test</p>
-					</div>
+						<label>Alter</label>
 
+						<p th:text="${entry.age}" class="card-title"></p>
+					</div>
+					<hr>
+					<div class="card-body">
+						<label>Bewertung</label>
+
+						<p th:text="${entry.stars}" class="card-title"></p>
+					</div>
 					<div class="card-footer">
 						<footer class="date" th:text="${#temporals.format(entry.date, 'dd. MMMM yyyy - HH:mm')}">Datum</footer>
 					</div>
@@ -85,9 +92,21 @@
 				<label for="age" th:text="#{guestbook.form.age}">E-Mail</label><br />
 				<input class="form-control" type="number" min="1" max="100" th:field="*{age}">
 				<div th:if="${#fields.hasErrors('age')}" class="invalid-feedback" th:text="#{guestbook.form.age}">Please provide a text.</div>
+			</div >
+			<div class="form-group">
+				<label>Bewertung</label><br/>
+				<select class="form-control" th:field="*{stars}">
+					<option th:value="'*'">*</option>
+					<option th:value="'**'">**</option>
+					<option th:value="'***'">***</option>
+					<option th:value="'****'">****</option>
+					<option th:value="'*****'">*****</option>
+				</select>
 			</div>
 			<input type="submit" class="btn btn-secondary" th:value="#{guestbook.form.submit}" value="Senden" />
 		</form>
+
+	</br>
 
 	</body>
 </html>

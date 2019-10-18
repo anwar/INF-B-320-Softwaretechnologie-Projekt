@@ -37,6 +37,7 @@ class GuestbookEntry {
 	private final String name, text, email;
 	private final String age;
 	private final LocalDateTime date;
+	private final String stars;
 
 	/**
 	 * Creates a new {@link GuestbookEntry} for the given name and text.
@@ -44,7 +45,7 @@ class GuestbookEntry {
 	 * @param text must not be {@literal null} or empty
 	 * @param age
 	 */
-	public GuestbookEntry(String name, String text, String email, String age) {
+	public GuestbookEntry(String name, String text, String email, String age, String stars) {
 
 		Assert.hasText(name, "Name must not be null or empty!");
 		Assert.hasText(text, "Text must not be null or empty!");
@@ -54,6 +55,8 @@ class GuestbookEntry {
 		this.text = text;
 		this.email = email;
 		this.age = age;
+		this.stars = stars;
+
 		this.date = LocalDateTime.now();
 	}
 
@@ -64,6 +67,7 @@ class GuestbookEntry {
 		this.text = null;
 		this.date = null;
 		this.age = null;
+		this.stars = null;
 	}
 
 	public String getName() {
@@ -88,5 +92,22 @@ class GuestbookEntry {
 
 	public String getAge() {
 		return age;
+	}
+
+	public String getStars() {
+		switch (stars){
+			case "1":
+				return "*";
+			case "2":
+				return "**";
+			case "3":
+				return "***";
+			case "4":
+				return "****";
+			case "5":
+				return "*****";
+			default:
+				return stars;
+		}
 	}
 }
