@@ -66,7 +66,9 @@ public class Application {
 					new GuestbookEntry("Gump1337",
 							"Gump1337@bsp.com","Mama always said life was like a box of chocolates. You never know what you're gonna get.")) //
 					.forEach(guestbook::save);
+
 		};
+
 	}
 
 	/**
