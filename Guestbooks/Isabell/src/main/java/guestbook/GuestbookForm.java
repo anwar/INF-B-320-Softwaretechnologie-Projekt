@@ -87,6 +87,6 @@ class GuestbookForm {
 	}
 
 	GuestbookEntry toNewEntry() {
-		return new GuestbookEntry(getName(), getText());
+		return new GuestbookEntry(getName(), getText(), getMood());
 	}
 }
