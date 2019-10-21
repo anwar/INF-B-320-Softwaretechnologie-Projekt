@@ -50,11 +50,15 @@
 					</div>
 
 					<div class="card-body">
-						<p th:text="${entry.email}" class="card-title">test</p>
+						<p th:text="${entry.email}" class="card-title">E-Mail</p>
 					</div>
 
 					<div class="card-body">
-						<p th:text="${entry.age}" class="card-title">test</p>
+						<p th:text="${entry.age}" class="card-title">Age</p>
+					</div>
+
+					<div class="card-body">
+						<p th:text="${entry.tel}">Telephonnumber</p>
 					</div>
 
 					<div class="card-footer">
@@ -68,23 +72,29 @@
 		<form method="post" role="form" class="gb-form" id="form" th:action="@{/guestbook}" th:object="${form}">
 			<div class="form-group">
 				<label for="name" th:text="#{guestbook.form.name}">Name</label><br /> 
-				<input class="form-control" type="text" th:field="*{name}" th:errorclass="is-invalid" required="required" />
+				<input class="form-control" type="text" th:field="*{name}" th:errorclass="is-invalid" required="required" placeholder="Name"/>
 				<div th:if="${#fields.hasErrors('name')}" class="invalid-feedback" th:text="#{guestbook.form.name.required}">Please provide a name.</div> 
 			</div>
 			<div class="form-group">
 				<label for="text" th:text="#{guestbook.form.text}">Text</label><br /> 
-				<textarea th:field="*{text}" th:errorclass="is-invalid" class="form-control" required="required"></textarea>
+				<textarea th:field="*{text}" th:errorclass="is-invalid" class="form-control" required="required" placeholder="Text"></textarea>
 				<div th:if="${#fields.hasErrors('text')}" class="invalid-feedback" th:text="#{guestbook.form.text.required}">Please provide a text.</div>
 			</div>
 			<div class="form-group">
 				<label for="email" th:text="#{guestbook.form.email}">E-Mail</label><br />
-				<input class="form-control" type="email" th:field="*{email}">
+				<input class="form-control" type="email" th:field="*{email}" placeholder="E-Mail">
 				<div th:if="${#fields.hasErrors('email')}" class="invalid-feedback" th:text="#{guestbook.form.email}">Please provide a text.</div>
 			</div>
 			<div class="form-group">
 				<label for="age" th:text="#{guestbook.form.age}">E-Mail</label><br />
-				<input class="form-control" type="number" min="1" max="100" th:field="*{age}">
+				<input class="form-control" type="number" min="1" max="100" placeholder="Alter"th:field="*{age}">
 				<div th:if="${#fields.hasErrors('age')}" class="invalid-feedback" th:text="#{guestbook.form.age}">Please provide a text.</div>
+			</div>
+
+			<div class="form-group">
+				<label for="tel" th:text="#{guestbook.form.tel}">Telefonnumber</label><br />
+				<input class="form-control" type="tel" placeholder="+49 0000000" th:field="*{tel}">
+				<div th:if="${#fields.hasErrors('tel')}" class="invalid-feedback" th:text="#{guestbook.form.tel}">Please provide a text.</div>
 			</div>
 			<input type="submit" class="btn btn-secondary" th:value="#{guestbook.form.submit}" value="Senden" />
 		</form>

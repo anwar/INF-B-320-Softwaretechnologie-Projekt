@@ -33,6 +33,9 @@ class GuestbookForm {
 	private final @NotBlank String text;
 	private final @NotBlank String email;
 	private final @NotBlank String age;
+	private final @NotBlank String tel;
+
+	private final @NotBlank String star;
 
 
 
@@ -46,12 +49,14 @@ class GuestbookForm {
 	 * @param name the value to bind to {@code name}
 	 * @param text the value to bind to {@code text}
 	 */
-	public GuestbookForm(String name, String text, String email, String age) {
+	public GuestbookForm(String name, String text, String email, String age, String tel, String star) {
 
 		this.name = name;
 		this.text = text;
 		this.email = email;
 		this.age = age;
+		this.tel = tel;
+		this.star = star;
 	}
 
 	/**
@@ -84,6 +89,14 @@ class GuestbookForm {
 		return age;
 	}
 
+	public String getTel() {
+		return tel;
+	}
+
+	public String getStar() {
+		return star;
+	}
+
 	/**
 	 * Returns a new {@link GuestbookEntry} using the data submitted in the request.
 	 *
@@ -91,6 +104,6 @@ class GuestbookForm {
 	 * @throws IllegalArgumentException if you call this on an instance without the name and text actually set.
 	 */
 	GuestbookEntry toNewEntry() {
-		return new GuestbookEntry(getName(), getText(), getEmail(), getAge());
+		return new GuestbookEntry(getName(), getText(), getEmail(), getAge(), getTel(), getStar());
 	}
 }

@@ -15,13 +15,12 @@
  */
 package guestbook;
 
-import java.time.LocalDateTime;
+import org.springframework.util.Assert;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import org.springframework.util.Assert;
+import java.time.LocalDateTime;
 
 /**
  * A guestbook entry. An entity as in the Domain Driven Design context. Mapped onto the database using JPA annotations.
@@ -34,9 +33,10 @@ import org.springframework.util.Assert;
 class GuestbookEntry {
 
 	private @Id @GeneratedValue Long id;
-	private final String name, text, email;
+	private final String name, text, email, tel;
 	private final String age;
 	private final LocalDateTime date;
+	private String[] stars = {"*","**","***","****", "*****"};
 
 	/**
 	 * Creates a new {@link GuestbookEntry} for the given name and text.
@@ -44,16 +44,21 @@ class GuestbookEntry {
 	 * @param text must not be {@literal null} or empty
 	 * @param age
 	 */
-	public GuestbookEntry(String name, String text, String email, String age) {
+	public GuestbookEntry(String name, String text, String email, String age, String tel, String[] stars) {
 
 		Assert.hasText(name, "Name must not be null or empty!");
 		Assert.hasText(text, "Text must not be null or empty!");
 		Assert.hasText(email, "Email must not be null or empty!");
+		Assert.hasText(age, "Age must not be null or empty!");
+		Assert.hasText(tel, "Telephonnumber must not be null or empty!");
 
 		this.name = name;
 		this.text = text;
 		this.email = email;
 		this.age = age;
+		this.tel = tel;
+		this.stars = stars;
+
 		this.date = LocalDateTime.now();
 	}
 
@@ -64,6 +69,8 @@ class GuestbookEntry {
 		this.text = null;
 		this.date = null;
 		this.age = null;
+		this.tel = null;
+		this.stars = null;
 	}
 
 	public String getName() {
@@ -88,5 +95,15 @@ class GuestbookEntry {
 
 	public String getAge() {
 		return age;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public String getStars() {
+		for(int i = 0 ; i < stars.length ; i++){
+			return stars[i];
+		}
 	}
 }

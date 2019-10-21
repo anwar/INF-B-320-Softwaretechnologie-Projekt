@@ -15,8 +15,6 @@
  */
 package guestbook;
 
-import java.util.stream.Stream;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,6 +25,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.stream.Stream;
 
 /**
  * The core class to bootstrap our application. It triggers Spring Boot's auto-configuration, component scanning and
@@ -60,11 +60,11 @@ public class Application {
 		return args -> {
 
 			Stream.of( //
-					new GuestbookEntry("H4xx0r", "first!!!", "text@gmail.com","25"), //
-					new GuestbookEntry("Arni", "Hasta la vista, baby","text@gmail.com", "30"), //
-					new GuestbookEntry("Duke Nukem", "It's time to kick ass and chew bubble gum. And I'm all out of gum.", "text@gmail.com", "50"), //
+					new GuestbookEntry("H4xx0r", "first!!!", "text@gmail.com","25", "0173293345"), //
+					new GuestbookEntry("Arni", "Hasta la vista, baby","text@gmail.com", "30", "0153293345"), //
+					new GuestbookEntry("Duke Nukem", "It's time to kick ass and chew bubble gum. And I'm all out of gum.", "text@gmail.com", "50","01673293345"), //
 					new GuestbookEntry("Gump1337",
-							"Mama always said life was like a box of chocolates. You never know what you're gonna get.", "text@gmail.com", "89")) //
+							"Mama always said life was like a box of chocolates. You never know what you're gonna get.", "text@gmail.com", "89","015493345")) //
 					.forEach(guestbook::save);
 		};
 	}
