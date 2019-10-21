@@ -30,28 +30,46 @@ class GuestbookEntryUnitTests {
 	void rejectsEmptyName() {
 
 		assertThatExceptionOfType(IllegalArgumentException.class)//
-				.isThrownBy(() -> new GuestbookEntry("", "May the 4th be with you!", "test@gmail.com","15","0173293345"));
+				.isThrownBy(() -> new GuestbookEntry("", "May the 4th be with you!", "test@gmail.com","15","**"));
 	}
 
 	@Test
 	void rejectsEmptyText() {
 
 		assertThatExceptionOfType(IllegalArgumentException.class)//
-				.isThrownBy(() -> new GuestbookEntry("Ollie", "", "test@gmail.com", "25", "0173293345"));
+				.isThrownBy(() -> new GuestbookEntry("Ollie", "", "test@gmail.com", "25","**"));
 	}
 
 	@Test
 	void rejectsEmptyEmail(){
-		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new GuestbookEntry("Ollie","Ich love that restaurant","", "56", "0173293345"));
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new GuestbookEntry("Ollie","Ich love that restaurant","", "56","**"));
+	}
+
+	@Test
+	void rejectsNullEmail(){
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> new GuestbookEntry("Ollie","Ich love that restaurant",null,"12","**"));
 	}
 
 	@Test
 	void rejectsEmptyAge(){
-		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new GuestbookEntry("Ollie","Ich love that restaurant","test@gmail.com", "", "0173293345"));
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new GuestbookEntry("Ollie","Ich love that restaurant","test@gmail.com", "","**"));
+	}
+	@Test
+	void rejectsNullAge(){
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> new GuestbookEntry("Ollie","Ich love that restaurant","test@gmail.com", null,"**"));
+	}
+	@Test
+	void rejectsEmptyStars(){
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new GuestbookEntry("Ollie","Ich love that restaurant","test@gmail.com", "",""));
+	}
+
+	@Test
+	void rejectsNullStars(){
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> new GuestbookEntry("Ollie","Ich love that restaurant","test@gmail.com", "",null));
 	}
 
 	@Test
 	void setsCreationDate() {
-		assertThat(new GuestbookEntry("Ollie", "May the 4th be with you!", "test@gmail.com", "78", "0173293345").getDate()).isNotNull();
+		assertThat(new GuestbookEntry("Ollie", "May the 4th be with you!", "test@gmail.com", "78","*****").getDate()).isNotNull();
 	}
 }
