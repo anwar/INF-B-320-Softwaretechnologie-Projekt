@@ -1,35 +1,27 @@
 = Protokoll Gruppe 43
-=======
 
-Treffen am 15.10.2019
+Treffen am 23.10.2019
 
-Ort:      APB +
-Beginn:   18:15 Uhr +
-Ende:     19:15 Uhr
+Ort:      Ort des Treffens +
+Beginn:   07:30 Uhr +
+Ende:     09:05 Uhr
 
-__Schriftführer:__Franziska Kiel
+__Schriftführer:__Isabell Zorr
 
 *Nächstes Treffen:* +
-23.10.19, 07:30 Uhr, APB
+30.10.2019, 07:30 Uhr, Andreas-Pfitzmann-Bau
 
 __Teilnehmer:__
 //Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
 
-- Uwe Schmidt (Tutor)
 - Albert Wellerdt
 - Franziska Kiel
-- Sanghyun Lee
 - Muhammad Talal Anwar
-
-
+- Sanghyun Lee
+- Isabell Zorr
 
 == Bemerkungen
-
-Wir haben uns in der Gruppe zusammengefunden und ALbert Wellerdt
-als Scrummaster bestimmt. Zudem fanden wir einen wöchentlichen Termin
-für Treffen und tauschten Kontaktdaten innerhalb der Gruppe.
-Die Einweisung in das Projekt wurde vorgenommen und die Aufgaben der
-ersten Woche bestimmt.
+Verwarnungen, besondere Vorfälle, Organisatorisches, wichtige getroffene Entscheidungen
 
 == Retrospektive des letzten Sprints
 *Issue referenziert die Issue ID von GitHub*
@@ -43,6 +35,10 @@ ersten Woche bestimmt.
 |===
 
 
+== Aktueller Stand
+Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den
+Dokumenten.
+
 == Planung des nächsten Sprints
 *Issue referenziert die Issue ID von GitHub*
 
@@ -52,4 +48,3 @@ ersten Woche bestimmt.
 |Issue |Titel |Beschreibung |Verantwortlicher |Status
 |…     |…     |…            |…                |…
 |===
-
