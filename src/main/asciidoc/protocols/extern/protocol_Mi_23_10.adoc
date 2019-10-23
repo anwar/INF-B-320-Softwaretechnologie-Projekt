@@ -14,6 +14,7 @@ __Schriftführer:__Isabell Zorr
 __Teilnehmer:__
 //Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
 
+- Uwe Schmidt (Tutor)
 - Albert Wellerdt
 - Franziska Kiel
 - Muhammad Talal Anwar
