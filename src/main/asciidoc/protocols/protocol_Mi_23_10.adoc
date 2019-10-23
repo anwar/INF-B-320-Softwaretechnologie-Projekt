@@ -21,7 +21,10 @@ __Teilnehmer:__
 - Isabell Zorr
 
 == Bemerkungen
-Verwarnungen, besondere Vorfälle, Organisatorisches, wichtige getroffene Entscheidungen
+Wir haben uns noch einmal in der Gruppe vorgestellt und die Ziele des Praktikums und
+unsere eigenen Vorstellungen an dieses besprochen. Zudem wurden die Abgaben aus den
+Guestbookerweiterungen abgenommen. Hauptaspekt des Treffens war das "Kundengespräch", welches
+wir nutzten um unsere Anwendung weiter zu planen und Fragen zu klären.
 
 == Retrospektive des letzten Sprints
 *Issue referenziert die Issue ID von GitHub*
@@ -36,8 +39,8 @@ Verwarnungen, besondere Vorfälle, Organisatorisches, wichtige getroffene Entsch
 
 
 == Aktueller Stand
-Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den
-Dokumenten.
+Der aktuelle Stand der Software befindet sich noch in der Analysephase.
+Es wurden CRC-Karten und Analysediagramme erstellt, welche weiter ausgearbeitet werden.
 
 == Planung des nächsten Sprints
 *Issue referenziert die Issue ID von GitHub*
