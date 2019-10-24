@@ -1,28 +1,27 @@
 = Protokoll Gruppe 43
 
-Treffen am 20.10.2019
+Treffen am 23.10.2019
 
-Ort:      Andreas-Pfitzmann-Bau +
-Beginn:   10:00 Uhr +
-Ende:     13:30 Uhr
+Ort:      SLUB +
+Beginn:   13:xx Uhr +
+Ende:     14:50 Uhr
 
 __Schriftführer:__Isabell Zorr
 
 *Nächstes Treffen:* +
-23.10.2019, 13:00 Uhr, SLUB
+26.10.2019, 10:00 Uhr, APB
 
 __Teilnehmer:__
 //Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
 
 - Albert Wellerdt
 - Franziska Kiel
-- Muhammad Talal Anwar
 - Sanghyun Lee
 - Isabell Zorr
 
-
 == Bemerkungen
-Wir haben die Analysediagramme unserer Anwendung erstellt.
+Wir arbeiteten die bereits erstellten Analysediagramme weiter aus
+und ergaenzten neue Teile, die im Kundengespraech erfahren wurden.
 
 == Retrospektive des letzten Sprints
 *Issue referenziert die Issue ID von GitHub*
@@ -37,7 +36,8 @@ Wir haben die Analysediagramme unserer Anwendung erstellt.
 
 
 == Aktueller Stand
-Der aktuelle Stand der Software befindet sich noch in der Analysephase.
+Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den
+Dokumenten.
 
 == Planung des nächsten Sprints
 *Issue referenziert die Issue ID von GitHub*
