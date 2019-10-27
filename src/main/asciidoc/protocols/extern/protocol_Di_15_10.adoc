@@ -1,4 +1,5 @@
-= Protokoll Gruppe XX
+= Protokoll Gruppe 43
+=======
 
 Treffen am 15.10.2019
 
@@ -23,13 +24,12 @@ __Teilnehmer:__
 
 
 == Bemerkungen
-- Scrum Master: Albert Wellerdt
-- Gruppenfindung
-- Terminfindung für wöchentliche Treffen
-- Kontaktaustausch mit den Gruppenmitgliedern
-- Einweisung in das Projekt
-- Aufgabenbestimmung der ersten Woche
 
+Wir haben uns in der Gruppe zusammengefunden und ALbert Wellerdt
+als Scrummaster bestimmt. Zudem fanden wir einen wöchentlichen Termin
+für Treffen und tauschten Kontaktdaten innerhalb der Gruppe.
+Die Einweisung in das Projekt wurde vorgenommen und die Aufgaben der
+ersten Woche bestimmt.
 
 == Retrospektive des letzten Sprints
 *Issue referenziert die Issue ID von GitHub*
@@ -43,10 +43,6 @@ __Teilnehmer:__
 |===
 
 
-== Aktueller Stand
-Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den
-Dokumenten.
-
 == Planung des nächsten Sprints
 *Issue referenziert die Issue ID von GitHub*
 
@@ -56,3 +52,4 @@ Dokumenten.
 |Issue |Titel |Beschreibung |Verantwortlicher |Status
 |…     |…     |…            |…                |…
 |===
+
