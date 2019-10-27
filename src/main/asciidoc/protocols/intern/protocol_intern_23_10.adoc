@@ -3,7 +3,7 @@
 Treffen am 23.10.2019
 
 Ort:      SLUB +
-Beginn:   13:xx Uhr +
+Beginn:   13:00 Uhr +
 Ende:     14:50 Uhr
 
 __Schriftführer:__Isabell Zorr
@@ -21,7 +21,7 @@ __Teilnehmer:__
 
 == Bemerkungen
 Wir arbeiteten die bereits erstellten Analysediagramme weiter aus
-und ergaenzten neue Teile, die im Kundengespraech erfahren wurden.
+und ergänzten neue Teile, die im Kundengespräch erfahren wurden.
 
 == Retrospektive des letzten Sprints
 *Issue referenziert die Issue ID von GitHub*

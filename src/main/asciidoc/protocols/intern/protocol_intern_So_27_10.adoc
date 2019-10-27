@@ -4,12 +4,12 @@ Treffen am 27.10.2019
 
 Ort:      SLUB +
 Beginn:   10:00 Uhr +
-Ende:     xx:xx Uhr
+Ende:     13:30 Uhr
 
 __Schriftführer:__Isabell Zorr
 
 *Nächstes Treffen:* +
-28.10.2019, 13:00 Uhr, APB
+28.10.2019, APB
 
 __Teilnehmer:__
 //Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
@@ -21,8 +21,8 @@ __Teilnehmer:__
 - Isabell Zorr
 
 == Bemerkungen
-Wir haben mit der Ausarbeitung der Diagramme fuer das Pflichtenheft begonnen und die Aufteilung
-der Aufgaben im Pflichtenheft begonnen.
+Wir haben mit der Ausarbeitung der Diagramme für das Pflichtenheft begonnen und die Aufgaben
+für das Pflichtenheft verteilt.
 
 == Retrospektive des letzten Sprints
 *Issue referenziert die Issue ID von GitHub*
@@ -37,8 +37,7 @@ der Aufgaben im Pflichtenheft begonnen.
 
 
 == Aktueller Stand
-Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den
-Dokumenten.
+Erste Aufteilung der Aufgaben, Planung der nächsten Tage.
 
 == Planung des nächsten Sprints
 *Issue referenziert die Issue ID von GitHub*
