@@ -98,7 +98,7 @@ Für komplexere Anwendungsfälle ein UML-Sequenzdiagramm ergänzen.
 Einfache Anwendungsfälle mit einem Absatz beschreiben.
 Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem einzigen zusammengefasst werden.
 
-image::models/analysis/diagramm 2.jpeg[]
+image::models/analysis/diagramm 1.jpeg[]
 
 [options="header"]
 [cols="^1h,3"]
@@ -133,28 +133,30 @@ Daraufhin erstellt der Vorstand einen neuen Pächteraccount.
 |?
 |===
 
-Image 2
+image::models/analysis/diagramm 2.jpeg[]
 
 [options="header"]
 [cols="^1h,3"]
 |===
 
 |ID
-|UC0010
+|UC0020
 |Name
-|Parzellen Bewerbung
+|Rechnung
 
 |Beschreibung
-|""
+|Nach der Aktualisierung des Wasser- und Stromverbrauchs können Haupt- und Nebenpächter
+ihre Rechnungen einsehen.
 
 |Akteure
-|Vorstandsvorsitzende, Stellvertreter, Gast
+|Hauptpächter, Nebenpächter
 
 |Auslöser
-|""
+|Der Haupt- und Nebenpächter aktualisieren ihre Wasser und Elektrostände
+und tragen dies in ihren Account ein und wählen den Rechnungsbutton aus um diese zu laden.
 
 |Vorbedingungen
-|""
+|Benutzer sollte eingeloggt sein
 
 |Wichtigste Schritte
 |1. "" +
@@ -214,8 +216,34 @@ Image 3
 === Muss-Kriterien
 Was das zu erstellende Programm auf alle Fälle leisten muss.
 
+- Liste aller Mitglieder +
+- Liste aller Parzellen (frei und besetzt) +
+
+Parzellenmanagment +
+- Zähler (Wasser + Elektro) +
+- +
+
+Accoutmanagement +
+- Accounts löschen und hinzufügen +
+- Rechnungs einsehen +
+
+
+Finanzmanagement +
+- Rechnung generieren +
+- Liste an Basispreisen +
+- Werteermittlung +
+
+
+Anträge +
+- Bauanträge +
+- Bewerbungen (Liste) +
+
+
+
 === Kann-Kriterien
-Anforderungen die das Programm leisten können soll, aber für den korrekten Betrieb entbehrlich sind.
+Anforderungen die das Programm leisten können soll, aber für den korrekten Betrieb entbehrlich sind. +
+- (Accounts bearbeiten) ?
+
 
 == Nicht-Funktionale Anforderungen
 
