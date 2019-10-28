@@ -99,34 +99,32 @@ image::models/analysis/diagramm 2.jpeg[]
 |===
 
 |ID
-|UC0010
+|UC0030
 |Name
-|Parzellen Bewerbung
+|Bewerbungsvorgang um eine Parzelle und Hinzufügen eines neuen Pächters
 
 |Beschreibung
-|""
+|Der Gast bewirbt sich über ein Formular auf eine Parzelle, welche vom Vorstand gesichtet und angenommen wird.
+Daraufhin erstellt der Vorstand einen neuen Pächteraccount.
 
 |Akteure
-|Vorstandsvorsitzende, Stellvertreter, Gast
+|Vorstandsvorsitz, Gast
 
 |Auslöser
-|""
+|Gast füllt des Bewerbungsformular aus
 
 |Vorbedingungen
-|""
+|Gast ist nicht angemeldet und Parzelle ist frei
 
 |Wichtigste Schritte
-|1. "" +
-2. "" +
-3. "" +
-4. "" +
-5. ""
+|1. Gast füllt Formular aus +
+2. Vorstandsvorsitzender nimmt Bewerbung an
 
 |Erweitert
-|""
+|nur der Vorstand kann einen Account hinzufügen
 
 |Funktionale Anforderung
-|""
+|?
 
 |===
 
