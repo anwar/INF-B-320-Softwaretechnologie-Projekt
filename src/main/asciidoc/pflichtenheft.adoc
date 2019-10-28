@@ -17,8 +17,96 @@ Im Pflichtenheft finden Sie alle Aufgabenstellungen, wichtige Modelle und sowie 
 Es werden die Anforderungen und die Ziele der Software hier spezifiziert.
 
 == Aufgabenstellung und Zielsetzung
-Text aus Aufgabenstellung kopieren und ggfs. präzisieren.
-Insbesondere ergänzen, welche Ziele mit dem Abschluss des Projektes erreicht werden sollen.
+
+Für eine Kleingartenanlage ist ein automatisiertes Verwaltungssystem für verschiedene Personengruppen zu erstellen.
+
+Genutzt werden soll das Programm grundsätzlich von fünf Personengruppen. Das sind der Vorstand
+selbst, dann die Pächter, Obmänner, die Vereinsgaststätte und zu guter Letzt noch Gäste.
+Die gesamte Anlage hat insgesamt 200 Parzellen. Jede Parzelle besitzt einen Hauptpächter, es kann
+aber ein Nebenpächter eingetragen werden. Darüber hinaus sollen auch die letzten beiden
+Vorpächter im System gespeichert werden. Nur der Hauptpächter ist zur jährlich stattfindenden
+Hauptversammlung stimmberechtigt. Jeder Pächter ist mit vollständiger Adresse, seinen
+Kontaktdaten, sowie seinem bzw. ihrem Geburtstag im System erfasst.
+Des Weiteren hat jede Parzelle eine bestimmte Größe, die zwischen 150 und 300m² liegt. Jede Parzelle hat einen
+Wasseranschluss und einen Elektroanschluss, an denen jeweils ein Zähler installiert ist. Jeder Pächter
+erhält einmal im Jahr eine Rechnung, die sich wie folgt zusammensetzt. Die Kosten für ein Jahr
+errechnen sich aus variablen Preisen der Miete für die Pacht, Wasser- und Stromkosten, Mitglieds-, Haft- und Sozialbeitrag,
+Rechtsschutz, Winterdienst, Aufwandspauschale und sonstigen Auslagen.
+Die Pächter werden dazu im
+Herbst darüber informiert, dass sie in den nächsten 2 Wochen die Zählerstände für Wasser und
+Strom abzulesen und einzutragen haben. Werden keine Werte bis dahin eingetragen, soll ein
+geschätzter Wert eingetragen werden. Die entstandene Rechnung soll dem Pächter unter seinem
+Account zugänglich sein, eine zusätzliche Information per E‐Mail wäre aber sinnvoll. Der Vorstand soll
+nach der Frist Informationen über den Gesamtverbrauch an Wasser in der Anlage erhalten, um dies
+mit dem Hauptwasserzähler vergleichen zu können.
+
+Der Vorstand selber setzt sich zusammen aus einem Vorstandsvorsitzenden, seinem Stellvertreter,
+einem Protokollanten, einem für die Finanzen verantwortlichen Schatzmeister, sowie den
+Obmännern. Von diesen Obmännern gibt es insgesamt acht, die sich jeweils um die Belange von 25
+Gärten kümmern. Obmänner dienen dabei als eine Art Zwischenglied zwischen dem einzelnen
+Pächter und dem Vorstandsvorsitz. Sie können z.B. bei kleinen Konflikten zwischen Pächtern
+vermitteln, ohne sofort die höchste Instanz zu behelligen. Sie können ebenfalls eine erste Ermahnung
+aussprechen, wenn ein Pächter gegen die Vereinsstatuten verstößt, indem er z.B. eine zu große
+Fläche fest überdacht, dem Garten zu wenig Pflege oder der Dreiteilung (1/3 bebaut, 1/3 begrünt,
+1/3 angebaut) offensichtlich widersprochen hat. Sollte der Mangel innerhalb einer vom Obmann
+festgelegten Zeitspanne nicht behoben sein, wird sich der Vorstand der Sache annehmen und bei
+wiederholter Uneinsicht des Pächters eine zweite Ermahnung und zu guter Letzt eine Kündigung
+aussprechen. Nach der Kündigung, egal ob vom Vorstand ausgesprochen oder von selbst eingereicht,
+wird die Parzelle wieder als frei angezeigt. Von da an muss der Vorpächter allerdings warten, bis sich
+ein neuer Pächter findet, um evtl. materielle Werte ersetzt zu bekommen.
+
+Jede Parzelle soll einen eigenen Login bekommen. Nach dem Anmelden sollen dem Pächter alle
+wichtigen Informationen übersichtlich angezeigt werden. Es soll weiterhin möglich sein, Anträge an
+den Vorstand zu stellen, bspw. Bauanträge für einen Neu‐, Um‐ oder Ausbau der Laube. Von jeder
+Parzelle wird erwartet, dass sie pro Kalenderjahr vier Pflichtstunden zur Erhaltung, Pflege und
+Instandhaltung der Gemeinschaftsanlagen leistet. Um ein Organisationschaos zu vermeiden, werden
+vom Vorstand bis spätestens 31.03. jeden Jahres acht Termine zur Ableistung der Stunden
+festgesetzt. Diese finden nur im April, Mai, Juni und September entweder an einem Freitag von 16 bis
+20 Uhr oder an einem Samstag zwischen 8 und 12 Uhr statt. Pächter können sich für diese Termine
+bis spätestens zwei Wochen vorher mit der von ihnen gewünschten Anzahl zu leistender Stunden
+anmelden. Zu jedem Termin ist ebenfalls ein aufsichtsführender Obmann anwesend, der die zu
+erledigenden Aufgaben an die Pächter verteilt und im Anschluss die geleisteten Stunden bestätigt
+bzw. die tatsächlich geleisteten Stunden einträgt. Die Obmänner müssen daher nach erfolgreicher
+Festlegung der Termine über diese informiert werden, damit sie sich für einen Termin eintragen
+können. Da der Vorstand und die Obmänner über das Jahr verteilt mit genug Aufgaben beschäftigt
+sind, müssen sie keine Pflichtstunden leisten. Werden bis zum letztmöglichen Termin nicht alle
+Pflichtstunden abgeleistet, werden pro Stunde 8 Euro zur jährlichen Rechnung eines Pächters
+hinzugefügt. Dabei wird auf halbe Stunden abgerundet.
+
+Gäste benötigen keinen Login und haben nur rudimentären Zugriff auf das System. Sie können sich
+Infos über geplante Veranstaltungen und Feste, wie z.B. das jährlich stattfindende Hexenbrennen
+oder Gartenfest ansehen. Sie können sich ebenso eine Übersicht der freien Parzellen ansehen und
+sich über ein Formular für eine oder mehrere Parzellen bewerben. Dabei sind der Name des
+Interessenten sowie eine Telefonnummer und eine gültige E‐Mail‐Adresse verpflichtend anzugeben.
+Freie Parzellen sind gekennzeichnet durch eine Quadratmeteranzahl, eine kurze Auflistung der auf
+oder in der Parzelle befindlichen Bebauungen (wie bspw. Laube, Teich, Grill, ...) und Gehölzen, sowie
+durch unabhängige Wertermittler berechneten Schätzwert, der als Ablösesumme auf
+Verhandlungsbasis für den Vorpächter zu verstehen ist. Der Vorstand erhält dann bei erneuter
+Anmeldung am System einen Hinweis, dass es neue Bewerber für eine oder mehrere Parzellen gibt.
+Es soll neue Bewerbungen, bearbeitete Bewerbungen, angenommene Bewerbungen und gelöschte
+Bewerbungen geben. So kann sich der Vorstand telefonisch mit dem oder den Bewerbern in
+Verbindung setzen, um bspw. einen Besichtigungstermin auszumachen. Die Anfragen sollen so lange
+bestehen bleiben, bis der Vorstand sich für einen Bewerber entschieden hat. Danach sollen alle
+Bewerbungen für eine Parzelle gelöscht werden. Der Vorstand kann jedoch auch vorher eine
+Bewerbung schon aus anderen Gründen löschen. Sollte der Vorstand einen passenden Bewerber für
+eine Parzelle gefunden haben und Vorpächter und neuer Pächter sich mit der Ablösesumme
+einverstanden erklären, wird die entsprechende Bewerbung als angenommen deklariert und alle
+anderen gelöscht. Dabei könnten die bereits gemachten persönlichen Daten des neuen Pächters in
+das Änderungsformular der entsprechenden Parzelle übernommen werden. Optional wäre es
+sinnvoll, wenn alle abgelehnten Bewerber über eine E‐Mail darüber informiert werden, dass die
+Parzelle vergeben wurde. Gäste können sich weiterhin aktuelle Termine und Veranstalltungen anschauen.
+
+Ziele der Webapplikation:
+
+- Werbeplattform der Kleingartenanlage nach außen
+- Verwaltungssystem für:
+* Vorstand
+* Pächter
+* Gäste
+* Parzellen
+* anfallende Formulare und Arbeiten
+- Repräsentation der Kleingartenanlage durch ein ansprechendes und intuitives Design im Web
+
 
 == Produktnutzung
 Das System wird hauptsächlich für die Verwaltung einer Kleingartenlage genutzt.
