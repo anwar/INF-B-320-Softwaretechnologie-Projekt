@@ -13,18 +13,52 @@
 Dieses Dokument benötigt ein Inhaltsverzeichnis. Es existieren mehrere Einbindungsmöglichkeiten.
 
 == Zusammenfassung
-Eine kurze Beschreibung des Dokuments. Wenige Absätze.
+Im Pflichtenheft finden Sie alle Aufgabenstellungen, wichtige Modelle und sowie den GUI Entwurf der Kleingartenanlage.
+Es werden die Anforderungen und die Ziele der Software hier spezifiziert.
 
 == Aufgabenstellung und Zielsetzung
 Text aus Aufgabenstellung kopieren und ggfs. präzisieren.
 Insbesondere ergänzen, welche Ziele mit dem Abschluss des Projektes erreicht werden sollen.
 
 == Produktnutzung
-In welchem Kontext soll das System später genutzt werden? Welche Rahmenbedingungen gelten?
-Zusätzlich kurze Einleitung für fachfremde Personen
+Das System wird hauptsächlich für die Verwaltung einer Kleingartenlage genutzt.
+Zusätzlich repräsentiert die Software die Anlage auch im Web.
+
+Dabei wird das System auf den Geräten in der Kleingartenanlage laufen und im Internet(über den Browser) für die Pächter.
+Das System wird dabei für die neuesten Versionen folgender Browser optimiert, worüber es erreichbar ist:
+
+- Google Chrome
+- Mozilla Firefox
+
+Die Nutzer, die das System am häufigsten nutzen werden, sind alle Leute, die sich über die aktuellen News der Kleingartenanlage informieren wollen und
+welche die sich für eine Parzelle bewerben wollen. Dabei wird nur typische Website Navigation vorausgesetzt.
+
+Der Vorstand muss mit dem Umgang mit dem System vertraut gemacht werden, um sie effektiv nutzen zu können.
+Spezielle Vorkenntnisse sind hier aber auch nicht erforderlich.
+
+Alle Daten werden persistent in einer Datenbank gespeichert, wobei kein SQL Wissen vom Manager nötig ist.
 
 == Interessensgruppen (Stakeholders)
-Welche realen und juristischen Personen(-gruppen) haben Einfluss auf die Anforderungen im Projekt?
+Hier ist jede Gruppe gelistet, die irgendeinen Einfluss auf das Projekt hat.
+Die Priorität 1-5 (niedrig-hoch) soll bei sich überschneidenden Zielen eine Entscheidungshilfe bieten.
+
+[options="header"]
+[cols="1,2,3,4"]
+|===
+|Name  |Priorität  |Beschreibung  |Ziele
+|Vorstandsvorsitzender |5  |"" | - "" +
+
+- ""
+|Hauptpächter |3 |"" |- ""
+
+|"" |3 |"" | - "" +
+- ""
+
+|"" |3 |"" | - "" +
+- ""
+
+|===
+
 
 == Systemgrenze und Top-Level-Architektur
 
@@ -57,6 +91,120 @@ Dieser Unterabschnitt beschreibt die Anwendungsfälle. In dieser Beschreibung m�
 Für komplexere Anwendungsfälle ein UML-Sequenzdiagramm ergänzen.
 Einfache Anwendungsfälle mit einem Absatz beschreiben.
 Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem einzigen zusammengefasst werden.
+
+Image 1
+
+[options="header"]
+[cols="^1h,3"]
+|===
+
+|ID
+|UC0010
+|Name
+|Parzellen Bewerbung
+
+|Beschreibung
+|""
+
+|Akteure
+|Vorstandsvorsitzende, Stellvertreter, Gast
+
+|Auslöser
+|""
+
+|Vorbedingungen
+|""
+
+|Wichtigste Schritte
+|1. "" +
+2. "" +
+3. "" +
+4. "" +
+5. ""
+
+|Erweitert
+|""
+
+|Funktionale Anforderung
+|""
+
+|===
+
+Image 2
+
+[options="header"]
+[cols="^1h,3"]
+|===
+
+|ID
+|UC0010
+|Name
+|Parzellen Bewerbung
+
+|Beschreibung
+|""
+
+|Akteure
+|Vorstandsvorsitzende, Stellvertreter, Gast
+
+|Auslöser
+|""
+
+|Vorbedingungen
+|""
+
+|Wichtigste Schritte
+|1. "" +
+2. "" +
+3. "" +
+4. "" +
+5. ""
+
+|Erweitert
+|""
+
+|Funktionale Anforderung
+|""
+
+|===
+
+Image 3
+
+[options="header"]
+[cols="^1h,3"]
+|===
+
+|ID
+|UC0010
+|Name
+|Parzellen Bewerbung
+
+|Beschreibung
+|""
+
+|Akteure
+|Vorstandsvorsitzende, Stellvertreter, Gast
+
+|Auslöser
+|""
+
+|Vorbedingungen
+|""
+
+|Wichtigste Schritte
+|1. "" +
+2. "" +
+3. "" +
+4. "" +
+5. ""
+
+|Erweitert
+|""
+
+|Funktionale Anforderung
+|""
+
+|===
 
 == Funktionale Anforderungen
 
