@@ -80,7 +80,13 @@ Weitere relevante Spalten können bei Bedarf ergänzt werden.
 [cols="1,4"]
 |===
 |Name |Beschreibung
-|...  |...
+|Vorstandsvorsitz  |... +
+|Schatzmeister | ... +
+|Obmann | ... +
+|Protokollant | ... +
+|Hauptpächter | ... +
+|Nebenpächter | ... +
+
 |===
 
 === Überblick Anwendungsfalldiagramm
@@ -125,7 +131,6 @@ Daraufhin erstellt der Vorstand einen neuen Pächteraccount.
 
 |Funktionale Anforderung
 |?
-
 |===
 
 Image 2
