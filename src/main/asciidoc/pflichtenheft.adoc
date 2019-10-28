@@ -214,25 +214,23 @@ Image 3
 == Funktionale Anforderungen
 
 === Muss-Kriterien
-Was das zu erstellende Programm auf alle Fälle leisten muss.
+Was das zu erstellende Programm auf alle Fälle leisten muss. +
 
 - Liste aller Mitglieder +
 - Liste aller Parzellen (frei und besetzt) +
 
 Parzellenmanagment +
 - Zähler (Wasser + Elektro) +
-- +
+- Pflichtstunden +
 
 Accoutmanagement +
 - Accounts löschen und hinzufügen +
 - Rechnungs einsehen +
 
-
 Finanzmanagement +
 - Rechnung generieren +
 - Liste an Basispreisen +
 - Werteermittlung +
-
 
 Anträge +
 - Bauanträge +
