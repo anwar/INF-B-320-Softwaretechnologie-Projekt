@@ -1,5 +1,5 @@
 = Pflichtenheft
-:project_name: Projektname
+:project_name: Kleingartenanlage
 == __{project_name}__
 
 [options="header"]
@@ -92,7 +92,7 @@ Für komplexere Anwendungsfälle ein UML-Sequenzdiagramm ergänzen.
 Einfache Anwendungsfälle mit einem Absatz beschreiben.
 Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem einzigen zusammengefasst werden.
 
-Image 1
+image::models/analysis/diagramm2.svg[]
 
 [options="header"]
 [cols="^1h,3"]
