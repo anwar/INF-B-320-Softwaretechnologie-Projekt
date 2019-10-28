@@ -92,7 +92,7 @@ Für komplexere Anwendungsfälle ein UML-Sequenzdiagramm ergänzen.
 Einfache Anwendungsfälle mit einem Absatz beschreiben.
 Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem einzigen zusammengefasst werden.
 
-image::models/analysis/diagramm2.svg[]
+image::models/analysis/diagramm 2.jpeg[]
 
 [options="header"]
 [cols="^1h,3"]
