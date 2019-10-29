@@ -1,16 +1,44 @@
-= Pflichtenheft
+// -- Table of Contents
+
+:toc:
+:toclevels: 3
+:toc-title: Inhaltsverzeichnis
+:toc-placement!:
+:sectanchors:
+:numbered:
+
+= Pflichtenheft  __{project_name}__
 :project_name: Kleingartenanlage
-== __{project_name}__
+==
 
 [options="header"]
 [cols="1, 1, 1, 1, 4"]
 |===
 |Version | Status      | Bearbeitungsdatum   | Autoren(en) |  Vermerk
 |0.1     | In Arbeit   | 10.10.2019          | Autor       | Initiale Version
+
+|0.1.1
+| ...
+| 28.10.2019
+| Albert Wellerdt
+| Vorarbeit Interessengruppen, Produktnutzung, Akteure, Anwendungsfallbeschreibung Pflichtstunden,
+ Muss-Kriterien und Kann-Kriterien
+
+|0.1.2
+| ...
+| 28.10.2019
+| Franziska Kiel
+| Zusammenfassung, Aufgabenstellung und Zielsetzung, Sequenzdiagramm Parzellenbewerbung
+
+|0.2
+| ...
+| 29.10.2019
+| Isabell Zorr
+| Überarbeitung Versionsverzeichnis, Inhaltsverzeichnis
+
 |===
 
-== Inhaltsverzeichnis
-Dieses Dokument benötigt ein Inhaltsverzeichnis. Es existieren mehrere Einbindungsmöglichkeiten.
+toc::[]
 
 == Zusammenfassung
 Im Pflichtenheft finden Sie alle Aufgabenstellungen, wichtige Modelle und sowie den GUI Entwurf der Kleingartenanlage.
@@ -186,7 +214,7 @@ Für komplexere Anwendungsfälle ein UML-Sequenzdiagramm ergänzen.
 Einfache Anwendungsfälle mit einem Absatz beschreiben.
 Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem einzigen zusammengefasst werden.
 
-image::models/analysis/diagramm 1.jpeg[]
+image::models/analysis/Gast.png[]
 
 [options="header"]
 [cols="^1h,3"]
