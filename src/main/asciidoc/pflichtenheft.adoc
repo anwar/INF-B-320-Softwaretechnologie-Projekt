@@ -460,7 +460,34 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 [options="header"]
 |===
 |Klasse/Enumeration |Beschreibung |
-|…                  |…            |
+|User                    |Ein User ist ein Benutzer der Anwendung. Der enthält persönliche Information z.B Name, Email, Geburtstag, Adresse und Telefonnummer. Jeder hat einen eigenen Account.           |
+|Hauptpächter            |Ein Hauptpächter ist ein User. Er kann einen Konflikt zwischen Pächter melden, kann einen Termin für Pflichtstunde festlegen und kann seinen Mietvertrag kündigen.             |
+|Nebenpächter            |Ein Nebenpächter ist ein User. Er kann einen Konflikt zwischen Pächter melden und kann einen Termin für Pflichtstunde festlegen             |
+|Vorstand                |…            |
+|Protokollant            |…            |
+|Stellvertreter          |Ein Stellenvertreter ist ein Haupt- oder Nebenpächter, aber er hat mehrere zusätzliche Funktionen. Die folgende Funktionen sind: Bewerbung bearbeiten, einen Mietvertrag kündigen, Ermahnung und Preise ändern.            |
+|Schatzmeister           |Ein Schatzmeister ist ein Haupt- oder Nebenpächter und er hat eine zusätzliche Preise-Änderung Funktion.           |
+|Obmann                  |…            |
+|Vorstandvorsitzender    |Ein Vorstandvorsitzender ist ein Haupt- oder Nebenpächter, aber er hat mehrere zusätzliche Funktionen. Die folgende Funktionen sind: Bewerbung bearbeiten, einen Mietvertrag kündigen, Ermahnung und Preise ändern.             |
+|Gast                    |Ein Gast ist ein Benutzer der Anwendung, aber benötigt keinen login. Ein Gast kann geplante Veranstaltungen ansehen und kann eine/mehrere freie Parzelle bewerben.              |
+|Parzelle                |…            |
+|Zähler                  |Ein Zähler überträgt eingegebene Wasser/Strom-Verbrauchsmengen von jeden Parzelle zu Klasse Parzelle und jeder Wert wird in der richtige Parzelle gespeichert.            |
+|Wasserzähler            |Ein Wasserzähler überträgt Wasser-Verbrauchsmenge von jeden Parzelle zu Zähler um die dateien zu speichern.             |
+|Elektrozähler           |Ein Elektrozähler überträgt Strom-Verbrauchsmenge von jeden Parzelle zu Zähler um die dateien zu speichern.            |
+|Hauptwasserzähler       |Ein Hauptwasserzähler enthält Wasser-Verbrauchsmenge von Kleingartenanlagen in letzten 12 Monaten.            |
+|Account                 |…            |
+|Rechnung                |Durch Dateien von Basispreis und Parzelle erstellt die Rechnung-Klasse eine jährliche Rechnung für alle Parzellen.            |
+|Basispreis              |Die Basispreis-Klasse enthält alle Beiträge von Wasseruhr, Stromzähler, Mitglied, Haftpflicht, Sozial und Winterdienst. Die enthält Mietpreis von jeder Parzelle, die unterschiedliche Größe hat. Diese Klasse wird in Rechnung-Klasse genutzt.              |
+|Vorpächter              |Alle persönliche Informationen, die Name, Email, Geburtstag, Adresse und Telefonnummer sind, von Vorpächter in dieser Klasse gespeichert werden.            |
+|Konflikt                |Wenn ein User/Pächter einen/mehrere Konflikte mit anderen Pächter meldet, benachrichtigt diese Klasse den Obmann.           |
+|Termin                  |Die Termin-Klasse bearbeite jährliche 8 Termine von Pflichtstunde. Hier kann Haupt-/Nebenpächter seine Termin anmelden und Obmänner werden darüber informiert.            |
+|Pflichtstunde           |…            |
+|Veranstaltung           |Diese Klasse enthält alle geplante Veranstaltungen und Feste von Kleingartenanlagen.            |
+|Formular                |Ein Gast oder Haupt-/Nebenpächter bewirbt eine freie Parzelle und diese Klasse benötigt Email, Name und Telefonnummer.          |
+|Bewerbung               |            |
+
+
+
 |===
 
 == Akzeptanztestfälle
