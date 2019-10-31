@@ -201,10 +201,13 @@ bei belieben die Bewerbung auf eine freie Parzelle in dieser.
 == Systemgrenze und Top-Level-Architektur
 
 === Kontextdiagramm
-Das Kontextdiagramm zeigt das geplante Software-System in seiner Umgebung. Zur Umgebung gehören alle Nutzergruppen des Systems und Nachbarsysteme. Die Grafik kann auch informell gehalten sein. Überlegen Sie sich dann geeignete Symbole. Die Grafik kann beispielsweise mit Visio erstellt werden. Wenn nötig, erläutern Sie diese Grafik.
+Das Kontextdiagramm zeigt das geplante Software-System in seiner Umgebung.
+Zur Umgebung gehören alle Nutzergruppen des Systems und Nachbarsysteme.
+
+image::diagrams/analyse/contextdiagram.png[]
 
 === Top-Level-Architektur
-Dokumentieren Sie ihre Top-Level-Architektur mit Hilfe eines Komponentendiagramm.
+image::diagrams/analyse/Top_Level_Architechture.png[]
 
 == Anwendungsfälle
 
@@ -230,7 +233,7 @@ einsehen, Pächter kündigen, Bewerbungen bearbeiten +
 |===
 
 === Überblick Anwendungsfalldiagramm
-Anwendungsfall-Diagramm, das alle Anwendungsfälle und alle Akteure darstellt
+image::diagrams/analyse/Use_Cases.png[]
 
 === Anwendungsfallbeschreibungen
 Dieser Unterabschnitt beschreibt die Anwendungsfälle. In dieser Beschreibung müssen noch nicht alle Sonderfälle und Varianten berücksichtigt werden. Schwerpunkt ist es, die wichtigsten Anwendungsfälle des Systems zu finden. Wichtig sind solche Anwendungsfälle, die für den Auftraggeber, den Nutzer den größten Nutzen bringen.
@@ -238,7 +241,7 @@ Für komplexere Anwendungsfälle ein UML-Sequenzdiagramm ergänzen.
 Einfache Anwendungsfälle mit einem Absatz beschreiben.
 Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem einzigen zusammengefasst werden.
 
-image::models/analysis/Gast.png[]
+image:diagrams/analyse/sequenzdiagram_guest.png[]
 
 [options="header"]
 [cols="^1h,3"]
@@ -307,45 +310,6 @@ image::models/analysis/diagramm 2.jpeg[]
 |""
 
 |===
-
-Image 3
-
-[options="header"]
-[cols="^1h,3"]
-|===
-
-|ID
-|UC0030
-|Name
-|Parzellen Bewerbung
-
-|Beschreibung
-|""
-
-|Akteure
-|Vorstandsvorsitzende, Stellvertreter, Gast
-
-|Auslöser
-|""
-
-|Vorbedingungen
-|""
-
-|Wichtigste Schritte
-|1. "" +
-2. "" +
-3. "" +
-4. "" +
-5. ""
-
-|Erweitert
-|""
-
-|Funktionale Anforderung
-|""
-
-|===
-
 image::models/analysis/diagramm 4.jpg[]
 
 [options="header"]
@@ -409,14 +373,13 @@ Finanzmanagement +
 - Werteermittlung +
 
 Anträge +
-- Bauanträge +
 - Bewerbungen (Liste) +
 
 
 
 === Kann-Kriterien
 Anforderungen die das Programm leisten können soll, aber für den korrekten Betrieb entbehrlich sind. +
-- (Accounts bearbeiten) ?
+- Nachbarschaftssystem (Bewertungen)
 
 
 == Nicht-Funktionale Anforderungen
@@ -451,7 +414,11 @@ Für jeden Dialog:
 == Datenmodell
 
 === Überblick: Klassendiagramm
-UML-Analyseklassendiagramm
+UML-Analyseklassendiagramme
+
+image::diagrams/analyse/classdiagram1.png[]
+image::diagrams/analyse/classdiagram2.png[]
+image::diagrams/analyse/classdiagram3.png[]
 
 === Klassen und Enumerationen
 Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Klassen/Enumerationen dar. Jede Klasse und Enumeration wird in Form eines Glossars textuell beschrieben. Zusätzlich werden eventuellen Konsistenz- und Formatierungsregeln aufgeführt.
