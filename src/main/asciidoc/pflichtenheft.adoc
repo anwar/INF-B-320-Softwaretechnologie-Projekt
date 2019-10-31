@@ -407,6 +407,7 @@ in der Datenbank erhalten, nur der Zugang wird für gelöschte Accounts gesperrt
 
 |===
 *4. Finazmanagement*
+
 |===
 |Name |Beschreibung
 |Rechnungen generieren
