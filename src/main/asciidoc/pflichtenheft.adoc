@@ -48,6 +48,13 @@
 | Isabell Zorr
 | Ergänzung Interessensgruppen und Akteure
 
+|0.4
+| ...
+| 31.10.2019
+| Sanghyun Lee
+| Überarbeitung von jährlichen Rechungen
+
+
 |===
 
 toc::[]
@@ -338,6 +345,47 @@ Image 3
 |""
 
 |===
+
+image::models/analysis/diagramm 4.jpg[]
+
+[options="header"]
+[cols="^1h,3"]
+|===
+
+|ID
+|UC0040
+|Name
+|Jährliche Rechnung
+
+|Beschreibung
+|Haupt-/Nebenpächter eingibt Verbrauch der Elektrizität und bekommt eine jährliche Rechnung per Email
+
+|Akteure
+|Hauptpächter, Nebenpächter
+
+|Auslöser
+|Der Haupt-/Nebenpächter eingibt Verbrauch der Elektrizität in seinem Account.
+
+|Vorbedingungen
+|Der Benutzer ist eingeloggt.
+
+|Wichtigste Schritte
+|1. Der Haupt-/Nebenpächter eingibt Verbrauch der Elektrizität in seinem Account +
+2. Der Haupt-/Nebenpächter kann seine Rechung in seiner Parzelle-Webseite finden. +
+3. Durch Klicken der Rechnung-Taste bekommt man eine jährliche Rechnung per Email.
+
+|Erweitert
+|""
+
+|Funktionale Anforderung
+|""
+
+|===
+
+
+
+[options="header"]
+[cols="^1h,3"]
 
 == Funktionale Anforderungen
 
