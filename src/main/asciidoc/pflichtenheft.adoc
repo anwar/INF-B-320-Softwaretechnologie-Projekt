@@ -419,7 +419,7 @@ in der Datenbank erhalten, nur der Zugang wird für gelöschte Accounts gesperrt
 
 |===
 
-*5. Anträge*
+*5. Anträge *
 
 |===
 |Name |Beschreibung
