@@ -54,6 +54,12 @@
 | Sanghyun Lee
 | Überarbeitung von jährlichen Rechungen
 
+|0.4.1
+| ...
+| 31.10.2019
+| Muhammad Talal Anwar
+| Überarbeitung von Arbeitseinsatz Anwendungsfall
+
 
 |===
 
@@ -276,7 +282,7 @@ Daraufhin erstellt der Vorstand einen neuen Pächteraccount.
 |?
 |===
 
-image::models/analysis/diagramm 2.jpeg[]
+image::models/analysis/sequence_arbeitseinsatz.jpg[]
 
 [options="header"]
 [cols="^1h,3"]
@@ -285,7 +291,7 @@ image::models/analysis/diagramm 2.jpeg[]
 |ID
 |UC0020
 |Name
-|Pflichtstunden Termin auswählen und dafür die Stunden eintragen
+|Arbeitseinsatz
 
 |Beschreibung
 |Der Haupt-/Nebenpächter wählt einen Termin zur Leistung der Pflichstunden für eine Parzelle aus. Diese Stunden sind von dem aufsichtsführenden Obmann bestätigt und im Anschluss im betreffenden Parzelle Konto eingetragen.
@@ -293,23 +299,10 @@ image::models/analysis/diagramm 2.jpeg[]
 |Akteure
 |Hauptpächter, Nebenpächter, Obmann
 
-|Auslöser
-|Der Haupt-/Nebenpächter wählt einen Termin für die Pflichtstunden Leistung aus.
-
 |Vorbedingungen
 |Der Benutzer ist eingeloggt.
-
-|Wichtigste Schritte
-|1. Der Haupt-/Nebenpächter meldet sich für einen Termin an +
-2. Der betreffende Obmann trägt die geleistete Studen ein
-
-|Erweitert
-|Nur der Obmann kann die Stunden eintragen und nur wenn der Haupt-/Nebenpächter seine Aufgabe erledigt hat.
-
-|Funktionale Anforderung
-|""
-
 |===
+
 image::models/analysis/diagramm 4.jpg[]
 
 [options="header"]
