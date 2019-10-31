@@ -42,6 +42,12 @@
 | Muhammad Talal Anwar
 | Überarbeitung von dem Pflichstunden Anwendungsfall
 
+| 0.3
+| ...
+| 30.10.2019
+| Isabell Zorr
+| Ergänzung Interessensgruppen und Akteure
+
 |===
 
 toc::[]
@@ -168,16 +174,19 @@ Die Priorität 1-5 (niedrig-hoch) soll bei sich überschneidenden Zielen eine En
 [cols="1,2,3,4"]
 |===
 |Name  |Priorität  |Beschreibung  |Ziele
-|Vorstandsvorsitzender |5  |"" | - "" +
+|Pächter |5  |Dem Pächter soll es ermöglicht werden, sämtliche Anliegen rund um seinen Kleingarten zu koordinieren.
+| - Einsicht in seine Rechnungen +
 
-- ""
-|Hauptpächter |3 |"" |- ""
+- Terminplanung
 
-|"" |3 |"" | - "" +
-- ""
 
-|"" |3 |"" | - "" +
-- ""
+|Gast |1 | Dem Gast soll eine ansprechende Übersicht über die Kleingartenanlage ermöglicht werden und
+bei belieben die Bewerbung auf eine freie Parzelle in dieser.
+|- Einsicht in die anstehenden Veranstaltungen im Reiter "News"
+
+- Bewerbung auf eine Parzelle im Reiter "Parzellen"
+
+- Login als Pächter
 
 |===
 
@@ -202,13 +211,15 @@ Weitere relevante Spalten können bei Bedarf ergänzt werden.
 [cols="1,4"]
 |===
 |Name |Beschreibung
-|Vorstandsvorsitz  |... +
-|Schatzmeister | ... +
-|Obmann | ... +
-|Protokollant | ... +
-|Hauptpächter | ... +
-|Nebenpächter | ... +
-
+|Vorstandsvorsitz  | Koordination der Belange der Kleingartenanlage, wie einen neuen Parzellen-Login anlegen, Parzellen
+als frei deklarieren, Termine im Reiter "News" sowohl für Veranstaltungen als auf für Pflichtstunden setzen, Rechnungen
+einsehen, Pächter kündigen, Bewerbungen bearbeiten +
+|Schatzmeister | Schreiben der Rechnungen, Änderung der Preise +
+|Obmann |  +
+|Protokollant | Protokolliert Treffen des Vorstandes +
+|Hauptpächter | Hauptansprechpartner für den Kleingarten +
+|Nebenpächter | Vom Hauptpächter und Vorstand genehmigter Mitbenutzer der Parzelle +
+| Gast | unangemeldeter Nutzer
 |===
 
 === Überblick Anwendungsfalldiagramm
