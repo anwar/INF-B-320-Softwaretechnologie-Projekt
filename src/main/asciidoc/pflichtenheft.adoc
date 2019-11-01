@@ -696,6 +696,15 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 
 [cols="1h, 4"]
 |===
+| ID                  | **<<AT0013>>**
+| Anwendungsfall      | Löschen von den abgelehnten Bewerbungen **<<UC0010>>**
+| Voraussetzung       | Der Vorstandsvorsitzender ist eingeloggt.
+| Ereignis            | Vorstandsvorsitzender nimmt eine Bewerbung für die Parzelle an.
+| erwartetes Ergebnis | Alle andere Bewerbungen sind automatisch vom System gelöscht.
+|===
+
+[cols="1h, 4"]
+|===
 | ID                  | **<<AT0020>>**
 | Anwendungsfall      | Auswählen von Arbeiteinsatz Termine **<<UC0020>>**
 | Voraussetzung       | Der Pächter ist eingeloggt.
@@ -726,8 +735,17 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 | ID                  | **<<AT0031>>**
 | Anwendungsfall      | Aufrufen von der Rechnung **<<UC0030>>**
 | Voraussetzung       | Der Pächter ist eingeloggt.
-| Ereignis            | Pächter klickt auf "Rechnung für {{Jahr}}", wo {{Jahr}} ist das Jahr, für das der Pächter die Rechnung aufrufen möchte.
-| erwartetes Ergebnis | Die betreffende Rechnung ist als PDF Datei heruntergeladen.
+| Ereignis            | Pächter klickt auf "Rechnung vom {{Jahr}}", wo {{Jahr}} ist das Jahr, für das der Pächter die Rechnung aufrufen möchte.
+| erwartetes Ergebnis | Die betreffende Rechnung wird als PDF Datei zu zu der E-Mail-Adresse des Pächters geschickt.
+|===
+
+[cols="1h, 4"]
+|===
+| ID                  | **<<AT0040>>**
+| Anwendungsfall      | Mitteilen von den Parzelle Zugriff Angaben
+| Voraussetzung       | keine.
+| Ereignis            | Eine neue Pächter ist zur eine Parzelle eingefügt.
+| erwartetes Ergebnis | Eine E-Mail mit Zugriff Angaben wird automatisch zu der E-Mail-Adresse des neuen Pächters geschickt.
 |===
 
 == Glossar
