@@ -249,12 +249,12 @@ Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem ein
 
 image:diagrams/analyse/sequenzdiagram_guest.png[]
 
-[options="header"]
-[cols="^1h,3"]
+[cols="1h, 3"]
+[[UC0010]]
 |===
 
 |ID
-|UC0010
+|**<<UC0010>>**
 |Name
 |Bewerbungsvorgang um eine Parzelle und Hinzufügen eines neuen Pächters
 
@@ -284,8 +284,8 @@ Daraufhin erstellt der Vorstand einen neuen Pächteraccount.
 
 image::models/analysis/sequence_arbeitseinsatz.jpg[]
 
-[options="header"]
-[cols="^1h,3"]
+[cols="1h, 3"]
+[[UC0020]]
 |===
 
 |ID
@@ -303,14 +303,14 @@ image::models/analysis/sequence_arbeitseinsatz.jpg[]
 |Der Benutzer ist eingeloggt.
 |===
 
-image::models/analysis/diagramm 4.jpg[]
+image::models/analysis/sequence_rechnung.jpg[]
 
-[options="header"]
-[cols="^1h,3"]
+[cols="1h, 3"]
+[[UC0030]]
 |===
 
 |ID
-|UC0040
+|**<<UC0030>>**
 |Name
 |Jährliche Rechnung
 
@@ -513,6 +513,69 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 == Akzeptanztestfälle
 Mithilfe von Akzeptanztests wird geprüft, ob die Software die funktionalen Erwartungen und Anforderungen im Gebrauch erfüllt. Diese sollen und können aus den Anwendungsfallbeschreibungen und den UML-Sequenzdiagrammen abgeleitet werden. D.h., pro (komplexen) Anwendungsfall gibt es typischerweise mindestens ein Sequenzdiagramm (welches ein Szenarium beschreibt). Für jedes Szenarium sollte es einen Akzeptanztestfall geben. Listen Sie alle Akzeptanztestfälle in tabellarischer Form auf.
 Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumenten (z.B. im Test-Plan) referenzieren zu können.
+
+[cols="1h, 4"]
+|===
+| ID                  | **<<AT0010>>**
+| Anwendungsfall      | Bewerben für eine Parzelle **<<UC0010>>**
+| Voraussetzung       | Die Parzelle ist frei.
+| Ereignis            | Gast füllt das Bewerbungsformular aus.
+| erwartetes Ergebnis | Eine Bewerbung ist mit Angaben von das Formular erzeugt und für die betreffende Parzelle gespeichert.
+|===
+
+[cols="1h, 4"]
+|===
+| ID                  | **<<AT0011>>**
+| Anwendungsfall      | Bewerbungen für eine Parzelle ansehen **<<UC0010>>**
+| Voraussetzung       | Der Vorstandsvorsitzender ist eingeloggt.
+| Ereignis            | Vorstandsvorsitzender meldet sich in dem Parzelle Konto an und klickt auf "Bewerbungen".
+| erwartetes Ergebnis | Alle Bewerbungen, Falls es gibt, werden angezeigt.
+|===
+
+[cols="1h, 4"]
+|===
+| ID                  | **<<AT0012>>**
+| Anwendungsfall      | Pächter zur Parzelle hinzufügen **<<UC0010>>**
+| Voraussetzung       | Der Vorstandsvorsitzender ist eingeloggt.
+| Ereignis            | Vorstandsvorsitzender nimmt eine Bewerbung für die Parzelle an.
+| erwartetes Ergebnis | Die Personalangaben des Bewerbers werden von die betreffenden Bewerbung entnommen und im Parzelle Konto eingetragen.
+|===
+
+[cols="1h, 4"]
+|===
+| ID                  | **<<AT0020>>**
+| Anwendungsfall      | Auswählen von Arbeiteinsatz Termine **<<UC0020>>**
+| Voraussetzung       | Der Pächter ist eingeloggt.
+| Ereignis            | Pächter wählt einen Termin für Pflichstunde Leistung aus.
+| erwartetes Ergebnis | Pächter ist für den betreffenden Termin angemeldet.
+|===
+
+[cols="1h, 4"]
+|===
+| ID                  | **<<AT0021>>**
+| Anwendungsfall      | Eintragen von geleisteten Pflichtstunde **<<UC0020>>**
+| Voraussetzung       | Der Obmann ist eingeloggt.
+| Ereignis            | Obmann wählt den betreffenden Termin und trägt die Anzahl der geleistete Pflichtstunde ein.
+| erwartetes Ergebnis | Die geleistete Pflichtstunden Anzahl ist für den betreffenden Termin in dem betreffenden Parzelle Konto gespeichert.
+|===
+
+[cols="1h, 4"]
+|===
+| ID                  | **<<AT0030>>**
+| Anwendungsfall      | Eintragen von Elektrozählerwert **<<UC0030>>**
+| Voraussetzung       | Der Pächter ist eingeloggt.
+| Ereignis            | Pächter trägt den aktuellen Wert des Elektrozähler ein.
+| erwartetes Ergebnis | Der Elektrozählerwert ist für die betreffende Parzelle gespeichert.
+|===
+
+[cols="1h, 4"]
+|===
+| ID                  | **<<AT0031>>**
+| Anwendungsfall      | Aufrufen von der Rechnung **<<UC0030>>**
+| Voraussetzung       | Der Pächter ist eingeloggt.
+| Ereignis            | Pächter klickt auf "Rechnung für {{Jahr}}", wo {{Jahr}} ist das Jahr, für das der Pächter die Rechnung aufrufen möchte.
+| erwartetes Ergebnis | Die betreffende Rechnung ist als PDF Datei heruntergeladen.
+|===
 
 == Glossar
 Sämtliche Begriffe, die innerhalb des Projektes verwendet werden und deren gemeinsames Verständnis aller beteiligten Stakeholder essentiell ist, sollten hier aufgeführt werden.
