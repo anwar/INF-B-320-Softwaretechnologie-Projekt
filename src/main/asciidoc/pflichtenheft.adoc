@@ -228,7 +228,7 @@ Weitere relevante Spalten können bei Bedarf ergänzt werden.
 |===
 | Name             | Beschreibung
 | Vorstandsvorsitz | Koordination der Belange der Kleingartenanlage, wie einen neuen Parzellen-Login anlegen, Parzellen
-als frei deklarieren, Termine im Reiter "News" sowohl für Veranstaltungen als auf für Pflichtstunden setzen, Rechnungen
+als frei deklarieren, Termine im Reiter "News" sowohl für Veranstaltungen als auch für Pflichtstunden setzen, Rechnungen
 einsehen, Pächter kündigen, Bewerbungen bearbeiten
 | Schatzmeister    | Schreiben der Rechnungen, Änderung der Preise
 | Obmann           | ""
@@ -344,6 +344,7 @@ image::models/analysis/sequence_rechnung.jpg[]
 
 === Muss-Kriterien
 
+
 ID: 1. Buchstabe: A - Allgemein, P - Parzellenmanagement, AC - Accountmanagement,
  F - Finanzmanagement, AN - Anträge, U - Usermanagement +
 2. Buchstabe: F - Funktionale Anforderung +
@@ -415,8 +416,7 @@ in der Datenbank erhalten, nur der Zugang wird für gelöschte Accounts gesperrt
 |===
 
 
-*4. Finazmanagement*
-
+*4. Finanzmanagement*
 
 [options="header"]
 [cols="^1h,1,3"]
@@ -635,9 +635,37 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 |===
 
 == Glossar
-Sämtliche Begriffe, die innerhalb des Projektes verwendet werden und deren gemeinsames Verständnis aller beteiligten Stakeholder essentiell ist, sollten hier aufgeführt werden.
-Insbesondere Begriffe der zu implementierenden Domäne wurden bereits beschrieben, jedoch gibt es meist mehr Begriffe, die einer Beschreibung bedürfen. +
-Beispiel: Was bedeutet "Kunde"? Ein Nutzer des Systems? Der Kunde des Projektes (Auftraggeber)?
+Das Glossar beinhaltet sämtliche Begriffe, die innerhalb des Projektes verwendet werden und deren gemeinsames Verständnis aller beteiligten Stakeholder essentiell ist.
+
+:domain_ref: Siehe <<Klassen und Enumerationen>>
+
+[options="header"]
+[cols="^1h,3"]
+|===
+
+|Begriff
+|Beschreibung
+
+| Pächter
+| Mieter und Hauptansprechpartner der Parzelle
+{domain_ref}
+
+| Parzelle
+| Kleingarteneinheit der Anlage
+{domain_ref}
+
+| Obmann
+| Ansprechpartner für die Pächter in seinem Umfeld, Mitglied des Vorstandes
+{domain_ref}
+
+| Gast
+| unangemeldeter Nutzer der Seite
+{domain_ref}
+
+
+
+|===
+
 
 == Offene Punkte
 Offene Punkte werden entweder direkt in der Spezifikation notiert. Wenn das Pflichtenheft zum finalen Review vorgelegt wird, sollte es keine offenen Punkte mehr geben.
