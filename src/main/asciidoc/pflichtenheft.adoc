@@ -537,28 +537,28 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 |===
-|Klasse/Enumeration |Beschreibung
+|Klasse/Enumeration      |Beschreibung
 |User                    |Ein User ist ein Benutzer der Anwendung. Der enthält persönliche Information z.B Name, Email, Geburtstag, Adresse und Telefonnummer. Jeder hat einen eigenen Account.
 |Pächter                 |Ein Pächter ist ein User. Er kann einen Konflikt zwischen Pächter melden, kann einen Termin für Pflichtstunde festlegen und kann seinen Mietvertrag kündigen.
-|<Enummeration> +
+|<Enumeration> +
 PÄCHTER                  |Jeder Pächter ist einer Rolle zugeordnet, wodurch gewisse Zugriffsrechte auf die Anwendung. (HAUPTPÄCHTER UND NEBENPÄCHTER)
 |Vorstandvorsitz         |Ein Vorstandvorsitz ist ein Pächter. Zusätzlich kann er Termin ändern und kann BesichtigungsTermin festlegen.
 |Kassierer/Schatzmeister |Ein Schatzmeister ist ein Pächter und er hat eine zusätzliche Preise-Änderung Funktion.
 |Vorstandvorsitzender    |Ein Vorstandvorsitzender ist ein Pächter, aber er hat mehrere zusätzliche Funktionen. Die folgende Funktionen sind: Bewerbung bearbeiten, einen Mietvertrag kündigen, Ermahnung und Preise ändern. Zusätzlich kann er Termin ändern und kann einen Besichtigungstermin festlegen.
 |Gast                    |Ein Gast ist ein Benutzer der Anwendung, aber benötigt keinen login. Ein Gast kann geplante Veranstaltungen ansehen und kann eine/mehrere freie Parzelle bewerben.
-|Parzelle                |Die Parzelle-Klasse enthält Größe aller Parzellen, befindliche Bebauungen, Gehölze und Schätzwert. Diese Klasse speichert Wasser/Strom-Verbrauchsmenge und hat aktuelle Zustände: Besetzt/Frei.
+|Parzelle                |Die Parzelle ist eine Kleingarteneinheit der Anlage. Diese Klasse enthält Größe aller Parzellen, befindliche Bebauungen, Gehölze und Schätzwert. Diese Klasse speichert Wasser/Strom-Verbrauchsmenge und hat aktuelle Zustände: Besetzt/Frei.
 |Zähler                  |Ein Zähler überträgt eingegebene Wasser/Strom-Verbrauchsmengen von jeden Parzelle zu Klasse Parzelle und jeder Wert wird in der richtige Parzelle gespeichert.
 |Account                 |Jeder Nutzer besitzt ein Account. Damit kann er Strom-Verbrauchsmenge schicken und kann Email verschicken.
 |Rechnung                |Durch Dateien von Basispreis und Parzelle erstellt die Rechnung-Klasse eine jährliche Rechnung für alle Parzellen.
 |Basispreis              |Die Basispreis-Klasse enthält Wasseruhr-, Stromzähler-, Mitglied-, Haftpflicht-, Sozial- und Winterdienstbeiträge. Die enthält auch Mietpreis pro Quadratmeter von jeder Parzelle, die unterschiedliche Größe hat. Diese Klasse wird in Rechnung-Klasse genutzt.
-|<Enummeration> +
+|<Enumeration> +
 ERMAHNUNG                |Ermahnung hat folgende Zustände: ANGENOMMEN, GELÖSCHT, NEU UND BEARBEITET
 |Vorpächter              |In dieser Klasse werden alle persönliche Informationen von Vorpächter, die Name, Email, Geburtstag, Adresse und Telefonnummer sind, gespeichert.
 |Konflikt                |Wenn ein User/Pächter einen/mehrere Konflikte mit anderen Pächter meldet, benachrichtigt diese Klasse den Obmann.
 |Termin                  |Die Termin-Klasse bearbeite jährliche 8 Termine von Pflichtstunde. Hier kann Haupt-/Nebenpächter seine Termin anmelden und Obmann wird darüber informiert und kann seinen Termin festlegen.
 |Veranstaltung           |Diese Klasse enthält alle geplante Veranstaltungen und Feste von Kleingartenanlagen. Alle User und Gast können darüber ansehen.
 |Formular                |Ein Gast oder Haupt-/Nebenpächter bewirbt eine freie Parzelle und diese Klasse benötigt Email, Name und Telefonnummer.
-|<Enummeration> +
+|<Enumeration> +
 BEWERBUNG                |Bewerbung hat folgende Zustände: ANGENOMMEN, GELÖSCHT, NEU UND BEARBEITET.
 
 
