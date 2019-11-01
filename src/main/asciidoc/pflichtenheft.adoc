@@ -749,6 +749,3 @@ Das Glossar beinhaltet sämtliche Begriffe, die innerhalb des Projektes verwende
 
 |===
 
-
-== Offene Punkte
-Offene Punkte werden entweder direkt in der Spezifikation notiert. Wenn das Pflichtenheft zum finalen Review vorgelegt wird, sollte es keine offenen Punkte mehr geben.
