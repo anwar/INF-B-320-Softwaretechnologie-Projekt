@@ -193,16 +193,12 @@ Die Priorität 1-5 (niedrig-hoch) soll bei sich überschneidenden Zielen eine En
 |Name  |Priorität  |Beschreibung  |Ziele
 |Pächter |5  |Dem Pächter soll es ermöglicht werden, sämtliche Anliegen rund um seinen Kleingarten zu koordinieren.
 | - Einsicht in seine Rechnungen +
-
 - Terminplanung
-
 
 |Gast |1 | Dem Gast soll eine ansprechende Übersicht über die Kleingartenanlage ermöglicht werden und
 bei belieben die Bewerbung auf eine freie Parzelle in dieser.
-|- Einsicht in die anstehenden Veranstaltungen im Reiter "News"
-
-- Bewerbung auf eine Parzelle im Reiter "Parzellen"
-
+|- Einsicht in die anstehenden Veranstaltungen im Reiter "News" +
+- Bewerbung auf eine Parzelle im Reiter "Parzellen" +
 - Login als Pächter
 
 |===
@@ -230,16 +226,16 @@ Weitere relevante Spalten können bei Bedarf ergänzt werden.
 [options="header"]
 [cols="1,4"]
 |===
-|Name |Beschreibung
-|Vorstandsvorsitz  | Koordination der Belange der Kleingartenanlage, wie einen neuen Parzellen-Login anlegen, Parzellen
+| Name             | Beschreibung
+| Vorstandsvorsitz | Koordination der Belange der Kleingartenanlage, wie einen neuen Parzellen-Login anlegen, Parzellen
 als frei deklarieren, Termine im Reiter "News" sowohl für Veranstaltungen als auf für Pflichtstunden setzen, Rechnungen
-einsehen, Pächter kündigen, Bewerbungen bearbeiten +
-|Schatzmeister | Schreiben der Rechnungen, Änderung der Preise +
-|Obmann |  +
-|Protokollant | Protokolliert Treffen des Vorstandes +
-|Hauptpächter | Hauptansprechpartner für den Kleingarten +
-|Nebenpächter | Vom Hauptpächter und Vorstand genehmigter Mitbenutzer der Parzelle +
-| Gast | unangemeldeter Nutzer
+einsehen, Pächter kündigen, Bewerbungen bearbeiten
+| Schatzmeister    | Schreiben der Rechnungen, Änderung der Preise
+| Obmann           | ""
+| Protokollant     | Protokolliert Treffen des Vorstandes
+| Hauptpächter     | Hauptansprechpartner für den Kleingarten
+| Nebenpächter     | Vom Hauptpächter und Vorstand genehmigter Mitbenutzer der Parzelle
+| Gast             | unangemeldeter Nutzer
 |===
 
 === Überblick Anwendungsfalldiagramm
