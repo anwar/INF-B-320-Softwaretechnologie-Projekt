@@ -594,6 +594,10 @@ image::models/design/GUI/Mitglied hinzufügen.png[]
 image::models/design/GUI/Konflikte aufgeben - Pächter.png[]
 image::models/design/GUI/Konflikte einsehen - Pächter.png[]
 image::models/design/GUI/Konflikte einsehen Obmann.png[]
+image::models/design/GUI/Parzellenübersicht – 1.png[]
+image::models/design/GUI/Parzellenübersicht.png[]
+image::models/design/GUI/Parzellenansicht freie.png[]
+image::models/design/GUI/Bewerbung.png[]
 
 === Überblick: Dialoglandkarte
 Erstellen Sie ein Übersichtsdiagramm, das das Zusammenspiel Ihrer Masken zur Laufzeit darstellt. Also mit welchen Aktionen zwischen den Masken navigiert wird.
