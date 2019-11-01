@@ -616,7 +616,12 @@ Mit der Navigationsleiste kann er auf die Überischt seiner Parzelle, der Anlage
 | 7 | Bewerbungen | Dem Vorstandsvorsitzenden wird es hier ermöglicht die eingegangenen Bewerbungen der Gäste einzusehen, zu akzeptieren und zu löschen.
 | 8 | Termine bearbeiten | Hier kann der Vorstand neue Veranstaltungsterime und Termine für die Pflichtstunden bearbeiten und hinzufügen.
 | 9 | Anlageanzeige (privilegiert) | Im Bereich Anlage können Pächter die Übersicht über die Parzellen der Anlage, ähnlich wie der Gast. Hier sieht der Pächter jedoch auch eine Anzeige der Parzelle seines nächsten Obmannes.
-| 10 |                                                                                                                                 b  b
+| 10 | Übersicht | Der Pächter kann in diesem Bereich alle Details zu seiner Parzelle einsehen und Daten wie den Wasser- und Elektrozählstand einpflegen. Zudem können sich Pächter, die nicht zum Vorstand gehören hier für ihre Pflichtstunden eintragen.
+| 11 | Rechnungen | In dieser Übersicht kann der Pächter seine Rechnungen einsehen.
+| 12 | Finanzen | Dieser Bereicht wird nur dem Kassierer angezeigt, der hier die Preise anpassen und Rechnungen einsehen kann.
+| 13 | Konflikte | Hier können Pächter ihre abgeschickten Beschwerden über andere Pächter einsehen
+| 14 | Bewerbung | Nachdem der Gast bei der Parzellenübersicht bei einer Parzelle auf Bewerbung geklickt hat, wird er auf dieses Formular geleitet, welches er mit seinen
+persönlichen Daten ausgefüllt abschickt. Dieses Formular wird dann an den Vorstandsvorsitzenden geschickt, der dieses dann bearbeiten kann. 
 
 |===
 
