@@ -210,10 +210,10 @@ bei belieben die Bewerbung auf eine freie Parzelle in dieser.
 Das Kontextdiagramm zeigt das geplante Software-System in seiner Umgebung.
 Zur Umgebung gehören alle Nutzergruppen des Systems und Nachbarsysteme.
 
-image::diagrams/analyse/contextdiagram.png[]
+image::models/analysis/contextdiagram.png[]
 
 === Top-Level-Architektur
-image::diagrams/analyse/Top_Level_Architechture.png[]
+image::models/analysis/Top_Level_Architechture.png[]
 
 == Anwendungsfälle
 
@@ -239,7 +239,7 @@ einsehen, Pächter kündigen, Bewerbungen bearbeiten
 |===
 
 === Überblick Anwendungsfalldiagramm
-image::diagrams/analyse/Use_Cases.png[]
+image::models/analysis/Use_Cases.png[]
 
 === Anwendungsfallbeschreibungen
 Dieser Unterabschnitt beschreibt die Anwendungsfälle. In dieser Beschreibung müssen noch nicht alle Sonderfälle und Varianten berücksichtigt werden. Schwerpunkt ist es, die wichtigsten Anwendungsfälle des Systems zu finden. Wichtig sind solche Anwendungsfälle, die für den Auftraggeber, den Nutzer den größten Nutzen bringen.
@@ -247,7 +247,7 @@ Für komplexere Anwendungsfälle ein UML-Sequenzdiagramm ergänzen.
 Einfache Anwendungsfälle mit einem Absatz beschreiben.
 Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem einzigen zusammengefasst werden.
 
-image:diagrams/analyse/sequenzdiagram_guest.png[]
+image:models/analysis/sequenzdiagram_guest.png[]
 
 [cols="1h, 3"]
 [[UC0010]]
@@ -496,19 +496,104 @@ die Rolle Vorstandsvorsitzender gibt es nur einmal, daher wird diese bei Neuverg
 == Nicht-Funktionale Anforderungen
 
 === Qualitätsziele
+[options="header"]
+[cols="2h,^1,^1,^1,^1,^1"]
+|===
+|Qualitätsziel
+|1
+|2
+|3
+|4
+|5
 
-Dokumentieren Sie in einer Tabelle die Qualitätsziele, welche das System erreichen soll, sowie deren Priorität.
+|Anpassbarkeit (Scalability)
+|X
+|
+|
+|
+|
+
+|Wartbarkeit (Maintainability)
+|
+|
+|X
+|
+|
+
+|Erweiterbarkeit (Extensibility)
+|
+|
+|
+|
+|X
+
+|Benutzbarkeit (Usability)
+|
+|
+|X
+|
+|
+
+|Zuverlässigkeit (Reliability)
+|
+|
+|
+|X
+|
+
+|Geschwindigkeit (Performance)
+|
+|
+|
+|X
+|
+
+|Sicherheit (Security)
+|
+|
+|
+|
+|X
+
+|===
 
 === Konkrete Nicht-Funktionale Anforderungen
+[options="header"]
+[cols="1,2"]
+|===
+|Name
+|Beschreibung
 
-Beschreiben Sie Nicht-Funktionale Anforderungen, welche dazu dienen, die zuvor definierten Qualitätsziele zu erreichen.
-Achten Sie darauf, dass deren Erfüllung (mindestens theoretisch) messbar sein muss.
+|Verfügbarkeit
+|Das System sollte möglichst immer verfügbar sein, damit alle Verwaltungsangelegenheiten geklärt werden können und das
+der Gast oder der Pächter die Website online sehen kann. Dabei sollte das System mindestens 99% der Zeit verfügbar sein.
+
+|Sicherheit
+|Die Passwörter der Pächter (vor allem vom Vorstand) sollten gesichert sein (nur in Hash Werte).
+
+|Geschwindigkeit
+|Das System sollte möglichst schnell sein, damit die vielen Nutzer in annehmbarer Zeit die Seite nutzen können
+und keine lange Wartezeiten auftreten.
+|===
 
 == GUI Prototyp
-
-In diesem Kapitel soll ein Entwurf der Navigationsmöglichkeiten und Dialoge des Systems erstellt werden.
-Idealerweise entsteht auch ein grafischer Prototyp, welcher dem Kunden zeigt, wie sein System visuell umgesetzt werden soll.
-Konkrete Absprachen - beispielsweise ob der grafische Prototyp oder die Dialoglandkarte höhere Priorität hat - sind mit dem Kunden zu treffen.
+image::models/design/GUI/Home.png[]
+image::models/design/GUI/Login.png[]
+image::models/design/GUI/Login mit daten.png[]
+image::models/design/GUI/Übersicht.png[]
+image::models/design/GUI/Übersicht Vorstand.png[]
+image::models/design/GUI/Basispreise.png[]
+image::models/design/GUI/Termine.png[]
+image::models/design/GUI/Termine bearbeiten.png[]
+image::models/design/GUI/Daten einpflegen.png[]
+image::models/design/GUI/Rechnungen Pächter.png[]
+image::models/design/GUI/Rechnungen Vorstand.png[]
+image::models/design/GUI/Mitgliederverwaltung.png[]
+image::models/design/GUI/Mitglied hinzufügen – 1.png[]
+image::models/design/GUI/Mitglied hinzufügen.png[]
+image::models/design/GUI/Konflikte aufgeben - Pächter.png[]
+image::models/design/GUI/Konflikte einsehen - Pächter.png[]
+image::models/design/GUI/Konflikte einsehen Obmann.png[]
 
 === Überblick: Dialoglandkarte
 Erstellen Sie ein Übersichtsdiagramm, das das Zusammenspiel Ihrer Masken zur Laufzeit darstellt. Also mit welchen Aktionen zwischen den Masken navigiert wird.
