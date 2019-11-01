@@ -781,7 +781,15 @@ Das Glossar beinhaltet sämtliche Begriffe, die innerhalb des Projektes verwende
 | unangemeldeter Nutzer der Seite
 {domain_ref}
 
+| Vorstandsvorsitzender
+| Vorsitz des Vorstands
+{domain_ref}
 
+| Vorstand
+| Geschäftsleitung der {project_name}. Mitglieder sind der Kassierer, der Vostandsvorsitzende, der Kassierer, die Obmänner, der Protokollant, Stellvertreter.
+
+| Stellvertreter
+| Stellvertreter des Vostandsvorsitzenden. Erhält die gleichen Befugnisse wie dieser.
 
 |===
 
