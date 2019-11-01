@@ -231,7 +231,7 @@ Weitere relevante Spalten können bei Bedarf ergänzt werden.
 als frei deklarieren, Termine im Reiter "News" sowohl für Veranstaltungen als auch für Pflichtstunden setzen, Rechnungen
 einsehen, Pächter kündigen, Bewerbungen bearbeiten
 | Schatzmeister    | Schreiben der Rechnungen, Änderung der Preise
-| Obmann           | ""
+| Obmann           | Der Obmann kontrolliert bei den Pflichtstunden ob die Leute da sind die sich eingetragen haben und er ist die erste Instanz wenn Pächter Beschwerden abgeben.
 | Protokollant     | Protokolliert Treffen des Vorstandes
 | Hauptpächter     | Hauptansprechpartner für den Kleingarten
 | Nebenpächter     | Vom Hauptpächter und Vorstand genehmigter Mitbenutzer der Parzelle
@@ -612,9 +612,9 @@ Für jeden Dialog:
 === Überblick: Klassendiagramm
 UML-Analyseklassendiagramme
 
-image::diagrams/analyse/classdiagram1.png[]
-image::diagrams/analyse/classdiagram2.png[]
-image::diagrams/analyse/classdiagram3.png[]
+image::models/analysis/classdiagram1.png[]
+image::models/analysis/classdiagram2.png[]
+image::models/analysis//classdiagram3.png[]
 
 === Klassen und Enumerationen
 Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Klassen/Enumerationen dar. Jede Klasse und Enumeration wird in Form eines Glossars textuell beschrieben. Zusätzlich werden eventuellen Konsistenz- und Formatierungsregeln aufgeführt.
