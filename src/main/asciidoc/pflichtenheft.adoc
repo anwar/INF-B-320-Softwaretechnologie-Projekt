@@ -340,101 +340,158 @@ image::models/analysis/sequence_rechnung.jpg[]
 |===
 
 
-
-[options="header"]
-[cols="^1h,3"]
-
 == Funktionale Anforderungen
 
 === Muss-Kriterien
 
-|===
-|Name |Beschreibung
-|Rechnungen generieren
-
-|Rechnungen werden nach Eingabe der Daten automatisch erstellt und in dem Useraccount gespeichert
-|Liste an Basispreisen
-|Es werden Basispreise erstellt, die jederzeit vom Kassierer geändert werden können
-
-
-|===
+ID: 1. Buchstabe: A - Allgemein, P - Parzellenmanagement, AC - Accountmanagement,
+ F - Finanzmanagement, AN - Anträge, U - Usermanagement +
+2. Buchstabe: F - Funktionale Anforderung +
+3. Zeichen: Fortlaufende Nummer für jeweiliges Department
 
 *1. Allgemein*
 
+
+[options="header"]
+[cols="^1h,1,3"]
 |===
-|Name |Beschreibung
+
+|ID
+|Name
+|Beschreibung
+
+|#A-F-01
 |Funktionen von Listen mit Daten: +
 - Liste aller Mitglieder +
-- Liste aller Parzellen (frei und besetzt) +
-
-|-Sortieren +
-- Suche +
-- Hinzufügen +
+- Liste aller freien und besetzten Parzellen +
+|Listen sollen sortiert werden können, man kann nach bestimmten Einträgen suchen,
+sowie neue hinzufügen
 
 |===
+
+
 
 *2. Parzellenmanagment*
+
+[options="header"]
+[cols="^1h,1,3"]
 |===
-|Name |Beschreibung
-|- Zähler (Wasser + Elektro) +
 
+|ID
+|Name
+|Beschreibung
 
-|Eintragen und Speichern der Zählerstände von mehreren Jahren +
+|#P-F-01
+|Wasser- und Elektrozähler
 
+|Zählerstände können in dem Useraccount eingetragen werden und gespeichert werden
+
+|#P-F-02
 |Pflichtstunden
-|- Eintragung in die Pflichtstunden und Speicherung der geleisteten Zeit pro Parzelle +
-- Speicherung und Gutschreiben der Überstunden
-
+|User können sich in die Pflichtstunden eintragen und die geleistete Zeit wird pro Parzelle in den Parzellen gespeichert,
+ Überstunden werden gespeichert und in der Parzelle gutgeschrieben für die nächsten Pflichtstunden
 
 |===
+
 
 *3. Accountmanagement*
-
+[options="header"]
+[cols="^1h,1,3"]
 |===
-|Name |Beschreibung
-|Löschen und Hinzufügen
 
+|ID
+|Name
+|Beschreibung
+
+|#AC-F-01
+|Löschen und Hinzufügen
 |Accounts können vom Vorstandvorsitzendem hinzugefügt werden und auch wieder gelöscht werden (Daten der User bleiben jedoch
 in der Datenbank erhalten, nur der Zugang wird für gelöschte Accounts gesperrt) +
 
+|#AC-F-02
 |Rechnungen einsehen
 |User können ihre Rechnungen in ihrem Account einsehen, die dort gespeichert sind
 
 |===
+
+
 *4. Finazmanagement*
 
-|===
-|Name |Beschreibung
-|Rechnungen generieren
 
-|Rechnungen werden nach Eingabe der Daten automatisch erstellt und in dem Useraccount gespeichert
+[options="header"]
+[cols="^1h,1,3"]
+|===
+
+|ID
+|Name
+|Beschreibung
+
+|#F-F-01
+|Rechnungen generieren
+|Rechnungen werden nach Eingabe der Daten vom Kassierer automatisch erstellt und in dem Useraccount gespeichert
+
+|#F-F-02
 |Liste an Basispreisen
 |Es werden Basispreise erstellt, die jederzeit vom Kassierer geändert werden können
 
-
 |===
+
 
 *5. Anträge*
 
+[options="header"]
+[cols="^1h,1,3"]
 |===
-|Name |Beschreibung
+
+|ID
+|Name
+|Beschreibung
+
+|#AN-F-01
 |Bewerbungen
+|Bewerbungen können vom User durch eine Vorlage ausgefüllt werden und abgeschickt werden,
+die Bewerber bekommen dann eine generierte Email zugeschickt, die den Eingang der Bewerbung bestätigt,
 
-|- Bewerbungen können ausgefüllt und abgeschickt werden +
- - diese werden in Listen gespeichert und vom Vorstandsvorsitz bearbeitet ( gelöscht, angenommen, abgelehnt)
+|#AN-F-02
+| Bewerbungen bearbeiten
+| Bewerbungen gehen an den Vorstandsvorsitzendem ein, welche in Listen gespeichert werden,
+der Vorstandsvorsitzende kann diese dann bearbeiten, er kann sie annehmen, löschen und ablehnen
 
 |===
+*6. User-Management*
+
+[options="header"]
+[cols="^1h,1,3"]
+|===
+|ID
+|Name
+|Beschreibung
+
+|#U-F-01
+|Login
+|User müssen sich mit ihrer Emailadresse und einem Passwort einloggen können
 
 
+|#U-F-04
+|User bearbeiten
+|Der Vorstandvorsitzende muss User bearbeiten können, Rollen wie Kassierer, Wassermänner, Obmänner können vom Vorstandsvorsitzendem im Pächteraccount zugeteilt werden,
+die Rolle Vorstandsvorsitzender gibt es nur einmal, daher wird diese bei Neuvergabe automatisch beim Vorgänger rausgenommen
+
+
+|===
 
 === Kann-Kriterien
+[options="header"]
+[cols="^1h,1,3"]
 |===
-|Name |Beschreibung
-|Nachbarschaftssystem
+|ID
+|Name
+|Beschreibung
 
+|#F101
+|Nachbarschaftssystem
 |User können bei der Parzellenansicht ihren Nachbarn Bewertungen abgeben, die dann von jedem gesehen werden können
 |===
-
 
 == Nicht-Funktionale Anforderungen
 
