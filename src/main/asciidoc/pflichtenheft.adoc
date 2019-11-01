@@ -600,8 +600,7 @@ image::models/design/GUI/Parzellenansicht freie.png[]
 image::models/design/GUI/Bewerbung.png[]
 
 === Überblick: Dialoglandkarte
-Erstellen Sie ein Übersichtsdiagramm, das das Zusammenspiel Ihrer Masken zur Laufzeit darstellt. Also mit welchen Aktionen zwischen den Masken navigiert wird.
-//Die nachfolgende Abbildung zeigt eine an die Pinnwand gezeichnete Dialoglandkarte. Ihre Karte sollte zusätzlich die Buttons/Funktionen darstellen, mit deren Hilfe Sie zwischen den Masken navigieren.
+image::models/design/deinBild.png[]
 
 === Dialogbeschreibung
 
