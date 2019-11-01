@@ -600,12 +600,25 @@ Erstellen Sie ein Übersichtsdiagramm, das das Zusammenspiel Ihrer Masken zur La
 //Die nachfolgende Abbildung zeigt eine an die Pinnwand gezeichnete Dialoglandkarte. Ihre Karte sollte zusätzlich die Buttons/Funktionen darstellen, mit deren Hilfe Sie zwischen den Masken navigieren.
 
 === Dialogbeschreibung
-Für jeden Dialog:
 
-1. Kurze textuelle Dialogbeschreibung eingefügt: Was soll der jeweilige Dialog? Was kann man damit tun? Überblick?
-2. Maskenentwürfe (Screenshot, Mockup)
-3. Maskenelemente (Ein/Ausgabefelder, Aktionen wie Buttons, Listen, …)
-4. Evtl. Maskendetails, spezielle Widgets
+[options="header"]
+[cols="^1h,2,3"]
+|===
+|Figure |Name  |Beschreibung
+|1 | Startseite des {project_name} | Hier werden dem unangemeldeten Nutzer Neuigkeiten zur {project_name} angezeigt.
+Mithilfe der Navigationsleiste erreicht der Nutzer den Login für die Pächter, die Anzeige der Anlage in der die verpachteten und freien Parzellen angezeigt werden.
+| 2 | Anlagenanzeige | Der unangemeldete Nutzer (Gast) erhält eine Überischt über die Parzellen mit kurzer Beschreibung dieser und einer Anzeige welche Parzellen frei sind. Auf freie Parzellen kann sich der Gast mit einem Formular bewerben.
+| 3 | Login | Hier können sich alle Pächter mit ihren Daten (Email-Adresse und Passwort) anmelden und gelangen so in die Ansicht für angemeldete nutzer. Ist der Login erfolglos, wird er auf die Loginseite zurückgeleitet.
+| 4 | Startseite für Pächter | Der Pächter befindet sich nun auf der Newsseite, wo ihm Anlagenrelevante Veranstaltungen und die Termine zu den Pflichtstunden angezeigt werden.
+Mit der Navigationsleiste kann er auf die Überischt seiner Parzelle, der Anlage, seiner abgeschickten Beschwerden und seine Rechnungen zugreifen.
+| 5 | Startseite für den Vorstandsvorsitzenden | Hier sieht der Vorstandsvorsitzende die gleiche Übersicht wie ein normaler Pächter. Zusätzlich hat er die Reiter Bewerbungen, Mitglieder und Termine bearbeiten.
+| 6 | Mitgliederübersicht | Die Mitgliedrübersicht gibt dem Vorstandsvorsitzenden Auskunft über die Pächter der {project_name}. Er kann die User hier bearbeiten, ihre Rolle ändern, deaktivieren und neue User hinzufügen.
+| 7 | Bewerbungen | Dem Vorstandsvorsitzenden wird es hier ermöglicht die eingegangenen Bewerbungen der Gäste einzusehen, zu akzeptieren und zu löschen.
+| 8 | Termine bearbeiten | Hier kann der Vorstand neue Veranstaltungsterime und Termine für die Pflichtstunden bearbeiten und hinzufügen.
+| 9 | Anlageanzeige (privilegiert) | Im Bereich Anlage können Pächter die Übersicht über die Parzellen der Anlage, ähnlich wie der Gast. Hier sieht der Pächter jedoch auch eine Anzeige der Parzelle seines nächsten Obmannes.
+| 10 |                                                                                                                                 b  b
+
+|===
 
 == Datenmodell
 
