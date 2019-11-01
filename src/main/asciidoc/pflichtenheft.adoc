@@ -9,7 +9,6 @@
 
 = Pflichtenheft  __{project_name}__
 :project_name: Kleingartenanlage
-==
 
 [options="header"]
 [cols="1, 1, 1, 1, 4"]
@@ -60,6 +59,11 @@
 | Muhammad Talal Anwar
 | Überarbeitung von Arbeitseinsatz Anwendungsfall
 
+|0.5
+| ...
+| 31.10.2019
+| Muhammad Talal Anwar
+| Akzeptanztestfälle
 
 |===
 
@@ -289,7 +293,7 @@ image::models/analysis/sequence_arbeitseinsatz.jpg[]
 |===
 
 |ID
-|UC0020
+|**<<UC0020>>**
 |Name
 |Arbeitseinsatz
 
