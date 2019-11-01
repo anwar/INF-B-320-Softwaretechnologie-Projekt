@@ -736,7 +736,7 @@ Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumen
 | Anwendungsfall      | Aufrufen von der Rechnung **<<UC0030>>**
 | Voraussetzung       | Der Pächter ist eingeloggt.
 | Ereignis            | Pächter klickt auf "Rechnung vom {{Jahr}}", wo {{Jahr}} ist das Jahr, für das der Pächter die Rechnung aufrufen möchte.
-| erwartetes Ergebnis | Die betreffende Rechnung wird als PDF Datei zu zu der E-Mail-Adresse des Pächters geschickt.
+| erwartetes Ergebnis | Die betreffende Rechnung wird als PDF Datei zu der E-Mail-Adresse des Pächters geschickt.
 |===
 
 [cols="1h, 4"]
