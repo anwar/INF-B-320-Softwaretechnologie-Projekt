@@ -635,7 +635,7 @@ UML-Analyseklassendiagramme
 
 image::models/analysis/classdiagram1.png[]
 image::models/analysis/classdiagram2.png[]
-image::models/analysis//classdiagram3.jpg[]
+image::models/analysis//classdiagram3.png[]
 
 === Klassen und Enumerationen
 Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Klassen/Enumerationen dar. Jede Klasse und Enumeration wird in Form eines Glossars textuell beschrieben. Zusätzlich werden eventuellen Konsistenz- und Formatierungsregeln aufgeführt.
