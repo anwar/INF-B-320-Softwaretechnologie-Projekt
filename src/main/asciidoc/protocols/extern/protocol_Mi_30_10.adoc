@@ -1,0 +1,38 @@
+= Protokoll Gruppe 43
+
+Treffen am 30.10.2019
+
+Ort:      APB +
+Beginn:   07:30 Uhr +
+Ende:     09:10 Uhr
+
+__Schriftführer:__
+
+*Nächstes Treffen:* +
+06.11.2019, 07:30 Uhr, APB
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Uwe Schmidt (Tutor)
+- Albert Wellerdt
+- Franziska Kiel
+- Muhammad Talal Anwar
+- Sanghyun Lee
+- Isabell Zorr
+
+== Bemerkungen
+Die Erweiterungen vom Videoshop wurden besprochen und der Tutor äußerte Verbesserungsvorschläge.
+Wir wendeten die CRC-Kartenmethode an und konnten so weitere Zusammenhänge zwischen den Klassen klären.
+Der Tutor wies uns ins Pflichtenheft ein und gab uns Tipps für die Diagramme und was wir noch verändern sollten.
+
+
+== Retrospektive des letzten Sprints
+Die Videoshop-Erweiterungen wurden alle abgenommen und sollten nur weiter verbessert werden mit
+den vom Tutor geäußerten Wünschen.
+
+== Aktueller Stand
+Das Pflichtenheft ist in Bearbeitung und wird am Freitag abgegeben.
+
+== Planung des nächsten Sprints
+Das Pflichtenheft und die Erweiterungen des Videoshops werden fertig gestellt.
