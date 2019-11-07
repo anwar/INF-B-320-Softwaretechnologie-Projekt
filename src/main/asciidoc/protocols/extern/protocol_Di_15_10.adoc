@@ -25,7 +25,7 @@ __Teilnehmer:__
 
 == Bemerkungen
 
-Wir haben uns in der Gruppe zusammengefunden und ALbert Wellerdt
+Wir haben uns in der Gruppe zusammengefunden und Albert Wellerdt
 als Scrummaster bestimmt. Zudem fanden wir einen wöchentlichen Termin
 für Treffen und tauschten Kontaktdaten innerhalb der Gruppe.
 Die Einweisung in das Projekt wurde vorgenommen und die Aufgaben der

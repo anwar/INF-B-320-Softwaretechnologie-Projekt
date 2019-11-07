@@ -22,17 +22,22 @@ __Teilnehmer:__
 - Isabell Zorr
 
 == Bemerkungen
-Die Erweiterungen vom Videoshop wurden besprochen und der Tutor äußerte Verbesserungsvorschläge.
+Die Erweiterungen vom Videoshop wurden besprochen und der Tutor äußerte Verbesserungsvorschläge, die
+aufgrund der fortgeschrittenen Zeit bis Montag statt Freitag implementiert und fertiggestellt werden sollen.
+So bleibt mehr Zeit sich auf das Pflichtenheft zu konzentrieren und das pünktlich bis Freitag zu vervollständigen.
 Wir wendeten die CRC-Kartenmethode an und konnten so weitere Zusammenhänge zwischen den Klassen klären.
-Der Tutor wies uns ins Pflichtenheft ein und gab uns Tipps für die Diagramme und was wir noch verändern sollten.
+Der Tutor wies uns ins Pflichtenheft ein und gab uns Tipps für die Diagramme und was wir noch verbessern sollten.
 
 
 == Retrospektive des letzten Sprints
 Die Videoshop-Erweiterungen wurden alle abgenommen und sollten nur weiter verbessert werden mit
-den vom Tutor geäußerten Wünschen.
+den vom Tutor geäußerten Wünschen. Die Analysediagramme sind größtenteils fertig und müssen ins Pflcihtenheft
+eingepflegt werden.
 
 == Aktueller Stand
 Das Pflichtenheft ist in Bearbeitung und wird am Freitag abgegeben.
+Letzte Arbeiten an den Analysediagrammen müssen vorgenommen werden. Die Arbeitsaufteilung für
+das Pflichtenheft wird vorgenommen. 
 
 == Planung des nächsten Sprints
 Das Pflichtenheft und die Erweiterungen des Videoshops werden fertig gestellt.

@@ -6,7 +6,7 @@ Ort:      Ort des Treffens +
 Beginn:   07:30 Uhr +
 Ende:     09:05 Uhr
 
-__Schriftführer:__Isabell Zorr
+__Schriftführer:__ Isabell Zorr
 
 *Nächstes Treffen:* +
 30.10.2019, 07:30 Uhr, Andreas-Pfitzmann-Bau
@@ -24,31 +24,19 @@ __Teilnehmer:__
 == Bemerkungen
 Wir haben uns noch einmal in der Gruppe vorgestellt und die Ziele des Praktikums und
 unsere eigenen Vorstellungen an dieses besprochen. Zudem wurden die Abgaben aus den
-Guestbookerweiterungen abgenommen. Hauptaspekt des Treffens war das "Kundengespräch", welches
+Guestbookerweiterungen abgenommen und Tipps zur Verbesserung gegeben.
+Hauptaspekt des Treffens war das "Kundengespräch", welches
 wir nutzten um unsere Anwendung weiter zu planen und Fragen zu klären.
 
 == Retrospektive des letzten Sprints
-*Issue referenziert die Issue ID von GitHub*
-// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
 
-// See http://asciidoctor.org/docs/user-manual/=tables
-[option="headers"]
-|===
-|Issue |Aufgabe |Status |Bemerkung
-|…     |…       |…      |…
-|===
-
+Die Guestbookerweiterungen wurden fertiggestellt und sollten einen ersten Einblick in das Spring-Framework
+geben. Die Gruppenmitglieder haben sich in die Aufgabenstellung eingelesen und aufgrund dessen Fragen
+für das Kundengespräch verfasst.
 
 == Aktueller Stand
 Der aktuelle Stand der Software befindet sich noch in der Analysephase.
 Es wurden CRC-Karten und Analysediagramme erstellt, welche weiter ausgearbeitet werden.
 
 == Planung des nächsten Sprints
-*Issue referenziert die Issue ID von GitHub*
-
-// See http://asciidoctor.org/docs/user-manual/=tables
-[option="headers"]
-|===
-|Issue |Titel |Beschreibung |Verantwortlicher |Status
-|…     |…     |…            |…                |…
-|===
+Es müssen die Analysediagramme in Magicdraw erstellt werden und das Pflichtenheft wird begonnen.
