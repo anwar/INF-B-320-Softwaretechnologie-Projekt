@@ -59,7 +59,9 @@ Das System soll wenig Wartung bedürfen, da die Aufwandskosten für den Vorstand
 Sämtliche Daten sollten in einer Datenbank gespeichert werden und durch die Anwendung errecihbar sein.
 
 == Kontextabgrenzung
-* Kontextdiagramm
+=== Kontextdiagramm
+image::models/analysis/System Context Diagram_v2.png[]
+Kontextdiagramm
 
 == Lösungsstrategie
 === Erfüllung der Qualitätsziele
@@ -70,7 +72,8 @@ Sämtliche Daten sollten in einer Datenbank gespeichert werden und durch die Anw
 |===
 
 === Softwarearchitektur
-* Beschreibung der Architektur anhand der Top-Level-Architektur oder eines Client-Server-Diagramms
+image::models/analysis/Top Level Architechture_v2.png[]
+Top-Level-Architektur
 
 === Entwurfsentscheidungen
 * Verwendete Muster
