@@ -1,0 +1,75 @@
+= Protokoll Gruppe 43
+
+Treffen am 06.11.2019
+
+Ort:      APB +
+Beginn:   13:00 Uhr +
+Ende:     14:30 Uhr
+
+__Schriftführer:__Isabell Zorr
+
+*Nächstes Treffen:* +
+09.11.2019, 10:00, APB
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Albert Wellerdt
+- Franziska Kiel
+- Sanghyun Lee
+- Isabell Zorr
+
+== Bemerkungen
+Mit dem Beginn der Entwurfsphase teilten wir in der Gruppe die einzelnen Packages zur Implementation auf.
+Franziska übernimmt die GUI, Sanghyun das Finanzmanagement, Isabell die Nutzerverwaltung, Talal das Nachrichtensystem und
+Albert das Parzellenmanagement. Wir entschlossen uns dazu die Github Issues zum Nachvollziehen der Aufgabenverteilung zu nutzen.
+Bis Freitag wollen wir den ersten Teil der Entwicklerdokumentation fertig haben und bis Mittwoch einen funktionstüchtigen
+Prototypen der Software haben, auf dessen Grundlage wir etwaige Anmerkungen von Uwe nur noch bis zur Abgabe am 15.11.
+bearbeiten müssen. Dafür klärten wir welche Klassen in den Packages benötigt werden und was wir von Spring und Salespoint
+nutzen müssen. Am Wochenende ist ein weiteres Treffen geplant und zwischendurch bei Bedarf eine Gruppenbesprechung über
+Discord.
+
+== Retrospektive des letzten Sprints
+
+Im letzten Sprint stellten wir das Pflichtenheft fertig. +
+Hier übernahm Albert das Erstellen des GUI-Prototypen und der Klassendiagramme mit Sanghyun zusammen.
+Sanghyun erstellte mit Franziskas Vorarbeit die Dialoglandkarte bei Magicdraw und die Überarbeitung der Rechnungsdiagramme.
+Talal erstellte die Akzeptanztestfälle und das Sequenzdiagramme zu den Pflichtstunden. Isabell schrieb die Dialogbeschreibungen
+und das Glossar. Franziska übernahm die Aufgabenstellung, die Muss- und Kann- Kriterien und das erstellen des Dialoglandkartenprototyps.
+
+== Aktueller Stand
+Die Software befindet sich nun in der Entwurfsphase und die Entwurfsdiagramme werden auf Grundlage der Analysediagramme
+entworfen. Ein Prototyp wird auf dieser Grundlage in der nächsten Woche entworfen.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#1
+| Einführungen und Ziele
+| Aufgabenstellung, Qualitätsziele aus Pflichtenheft überarbeiten
+| Franziska
+| open
+
+| #2
+| Randbedingungen
+| Hardware-Vorgaben, Software-Vorgaben, Vorgaben zum Betrieb des Software
+| Isabell
+| open
+
+| #3
+| Kontextabgrenzung
+| Kontextdiagramm und Top Level Architektur anpassen, Salespoint Framework einbringen und versuchen Spring einzubinden
+| Sanghyun
+| open
+
+| #4
+| Entwurfsentscheidungen
+| Design Pattern, Persistenz, User Interface
+| Talal
+| open
+
+|===
