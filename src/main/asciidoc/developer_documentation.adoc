@@ -49,14 +49,14 @@ und unter welchen Umständen diese erfolgt.
 
 Das System wird von den Pächtern der _{project_name}_ genutzt und dient der Übersicht der Parzelle
 und dem Managen der Anlage für den Vorstand. Auch können sich Gäste über Neuigkeiten informieren und sich
-sich auf Parzellen bewerben. Die Software läuft auf einem Server und ist für alle Nutzer 24/7 über einen
+auf Parzellen bewerben. Die Software läuft auf einem Server und ist für alle Nutzer 24/7 über einen
 Browser erreichbar.
 
 Die Hauptnutzer der Software werden die Pächter (tenants), die wenig bis viel Erfahrung mit Software haben,
 und die Vorstandsmitglieder, die ebenfalls wenig bis viel Erfahrung im Umgang haben.
 
 Das System soll wenig Wartung bedürfen, da die Aufwandskosten für den Vorstand zu hoch wären.
-Sämtliche Daten sollten in einer Datenbank gespeichert werden und durch die Anwendung errecihbar sein.
+Sämtliche Daten sollten in einer Datenbank gespeichert werden und durch die Anwendung erreichbar sein.
 
 == Kontextabgrenzung
 === Kontextdiagramm
