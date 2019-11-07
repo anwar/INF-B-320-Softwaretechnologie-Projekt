@@ -1,0 +1,57 @@
+= Protokoll Gruppe 43
+
+Treffen am 06.11.2019
+
+Ort:      APB +
+Beginn:   07:30 Uhr +
+Ende:     09:00 Uhr
+
+__Schriftführer:__Isabell Zorr
+
+*Nächstes Treffen:* +
+13.11.2019, 07:30 Uhr, APB
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Uwe Schmidt (Tutor)
+- Albert Wellerdt
+- Franziska Kiel
+- Muhammad Talal Anwar
+- Sanghyun Lee
+- Isabell Zorr
+
+== Bemerkungen
+Die Analysephase ist mit der Abgabe des Pflichtenheftes nun offiziell beendet. Die nächsten zwei Wochen
+sind für den Entwurf und den ersten Prototypen gedacht. Dieser Prototyp soll alle Kernfunktionalitäten der
+Anwendung können und dient zum "Ausprobieren von neuen Sachen". Uns wird freigestellt, ob wir den Prototypen auf den
+Masterbranch oder auf einen eigenen Prototypenbranch pushen, jedoch empfiehlt uns Uwe (Tutor) einen eigenen Branch,
+da wir eventuell nicht am Prototypen weiterschreiben, sondern erneut bei der Implementation der Anwendung anfangen.
+Diese Entscheidung steht noch aus und wird im nächsten internen Treffen besprochen.
+Die Videoshoperweiterungen wurden Montag abgebeben und sind bis auf kleine Ausnahmen zufriedenstellend.
+Uwe wies auf Fehler und mögliche Änderungen und die Nutzung des Auditoriums bei Fragen hin.
+Zudem sollen wir uns angewöhnen Dokumentationskommentare mit Referenzen für Code, den wir benutzen, zu verwenden um
+Plagiaten vorzubeugen. Auch steht bald die Einschreibung für die Abschlussprüfung an, für die wir uns eintragen sollen.
+Das Pflichtenheft übertraf Uwes Erwartungen und wird so abgenommen. Kleine Änderungen im Bezug auf die Sequenzdiagramme und
+den Qualitätszielen sollten für den Entwurf vorgenommen werden. Die Muss-Kriterien sind nicht vollständig und können gerne
+erweitert werden, der GUI-Prototyp ist sehr umfangreich und dadurch wird unser Template-System ein einzelnes System.
+Auch sollten wir bei den Akzeptanztestfällen auf Fehleingaben testen.
+Diese Akzeptanztestfälle sind wichtig für den Testplan.
+Nächste Woche Freitag (15.11.) ist die Abgabe der Entwicklerdokumentation.
+Für die Entwurfsklassendiagramme empfiehlt uns Uwe die Diagramme für die einzelnen Packages zu erstellen.
+Zudem sollen wir dringend die Protokolle sowohl für die internen als auch für die externen Treffen überarbeiten.
+
+== Retrospektive des letzten Sprints
+
+Das Pflichtenheft ist fertiggestellt, die Videoshoperweiterungen wurden abgegeben.
+
+== Aktueller Stand
+
+Mit der Fertigstellung des Pflichtenheftes ist die Analysephase abgeschlossen und das Projekt geht ind die
+Entwurfsphase über. Die nächsten Schritte sind die Erstellung von Entwurfsdiagrammen, die Erstellung eines Prototypen
+mit den Kernfunktionen der Anwendung und das Schreiben der Entwicklerdokumentation.
+
+== Planung des nächsten Sprints
+
+Bis Freitag sind die Protokolle zu überarbeiten. Nächsten Mittwoch soll der Prototyp schon in einem funktionstüchtigen
+Zustand sein um weitere Verbesserungsvorschläge zu besprechen und Anforderungen zu klären.
