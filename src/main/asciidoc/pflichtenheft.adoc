@@ -515,8 +515,8 @@ die Rolle Vorstandsvorsitzender gibt es nur einmal, daher wird diese bei Neuverg
 
 |Wartbarkeit (Maintainability)
 |
+|x
 |
-|X
 |
 |
 
@@ -524,36 +524,36 @@ die Rolle Vorstandsvorsitzender gibt es nur einmal, daher wird diese bei Neuverg
 |
 |
 |
+|x
 |
-|X
 
 |Benutzbarkeit (Usability)
 |
+|x
 |
-|X
 |
 |
 
 |Zuverlässigkeit (Reliability)
 |
 |
+|x
 |
-|X
 |
 
 |Geschwindigkeit (Performance)
 |
 |
 |
-|X
 |
+|x
 
 |Sicherheit (Security)
 |
 |
 |
+|x
 |
-|X
 
 |===
 
