@@ -4,12 +4,12 @@ Treffen am 28.10.2019
 
 Ort:      APB +
 Beginn:   12:50 Uhr +
-Ende:     xx:xx Uhr
+Ende:     14:30 Uhr
 
-__Schriftführer:__Isabell Zorr
+__Schriftführer:__ Isabell Zorr
 
 *Nächstes Treffen:* +
-XX.XX.20XX, xx:xx Uhr, Ort des nächsten Treffens
+06.11.2019, 13:00 Uhr, APB
 
 __Teilnehmer:__
 //Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
@@ -20,30 +20,19 @@ __Teilnehmer:__
 - Isabell Zorr
 
 == Bemerkungen
-Verwarnungen, besondere Vorfälle, Organisatorisches, wichtige getroffene Entscheidungen
+Wir haben die CRC-Karten besprochen und für die Anwendung der CRC-Karten-Methode vorbereitet. Zudem
+haben wir das Pflichtenheft besprochen und am Beispiel vom Videoshop
 
 == Retrospektive des letzten Sprints
-*Issue referenziert die Issue ID von GitHub*
-// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
-
-// See http://asciidoctor.org/docs/user-manual/=tables
-[option="headers"]
-|===
-|Issue |Aufgabe |Status |Bemerkung
-|…     |…       |…      |…
-|===
-
+Jeder hat ein bis zwei CRC-Karten verfasst.
+Franziska und Isabell erstellten die für den Nebenpächter und den Obmann, Sanghyun für den Hauptpächter,
+Talal für den Gast und Albert für den Vorstandsvorsitzenden, Kassierer, der Person und dem Stellvertretenden.
 
 == Aktueller Stand
-Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den
-Dokumenten.
+
+Das Pflichtenheft ist in Bearbeitung und wird am Freitag abgegeben. Damit wird die
+Analysephase am Freitag beendet und die Entwurfsphase beginnt nächste Woche.
 
 == Planung des nächsten Sprints
-*Issue referenziert die Issue ID von GitHub*
-
-// See http://asciidoctor.org/docs/user-manual/=tables
-[option="headers"]
-|===
-|Issue |Titel |Beschreibung |Verantwortlicher |Status
-|…     |…     |…            |…                |…
-|===
+Das Pflichtenheft wird bis Freitag fertiggestellt, sowie die Erweiterungen für den Videoshop.
+Bei Bedarf wird sich in einem Gruppencall bei Discord getroffen und letzte liegengebliebene Sachen geklärt.

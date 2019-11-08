@@ -24,27 +24,16 @@ Wir arbeiteten die bereits erstellten Analysediagramme weiter aus
 und ergänzten neue Teile, die im Kundengespräch erfahren wurden.
 
 == Retrospektive des letzten Sprints
-*Issue referenziert die Issue ID von GitHub*
-// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
 
-// See http://asciidoctor.org/docs/user-manual/=tables
-[option="headers"]
-|===
-|Issue |Aufgabe |Status |Bemerkung
-|…     |…       |…      |…
-|===
+Mit den im letzten Sprint formulieren Fragen konnten viele neue Erkenntnisse aus dem Kundengespräch
+erfahren werden, die nun in die Analyse eingehen werden.
 
 
 == Aktueller Stand
-Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den
-Dokumenten.
+Das Kundengespräch lieferte neue Erkenntnisse und konnte Fragen klären. Die neuen Informationen
+und Wünsche des Kunden werden in die Analysediagramme übertragen und ins Pflichtenheft aufgenommen.
 
 == Planung des nächsten Sprints
-*Issue referenziert die Issue ID von GitHub*
-
-// See http://asciidoctor.org/docs/user-manual/=tables
-[option="headers"]
-|===
-|Issue |Titel |Beschreibung |Verantwortlicher |Status
-|…     |…     |…            |…                |…
-|===
+Im nächsten Sprint werden die Sequenzdiagramme zum Bewerben auf eine Parzelle (Franziska und Isabell),
+das Erstellen und Versenden einer Rechnung (Talal) und zum Bewerben und Anrechnen von Pflichtstunden (Sanghyun)
+ausgearbeitet.

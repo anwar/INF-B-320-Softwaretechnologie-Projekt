@@ -6,7 +6,7 @@ Ort:      SLUB +
 Beginn:   10:00 Uhr +
 Ende:     13:30 Uhr
 
-__Schriftführer:__Isabell Zorr
+__Schriftführer:__ Isabell Zorr
 
 *Nächstes Treffen:* +
 28.10.2019, APB
@@ -21,30 +21,15 @@ __Teilnehmer:__
 - Isabell Zorr
 
 == Bemerkungen
-Wir haben mit der Ausarbeitung der Diagramme für das Pflichtenheft begonnen und die Aufgaben
-für das Pflichtenheft verteilt.
+Wir haben die Analysediagramme der Klassen, Top-Level-Architektur und Kontextidiagram ausgearbeitet
+und die Aufgaben für das Pflichtenheft verteilt.
 
 == Retrospektive des letzten Sprints
-*Issue referenziert die Issue ID von GitHub*
-// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
-
-// See http://asciidoctor.org/docs/user-manual/=tables
-[option="headers"]
-|===
-|Issue |Aufgabe |Status |Bemerkung
-|…     |…       |…      |…
-|===
-
+Die Sequenzdiagramme sind fertiggestellt und wurden ins Pflichtenheft übernommen
 
 == Aktueller Stand
-Erste Aufteilung der Aufgaben, Planung der nächsten Tage.
+Erste Aufteilung der Aufgaben, Planung der nächsten Tage. Das Pflichtenheft ist in Arbeit und am
+Freitag ist Abgabe der Videoshoperweiterungen.
 
 == Planung des nächsten Sprints
-*Issue referenziert die Issue ID von GitHub*
-
-// See http://asciidoctor.org/docs/user-manual/=tables
-[option="headers"]
-|===
-|Issue |Titel |Beschreibung |Verantwortlicher |Status
-|…     |…     |…            |…                |…
-|===
+Jeder befasst sich mit seiner Aufgabe im Pflichtenheft.

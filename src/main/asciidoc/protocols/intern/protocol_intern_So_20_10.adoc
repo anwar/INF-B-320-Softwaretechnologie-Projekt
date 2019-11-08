@@ -22,29 +22,18 @@ __Teilnehmer:__
 
 
 == Bemerkungen
-Wir haben die Analysediagramme unserer Anwendung erstellt.
+Wir haben die Analysediagramme unserer Anwendung erstellt und sind zusammen die Aufgabenstellung
+durchgegangen, haben Verständnisfragen geklärt und Fragen für das Kundengespräch formuliert. Erste
+Ideen zur Implementation wurden gesammelt.
 
 == Retrospektive des letzten Sprints
-*Issue referenziert die Issue ID von GitHub*
-// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
-
-// See http://asciidoctor.org/docs/user-manual/=tables
-[option="headers"]
-|===
-|Issue |Aufgabe |Status |Bemerkung
-|…     |…       |…      |…
-|===
-
+Jedes Teammitglied hat die Aufgabenstellung gelesen und jeder implementierte eine Erweiterung im
+Guestbook-Prototyp.
 
 == Aktueller Stand
-Der aktuelle Stand der Software befindet sich noch in der Analysephase.
+Der aktuelle Stand der Software befindet sich noch in der Analysephase. Die Aufgabenstellung wurde
+gelesen und Fragen für das Kundengespräch formuliert.
 
 == Planung des nächsten Sprints
-*Issue referenziert die Issue ID von GitHub*
-
-// See http://asciidoctor.org/docs/user-manual/=tables
-[option="headers"]
-|===
-|Issue |Titel |Beschreibung |Verantwortlicher |Status
-|…     |…     |…            |…                |…
-|===
+Da im nächsten externen Treffen das Kundengespräch abgehalten wird, müssen weitere Fragen formuliert
+werden.

@@ -6,7 +6,7 @@ Ort:      APB +
 Beginn:   07:30 Uhr +
 Ende:     09:10 Uhr
 
-__Schriftführer:__
+__Schriftführer:__ Isabell Zorr
 
 *Nächstes Treffen:* +
 06.11.2019, 07:30 Uhr, APB
@@ -37,7 +37,7 @@ eingepflegt werden.
 == Aktueller Stand
 Das Pflichtenheft ist in Bearbeitung und wird am Freitag abgegeben.
 Letzte Arbeiten an den Analysediagrammen müssen vorgenommen werden. Die Arbeitsaufteilung für
-das Pflichtenheft wird vorgenommen. 
+das Pflichtenheft wird vorgenommen.
 
 == Planung des nächsten Sprints
 Das Pflichtenheft und die Erweiterungen des Videoshops werden fertig gestellt.
