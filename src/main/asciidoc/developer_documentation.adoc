@@ -215,7 +215,7 @@ Kontextdiagramm
 
 === Softwarearchitektur
 
-image::models/analysis/Top Level Architechture_v2.png.png[]
+image::models/analysis/Top Level Architechture_v2.png[]
 Top-Level-Architektur
 
 === Entwurfsentscheidungen
