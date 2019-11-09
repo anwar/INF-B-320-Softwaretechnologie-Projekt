@@ -11,8 +11,11 @@
 [options="header"]
 [cols="1, 3, 3"]
 |===
-|Version | Bearbeitungsdatum   | Autor 
-|0.1	| 06.11.2019 | Isabell Zorr
+| Version | Bearbeitungsdatum | Autor
+| 0.1     | 06.11.2019        | Isabell Zorr
+| 0.1.1   | 06.11.2019        | Franziska Kiel
+| 0.1.2   | 09.11.2019        | Sanghyun Lee
+| 0.1.3   | 09.11.2019        | Muhammad Talal Anwar
 
 |===
 
@@ -208,7 +211,7 @@ Kontextdiagramm
 == Lösungsstrategie
 === Erfüllung der Qualitätsziele
 [options="header"]
-|=== 
+|===
 |Qualitätsziel |Lösungsansatz
 |... |...
 |===
@@ -219,22 +222,37 @@ image::models/analysis/Top Level Architechture_v2.png[]
 Top-Level-Architektur
 
 === Entwurfsentscheidungen
-* Verwendete Muster
-* Persistenz
-* Benutzeroberfläche
-* Verwendung externer Frameworks
+
+==== Verwendete Muster
+* Spring MVC
+
+==== Persistenz
+Die Anwendung verwendet *Hibernate Annotation basiertes Mapping*, um Java Klassen zu den Datenbanktabellen zuordnen. Als Datenbank wird *H2* verwendet. Die Persistenz ist standardmäßig deaktiviert. Um den Persistenzspeicher zu aktivieren, müssen die folgenden zwei Zeilen in der Datei application.properties nicht auskommentiert werden:
+
+....
+# spring.datasource.url=jdbc:h2:./db/videoshop
+# spring.jpa.hibernate.ddl-auto=update
+....
+
+==== Benutzeroberfläche
+image::models/design/user-interface.png[]
+
+==== Verwendung externer Frameworks
 
 [options="header", cols="1,3,3"]
 |===
-|Externe Klasse |Pfad der externen Klasse |Verwendet von (Klasse der eigenen Anwendung)
-|... |... |...
+| Externe Klasse                | Pfad der externen Klasse                               | Verwendet von (Klasse der eigenen Anwendung)
+| Salespoint.Role               | org.salespointframework.useraccount.Role               | ...
+| Salespoint.UserAccount        | org.salespointframework.useraccount.UserAccount        | ...
+| Salespoint.UserAccountManager | org.salespointframework.useraccount.UserAccountManager | ...
+| Spring.MailSender             | org.springframework.mail.MailSender                    | ...
 |===
 
 == Bausteinsicht
 * Entwurfsklassendiagramme der einzelnen Packages
 
 [options="header"]
-|=== 
+|===
 |Klasse/Enumeration |Description
 |===
 
@@ -250,4 +268,3 @@ Top-Level-Architektur
 
 == Technische Schulden
 * Auflistung der nicht erreichten Quality Gates und der zugehörigen SonarQube Issues
-
