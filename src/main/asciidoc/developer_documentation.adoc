@@ -221,6 +221,9 @@ Kontextdiagramm
 image::models/analysis/Top Level Architechture_v2.png[]
 Top-Level-Architektur
 
+image::models/analysis/Client Server Model of the Application.png[]
+Client-Server-Modell der Anwendung
+
 === Entwurfsentscheidungen
 
 ==== Verwendete Muster
