@@ -16,6 +16,7 @@
 | 0.1.1   | 06.11.2019        | Franziska Kiel
 | 0.1.2   | 09.11.2019        | Sanghyun Lee
 | 0.1.3   | 09.11.2019        | Muhammad Talal Anwar
+| 0.1.4   | 12.11.2019        | Isabell Zorr
 
 |===
 
@@ -257,6 +258,31 @@ image::models/design/user-interface.png[]
 [options="header"]
 |===
 |Klasse/Enumeration |Description
+|===
+
+image::models/analysis/KleinGartenAnlage.tenant.png[]
+
+[options="header"]
+|===
+|Klasse/Enumeration |Description
+|Person
+| Beschreibt die allgemeine Person mit ihren Eigenschaften, wie Name, E-Mail, Geburtstag, Adresse und Telefonnummer
+
+|Tenant
+|Die Pächerklasse beschreibt den Pächter der Parzelle und erbt vom Salespoint-UserAccount und fügt diesem die Eigenschaften
+der Person hinzu
+
+|TenantController
+|Ein Spring MVC Controller um neue Pächter hinzuzufügen und bereits bestehende anzuzeigen
+
+|TenantManager
+|Serviceklasse um Pächter zu managen
+
+|TenantRepository
+|Ein Repositoryinterface um Pächterinstanzen zu managen
+
+|Plot
+|Die dem Pächter zugeordnete Parzelle aus dem Plotpackage
 |===
 
 === Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
