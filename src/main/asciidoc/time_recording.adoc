@@ -3,15 +3,17 @@
 Notieren Sie die Zeit in Minuten für jeden Entwickler und – getrennt davon – für Team-Treffen pro Woche (Wochengranularität).
 Die individuell erfasste Zeit beinhaltet auch das Lesen von Dokumentationen, Besprechungen mit Teamkollegen und sonstige auf das Praktikum bezogene Aufgaben, jedoch *nicht* das Team-Treffen (= letzte Spalte).
 
+Werte in () beinhalten sowohl Einzelarbeitszeit, als auch Meetings der Gruppe 44, aus den Wochen bevor der Wechsel zur Gruppe 43 stattfand.
+
 // See http://asciidoctor.org/docs/user-manual/#tables
 [option="headers"]
 |===
-| Woche | Albert | Franziska | Isabell | Sanghyun | Talal | Meeting
-| 1     | 370    | 660       | 360     | 480      | 480   | 200
-| 2     | 400    | 460       | 400     | 450      | 400   | 180
-| 3     | 1400   | 1300      | 800     | 780      | 1080  | 410
-| 4     |420      | 420       | 480     | 400      | 300   | 90
-| 5     | …      |920         | 840     | 360        | …     |320
+| Woche | Albert | Franziska | Isabell | Sanghyun | Talal   |Ylvi     | Meeting
+| 1     | 370    | 660       | 360     | 480      | 480     |(990)    | 200
+| 2     | 400    | 460       | 400     | 450      | 400     |(1059)   | 180
+| 3     | 1400   | 1300      | 800     | 780      | 1080    |(1798)   | 410
+| 4     |420      | 420       | 480     | 400      | 300    |(891)    | 90
+| 5     | …      |920         | 840     | 360        | …    |255      |320
 | 6     | …      | …         | …       | …        | …     | …
 | 7     | …      | …         | …       | …        | …     | …
 | 8     | …      | …         | …       | …        | …     | …
