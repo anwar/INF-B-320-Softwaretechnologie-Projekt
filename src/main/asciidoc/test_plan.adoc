@@ -25,11 +25,8 @@ U-U-01, P-U-02, F-I-03
 z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel).
 
 == Herangehensweise
-*Bsp.:*
-
-*Klassen werden mit JUnit getestet.*
-
-*Integrationstest nach Bottom-Up Prinzip*
+- Klassen werden mit JUnit getestet.
+- Integrationstest nach Bottom-Up Prinzip
 
 == Umgebungsvoraussetzungen
 * Wird spezielle Hardware benötigt?
