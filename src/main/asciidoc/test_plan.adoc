@@ -18,11 +18,14 @@ Bsp. +
 U-U-01, P-U-02, F-I-03
 
 == Test Gegenstände
+Test Gegenstände sind die jeweiligen Verwaltungsebenen, bzw. die ausführenden Klassen (z.B. Controller).
 
 == Zu testende Funktionalitäten
+Zu testen sind die eigenen erstellten Klassen, welche die Eingaben entgegennehmen, diese verarbeiten oder an andere Bereiche weitergeben.
 
 == Nicht zu testende Funktionalitäten
-z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel).
+Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel).
+Zu diesen gehören beispielsweise Spring, Salespoint, Maven, Thymeleaf.
 
 == Herangehensweise
 - Klassen werden mit JUnit getestet.
