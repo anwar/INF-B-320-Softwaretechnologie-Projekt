@@ -17,6 +17,7 @@
 | 0.1.2   | 09.11.2019        | Sanghyun Lee
 | 0.1.3   | 09.11.2019        | Muhammad Talal Anwar
 | 0.1.4   | 12.11.2019        | Isabell Zorr
+| 0.1.5   | 14.11.2019        | Ylvi Bachmann
 
 |===
 
@@ -255,10 +256,7 @@ image::models/design/user-interface.png[]
 == Bausteinsicht
 * Entwurfsklassendiagramme der einzelnen Packages
 
-[options="header"]
-|===
-|Klasse/Enumeration |Description
-|===
+* Pächterverwaltung
 
 image::models/analysis/KleinGartenAnlage.tenant.png[]
 
@@ -285,11 +283,48 @@ der Person hinzu
 |Die dem Pächter zugeordnete Parzelle aus dem Plotpackage
 |===
 
+* Parzellenverwaltung
+
+image::models/analysis/PlotManagement.png[Parzellenverwaltung]
+
+[options="header"]
+|===
+|Klasse/Enumeration |Description
+|Plot
+|beschreibt die Parzelle mit ihren benötigten Daten und speichert Pächter und Nebenpächter
+
+|PlotStatus
+|Status einer Parzelle; mögliche Werte:
+
+- FREE Parzelle hat keinen zugehörigen Pächter
+- TAKEN Parzelle wird gemietet
+
+|Procedure
+|dient der Speicherung der veränderlichen Daten der Parzelle, welche im Zusammenhang mit der Rechnungserstellung benötigt werden
+
+|PlotService
+|implementiert sämtliche Use Cases des Plot Package
+
+|PlotController
+|bearbeitet und beantwortet die Aufrufe der unterschiedlichen Seiten
+
+|...Form
+|beschreiben die Formulare, mit welchen z.B. neue Parzellen angelegt und Daten einer bestehenden Parzelle verändert werden können +
+(werden hier vereinfacht zusammengefasst, um Übersichtlichkeit zu gewährleisten)
+
+|PlotCatalog
+|dient der Verwaltung und Filterung der Instanzen der Parzellen
+
+|Tenant
+|Bezug auf die Pächterklasse aus dem Tenant Package; dient der Speicherung der Nebenpächter in der zugehörigen Parzelle
+|===
+
 === Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
 
 [options="header"]
 |===
 |Klasse/Enumeration (Analysemodell) |Klasse/Enumeration (Entwurfsmodell)
+|Parzelle  |Plot
 |===
 
 == Laufzeitsicht
