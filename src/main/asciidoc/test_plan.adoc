@@ -3,7 +3,11 @@
 Dieser Testplan stellt eine vereinfachte Version der IEEE 829-1998 Vorlage dar.
 
 == Einführung
-Wozu dient das Dokument? Zielgruppe?
+Dieses Dokument soll einen Überblick geben, wie getestet werden soll, inwiefern die Qualität der Anwendung gewährleistet wird.
+Dabei werden die zu betrachteten Teilbereiche, die verwendeten Testverfahren und notwendige Rahmenbedingungen festgelegt.
+
+Ebenfalls soll es für das Entwicklerteam eine Unterstützung bei ihrer Arbeit sein und unabhängigen Bewertern die Möglichkeit bieten,
+die Qualität der Anwendung einzuschätzen.
 
 == Aufbau der Testbezeichner
 Nach welchem Schema sind die Tests benannt?
