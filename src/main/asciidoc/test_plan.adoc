@@ -8,11 +8,14 @@ Wozu dient das Dokument? Zielgruppe?
 == Aufbau der Testbezeichner
 Nach welchem Schema sind die Tests benannt?
 
-*Bsp.*
+1. Buchstabe: Zugehörigkeit des Departments +
+U - UserDepartment, P - PlotDepartment, F - FinanceDeparment, M - MessageDepartment
+2. Buchstabe: Art des Tests +
+U - UnitTest, I - Integrationstest
+3. fortlaufende  Zahl zu Identifikation des Tests im jeweiligen Department
 
-*U - Unit Test, I - Integrationstest*
-
-*U-1, U-2, I-1*
+Bsp. +
+U-U-01, P-U-02, F-I-03
 
 == Test Gegenstände
 
