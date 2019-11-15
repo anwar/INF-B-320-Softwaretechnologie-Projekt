@@ -13,7 +13,7 @@ die Qualität der Anwendung einzuschätzen.
 Nach welchem Schema sind die Tests benannt?
 
 1. Buchstabe: Zugehörigkeit des Departments +
-U - UserDepartment, P - PlotDepartment, F - FinanceDeparment, M - MessageDepartment
+T - TenantDepartment, P - PlotDepartment, F - FinanceDeparment, M - MessageDepartment
 2. Buchstabe: Art des Tests +
 U - UnitTest, I - Integrationstest
 3. fortlaufende  Zahl zu Identifikation des Tests im jeweiligen Department
@@ -41,9 +41,28 @@ Zu diesen gehören beispielsweise Spring, Salespoint, Maven, Thymeleaf.
 * JUnit zur Erstellung von Unit Tests
 
 == Testfälle und Verantwortlichkeit
-Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 
-// See http://asciidoctor.org/docs/user-manual/#tables
+
+
+==== TenantDepartment
+zuständig: Isabell Zorr
+[options="headers"]
+|===
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+|  |              |…              |…       |…
+|===
+
+==== PlotDepartment
+zuständig: Ylvi Sarah Bachmann und Albert Wellerdt
+
+[options="headers"]
+|===
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+|P-U-010 |Parzelle erstellen|…              |…       |…
+|===
+
+==== FinanceDepartment
+zuständig: Sanghyun Lee und Sascha Seiffert
 [options="headers"]
 |===
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
@@ -58,5 +77,16 @@ zuständig Ylvi Sarah Bachmann und Albert Wellerdt
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
 |P-U-010 |Parzelle erstellen |--      |Parzellengröße, Bereich, Schätzwert, Wasserzähler, Stromzähler | Parzelle wird erstellt, Attribute in passendem Format
 |P-U-012 |Parzelle besetzt |Bewerbung angenommen      |Email des neuen Pächters dann auf besetzt | String "besetzt" wird ausgegeben
+|===
+
+
+==== MessageDepartment
+zuständig: Muhammad Talal Anwar
+[options="headers"]
+|===
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+|P-U-010 |Parzelle erstellen |--      |Parzellengröße, Bereich, Schätzwert, Wasserzähler, Stromzähler | Parzelle wird erstellt, Attribute in passendem Format
+|P-U-012 |Parzelle besetzt |Bewerbung angenommen      |Email des neuen Pächters dann auf besetzt | String "besetzt" wird ausgegeben
+|…  |…              |…              |…       |…
 |===
 
