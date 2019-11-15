@@ -350,10 +350,10 @@ image::models/analysis/KleinGartenAnlagen.finance.png[]
 |Die Fee Klasse beschreibt den Preis der Parzelle mit benötigen Daten
 
 |FeeController
-|Die FeeController Klasse ist verantworlich für die Aufrufe der verschiedene (Html) Seiten
+|Die FeeController Klasse ist verantwortlich für die Aufrufe der verschiedene (Html) Seiten
 
 |FeeManagement
-|Die FeeManagement Klasse ist verantworlich für die Verwaltung der Preisliste
+|Die FeeManagement Klasse ist verantwortlich für die Verwaltung der Preisliste
 
 |FeeCatalog
 |Die FeeCatalog Klasse filtert Daten unter Namen oder BillId
