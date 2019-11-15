@@ -52,13 +52,15 @@ zuständig: Isabell Zorr
 |  |              |…              |…       |…
 |===
 
-==== PlotDepartment
-zuständig: Ylvi Sarah Bachmann und Albert Wellerdt
+== PlotDepartment
+zuständig Ylvi Sarah Bachmann und Albert Wellerdt
 
 [options="headers"]
 |===
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|P-U-010 |Parzelle erstellen|…              |…       |…
+|P-U-010 |Parzelle erstellen |--      |Parzellengröße, Bereich, Schätzwert, Wasserzähler, Stromzähler | Parzelle wird erstellt, Attribute in passendem Format
+|P-U-012 |Parzelle besetzt |Bewerbung angenommen      |Email des neuen Pächters dann auf besetzt | String "besetzt" wird ausgegeben
+|P-U-020 |Nebenpächter hinzufügen |Hauptpächter für Parzelle exisitiert  |Namen und Email des Nebenpächters | Nebenpächter erscheint in der Liste der Nebenpächter für eine Parzelle
 |===
 
 ==== FinanceDepartment
@@ -69,15 +71,7 @@ zuständig: Sanghyun Lee und Sascha Seiffert
 |…  |…              |…              |…       |…
 |===
 
-== PlotDepartment
-zuständig Ylvi Sarah Bachmann und Albert Wellerdt
 
-[options="headers"]
-|===
-|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|P-U-010 |Parzelle erstellen |--      |Parzellengröße, Bereich, Schätzwert, Wasserzähler, Stromzähler | Parzelle wird erstellt, Attribute in passendem Format
-|P-U-012 |Parzelle besetzt |Bewerbung angenommen      |Email des neuen Pächters dann auf besetzt | String "besetzt" wird ausgegeben
-|===
 
 
 ==== MessageDepartment
@@ -85,8 +79,6 @@ zuständig: Muhammad Talal Anwar
 [options="headers"]
 |===
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|P-U-010 |Parzelle erstellen |--      |Parzellengröße, Bereich, Schätzwert, Wasserzähler, Stromzähler | Parzelle wird erstellt, Attribute in passendem Format
-|P-U-012 |Parzelle besetzt |Bewerbung angenommen      |Email des neuen Pächters dann auf besetzt | String "besetzt" wird ausgegeben
 |…  |…              |…              |…       |…
 |===
 
