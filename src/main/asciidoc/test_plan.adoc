@@ -128,11 +128,12 @@ zuständig: Sanghyun Lee und Sascha Seiffert
 [options="headers"]
 |===
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|F-I-001  |eine neue Komponente in Preisliste hinzufügen    |--                                                |Name, Preis und Menge von einen Komponente            |Die neue Kompenente wird erstellt
-|F-I-005  |eine Komponente von Preisliste bearbeiten        |Komponente von Preisliste existiert               |Name, Preis oder Menge von einen Komponente           |Die gewählte Komponente enthält einen neuen Wert
-|F-I-010  |Rechnen Wasserkosten einer Parzelle              |Wasserzählerstand einer Parzelle                  |Wasserzählerstand (und Wasserkost pro Kubikmeter)     |Ein Preis von Wasserkost einer Parzelle wird gerechnet
+|F-I-001  |eine neue Rechnungsposition hinzufügen    |--                                                |Name, Preis und Menge von einer Position            |Die neue Position wird erstellt
+|F-I-005  |eine Rechnungsposition bearbeiten        |Position existiert in Preisliste            |Name, Preis oder Menge von einen Position           |Die gewählte Position enthält einen neuen Wert
+|F-I-010  |Rechnen Wasserkosten einer Parzelle              |Wasserzählerstand einer Parzelle                  |Wasserzählerstand (und Wasserkosten pro Kubikmeter)     |Ein Preis von Wasserkost einer Parzelle wird gerechnet
 |F-I-015  |Rechnen Miete einer Parzelle                     |Größe einer Parzelle                              |Größe der Parzelle (und Miete pro Quadratmeter)       |Eine jährliche Miete der Parzelle wird gerechnet
 |F-I-020  |Rechnen eine jährliche Rechnung einer Parzelle   |Parzelle enthält alle nötige Daten für Berechnung |Wasser/Stromzählerstand und Größe der Parzelle        |Eine jährliche Rechnung der Parzelle wird erstellt
+|F-I-021 |Versenden per E-Mail  |Rechnung ist erstellt  |Adressat und PDF  |Die Rechnung wird dem Empfänger zugestellt
 |===
 
 
