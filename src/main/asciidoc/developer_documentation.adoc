@@ -265,8 +265,6 @@ image::models/analysis/KleinGartenAnlage.tenant.png[]
 [options="header"]
 |===
 |Klasse/Enumeration |Description
-|Person
-| Beschreibt die allgemeine Person mit ihren Eigenschaften, wie Name, E-Mail, Geburtstag, Adresse und Telefonnummer
 
 |Tenant
 |Die Pächerklasse beschreibt den Pächter der Parzelle und erbt vom Salespoint-UserAccount und fügt diesem die Eigenschaften
@@ -283,6 +281,9 @@ der Person hinzu
 
 |Plot
 |Die dem Pächter zugeordnete Parzelle aus dem Plotpackage
+
+|RegistrationForm
+|Dient der Registrierung eines neuen Pächters über das Bewerbungsformular
 |===
 
 * Parzellenverwaltung
