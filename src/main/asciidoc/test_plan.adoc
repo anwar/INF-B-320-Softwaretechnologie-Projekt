@@ -139,14 +139,11 @@ zuständig: Sanghyun Lee und Sascha Seiffert
 |F-I-021 |Versenden per E-Mail  |Rechnung ist erstellt  |Adressat und PDF  |Die Rechnung wird dem Empfänger zugestellt
 |===
 
-
-
-
-==== MessageDepartment
+=== MessageDepartment
 zuständig: Muhammad Talal Anwar
 [options="headers"]
 |===
-|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|…  |…              |…              |…       |…
+| ID      | Anwendungsfall                        | Vorbedingungen                                                   | Eingabe           | Ausgabe
+| M-U-010 | einen neuen News Eintrag machen       | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender | Text des Eintrags | Eintrag wird gespeichert
+| M-I-020 | Nachricht ist ordnungsgemäß geschickt |                                                                  | Nachricht         | erfolgreich Assertion Test durch E-mail Test Server (https://asciidoctor.org[GreenMail])
 |===
-
