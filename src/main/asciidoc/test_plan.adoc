@@ -13,7 +13,7 @@ die Qualität der Anwendung einzuschätzen.
 Nach welchem Schema sind die Tests benannt?
 
 1. Buchstabe: Zugehörigkeit des Departments +
-T - TenantDepartment, P - PlotDepartment, F - FinanceDeparment, M - MessageDepartment
+T - TenantDepartment, P - PlotDepartment, F - FinanceDepartment, M - MessageDepartment
 2. Buchstabe: Art des Tests +
 U - UnitTest, I - Integrationstest
 3. fortlaufende  Zahl zu Identifikation des Tests im jeweiligen Department
@@ -42,9 +42,7 @@ Zu diesen gehören beispielsweise Spring, Salespoint, Maven, Thymeleaf.
 
 == Testfälle und Verantwortlichkeit
 
-
-
-==== TenantDepartment
+=== TenantDepartment
 zuständig: Isabell Zorr, Franziska Kiel
 [options="headers"]
 |===
@@ -63,22 +61,22 @@ zuständig: Isabell Zorr, Franziska Kiel
 
 |U-U-020
 |Pächter muss sein generiertes Passwort ändern
-|Vorstandsvorsitzender hat eine Email an den Pächter mit einem generierten Passwort geschickt und Pächter ist angemledet
+|Vorstandsvorsitzender hat eine Email an den Pächter mit einem generierten Passwort geschickt und Pächter ist angemeldet
 |Pächter trägt sein generiertes Passwort in das vorhergesehene Feld ein und
  trägt zweimal richtig sein neues Passwort ein und Button zum Passwort ändern wird getätigt
 |Passwort wird erfolgreich geändert
 
 |U-U-021
-|Pächter muss sein generieertes Passwort ändern
-|Vorstandsvorsitzender hat eine Email an den Pächter mit einem generierten Passwort geschickt und Pächter ist angemledet
+|Pächter muss sein generiertes Passwort ändern
+|Vorstandsvorsitzender hat eine Email an den Pächter mit einem generierten Passwort geschickt und Pächter ist angemeldet
 | Er trägt sein altes Passwort inkorrekt in das vorhergesehene Feld ein und
-trägt zweimal richtig sein neuese Passwort ein ODER ein Feld für das neue
+trägt zweimal richtig sein neues Passwort ein ODER ein Feld für das neue
 Passwort stimmt mit dem anderen nicht überein ODER ein oder mehr Felder wurden
 nicht ausgefüllt. +
   Button zum Passwort ändern wird getätigt
 | Passwort wird nicht geändert, Fehlermeldung erscheint
 
-|U-U-30
+|U-U-030
 | Vorstandsvorsitzender sucht in der Datenbank nach Pächter
 | Vorstandsvorsitzender ist eingeloggt und befindet sich auf "Pächter verwalten"
 | Manager tippt einen Namen in das Suchfeld und klickt auf Suchen
@@ -101,13 +99,13 @@ Suchanfrage gefunden worden
 
 | U-U-051
 | Pächter wird Vorpächter
-| Vorstandsvorsitzender ist eingeloggt, Pächter hat Parzelle gekünigt
+| Vorstandsvorsitzender ist eingeloggt, Pächter hat Parzelle gekündigt
 | Vorstandsvorsitzender geht auf die Pächterverwaltung und auf die Detailseite des Pächters und betätigt den "Pächter deaktivieren"- Button
  | Fehlermeldung erscheint, dass ein Pächter nur deaktiviert werden kann, wenn für seine Parzelle ein Nachpächter bestimmt ist
 
 |===
 
-== PlotDepartment
+=== PlotDepartment
 zuständig Ylvi Sarah Bachmann und Albert Wellerdt
 
 [options="headers"]
@@ -116,21 +114,21 @@ zuständig Ylvi Sarah Bachmann und Albert Wellerdt
 |P-U-010 |Parzelle erstellen |--      |Parzellengröße, Bereich, Schätzwert, Wasserzähler, Stromzähler | Parzelle wird erstellt, Attribute in passendem Format
 |P-U-012 |Parzelle besetzt |Bewerbung angenommen      |Email des neuen Pächters dann auf besetzt | String "besetzt" wird ausgegeben
 |P-U-013 |Parzelle besetzt |Bewerbung angenommen      |Email des neuen Pächters dann auf besetzt | Fehlermeldung Parzelle steht schon auf "taken"
-|P-U-020 |Nebenpächter hinzufügen |Hauptpächter für Parzelle exisitiert  |Namen und Email des Nebenpächters | Nebenpächter erscheint in der Liste der Nebenpächter für eine Parzelle
-|P-U-021 |Nebenpächter hinzufügen |Hauptpächter für Parzelle exisitiert  |Namen und Email des Nebenpächters | Fehlermeldung Nebenpächter mit dieser Email Adresse existiert bereits für die Parzelle
+|P-U-020 |Nebenpächter hinzufügen |Hauptpächter für Parzelle existiert  |Namen und Email des Nebenpächters | Nebenpächter erscheint in der Liste der Nebenpächter für eine Parzelle
+|P-U-021 |Nebenpächter hinzufügen |Hauptpächter für Parzelle existiert  |Namen und Email des Nebenpächters | Fehlermeldung Nebenpächter mit dieser Email Adresse existiert bereits für die Parzelle
 |P-U-022 |Hinzufügen der Arbeitsstunden und Wasserstand |Parzelle existiert und ein Hauptpächter  |Wasserzählerstand und gearbeitete Stunden | Werte stehen in der Procedure Klasse
 |P-U-030 |selber Hauptpächter zu der selben Parzelle nochmal hinzufügen |Parzelle existiert und der Hauptpächter  |Tenant | Fehlermeldung der Hauptpächter existiert bereits für die Parzelle
 |P-U-031 |Hauptpächter zur Parzelle hinzufügen |Parzelle existiert |Tenant | Hauptpächter kriegt seine Zelle angezeigt im Dashboard und in seiner eigenen Liste
 |===
 
-==== FinanceDepartment
+=== FinanceDepartment
 zuständig: Sanghyun Lee und Sascha Seiffert
 [options="headers"]
 |===
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
 |F-U-001  |eine neue Rechnungsposition hinzufügen    |--                                                |Name, Preis und Menge von einer Position            |Die neue Position wird erstellt
-|F-I-002 |Positionen generieren  |Vorgang(Procedure) existiert  |Button  |Rechnungspositionen werden aus dem Vorgang generiert  
-|F-U-003 |Positionen löschen  |Position existert  |Bestätigung  |Rechnungspositionen werden gelöscht   
+|F-I-002 |Positionen generieren  |Vorgang(Procedure) existiert  |Button  |Rechnungspositionen werden aus dem Vorgang generiert
+|F-U-003 |Positionen löschen  |Position existiert  |Bestätigung  |Rechnungspositionen werden gelöscht
 |F-U-005  |eine Rechnungsposition bearbeiten        |Position existiert in Preisliste            |Name, Preis oder Menge von einen Position           |Die gewählte Position enthält einen neuen Wert
 |F-U-010  |Rechnen Wasserkosten einer Parzelle              |Wasserzählerstand einer Parzelle                  |Wasserzählerstand (und Wasserkosten pro Kubikmeter)     |Ein Preis von Wasserkost einer Parzelle wird gerechnet
 |F-U-015  |Rechnen Miete einer Parzelle                     |Größe einer Parzelle                              |Größe der Parzelle (und Miete pro Quadratmeter)       |Eine jährliche Miete der Parzelle wird gerechnet
