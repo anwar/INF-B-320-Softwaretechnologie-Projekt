@@ -143,5 +143,7 @@ zuständig: Muhammad Talal Anwar
 |===
 | ID      | Anwendungsfall                        | Vorbedingungen                                                   | Eingabe           | Ausgabe
 | M-U-010 | einen neuen News Eintrag machen       | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender | Text des Eintrags | Eintrag wird gespeichert
-| M-I-020 | Nachricht ist ordnungsgemäß geschickt |                                                                  | Nachricht         | erfolgreich Assertion Test durch E-mail Test Server (https://asciidoctor.org[GreenMail])
+| M-U-020 | einen News Eintrag bearbeiten         | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender, und die Eintrag existiert | Änderung          | Eintrag wird aktualisiert
+| M-U-030 | einen News Eintrag löschen            | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender, und die Eintrag existiert |          | Eintrag wird gelöscht
+| M-I-040 | Nachricht ist ordnungsgemäß geschickt |                                                                  | Nachricht         | erfolgreich Assertion Test durch E-mail Test Server (https://asciidoctor.org[GreenMail])
 |===
