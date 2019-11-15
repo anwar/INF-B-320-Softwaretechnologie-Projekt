@@ -93,6 +93,18 @@ Suchanfrage gefunden worden
 |Pächter gibt falsches Passwort ein
 |Pächter wird nicht eingeloggt -> Fehlermeldung erscheint
 
+| U-U-050
+| Pächter wird Vorpächter
+| Vorstandsvorsitzender ist eingeloggt, Pächter hat Parzelle gekündigt, neuer Pächter ist vorhanden
+| Vorstandsvorsitzender geht auf die Pächterverwaltung und auf die Detailseite des Pächters und betätigt den "Pächter deaktivieren"- Button
+| Pächter wird in der Vorpächterliste seiner Parzelle aufgenommen
+
+| U-U-051
+| Pächter wird Vorpächter
+| Vorstandsvorsitzender ist eingeloggt, Pächter hat Parzelle gekünigt
+| Vorstandsvorsitzender geht auf die Pächterverwaltung und auf die Detailseite des Pächters und betätigt den "Pächter deaktivieren"- Button
+| Fehlermeldung erscheint, dass ein Pächter nur deaktiviert werden kann, wenn für seine Parzelle ein Nachpächter bestimmt ist
+
 |===
 
 == PlotDepartment
