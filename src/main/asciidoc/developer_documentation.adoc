@@ -214,8 +214,29 @@ Kontextdiagramm
 === Erfüllung der Qualitätsziele
 [options="header"]
 |===
-|Qualitätsziel |Lösungsansatz
-|... |...
+| Qualitätsziel |Lösungsansatz
+| Anpassbarkeit (Scalability)
+| Nutzen von Frameworks, sodass einfaches Hinzufügen neuer Methoden ermöglicht wird
+
+| Wartbarkeit (Maintainability)
+| Übersichtliche Packages und die Nutzung von Frameworks, Kommentieren des Codes, Nutzer werden Rollen zugewiesen
+
+| Erweiterbarkeit (Extensibility)
+| Durch die Nutzung  von Packages und Frameworks wird eine Erweiterung vereinfacht
+
+| Benutzbarkeit (Usability)
+| Aufbau der Website, sodass sie bei jeder Bildschirmgröße (ausgenommen mobil) problemlos benutzt werden kann.
+Möglichst wenig scrollen.
+
+
+| Zuverlässigkeit (Reliability)
+| Tests mit JUnit
+
+| Geschwindigkeit (Performance)
+| Die Seiten laden abhängig von der Geschwindigkeit der Browser
+
+| Sicherheit (Security)
+| Nutzung von einmaligen Passwörtern
 |===
 
 === Softwarearchitektur
@@ -235,7 +256,7 @@ Client-Server-Modell der Anwendung
 Die Anwendung verwendet *Hibernate Annotation basiertes Mapping*, um Java Klassen zu den Datenbanktabellen zuordnen. Als Datenbank wird *H2* verwendet. Die Persistenz ist standardmäßig deaktiviert. Um den Persistenzspeicher zu aktivieren, müssen die folgenden zwei Zeilen in der Datei application.properties nicht auskommentiert werden:
 
 ....
-# spring.datasource.url=jdbc:h2:./db/videoshop
+# spring.datasource.url=jdbc:h2:./db/kleingarten
 # spring.jpa.hibernate.ddl-auto=update
 ....
 
