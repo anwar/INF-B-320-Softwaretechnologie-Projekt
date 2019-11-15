@@ -41,14 +41,8 @@ Zu diesen gehören beispielsweise Spring, Salespoint, Maven, Thymeleaf.
 * JUnit zur Erstellung von Unit Tests
 
 == Testfälle und Verantwortlichkeit
-Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 
-// See http://asciidoctor.org/docs/user-manual/#tables
-[options="headers"]
-|===
-|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|…  |…              |…              |…       |…
-|===
+
 
 ==== TenantDepartment
 zuständig: Isabell Zorr
@@ -56,4 +50,29 @@ zuständig: Isabell Zorr
 |===
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
 |  |              |…              |…       |…
+|===
+
+==== PlotDepartment
+zuständig: Ylvi Sarah Bachmann und Albert Wellerdt
+
+[options="headers"]
+|===
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+|P-U-010 |Parzelle erstellen|…              |…       |…
+|===
+
+==== FinanceDepartment
+zuständig: Sanghyun Lee und Sascha Seiffert
+[options="headers"]
+|===
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+|…  |…              |…              |…       |…
+|===
+
+==== MessageDepartment
+zuständig: Muhammad Talal Anwar
+[options="headers"]
+|===
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+|…  |…              |…              |…       |…
 |===
