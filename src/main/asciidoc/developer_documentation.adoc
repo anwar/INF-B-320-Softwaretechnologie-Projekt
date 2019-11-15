@@ -322,6 +322,29 @@ image::models/analysis/PlotManagement.png[Parzellenverwaltung]
 |Bezug auf die Pächterklasse aus dem Tenant Package; dient der Speicherung der Nebenpächter in der zugehörigen Parzelle
 |===
 
+* Finanzverwaltung
+
+image::models/analysis/KleinGartenAnlagen.finance.png[]
+
+[options="header"]
+|===
+|Klasse/Enumeration |Description
+|Fee
+|Die Fee Klasse beschreibt den Preis der Parzelle mit benötigen Daten
+
+|FeeController
+|Die FeeController Klasse ist verantworlich für die Aufrufe der verschiedene (Html) Seiten
+
+|FeeManagement
+|Die FeeManagement Klasse ist verantworlich für die Verwaltung der Preisliste
+
+|FeeCatalog
+|Die FeeCatalog Klasse filtert Daten unter Namen oder BillId
+
+|Bill
+|Die Bill Klasse erstellt eine jährliche Rechnung
+
+|===
 === Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
 
 [options="header"]
