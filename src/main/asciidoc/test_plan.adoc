@@ -103,7 +103,7 @@ Suchanfrage gefunden worden
 | Pächter wird Vorpächter
 | Vorstandsvorsitzender ist eingeloggt, Pächter hat Parzelle gekünigt
 | Vorstandsvorsitzender geht auf die Pächterverwaltung und auf die Detailseite des Pächters und betätigt den "Pächter deaktivieren"- Button
-| Fehlermeldung erscheint, dass ein Pächter nur deaktiviert werden kann, wenn für seine Parzelle ein Nachpächter bestimmt ist
+ | Fehlermeldung erscheint, dass ein Pächter nur deaktiviert werden kann, wenn für seine Parzelle ein Nachpächter bestimmt ist
 
 |===
 
@@ -128,7 +128,15 @@ zuständig: Sanghyun Lee und Sascha Seiffert
 [options="headers"]
 |===
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|…  |…              |…              |…       |…
+|F-U-001  |eine neue Rechnungsposition hinzufügen    |--                                                |Name, Preis und Menge von einer Position            |Die neue Position wird erstellt
+|F-I-002 |Positionen generieren  |Vorgang(Procedure) existiert  |Button  |Rechnungspositionen werden aus dem Vorgang generiert  
+|F-U-003 |Positionen löschen  |Position existert  |Bestätigung  |Rechnungspositionen werden gelöscht   
+|F-U-005  |eine Rechnungsposition bearbeiten        |Position existiert in Preisliste            |Name, Preis oder Menge von einen Position           |Die gewählte Position enthält einen neuen Wert
+|F-U-010  |Rechnen Wasserkosten einer Parzelle              |Wasserzählerstand einer Parzelle                  |Wasserzählerstand (und Wasserkosten pro Kubikmeter)     |Ein Preis von Wasserkost einer Parzelle wird gerechnet
+|F-U-015  |Rechnen Miete einer Parzelle                     |Größe einer Parzelle                              |Größe der Parzelle (und Miete pro Quadratmeter)       |Eine jährliche Miete der Parzelle wird gerechnet
+|F-U-019 |Schätzen fehlender Rechnungspositionen  |Rechnung existiert, alle bekannten Positionen sind angelegt  |Alle Positionen  |Fehlende Kosten oder Verbräuche werden geschätzt
+|F-U-020  |Rechnen eine jährliche Rechnung einer Parzelle   |Parzelle enthält alle nötige Daten für Berechnung |Wasser/Stromzählerstand und Größe der Parzelle        |Eine jährliche Rechnung der Parzelle wird erstellt
+|F-I-021 |Versenden per E-Mail  |Rechnung ist erstellt  |Adressat und PDF  |Die Rechnung wird dem Empfänger zugestellt
 |===
 
 
