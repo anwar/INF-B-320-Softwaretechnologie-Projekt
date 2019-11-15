@@ -45,11 +45,66 @@ Zu diesen gehören beispielsweise Spring, Salespoint, Maven, Thymeleaf.
 
 
 ==== TenantDepartment
-zuständig: Isabell Zorr
+zuständig: Isabell Zorr, Franziska Kiel
 [options="headers"]
 |===
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|  |              |…              |…       |…
+|U-U-010
+| neuer Pächter wird erstellt
+|Bewerbung wurde angenommen und Vorstandsvorsitzender ist eingeloggt
+|Vorstandsvorsitzender füllt alle Felder aus und klickt auf "hinzufügen"
+|Pächter wird erfolgreich in die Datenbank aufgenommen
+
+|U-U-011
+|neuer Pächter wird erstellt
+|Bewerbung wurde angenommen und Vorstandsvorsitzender ist eingeloggt
+|Vorstandsvorsitzender füllt eine der Felder nicht aus oder nicht korrekt (z.B beim Namen dürfen keine Zahlen sein)
+| es wird kein neuer Pächter hinzugefügt und eine Fehlermeldung erscheint, dass das Feld fehlerhaft aufgefüllt ist bzw. nicht ausgefüllt wurde
+
+|U-U-020
+|Pächter muss sein generiertes Passwort ändern
+|Vorstandsvorsitzender hat eine Email an den Pächter mit einem generierten Passwort geschickt und Pächter ist angemledet
+|Pächter trägt sein generiertes Passwort in das vorhergesehene Feld ein und
+ trägt zweimal richtig sein neues Passwort ein und Button zum Passwort ändern wird getätigt
+|Passwort wird erfolgreich geändert
+
+|U-U-021
+|Pächter muss sein generieertes Passwort ändern
+|Vorstandsvorsitzender hat eine Email an den Pächter mit einem generierten Passwort geschickt und Pächter ist angemledet
+| Er trägt sein altes Passwort inkorrekt in das vorhergesehene Feld ein und
+trägt zweimal richtig sein neuese Passwort ein ODER ein Feld für das neue
+Passwort stimmt mit dem anderen nicht überein ODER ein oder mehr Felder wurden
+nicht ausgefüllt. +
+  Button zum Passwort ändern wird getätigt
+| Passwort wird nicht geändert, Fehlermeldung erscheint
+
+|U-U-30
+| Vorstandsvorsitzender sucht in der Datenbank nach Pächter
+| Vorstandsvorsitzender ist eingeloggt und befindet sich auf "Pächter verwalten"
+| Manager tippt einen Namen in das Suchfeld und klickt auf Suchen
+| Fall 1: der gesuchte Name wird in der Datenbank gefunden und alle Ergebnisse aufgelistet,
++
+Fall 2: wenn kein Ergebnis gefunden wird so wird angezeigt, dass keine Pächter unter dieser
+Suchanfrage gefunden worden
+
+|U-U-040
+|Pächter will sich einloggen
+|Pächter befindet sich auf der Login Seite
+|Pächter gibt falsches Passwort ein
+|Pächter wird nicht eingeloggt -> Fehlermeldung erscheint
+
+| U-U-050
+| Pächter wird Vorpächter
+| Vorstandsvorsitzender ist eingeloggt, Pächter hat Parzelle gekündigt, neuer Pächter ist vorhanden
+| Vorstandsvorsitzender geht auf die Pächterverwaltung und auf die Detailseite des Pächters und betätigt den "Pächter deaktivieren"- Button
+| Pächter wird in der Vorpächterliste seiner Parzelle aufgenommen
+
+| U-U-051
+| Pächter wird Vorpächter
+| Vorstandsvorsitzender ist eingeloggt, Pächter hat Parzelle gekünigt
+| Vorstandsvorsitzender geht auf die Pächterverwaltung und auf die Detailseite des Pächters und betätigt den "Pächter deaktivieren"- Button
+| Fehlermeldung erscheint, dass ein Pächter nur deaktiviert werden kann, wenn für seine Parzelle ein Nachpächter bestimmt ist
+
 |===
 
 == PlotDepartment
