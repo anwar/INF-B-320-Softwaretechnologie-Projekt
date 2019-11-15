@@ -267,13 +267,21 @@ image::models/design/user-interface.png[]
 
 [options="header", cols="1,3,3"]
 |===
-| Externe Klasse                | Pfad der externen Klasse                               | Verwendet von (Klasse der eigenen Anwendung)
-| Salespoint.Role               | org.salespointframework.useraccount.Role               | ...
-| Salespoint.UserAccount        | org.salespointframework.useraccount.UserAccount        | ...
-| Salespoint.UserAccountManager | org.salespointframework.useraccount.UserAccountManager | ...
-| Spring.MailSender             | org.springframework.mail.MailSender                    | ...
-| Salespoint.Product            | org.salespointframework.catalog.Product                | Plot
-| Salespoint.Catalog            | org.salespointframework.catalog                        | PlotCatalog
+| Externe Klasse                | Pfad der externen Klasse                                 | Verwendet von (Klasse der eigenen Anwendung)
+| Salespoint.Catalog            | org.salespointframework.catalog                          | plot.PlotCatalog
+| Salespoint.Product            | org.salespointframework.catalog.Product                  | plot.Plot
+| Salespoint.Role               | org.salespointframework.useraccount.Role                 | tenant.TenantDataInitializer
+| Salespoint.UserAccount        | org.salespointframework.useraccount.UserAccount          | tenant.Tenant
+| Salespoint.UserAccountManager | org.salespointframework.useraccount.UserAccountManager   | tenant.TenantManager
+| Spring.Errors                 | org.springframework.validation.Errors                    | message.MessageController
+| Spring.MailMessage            | org.springframework.mail.MailMessage                     | message.MessageController
+| Spring.MailSender             | org.springframework.mail.MailSender                      | message.MessageController
+| Spring.Model                  | org.springframework.ui.Model                            a|
+* finance.FeeController
+* message.MessageController
+* plot.PlotController
+* tenant.tenantController
+
 |===
 
 == Bausteinsicht
