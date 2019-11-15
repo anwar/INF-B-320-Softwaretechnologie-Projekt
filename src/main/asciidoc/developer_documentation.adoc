@@ -277,10 +277,8 @@ image::models/design/user-interface.png[]
 |===
 
 == Bausteinsicht
-* Entwurfsklassendiagramme der einzelnen Packages
 
-* Pächterverwaltung
-
+=== Pächterverwaltung
 image::models/analysis/KleinGartenAnlage.tenant.png[]
 
 [options="header"]
@@ -307,8 +305,7 @@ der Person hinzu
 |Dient der Registrierung eines neuen Pächters über das Bewerbungsformular
 |===
 
-* Parzellenverwaltung
-
+=== Parzellenverwaltung
 image::models/analysis/PlotManagement.png[Parzellenverwaltung]
 
 [options="header"]
@@ -343,8 +340,7 @@ image::models/analysis/PlotManagement.png[Parzellenverwaltung]
 |Bezug auf die Pächterklasse aus dem Tenant Package; dient der Speicherung der Nebenpächter in der zugehörigen Parzelle
 |===
 
-* Finanzverwaltung
-
+=== Finanzverwaltung
 image::models/analysis/KleinGartenAnlagen.finance.png[]
 
 [options="header"]
@@ -366,6 +362,17 @@ image::models/analysis/KleinGartenAnlagen.finance.png[]
 |Die Bill Klasse erstellt eine jährliche Rechnung
 
 |===
+
+=== Nachrichtensystem
+image::models/analysis/KleinGartenAnlagen.message.png[]
+
+[options="header"]
+|===
+| Klasse/Enumeration | Description
+| Message            | Die Message Klasse beschreibt eine Nachricht, die von dem System geschickt wird.
+| MessageController  | Die MessageController Klasse ist verantwortlich für das Schicken und Erzeugen einer Nachricht.
+|===
+
 === Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
 
 [options="header"]
