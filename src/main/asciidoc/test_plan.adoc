@@ -60,7 +60,12 @@ zuständig Ylvi Sarah Bachmann und Albert Wellerdt
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
 |P-U-010 |Parzelle erstellen |--      |Parzellengröße, Bereich, Schätzwert, Wasserzähler, Stromzähler | Parzelle wird erstellt, Attribute in passendem Format
 |P-U-012 |Parzelle besetzt |Bewerbung angenommen      |Email des neuen Pächters dann auf besetzt | String "besetzt" wird ausgegeben
+|P-U-013 |Parzelle besetzt |Bewerbung angenommen      |Email des neuen Pächters dann auf besetzt | Fehlermeldung Parzelle steht schon auf "taken"
 |P-U-020 |Nebenpächter hinzufügen |Hauptpächter für Parzelle exisitiert  |Namen und Email des Nebenpächters | Nebenpächter erscheint in der Liste der Nebenpächter für eine Parzelle
+|P-U-021 |Nebenpächter hinzufügen |Hauptpächter für Parzelle exisitiert  |Namen und Email des Nebenpächters | Fehlermeldung Nebenpächter mit dieser Email Adresse existiert bereits für die Parzelle
+|P-U-022 |Hinzufügen der Arbeitsstunden und Wasserstand |Parzelle existiert und ein Hauptpächter  |Wasserzählerstand und gearbeitete Stunden | Werte stehen in der Procedure Klasse
+|P-U-030 |selber Hauptpächter zu der selben Parzelle nochmal hinzufügen |Parzelle existiert und der Hauptpächter  |Tenant | Fehlermeldung der Hauptpächter existiert bereits für die Parzelle
+|P-U-031 |Hauptpächter zur Parzelle hinzufügen |Parzelle existiert |Tenant | Hauptpächter kriegt seine Zelle angezeigt im Dashboard und in seiner eigenen Liste
 |===
 
 ==== FinanceDepartment
