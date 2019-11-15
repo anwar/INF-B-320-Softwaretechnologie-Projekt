@@ -36,10 +36,9 @@ Zu diesen gehören beispielsweise Spring, Salespoint, Maven, Thymeleaf.
 - Integrationstest nach Bottom-Up Prinzip
 
 == Umgebungsvoraussetzungen
-* Wird spezielle Hardware benötigt?
-* Welche Daten müssen bereitgestellt werden? Wie werden die Daten bereitgestellt?
-* Wird zusätzliche Software für das Testen benötigt?
-* Wie kommuniziert die Software während des Testens? Internet? Netzwerk?
+*  Ein einsatzfähiges Computer System
+* Zu testende Programme (Testobjekte)
+* JUnit zur Erstellung von Unit Tests
 
 == Testfälle und Verantwortlichkeit
 Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
