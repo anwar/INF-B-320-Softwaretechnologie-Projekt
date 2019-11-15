@@ -103,8 +103,7 @@ Suchanfrage gefunden worden
 | Pächter wird Vorpächter
 | Vorstandsvorsitzender ist eingeloggt, Pächter hat Parzelle gekünigt
 | Vorstandsvorsitzender geht auf die Pächterverwaltung und auf die Detailseite des Pächters und betätigt den "Pächter deaktivieren"- Button
-
-|F-I-002 |Positionen generieren  |Vorgang(Procedure) existiert  |Button  |Rechnungspositionen werden aus dem Vorgang generiert  | Fehlermeldung erscheint, dass ein Pächter nur deaktiviert werden kann, wenn für seine Parzelle ein Nachpächter bestimmt ist
+ | Fehlermeldung erscheint, dass ein Pächter nur deaktiviert werden kann, wenn für seine Parzelle ein Nachpächter bestimmt ist
 
 |===
 
