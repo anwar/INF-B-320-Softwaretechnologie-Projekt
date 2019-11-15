@@ -49,3 +49,13 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
 |…  |…              |…              |…       |…
 |===
+
+== Parzellenmanagement
+zuständig Ylvi Sarah Bachmann und Albert Wellerdt
+
+[options="headers"]
+|===
+|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
+|P-U-010 |Parzelle erstellen|…              |…       |…
+|===
+
