@@ -1,0 +1,127 @@
+= Protokoll Gruppe 43
+
+Treffen am 13.11.2019
+
+Ort:      APB +
+Beginn:   14:50 Uhr +
+Ende:     16:30 Uhr
+
+__Schriftführer:__ Isabell Zorr
+
+*Nächstes Treffen:* +
+20.11.2019, 10:30 Uhr, APB
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Albert Wellerdt
+- Franziska Kiel
+- Sascha Seiffert
+- Sanghyun Lee
+- Ylvie Sarah Bachmann
+- Isabell Zorr
+
+== Bemerkungen
+Dieses Treffen diente der ersten Zusammenarbeit mit den neuen Gruppenmitgliedern. Sascha und Sanghyun tauschten sich über das
+Finanzsystem aus, an welchem beide gearbeitet haben und jetzt versuchen ihre jeweiligen Ideen und Versionen zu vereinen.
+Ebenso taten dies Albert und Ylvie für ihr Parzellenmanagement. Es wurde sich dazu entschieden die bereits entstandenen
+Entwurfsdiagramme für die Entwicklerdokumentation zusammenzufassen. Franziska und Isabell arbeitetn jeweils am Prototyp
+weiter und halfen den anderen bei Problemen oder bekamen Hilfe.
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|#4
+|Entwurfsentscheidungen
+| closed
+|in Entwicklerdokumentation eingepflegt
+
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Ingegration im Code
+| open
+|wip
+
+|#6
+|Entwurfsdiagramm Pächterverwaltung und kleine Integration im Code
+| closed
+| Entwurfsdiagramm muss mit neuen Erkenntnissen aus Gruppenzusammenführung überarbeitet werden
+
+|#7
+|Entwurfsdiagramm Parzellenverwaltung und kleine Integration im Code
+| open
+|wip
+
+|#8
+|Entwurfsdiagramm Nachrichtensystem und kleine Integration im Code
+| open
+|"-"
+
+|#9
+|Integration HTML und CSS Code/Grobe Container
+| open
+|"-"
+
+|#10
+|Verwendung externer Frameworks
+|open
+|"-"
+|===
+
+
+== Aktueller Stand
+
+Die neuen Gruppenmitglieder müssen sich noch in das Gruppengefüge einfinden und Aufgaben müssen für sie gefunden werden.
+Die Fertigstellung des Prototypen wird bis auf weiteres nach hinten verschoben um der fristgemäßen Bearbeitung des Testplanes
+und der Entwicklerdoku nicht im weg zu stehen.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+|#6
+|Entwurfsdiagramm Pächterverwaltung und kleine Integrationen im Code
+|erstellen eines Entwurfsdiagrammes für die Pächterverwaltung und schon eine kleine Integration dessen im Code
+für den Prototypen
+|Isabell
+| open
+
+|#7
+|Entwurfsdiagramm Parzellenverwaltung und kleine Integrationen im Code
+|erstellen eines Entwurfsdiagrammes für die Parzellenverwaltung und schon eine kleine Integration dessen im Code
+für den Prototypen
+|Albert
+| open
+
+|#8
+|Entwurfsdiagramm Nachrichtensystem und kleine Integrationen im Code
+|erstellen eines Entwurfsdiagrammes für das Nachrichtensystem und schon eine kleine Integration dessen im Code
+für den Prototypen
+|Talal
+| open
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#10
+|Verwendung externer Frameworks
+| -
+| Talal
+| open
+|===
