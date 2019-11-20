@@ -18,6 +18,7 @@
 | 0.1.3   | 09.11.2019        | Muhammad Talal Anwar
 | 0.1.4   | 12.11.2019        | Isabell Zorr
 | 0.1.5   | 14.11.2019        | Ylvi Bachmann
+| 0.1.6   | 20.11.2019        | Isabell Zorr
 
 |===
 
@@ -215,25 +216,24 @@ Kontextdiagramm
 [options="header"]
 |===
 | Qualitätsziel |Lösungsansatz
+
 | Anpassbarkeit (Scalability)
-| Nutzen von Frameworks, sodass einfaches Hinzufügen neuer Methoden ermöglicht wird
+| - Vermeidung von Codewiederholung +
+- Kopieren von Funktionen
 
 | Wartbarkeit (Maintainability)
-| Übersichtliche Packages und die Nutzung von Frameworks, Kommentieren des Codes, Nutzer werden Rollen zugewiesen
+| - Nutzung von einzelnen Packages und Komponenten +
+- Sicherstellen, dass Komponenten von anderen Komponenten (wieder-) verwendet werden können
 
 | Erweiterbarkeit (Extensibility)
-| Durch die Nutzung  von Packages und Frameworks wird eine Erweiterung vereinfacht
+| - Nutzung  von Packages und Frameworks
 
 | Benutzbarkeit (Usability)
-| Aufbau der Website, sodass sie bei jeder Bildschirmgröße (ausgenommen mobil) problemlos benutzt werden kann.
-Möglichst wenig scrollen.
+| -
 
 
 | Zuverlässigkeit (Reliability)
 | Tests mit JUnit
-
-| Geschwindigkeit (Performance)
-| Die Seiten laden abhängig von der Geschwindigkeit der Browser
 
 | Sicherheit (Security)
 | Nutzung von einmaligen Passwörtern
@@ -308,9 +308,7 @@ image::models/analysis/KleinGartenAnlage.tenant.png[]
 |Klasse/Enumeration |Description
 
 |Tenant
-|Die Pächerklasse beschreibt den Pächter der Parzelle und erbt vom Salespoint-UserAccount und fügt diesem die Eigenschaften
-der Person hinzu
-
+|Die Pächerklasse beschreibt den Pächter der Parzelle und erbt vom Salespoint-UserAccount
 |TenantController
 |Ein Spring MVC Controller um neue Pächter hinzuzufügen und bereits bestehende anzuzeigen
 
@@ -320,11 +318,11 @@ der Person hinzu
 |TenantRepository
 |Ein Repositoryinterface um Pächterinstanzen zu managen
 
-|Plot
-|Die dem Pächter zugeordnete Parzelle aus dem Plotpackage
-
 |RegistrationForm
 |Dient der Registrierung eines neuen Pächters über das Bewerbungsformular
+
+|TenantDataInitializer
+|Eine Klasse zum Erzeugen vorhandener Nutzer zum Systemstart.
 |===
 
 === Parzellenverwaltung
