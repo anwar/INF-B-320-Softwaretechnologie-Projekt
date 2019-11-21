@@ -19,6 +19,7 @@
 | 0.1.4   | 12.11.2019        | Isabell Zorr
 | 0.1.5   | 14.11.2019        | Ylvi Bachmann
 | 0.1.6   | 20.11.2019        | Isabell Zorr
+| 0.1.7   | 21.11.2019        | Ylvi Bachmann
 
 |===
 
