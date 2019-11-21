@@ -301,7 +301,7 @@ image::models/design/user-interface.png[]
 == Bausteinsicht
 
 === Pächterverwaltung
-image::models/analysis/KleinGartenAnlage.tenant.png[]
+image::models/analysis/KleinGartenAnlage.tenant.png[Pächterverwaltung]
 
 [options="header"]
 |===
