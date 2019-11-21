@@ -91,17 +91,29 @@ Suchanfrage gefunden worden
 |Pächter gibt falsches Passwort ein
 |Pächter wird nicht eingeloggt -> Fehlermeldung erscheint
 
+|U-U-041
+|Pächter will sich einloggen
+|Pächter befindet sich auf der Login Seite
+|Pächter gibt richtiges Passwort ein
+|Pächter wird erfolgreich eingeloggt und hat nun Zugriff auf authentifizierte Seiten
+
 | U-U-050
 | Pächter wird Vorpächter
 | Vorstandsvorsitzender ist eingeloggt, Pächter hat Parzelle gekündigt, neuer Pächter ist vorhanden
 | Vorstandsvorsitzender geht auf die Pächterverwaltung und auf die Detailseite des Pächters und betätigt den "Pächter deaktivieren"- Button
-| Pächter wird in der Vorpächterliste seiner Parzelle aufgenommen
+| Pächter wird in der Vorpächterliste seiner Parzelle aufgenommen, seine Daten werden anonymisiert
 
 | U-U-051
 | Pächter wird Vorpächter
 | Vorstandsvorsitzender ist eingeloggt, Pächter hat Parzelle gekündigt
 | Vorstandsvorsitzender geht auf die Pächterverwaltung und auf die Detailseite des Pächters und betätigt den "Pächter deaktivieren"- Button
- | Fehlermeldung erscheint, dass ein Pächter nur deaktiviert werden kann, wenn für seine Parzelle ein Nachpächter bestimmt ist
+|Fehlermeldung erscheint, dass ein Pächter nur deaktiviert werden kann, wenn für seine Parzelle ein Nachpächter bestimmt ist
+
+| U-U-060
+| Rolle eines Pächters ändern
+| Vorstandsvorsitzender ist eingeloggt
+| Vorstandsvorsitzender befindet sich auf der Detailseite eines Pächters, geht auf Rolle ändern und wählt aus Drop-Down neue Rolle an, geht auf Speichern
+| Rolle vom Pächter wird erfolgreich geändert
 
 |===
 

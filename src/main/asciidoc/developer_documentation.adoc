@@ -229,14 +229,18 @@ Kontextdiagramm
 | - Nutzung  von Packages und Frameworks
 
 | Benutzbarkeit (Usability)
-| -
+| - übersichtliche und benutzerfreundliche Ansichten +
+- große Buttons mit verständlichen Beschriftungen +
+- Übersichtsseiten der Anwendung sind mit wenigen Klicks zu erreichen
 
 
 | Zuverlässigkeit (Reliability)
 | Tests mit JUnit
 
 | Sicherheit (Security)
-| Nutzung von einmaligen Passwörtern
+| - Nutzung von einmaligen Passwörtern und Spring Security +
+- Authorisierung von Nutzern
+
 |===
 
 === Softwarearchitektur
