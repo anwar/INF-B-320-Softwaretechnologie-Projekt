@@ -19,6 +19,7 @@
 | 0.1.4   | 12.11.2019        | Isabell Zorr
 | 0.1.5   | 14.11.2019        | Ylvi Bachmann
 | 0.1.6   | 20.11.2019        | Isabell Zorr
+| 0.1.7   | 21.11.2019        | Ylvi Bachmann
 
 |===
 
@@ -253,6 +254,12 @@ Client-Server-Modell der Anwendung
 
 === Entwurfsentscheidungen
 
+* Hinzufügen der Assoziationsklasse Procedure zwischen den Klassen Plot und Tenant, um die Verbindung dieser Klassen
+zu modellieren und veränderliche Daten (z.B. Pächter, Wasserzähler, ...) der Parzelle für die jährliche Rechnungserstellung
+zu speichern
+* Hinzufügen weiterer Packages (Bewerbungsverwaltung und Terminverwaltung), um bessere Arbeitsteilung zu erreichen, damit
+Konflikte vermieden werden können
+
 ==== Verwendete Muster
 * Spring MVC
 
@@ -344,32 +351,14 @@ image::models/analysis/PlotManagement.png[Parzellenverwaltung]
 |===
 |Klasse/Enumeration |Description
 |Plot
-|beschreibt die Parzelle mit ihren benötigten Daten und speichert Pächter und Nebenpächter
-
-|PlotStatus
-|Status einer Parzelle; mögliche Werte:
-
-- FREE Parzelle hat keinen zugehörigen Pächter
-- TAKEN Parzelle wird gemietet
-
-|Procedure
-|dient der Speicherung der veränderlichen Daten der Parzelle, welche im Zusammenhang mit der Rechnungserstellung benötigt werden
+|beschreibt die Parzelle mit ihren benötigten Daten
 
 |PlotService
-|implementiert sämtliche Use Cases des Plot Package
-
-|PlotController
-|bearbeitet und beantwortet die Aufrufe der unterschiedlichen Seiten
+|Managementklasse, beinhaltet Methoden, die vom Controller genutzt werden, um diesen übersichtlich zu halten
 
 |...Form
 |beschreiben die Formulare, mit welchen z.B. neue Parzellen angelegt und Daten einer bestehenden Parzelle verändert werden können +
 (werden hier vereinfacht zusammengefasst, um Übersichtlichkeit zu gewährleisten)
-
-|PlotCatalog
-|dient der Verwaltung und Filterung der Instanzen der Parzellen
-
-|Tenant
-|Bezug auf die Pächterklasse aus dem Tenant Package; dient der Speicherung der Nebenpächter in der zugehörigen Parzelle
 |===
 
 === Finanzverwaltung
@@ -412,8 +401,11 @@ image::models/analysis/KleinGartenAnlagen.message.png[]
 
 [options="header"]
 |===
-|Klasse/Enumeration (Analysemodell) |Klasse/Enumeration (Entwurfsmodell)
-|Parzelle  |Plot
+|Klasse/Enumeration (Analysemodell) |Klasse/Enumeration (Entwurfsmodell) |Beschreibung
+|<Enumeration> +
+  PÄCHTER              |-           |Hinzufügen der Assoziationsklasse Procedure
+|Vorpächter            |-           |Speicherung der Pächter einer Parzelle als Attribute in Procedure
+|Zähler                |-           |Speicherung der Zählerstände als Attribute in der Parzelle und in Procedure
 |===
 
 == Laufzeitsicht
