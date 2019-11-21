@@ -1,0 +1,139 @@
+= Protokoll Gruppe 43
+
+Treffen am 21.11.2019
+
+Ort:      APB +
+Beginn:   09:00 Uhr +
+Ende:     12:00 Uhr
+
+__Schriftführer:__ Isabell Zorr
+
+*Nächstes Treffen:* +
+27.11.2019, 07:30 Uhr, APB
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Uwe Schmidt (Tutor)
+- Albert Wellerdt
+- Franziska Kiel
+- Muhammad Talal Anwar
+- Sanghyun Lee
+- Ylvi Sarah Bachmann
+- Isabell Zorr
+
+== Bemerkungen
+Bei diesem Treffen wurde der Prototyp vorgestellt und die Zwischenpräsentation gehalten.
+Der Prototyp ist laut Uwes Aussage in Ordnung und er gab uns Tipps und Verbesserungsvorschläge anlässlich
+unseres Präsentationsstils. Er ermahnte uns auch noch einmal an unserer Gruppenkommunikation zu arbeiten, da
+man es wohl merke, dass wir als Gruppe nur teilweise kommunizieren. Auch klärte er letzte Fragen und gab uns
+gute Tipps zur Implementierung. Durch das Treffen konnten wirklich einige Denkfehler aus der Analyse berichtigt werden,
+was uns in der Implementierung weiter bringen wird.
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|#6-8
+| Entwurfsdiagramme für Entwicklerdokumentation
+| closed
+| in Entwicklerdokumentation eingepflegt
+
+|#10
+| Verwendung externer Frameworks
+| closed
+| ""
+
+|#11-17
+|Fertigstellung des Testplans
+| closed
+| zur Bearbeitung des Testplans wurden die Abschnitte als Issues verfasst, welche jeweils von einem Gruppenmitglied bearbeitet
+wurden
+
+|#18-22
+|Erstellung der Präsentationsfolien
+|closed
+|von jedem Department wurden Folien in einem Präsentationsdokument für die Zwischenpräsentation erstellt
+
+|===
+
+
+== Aktueller Stand
+Der Prototyp der Anwendung wurde vorgestellt und abgenommen. Die Entwicklerdokumentation wird noch bis Freitag in kleinen
+Teilen (vor allem in den Diagrammen) bearbeitet. Weitere Testfälle werden ebenfalls bis Freitag erstellt.
+Ab Freitag beginnt dann die Implementationsphase.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#24
+|Fix HTML/CSS for homepage news section
+| ...
+| ...
+| open
+
+|#25
+|Implement Message package for sending emails
+| BAsic functionality, integration Test
+|Talal
+|open
+
+|#26
+|Update diagram for UserManagement
+| add Association to appointment package, delete association to plot package,
+update used methods
+|Isabell
+|open
+
+|#27
+|Add diagram for appointmentManagement
+|...
+|Albert
+|open
+
+|#28
+|Update diagram for financeManagement
+| rework diagram with new understanding from extern meeting
+| Sanghyun
+|open
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#30
+|Update Diagram for plotManagement
+| rework diagram with new understanding from extern meeting
+| Ylvi
+| open
+
+|#31
+| Add and update test cases for plotManagement
+| ...
+| Ylvi
+| open
+
+|===
