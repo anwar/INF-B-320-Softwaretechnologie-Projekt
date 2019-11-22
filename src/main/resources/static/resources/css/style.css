@@ -31,7 +31,7 @@ footer {
 }
 
 .header-title h1{
-	font-size: 50px;
+	font-size: 40px;
 	text-align: center;
 }
 
@@ -40,8 +40,9 @@ footer {
 	justify-content: center;
 	align-content: center;
 	text-align: center;
-	font-size: 30px;
-	padding: 0.5em 1em;
+	font-size:25px;
+
+
 }
 
 .news-section img{
@@ -74,6 +75,7 @@ p {
 	font-size: 18pt;
 	padding-left: 20px;
 	padding-right: 20px;
+	text-align: center;
 }
 ul {
 	margin-top: -8px;
@@ -108,6 +110,7 @@ li a:hover {
 .event-pics{
 	height: 300px;
 	width: 500px;
+
 }
 
 .button-section{
