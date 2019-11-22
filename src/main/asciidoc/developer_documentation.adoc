@@ -387,11 +387,13 @@ image::models/analysis/KleinGartenAnlagen.finance.png[]
 === News
 image::models/analysis/KleinGartenAnlagen.news.png[]
 
-=== Nachrichtensystem
-image::models/analysis/KleinGartenAnlagen.message.png[]
 
 === Bewerbungen
 image::models/analysis/ApplicationManagement.png[]
+
+
+=== Nachrichtensystem
+image::models/analysis/KleinGartenAnlagen.message.png[]
 
 [options="header"]
 |===
