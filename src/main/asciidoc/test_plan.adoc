@@ -118,19 +118,226 @@ Suchanfrage gefunden worden
 |===
 
 === PlotDepartment
-zuständig Ylvi Sarah Bachmann und Albert Wellerdt
+zuständig Ylvi Sarah Bachmann
 
 [options="headers"]
 |===
-|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|P-U-010 |Parzelle erstellen |--      |Parzellengröße, Bereich, Schätzwert, Wasserzähler, Stromzähler | Parzelle wird erstellt, Attribute in passendem Format
-|P-U-012 |Parzelle besetzt |Bewerbung angenommen      |Email des neuen Pächters dann auf besetzt | String "besetzt" wird ausgegeben
-|P-U-013 |Parzelle besetzt |Bewerbung angenommen      |Email des neuen Pächters dann auf besetzt | Fehlermeldung Parzelle steht schon auf "taken"
-|P-U-020 |Nebenpächter hinzufügen |Hauptpächter für Parzelle existiert  |Namen und Email des Nebenpächters | Nebenpächter erscheint in der Liste der Nebenpächter für eine Parzelle
-|P-U-021 |Nebenpächter hinzufügen |Hauptpächter für Parzelle existiert  |Namen und Email des Nebenpächters | Fehlermeldung Nebenpächter mit dieser Email Adresse existiert bereits für die Parzelle
-|P-U-022 |Hinzufügen der Arbeitsstunden und Wasserstand |Parzelle existiert und ein Hauptpächter  |Wasserzählerstand und gearbeitete Stunden | Werte stehen in der Procedure Klasse
-|P-U-030 |selber Hauptpächter zu der selben Parzelle nochmal hinzufügen |Parzelle existiert und der Hauptpächter  |Tenant | Fehlermeldung der Hauptpächter existiert bereits für die Parzelle
-|P-U-031 |Hauptpächter zur Parzelle hinzufügen |Parzelle existiert |Tenant | Hauptpächter kriegt seine Zelle angezeigt im Dashboard und in seiner eigenen Liste
+|ID   |Akzeptanztest ID |Anwendungsfall ID  |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe / Nachbedingung
+|P-U-010
+|
+|
+|Parzelle erstellen
+|Nutzer hat die Rolle Admin
+|Parzellengröße, Wasserzähler, Stromzähler, Beschreibung
+|Parzelle wird erstellt, Attribute in passendem Format
+
+|P-U-011
+|
+|
+|Parzelle erstellen
+|Nutzer hat andere Rolle als Admin
+|Parzellengröße, Wasserzähler, Stromzähler, Beschreibung
+|Fehlermeldung
+
+|P-I-010
+|**<<AT0010>>**
+|**<<UC0010>>**
+|Bewerben für eine Parzelle
+|Parzelle hat den Status FREE
+|Model mit Parzelle
+|String "/createApplication"
+
+|P-I-011
+|
+|**<<UC0010>>**
+|Bewerben für eine Parzelle
+|Parzelle hat den Status TAKEN
+|Model mit Parzelle
+|Fehlermeldung
+
+|P-U-012
+|**<<AT0010>>**
+|**<<UC0010>>**
+|Hinzufügen einer Bewerbung zu einer Parzelle
+|Bewerbung für die Parzelle
+|--
+|Bewerbung ist im zugehörigen Attribut der Parzelle gespeichert
+
+|P-I-012
+|**<<AT0011>>**
+|**<<UC0010>>**
+|Bewerbungen für eine Parzelle ansehen
+|Nutzer hat Rolle Obmann
+|Model mit Parzelle
+|Model mit Bewerbungen
+
+|P-I-013
+|
+|**<<UC0010>>**
+|Bewerbungen für eine Parzelle ansehen
+|Nutzer hat andere Rolle als Obmann
+|Model mit Parzelle
+|Fehlermeldung
+
+|P-U-012
+|**<<AT0012>>**
+|**<<UC0010>>**
+|Hinzufügen eines Hauptpächters
+|angenomme Bewerbung für die Parzelle, Parzelle hat den Status FREE
+|Parzelle, Bewerbung
+|Jahr, Parzelle, Pächter
+
+|P-I-014
+|**<<AT0012>>**
+|**<<UC0010>>**
+|Hinzufügen eines Hauptpächters
+|angenomme Bewerbung für die Parzelle, Parzelle hat den Status FREE
+|--
+|Model mit Jahr, Parzelle und Pächter
+
+|P-U-013
+|
+|**<<UC0010>>**
+|Hinzufügen eines Hauptpächters
+|angenommene Bewerbung für die Parzelle
+|Parzelle hat den Status TAKEN
+|Fehlermeldung
+
+|P-U-040
+|
+|
+|Nebenpächter hinzufügen
+|Hauptpächter für Parzelle existiert, Nebenpächter hat einen User Account
+|Namen und Email des Nebenpächters
+|Jahr, Parzelle und Pächter
+
+|P-U-041
+|
+|
+|Nebenpächter hinzufügen
+|Hauptpächter für Parzelle existiert, Nebenpächter hat keinen User Account
+|Namen und Email des Nebenpächters
+|Fehlermeldung
+
+|P-U-020
+|**<<AT0021>>**
+|**<<UC0020>>**
+|Eintragen der geleisteten Pflichtstunden
+|Nutzer hat die Rolle Obmann, Parzelle hat den Status TAKEN
+|gewünschte Parzelle
+|Parzelle und Summe der Pflichtstunden
+
+|P-U-021
+|
+|**<<UC0020>>**
+|Eintragen der geleisteten Pflichtstunden
+|Nutzer hat die Rolle Obmann, Parzelle hat den Status FREE
+|gewünschte Parzelle
+|Fehlermeldung
+
+|P-U-022
+|**<<AT0021>>**
+|**<<UC0020>>**
+|Eintragen der geleisteten Pflichtstunden
+|Parzelle hat den Status TAKEN
+|Parzelle und Summe der Pflichtstunden
+|Jahr, Parzelle und Summe der Pflichtstunden
+
+|P-U-023
+|
+|**<<UC0020>>**
+|Eintragen der geleisteten Pflichtstunden
+|Nutzer hat andere Rolle als Obmann
+|gewünschte Parzelle
+|Fehlermeldung
+
+|P-I-020
+|**<<AT0021>>**
+|**<<UC0020>>**
+|Eintragen der geleisteten Pflichtstunden
+|Nutzer hat die Rolle Obmann
+|Model mit Parzelle
+|Form mit geleisteten Pflichtstunden
+
+|P-I-021
+|**<<AT0021>>**
+|**<<UC0020>>**
+|Eintragen der geleisteten Pflichtstunden
+|Nutzer hat die Rolle Obmann
+|Form mit geleisteten Pflichtstunden, Parzelle
+|Model mit Jahr, Parzelle und Summe der Pflichtstunden
+
+|P-U-023
+|
+|
+|Hinzufügen des Wasserzählerstands
+|Nutzer hat die Rolle Obmann, Parzelle hat den Status TAKEN
+|gewünschte Parzelle, Wasserzählerstand
+|Jahr, Parzelle, Wasserzählerstand
+
+|P-I-023
+|
+|
+|Hinzufügen des Wasserzählerstands
+|Nutzer hat die Rolle Obmann
+|Model mit Parzelle
+|Form zum Eintragen des Wasserzählerstands
+
+|P-I-024
+|
+|
+|Hinzufügen des Wasserzählerstands
+|--
+|Form mit Wasserzählerstand, Parzelle
+|Model mit Jahr, Parzelle und Wasserzählerstand
+
+|P-U-030
+|**<<AT0030>>**
+|**<<UC0030>>**
+|Eintragen des Elektrozählerwerts
+|Parzelle hat den Status TAKEN
+|gewünschte Parzelle, Elektrozählerstand
+|Jahr, Parzelle, Elektrozählerstand
+
+|P-U-031
+|
+|**<<UC0030>>**
+|Eintragen des Elektrozählerwerts
+|Parzelle hat den Status FREE
+|gewünschte Parzelle, Elektrozählerstand
+|Fehlermeldung
+
+|P-I-030
+|**<<AT0030>>**
+|**<<UC0030>>**
+|Eintragen des Elektrozählerwerts
+|Nutzer hat die Rolle Obmann
+|Model mit Parzelle
+|Form zum Eintragen des Elektrozählerstands
+
+|P-I-031
+|**<<AT0030>>**
+|**<<UC0030>>**
+|Hinzufügen des Elektrozählerstands
+|--
+|Form mit Elektrozählerstand, Parzelle
+|Model mit Jahr, Parzelle und Elektrozählerstand
+
+|P-I-032
+|**<<AT0031>>**
+|**<<UC0030>>**
+|Aufrufen der Rechnungen
+|Nutzer hat die Rolle Kassierer
+|Parzelle
+|Model mit allen Rechnungen für die Parzelle
+
+|P-I-033
+|**<<AT0031>>**
+|**<<UC0030>>**
+|Aufrufen der Rechnungen
+|Nutzer hat die Rolle Pächter
+|Parzelle
+|Model mit Rechnungen mit gegebenem Nutzer für die Parzelle
 |===
 
 === FinanceDepartment
