@@ -390,6 +390,9 @@ image::models/analysis/KleinGartenAnlagen.news.png[]
 === Nachrichtensystem
 image::models/analysis/KleinGartenAnlagen.message.png[]
 
+=== Bewerbungen
+image::models/analysis/ApplicationManagement.png[]
+
 [options="header"]
 |===
 | Klasse/Enumeration | Description
