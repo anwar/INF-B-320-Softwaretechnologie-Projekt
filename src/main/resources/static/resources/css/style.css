@@ -15,7 +15,15 @@ header {
 	align-items: center;
 	justify-content: center;
 }
-
+footer {
+	position: fixed;
+	padding: 10px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	color: white;
+	background: #043353;
+}
 #overlay img{
 	background: rgba(2,20,33,0.5);
 	bottom: 0;
@@ -29,6 +37,11 @@ header {
 
 .news-section table{
 	margin: 0 auto;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+	font-size: 30px;
+	padding: 0.5em 1em;
 }
 
 .news-section img{
