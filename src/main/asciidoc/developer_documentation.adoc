@@ -368,28 +368,29 @@ image::models/analysis/FinanceManagement.png[]
 |===
 |Klasse/Enumeration |Description
 |Fee
-|Die Fee Klasse beschreibt den Preis der Parzelle mit benötigen Daten
-
-|FeeController
-|Die FeeController Klasse ist verantwortlich für die Aufrufe der verschiedene (Html) Seiten
-
-|FeeManagement
-|Die FeeManagement Klasse ist verantwortlich für die Verwaltung der Preisliste
-
-|FeeCatalog
-|Die FeeCatalog Klasse filtert Daten unter Namen oder BillId
+|Die Fee Klasse beschreibt den Basispreis der Parzelle mit benötigen Daten
 
 |Procedure
-|
+|Procedure Klasse beschreibt alle benötige Attribute, die von Plot- und TenantManager erhalten werden
 
 |ProcedureManagement
-|
+|ProcedureManagement Klasse ist verantwortlich für die Verwaltung der Procedure
 
 |ProcedureRepository
-|
+|ProcedureRepository verwaltet alle empfangene Dateien von Plot- und TenantManager
 
 |Bill
-|Die Bill Klasse erstellt eine jährliche Rechnung
+|Die Bill Klasse beschreibt eine jährliche Rechnung mit benötigen Information
+
+|BillCatalog
+|Die BillCatalog filtert Rechnungen unter Parzelle, Hauptpächter und Pächter
+
+|BillController
+|Die BillController Klasse ist verantwortlich für die Aufrufe der verschiedene (Html) Seiten
+
+|BillManagement
+|BillManagement Klasse ist für Berechnungen und ist verantwortlich für die Erstellung der jährlichen Rechnung
+
 
 |===
 
