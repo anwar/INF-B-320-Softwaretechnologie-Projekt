@@ -120,14 +120,14 @@ li a:hover {
 	text-align: center;
 }
 .button{
-	margin-left: 30px;
+	/*margin-left: 30px; */
 	color: white;
 	transition: all 0.5s ease-in-out;
 	background-color: #E44652;
 	border-radius: 10px;
 	font-size: 20px;
 	height: 50px;
-	width: 200px;
+	width: 150px;
 	border: 0;
 	box-shadow: 0px 0px 34px -23px rgba(0,0,0,0.75);
 
@@ -230,10 +230,13 @@ input[type=number]::-webkit-outer-spin-button {
 	width: 320px;
 }
 input.text_bgImage {
-	width: 400px;
-	height: 20px;
+	width: 300px;
+	height: 25px;
 	border-radius: 20px;
-	padding: 0;}
+	padding: 0;
+    font-size: 15px;
+}
+
 
 .plotOverview {
 	display: grid;
