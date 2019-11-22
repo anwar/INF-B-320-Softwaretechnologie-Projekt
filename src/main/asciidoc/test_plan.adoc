@@ -375,3 +375,13 @@ zuständig: Sascha Seiffert
 | A-U-012 | Bewerbung ablehnen            | Bewerbung existiert, Status "new" | Button         | Eintrag wird aktualisiert
 | A-U-020 | Bewerbung abschließen  | Bewerbung für Parzelle mit Status "accepted"  | -  | neuer Tenant, alle Bewerbungen auf "hidden"
 |===
+
+=== AppointmentDepartment
+zuständig: Sascha Seiffert
+[options="headers"]
+|===
+| ID      | Anwendungsfall                        | Vorbedingungen                                                   | Eingabe           | Ausgabe
+| AP-U-001 | Termin erstellen       | Zeit existiert für dieses Datum noch nicht   | Zeit, Datum  | Termin(Zeit, Datum)
+| AP-U-011 | Termin löschen        | Termin existiert bereits | Button          | Eintrag wird gelöscht
+| AP-U-012 | Termin bearbeiten            | Termin existiert bereits, neue Zeit existiert noch nicht | Button         | Termin wird aktualisiert
+|===

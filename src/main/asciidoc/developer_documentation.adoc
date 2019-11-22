@@ -412,6 +412,17 @@ image::models/analysis/KleinGartenAnlagen.message.png[]
 | MessageController  | Die MessageController Klasse ist verantwortlich für das Schicken und Erzeugen einer Nachricht.
 |===
 
+=== Termine
+image::models/analysis/kleingarten.appointment.png[]
+
+[options="header"]
+|===
+| Klasse/Enumeration | Description
+| Appointment            | Die Appointment Klasse beschreibt einen Termin.
+| AppointmentController  | Die AppointmentController Klasse ist verantwortlich für das Erzeugen, Löschen und Bearbeiten eines Termins.
+| AppointmentManager | Der AppointmentManager ist verantwortlich für die Aufbewahrung und Verwaltung der Termine.
+|===
+
 === Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
 
 [options="header"]
