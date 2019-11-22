@@ -126,7 +126,7 @@ zuständig Ylvi Sarah Bachmann
 |P-U-010
 |
 |
-|Parzelle erstellen
+|Erstellen einer Parzelle
 |Nutzer hat die Rolle Admin
 |Parzellengröße, Wasserzähler, Stromzähler, Beschreibung
 |Parzelle wird erstellt, Attribute in passendem Format
@@ -134,7 +134,7 @@ zuständig Ylvi Sarah Bachmann
 |P-U-011
 |
 |
-|Parzelle erstellen
+|Erstellen einer Parzelle
 |Nutzer hat andere Rolle als Admin
 |Parzellengröße, Wasserzähler, Stromzähler, Beschreibung
 |Fehlermeldung
@@ -166,15 +166,15 @@ zuständig Ylvi Sarah Bachmann
 |P-I-012
 |**<<AT0011>>**
 |**<<UC0010>>**
-|Bewerbungen für eine Parzelle ansehen
+|Ansehen von Bewerbungen für eine Parzelle
 |Nutzer hat Rolle Obmann
 |Model mit Parzelle
-|Model mit Bewerbungen
+|Model mit Bewerbungen für die gegebene Parzelle
 
 |P-I-013
 |
 |**<<UC0010>>**
-|Bewerbungen für eine Parzelle ansehen
+|Ansehen von Bewerbungen für eine Parzelle
 |Nutzer hat andere Rolle als Obmann
 |Model mit Parzelle
 |Fehlermeldung
@@ -206,18 +206,34 @@ zuständig Ylvi Sarah Bachmann
 |P-U-040
 |
 |
-|Nebenpächter hinzufügen
+|Hinzufügen eines Nebenpächters
 |Hauptpächter für Parzelle existiert, Nebenpächter hat einen User Account
-|Namen und Email des Nebenpächters
+|Name und Email des Nebenpächters
 |Jahr, Parzelle und Pächter
 
 |P-U-041
 |
 |
-|Nebenpächter hinzufügen
+|Hinzufügen eines Nebenpächters
 |Hauptpächter für Parzelle existiert, Nebenpächter hat keinen User Account
 |Namen und Email des Nebenpächters
 |Fehlermeldung
+
+|P-I-040
+|
+|
+|Hinzufügen eines Nebenpächters
+|Hauptpächter für Parzelle existiert
+|Model mit Parzelle
+|Form mit Nebenpächtern der Parzelle
+
+|P-I-041
+|
+|
+|Hinzufügen eines Nebenpächters
+|Hauptpächter für Parzelle existiert
+|Form mit Email und Name des Nebenpächters, Parzelle
+|Model mit Jahr, Parzelle und Pächter
 
 |P-U-020
 |**<<AT0021>>**
@@ -273,7 +289,7 @@ zuständig Ylvi Sarah Bachmann
 |Hinzufügen des Wasserzählerstands
 |Nutzer hat die Rolle Obmann, Parzelle hat den Status TAKEN
 |gewünschte Parzelle, Wasserzählerstand
-|Jahr, Parzelle, Wasserzählerstand
+|Wasserzählerstand ist im zugehörigen Attribut der Parzelle gespeichert
 
 |P-I-023
 |
@@ -283,26 +299,18 @@ zuständig Ylvi Sarah Bachmann
 |Model mit Parzelle
 |Form zum Eintragen des Wasserzählerstands
 
-|P-I-024
-|
-|
-|Hinzufügen des Wasserzählerstands
-|--
-|Form mit Wasserzählerstand, Parzelle
-|Model mit Jahr, Parzelle und Wasserzählerstand
-
 |P-U-030
 |**<<AT0030>>**
 |**<<UC0030>>**
-|Eintragen des Elektrozählerwerts
+|Eintragen des Elektrozählerstands
 |Parzelle hat den Status TAKEN
 |gewünschte Parzelle, Elektrozählerstand
-|Jahr, Parzelle, Elektrozählerstand
+|Elektrozählerstand ist im zugehörigen Attribut der Parzelle gespeichert
 
 |P-U-031
 |
 |**<<UC0030>>**
-|Eintragen des Elektrozählerwerts
+|Eintragen des Elektrozählerstands
 |Parzelle hat den Status FREE
 |gewünschte Parzelle, Elektrozählerstand
 |Fehlermeldung
@@ -314,14 +322,6 @@ zuständig Ylvi Sarah Bachmann
 |Nutzer hat die Rolle Obmann
 |Model mit Parzelle
 |Form zum Eintragen des Elektrozählerstands
-
-|P-I-031
-|**<<AT0030>>**
-|**<<UC0030>>**
-|Hinzufügen des Elektrozählerstands
-|--
-|Form mit Elektrozählerstand, Parzelle
-|Model mit Jahr, Parzelle und Elektrozählerstand
 
 |P-I-032
 |**<<AT0031>>**
