@@ -159,3 +159,13 @@ zuständig: Muhammad Talal Anwar
 | M-U-030 | einen News Eintrag löschen            | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender, und die Eintrag existiert |          | Eintrag wird gelöscht
 | M-I-040 | Nachricht ist ordnungsgemäß geschickt |                                                                  | Nachricht         | erfolgreich Assertion Test durch E-mail Test Server (https://asciidoctor.org[GreenMail])
 |===
+
+=== ApplicationDepartment
+zuständig: Sascha Seiffert
+[options="headers"]
+|===
+| ID      | Anwendungsfall                        | Vorbedingungen                                                   | Eingabe           | Ausgabe
+| A-U-001 | Bewerbung erstellen       | Parzelle frei   | Name und E-Mail  | -
+| A-U-011 | Bewerbung annehmen         | Bewerbung existiert, status "new" | Button          | Eintrag wird aktualisiert
+| A-U-012 | Bewerbung ablehnen            | Bewerbung existiert, statu "new" | Button         | Eintrag wird aktualisiert
+|===
