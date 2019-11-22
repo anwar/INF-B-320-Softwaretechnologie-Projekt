@@ -362,7 +362,7 @@ image::models/analysis/PlotManagement.png[Parzellenverwaltung]
 |===
 
 === Finanzverwaltung
-image::models/analysis/KleinGartenAnlagen.finance.png[]
+image::models/analysis/FinanceManagement.png[]
 
 [options="header"]
 |===
@@ -378,6 +378,15 @@ image::models/analysis/KleinGartenAnlagen.finance.png[]
 
 |FeeCatalog
 |Die FeeCatalog Klasse filtert Daten unter Namen oder BillId
+
+|Procedure
+|
+
+|ProcedureManagement
+|
+
+|ProcedureRepository
+|
 
 |Bill
 |Die Bill Klasse erstellt eine jährliche Rechnung
