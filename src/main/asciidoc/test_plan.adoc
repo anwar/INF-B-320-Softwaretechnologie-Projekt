@@ -166,6 +166,7 @@ zuständig: Sascha Seiffert
 |===
 | ID      | Anwendungsfall                        | Vorbedingungen                                                   | Eingabe           | Ausgabe
 | A-U-001 | Bewerbung erstellen       | Parzelle frei   | Name und E-Mail  | -
-| A-U-011 | Bewerbung annehmen         | Bewerbung existiert, status "new" | Button          | Eintrag wird aktualisiert
-| A-U-012 | Bewerbung ablehnen            | Bewerbung existiert, statu "new" | Button         | Eintrag wird aktualisiert
+| A-U-011 | Bewerbung annehmen         | Bewerbung existiert, Status "new" | Button          | Eintrag wird aktualisiert
+| A-U-012 | Bewerbung ablehnen            | Bewerbung existiert, Status "new" | Button         | Eintrag wird aktualisiert
+| A-U-020 | Bewerbung abschließen  | Bewerbung für Parzelle mit Status "accepted"  | -  | neuer Tenant, alle Bewerbungen auf "hidden"
 |===
