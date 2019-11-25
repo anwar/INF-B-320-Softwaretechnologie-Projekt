@@ -24,6 +24,6 @@ public class WelcomeController {
 	@RequestMapping("/")
 	public String index() {
 
-		return "home";
+		return "/home";
 	}
 }
