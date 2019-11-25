@@ -50,6 +50,10 @@ public abstract class Fee {
 		return count;
 	}
 	
+	public void setCount(double count) {
+		this.count = count;
+	}
+	
 	public double getDefaultPrice(int year) {
 		return 1;
 	}
