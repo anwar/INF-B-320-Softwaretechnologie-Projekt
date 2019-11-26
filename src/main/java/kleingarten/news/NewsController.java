@@ -22,6 +22,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
@@ -40,6 +41,12 @@ class NewsController {
 
 		Assert.notNull(news, "News must not be null!");
 		this.news = news;
+	}
+
+	@RequestMapping("/")
+	public String index() {
+
+		return "redirect:/home";
 	}
 
 	/**
