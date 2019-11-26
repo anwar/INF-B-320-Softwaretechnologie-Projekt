@@ -16,20 +16,20 @@ import kleingarten.tenant.Tenant;
 
 @Entity
 public class Procedure {
-	
+
 
 	private @Id @GeneratedValue long id;
-	
+
 	/**
 	 * Year is needed to get the prices for some items
 	 */
 	private int year;
-	
+
 	/**
-	 * The values shown by the clock. 
+	 * The values shown by the clock.
 	 * The gap between this and last year is the fee.
 	 */
-	private double 
+	private double
 			watercount,
 			powercount;
 	/**
@@ -37,18 +37,18 @@ public class Procedure {
 	 * May also change from year to year.
 	 */
 	private double size;
-	
+
 	/**
 	 * work hours are count in minutes to get better overview.
 	 * We need to round it down to half hours in the fee calculation.
 	 */
 	private int workMinutes;
-	
+
 	/**
 	 * The main tenant id. Can not be null.
 	 */
 	private @NonNull long mainTenant;
-	
+
 	/**
 	 * Set of sub Tenant IDs.
 	 * Empty Set if only main tenant.
@@ -110,6 +110,6 @@ public class Procedure {
 	public Set<Long> getSubTenants() {
 		return subTenants;
 	}
-	
+
 
 }
