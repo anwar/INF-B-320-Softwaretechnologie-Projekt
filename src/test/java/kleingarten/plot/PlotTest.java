@@ -13,11 +13,17 @@ import static org.salespointframework.core.Currencies.EURO;
 public class PlotTest {
 	private Plot plot;
 
+	/**
+	 * Setup of a mock of type plot to run the tests with
+	 */
 	@BeforeEach
 	public void setup() {
 		plot = new Plot("123", Money.of(300, EURO), 500, "test", 5, 6);
 	}
 
+	/**
+	 * Test if the initial setup has worked correctly
+	 */
 	@Test
 	public void testInitial() {
 		assertThat(plot.getStatus()).isEqualTo(PlotStatus.FREE);
@@ -30,6 +36,9 @@ public class PlotTest {
 		assertThat(plot.getWaterCountDifference()).isEqualTo(0);
 	}
 
+	/**
+	 * Test if changes of the plot are made correctly
+	 */
 	@Test
 	public void testChanges() {
 		plot.setStatus(PlotStatus.TAKEN);
@@ -49,6 +58,9 @@ public class PlotTest {
 		assertThat(plot.getWaterCountDifference()).isEqualTo(194.5);
 	}
 
+	/**
+	 * Test if illegal values for the plots attributes lead to exceptions of type {@link IllegalArgumentException}
+	 */
 	@Test
 	public void testIllegalArguments() {
 		PlotStatus status = null;
