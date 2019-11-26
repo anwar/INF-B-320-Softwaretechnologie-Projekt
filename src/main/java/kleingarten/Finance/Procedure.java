@@ -33,7 +33,7 @@ public class Procedure {
 			watercount,
 			powercount;
 	/**
-	 * Size of the kleingarten.plot in qm.
+	 * Size of the plot in qm.
 	 * May also change from year to year.
 	 */
 	private double size;
