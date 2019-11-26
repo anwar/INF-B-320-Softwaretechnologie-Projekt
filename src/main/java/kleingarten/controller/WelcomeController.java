@@ -21,9 +21,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class WelcomeController {
 
+	/**
+	 * Handles requests to the application root URI. Note, that you can use {@code redirect:} as prefix to trigger a
+	 * browser redirect instead of simply rendering a view.
+	 *
+	 * @return a redirect string
+	 */
 	@RequestMapping("/")
 	public String index() {
 
-		return "/home";
+		return "redirect:/home";
 	}
 }
