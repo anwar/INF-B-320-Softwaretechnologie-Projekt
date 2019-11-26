@@ -16,13 +16,15 @@ header {
 	justify-content: center;
 }
 footer {
-	position: fixed;
+	position: relative;
 	padding: 10px;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	color: white;
 	background: #043353;
+
+
 }
 #overlay img{
 	background: rgba(2,20,33,0.5);
@@ -40,7 +42,7 @@ footer {
 	justify-content: center;
 	align-content: center;
 	text-align: center;
-	font-size:25px;
+	font-size:20px;
 
 
 }
