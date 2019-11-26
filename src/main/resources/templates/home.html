@@ -31,6 +31,32 @@
 			</table>
 		</div>
 
+<!--
+TODO (Franziska): Adjust the theming (style) of the News entries and -form so that it matches web application's overall theme.
+-->
+<!--		<div class="news-section">-->
+<!--			<div id="entries" class="mx-auto">-->
+<!--				<div th:each="entry, it : ${entries}" th:with="index = ${it.count}">-->
+<!--					<div class="card" th:fragment="entry" th:id="entry+${entry.id}">-->
+<!--						<div class="card-body">-->
+<!--							<blockquote class="entrytext" th:text="${entry.text}"></blockquote>-->
+<!--						</div>-->
+<!--						<div class="card-footer">-->
+<!--							<footer class="date" th:text="${#temporals.format(entry.date, 'dd. MMMM yyyy - HH:mm')}">Datum</footer>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+
+<!--			<form class="ui form" role="form" id="form" th:action="@{/home}" th:object="${form}" method="post">-->
+<!--				<div class="field">-->
+<!--					<textarea th:field="*{text}" th:errorclass="is-invalid" required="required"></textarea>-->
+<!--					<div class="ui error message" th:if="${#fields.hasErrors('text')}" th:text="#{news.form.text.required}">Bitte geben Sie eine Nachricht an.</div>-->
+<!--				</div>-->
+<!--				<input type="submit" class="ui submit button" th:value="#{news.form.submit}" value="Abschicken" />-->
+<!--			</form>-->
+<!--		</div>-->
+
 	</div>
 
 
