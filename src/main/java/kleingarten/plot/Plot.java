@@ -2,7 +2,9 @@ package kleingarten.plot;
 
 import org.salespointframework.catalog.Product;
 import javax.money.MonetaryAmount;
+import javax.persistence.Entity;
 
+@Entity
 public class Plot extends Product {
 
 	private PlotStatus status;
