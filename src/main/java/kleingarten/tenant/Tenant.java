@@ -1,5 +1,6 @@
 package kleingarten.tenant;
 
+import org.h2.engine.User;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.springframework.data.util.Streamable;
@@ -27,10 +28,9 @@ public class Tenant {
 	public String phonenumber;
 	public String birthdate;
 //	public Streamable<Role> roles;
-	public String email;       
-	
+
 	//Siehe Dokumentation ElementCollection, wurde auch analog im Salespoint-Produkt verwendet.
-	@ElementCollection  
+	@ElementCollection
     protected Set<Role> roles = new HashSet();
 
 	public String getAddress(){
@@ -66,52 +66,56 @@ public class Tenant {
 	}
 
 	public String getEmail(){
-		return email;
+		return this.userAccount.getEmail();
 	}
 
-	public void setForename(){
+	public void setForename(String forename){
 		this.forename = forename;
 	}
 
-	public void setSurname(){
+	public void setSurname(String surname){
 		this.surname = surname;
 	}
 
-	public void setAddress(){
+	public void setAddress(String address){
 		this.address = address;
 	}
 
-	public void setEmail(){
-		this.email = email;
+	public void setEmail(String email){
+		this.userAccount.setEmail(email);
 	}
 
-	public void setPhonenumber(){
+	public void setPhonenumber(String phonenumber){
 		this.phonenumber = phonenumber;
 	}
 
-	public void setBirthdate(){
+	public void setBirthdate(String birthdate){
 		this.birthdate = birthdate;
 	}
 
-	public void setRole(){
-		this.roles = roles;
+	public void addRole(Role role){
+		this.roles.add(role);
 	}
 
-	public void setUserAccount(){
+	public void removeRole(Role role){
+		this.roles.remove(role);
+	}
+
+	public void setUserAccount(UserAccount userAccount){
 		this.userAccount = userAccount;
 	}
 
 	private Tenant(){}
 
-	public Tenant(String forename, String surname, String address, String email, String phonenumber, String birthdate, UserAccount userAccount, Streamable<Role> roles){
+	public Tenant(String forename, String surname, String address, String email, String phonenumber, String birthdate, UserAccount userAccount, Role role){
 		this.forename = forename;
 		this.surname = surname;
 		this.address = address;
-		this.email = email;
 		this.phonenumber = phonenumber;
 		this.userAccount = userAccount;
 		this.birthdate = birthdate;
-		this.roles.addAll(roles.toSet());
+		this.roles.add(role);
+		this.userAccount.setEmail(email);
 
 	}
 
