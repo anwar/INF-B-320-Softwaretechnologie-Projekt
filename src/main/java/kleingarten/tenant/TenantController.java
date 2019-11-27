@@ -23,7 +23,7 @@ class TenantController {
 	@GetMapping("/tenants")
 	@PreAuthorize("hasRole('ROLE_VORSTAND')")
 	String tenants(Model model){
-		model.addAttribute("tenant", tenantManager.getAll());
+		model.addAttribute("tenantList", tenantManager.getAll());
 		return "tenants";
 	}
 

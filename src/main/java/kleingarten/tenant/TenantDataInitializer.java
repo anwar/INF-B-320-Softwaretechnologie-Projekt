@@ -20,7 +20,7 @@ public class TenantDataInitializer implements DataInitializer {
 	private final TenantRepository tenantRepository;
 
 	TenantDataInitializer(UserAccountManager userAccountManager, TenantRepository tenantRepository){
-		LOG.info("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(tenantRepository, "TenantRepository must not be null");
 
@@ -30,7 +30,7 @@ public class TenantDataInitializer implements DataInitializer {
 
 	@Override
 	public void initialize() {
-		LOG.info("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
 		if(userAccountManager.findByUsername("peter.klaus").isPresent()){
 			return;
 		}
@@ -68,6 +68,6 @@ public class TenantDataInitializer implements DataInitializer {
 		cashier.addRole(financeRole);
 		replacement.addRole(stellvertreterRole);
 
-		tenantRepository.saveAll(List.of(boss, obmann));
+		tenantRepository.saveAll(List.of(boss, obmann, cashier, replacement));
 	}
 }
