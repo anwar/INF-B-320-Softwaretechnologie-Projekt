@@ -1,15 +1,11 @@
 package kleingarten.plot;
 
-import org.javamoney.moneta.Money;
 import org.salespointframework.core.DataInitializer;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
-
 import java.util.List;
-
-import static org.salespointframework.core.Currencies.EURO;
 
 @Component
 public class PlotDataInitializer implements DataInitializer{
