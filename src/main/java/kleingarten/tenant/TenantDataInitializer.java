@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
+import java.util.List;
+
 @Component
 public class TenantDataInitializer implements DataInitializer {
 
@@ -47,6 +49,15 @@ public class TenantDataInitializer implements DataInitializer {
 
 		Tenant boss = new Tenant("Peter", "Klaus", "Am Berg 5, 12423 Irgendwo im Nirgendwo", "peter.klaus@email.com", "01242354356", "13.04.1999",
 			userAccountManager.create("peter.klaus", password, tenantRole), vorstandRole);
-		tenantRepository.save(boss);
+
+
+		Tenant obmann = new Tenant("Hubert", "Grumpel", "Hinter den 7 Bergen, 98766 Zwergenhausen",
+			"hubert.grumpel2@cloud.com", "012345678", "04.09.1978",
+			userAccountManager.create("hubertgrumpel", password, tenantRole), tenantRole);
+
+		obmann.addRole(obmannRole);
+		boss.addRole(vorstandRole);
+
+		tenantRepository.saveAll(List.of(boss, obmann));
 	}
 }
