@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.salespointframework.core.Currencies.EURO;
 
-public class PlotTest {
+public class PlotTests {
 	private Plot plot;
 
 	/**
@@ -18,7 +18,7 @@ public class PlotTest {
 	 */
 	@BeforeEach
 	public void SetUp() {
-		plot = new Plot("123", Money.of(300, EURO), 500, "test");
+		plot = new Plot("123", 500, "test");
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class PlotTest {
 	 */
 	@Test
 	public void InitalEstimatorTest() {
-		assertThat(plot.getEstimator()).isEqualTo(Money.of(300, EURO));
+		assertThat(plot.getEstimator()).isEqualTo(Money.of(0, EURO));
 	}
 
 	/**
