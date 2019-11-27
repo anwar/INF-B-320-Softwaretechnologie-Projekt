@@ -7,7 +7,6 @@ import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import javax.money.MonetaryAmount;
 import java.time.Year;
 
 @Component
@@ -42,16 +41,6 @@ public class PlotService {
 	 */
 	public boolean existsByName(String name) {
 		return !this.plotCatalog.findByName(name).isEmpty();
-	}
-
-	/**
-	 * Updates the information about a {@link Plot}
-	 * @param associatedPlot {@link Plot} that should to be changed
-	 * @param description new description of {@link Plot} as String
-	 * @param estimator new estimator of {@link Plot} of type {@link MonetaryAmount}
-	 */
-	public void updatePlotInfo(Plot associatedPlot, String description, MonetaryAmount estimator) throws ExecutionControl.NotImplementedException {
-		throw new ExecutionControl.NotImplementedException("Not implemented jet!");
 	}
 
 	/**

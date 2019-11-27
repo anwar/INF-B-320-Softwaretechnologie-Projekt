@@ -35,4 +35,3 @@ public class PlotDataInitializer implements DataInitializer{
 	}
 }
 
-}
