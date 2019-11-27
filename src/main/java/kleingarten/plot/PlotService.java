@@ -15,16 +15,14 @@ public class PlotService {
 	/**
 	 * Greates a new object of type {@link Plot} and adds it to the {@link PlotCatalog}
 	 * @param size size of the {@link Plot} as int
-	 * @param electricityCount value of the electric meter of the {@link Plot} as double
-	 * @param waterCount value of the water meter of the {@link Plot} as double
 	 * @param description description of the {@link Plot} as String
 	 */
-	void addNewPlot(int size, double electricityCount, double waterCount, String description) throws ExecutionControl.NotImplementedException {
+	void addNewPlot(int size, String description) throws ExecutionControl.NotImplementedException {
 		throw new ExecutionControl.NotImplementedException("Not implemented jet!");
 	}
 
 	/**
-	 * Updates the information about a {@link Plot} and saves them
+	 * Updates the information about a {@link Plot}
 	 * @param associatedPlot {@link Plot} that should to be changed
 	 * @param description new description of {@link Plot} as String
 	 * @param estimator new estimator of {@link Plot} of type {@link MonetaryAmount}
@@ -34,14 +32,21 @@ public class PlotService {
 	}
 
 	/**
-	 *
-	 * @return
+	 * Getter for all {@link Plot}s which are not rented
+	 * @return free {@link Plot}s as {@link Streamable} of type {@link Plot}
 	 */
 	Streamable<Plot> getFreePlots() throws ExecutionControl.NotImplementedException {
 		throw new ExecutionControl.NotImplementedException("Not implemented jet!");
 	}
 
-	Streamable<Plot> getAssociatedPlots(Year year, Tenant tenant) throws ExecutionControl.NotImplementedException {
+	/**
+	 * Getter for all rented {@link Plot}s of a specific user
+	 * @param year year for which the rented {@link Plot}s should be searched
+	 * @param tenant {@link Tenant} for which the {@link Plot}s should be searched
+	 * @return rented {@link Plot}s as {@link Streamable} of type {@link Plot}
+	 * @throws ExecutionControl.NotImplementedException
+	 */
+	Streamable<Plot> getAssociatedPlots(Year year,  Tenant tenant) throws ExecutionControl.NotImplementedException {
 		throw new ExecutionControl.NotImplementedException("Not implemented jet!");
 	}
 
