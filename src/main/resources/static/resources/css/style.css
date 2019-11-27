@@ -75,7 +75,6 @@ h1 {
 	color: #043353;
 	font-size: 60pt;
 }
-
 p {
 	color: black;
 	font-size: 18pt;
@@ -279,4 +278,9 @@ input.text_bgImage {
 }
 
 
+.there{
+	color: white;
+	background-color: #E44652;
+
+}
 

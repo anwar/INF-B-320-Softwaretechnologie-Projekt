@@ -20,14 +20,15 @@
 
         <img src="./resources/css/pics/kleingarten.jpg" alt="kleingarten" width="100%" height="10%"/>
     </div>
+    <div id="navi">
     <ul>
 
 
         <li><a href="home.html" th:href="@{/}" >Home</a></li>
         <li><a href="anlage.html" th:href="@{/anlage}">Anlage</a></li>
-        <li><a href="tenantOverview.html" th:href="@{/tenantOverview}" >Meine Parzelle</a></li>
-        <li><a href="bills.html" th:href="@{/bill}" >Rechnungen</a></li>
-        <li><a href="complains.html" th:href="@{/complains}" >Beschwerden</a></li>
+        <li><a href="tenantOverview.html" th:href="@{/tenantOverview}" sec:authorize="isAuthenticated()" >Meine Parzelle</a></li>
+        <li><a href="bills.html" th:href="@{/bill}" sec:authorize="isAuthenticated()">Rechnungen</a></li>
+        <li><a href="complains.html" th:href="@{/complains}" sec:authorize="hasAnyRole('ROLE_TENANT')">Beschwerden</a></li>
         <li><a href="tenants.html" th:href="@{/tenants}"sec:authorize="hasAnyRole('ROLE_VORSTAND')"> Mitglieder</a></li>
 
 
@@ -43,7 +44,7 @@
 
 
 
-    </ul>
+    </ul></div>
 </nav>
 
 </div>
