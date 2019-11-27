@@ -25,23 +25,24 @@
     <center><div><table>
         <thead>
         <tr>
-            <th >ID</th>
+           <!-- <th >ID</th>-->
             <th>Vorname</th>
             <th>Nachname</th>
             <th>Email</th>
+            <th>Rolle</th>
 
 
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
 
-        <tr  th:each="tenant : ${tenant}">
+        <tr  th:each="tenant : ${tenantList}">
 
-            <td th:text="${tenant.id}">1</td>
-            <td> <a th:href="'/tenantdetails?id=' +${tenant.getId()}"  th:text="${tenant.forename}">Paul</a> </td>
-            <td> <a th:href="'/tenantdetails?id=' +${tenant.getId()}"  th:text="${tenant.surname}">Paul</a> </td>
-            <td th:text="${tenant.email}">Parzelle 1</td>
-
+          <!--  <td th:text="${tenant.id}">1</td> -->
+            <td> <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.forename}">Paul</a> </td>
+            <td> <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.surname}">Paul</a> </td>
+            <td>  <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.email}">Paul</a> </td>
+            <td>  <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.getRoles()}">Paul</a> </td>
 
 
         </tr>
