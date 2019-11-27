@@ -1,8 +1,11 @@
 package kleingarten.plot;
 
+import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
 import javax.money.MonetaryAmount;
 import javax.persistence.Entity;
+
+import static org.salespointframework.core.Currencies.EURO;
 
 @Entity
 public class Plot extends Product {
@@ -23,12 +26,11 @@ public class Plot extends Product {
 	/**
 	 * Constructor of class {@link Plot}
 	 * @param name number to identify the {@link Plot} as String to be easy readable by the user
-	 * @param price estimator as {@link MonetaryAmount}, that represents the value of the {@link Plot}
 	 * @param size size of the {@link Plot} as int
 	 * @param description String that describes the look of a {@link Plot}
 	 */
-	public Plot(String name, MonetaryAmount price, int size, String description) {
-		super(name, price);
+	public Plot(String name, int size, String description) {
+		super(name, Money.of(0, EURO));
 		this.status = PlotStatus.FREE;
 		this.size = size;
 		this.description = description;
