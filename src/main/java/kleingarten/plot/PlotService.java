@@ -19,7 +19,7 @@ public class PlotService {
 	 * @param waterCount value of the water meter of the {@link Plot} as double
 	 * @param description description of the {@link Plot} as String
 	 */
-	void addNewPlot(int size, double electricityCount, double waterCount, String description) {
+	void addNewPlot(int size, double electricityCount, double waterCount, String description) throws ExecutionControl.NotImplementedException {
 		throw new ExecutionControl.NotImplementedException("Not implemented jet!");
 	}
 
@@ -29,7 +29,7 @@ public class PlotService {
 	 * @param description new description of {@link Plot} as String
 	 * @param estimator new estimator of {@link Plot} of type {@link MonetaryAmount}
 	 */
-	void updatePlotInfo(Plot associatedPlot, String description, MonetaryAmount estimator) {
+	void updatePlotInfo(Plot associatedPlot, String description, MonetaryAmount estimator) throws ExecutionControl.NotImplementedException {
 		throw new ExecutionControl.NotImplementedException("Not implemented jet!");
 	}
 
@@ -37,11 +37,11 @@ public class PlotService {
 	 *
 	 * @return
 	 */
-	Streamable<Plot> getFreePlots() {
+	Streamable<Plot> getFreePlots() throws ExecutionControl.NotImplementedException {
 		throw new ExecutionControl.NotImplementedException("Not implemented jet!");
 	}
 
-	Streamable<Plot> getAssociatedPlots(Year year, Tenant tenant) {
+	Streamable<Plot> getAssociatedPlots(Year year, Tenant tenant) throws ExecutionControl.NotImplementedException {
 		throw new ExecutionControl.NotImplementedException("Not implemented jet!");
 	}
 
