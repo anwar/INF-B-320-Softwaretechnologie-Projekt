@@ -17,6 +17,7 @@ __Teilnehmer:__
 - Uwe Schmidt (Tutor)
 - Albert Wellerdt
 - Franziska Kiel
+- Sascha Seiffert
 - Muhammad Talal Anwar
 - Sanghyun Lee
 - Ylvi Sarah Bachmann
@@ -95,7 +96,7 @@ Ab Freitag beginnt dann die Implementationsphase.
 
 |#25
 |Implement Message package for sending emails
-| BAsic functionality, integration Test
+| Basic functionality, integration Test
 |Talal
 |open
 

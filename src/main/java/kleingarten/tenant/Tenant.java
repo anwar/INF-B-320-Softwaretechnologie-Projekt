@@ -64,6 +64,10 @@ public class Tenant {
 		return userAccount.getRoles();
 	}
 
+	public Role getRole(){
+		return userAccount.getRoles().toList().get(0);
+	}
+
 	public String getEmail(){
 		return this.userAccount.getEmail();
 	}

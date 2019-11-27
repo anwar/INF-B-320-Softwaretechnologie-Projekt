@@ -38,11 +38,12 @@
 
         <tr  th:each="tenant : ${tenantList}">
 
+
           <!--  <td th:text="${tenant.id}">1</td> -->
             <td> <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.forename}">Paul</a> </td>
             <td> <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.surname}">Paul</a> </td>
             <td>  <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.email}">Paul</a> </td>
-            <td>  <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.getRoles()}">Paul</a> </td>
+            <td>  <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.getRole()}">Paul</a> </td>
 
 
         </tr>

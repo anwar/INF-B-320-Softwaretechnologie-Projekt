@@ -1,0 +1,160 @@
+= Protokoll Gruppe 43
+
+Treffen am 27.11.2019
+
+Ort:      APB +
+Beginn:   13:00 Uhr +
+Ende:     15:00 Uhr
+
+__Schriftführer:__ Isabell Zorr
+
+*Nächstes Treffen:* +
+04.12.2019, 13:00 Uhr, APB
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Albert Wellerdt
+- Franziska Kiel
+- Sascha Seiffert
+- Sanghyun Lee
+- Ylvi Sarah Bachmann
+- Isabell Zorr
+
+== Bemerkungen
+Bei dem heutigen internen Treffen programmierten wir zusammen an der Anwendung. Ylvi, Sascha und Sanghyun klärten
+die genaue Zusammenarbeit zwischen der Procedure-Klasse aus dem FinanceDepartment mit den Plots.
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#24
+|Fix HTML/CSS for homepage news section
+| ...
+| ...
+| open
+
+|#25
+|Implement Message package for sending emails
+| BAsic functionality, integration Test
+|Talal
+|open
+
+|#27
+|Add diagram for appointmentManagement
+|...
+|Albert
+|open
+
+|#28
+|Update diagram for financeManagement
+| rework diagram with new understanding from extern meeting
+| Sanghyun
+|open
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#34
+|TenantDepartment
+| Issue to manage the TODOS for the tenantDepartment
+|Isabell
+|open
+
+|#35
+| Add classes PlotController and PlotService
+|Issue to manage TODOS for the PlotDepartment
+| Ylvi
+| open
+|===
+
+
+== Aktueller Stand
+Die Software befindet sich nun offiziell in der Implementierungsphase und soll bis zum 18.12. in ihrer
+Funktionalität fertiggestellt sein.
+Der Testplan und die Entwicklerdokumentation werden während der Implementation
+mit neuen Erkenntnissen geupdatet.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#24
+|Fix HTML/CSS for homepage news section
+| ...
+| ...
+| open
+
+|#25
+|Implement Message package for sending emails
+| BAsic functionality, integration Test
+|Talal
+|open
+
+|#27
+|Add diagram for appointmentManagement
+|...
+|Albert
+|open
+
+|#28
+|Update diagram for financeManagement
+| rework diagram with new understanding from extern meeting
+| Sanghyun
+|open
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#34
+|TenantDepartment
+| Issue to manage the TODOS for the tenantDepartment
+|Isabell
+|open
+
+|#35
+| Add classes PlotController and PlotService
+|Issue to manage TODOS for the PlotDepartment
+| Ylvi
+| open
+|===
