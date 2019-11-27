@@ -47,7 +47,8 @@ public class TenantDataInitializer implements DataInitializer {
 		var financeRole = Role.of("ROLE_KASSIERER");
 		var tenantRole = Role.of("ROLE_TENANT");
 
-		Tenant boss = new Tenant("Peter", "Klaus", "Am Berg 5, 12423 Irgendwo im Nirgendwo", "peter.klaus@email.com", "01242354356", "13.04.1999",
+		Tenant boss = new Tenant("Peter", "Klaus", "Am Berg 5, 12423 Irgendwo im Nirgendwo", "peter.klaus@email.com",
+			"01242354356", "13.04.1999",
 			userAccountManager.create("peter.klaus", password, tenantRole));
 
 
@@ -55,8 +56,17 @@ public class TenantDataInitializer implements DataInitializer {
 			"hubert.grumpel2@cloud.com", "012345678", "04.09.1978",
 			userAccountManager.create("hubertgrumpel", password, tenantRole));
 
+		Tenant cashier = new Tenant("Bill", "Richart", "Am Bahnhof 25, 07875 Dorfdorf", "billy,billbill@geld.com",
+			"0123098874326", "13.05.1968", userAccountManager.create("bill", password, tenantRole));
+
+		Tenant replacement = new Tenant("Sophie", "Kirmse", "Am Teichplatz 5, 67807 Meldetsichnie",
+			"s.krimse@gemaile.com", "034567892132", "08.12.1988",
+			userAccountManager.create("sophie", password, tenantRole));
+
 		obmann.addRole(obmannRole);
 		boss.addRole(vorstandRole);
+		cashier.addRole(financeRole);
+		replacement.addRole(stellvertreterRole);
 
 		tenantRepository.saveAll(List.of(boss, obmann));
 	}
