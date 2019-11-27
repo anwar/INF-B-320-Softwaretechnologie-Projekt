@@ -21,7 +21,7 @@ public abstract class Fee {
 	String title;
 
 	/**
-	 * Text shown on Bill.
+	 * Text shown on Bill. (More Details)
 	 */
 	String text;
 

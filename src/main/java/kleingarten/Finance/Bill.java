@@ -10,9 +10,12 @@ public abstract class Bill {
 		return water.getTitle() + water.getText();
 	}
 
+	/*
+	*billID shows plot Nr. and created year
+	 */
 	String billID;
 	double totalFee;
-	String description;
+	String description; // not necessary
 
 	public Bill(String billID, double totalFee, String description){
 		this.billID = billID;

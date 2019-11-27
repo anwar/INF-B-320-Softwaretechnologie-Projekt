@@ -6,7 +6,7 @@ public abstract class DefaultVaulues {
 	public static final double POWER_DEFAULT = 0.2d;
 	public static final double PLOT_DEFAULT = 0.18;
 	/*
-	Base Fee
+	Base Fee with fixed values
 	 */
 	public static final double MEMBERSHIPFEE_DEFAULT = 17.25;
 	public static final double LIABILITYFEE_DEFAULT = 0.35;
