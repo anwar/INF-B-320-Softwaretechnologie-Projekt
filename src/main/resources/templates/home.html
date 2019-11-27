@@ -62,7 +62,10 @@
 
 
 	</div>
-	<div th:include="Cookies.html"></div>
+	<span sec:authorize="!isAuthenticated()">
+		<div th:include="Cookies.html"></div>
+	</span>
+
 	<div th:include="navigation :: footer"></div>
 	</body>
 </html>
