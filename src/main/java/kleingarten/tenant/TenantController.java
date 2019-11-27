@@ -33,4 +33,8 @@ class TenantController {
 		model.addAttribute("tenant", tenantManager.get(Long.parseLong(id)));
 		return "tenantDetails";
 	}
+	@GetMapping("/myPlot")
+	String tenantOverview(){
+		return "myPlot";
+	}
 }
