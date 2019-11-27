@@ -14,109 +14,144 @@ public class PlotTest {
 	private Plot plot;
 
 	/**
-	 * Setup of a mock of type plot to run the tests with
+	 * Setup of a mock of type {@link Plot} to run the tests with
 	 */
 	@BeforeEach
-	public void setup() {
-		plot = new Plot("123", Money.of(300, EURO), 500, "test", 5, 6);
+	public void SetUp() {
+		plot = new Plot("123", Money.of(300, EURO), 500, "test");
 	}
 
 	/**
 	 * Test if the initial setup has worked correctly
 	 */
 	@Test
-	public void testInitial() {
+	public void InitialStatusTest() {
 		assertThat(plot.getStatus()).isEqualTo(PlotStatus.FREE);
+	}
+
+	/**
+	 * Test if the initial setup has worked correctly
+	 */
+	@Test
+	public void InitialSizeTest() {
 		assertThat(plot.getSize()).isEqualTo(500);
+	}
+
+	/**
+	 * Test if the initial setup has worked correctly
+	 */
+	@Test
+	public void InitialDescriptionTest() {
 		assertThat(plot.getDescription()).isEqualTo("test");
+	}
+
+	/**
+	 * Test if the initial setup has worked correctly
+	 */
+	@Test
+	public void InitalEstimatorTest() {
 		assertThat(plot.getEstimator()).isEqualTo(Money.of(300, EURO));
-		assertThat(plot.getElectricityCount()).isEqualTo(5);
-		assertThat(plot.getElectricityCountDifference()).isEqualTo(0);
-		assertThat(plot.getWaterCount()).isEqualTo(6);
-		assertThat(plot.getWaterCountDifference()).isEqualTo(0);
 	}
 
 	/**
-	 * Test if changes of the plot are made correctly
+	 * Test if changes of the {@link Plot} are made correctly
 	 */
 	@Test
-	public void testChanges() {
+	public void ChangeStatusTest() {
 		plot.setStatus(PlotStatus.TAKEN);
-		plot.setSize(300);
-		plot.setDescription("This plot is rented");
-		plot.setEstimator(Money.of(400, EURO));
-		plot.setElectricityCountDifference(120.5);
-		plot.setWaterCountDifference(200.5);
-
 		assertThat(plot.getStatus()).isEqualTo(PlotStatus.TAKEN);
-		assertThat(plot.getSize()).isEqualTo(300);
-		assertThat(plot.getDescription()).isEqualTo("This plot is rented");
-		assertThat(plot.getEstimator()).isEqualTo(Money.of(400, EURO));
-		assertThat(plot.getElectricityCount()).isEqualTo(120.5);
-		assertThat(plot.getElectricityCountDifference()).isEqualTo(115.5);
-		assertThat(plot.getWaterCount()).isEqualTo(200.5);
-		assertThat(plot.getWaterCountDifference()).isEqualTo(194.5);
 	}
 
 	/**
-	 * Test if illegal values for the plots attributes lead to exceptions of type {@link IllegalArgumentException}
+	 * Test if changes of the {@link Plot} are made correctly
 	 */
 	@Test
-	public void testIllegalArguments() {
-		PlotStatus status = null;
-		int size_negative = -5;
-		int size = 0;
-		String description = null;
-		MonetaryAmount estimator_negative = Money.of(-5, EURO);
-		MonetaryAmount estimator = null;
-		double electricityCount_negative = -2.5;
-		double electricityCount = 0;
-		double electricityCount_sinks = plot.getElectricityCount() - 2;
-		double waterCount_negative = -2.5;
-		double waterCount = 0;
-		double waterCount_sinks = plot.getWaterCount() - 2;
+	public void ChangeSizeTest() {
+		plot.setSize(300);
+		assertThat(plot.getSize()).isEqualTo(300);
+	}
 
+	/**
+	 * Test if changes of the {@link Plot} are made correctly
+	 */
+	@Test
+	public void ChangeDescriptionTest() {
+		plot.setDescription("This plot is rented");
+		assertThat(plot.getDescription()).isEqualTo("This plot is rented");
+	}
+
+	/**
+	 * Test if changes of the {@link Plot} are made correctly
+	 */
+	@Test
+	public void ChangeEstimatorTest() {
+		plot.setEstimator(Money.of(400, EURO));
+		assertThat(plot.getEstimator()).isEqualTo(Money.of(400, EURO));
+	}
+
+	/**
+	 * Test if illegal value for the {@link Plot}s attribute lead to exception of type {@link IllegalArgumentException}
+	 */
+	@Test
+	public void IllegalStatusTest() {
+		PlotStatus status = null;
 		assertThrows(IllegalArgumentException.class, () -> {
 			plot.setStatus(status);
 		});
+	}
+
+	/**
+	 * Test if illegal value for the {@link Plot}s attribute lead to exception of type {@link IllegalArgumentException}
+	 */
+	@Test
+	public void NegativeSizeTest() {
+		int size_negative = -5;
 		assertThrows(IllegalArgumentException.class, () -> {
 			plot.setSize(size_negative);
 		});
+	}
+
+	/**
+	 * Test if illegal value for the {@link Plot}s attribute lead to exception of type {@link IllegalArgumentException}
+	 */
+	@Test
+	public void IllegalSizeTest() {
+		int size = 0;
 		assertThrows(IllegalArgumentException.class, () -> {
 			plot.setSize(size);
 		});
+	}
+
+	/**
+	 * Test if illegal value for the {@link Plot}s attribute lead to exception of type {@link IllegalArgumentException}
+	 */
+	@Test
+	public void IllegalDescriptionTest() {
+		String description = null;
 		assertThrows(IllegalArgumentException.class, () -> {
 			plot.setDescription(description);
 		});
+	}
+
+	/**
+	 * Test if illegal value for the {@link Plot}s attribute lead to exception of type {@link IllegalArgumentException}
+	 */
+	@Test
+	public void NegativeEstimatorTest() {
+		MonetaryAmount estimator_negative = Money.of(-5, EURO);
 		assertThrows(IllegalArgumentException.class, () -> {
 			plot.setEstimator(estimator_negative);
 		});
+	}
+
+	/**
+	 * Test if illegal value for the {@link Plot}s attribute lead to exception of type {@link IllegalArgumentException}
+	 */
+	@Test
+	public void IllegalEstimatorTest() {
+		MonetaryAmount estimator = null;
 		assertThrows(IllegalArgumentException.class, () -> {
 			plot.setEstimator(estimator);
-		});
-		assertThrows(IllegalArgumentException.class, () -> {
-			plot.setElectricityCountDifference(electricityCount_negative);
-		});
-		assertThrows(IllegalArgumentException.class, () -> {
-			plot.setElectricityCountDifference(electricityCount_sinks);
-		});
-		assertThrows(IllegalArgumentException.class, () -> {
-			plot.setElectricityCountDifference(electricityCount);
-		});
-		assertThrows(IllegalArgumentException.class, () -> {
-			plot.setElectricityCount(electricityCount_negative);
-		});
-		assertThrows(IllegalArgumentException.class, () -> {
-			plot.setWaterCountDifference(waterCount_negative);
-		});
-		assertThrows(IllegalArgumentException.class, () -> {
-			plot.setWaterCountDifference(waterCount_sinks);
-		});
-		assertThrows(IllegalArgumentException.class, () -> {
-			plot.setWaterCountDifference(waterCount);
-		});
-		assertThrows(IllegalArgumentException.class, () -> {
-			plot.setWaterCount(waterCount_negative);
 		});
 	}
 }
