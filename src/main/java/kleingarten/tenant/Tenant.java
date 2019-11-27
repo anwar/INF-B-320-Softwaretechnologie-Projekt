@@ -27,7 +27,6 @@ public class Tenant {
 	public String address;
 	public String phonenumber;
 	public String birthdate;
-//	public Streamable<Role> roles;
 
 	//Siehe Dokumentation ElementCollection, wurde auch analog im Salespoint-Produkt verwendet.
 	@ElementCollection
@@ -94,11 +93,10 @@ public class Tenant {
 	}
 
 	public void addRole(Role role){
-		this.roles.add(role);
+		this.userAccount.add(role);
 	}
-
 	public void removeRole(Role role){
-		this.roles.remove(role);
+		this.userAccount.remove(role);
 	}
 
 	public void setUserAccount(UserAccount userAccount){
@@ -107,14 +105,13 @@ public class Tenant {
 
 	private Tenant(){}
 
-	public Tenant(String forename, String surname, String address, String email, String phonenumber, String birthdate, UserAccount userAccount, Role role){
+	public Tenant(String forename, String surname, String address, String email, String phonenumber, String birthdate, UserAccount userAccount/*, Role role*/){
 		this.forename = forename;
 		this.surname = surname;
 		this.address = address;
 		this.phonenumber = phonenumber;
 		this.userAccount = userAccount;
 		this.birthdate = birthdate;
-		this.roles.add(role);
 		this.userAccount.setEmail(email);
 
 	}

@@ -48,12 +48,12 @@ public class TenantDataInitializer implements DataInitializer {
 		var tenantRole = Role.of("ROLE_TENANT");
 
 		Tenant boss = new Tenant("Peter", "Klaus", "Am Berg 5, 12423 Irgendwo im Nirgendwo", "peter.klaus@email.com", "01242354356", "13.04.1999",
-			userAccountManager.create("peter.klaus", password, tenantRole), vorstandRole);
+			userAccountManager.create("peter.klaus", password, tenantRole));
 
 
 		Tenant obmann = new Tenant("Hubert", "Grumpel", "Hinter den 7 Bergen, 98766 Zwergenhausen",
 			"hubert.grumpel2@cloud.com", "012345678", "04.09.1978",
-			userAccountManager.create("hubertgrumpel", password, tenantRole), tenantRole);
+			userAccountManager.create("hubertgrumpel", password, tenantRole));
 
 		obmann.addRole(obmannRole);
 		boss.addRole(vorstandRole);
