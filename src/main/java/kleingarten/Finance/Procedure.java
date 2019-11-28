@@ -30,7 +30,7 @@ public class Procedure {
 	 */
 	private boolean isOpen;
 	
-	private ProductIdentifier plotId;
+	//private ProductIdentifier plotId;
 
 	/**
 	 * The values shown by the clock.
@@ -74,7 +74,7 @@ public class Procedure {
 	public Procedure(int year, ProductIdentifier plotId, double size, long mainTenant) {
 		super();
 		this.year = year;
-		this.plotId = plotId;
+		//this.plotId = plotId;
 		this.size = size;
 		this.mainTenant = mainTenant;
 		isOpen = true;
@@ -140,7 +140,7 @@ public class Procedure {
 	}
 	
 	public ProductIdentifier getPlotId() {
-		return plotId;
+		return null;//plotId;
 	}
 
 	/**
