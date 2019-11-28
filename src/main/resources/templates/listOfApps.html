@@ -11,35 +11,25 @@
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
     <link th:href="@{/resources/css/style.css}" rel="stylesheet"
           href="../static/resources/css/style.css" type="text/css"/>
-    <title>Termin erstellen</title>
+    <title>Liste der Termine</title>
 </head>
 <body>
-
     <div class="ui-container">
         <nav th:include="navigation :: navigation"/>
         <div class="header-title">
-            <h1>Termin erstellen</h1>
+            <h1>Liste aller Termine</h1>
         </div>
     </div>
-    <form method="post" role="form" id="form" th:action="@{/createAForm}" th:object="${form}">
-        <table>
-            <tr>
-                <td>
-                    <label for="date">Datum</label>
-                    <input id="date" th:field="*{date}" type="date" required="required" th:min="${dateNow}"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="time">Zeit</label>
-                    <input id="time" th:field="*{time}" type="time" th:min="${timeNow}" required="required"/>
-                </td>
-            </tr>
-        </table>
-
-        <button type="submit" class="ui button">Neuen Termin hinzufügen</button></div>
-    </form>
-
-
+    <table>
+        <tr>
+            <th>Datum</th>
+            <th>Zeit</th>
+        </tr>
+        <tr th:each="app : ${ListOfApps}">
+            <td th:text="${app.date}">Datum</td>
+            <td th:text="${app.time}">Zeit</td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>
