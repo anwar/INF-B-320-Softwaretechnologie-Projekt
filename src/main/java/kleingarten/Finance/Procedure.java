@@ -23,13 +23,13 @@ public class Procedure {
 	 * Year is needed to get the prices for some items
 	 */
 	private int year;
-	
+
 	/**
 	 * if the procedure is open, it can be edited.
 	 * When the bill gets calculated, the procedure closes and should not be opened or edited anymore.
 	 */
 	private boolean isOpen;
-	
+
 	private ProductIdentifier plotId;
 
 	/**
@@ -65,7 +65,7 @@ public class Procedure {
 
 	/**
 	 * Constructor with needed types. Good for testing.
-	 * 
+	 *
 	 * @param year
 	 * @param plotId
 	 * @param size
@@ -79,10 +79,10 @@ public class Procedure {
 		this.mainTenant = mainTenant;
 		isOpen = true;
 	}
-	
+
 	/**
 	 * Constructor with some parsing, best to use this one.
-	 * 
+	 *
 	 * @param year
 	 * @param plot
 	 * @param mainTenant
@@ -138,69 +138,69 @@ public class Procedure {
 	public Set<Long> getSubTenants() {
 		return subTenants;
 	}
-	
+
 	public ProductIdentifier getPlotId() {
 		return plotId;
 	}
 
 	/**
 	 * Add a new Sub Tenant to the Procedure.
-	 * 
+	 *
 	 * @param tenantID
 	 * @return true when added, false if not
 	 */
 	public boolean addSubTenant(long tenantID) {
-		
+
 		//should not set main Tenant as sub Tenant
 		if (tenantID==mainTenant) return false;
-		
+
 		//Set restricts duplicates
 		return subTenants.add(tenantID);
-		
+
 	}
-	
+
 	/**
 	 * Remove a sub Tenant out of Tenant List, will not affect main Tenant.
-	 * 
+	 *
 	 * @param tenantID of Tenant to be removed
 	 * @return true if removed
 	 */
 	public boolean removeSubTenant(long tenantID) {
-		
+
 		return subTenants.remove(tenantID);
 	}
-	
+
 	/**
 	 * Set a main Tenant for the Process, the old Tenant will be overwritten.
 	 * Also keep the subTenants as they are.
-	 * 
+	 *
 	 * @param tenantID
 	 * @return false if tenant is already main tenant
 	 */
 	public boolean setMainTenant(long tenantID) {
 		if(tenantID==mainTenant) return false;
-		
+
 		mainTenant = tenantID;
 		return true;
 	}
-	
+
 	/**
 	 * Set the new main Tenant for the Process.
 	 * Will also remove all sub Tenants.
-	 * 
+	 *
 	 * @param tenantID
 	 * @return false if its the same main Tenant as before
 	 */
 	public boolean setNewMainTenant(long tenantID) {
-		
+
 		if(tenantID==mainTenant) {
 			return false;
 		}
-		
+
 		mainTenant=tenantID;
 		subTenants.clear();
 		return true;
-		
+
 	}
 
 	/**
