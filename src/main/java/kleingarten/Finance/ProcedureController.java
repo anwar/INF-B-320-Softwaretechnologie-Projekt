@@ -9,12 +9,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 public class ProcedureController {
-	private ProcedureManager procedureManager;
+	//private ProcedureManager procedureManager;
 
 	@Autowired
 	public ProcedureController( ) {
 
 	}
+
+	@GetMapping("/bill")
+	String viewBill(){
+		return "bill";
+	}
+
+/*
 
 	@GetMapping("/bill")
 	public String viewBill(Model model) {
@@ -26,6 +33,9 @@ public class ProcedureController {
 	public Iterable<Procedure> allProcedure() {
 		return procedureManager.findAll();
 	}
+
+
+ */
 
 
 }

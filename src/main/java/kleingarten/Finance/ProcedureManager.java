@@ -10,20 +10,28 @@ public class ProcedureManager {
 
 	private final ProcedureRepository procedures;
 
+	/*
 	@Autowired
 	public ProcedureManager(ProcedureRepository procedures) {
 		Assert.notNull(procedures, "ProcedureRepository must not be null!");
 		this.procedures = procedures;
 	}
+	*/
 
-	public Iterable<Procedure> findAll(){
+	ProcedureManager(ProcedureRepository procedures){
+		Assert.notNull(procedures, "TenantRepository must not be null!");
+		this.procedures = procedures;
+	}
+
+	/*
+		public Iterable<Procedure> findAll(){
 		return procedures.findAll();
 	}
+	 */
 
 	Streamable<Procedure> getAll() {
 		return procedures.findAll();
 	}
-
 
 	Procedure get(long id) {
 		return procedures.findById(id);
