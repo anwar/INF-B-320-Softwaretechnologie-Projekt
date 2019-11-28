@@ -30,7 +30,7 @@ public class AppointmentManager {
 		date.format(DateTimeFormatter.ofPattern("dd-MMM-yy"));
 		LocalTime time = LocalTime.parse(form.getTime());
 
-		return times.save((new Appointment(time, date, form.getWorkHours())));
+		return times.save((new Appointment(time, date)));
 
 	}
 
