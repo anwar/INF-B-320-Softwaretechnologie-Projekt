@@ -18,15 +18,13 @@ public class ProcedureDataInitializer implements DataInitializer {
 	@Override
 	public void initialize() {
 
-		Procedure p1 = procedureManager.add(new Procedure( 2018, 186.52d, 1l ));
-		p1.setWatercount(500);
-
-
-
-
-		//Fee water = new WaterFee(p1.getWatercount());
-
-		LOG.info("Wasserstand: "+procedureManager.get(p1.getId()).getWatercount());
+//		Procedure p1 = procedureManager.add(new Procedure( 2018, 1l, 186.52d, 1l ));
+//		p1.setWatercount(500);
+//
+//
+//		//Fee water = new WaterFee(p1.getWatercount());
+//
+//		LOG.info("Wasserstand: "+procedureManager.get(p1.getId()).getWatercount());
 
 	}
 
