@@ -19,16 +19,14 @@ public class Appointment {
 	private ArrayList<Plot> plots;
 	private LocalTime time;
 	private LocalDate date;
-	private String workHours;
 
 	private Appointment() {
 
 	}
 
-	public Appointment(LocalTime time, LocalDate date, String workHours){
+	public Appointment(LocalTime time, LocalDate date){
 		this.time = time;
 		this.date = date;
-		this.workHours = workHours;
 		plots = new ArrayList<>();
 	}
 
@@ -46,14 +44,6 @@ public class Appointment {
 
 	public void setDate(LocalDate date) {
 		this.date = date;
-	}
-
-	public String getWorkHours() {
-		return workHours;
-	}
-
-	public void setWorkHours(String workHours) {
-		this.workHours = workHours;
 	}
 
 	public ArrayList<Plot> getPlots() {
