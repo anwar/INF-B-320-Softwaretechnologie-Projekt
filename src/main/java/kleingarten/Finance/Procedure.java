@@ -110,6 +110,49 @@ public class Procedure {
 	public Set<Long> getSubTenants() {
 		return subTenants;
 	}
+	
+	/**
+	 * Add a new Sub Tenant to the Procedure.
+	 * @param tenantID
+	 * @return true when added, false if not
+	 */
+	public boolean addSubTenant(Long tenantID) {
+		
+		//should not set main Tenant as sub Tenant
+		if (tenantID==mainTenant) return false;
+		
+		//Set restricts duplicates
+		return subTenants.add(tenantID);
+		
+	}
+	
+	/**
+	 * Remove a sub Tenant out of Tenant List, will not affect main Tenant.
+	 * @param tenantID of Tenant to be removed
+	 * @return true if removed
+	 */
+	public boolean removeSubTenant(Long tenantID) {
+		
+		return subTenants.remove(tenantID);
+	}
+	
+	/**
+	 * Set the new main Tenant for the Process.
+	 * Will also remove all sub Tenants.
+	 * @param tenantID
+	 * @return false if its the same main Tenant as before
+	 */
+	public boolean setNewMainTenant(Long tenantID) {
+		
+		if(tenantID.longValue()==mainTenant) {
+			return false;
+		}
+		
+		mainTenant=tenantID;
+		subTenants.clear();
+		return true;
+		
+	}
 
 
 }
