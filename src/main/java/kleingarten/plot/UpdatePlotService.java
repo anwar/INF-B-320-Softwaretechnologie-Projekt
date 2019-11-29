@@ -4,7 +4,6 @@ import kleingarten.Finance.ProcedureManager;
 import kleingarten.tenant.Tenant;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 import javax.money.MonetaryAmount;
 
@@ -14,9 +13,6 @@ public class UpdatePlotService {
 	private final ProcedureManager procedureManager;
 
 	UpdatePlotService(PlotCatalog plotCatalog, ProcedureManager procedureManager){
-
-		Assert.notNull(plotCatalog, "PlotCatalog must not be null!");
-		Assert.notNull(procedureManager, "ProcedureManager must not be null!");
 		this.plotCatalog = plotCatalog;
 		this.procedureManager = procedureManager;
 	}
