@@ -14,9 +14,6 @@ public class UpdatePlotService {
 	private final ProcedureManager procedureManager;
 
 	UpdatePlotService(PlotCatalog plotCatalog, ProcedureManager procedureManager){
-
-		Assert.notNull(plotCatalog, "PlotCatalog must not be null!");
-		Assert.notNull(procedureManager, "ProcedureManager must not be null!");
 		this.plotCatalog = plotCatalog;
 		this.procedureManager = procedureManager;
 	}
