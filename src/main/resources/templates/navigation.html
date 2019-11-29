@@ -25,7 +25,7 @@
 
 
         <li><a href="home.html" th:href="@{/}" >Home</a></li>
-        <li><a href="anlage.html" th:href="@{/anlage}">Anlage</a></li>
+        <li><a href="plotOverview.html" th:href="@{/anlage}">Anlage</a></li>
         <li><a href="plot.html" th:href="@{/myPlot}" sec:authorize="isAuthenticated()" >Meine Parzelle</a></li>
         <li><a href="bills.html" th:href="@{/bill}" sec:authorize="isAuthenticated()">Rechnungen</a></li>
         <li><a href="complains.html" th:href="@{/complains}" sec:authorize="hasAnyRole('Hauptpächter', 'Nebenpächter')">Beschwerden</a></li>
