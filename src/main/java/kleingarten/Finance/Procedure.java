@@ -90,6 +90,14 @@ public class Procedure {
 	public Procedure(int year, Plot plot, long mainTenant) {
 		this(year, plot.getId().getIdentifier(), (double)plot.getSize(), mainTenant);
 	}
+	
+	
+	public boolean isTenant(long tenantId) {
+		if(mainTenant==tenantId) return true;
+		if(subTenants.contains(tenantId)) return true;
+		return false;
+	}
+	
 
 	public double getWatercount() {
 		return watercount;

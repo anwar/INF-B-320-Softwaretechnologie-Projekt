@@ -20,16 +20,29 @@ public class ProcedureDataInitializer implements DataInitializer {
 	public void initialize() {
 
 		Procedure p1 = procedureManager.add(new Procedure( 2018, "testID", 186.52d, 1l ));
+		Procedure p2 = procedureManager.add(new Procedure( 2018, "testIDPlot2", 123.52d, 1l ));
 		p1.setWatercount(500);
+		p2.setWatercount(400);
 
 		Procedure procedure = procedureManager.getProcedure(2018, new SalespointIdentifier("testID"));
 		
-		LOG.info("Gefunden(2018): "+ (procedure==null ? "null" : procedure.getWatercount()) );
+		LOG.info("Gefunden(2018): "+ (procedure==null ? "nix gefunden" : procedure.getWatercount()) );
 		
 		
 		Procedure procedure2 = procedureManager.getProcedure(2017, new SalespointIdentifier("testID"));
 		
 		LOG.info("Gefunden(2017): "+ (procedure2==null ? "nix gefunden" : procedure2.getWatercount()) );
+		
+		Procedure proc = procedureManager.getProcedure(2018, new SalespointIdentifier("testID"));
+		
+		LOG.info(proc==null ? "nix gefunden" : proc.getWatercount()+"" );
+		
+		for(Procedure pro:procedureManager.getProcedures(2018, 1l)) {
+
+			
+			LOG.info(pro==null ? "nix gefunden" : pro.getWatercount()+"" );
+		}
+		
 //
 //		//Fee water = new WaterFee(p1.getWatercount());
 //

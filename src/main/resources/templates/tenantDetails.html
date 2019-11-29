@@ -14,6 +14,8 @@
 
     <link th:href="@{/resources/css/tenantdetailsTable.css}" rel="stylesheet"
           href="../static/resources/css/tenantdetailsTable.css" type="text/css">
+    <link th:href="@{/resources/css/modifyTenant.css}" rel="stylesheet"
+    href="../static/resources/css/modifyTenant.css" type="text/css">
 
 
 </head>
@@ -29,21 +31,33 @@
 
         <table>
             <tr  th:each="tenant : ${tenant}">
-                <th >ID</th>  <td th:text="${tenant.getId()}">1</td> </tr>
-            <tr>   <th>Vorname</th><td th:text="${tenant.getForename()}">1</td> </tr>
-            <tr>   <th>Nachname</th><td th:text="${tenant.getSurname()}">1</td> </tr>
-            <tr><th>Geburtstag</th> <td th:text="${tenant.getBirthdate()}">1</td></tr>
-            <tr><th>Adresse</th> <td th:text="${tenant.getAddress()}">1</td></tr>
-            <tr><th>Email</th> <td th:text="${tenant.getEmail()}">1</td></tr>
-            <tr><th>Telefon</th> <td th:text="${tenant.getPhonenumber()}">1</td></tr>
+
+               <th >ID</th>  <td th:text="${tenant.getId()}">1</td><td style="font-size:20px;"> <a href="#open-modal"> &#9997; </a> </td> </tr>
+            <div id="open-modal" class="modal-window">
+                <div>
+                    <a href="#modal-close" title="Close" class="modal-close">close &times;</a>
+                    <h1>Bearbeiten</h1>
+                    <div>     <label for="id">ID</label>
+
+                        <input class="text_bgImage" id="id" name="id" th:value="${tenant.getId()}"  type="number" required="required"/></div>
+                </div>
+            </div>
+            <tr>   <th>Vorname</th><td th:text="${tenant.getForename()}">1</td><td style="font-size:20px;"> <a  href="#open-modal"> &#9997; </a> </td></tr>
+
+            <tr>   <th>Nachname</th><td th:text="${tenant.getSurname()}">1</td><td style="font-size:20px;"> <a> &#9997; </a> </td></tr>
+            <tr><th>Geburtstag</th> <td th:text="${tenant.getBirthdate()}">1</td><td style="font-size:20px;"> <a> &#9997; </a> </td></tr>
+            <tr><th>Adresse</th> <td th:text="${tenant.getAddress()}">1</td><td style="font-size:20px;"> <a> &#9997; </a> </td></tr>
+            <tr><th>Email</th> <td th:text="${tenant.getEmail()}">1</td><td style="font-size:20px;"> <a> &#9997; </a> </td></tr>
+            <tr><th>Telefon</th> <td th:text="${tenant.getPhonenumber()}">1</td><td style="font-size:20px;"> <a> &#9997; </a> </td></tr>
+            <tr><th>Rolle(n)</th> <td th:text="${tenant.getRole()}">1 </tr>
 
         </table>
-    </div>
-</div>
-<div class="button-section">
 
-    <button class="button"  onclick="location.href='/modifyTenant'">Pächter bearbeiten</button>
-</div>
+
+
+    </div>
+
+
 
 
 </center>

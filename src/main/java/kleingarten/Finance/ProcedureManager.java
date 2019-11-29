@@ -1,5 +1,8 @@
 package kleingarten.Finance;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.salespointframework.core.SalespointIdentifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
@@ -55,6 +58,22 @@ public class ProcedureManager {
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * Get all Procedures for the Tenant, if he is main or sub Tenant in it.
+	 * 
+	 * @param year
+	 * @param tenantId
+	 * @return Empty Steamable or Procedures
+	 */
+	public Streamable<Procedure> getProcedures(int year, long tenantId) {
+		List<Procedure> procList = new LinkedList<Procedure>();
+		
+		for(Procedure procedure:procedures.findByYear(year)) {
+			if(procedure.isTenant(tenantId)) procList.add(procedure);
+		}
+		return Streamable.of(procList);
 	}
 
 

@@ -3,21 +3,23 @@ package kleingarten.plot;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.money.format.MonetaryFormats;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class PlotController {
 	private final PlotService plotService;
+	private final PlotCatalog plotCatalog;
 
-	PlotController(PlotService plotService){
+	PlotController(PlotService plotService, PlotCatalog plotCatalog){
 		this.plotService = plotService;
+		this.plotCatalog = plotCatalog;
 	}
 
 	@GetMapping("/plot/{plot}")
@@ -41,6 +43,22 @@ public class PlotController {
 
 		mav.setViewName("plot");
 		return mav;
+	}
+
+	@GetMapping("/anlage")
+	public ModelAndView plotOverview(@LoggedIn Optional<UserAccount> user) {
+		ModelAndView mav = new ModelAndView();
+
+		Set<Plot> plots = plotCatalog.findAll().toSet();
+		Map<Plot, String> colors = new HashMap<>();
+		for (Plot plot: plots) {
+			colors.put(plot, plot.getStatus() == PlotStatus.TAKEN ? "grey" : "olive");
+		}
+		mav.addObject("plotList", plots);
+		mav.addObject("plotColors", colors);
+		mav.setViewName("plotOverview");
+		return mav;
+
 	}
 
 }

@@ -21,14 +21,14 @@ class TenantController {
 	}
 
 	@GetMapping("/tenants")
-	@PreAuthorize("hasRole('ROLE_VORSTAND')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String tenants(Model model){
 		model.addAttribute("tenantList", tenantManager.getAll());
 		return "tenants";
 	}
 
 	@GetMapping("/tenantDetails")
-	@PreAuthorize("hasRole('ROLE_VORSTAND')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String tenantDetails(@RequestParam("id") String id, Model model){
 		model.addAttribute("tenant", tenantManager.get(Long.parseLong(id)));
 		return "tenantDetails";
