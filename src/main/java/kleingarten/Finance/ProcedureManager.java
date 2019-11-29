@@ -60,12 +60,18 @@ public class ProcedureManager {
 		return null;
 	}
 	
-	
+	/**
+	 * Get all Procedures for the Tenant, if he is main or sub Tenant in it.
+	 * 
+	 * @param year
+	 * @param tenantId
+	 * @return Empty Steamable or Procedures
+	 */
 	public Streamable<Procedure> getProcedures(int year, long tenantId) {
 		List<Procedure> procList = new LinkedList<Procedure>();
 		
 		for(Procedure procedure:procedures.findByYear(year)) {
-			if(procedure.getMainTenant() == tenantId) procList.add(procedure);
+			if(procedure.isTenant(tenantId)) procList.add(procedure);
 		}
 		return Streamable.of(procList);
 	}

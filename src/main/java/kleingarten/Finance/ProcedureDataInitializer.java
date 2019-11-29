@@ -30,6 +30,7 @@ public class ProcedureDataInitializer implements DataInitializer {
 		Procedure procedure2 = procedureManager.getProcedure(2017, new SalespointIdentifier("testID"));
 		
 		LOG.info("Gefunden(2017): "+ (procedure2==null ? "nix gefunden" : procedure2.getWatercount()) );
+		
 //
 //		//Fee water = new WaterFee(p1.getWatercount());
 //
