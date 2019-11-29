@@ -1,5 +1,6 @@
 package kleingarten.Finance;
 
+import org.salespointframework.core.SalespointIdentifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,13 @@ public class ProcedureManager {
 	Procedure add(Procedure procedure) {
 		return procedures.save(procedure);
 	}
+
+	// Currently there is an issue in plotId. It does not work.
+	/*
+	public Procedure findByPlotId(SalespointIdentifier plotId){
+		return procedures.findByPlotId(plotId);
+	}
+	*/
 
 
 }
