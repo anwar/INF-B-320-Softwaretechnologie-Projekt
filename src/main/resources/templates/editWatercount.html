@@ -15,7 +15,7 @@
         <h1>Edit Watercount</h1>
     </div>
     <center><h2 th:text="'PlotNr: ' + ${plotId}" >Plot Number</h2></center>
-    <form th:object="${procedure}" th:action="@{/bill/{plotId}/editWatercount}" method="post">
+    <form th:object="${procedure}" th:action="@{/bill/editWatercount/{plotId}}" method="post">
 
         <table class="plotTable">
 
