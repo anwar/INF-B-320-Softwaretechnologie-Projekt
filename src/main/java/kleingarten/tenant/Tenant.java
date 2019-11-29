@@ -1,13 +1,12 @@
 package kleingarten.tenant;
 
-import org.h2.engine.User;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.springframework.data.util.Streamable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
+
 import java.util.Set;
 
 import javax.persistence.ElementCollection;
@@ -65,7 +64,7 @@ public class Tenant {
 	}
 
 	public Role getRole(){
-		return userAccount.getRoles().toList().get(0);
+		return userAccount.getRoles().iterator().next();
 	}
 
 	public String getEmail(){
@@ -99,6 +98,7 @@ public class Tenant {
 	public void addRole(Role role){
 		this.userAccount.add(role);
 	}
+
 	public void removeRole(Role role){
 		this.userAccount.remove(role);
 	}
@@ -109,7 +109,7 @@ public class Tenant {
 
 	private Tenant(){}
 
-	public Tenant(String forename, String surname, String address, String email, String phonenumber, String birthdate, UserAccount userAccount/*, Role role*/){
+	public Tenant(String forename, String surname, String address, String email, String phonenumber, String birthdate, UserAccount userAccount){
 		this.forename = forename;
 		this.surname = surname;
 		this.address = address;
