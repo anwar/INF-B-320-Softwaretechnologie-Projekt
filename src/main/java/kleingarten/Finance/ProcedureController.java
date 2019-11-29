@@ -3,6 +3,7 @@ package kleingarten.Finance;
 import org.salespointframework.core.SalespointIdentifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,9 +39,9 @@ public class ProcedureController {
  */
 
 //Editing Watercount, but need to solve a problem with plotId.
-/*
+
 	@GetMapping("/procedure/editWatercount/{plotId}")
-	@PreAuthorize("hasRole('ROLE_VORSTAND')")
+	//@PreAuthorize("hasRole('ROLE_VORSTAND')")
 	public String editFee(Model model, @PathVariable String plotId) {
 		model.addAttribute("procedure", procedureManager.findByPlotId(plotId).get());
 		return "/editWatercount";
@@ -52,7 +53,7 @@ public class ProcedureController {
 		procedureManager.save(procedure);
 		return "redirect:/procedure";
 	}
-*/
+
 
 
 	@GetMapping("/procedure")

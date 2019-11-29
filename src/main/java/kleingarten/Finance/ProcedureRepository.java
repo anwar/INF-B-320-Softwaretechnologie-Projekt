@@ -14,7 +14,7 @@ public interface ProcedureRepository extends CrudRepository<Procedure, Long> {
 
 	Streamable<Procedure> findByYear(int year);
 
-	// Procedure findByPlotId(SalespointIdentifier plotId);
+	//Procedure findByPlotId(String plotId);
 
 	//find billid + year
 	//find

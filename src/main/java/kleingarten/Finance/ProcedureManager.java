@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.salespointframework.core.SalespointIdentifier;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -78,16 +77,17 @@ public class ProcedureManager {
 
 
 	// Currently there is an issue in plotId. It does not work.
-	/*
+
 	public Procedure save(Procedure procedure) {
 
 		return procedures.save(procedure);
 	}
 
-	public Procedure findByPlotId(String plotId){
+	public Streamable<Procedure> findByPlotId(String plotId){
 		return procedures.findByPlotId(plotId);
 	}
-	*/
+
+
 
 
 }
