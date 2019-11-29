@@ -22,15 +22,13 @@ public class PlotService {
 	private final ProcedureManager procedureManager;
 
 	PlotService(PlotCatalog plotCatalog, ProcedureManager procedureManager){
-
-		Assert.notNull(plotCatalog, "PlotCatalog must not be null!");
-		Assert.notNull(procedureManager, "ProcedureManager must not be null!");
 		this.plotCatalog = plotCatalog;
 		this.procedureManager = procedureManager;
 	}
 
 	/**
-	 * Creates a new object of type {@link Plot} and adds it to the {@link PlotCatalog}
+	 * Create a new object of type {@link Plot} and add it to the {@link PlotCatalog}
+	 * @param name name of the {@link Plot} as String
 	 * @param size size of the {@link Plot} as int
 	 * @param description description of the {@link Plot} as String
 	 */
@@ -42,7 +40,7 @@ public class PlotService {
 	}
 
 	/**
-	 * Checks if there is a {@link Plot} with the given name in the {@link PlotCatalog}
+	 * Check if there is a {@link Plot} with the given name in the {@link PlotCatalog}
 	 * @param name name of the {@link Plot} as String
 	 * @return true, if {@link Plot} with the given name exists
 	 */
@@ -51,19 +49,7 @@ public class PlotService {
 	}
 
 	/**
-	 * Getter for a {@link Plot}
-	 * @param plotId ID of the {@link Plot} which should be found
-	 * @return {@link Plot} which is searched
-	 */
-	public Plot getPlot(ProductIdentifier plotId) {
-		if (!this.plotCatalog.existsById(plotId)) {
-			throw  new IllegalArgumentException("Plot must exist!");
-		}
-		return this.plotCatalog.findById(plotId).get();
-	}
-
-	/**
-	 * Gets the associated {@link Procedure} for a {@link Plot}
+	 * Get the associated {@link Procedure} for a {@link Plot}
 	 * @param year the year for which the {@link Procedure} should be found
 	 * @param plotId the Id of the {@link Plot} for which the {@link Procedure} should be found
 	 * @return {@link Procedure} which is searched
@@ -73,14 +59,13 @@ public class PlotService {
 	}
 
 	/**
-	 * Getter for all rented {@link Plot}s of a specific user
+	 * Get all rented {@link Plot}s of a specific user
 	 * @param year year for which the rented {@link Plot}s should be searched
 	 * @param tenant {@link Tenant} for which the {@link Plot}s should be searched
 	 * @return rented {@link Plot}s as {@link Streamable} of type {@link Plot}
-	 * @throws ExecutionControl.NotImplementedException
 	 */
-	Streamable<Plot> getAssociatedPlots(Year year,  Tenant tenant) throws ExecutionControl.NotImplementedException {
-		throw new ExecutionControl.NotImplementedException("Not implemented jet!");
+	Streamable<Plot> getAssociatedPlots(Year year,  Tenant tenant) {
+		throw new UnsupportedOperationException("Not implemented yet!");
 	}
 
 }

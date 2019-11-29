@@ -17,7 +17,7 @@ public class PlotTests {
 	 * Setup of a mock of type {@link Plot} to run the tests with
 	 */
 	@BeforeEach
-	public void SetUp() {
+	public void setUp() {
 		plot = new Plot("123", 500, "test");
 	}
 
@@ -25,7 +25,7 @@ public class PlotTests {
 	 * Test if the initial setup has worked correctly
 	 */
 	@Test
-	public void InitialStatusTest() {
+	public void initialStatusTest() {
 		assertThat(plot.getStatus()).isEqualTo(PlotStatus.FREE);
 	}
 
@@ -33,7 +33,7 @@ public class PlotTests {
 	 * Test if the initial setup has worked correctly
 	 */
 	@Test
-	public void InitialSizeTest() {
+	public void initialSizeTest() {
 		assertThat(plot.getSize()).isEqualTo(500);
 	}
 
@@ -41,7 +41,7 @@ public class PlotTests {
 	 * Test if the initial setup has worked correctly
 	 */
 	@Test
-	public void InitialDescriptionTest() {
+	public void initialDescriptionTest() {
 		assertThat(plot.getDescription()).isEqualTo("test");
 	}
 
@@ -49,7 +49,7 @@ public class PlotTests {
 	 * Test if the initial setup has worked correctly
 	 */
 	@Test
-	public void InitalEstimatorTest() {
+	public void initalEstimatorTest() {
 		assertThat(plot.getEstimator()).isEqualTo(Money.of(0, EURO));
 	}
 
@@ -57,7 +57,7 @@ public class PlotTests {
 	 * Test if changes of the {@link Plot} are made correctly
 	 */
 	@Test
-	public void ChangeStatusTest() {
+	public void changeStatusTest() {
 		plot.setStatus(PlotStatus.TAKEN);
 		assertThat(plot.getStatus()).isEqualTo(PlotStatus.TAKEN);
 	}
@@ -66,7 +66,7 @@ public class PlotTests {
 	 * Test if changes of the {@link Plot} are made correctly
 	 */
 	@Test
-	public void ChangeSizeTest() {
+	public void changeSizeTest() {
 		plot.setSize(300);
 		assertThat(plot.getSize()).isEqualTo(300);
 	}
@@ -75,7 +75,7 @@ public class PlotTests {
 	 * Test if changes of the {@link Plot} are made correctly
 	 */
 	@Test
-	public void ChangeDescriptionTest() {
+	public void changeDescriptionTest() {
 		plot.setDescription("This plot is rented");
 		assertThat(plot.getDescription()).isEqualTo("This plot is rented");
 	}
@@ -84,7 +84,7 @@ public class PlotTests {
 	 * Test if changes of the {@link Plot} are made correctly
 	 */
 	@Test
-	public void ChangeEstimatorTest() {
+	public void changeEstimatorTest() {
 		plot.setEstimator(Money.of(400, EURO));
 		assertThat(plot.getEstimator()).isEqualTo(Money.of(400, EURO));
 	}
@@ -93,7 +93,7 @@ public class PlotTests {
 	 * Test if illegal value for the {@link Plot}s attribute lead to exception of type {@link IllegalArgumentException}
 	 */
 	@Test
-	public void IllegalStatusTest() {
+	public void illegalStatusTest() {
 		PlotStatus status = null;
 		assertThrows(IllegalArgumentException.class, () -> {
 			plot.setStatus(status);
@@ -104,7 +104,7 @@ public class PlotTests {
 	 * Test if illegal value for the {@link Plot}s attribute lead to exception of type {@link IllegalArgumentException}
 	 */
 	@Test
-	public void NegativeSizeTest() {
+	public void negativeSizeTest() {
 		int size_negative = -5;
 		assertThrows(IllegalArgumentException.class, () -> {
 			plot.setSize(size_negative);
@@ -115,7 +115,7 @@ public class PlotTests {
 	 * Test if illegal value for the {@link Plot}s attribute lead to exception of type {@link IllegalArgumentException}
 	 */
 	@Test
-	public void IllegalSizeTest() {
+	public void illegalSizeTest() {
 		int size = 0;
 		assertThrows(IllegalArgumentException.class, () -> {
 			plot.setSize(size);
@@ -126,7 +126,7 @@ public class PlotTests {
 	 * Test if illegal value for the {@link Plot}s attribute lead to exception of type {@link IllegalArgumentException}
 	 */
 	@Test
-	public void IllegalDescriptionTest() {
+	public void illegalDescriptionTest() {
 		String description = null;
 		assertThrows(IllegalArgumentException.class, () -> {
 			plot.setDescription(description);
@@ -137,7 +137,7 @@ public class PlotTests {
 	 * Test if illegal value for the {@link Plot}s attribute lead to exception of type {@link IllegalArgumentException}
 	 */
 	@Test
-	public void NegativeEstimatorTest() {
+	public void negativeEstimatorTest() {
 		MonetaryAmount estimator_negative = Money.of(-5, EURO);
 		assertThrows(IllegalArgumentException.class, () -> {
 			plot.setEstimator(estimator_negative);
@@ -148,7 +148,7 @@ public class PlotTests {
 	 * Test if illegal value for the {@link Plot}s attribute lead to exception of type {@link IllegalArgumentException}
 	 */
 	@Test
-	public void IllegalEstimatorTest() {
+	public void illegalEstimatorTest() {
 		MonetaryAmount estimator = null;
 		assertThrows(IllegalArgumentException.class, () -> {
 			plot.setEstimator(estimator);

@@ -22,9 +22,11 @@ public class PlotController {
 	}
 
 	@GetMapping("/plot/{plot}")
-	public ModelAndView detailsOfFreePlot(@LoggedIn Optional<UserAccount> user, @PathVariable Plot plot) {
+	public ModelAndView details(@LoggedIn Optional<UserAccount> user, @PathVariable Plot plot) {
 		ModelAndView mav = new ModelAndView();
-		plotService.getPlot(plot.getId());
+		if (!plotService.existsByName(plot.getName())) {
+			throw new IllegalArgumentException("Plot must exist!");
+		}
 
 		mav.addObject("plotName", plot.getName());
 		mav.addObject("plotSize", plot.getSize() + " m²");
