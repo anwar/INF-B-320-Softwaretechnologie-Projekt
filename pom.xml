@@ -34,6 +34,11 @@
 			Use Maven Central for package search (https://search.maven.org/).
 		-->
 
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<repositories>

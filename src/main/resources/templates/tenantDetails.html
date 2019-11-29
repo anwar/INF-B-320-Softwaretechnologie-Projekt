@@ -30,12 +30,13 @@
         <table>
             <tr  th:each="tenant : ${tenant}">
                 <th >ID</th>  <td th:text="${tenant.getId()}">1</td> </tr>
-            <tr>   <th>Vorname</th><td th:text="${tenant.getForename()}">1</td> </tr>
-            <tr>   <th>Nachname</th><td th:text="${tenant.getSurname()}">1</td> </tr>
+            <tr><th>Vorname</th><td th:text="${tenant.getForename()}">1</td> </tr>
+            <tr><th>Nachname</th><td th:text="${tenant.getSurname()}">1</td> </tr>
             <tr><th>Geburtstag</th> <td th:text="${tenant.getBirthdate()}">1</td></tr>
             <tr><th>Adresse</th> <td th:text="${tenant.getAddress()}">1</td></tr>
             <tr><th>Email</th> <td th:text="${tenant.getEmail()}">1</td></tr>
             <tr><th>Telefon</th> <td th:text="${tenant.getPhonenumber()}">1</td></tr>
+            <tr><th>Rolle(n)</th> <td th:text="${tenant.getRole()}">1 </tr>
 
         </table>
     </div>
