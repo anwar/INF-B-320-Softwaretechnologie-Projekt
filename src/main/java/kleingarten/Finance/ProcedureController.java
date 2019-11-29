@@ -13,8 +13,11 @@ public class ProcedureController {
 	private ProcedureManager procedureManager;
 
 	@Autowired
-	public ProcedureController( ) {
+
+	public ProcedureController(ProcedureManager procedureManager ) {
 		this.procedureManager = procedureManager;
+
+
 	}
 
 	@GetMapping("/bill")
@@ -50,6 +53,13 @@ public class ProcedureController {
 		return "redirect:/bill";
 	}
 */
+
+
+	@GetMapping("/procedure")
+	String procedure(Model model){
+		model.addAttribute("procedure", procedureManager.getAll());
+		return "procedure";
+	}
 
 
 }
