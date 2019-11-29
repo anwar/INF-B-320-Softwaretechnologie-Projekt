@@ -24,16 +24,19 @@
     <div align="center">
         <table>
             <tbody>
-                <tr><th>Name</th> <td align="center" th:text="${plot.getName()}"> Text </td></tr>
-                <tr><th>Größe</th> <td align="center" th:text="${plot.getSize()}"> Text </td></tr>
-                <tr><th>Beschreibung</th> <td align="center" th:text="${plot.getDescription()}"> Text </td></tr>
-                <tr><th>Schätzwert</th> <td align="center" th:text="${plot.getPrice()}"> Text </td></tr>
+                <tr><th>Name</th> <td align="center" th:text="${plotName}"> Text </td></tr>
+                <tr><th>Größe</th> <td align="center" th:text="${plotSize}"> Text </td></tr>
+                <tr><th>Beschreibung</th> <td align="center" th:text="${plotDescription}"> Text </td></tr>
+                <tr><th>Schätzwert</th> <td align="center" th:text="${plotPrice}"> Text </td></tr>
                 <tr th:if="${rented}"><th>Hauptpächter</th> <td align="center" th:text="${mainTenant}"> Text </td></tr>
                 <tr th:if="${rented}"><th>Nebenpächter</th> <td></td></tr>
                 <tr th:if="${rented}" th:each="tenant : ${subTenants}"><th></th> <td align="center" th:text="${tenant}"> Text </td></tr>
                 <tr th:if="${rented}"><th>Arbeitsstunden</th> <td align="center" th:text="${workHours}"> Text </td></tr>
             </tbody>
         </table>
+        <div class="button-section" th:if="!${rented}">
+            <button class="button"  onclick="location.href='/createApplication'">Bewerben</button>
+        </div>
     </div>
 </div>
 </body>

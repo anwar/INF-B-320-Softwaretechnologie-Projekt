@@ -27,7 +27,9 @@ public class PlotDataInitializer implements DataInitializer{
 
 		LOG.info("Creating default plots");
 		var Plot = this.plotService.addNewPlot("23", 300, "Kleine Parzelle mit angelegtem Teich.");
+		LOG.info(Plot.getId().toString());
 		var Plot_2 = this.plotService.addNewPlot("2", 500, "Sehr große Parzelle.");
+		LOG.info(Plot_2.getId().toString());
 		this.catalog.saveAll(List.of(Plot, Plot_2));
 
 		LOG.info("fertig");
