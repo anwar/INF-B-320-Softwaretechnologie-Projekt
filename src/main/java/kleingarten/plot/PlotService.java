@@ -1,20 +1,13 @@
 package kleingarten.plot;
 
-import com.querydsl.core.Tuple;
-import jdk.jshell.spi.ExecutionControl;
 import kleingarten.Finance.ProcedureManager;
 import kleingarten.tenant.Tenant;
 import org.h2.engine.Procedure;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 import java.time.Year;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 @Component
 public class PlotService {
