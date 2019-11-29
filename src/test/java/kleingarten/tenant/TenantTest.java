@@ -38,5 +38,5 @@ public class TenantTest {
 	public void initialPasswordTest(){
 		assertThat(tenant.getUserAccount().getPassword().equals("123"));
 	}
-	
+
 }
