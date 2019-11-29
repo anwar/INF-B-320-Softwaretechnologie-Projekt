@@ -39,18 +39,18 @@ public class ProcedureController {
 
 //Editing Watercount, but need to solve a problem with plotId.
 /*
-	@GetMapping("/bill/editWatercount/{plotId}")
+	@GetMapping("/procedure/editWatercount/{plotId}")
 	@PreAuthorize("hasRole('ROLE_VORSTAND')")
-	public String editFee(Model model, @PathVariable SalespointIdentifier plotId) {
+	public String editFee(Model model, @PathVariable String plotId) {
 		model.addAttribute("procedure", procedureManager.findByPlotId(plotId).get());
 		return "/editWatercount";
 	}
-	@PostMapping("/bill/editWatercount/{plotId}")
+	@PostMapping("/procedure/editWatercount/{plotId}")
 	public String saveProcedure(Model model, Procedure procedure) {
 		System.out.println("Plot ID:" + procedure.getPlotId());
 		System.out.println("Watercount:" + procedure.getWatercount());
 		procedureManager.save(procedure);
-		return "redirect:/bill";
+		return "redirect:/procedure";
 	}
 */
 
