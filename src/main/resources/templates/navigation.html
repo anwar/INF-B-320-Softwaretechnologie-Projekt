@@ -35,7 +35,8 @@
         <li style="float:right"><a  href="login.html" th:href="@{/login}" sec:authorize="!isAuthenticated()">Login</a>
 
             <form  sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-                <button type="submit" class="button1">Logout</button>
+                <button type="submit"
+                        class="button1">Logout</button>
             </form>
 
 

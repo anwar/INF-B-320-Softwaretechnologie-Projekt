@@ -1,18 +1,22 @@
 package kleingarten.Finance;
 
+import org.salespointframework.core.SalespointIdentifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Controller
 public class ProcedureController {
-	//private ProcedureManager procedureManager;
+	private ProcedureManager procedureManager;
 
 	@Autowired
-	public ProcedureController( ) {
+
+	public ProcedureController(ProcedureManager procedureManager ) {
+		this.procedureManager = procedureManager;
+
 
 	}
 
@@ -20,9 +24,7 @@ public class ProcedureController {
 	String viewBill(){
 		return "bill";
 	}
-
 /*
-
 	@GetMapping("/bill")
 	public String viewBill(Model model) {
 		model.addAttribute("ProcedureRepository", procedureManager.findAll());
@@ -33,9 +35,31 @@ public class ProcedureController {
 	public Iterable<Procedure> allProcedure() {
 		return procedureManager.findAll();
 	}
-
-
  */
+
+//Editing Watercount, but need to solve a problem with plotId.
+/*
+	@GetMapping("/bill/editWatercount/{plotId}")
+	@PreAuthorize("hasRole('ROLE_VORSTAND')")
+	public String editFee(Model model, @PathVariable SalespointIdentifier plotId) {
+		model.addAttribute("procedure", procedureManager.findByPlotId(plotId).get());
+		return "/editWatercount";
+	}
+	@PostMapping("/bill/editWatercount/{plotId}")
+	public String saveProcedure(Model model, Procedure procedure) {
+		System.out.println("Plot ID:" + procedure.getPlotId());
+		System.out.println("Watercount:" + procedure.getWatercount());
+		procedureManager.save(procedure);
+		return "redirect:/bill";
+	}
+*/
+
+
+	@GetMapping("/procedure")
+	String procedure(Model model){
+		model.addAttribute("procedure", procedureManager.getAll());
+		return "procedure";
+	}
 
 
 }

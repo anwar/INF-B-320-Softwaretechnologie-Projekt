@@ -58,4 +58,17 @@ public class ProcedureManager {
 	}
 
 
+	// Currently there is an issue in plotId. It does not work.
+	/*
+	public Procedure save(Procedure procedure) {
+
+		return procedures.save(procedure);
+	}
+
+	public Procedure findByPlotId(SalespointIdentifier plotId){
+		return procedures.findByPlotId(plotId);
+	}
+	*/
+
+
 }
