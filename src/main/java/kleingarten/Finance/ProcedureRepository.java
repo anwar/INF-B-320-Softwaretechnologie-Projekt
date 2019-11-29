@@ -8,6 +8,8 @@ public interface ProcedureRepository extends CrudRepository<Procedure, Long> {
 	Streamable<Procedure> findAll();
 
 	Procedure findById(long id);
+	
+	Streamable<Procedure> findByPlotId(String plotId);
 
 	//find billid + year
 	//find

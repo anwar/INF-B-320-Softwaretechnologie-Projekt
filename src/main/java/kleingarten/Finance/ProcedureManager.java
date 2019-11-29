@@ -1,5 +1,6 @@
 package kleingarten.Finance;
 
+import org.salespointframework.core.SalespointIdentifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
@@ -29,16 +30,31 @@ public class ProcedureManager {
 	}
 	 */
 
-	Streamable<Procedure> getAll() {
+	public Streamable<Procedure> getAll() {
 		return procedures.findAll();
 	}
 
-	Procedure get(long id) {
+	public Procedure get(long id) {
 		return procedures.findById(id);
 	}
 
-	Procedure add(Procedure procedure) {
+	public Procedure add(Procedure procedure) {
 		return procedures.save(procedure);
+	}
+	
+	/**
+	 * Find a Procedure by a given year and plotId.
+	 * 
+	 * @param year
+	 * @param plotId
+	 * @return null if not found
+	 */
+	public Procedure getProcedure(int year, SalespointIdentifier plotId) {
+		for(Procedure procedure:procedures.findByPlotId(plotId.getIdentifier())) {
+			if(procedure.getYear() == year) return procedure;
+		}
+		
+		return null;
 	}
 
 
