@@ -4,7 +4,6 @@ import kleingarten.Finance.ProcedureManager;
 import kleingarten.tenant.Tenant;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 import javax.money.MonetaryAmount;
 
