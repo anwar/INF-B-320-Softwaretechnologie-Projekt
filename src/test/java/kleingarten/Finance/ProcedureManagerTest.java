@@ -1,4 +1,4 @@
-package kleingarten.Finance;
+/*package kleingarten.Finance;
 
 
 import static org.assertj.core.api.Assertions.*;
@@ -37,3 +37,5 @@ public class ProcedureManagerTest {
 
 	}
 }
+*/
+

@@ -32,26 +32,58 @@
         <table>
             <tr  th:each="tenant : ${tenant}">
 
-               <th >ID</th>  <td th:text="${tenant.getId()}">1</td><td style="font-size:20px;"> <a href="#open-modal"> &#9997; </a> </td> </tr>
-            <div id="open-modal" class="modal-window">
-                <div>
-                    <a href="#modal-close" title="Close" class="modal-close">close &times;</a>
-                    <h1>Bearbeiten</h1>
-                    <div>     <label for="id">ID</label>
-
-                        <input class="text_bgImage" id="id" name="id" th:value="${tenant.getId()}"  type="number" required="required"/></div>
-                </div>
-            </div>
-            <tr>   <th>Vorname</th><td th:text="${tenant.getForename()}">1</td><td style="font-size:20px;"> <a  href="#open-modal"> &#9997; </a> </td></tr>
-
-            <tr>   <th>Nachname</th><td th:text="${tenant.getSurname()}">1</td><td style="font-size:20px;"> <a> &#9997; </a> </td></tr>
-            <tr><th>Geburtstag</th> <td th:text="${tenant.getBirthdate()}">1</td><td style="font-size:20px;"> <a> &#9997; </a> </td></tr>
-            <tr><th>Adresse</th> <td th:text="${tenant.getAddress()}">1</td><td style="font-size:20px;"> <a> &#9997; </a> </td></tr>
-            <tr><th>Email</th> <td th:text="${tenant.getEmail()}">1</td><td style="font-size:20px;"> <a> &#9997; </a> </td></tr>
-            <tr><th>Telefon</th> <td th:text="${tenant.getPhonenumber()}">1</td><td style="font-size:20px;"> <a> &#9997; </a> </td></tr>
-            <tr><th>Rolle(n)</th> <td th:text="${tenant.getRole()}">1 </tr>
+               <th >ID</th>  <td th:text="${tenant.getId()}">1</td>
+                <td style="font-size:20px; background-color: white"> <a href="#open-modal"> &#9997; </a> </td> </tr>
+            <tr> <th>Vorname</th><td th:text="${tenant.getForename()}">1</td></tr>
+            <tr><th>Nachname</th><td th:text="${tenant.getSurname()}">1</td></tr>
+            <tr><th>Geburtstag</th> <td th:text="${tenant.getBirthdate()}">1</td></tr>
+            <tr><th>Adresse</th> <td th:text="${tenant.getAddress()}">1</td></tr>
+            <tr><th>Email</th> <td th:text="${tenant.getEmail()}">1</td></tr>
+            <tr><th>Telefon</th> <td th:text="${tenant.getPhonenumber()}">1</td></tr>
+            <tr><th>Rolle(n)</th> <td th:text="${tenant.getRoles()}">1 </tr>
 
         </table>
+        <div id="open-modal" class="modal-window">
+            <div>
+                <a href="#modal-close" title="Close" class="modal-close">close &times;</a>
+                <h1>Bearbeiten</h1>
+                <div>     <label for="id">ID</label>
+                    <input class="text_bgImage" id="id" name="id" th:value="${tenant.getId()}"  type="number" required="required"/>
+                </div>
+
+                <div>     <label for="forename">Vorname</label>
+
+                    <input class="text_bgImage" id="forename" name="id" th:value="${tenant.getForename()}"  type="text" required="required"/>
+                </div>
+
+                <div>     <label for="surname">Nachname</label>
+
+                    <input class="text_bgImage" id="surname" name="id" th:value="${tenant.getSurname()}"  type="text" required="required"/>
+                </div>
+
+                <div>     <label for="birthdate">Geburtstag</label>
+
+                    <input class="text_bgImage" id="birthdate" name="id" th:value="${tenant.getBirthdate()}"  type="date" required="required"/>
+
+                <div>     <label for="address">Adresse</label>
+
+                    <input class="text_bgImage" id="address" name="id" th:value="${tenant.getAddress()}"  type="text" required="required"/>
+                </div>
+                <div>     <label for="email">Email</label>
+
+                    <input class="text_bgImage" id="email" name="id" th:value="${tenant.getEmail()}"  type="email" required="required"/>
+                </div>
+                <div>     <label for="phone">Telefon</label>
+
+                    <input class="text_bgImage" id="phone" name="id" th:value="${tenant.getPhonenumber()}"  type="number" required="required"/>
+                </div>
+                <div>     <label for="roles">Rolle(n)</label>
+
+                    <input class="text_bgImage" id="roles" name="id" th:value="${tenant.getRoles()}"  type="text" required="required"/>
+                </div>
+            </div>
+
+        </div>
 
 
 

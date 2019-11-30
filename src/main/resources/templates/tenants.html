@@ -43,7 +43,7 @@
             <td> <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.forename}">Paul</a> </td>
             <td> <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.surname}">Paul</a> </td>
             <td>  <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.email}">Paul</a> </td>
-            <td>  <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.getRoles().toString()}">Paul</a> </td>
+            <td>  <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.getRoles()}">Paul</a> </td>
 
 
         </tr>
