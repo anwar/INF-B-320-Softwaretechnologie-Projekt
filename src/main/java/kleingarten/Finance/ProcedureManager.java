@@ -74,6 +74,18 @@ public class ProcedureManager {
 		}
 		return Streamable.of(procList);
 	}
+	
+	/**
+	 * Get all Procedures with the given TenantId inside.
+	 * It doesnt matter if he is main or sub Tenant.
+	 * Main Teanant Procedures will come first.
+	 * 
+	 * @param tenantId
+	 * @return (mainTenantProcedures):(subTenantProcedures)
+	 */
+	public Streamable<Procedure> getAll(long tenantId) {
+		return procedures.findByMainTenant(tenantId).and(procedures.findBySubTenant(tenantId));
+	}
 
 
 	// Currently there is an issue in plotId. It does not work.
