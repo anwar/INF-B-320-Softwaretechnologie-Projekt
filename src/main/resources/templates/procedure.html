@@ -40,7 +40,7 @@
 
             <td>Wasserstand</td>
             <td th:text="${procedure.getWatercount()}">Paul</td>
-            <td> <a type="button" th:value="${procedure.getPlotId()}" th:href="@{/procedure/editWatercount/{plotId} (Id=${procedure.getPlotId()})}">Bearbeiten</a></td>
+            <td> <a type="button" th:value="${procedure.getPlotId()}" th:href="@{procedure/editWatercount/{plotId} (Id=${procedure.getPlotId()})}">Bearbeiten</a></td>
             <!--<td type="button" onclick="location.href='/procedure/editWatercount/{plotId}'">Bearbeiten</button></td>-->
 
         </tr>

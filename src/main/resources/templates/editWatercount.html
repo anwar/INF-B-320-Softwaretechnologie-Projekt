@@ -1,20 +1,31 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
     <link th:href="@{/resources/css/style.css}" rel="stylesheet"
           href="../static/resources/css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>Edit Watercount</title>
+    <link th:href="@{/resources/css/tenantTable.css}" rel="stylesheet"
+          href="../static/resources/css/tenantTable.css" type="text/css">
+    <meta charset="UTF-8">
+    <title>Procedure</title>
 </head>
-
-<nav th:include="navigation :: navigation"/>
+<body>
+<div class="ui container">
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="header-title">
+        
 <div class="plotRegistration">
     <div class="header-title">
         <h1>Edit Watercount</h1>
     </div>
-    <form th:object="${procedure}" th:action="@{/bill/editWatercount/{plotId}}" method="post">
+    <form th:object="${procedure}" th:action="@{procedure/editWatercount/{plotId}}" method="post">
 
         <table class="plotTable">
 
