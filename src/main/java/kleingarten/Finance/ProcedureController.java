@@ -45,7 +45,7 @@ public class ProcedureController {
 	 */
 	@GetMapping("procedure/editWatercount/{plotId}")
 	//@PreAuthorize("hasRole('ROLE_VORSTAND')")
-	public String editFee(Model model, @PathVariable String plotId) {
+	public String editWatercount(Model model, @PathVariable String plotId) {
 		model.addAttribute("procedure", procedureManager.findByPlotId(plotId).get());
 		return "editWatercount";
 	}

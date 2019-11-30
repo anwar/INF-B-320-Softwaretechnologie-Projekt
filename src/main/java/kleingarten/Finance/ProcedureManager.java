@@ -101,9 +101,6 @@ public class ProcedureManager {
 		return Streamable.of(noDubes);
 	}
 
-
-	// Currently there is an issue in plotId. It does not work.
-
 	public Procedure save(Procedure procedure) { //?? why do we need this?[Sascha] --> I need a "save" function to edit and save watercount.[Sanghyun]
 
 		return procedures.save(procedure);
