@@ -14,12 +14,14 @@
     <title>Liste der Termine</title>
 </head>
 <body>
+
     <div class="ui-container">
         <nav th:include="navigation :: navigation"/>
         <div class="header-title">
             <h1>Liste aller Termine</h1>
         </div>
     </div>
+    <center>
     <table>
         <tr>
             <th>Datum</th>
@@ -30,6 +32,6 @@
             <td th:text="${app.time}">Zeit</td>
         </tr>
     </table>
-</div>
+    </center>
 </body>
 </html>

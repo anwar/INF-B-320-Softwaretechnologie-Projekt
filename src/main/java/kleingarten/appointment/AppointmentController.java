@@ -32,6 +32,7 @@ public class AppointmentController {
 
 	@PostMapping("/createAForm")
 	String addAppointment(@Valid CreateAppointmentForm form, Errors result){
+
 		appointmentManager.createAppointment(form);
 		return "redirect:/createAForm";
 	}

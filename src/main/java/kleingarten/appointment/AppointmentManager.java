@@ -25,7 +25,11 @@ public class AppointmentManager {
 
 	public Appointment createAppointment(CreateAppointmentForm form){
 
-		return times.save((new Appointment(form.getTime(), form.getDate())));
+		LocalTime localTime = LocalTime.parse(form.getTime());
+		LocalDate localDate = LocalDate.parse(form.getDate());
+		localDate.format(DateTimeFormatter.ofPattern("DD/MM/YYYY"));
+
+		return times.save((new Appointment(localTime, localDate)));
 		}
 
 	}

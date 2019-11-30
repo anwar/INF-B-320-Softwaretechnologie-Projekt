@@ -1,5 +1,6 @@
 package kleingarten.appointment;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import kleingarten.plot.Plot;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,29 +18,31 @@ public class Appointment {
 
 	private @Id @GeneratedValue long id;
 
-	private String time;
-	private String date;
+
+	private LocalTime time;
+	@JsonFormat(pattern="dd/MM/yyyy")
+	private LocalDate date;
 
 	private Appointment() {}
 
-	public Appointment(String time, String date){
+	public Appointment(LocalTime time, LocalDate date){
 		this.time = time;
 		this.date = date;
 	}
 
-	public String getTime() {
+	public LocalTime getTime() {
 		return time;
 	}
 
-	public void setTime(String time) {
+	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 }
