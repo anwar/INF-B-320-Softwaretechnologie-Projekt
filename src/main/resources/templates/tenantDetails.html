@@ -16,6 +16,7 @@
           href="../static/resources/css/tenantdetailsTable.css" type="text/css">
     <link th:href="@{/resources/css/modifyTenant.css}" rel="stylesheet"
     href="../static/resources/css/modifyTenant.css" type="text/css">
+    <script src="../static/resources/css/test.js"></script>
 
 
 </head>
@@ -26,6 +27,7 @@
     <div class="header-title">
         <h1> Details</h1>
     </div>
+
     <div>
 
 <!-- unicody by: https://www.w3schools.com/charsets/ref_utf_dingbats.asp -->
@@ -33,7 +35,7 @@
             <tr  th:each="tenant : ${tenant}">
 
                <th >ID</th>  <td th:text="${tenant.getId()}">1</td>
-                <td style="font-size:20px; background-color: white"> <a href="#open-modal"> &#9997; </a> </td> </tr>
+                <td style="font-size:20px; background-color: white"> <a th:title="Bearbeiten" href="#open-modal"> &#9997; </a> </td> </tr>
             <tr> <th>Vorname</th><td th:text="${tenant.getForename()}">1</td></tr>
             <tr><th>Nachname</th><td th:text="${tenant.getSurname()}">1</td></tr>
             <tr><th>Geburtstag</th> <td th:text="${tenant.getBirthdate()}">1</td></tr>
@@ -46,7 +48,7 @@
         <div id="open-modal" class="modal-window">
             <div>
                  <!-- unicody by: https://www.w3schools.com/charsets/ref_utf_dingbats.asp -->
-                <a href="#modal-close" title="Close" class="modal-close">&#10060;</a>
+                <a href="#modal-close" title="Schließen" class="modal-close">&#10060;</a>
                 <table>
                    <div class="header-title">
                        <h1>Bearbeiten</h1>

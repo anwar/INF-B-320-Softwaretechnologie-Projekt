@@ -13,17 +13,31 @@
           href="../static/resources/css/style.css" type="text/css"/>
     <link th:href="@{/resources/css/tenantTable.css}" rel="stylesheet"
           href="../static/resources/css/tenantTable.css" type="text/css">
+    href="../static/resources/css/style.css" type="text/css"/>
+    <script th:src="@{/resources/css/js/search.js}"
+          src="../static/resources/css/js/search.js"> </script>
+
     <meta charset="UTF-8">
-    <title>Tenants</title>
-</head>
+
+
+
+    </head>
 <body>
 <div class="ui container">
     <nav th:include="navigation :: navigation"></nav>
     <div class="header-title">
         <h1>Pächterliste</h1>
     </div>
-    <center><div><table>
-        <thead>
+    <center>
+<!--unicode by: https://www.compart.com/de/unicode/U+1F50D -->
+        <input class="text_bgImage" type="text"  id="myInput" onkeyup="myFunction()" placeholder="&#128269; Suche nach Pächter">
+
+
+        <div><br>
+            <table  id="myTable">
+
+
+       <thead>
         <tr>
            <!-- <th >ID</th>-->
             <th>Vorname</th>
@@ -33,13 +47,13 @@
 
 
         </tr>
-        </thead>
-        <tbody th:remove="all-but-first">
+       </thead>
+      <tbody th:remove="all-but-first">
 
-        <tr  th:each="tenant : ${tenantList}">
+       <tr  th:each="tenant : ${tenantList}">
 
 
-          <!--  <td th:text="${tenant.id}">1</td> -->
+         <!--  <td th:text="${tenant.id}">1</td> -->
             <td> <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.forename}">Paul</a> </td>
             <td> <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.surname}">Paul</a> </td>
             <td>  <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.email}">Paul</a> </td>
@@ -47,7 +61,10 @@
 
 
         </tr>
-        </tbody>
+
+
+
+      </tbody>
     </table>
     </div>
         <div class="button-section">
