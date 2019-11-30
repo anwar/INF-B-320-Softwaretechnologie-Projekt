@@ -40,7 +40,7 @@ public class TenantManager {
 	}
 
 	public boolean tenantHasRole(Tenant tenant, Role role){
-		return tenant.getRoles().equals(role);
+		return tenant.getUserAccount().hasRole(role);
 	}
 
 	public Streamable<Tenant> findEnabled(){
