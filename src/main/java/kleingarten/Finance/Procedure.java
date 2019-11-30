@@ -104,6 +104,7 @@ public class Procedure {
 	}
 
 	public void setWatercount(double watercount) {
+		if(!editable()) return;
 		this.watercount = watercount;
 	}
 
@@ -112,6 +113,7 @@ public class Procedure {
 	}
 
 	public void setPowercount(double powercount) {
+		if(!editable()) return;
 		this.powercount = powercount;
 	}
 
@@ -120,6 +122,7 @@ public class Procedure {
 	}
 
 	public void setSize(double size) {
+		if(!editable()) return;
 		this.size = size;
 	}
 
@@ -128,6 +131,7 @@ public class Procedure {
 	}
 
 	public void setWorkMinutes(int workMinutes) {
+		if(!editable()) return;
 		this.workMinutes = workMinutes;
 	}
 
@@ -158,6 +162,7 @@ public class Procedure {
 	 * @return true when added, false if not
 	 */
 	public boolean addSubTenant(long tenantID) {
+		if(!editable()) return false;
 
 		//should not set main Tenant as sub Tenant
 		if (tenantID==mainTenant) return false;
@@ -174,6 +179,7 @@ public class Procedure {
 	 * @return true if removed
 	 */
 	public boolean removeSubTenant(long tenantID) {
+		if(!editable()) return false;
 
 		return subTenants.remove(tenantID);
 	}
@@ -186,6 +192,7 @@ public class Procedure {
 	 * @return false if tenant is already main tenant
 	 */
 	public boolean setMainTenant(long tenantID) {
+		if(!editable()) return false;
 		if(tenantID==mainTenant) return false;
 
 		mainTenant = tenantID;
@@ -200,6 +207,7 @@ public class Procedure {
 	 * @return false if its the same main Tenant as before
 	 */
 	public boolean setNewMainTenant(long tenantID) {
+		if(!editable()) return false;
 
 		if(tenantID==mainTenant) {
 			return false;
@@ -209,6 +217,14 @@ public class Procedure {
 		subTenants.clear();
 		return true;
 
+	}
+	
+	private boolean editable() {
+		return isOpen;
+	} //this seems to be redundant, but it has internal use and may differ from isOpen later..
+	
+	public boolean isOpen() {
+		return isOpen;
 	}
 
 	/**

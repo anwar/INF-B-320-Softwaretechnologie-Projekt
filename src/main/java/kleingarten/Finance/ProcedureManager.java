@@ -86,6 +86,7 @@ public class ProcedureManager {
 	 * @return (mainTenantProcedures):(subTenantProcedures)
 	 */
 	public Streamable<Procedure> getAll(long tenantId) {
+		//I am preventing duplicates here. however, a tenant should only be main or sub tenant, not both.
 		Set<Procedure> noDubes = procedures.findByMainTenant(tenantId).and(procedures.findBySubTenant(tenantId)).toSet();
 		return Streamable.of(noDubes);
 	}
@@ -93,7 +94,7 @@ public class ProcedureManager {
 
 	// Currently there is an issue in plotId. It does not work.
 
-	public Procedure save(Procedure procedure) {
+	public Procedure save(Procedure procedure) { //?? why do we need this?[Sascha]
 
 		return procedures.save(procedure);
 	}
