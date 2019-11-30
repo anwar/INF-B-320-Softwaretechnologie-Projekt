@@ -1,6 +1,8 @@
 package kleingarten.plot;
 
+import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.core.DataInitializer;
+import org.salespointframework.core.SalespointIdentifier;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +34,9 @@ public class PlotDataInitializer implements DataInitializer{
 		LOG.info(Plot_2.getId().toString());
 		this.catalog.saveAll(List.of(Plot, Plot_2));
 
+		//small test, i cant get the ProductIdentifier so i had to use the name in ProcedureDataInitializer[Sascha]
+		LOG.info(plotService.getProcedure(2018, "23").toString());
+		
 		LOG.info("fertig");
 
 	}

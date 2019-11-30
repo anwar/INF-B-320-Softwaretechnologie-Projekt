@@ -62,6 +62,10 @@ public class Procedure {
 	 */
 	@ElementCollection //Siehe Dokumentation ElementCollection, wurde auch analog im Salespoint-Produkt verwendet.
 	private Set<Long> subTenants = new HashSet<Long>();
+	
+	private Procedure() {
+		//Default Constructor for spring
+	}
 
 	/**
 	 * Constructor with needed types. Good for testing.
@@ -232,6 +236,12 @@ public class Procedure {
 	 */
 	public void close() {
 		isOpen=false;
+	}
+	
+	
+	
+	public String toString() {
+		return "Procedure Plot: " + plotId + " Tenant: " + mainTenant + " isOpen? " + isOpen();
 	}
 
 }

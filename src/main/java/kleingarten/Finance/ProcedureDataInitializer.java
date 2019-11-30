@@ -21,7 +21,7 @@ public class ProcedureDataInitializer implements DataInitializer {
 
 		Procedure p1 = procedureManager.add(new Procedure( 2018, "testID", 186.52d, 1l ));
 		Procedure p2 = procedureManager.add(new Procedure( 2018, "testIDPlot2", 123.52d, 1l ));
-		Procedure p3 = procedureManager.add(new Procedure( 2018, "testIDPlot2", 123.52d, 2l ));
+		Procedure p3 = procedureManager.add(new Procedure( 2018, "23", 123.52d, 2l ));
 		p1.setWatercount(500);
 		p2.setWatercount(400);
 		p3.setWatercount(300);
@@ -43,13 +43,13 @@ public class ProcedureDataInitializer implements DataInitializer {
 		for(Procedure pro:procedureManager.getProcedures(2018, 1l)) {
 
 			
-			LOG.info(pro==null ? "nix gefunden" : pro.getWatercount()+"" );
+			//LOG.info(pro==null ? "nix gefunden" : pro.getWatercount()+"" );
 		}
 		
 		for(Procedure pro:procedureManager.getAll(1l)) {
 
 			
-			LOG.info(pro==null ? "nix gefunden" : pro.getWatercount()+"" );
+			//LOG.info(pro==null ? "nix gefunden" : pro.getWatercount()+"" );
 		}
 		
 		

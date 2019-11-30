@@ -2,7 +2,8 @@ package kleingarten.plot;
 
 import kleingarten.Finance.ProcedureManager;
 import kleingarten.tenant.Tenant;
-import org.h2.engine.Procedure;
+import kleingarten.Finance.Procedure;
+//import org.h2.engine.Procedure;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
@@ -48,8 +49,14 @@ public class PlotService {
 	 * @return {@link Procedure} which is searched
 	 */
 	public Procedure getProcedure(int year, ProductIdentifier plotId) {
-		throw new UnsupportedOperationException();
+		//this should be the line to go with. i wanted to test it but got an error with the import of the procedure.
+		//see imports i changed it [Sascha]
+		return procedureManager.getProcedure(year, plotId);
+		
+		//throw new UnsupportedOperationException();
 	}
+	public Procedure getProcedure(int year, String plotId) { //i need this for testing
+		return procedureManager.getProcedure(year, plotId); }
 
 	/**
 	 * Get all rented {@link Plot}s of a specific user

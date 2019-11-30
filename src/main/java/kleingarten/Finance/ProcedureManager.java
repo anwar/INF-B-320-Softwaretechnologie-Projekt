@@ -60,6 +60,14 @@ public class ProcedureManager {
 
 		return null;
 	}
+	
+	public Procedure getProcedure(int year, String plotId) {
+		for(Procedure procedure:procedures.findByPlotId(plotId)) {
+			if(procedure.getYear() == year) return procedure;
+		}
+
+		return null;
+	}
 
 	/**
 	 * Get all Procedures for the Tenant, if he is main or sub Tenant in it.
