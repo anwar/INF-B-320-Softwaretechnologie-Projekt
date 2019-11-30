@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -16,41 +17,29 @@ public class Appointment {
 
 	private @Id @GeneratedValue long id;
 
-	private ArrayList<Plot> plots;
-	private LocalTime time;
-	private LocalDate date;
+	private String time;
+	private String date;
 
-	private Appointment() {
+	private Appointment() {}
 
-	}
-
-	public Appointment(LocalTime time, LocalDate date){
+	public Appointment(String time, String date){
 		this.time = time;
 		this.date = date;
-		plots = new ArrayList<>();
 	}
 
-	public LocalTime getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(LocalTime time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(String date) {
 		this.date = date;
-	}
-
-	public ArrayList<Plot> getPlots() {
-		return plots;
-	}
-
-	public void setPlots(ArrayList<Plot> plots) {
-		this.plots = plots;
 	}
 }
