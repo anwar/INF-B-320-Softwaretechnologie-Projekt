@@ -109,14 +109,15 @@ public class Tenant {
 
 	private Tenant(){}
 
-	public Tenant(String forename, String surname, String address, String email, String phonenumber, String birthdate, UserAccount userAccount){
+	public Tenant(String forename, String surname, String address /*, String email*/, String phonenumber, String birthdate, UserAccount userAccount){
 		this.forename = forename;
 		this.surname = surname;
 		this.address = address;
 		this.phonenumber = phonenumber;
 		this.userAccount = userAccount;
 		this.birthdate = birthdate;
-		this.userAccount.setEmail(email);
+		//this.userAccount.setEmail(email);
+
 
 	}
 

@@ -50,27 +50,27 @@ public class TenantDataInitializer implements DataInitializer {
 		var subtenantRole = Role.of("Nebenpächter");
 		var waterRole = Role.of("Wassermann");
 
-		Tenant boss = new Tenant("Peter", "Klaus", "Am Berg 5, 12423 Irgendwo im Nirgendwo", "peter.klaus@email.com",
+		Tenant boss = new Tenant("Peter", "Klaus", "Am Berg 5, 12423 Irgendwo im Nirgendwo",
 			"01242354356", "13.04.1999",
-			userAccountManager.create("peter.klaus", password, maintenantRole));
+			userAccountManager.create("peter.klaus", password,"peter.klaus@email.com", maintenantRole));
 
 
 		Tenant obmann = new Tenant("Hubert", "Grumpel", "Hinter den 7 Bergen, 98766 Zwergenhausen",
-			"hubert.grumpel2@cloud.com", "012345678", "04.09.1978",
-			userAccountManager.create("hubertgrumpel", password, maintenantRole));
+			 "012345678", "04.09.1978",
+			userAccountManager.create("hubertgrumpel", password,"hubert.grumpel2@cloud.com", maintenantRole));
 
-		Tenant cashier = new Tenant("Bill", "Richart", "Am Bahnhof 25, 07875 Dorfdorf", "billy,billbill@geld.com",
-			"0123098874326", "13.05.1968", userAccountManager.create("bill", password, subtenantRole));
+		Tenant cashier = new Tenant("Bill", "Richart", "Am Bahnhof 25, 07875 Dorfdorf",
+			"0123098874326", "13.05.1968", userAccountManager.create("bill", password,"billy,billbill@geld.com", subtenantRole));
 
 		Tenant replacement = new Tenant("Sophie", "Kirmse", "Am Teichplatz 5, 67807 Meldetsichnie",
-			"s.krimse@gemaile.com", "034567892132", "08.12.1988",
-			userAccountManager.create("sophie", password, subtenantRole));
+			 "034567892132", "08.12.1988",
+			userAccountManager.create("sophie", password, "s.krimse@gemaile.com",subtenantRole));
 
-		Tenant protocol = new Tenant("Franziska", "Kiel", "Bei Isa", "francys@email.com",
-			"0896548786890", "19.08.1998", userAccountManager.create("franziska", password, maintenantRole));
+		Tenant protocol = new Tenant("Franziska", "Kiel", "Bei Isa",
+			"0896548786890", "19.08.1998", userAccountManager.create("franziska", password, "francys@email.com",maintenantRole));
 
 		Tenant waterman = new Tenant("Atlas", "Neptunius", "An der Promenade 34, 01298 Atlantis",
-			"neptuns.bart@fishmail.com", "0980790789","08.09.1567", userAccountManager.create("neptun", password, maintenantRole));
+			 "0980790789","08.09.1567", userAccountManager.create("neptun", password,"neptuns.bart@fishmail.com", maintenantRole));
 
 		obmann.addRole(obmannRole);
 		boss.addRole(vorstandRole);

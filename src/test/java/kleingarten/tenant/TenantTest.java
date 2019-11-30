@@ -20,8 +20,8 @@ public class TenantTest {
 
 	@BeforeEach
 	public void SetUp(){
-		tenant = new Tenant("Jassi", "Gepackert", "Neben Isa und Francy", "jassis@email.com",
-			"908964875734", "13.05.1999", userAccountManager.create("jassi", Password.UnencryptedPassword.of("123"), Role.of("Hauptpächter")));
+		tenant = new Tenant("Jassi", "Gepackert", "Neben Isa und Francy",
+			"908964875734", "13.05.1999", userAccountManager.create("jassi", Password.UnencryptedPassword.of("123"),"jassis@email.com", Role.of("Hauptpächter")));
 	}
 
 	@Test
