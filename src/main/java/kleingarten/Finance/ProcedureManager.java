@@ -1,7 +1,9 @@
 package kleingarten.Finance;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.salespointframework.core.SalespointIdentifier;
 import org.springframework.data.util.Streamable;
@@ -84,7 +86,8 @@ public class ProcedureManager {
 	 * @return (mainTenantProcedures):(subTenantProcedures)
 	 */
 	public Streamable<Procedure> getAll(long tenantId) {
-		return procedures.findByMainTenant(tenantId).and(procedures.findBySubTenant(tenantId));
+		Set<Procedure> noDubes = procedures.findByMainTenant(tenantId).and(procedures.findBySubTenant(tenantId)).toSet();
+		return Streamable.of(noDubes);
 	}
 
 
