@@ -2,12 +2,14 @@ package kleingarten.tenant;
 
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.data.util.Streamable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -59,8 +61,8 @@ public class Tenant {
 		return userAccount;
 	}
 
-	public Streamable<Role> getRoles(){
-		return userAccount.getRoles();
+	public String getRoles(){
+		return userAccount.getRoles().toList().stream().map(n -> new TenantRole(n)).sorted().map(n -> n.toString()).collect(Collectors.joining(", "));
 	}
 
 	public Role getRole(){
