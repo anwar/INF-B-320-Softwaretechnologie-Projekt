@@ -28,32 +28,32 @@ public class ProcedureDataInitializer implements DataInitializer {
 		p3.addSubTenant(1l);
 
 		Procedure procedure = procedureManager.getProcedure(2018, new SalespointIdentifier("testID"));
-		
+
 		LOG.info("Gefunden(2018): "+ (procedure==null ? "nix gefunden" : procedure.getWatercount()) );
-		
-		
+
+
 		Procedure procedure2 = procedureManager.getProcedure(2017, new SalespointIdentifier("testID"));
-		
+
 		LOG.info("Gefunden(2017): "+ (procedure2==null ? "nix gefunden" : procedure2.getWatercount()) );
-		
+
 		Procedure proc = procedureManager.getProcedure(2018, new SalespointIdentifier("testID"));
-		
+
 		LOG.info(proc==null ? "nix gefunden" : proc.getWatercount()+"" );
-		
+
 		for(Procedure pro:procedureManager.getProcedures(2018, 1l)) {
 
-			
+
 			//LOG.info(pro==null ? "nix gefunden" : pro.getWatercount()+"" );
 		}
-		
+
 		for(Procedure pro:procedureManager.getAll(1l)) {
 
-			
+
 			//LOG.info(pro==null ? "nix gefunden" : pro.getWatercount()+"" );
 		}
-		
-		
-		
+
+
+
 //
 //		//Fee water = new WaterFee(p1.getWatercount());
 //

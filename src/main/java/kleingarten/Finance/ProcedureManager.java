@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.salespointframework.core.SalespointIdentifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -15,18 +16,19 @@ public class ProcedureManager {
 
 	private final ProcedureRepository procedures;
 
-	/*
+
 	@Autowired
 	public ProcedureManager(ProcedureRepository procedures) {
 		Assert.notNull(procedures, "ProcedureRepository must not be null!");
 		this.procedures = procedures;
 	}
-	*/
 
+/*
 	ProcedureManager(ProcedureRepository procedures){
 		Assert.notNull(procedures, "TenantRepository must not be null!");
 		this.procedures = procedures;
 	}
+*/
 
 	/*
 		public Iterable<Procedure> findAll(){
@@ -60,7 +62,7 @@ public class ProcedureManager {
 
 		return null;
 	}
-	
+
 	public Procedure getProcedure(int year, String plotId) {
 		for(Procedure procedure:procedures.findByPlotId(plotId)) {
 			if(procedure.getYear() == year) return procedure;
@@ -84,12 +86,12 @@ public class ProcedureManager {
 		}
 		return Streamable.of(procList);
 	}
-	
+
 	/**
 	 * Get all Procedures with the given TenantId inside.
 	 * It doesnt matter if he is main or sub Tenant.
 	 * Main Teanant Procedures will come first.
-	 * 
+	 *
 	 * @param tenantId
 	 * @return (mainTenantProcedures):(subTenantProcedures)
 	 */
@@ -102,7 +104,7 @@ public class ProcedureManager {
 
 	// Currently there is an issue in plotId. It does not work.
 
-	public Procedure save(Procedure procedure) { //?? why do we need this?[Sascha]
+	public Procedure save(Procedure procedure) { //?? why do we need this?[Sascha] --> I need a "save" function to edit and save watercount.[Sanghyun]
 
 		return procedures.save(procedure);
 	}

@@ -10,18 +10,18 @@
 </head>
 
 <nav th:include="navigation :: navigation"/>
-<div class="plotRegistration">
+<div class="editWatercount">
     <div class="header-title">
         <h1>Edit Watercount</h1>
     </div>
-    <center><h2 th:text="'PlotNr: ' + ${plotId}" >Plot Number</h2></center>
+    <center><h2 th:text="'PlotNr: ' + ${procedure.getPlotId()}" >Plot Number</h2></center>
     <form th:object="${procedure}" th:action="@{/bill/editWatercount/{plotId}}" method="post">
 
         <table class="plotTable">
 
             <tr>
                 <td> <label>Watercount</label></td>
-                <td>   <input type="number" min="0" step="0.01" th:field="*{watercount}"></td>
+                <td>   <input type="number" min="0" step="0.01" th:field="*{procedure.getWatercount()}"></td>
             </tr>
 
         </table>
