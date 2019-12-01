@@ -3,12 +3,9 @@ package kleingarten.plot;
 import kleingarten.Finance.ProcedureManager;
 import kleingarten.tenant.Tenant;
 import kleingarten.Finance.Procedure;
-//import org.h2.engine.Procedure;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
-
-import java.time.Year;
 
 @Component
 public class PlotService {
@@ -46,17 +43,15 @@ public class PlotService {
 	 * Get the associated {@link Procedure} for a {@link Plot}
 	 * @param year the year for which the {@link Procedure} should be found
 	 * @param plotId the Id of the {@link Plot} for which the {@link Procedure} should be found
-	 * @return {@link Procedure} which is searched
+	 * @return {@link Procedure} which is searched for
 	 */
 	public Procedure getProcedure(int year, ProductIdentifier plotId) {
-		//this should be the line to go with. i wanted to test it but got an error with the import of the procedure.
-		//see imports i changed it [Sascha]
-		return procedureManager.getProcedure(year, plotId);
-		
-		//throw new UnsupportedOperationException();
+		Procedure procedure = procedureManager.getProcedure(year,plotId);
+		if (procedure == null) {
+			throw new IllegalArgumentException("Procedure must not be null!");
+		}
+		return procedure;
 	}
-	public Procedure getProcedure(int year, String plotId) { //i need this for testing
-		return procedureManager.getProcedure(year, plotId); }
 
 	/**
 	 * Get all rented {@link Plot}s of a specific user
@@ -64,8 +59,8 @@ public class PlotService {
 	 * @param tenant {@link Tenant} for which the {@link Plot}s should be searched
 	 * @return rented {@link Plot}s as {@link Streamable} of type {@link Plot}
 	 */
-	Streamable<Plot> getAssociatedPlots(Year year,  Tenant tenant) {
-		throw new UnsupportedOperationException("Not implemented yet!");
+	public Streamable<Plot> getAssociatedPlots(int year,  Tenant tenant) {
+		throw new UnsupportedOperationException();
 	}
 
 }
