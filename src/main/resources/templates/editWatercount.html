@@ -20,9 +20,10 @@
 <div class="ui container">
     <nav th:include="navigation :: navigation"></nav>
     <div class="header-title">
-        
+
 <div class="plotRegistration">
     <div class="header-title">
+
         <h1>Edit Watercount</h1>
     </div>
     <form th:object="${procedure}" th:action="@{procedure/editWatercount/{plotId}}" method="post">
