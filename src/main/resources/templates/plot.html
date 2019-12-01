@@ -35,7 +35,9 @@
             </tbody>
         </table>
         <div class="button-section" th:if="!${rented}">
-            <button class="button"  onclick="location.href='/createApplication'">Bewerben</button>
+            <button class="button"  onclick="location.href='/createApplication'" >Bewerben</button>
+            <button class="button" onclick="location.href= '/application'">Bewerbungen anzeigen</button>
+            <input type="hidden" id="plotID" name="plotID" th:value="${plotID}">
         </div>
     </div>
 </div>

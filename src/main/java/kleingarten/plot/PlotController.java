@@ -32,6 +32,7 @@ public class PlotController {
 			throw new IllegalArgumentException("Plot must exist!");
 		}
 
+		mav.addObject("plotID", plot.getId());
 		mav.addObject("plotName", plot.getName());
 		mav.addObject("plotSize", plot.getSize() + " m²");
 		mav.addObject("plotDescription", plot.getDescription());
