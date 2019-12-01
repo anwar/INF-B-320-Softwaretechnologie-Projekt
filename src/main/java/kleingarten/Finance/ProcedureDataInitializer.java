@@ -22,15 +22,16 @@ public class ProcedureDataInitializer implements DataInitializer {
 		Procedure p1 = procedureManager.add(new Procedure( 2018, "testID", 186.52d, 1l ));
 		Procedure p2 = procedureManager.add(new Procedure( 2018, "testIDPlot2", 123.52d, 1l ));
 		Procedure p3 = procedureManager.add(new Procedure( 2018, "23", 123.52d, 2l ));
+		Procedure p4 = procedureManager.add(new Procedure( 2018, "11", 121.52d, 3l ));
 		p1.setWatercount(500);
 		p2.setWatercount(400);
 		p3.setWatercount(300);
+		p4.setPowercount(600);
 		p3.addSubTenant(1l);
 
 		Procedure procedure = procedureManager.getProcedure(2018, new SalespointIdentifier("testID"));
 
 		LOG.info("Gefunden(2018): "+ (procedure==null ? "nix gefunden" : procedure.getWatercount()) );
-
 
 		Procedure procedure2 = procedureManager.getProcedure(2017, new SalespointIdentifier("testID"));
 
@@ -39,6 +40,10 @@ public class ProcedureDataInitializer implements DataInitializer {
 		Procedure proc = procedureManager.getProcedure(2018, new SalespointIdentifier("testID"));
 
 		LOG.info(proc==null ? "nix gefunden" : proc.getWatercount()+"" );
+
+		Procedure procedure3 = procedureManager.getProcedure(2018, new SalespointIdentifier("11"));
+
+		LOG.info("Gefunden(2018): "+ (procedure3==null ? "nix gefunden" : procedure3.getPowercount()) );
 
 		for(Procedure pro:procedureManager.getProcedures(2018, 1l)) {
 
