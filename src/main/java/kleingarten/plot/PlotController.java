@@ -1,5 +1,8 @@
 package kleingarten.plot;
 
+import kleingarten.tenant.Tenant;
+import net.bytebuddy.asm.Advice;
+import org.salespointframework.time.BusinessTime;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -35,7 +38,7 @@ public class PlotController {
 		mav.addObject("plotPrice", MonetaryFormats.getAmountFormat(Locale.GERMANY).format(plot.getEstimator()));
 
 		if (user.isPresent()) {
-			throw new UnsupportedOperationException("Not implemented yet!");
+			//TODO Tenant tenant = user.getTenant(); (not implemented yet)
 		}
 		else {
 			mav.addObject("rented", false);
