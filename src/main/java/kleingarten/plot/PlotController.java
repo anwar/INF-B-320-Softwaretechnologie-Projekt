@@ -20,11 +20,13 @@ public class PlotController {
 	private final PlotService plotService;
 	private final PlotCatalog plotCatalog;
 	private final TenantRepository tenantRepository;
+	private final DataService dataService;
 
-	PlotController(PlotService plotService, PlotCatalog plotCatalog, TenantRepository tenantRepository){
+	PlotController(PlotService plotService, PlotCatalog plotCatalog, TenantRepository tenantRepository, DataService dataService) {
 		this.plotService = plotService;
 		this.plotCatalog = plotCatalog;
 		this.tenantRepository = tenantRepository;
+		this.dataService = dataService;
 	}
 
 	@GetMapping("/plot/{plot}")
@@ -34,73 +36,120 @@ public class PlotController {
 			throw new IllegalArgumentException("Plot must exist!");
 		}
 
-		Procedure procedure = plotService.getProcedure(time.getYear(), plot.getId());
-		if (procedure == null) {
-			throw new IllegalArgumentException("Procedure must exist!");
-		}
+		//Procedure procedure = plotService.getProcedure(time.getYear(), plot.getId());
+		//if (procedure == null) {
+		//	throw new IllegalArgumentException("Procedure must exist!");
+		//}
 
-		if (tenantRepository.findByUserAccount(user.get()).isEmpty()) {
-			throw new IllegalArgumentException("User must exist!");
-		}
-
+		// Add default information to the model
 		mav.addObject("plotID", plot.getId());
 		mav.addObject("plotName", plot.getName());
 		mav.addObject("plotSize", plot.getSize() + " m²");
 		mav.addObject("plotDescription", plot.getDescription());
 		mav.addObject("plotPrice", MonetaryFormats.getAmountFormat(Locale.GERMANY).format(plot.getEstimator()));
-		mav.addObject("mainTenant", plotService.compareTenants(procedure.getMainTenant()));
+		//mav.addObject("mainTenant", plotService.compareTenants(procedure.getMainTenant()));
 
-		Set<Tenant> subTenants = new HashSet<>();
-		for (long tenantId:
-			 procedure.getSubTenants()) {
-			subTenants.add(plotService.getTenant(tenantId));
-		}
+		//Set<Tenant> subTenants = new HashSet<>();
+		//for (long tenantId:
+		//	 procedure.getSubTenants()) {
+		//	subTenants.add(plotService.findTenantById(tenantId));
+		//}
 
-		mav.addObject("subTenants", subTenants);
-		mav.addObject("workHours", procedure.getWorkMinutes() + "min");
+		//mav.addObject("subTenants", subTenants);
+		//mav.addObject("workHours", procedure.getWorkMinutes() + "min");
+
+		mav.setViewName("plot");
 
 		if (user.isPresent()) {
+			if (tenantRepository.findByUserAccount(user.get()).isEmpty()) {
+				throw new IllegalArgumentException("User must exist!");
+			}
 			Tenant tenant = tenantRepository.findByUserAccount(user.get()).get();
-			if (plotService.compareTenants(tenant.getId())) {
-				if (procedure.isTenant(tenant.getId())) {
-					// todo
-					return null;
-				}
-				if (tenant.getRole().equals(Role.of("Vorstandsvorsitzender")) || tenant.getRole().equals(Role.of("Stellvertreter"))) {
-					mav.addObject("rented", true);
-					mav.addObject("canSee", true);
-					mav.addObject("canSeeBills", true);
-					mav.addObject("canSeeApplications", true);
-					mav.addObject("canModify", true);
-				}
-				else if (tenant.getRole().equals(Role.of("Obmann")) || tenant.getRole().equals(Role.of("Wassermann"))) {
-					mav.addObject("rented", true);
-					mav.addObject("canSee", true);
-					mav.addObject("canSeeBills", false);
-					mav.addObject("canSeeApplications", false);
-					mav.addObject("canModify", true);
-				}
-				else if (tenant.getRole().equals(Role.of("Kassierer"))) {
-					mav.addObject("rented", true);
-					mav.addObject("canSee", true);
-					mav.addObject("canSeeBills", true);
-					mav.addObject("canSeeApplications", false);
-					mav.addObject("canModify", false);
-				}
-				else if (tenant.getRole().equals(Role.of("Protokollant"))) {
-					mav.addObject("rented", true);
-					mav.addObject("canSee", true);
-					mav.addObject("canSeeBills", false);
-					mav.addObject("canSeeApplications", false);
-					mav.addObject("canModify", false);
-				}
+			//if (plotService.compareTenants(tenant.getId())) {
+			//if (procedure.isTenant(tenant.getId())) {
+			// todo
+			//	ModelAndView mav = new ModelAndView("redirect:/myPlot");
+			//  return mav;
+			//}
+
+			mav.addObject("rented", true);
+			// Check which role the user has to provide the correct rights of access on the view
+			if (dataService.tenantHasRole(tenant, Role.of("Protokollant"))) {
+				mav.addObject("canSee", true);
+				mav.addObject("canSeeBills", false);
+				mav.addObject("canSeeApplications", false);
+				mav.addObject("canModify", false);
+			}
+			else if (dataService.tenantHasRole(tenant, Role.of("Kassierer"))) {
+				mav.addObject("canSee", true);
+				mav.addObject("canSeeBills", true);
+				mav.addObject("canSeeApplications", false);
+				boolean condModify = dataService.tenantHasRole(tenant, Role.of("Obmann"))
+					               || dataService.tenantHasRole(tenant, Role.of("Wassermann"));
+				mav.addObject("canModify", condModify);
+
+			}
+			else if (dataService.tenantHasRole(tenant, Role.of("Obmann")) || dataService.tenantHasRole(tenant, Role.of("Wassermann"))) {
+				mav.addObject("canSee", true);
+				mav.addObject("canSeeBills", false);
+				mav.addObject("canSeeApplications", false);
+				mav.addObject("canModify", true);
+			}
+			else if (dataService.tenantHasRole(tenant, Role.of("Vorstandsvorsitzender")) || dataService.tenantHasRole(tenant, Role.of("Stellvertreter"))) {
+				mav.addObject("canSee", true);
+				mav.addObject("canSeeBills", true);
+				mav.addObject("canSeeApplications", true);
+				mav.addObject("canModify", true);
 			}
 		}
+		// User is not logged in and should only see information of a free plot
 		else {
+			if (plot.getStatus() == PlotStatus.TAKEN) {
+				throw new IllegalArgumentException("Unauthenticated user must not have access to a rented plot!");
+			}
 			mav.addObject("rented", false);
 		}
 
-		mav.setViewName("plot");
+		return mav;
+	}
+
+	@GetMapping("/myPlot")
+	public ModelAndView rentedPlots(@LoggedIn UserAccount user, Plot plot) {
+		ModelAndView mav = new ModelAndView();
+		if (!plotService.existsByName(plot.getName())) {
+			throw new IllegalArgumentException("Plot must exist!");
+		}
+
+		mav.setViewName("myPlot");
+
+		//Procedure procedure = plotService.getProcedure(time.getYear(), plot.getId());
+		//if (procedure == null) {
+		//	throw new IllegalArgumentException("Procedure must exist!");
+		//}
+
+		// Add default information to the model
+		mav.addObject("plotID", plot.getId());
+		mav.addObject("plotName", plot.getName());
+		mav.addObject("plotSize", plot.getSize() + " m²");
+		mav.addObject("plotDescription", plot.getDescription());
+		mav.addObject("plotPrice", MonetaryFormats.getAmountFormat(Locale.GERMANY).format(plot.getEstimator()));
+		//mav.addObject("mainTenant", plotService.compareTenants(procedure.getMainTenant()));
+
+		//Set<Tenant> subTenants = new HashSet<>();
+		//for (long tenantId:
+		//	 procedure.getSubTenants()) {
+		//	subTenants.add(plotService.findTenantById(tenantId));
+		//}
+
+		//mav.addObject("subTenants", subTenants);
+		//mav.addObject("workHours", procedure.getWorkMinutes() + "min");
+
+		if (tenantRepository.findByUserAccount(user).isEmpty()) {
+			throw new IllegalArgumentException("User must exist!");
+		}
+		Tenant tenant = tenantRepository.findByUserAccount(user).get();
+		//if (plotService.compareTenants(tenant.getId())) {
+		//if (procedure.isTenant(tenant.getId()))
 		return mav;
 	}
 
@@ -110,7 +159,7 @@ public class PlotController {
 
 		Set<Plot> plots = plotCatalog.findAll().toSet();
 		Map<Plot, String> colors = new HashMap<>();
-		for (Plot plot: plots) {
+		for (Plot plot : plots) {
 			colors.put(plot, plot.getStatus() == PlotStatus.TAKEN ? "grey" : "olive");
 		}
 		mav.addObject("plotList", plots);
