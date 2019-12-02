@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Penalty extends Fee {
-	Procedure procedure;
+/*	Procedure procedure;
 
 	public Penalty(){
 		this.title = "Pflichtstunde";
 		this.text = "";
 		this.count = procedure.getWorkMinutes();	// Need to work on later
 	}
+*/
 
 	@Override
 	public double getDefaultPrice(int year) {
