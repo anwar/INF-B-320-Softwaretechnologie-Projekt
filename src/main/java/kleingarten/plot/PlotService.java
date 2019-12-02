@@ -3,18 +3,20 @@ package kleingarten.plot;
 import kleingarten.Finance.ProcedureManager;
 import kleingarten.tenant.Tenant;
 import kleingarten.Finance.Procedure;
+import kleingarten.tenant.TenantRepository;
 import org.salespointframework.catalog.ProductIdentifier;
-import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PlotService {
 	private final PlotCatalog plotCatalog;
 	private final ProcedureManager procedureManager;
+	private final TenantRepository tenantRepository;
 
-	PlotService(PlotCatalog plotCatalog, ProcedureManager procedureManager){
+	PlotService(PlotCatalog plotCatalog, ProcedureManager procedureManager, TenantRepository tenantRepository){
 		this.plotCatalog = plotCatalog;
 		this.procedureManager = procedureManager;
+		this.tenantRepository = tenantRepository;
 	}
 
 	/**
@@ -54,13 +56,19 @@ public class PlotService {
 	}
 
 	/**
-	 * Get all rented {@link Plot}s of a specific user
-	 * @param year year for which the rented {@link Plot}s should be searched
-	 * @param tenant {@link Tenant} for which the {@link Plot}s should be searched
-	 * @return rented {@link Plot}s as {@link Streamable} of type {@link Plot}
+	 * Compare if two objects of type {@link Tenant} are identical
+	 * @param tenant one tenant of type {@link Tenant} which should be compared
+	 * @param tenantId Id of the other tenant as a reference to the object
+	 * @return true, if the two objects of type {@link Tenant} are identical
 	 */
-	public Streamable<Plot> getAssociatedPlots(int year,  Tenant tenant) {
-		throw new UnsupportedOperationException();
+	public boolean compareTenants(Tenant tenant, long tenantId) {
+		for (Tenant user:
+			 this.tenantRepository.findAll()) {
+			if (user.getId() == tenantId) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
