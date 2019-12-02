@@ -7,6 +7,8 @@ import kleingarten.tenant.TenantRepository;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class PlotService {
 	private final PlotCatalog plotCatalog;
@@ -56,19 +58,33 @@ public class PlotService {
 	}
 
 	/**
-	 * Compare if two objects of type {@link Tenant} are identical
-	 * @param tenant one tenant of type {@link Tenant} which should be compared
-	 * @param tenantId Id of the other tenant as a reference to the object
-	 * @return true, if the two objects of type {@link Tenant} are identical
+	 * Compare if object of type {@link Tenant} is identical to an {@link Tenant} in the {@link TenantRepository}
+	 * @param tenantId id as {@literal long} of the {@link Tenant}
+	 * @return true, if there is a matching {@link Tenant}
 	 */
-	public boolean compareTenants(Tenant tenant, long tenantId) {
+	public boolean compareTenants(long tenantId) {
 		for (Tenant user:
-			 this.tenantRepository.findAll()) {
+			 tenantRepository.findAll()) {
 			if (user.getId() == tenantId) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Get object of type {@link Tenant} for a given tenantId
+	 * @param tenantId id of the {@link Tenant} as {@literal long}
+	 * @return associated {@link Tenant} if it is found, else {@literal null}
+	 */
+	public Tenant getTenant(long tenantId) {
+		for (Tenant tenant:
+			 tenantRepository.findAll()) {
+			if (tenant.getId() == tenantId) {
+				return tenant;
+			}
+		}
+		throw new IllegalArgumentException("Tenant must exist!");
 	}
 
 }
