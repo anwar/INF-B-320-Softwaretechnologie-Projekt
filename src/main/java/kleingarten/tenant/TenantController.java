@@ -34,6 +34,8 @@ class TenantController {
 		return "tenantDetails";
 	}
 
+	//GetMapping for ("/myPlot") already implemented in PlotController so I deleted it here (Ylvi)
+
 	@GetMapping("/complains")
 	String complains() {
 		return "complains";
