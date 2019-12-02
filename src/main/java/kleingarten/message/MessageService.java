@@ -50,4 +50,28 @@ public class MessageService {
 			LOG.error(e.getMessage());
 		}
 	}
+
+	public void sendMessageWithAttachment(Message message, String pathToAttachment) {
+		try {
+			MimeMessage mimeMsg = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMsg, true);
+
+			helper.setTo(message.getTo());
+			helper.setSubject(message.getSubject());
+			helper.setText(message.getText());
+
+			FileSystemResource file = new FileSystemResource(new File(pathToAttachment));
+
+			String fileName = file.getFilename();
+			if (fileName == null) {
+				fileName = "attachment";
+			}
+
+			helper.addAttachment(fileName, file);
+
+			mailSender.send(mimeMsg);
+		} catch (MessagingException | MailException e) {
+			LOG.error(e.getMessage());
+		}
+	}
 }
