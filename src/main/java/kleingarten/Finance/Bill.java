@@ -1,8 +1,12 @@
 package kleingarten.Finance;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.List;
 
+//@Entity
 public class Bill {
 
 	/*
@@ -22,6 +26,7 @@ public class Bill {
 	public Bill(){}
 
 	List<Fee> fees;
+
 	public Bill(Procedure procedure){
 		this.billID = billID;
 
