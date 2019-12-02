@@ -1,12 +1,8 @@
 package kleingarten.plot;
 
 import kleingarten.tenant.Tenant;
-import net.bytebuddy.asm.Advice;
-import org.salespointframework.time.BusinessTime;
-import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
-import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +21,7 @@ public class PlotController {
 		this.plotCatalog = plotCatalog;
 	}
 
+	//TODO Use user
 	@GetMapping("/plot/{plot}")
 	public ModelAndView details(@LoggedIn Optional<UserAccount> user, @PathVariable Plot plot) {
 		ModelAndView mav = new ModelAndView();
@@ -32,6 +29,7 @@ public class PlotController {
 			throw new IllegalArgumentException("Plot must exist!");
 		}
 
+		mav.addObject("plotID", plot.getId());
 		mav.addObject("plotName", plot.getName());
 		mav.addObject("plotSize", plot.getSize() + " m²");
 		mav.addObject("plotDescription", plot.getDescription());
@@ -39,6 +37,9 @@ public class PlotController {
 
 		if (user.isPresent()) {
 			//TODO Tenant tenant = user.getTenant(); (not implemented yet)
+			//switch (tenant.getRole().toString()) {
+			//	case :
+			//}
 		}
 		else {
 			mav.addObject("rented", false);

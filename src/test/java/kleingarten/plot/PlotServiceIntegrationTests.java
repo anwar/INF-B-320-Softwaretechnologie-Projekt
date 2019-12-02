@@ -4,7 +4,6 @@ import kleingarten.Finance.Procedure;
 import kleingarten.Finance.ProcedureManager;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

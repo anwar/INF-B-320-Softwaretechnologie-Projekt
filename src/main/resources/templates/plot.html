@@ -28,14 +28,19 @@
                 <tr><th>Größe</th> <td align="center" th:text="${plotSize}"> Text </td></tr>
                 <tr><th>Beschreibung</th> <td align="center" th:text="${plotDescription}"> Text </td></tr>
                 <tr><th>Schätzwert</th> <td align="center" th:text="${plotPrice}"> Text </td></tr>
-                <tr th:if="${rented}"><th>Hauptpächter</th> <td align="center" th:text="${mainTenant}"> Text </td></tr>
-                <tr th:if="${rented}"><th>Nebenpächter</th> <td></td></tr>
-                <tr th:if="${rented}" th:each="tenant : ${subTenants}"><th></th> <td align="center" th:text="${tenant}"> Text </td></tr>
-                <tr th:if="${rented}"><th>Arbeitsstunden</th> <td align="center" th:text="${workHours}"> Text </td></tr>
+                <tr th:if="${canSee}"><th>Hauptpächter</th> <td align="center" th:text="${mainTenant}"> Text </td></tr>
+                <tr th:if="${canSee}"><th>Nebenpächter</th> <td></td></tr>
+                <tr th:if="${canSee}" th:each="tenant : ${subTenants}"><th></th> <td align="center" th:text="${tenant}"> Text </td></tr>
+                <tr th:if="${canSee}"><th>Arbeitsstunden</th> <td align="center" th:text="${workHours}"> Text </td></tr>
+                <div class="button-section" th:if="${rents}" th:each="">
+                    <button class="button">Text</button>
+                </div>
             </tbody>
         </table>
         <div class="button-section" th:if="!${rented}">
-            <button class="button"  onclick="location.href='/createApplication'">Bewerben</button>
+            <button class="button"  onclick="location.href='/createApplication'" >Bewerben</button>
+            <button class="button" onclick="location.href= '/application'">Bewerbungen anzeigen</button>
+            <input type="hidden" id="plotID" name="plotID" th:value="${plotID}">
         </div>
     </div>
 </div>
