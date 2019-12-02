@@ -35,14 +35,14 @@
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
-
-        <tr  th:each="procedure : ${procedure}">
+<div  th:each="procedure : ${procedure}">
+        <tr  >
             <td>Wasserstand</td>
             <td th:text="${procedure.getWatercount()}">Paul</td>
             <td> <a type="button" th:value="${procedure.getPlotId()}" th:href="@{procedure/editWatercount/{plotId} (Id=${procedure.getPlotId()})}">Wasserzählerstand Bearbeiten</a></td>
         </tr>
 
-        <tr>
+        <tr >
             <td>Stromzählerstand</td>
             <td th:text="${procedure.getPowercount()}">Paul</td>
             <td> <a type="button" th:value="${procedure.getPlotId()}" th:href="@{procedure/editPowercount/{plotId} (Id=${procedure.getPlotId()})}">Stromzählerstand Bearbeiten</a></td>
@@ -83,7 +83,7 @@
             <td th:text="${procedure.getPlotId()}">Paul</td>
             <td> <a type="button">Bearbeiten</a></td>
         </tr>
-        </tbody>
+</div>  </tbody>
     </table>
     </div>
 </div>

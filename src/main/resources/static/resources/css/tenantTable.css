@@ -13,3 +13,7 @@ tbody tr:nth-child(even){
 tbody tr:nth-child(even):hover{
     background-color:white;
 }
+table{
+    margin-right: auto;
+    margin-left: auto;
+}

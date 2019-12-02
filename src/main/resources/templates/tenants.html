@@ -13,7 +13,6 @@
           href="../static/resources/css/style.css" type="text/css"/>
     <link th:href="@{/resources/css/tenantTable.css}" rel="stylesheet"
           href="../static/resources/css/tenantTable.css" type="text/css">
-    href="../static/resources/css/style.css" type="text/css"/>
     <script th:src="@{/resources/css/js/search.js}"
           src="../static/resources/css/js/search.js"> </script>
 
@@ -28,10 +27,11 @@
     <div class="header-title">
         <h1>Pächterliste</h1>
     </div>
-    <center>
-<!--unicode by: https://www.compart.com/de/unicode/U+1F50D -->
-        <input class="text_bgImage" type="text"  id="myInput" onkeyup="myFunction()" placeholder="&#128269; Suche nach Pächter">
 
+<!--unicode by: https://www.compart.com/de/unicode/U+1F50D -->
+       <center>
+           <input class="text_bgImage" type="text"  id="myInput" onkeyup="myFunction()" placeholder="&#128269; Suche nach Pächter">
+       </center>
 
         <div><br>
             <table  id="myTable">
@@ -72,7 +72,6 @@
             <button class="button"  onclick="location.href='/register'">Pächter hinzufügen</button>
         </div>
 
-    </center>
 
 </div>
 

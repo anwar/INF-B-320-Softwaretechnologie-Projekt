@@ -11,14 +11,14 @@ public class ProcedureController {
 
 	@Autowired
 
-	public ProcedureController(ProcedureManager procedureManager ) {
+	public ProcedureController(ProcedureManager procedureManager) {
 		this.procedureManager = procedureManager;
 
 
 	}
 
 	@GetMapping("/bill")
-	String viewBill(){
+	String viewBill() {
 		return "bill";
 	}
 /*
@@ -69,6 +69,7 @@ public class ProcedureController {
 		model.addAttribute("procedure", procedureManager.findByPlotId(plotId).get());
 		return "editPowercount";
 	}
+
 	/**
 	 * @param model
 	 * @param procedure
@@ -84,10 +85,15 @@ public class ProcedureController {
 	}
 
 	@GetMapping("procedure")
-	String procedure(Model model){
+	String procedure(Model model) {
 		model.addAttribute("procedure", procedureManager.getAll());
 		return "procedure";
 	}
 
+	@GetMapping("updateProcedure")
+	String updateProcedure(Model model) {
+		model.addAttribute("procedure", procedureManager.getAll());
+		return "updateProcedure";
 
+	}
 }
