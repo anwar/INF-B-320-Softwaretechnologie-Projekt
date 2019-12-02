@@ -5,6 +5,7 @@ public abstract class DefaultVaulues {
 	public static final double WATER_DEFAULT = 10d;
 	public static final double POWER_DEFAULT = 0.2d;
 	public static final double PLOT_DEFAULT = 0.18;
+	public static final double PENALTY_DEFAULT = 8;
 	/*
 	Base Fee with fixed values
 	 */
