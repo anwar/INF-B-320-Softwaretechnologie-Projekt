@@ -33,8 +33,9 @@ public class AppointmentController {
 	@PostMapping("/createAppointment")
 	String addAppointment(@Valid CreateAppointmentForm form, Error error){
 		LocalDate localDate = LocalDate.parse(form.getDate());
-		if(appointmentManager.getAll().get().anyMatch(appointment -> appointment.getDate().isEqual(localDate))){
-			error.getMessage();
+		LocalTime localTime = LocalTime.parse(form.getTime());
+		if(appointmentManager.getAll().get().anyMatch(appointment -> appointment.getDate().isEqual(localDate)) && appointmentManager.getAll().get().anyMatch(appointment -> appointment.getTime().equals(localTime))){
+			error.getMessage(); //hier einblendung machen
 		}else{
 			appointmentManager.createAppointment(form);
 		}

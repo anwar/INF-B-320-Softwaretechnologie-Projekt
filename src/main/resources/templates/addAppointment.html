@@ -21,12 +21,15 @@
         <h1>Termin erstellen</h1>
     </div>
 </div>
-<form method="post" role="form" id="form" th:action="@{/createAForm}" th:object="${form}">
-
-
-    <button type="submit" class="ui button">Zum Termin eintragen</button></div>
-</form>
-
+<center>
+    <form method="post" role="form" id="form" th:action="@{/addAppointment}" th:object="${form}">
+        <select>
+            <option th:each="appointments : ${ListofAppointments}" th:text="${appointments.getDate()}"></option>
+            <option th:each="appointments : ${ListofAppointments}" th:text="${appointments.getTime()}"></option>
+        </select>
+        <button type="submit" class="ui button">Zum Termin eintragen</button></div>
+    </form>
+</center>
 
 </body>
 </html>

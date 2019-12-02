@@ -1,6 +1,8 @@
 package kleingarten.appointment;
 
 import kleingarten.plot.Plot;
+import net.bytebuddy.implementation.attribute.AnnotationAppender;
+import org.salespointframework.core.SalespointIdentifier;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,16 +14,21 @@ public class WorkHours {
 
 	private int workHours;
 
+
+	private SalespointIdentifier plotID;
+	/*
 	@OneToMany
 	private List<Plot> plots = new ArrayList<>();
+	*/
 
 	@ManyToOne
 	private Appointment appointment;
 
-	public WorkHours(int workHours, Appointment appointment){
+	public WorkHours(int workHours, Appointment appointment, SalespointIdentifier plotID){
 		super();
 		this.workHours = workHours;
 		this.appointment = appointment;
+		this.plotID = plotID;
 	}
 
 
@@ -33,15 +40,15 @@ public class WorkHours {
 		this.workHours = workHours;
 	}
 
-	public void addPlot(Plot plot){
-		plots.add(plot);
-	}
-
-	public Iterable<Plot> getPlots(){
-		return plots;
+	public SalespointIdentifier getPlot() {
+		return plotID;
 	}
 
 	public Appointment getAppointment() {
 		return appointment;
+	}
+
+	public void setAppointment(Appointment appointment) {
+		this.appointment = appointment;
 	}
 }
