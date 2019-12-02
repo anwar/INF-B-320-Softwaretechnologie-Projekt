@@ -11,7 +11,7 @@ public class WaterFee extends Fee {
 		this.text = "";
 		this.count = procedure.getWatercount();
 	}
-	*/
+*/
 	@Override
 		public double getDefaultPrice(int year) {
 			// TODO Auto-generated method stub

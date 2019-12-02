@@ -33,7 +33,6 @@ public abstract class Fee {
 	public Fee() {
 		this.title="DEFAULT_TITLE";
 		this.text="DEFAULT_TEXT";
-
 		this.count = 1;
 
 	}
