@@ -30,7 +30,6 @@
         <li><a href="bills.html" th:href="@{/bill}" sec:authorize="isAuthenticated()">Rechnungen</a></li>
         <li><a href="complains.html" th:href="@{/complains}" sec:authorize="hasAnyRole('Hauptpächter', 'Nebenpächter')">Beschwerden</a></li>
         <li><a href="tenants.html" th:href="@{/tenants}"sec:authorize="hasAnyRole('Vorstandsvorsitzender')"> Mitglieder</a></li>
-        <li><a href="updateProcedure.html.html" th:href="@{/updateProcedure}" sec:authorize="hasAnyRole('Hauptpächter', 'Nebenpächter')">Update</a></li>
 
         <li style="float:right"><a  href="login.html" th:href="@{/login}" sec:authorize="!isAuthenticated()">Login</a>
 
