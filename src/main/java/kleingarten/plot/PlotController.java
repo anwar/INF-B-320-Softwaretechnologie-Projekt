@@ -25,8 +25,9 @@ public class PlotController {
 		this.plotCatalog = plotCatalog;
 	}
 
+	//TODO Use user
 	@GetMapping("/plot/{plot}")
-	public ModelAndView details(@LoggedIn Optional<UserAccount> user, @PathVariable Plot plot) {
+	public ModelAndView details(@LoggedIn Optional<UserAccount> user, @PathVariable Plot plot, Tenant tenant) {
 		ModelAndView mav = new ModelAndView();
 		if (!plotService.existsByName(plot.getName())) {
 			throw new IllegalArgumentException("Plot must exist!");
@@ -40,6 +41,9 @@ public class PlotController {
 
 		if (user.isPresent()) {
 			//TODO Tenant tenant = user.getTenant(); (not implemented yet)
+			switch (tenant.getRole().toString()) {
+				case :
+			}
 		}
 		else {
 			mav.addObject("rented", false);
