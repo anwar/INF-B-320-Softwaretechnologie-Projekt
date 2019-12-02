@@ -15,6 +15,7 @@
  */
 package kleingarten.message;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,45 +32,47 @@ import java.io.File;
 
 @Service
 public class MessageService {
-
 	private static final Logger LOG = LoggerFactory.getLogger(MessageService.class);
 
-	// Configuration for mail sending is defined in application.properties file.
-	@Autowired
 	private JavaMailSender mailSender;
 
-	public void sendSimpleMessage(Message message) {
-		SimpleMailMessage simpleMailMsg = new SimpleMailMessage();
-		simpleMailMsg.setTo(message.getTo());
-		simpleMailMsg.setSubject(message.getSubject());
-		simpleMailMsg.setText(message.getText());
+	// Configuration for mail server is defined in application.properties file.
+	public MessageService(@Autowired JavaMailSender mailSender) {
+		this.mailSender = mailSender;
+	}
+
+	public void sendMessage(String to, String subject, String text) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(to);
+		message.setSubject(subject);
+		message.setText(text);
 
 		try {
-			mailSender.send(simpleMailMsg);
+			mailSender.send(message);
 		} catch (MailException e) {
 			LOG.error(e.getMessage());
 		}
 	}
 
-	public void sendMessageWithAttachment(Message message, String pathToAttachment) {
+	public void sendMessageWithAttachment(String to, String subject, String text, String pathToAttachment) {
 		try {
-			MimeMessage mimeMsg = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(mimeMsg, true);
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-			helper.setTo(message.getTo());
-			helper.setSubject(message.getSubject());
-			helper.setText(message.getText());
+			helper.setTo(to);
+			helper.setSubject(subject);
+			helper.setText(text);
 
 			FileSystemResource file = new FileSystemResource(new File(pathToAttachment));
 
 			String fileName = file.getFilename();
-			if (fileName == null) {
-				fileName = "attachment";
+			if (fileName == null || fileName.isEmpty()) {
+				fileName = "attachment" + FilenameUtils.getExtension(fileName);
 			}
 
 			helper.addAttachment(fileName, file);
 
-			mailSender.send(mimeMsg);
+			mailSender.send(message);
 		} catch (MessagingException | MailException e) {
 			LOG.error(e.getMessage());
 		}
