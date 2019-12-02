@@ -4,11 +4,11 @@ import org.apache.tomcat.jni.Local;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AppointmentManager {
