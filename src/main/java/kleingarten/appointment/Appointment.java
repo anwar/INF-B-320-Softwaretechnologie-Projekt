@@ -20,7 +20,6 @@ public class Appointment {
 
 
 	private LocalTime time;
-	@JsonFormat(pattern="dd/MM/yyyy")
 	private LocalDate date;
 
 	private Appointment() {}

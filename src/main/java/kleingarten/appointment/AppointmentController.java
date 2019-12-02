@@ -31,9 +31,14 @@ public class AppointmentController {
 	}
 
 	@PostMapping("/createAppointment")
-	String addAppointment(@Valid CreateAppointmentForm form, Errors result){
+	String addAppointment(@Valid CreateAppointmentForm form, Error error){
+		LocalDate localDate = LocalDate.parse(form.getDate());
+		if(appointmentManager.getAll().get().anyMatch(appointment -> appointment.getDate().isEqual(localDate))){
+			error.getMessage();
+		}else{
+			appointmentManager.createAppointment(form);
+		}
 
-		appointmentManager.createAppointment(form);
 		return "redirect:/createAppointment";
 	}
 
