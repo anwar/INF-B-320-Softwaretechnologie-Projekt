@@ -20,9 +20,24 @@
     <div class="header-title">
         <h1>meine Parzellenübersicht</h1>
     </div>
-    <div class="button-section">
-        <button class="button"  onclick="location.href='/procedure'">Datenübersicht</button>
+    <div align="center">
+        <table>
+            <tbody>
+            <tr><th>Name</th> <td align="center" th:text="${plotName}"> Text </td></tr>
+            <tr><th>Größe</th> <td align="center" th:text="${plotSize}"> Text </td></tr>
+            <tr><th>Beschreibung</th> <td align="center" th:text="${plotDescription}"> Text </td></tr>
+            <tr><th>Schätzwert</th> <td align="center" th:text="${plotPrice}"> Text </td></tr>
+            <tr th:if="${canSee}"><th>Hauptpächter</th> <td align="center" th:text="${mainTenant}"> Text </td></tr>
+            <tr th:if="${canSee}"><th>Nebenpächter</th> <td></td></tr>
+            <tr th:if="${canSee}" th:each="tenant : ${subTenants}"><th></th> <td align="center" th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()}"> Text </td></tr>
+            <tr th:if="${canSee}"><th>Arbeitsstunden</th> <td align="center" th:text="${workHours}"> Text </td></tr>
+            </tbody>
+            <div class="button-section">
+                <button class="button" th:if="${canSee}">Zählerstände eintragen</button>
+                <button class="button" th:if="${canSee}">Rechnungen anzeigen</button>
 
+            </div>
+        </table>
     </div>
 </div>
 <div th:include="navigation :: footer"></div>

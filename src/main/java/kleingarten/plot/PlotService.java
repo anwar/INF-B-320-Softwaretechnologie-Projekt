@@ -1,9 +1,7 @@
 package kleingarten.plot;
 
 import kleingarten.Finance.ProcedureManager;
-import kleingarten.tenant.Tenant;
 import kleingarten.Finance.Procedure;
-import kleingarten.tenant.TenantRepository;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.stereotype.Component;
 
@@ -11,12 +9,10 @@ import org.springframework.stereotype.Component;
 public class PlotService {
 	private final PlotCatalog plotCatalog;
 	private final ProcedureManager procedureManager;
-	private final TenantRepository tenantRepository;
 
-	PlotService(PlotCatalog plotCatalog, ProcedureManager procedureManager, TenantRepository tenantRepository){
+	PlotService(PlotCatalog plotCatalog, ProcedureManager procedureManager){
 		this.plotCatalog = plotCatalog;
 		this.procedureManager = procedureManager;
-		this.tenantRepository = tenantRepository;
 	}
 
 	/**
@@ -55,20 +51,6 @@ public class PlotService {
 		return procedure;
 	}
 
-	/**
-	 * Compare if two objects of type {@link Tenant} are identical
-	 * @param tenant one tenant of type {@link Tenant} which should be compared
-	 * @param tenantId Id of the other tenant as a reference to the object
-	 * @return true, if the two objects of type {@link Tenant} are identical
-	 */
-	public boolean compareTenants(Tenant tenant, long tenantId) {
-		for (Tenant user:
-			 this.tenantRepository.findAll()) {
-			if (user.getId() == tenantId) {
-				return true;
-			}
-		}
-		return false;
-	}
+
 
 }
