@@ -22,19 +22,24 @@ public class AppointmentController {
 		this.appointmentManager = appointmentManager;
 	}
 
-	@GetMapping("/createAForm")
+	@GetMapping("/createAppointment")
 	String Appointments (Model model, CreateAppointmentForm form){
 		model.addAttribute("dateNow", LocalDate.now());
 		model.addAttribute("timeNow", LocalTime.now());
 		model.addAttribute("form", form);
-		return "createAForm";
+		return "createAppointment";
 	}
 
-	@PostMapping("/createAForm")
-	String addAppointment(@Valid CreateAppointmentForm form, Errors result){
+	@PostMapping("/createAppointment")
+	String addAppointment(@Valid CreateAppointmentForm form, Error error){
+		LocalDate localDate = LocalDate.parse(form.getDate());
+		if(appointmentManager.getAll().get().anyMatch(appointment -> appointment.getDate().isEqual(localDate))){
+			error.getMessage();
+		}else{
+			appointmentManager.createAppointment(form);
+		}
 
-		appointmentManager.createAppointment(form);
-		return "redirect:/createAForm";
+		return "redirect:/createAppointment";
 	}
 
 	@GetMapping("/listOfApps")

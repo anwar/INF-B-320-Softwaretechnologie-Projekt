@@ -37,18 +37,17 @@
         <tbody th:remove="all-but-first">
 
         <tr  th:each="procedure : ${procedure}">
-
             <td>Wasserstand</td>
             <td th:text="${procedure.getWatercount()}">Paul</td>
-            <td> <a type="button" th:value="${procedure.getPlotId()}" th:href="@{procedure/editWatercount/{plotId} (Id=${procedure.getPlotId()})}">Bearbeiten</a></td>
-            <!--<td type="button" onclick="location.href='/procedure/editWatercount/{plotId}'">Bearbeiten</button></td>-->
-
+            <td> <a type="button" th:value="${procedure.getPlotId()}" th:href="@{procedure/editWatercount/{plotId} (Id=${procedure.getPlotId()})}">Wasserzählerstand Bearbeiten</a></td>
         </tr>
+
         <tr>
             <td>Stromzählerstand</td>
             <td th:text="${procedure.getPowercount()}">Paul</td>
-            <td> <a type="button">Bearbeiten</a></td>
+            <td> <a type="button" th:value="${procedure.getPlotId()}" th:href="@{procedure/editPowercount/{plotId} (Id=${procedure.getPlotId()})}">Stromzählerstand Bearbeiten</a></td>
         </tr>
+
         <tr>
             <td>Größe</td>
             <td th:text="${procedure.getSize()}">Paul</td>

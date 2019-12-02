@@ -4,7 +4,7 @@ import org.salespointframework.core.SalespointIdentifier;
 
 import kleingarten.plot.Plot;
 
-public class EditWatercount {
+public class editWatercount {
 	private int year;
 	private SalespointIdentifier plotId;
 	private double watercount;
@@ -21,12 +21,5 @@ public class EditWatercount {
 	public void setWatercount(double watercount) {
 		this.watercount = watercount;
 	}
-
-	// There is an issue in plotId. Currently I can not use this method
-	/*
-	public String getPlotId() {
-		return plotId.toString();
-	}
-	*/
 
 }

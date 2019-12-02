@@ -177,18 +177,18 @@ li a:hover {
 	margin-top: 70px;
 }
 
-.plotRegistration table{
+.plotRegistration .appointment-form  table{
 	margin: 0 auto;
 }
 
-.plotRegistration table td label{
+.plotRegistration .appointment-form table td label{
 	font-size: 21px;
 	color: #043353;
 	margin-right: 20px;
 
 }
 
-.plotRegistration table td input{
+.plotRegistration .appointment-form table td input{
 	margin-top: 20px;
 	border-radius: 20px;
 	height: 25px;
