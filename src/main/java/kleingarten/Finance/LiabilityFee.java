@@ -6,6 +6,7 @@ public class LiabilityFee extends Fee {
 		this.title = "Haftpflichtbeitrag";
 		this.text = "";
 		this.count = 1;
+		this.defaultPrice = getDefaultPrice(2018);
 	}
 	@Override
 	public double getDefaultPrice(int year) {

@@ -6,6 +6,7 @@ public class ExpensesFlat extends Fee {
 		this.title = "Aufwandspauschale";
 		this.text = "";
 		this.count = 1;
+		this.defaultPrice = getDefaultPrice(2018);
 	}
 	@Override
 	public double getDefaultPrice(int year) {

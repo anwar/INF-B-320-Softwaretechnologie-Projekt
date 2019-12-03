@@ -17,7 +17,7 @@ public class BillController {
 
 	@GetMapping("/bill")
 	String viewBill(Model model){
-		model.addAttribute("Bill", billManager.findAll());
+		model.addAttribute("feeList", billManager.findAll());
 		return "bill";
 	}
 
