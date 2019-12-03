@@ -1,5 +1,6 @@
 package kleingarten.plot;
 
+import com.sun.xml.bind.v2.TODO;
 import kleingarten.Finance.Procedure;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantRepository;
@@ -159,9 +160,14 @@ public class PlotController {
 
 		Set<Plot> plots = plotCatalog.findAll().toSet();
 		Map<Plot, String> colors = new HashMap<>();
+		Map<Plot, Boolean> rights = new HashMap<>();
+
 		for (Plot plot : plots) {
 			colors.put(plot, plot.getStatus() == PlotStatus.TAKEN ? "grey" : "olive");
-			if (plot.getStatus() == PlotStatus.TAKEN) {
+			if (plot.getStatus() == PlotStatus.FREE) {
+				rights.put(plot, true);
+			}
+			else {
 				Tenant mainTenant = dataService.findTenantById(dataService.getProcedure(LocalDateTime.now().getYear(), plot).getMainTenant());
 				if (dataService.tenantHasRole(mainTenant, Role.of("Vorstandsvorsitzender")) || dataService.tenantHasRole(mainTenant, Role.of("Stellvertreter"))) {
 					colors.put(plot, "yellow");
@@ -172,11 +178,35 @@ public class PlotController {
 				else if (dataService.tenantHasRole(mainTenant, Role.of("Obmann"))) {
 					colors.put(plot, "blue");
 				}
+				rights.put(plot, false);
+			}
+			if (user.isPresent()) {
+				if (tenantRepository.findByUserAccount(user.get()).isEmpty()) {
+					throw new IllegalArgumentException("User must exist!");
+				}
+				Tenant tenant = tenantRepository.findByUserAccount(user.get()).get();
+				if (dataService.tenantHasRole(tenant, Role.of("Vorstandsvorsitzender"))
+					|| dataService.tenantHasRole(tenant, Role.of("Stellvertreter"))) {
+					rights.put(plot, true);
+					mav.addObject("canAdd", true);
+				}
+				else if (dataService.tenantHasRole(tenant, Role.of("Protokollant"))
+					|| dataService.tenantHasRole(tenant, Role.of("Kassierer"))
+					|| dataService.tenantHasRole(tenant, Role.of("Wassermann"))) {
+					rights.put(plot, true);
+				}
+				//TODO Implement usage of chairman
+				/*else if (dataService.tenantHasRole(tenant, Role.of("Obmann"))) {
+					rights.put(plot, plot.getChairman().getId() == tenant.getId());
+				}*/
 			}
 		}
+
 		mav.addObject("plotList", plots);
 		mav.addObject("plotColors", colors);
+		mav.addObject("userRights", rights);
 		mav.setViewName("plotOverview");
+
 		return mav;
 
 	}
