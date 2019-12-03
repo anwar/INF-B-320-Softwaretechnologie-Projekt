@@ -7,16 +7,19 @@ import kleingarten.tenant.TenantRepository;
 import org.salespointframework.useraccount.Role;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
 public class DataService {
 	private final TenantRepository tenantRepository;
 	private final ProcedureManager procedureManager;
+	private final PlotService plotService;
 
-	DataService(TenantRepository tenantRepository, ProcedureManager procedureManager) {
+	DataService(TenantRepository tenantRepository, ProcedureManager procedureManager, PlotService plotService) {
 		this.tenantRepository = tenantRepository;
 		this.procedureManager = procedureManager;
+		this.plotService = plotService;
 	}
 
 	/**
@@ -72,5 +75,34 @@ public class DataService {
 			throw new IllegalArgumentException("Procedure must not be null!");
 		}
 		return procedure;
+	}
+
+	/**
+	 * Check if there is a {@link Procedure} for the given {@link Plot} and year
+	 * @param year year for which a {@link Procedure} is searched as int
+	 * @param plot plot of type {@link Plot}for which a {@link Procedure} is searched
+	 * @return true, if {@link Procedure} exists, else false
+	 */
+	public boolean procedureExists(int year, Plot plot) {
+		Procedure procedure = procedureManager.getProcedure(year, plot);
+		if (procedure == null) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Create a {@link Set} of {@link Plot}s which are rented by a specific {@link Tenant}
+	 * @param year year for which the {@link Plot}s are searched as int
+	 * @param tenant tenant of type {@link Tenant} who's rented {@link Plot}s are searched
+	 * @return {@link Set} of {@link Plot}s which a associated to the given {@link Tenant}
+	 */
+	public Set<Plot> getRentedPlots(int year, Tenant tenant) {
+		Set<Plot> rentedPlots = new HashSet<>();
+		Set<Procedure> procedures = procedureManager.getProcedures(year, tenant.getId()).toSet();
+		for (Procedure procedure : procedures) {
+			rentedPlots.add(plotService.findById(procedure.getPlotId()));
+		}
+		return rentedPlots;
 	}
 }
