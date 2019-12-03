@@ -21,6 +21,7 @@ import com.icegreen.greenmail.util.ServerSetup;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ActiveProfiles;
 
 import javax.mail.MessagingException;
@@ -29,6 +30,14 @@ import javax.mail.internet.MimeMessage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Integration tests for {@link MessageService}.
+ * {@link GreenMail} is used to create a test server where we can send and received
+ * our emails for testing purposes.
+ * These tests are based on the examples provided on the official Greenmail website.
+ *
+ * @see http://www.icegreen.com/greenmail/#examples
+ */
 @SpringBootTest
 @ActiveProfiles("test")
 public class MessageServiceIntegrationTest {
@@ -36,17 +45,24 @@ public class MessageServiceIntegrationTest {
 
 	private MessageService messageService;
 
+	/**
+	 * The {@link JavaMailSender} for the {@link MessageService} is created and configured using
+	 * the properties file in {@code src/test/resources/application.properties}.
+	 */
 	public MessageServiceIntegrationTest(@Autowired MessageService messageService) {
 		this.messageService = messageService;
 	}
 
+	/**
+	 * Test whether a simple email was sent properly.
+	 * {@link GreenMailUtil} is used to created random content for the email.
+	 */
 	@Test
 	public void sendMessageTest() throws MessagingException {
 		try {
 			greenMail.start();
 
 			final String to = "bar@example.com";
-			//Use random content to avoid potential residual lingering problems
 			final String subject = GreenMailUtil.random();
 			final String text = GreenMailUtil.random();
 
@@ -55,7 +71,6 @@ public class MessageServiceIntegrationTest {
 			// wait for max 5s for 1 email to arrive
 			assertTrue(greenMail.waitForIncomingEmail(3000, 1));
 
-			// Retrieve using GreenMail API
 			MimeMessage[] messages = greenMail.getReceivedMessages();
 			assertEquals(1, messages.length);
 

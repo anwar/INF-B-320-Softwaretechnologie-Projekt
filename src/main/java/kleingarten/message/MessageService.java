@@ -30,17 +30,36 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
 
+/**
+ * {@link MessageService} provides convenient methods based on the {@link org.springframework.mail} package
+ * to send emails using a SMTP server.
+ * The methods are based on the official Spring documentation and the guide on Baeldung website.
+ *
+ * @see https://docs.spring.io/spring/docs/5.2.2.RELEASE/spring-framework-reference/integration.html#mail
+ * @see https://www.baeldung.com/spring-email
+ */
 @Service
 public class MessageService {
 	private static final Logger LOG = LoggerFactory.getLogger(MessageService.class);
 
 	private JavaMailSender mailSender;
 
-	// Configuration for mail server is defined in application.properties file.
+	/**
+	 * Spring Framework provides an easy abstraction for sending email by using the {@link JavaMailSender}
+	 * interface. Spring creates a {@link JavaMailSender}, if none exists, using the configuration provided
+	 * in {@code src/main/resources/application.properties}.
+	 */
 	public MessageService(@Autowired JavaMailSender mailSender) {
 		this.mailSender = mailSender;
 	}
 
+	/**
+	 * A method for sending a {@link SimpleMailMessage}.
+	 *
+	 * @param to      email address of the recipient
+	 * @param subject for the email
+	 * @param text    for the email
+	 */
 	public void sendMessage(String to, String subject, String text) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(to);
@@ -54,6 +73,14 @@ public class MessageService {
 		}
 	}
 
+	/**
+	 * A method for sending a multi part {@link MimeMessage}.
+	 *
+	 * @param to               email address of the recipient
+	 * @param subject          for the email
+	 * @param text             for the email
+	 * @param pathToAttachment for the email
+	 */
 	public void sendMessageWithAttachment(String to, String subject, String text, String pathToAttachment) {
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
