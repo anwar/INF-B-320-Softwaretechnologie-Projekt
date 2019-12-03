@@ -5,8 +5,12 @@ import java.util.Set;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Persistence;
 
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.lang.NonNull;
@@ -30,7 +34,9 @@ public class Procedure {
 	 */
 	private boolean isOpen;
 	
-	private String plotId;
+	@ManyToOne
+	@JoinColumn(name = "PRODUCT_ID")
+	private Plot plot;
 
 	/**
 	 * The values shown by the clock.
@@ -65,6 +71,7 @@ public class Procedure {
 	
 	private Procedure() {
 		//Default Constructor for spring
+		super();
 	}
 
 	/**
@@ -78,7 +85,6 @@ public class Procedure {
 	public Procedure(int year, String plotId, double size, long mainTenant) {
 		super();
 		this.year = year;
-		this.plotId = plotId; //save SalespointIdentifier as String
 		this.size = size;
 		this.mainTenant = mainTenant;
 		isOpen = true;
@@ -93,6 +99,7 @@ public class Procedure {
 	 */
 	public Procedure(int year, Plot plot, long mainTenant) {
 		this(year, plot.getId().getIdentifier(), (double)plot.getSize(), mainTenant);
+		this.plot = plot;
 	}
 	
 	
@@ -241,7 +248,7 @@ public class Procedure {
 	
 	
 	public String toString() {
-		return "Procedure Plot: " + plotId + " Tenant: " + mainTenant + " isOpen? " + isOpen();
+		return "Procedure Plot: " + plot.getName() + " Tenant: " + mainTenant + " isOpen? " + isOpen();
 	}
 
 }
