@@ -54,6 +54,8 @@ public class TenantTest {
 		assertThat(tenant.getSurname().equals("Gepackert"));
 
 	}
-
-
+	@Test
+	void initialEmailTest(){
+		assertThat(tenant.getUserAccount().getEmail().equals("jassis@email.com"));
+	}
 }
