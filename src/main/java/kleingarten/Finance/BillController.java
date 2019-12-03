@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class BillController {
 
-	/*private BillManager billManager;
+	private BillManager billManager;
 
 	@Autowired
 	public BillController(BillManager billManager) {
 		this.billManager = billManager;
 	}
-	*/
 
 	@GetMapping("/bill")
-	String viewBill(){
+	String viewBill(Model model){
+		model.addAttribute("Bill", billManager.findAll());
 		return "bill";
 	}
 

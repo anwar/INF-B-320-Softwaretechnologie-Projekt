@@ -7,8 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BillRepository extends CrudRepository<Bill, Long> {
+public interface BillRepository extends CrudRepository<Fee, Long> {
 
+	@Override
+	List<Fee> findAll();
 	/*
 	Streamable<Bill> findAll();
 

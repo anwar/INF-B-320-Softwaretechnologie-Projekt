@@ -5,6 +5,8 @@ import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BillManager {
 	private BillRepository billRepository;
@@ -15,20 +17,20 @@ public class BillManager {
 	public BillManager(BillRepository billRepository) {
 		this.billRepository = billRepository;
 	}
-	/*
-	Streamable<Bill> findAll(){
+
+	List<Fee> findAll(){
 		return billRepository.findAll();
-	};
+	}
 
-
+	/*
 	Bill findById(long id) {
 		return billRepository.findById(id);
-	};
+	}
 
 	Streamable<Bill> findByPlotId(String plotId){
 		return billRepository.findByPlotId(plotId);
 	}
-	;
+
 	*/
 
 	//Streamable<Bill> findByYear(int year);
