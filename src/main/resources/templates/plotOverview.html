@@ -25,7 +25,7 @@
     <div class="plotOverview">
         <div class="plotList" th:each="plot : ${plotList}">
             <div class="plot" th:style="'background: ' + ${plotColors.get(plot)}">
-                <a title="Details anzeigen" th:text="${plot.getName()}" th:if="${userRights.get(plot)}" th:href="'/plot/' + ${plot.getId()}"> Text </a>
+                <a title="Details anzeigen" th:text="${plot.getName()}" th:if="${userRights.get(plot)}" th:href="'/myPlot/' + ${plot.getId()}"> Text </a>
                 <span th:unless="${userRights.get(plot)}" th:text="${plot.getName()}"> Text </span>
             </div>
         </div>

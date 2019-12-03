@@ -18,8 +18,9 @@
 <div class="ui container">
     <nav th:include="navigation :: navigation"/>
     <div class="header-title">
-        <h1>meine Parzellenübersicht</h1>
+        <h1>Details</h1>
     </div>
+
     <div align="center">
         <table>
             <tbody>
@@ -27,17 +28,22 @@
             <tr><th>Größe</th> <td align="center" th:text="${plotSize}"> Text </td></tr>
             <tr><th>Beschreibung</th> <td align="center" th:text="${plotDescription}"> Text </td></tr>
             <tr><th>Schätzwert</th> <td align="center" th:text="${plotPrice}"> Text </td></tr>
-            <tr th:if="${canSee}"><th>Hauptpächter</th> <td align="center" th:text="${mainTenant}"> Text </td></tr>
+            <tr th:if="${canSee}"><th>Hauptpächter</th> <td align="center" th:text="${mainTenant.getForename()} + ' ' + ${mainTenant.getSurname()}"> Text </td></tr>
             <tr th:if="${canSee}"><th>Nebenpächter</th> <td></td></tr>
             <tr th:if="${canSee}" th:each="tenant : ${subTenants}"><th></th> <td align="center" th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()}"> Text </td></tr>
             <tr th:if="${canSee}"><th>Arbeitsstunden</th> <td align="center" th:text="${workHours}"> Text </td></tr>
             </tbody>
             <div class="button-section">
-                <button class="button" th:if="${canSee}">Zählerstände eintragen</button>
-                <button class="button" th:if="${canSee}">Rechnungen anzeigen</button>
+                <button class="button" th:if="${canModify}">Zählerstände eintragen</button>
+                <button class="button" th:if="${canSeeBills}">Rechnungen anzeigen</button>
 
             </div>
         </table>
+        <div class="button-section">
+            <button class="button"  th:if="${!loggedIn}" onclick="location.href='/createApplication'" >Bewerben</button>
+            <button class="button" onclick="location.href= '/application'" th:if="${canSeeApplications}">Bewerbungen anzeigen</button>
+            <input type="hidden" id="plotID" name="plotID" th:value="${plotID}">
+        </div>
     </div>
 </div>
 <div th:include="navigation :: footer"></div>

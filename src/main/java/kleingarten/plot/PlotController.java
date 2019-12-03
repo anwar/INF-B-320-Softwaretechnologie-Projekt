@@ -10,6 +10,7 @@ import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.money.format.MonetaryFormats;
@@ -31,7 +32,7 @@ public class PlotController {
 	}
 
 	@GetMapping("/myPlot")
-	public ModelAndView details(@LoggedIn Optional<UserAccount> user, Optional<Plot> plot) {
+	public ModelAndView details(@LoggedIn Optional<UserAccount> user, @RequestParam Optional<Plot> plot) {
 		ModelAndView mav = new ModelAndView();
 		Plot shownPlot = null;
 
