@@ -14,9 +14,10 @@ public class Bill {
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	/*
 	 *billID shows plot Nr. and created year
-	 */
+
 	private String billID;
 	//Procedure procedure;
 
@@ -27,6 +28,7 @@ public class Bill {
 	public void setBillID(String billID) {
 		this.billID = billID;
 	}
+	*/
 
 	public Bill(){}
 
@@ -34,8 +36,9 @@ public class Bill {
 	List<Fee> fees;
 
 	public Bill(Procedure procedure){
-		this.billID = billID;
-
+		/**
+		 * Basic fees for a bill
+		 */
 		Fee membershipFee = new MembershipFee();
 		fees.add(membershipFee);
 		Fee liabilityFee = new LiabilityFee();
@@ -52,21 +55,15 @@ public class Bill {
 		fees.add(waterMeterFee);
 		Fee electricityMeterFee = new ElectricityMeterFee();
 		fees.add(electricityMeterFee);
-
+		/*
 		double water = procedure.getWatercount();
 		Fee waterFee = new WaterFee();
 		fees.add(waterFee);
+		*/
+		//this.billID = billID;
+
 	}
 
-	/*
-	public String generateString(Procedure procedure) {
-
-		Fee water = new WaterFee();
-		water.setCount(procedure.getWatercount());
-
-		return water.getTitle() + water.getText();
-	}
-	 */
 }
 
 

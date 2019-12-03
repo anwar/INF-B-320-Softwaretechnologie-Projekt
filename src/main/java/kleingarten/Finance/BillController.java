@@ -2,17 +2,19 @@ package kleingarten.Finance;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class BillController {
 
-	private BillManager billManager;
+	/*private BillManager billManager;
 
 	@Autowired
-	public BillController(BillManager billManager ) {
+	public BillController(BillManager billManager) {
 		this.billManager = billManager;
 	}
+	*/
 
 	@GetMapping("/bill")
 	String viewBill(){

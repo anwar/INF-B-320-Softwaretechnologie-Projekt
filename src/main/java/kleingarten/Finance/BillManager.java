@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class BillManager {
 	private BillRepository billRepository;
-	private String getBillID;
-	/*
-	//@Autowired
+	//private String getBillID;
+
+
+	@Autowired
 	public BillManager(BillRepository billRepository) {
 		this.billRepository = billRepository;
-
 	}
+	/*
 	Streamable<Bill> findAll(){
 		return billRepository.findAll();
 	};
