@@ -31,39 +31,39 @@ public class ProcedureDataInitializer implements DataInitializer {
 		if (!this.procedureManager.getAll().toList().isEmpty()) {
 			return;
 		}
-		LOG.info("Creating default procedures");
-		Streamable<Tenant> tenants = this.tenantRepository.findAll();
-		Tenant boss = null;
-		Tenant obman = null;
-		Tenant protocol = null;
-		Tenant waterman = null;
-		for (Tenant tenant:
-			 tenants) {
-			if (tenant.getEmail().equals("peter.klaus@email.com")) {
-				boss = tenant;
-			}
-			else if (tenant.getEmail().equals("hubert.grumpel2@cloud.com")) {
-				obman = tenant;
-			}
-			else if (tenant.getEmail().equals("francys@email.com")) {
-				protocol = tenant;
-			}
-			else if (tenant.getEmail().equals("neptuns.bart@fishmail.com")) {
-				waterman = tenant;
-			}
-		}
+
 		List<Plot> plots = this.plotCatalog.findAll().toList();
+		List<Tenant> tenants = this.tenantRepository.findAll().toList();
+		if (!plots.isEmpty() && !tenants.isEmpty()) {
+			LOG.info("Creating default procedures");
 
-		var procedure_1 = new Procedure(2019, plots.get(0), boss.getId());
-		this.procedureManager.add(procedure_1);
-		var procedure_2 = new Procedure(2019, plots.get(1), obman.getId());
-		this.procedureManager.add(procedure_2);
-		var procedure_3 = new Procedure(2019, plots.get(2), protocol.getId());
-		this.procedureManager.add(procedure_3);
-		var procedure_4 = new Procedure(2019, plots.get(3), waterman.getId());
-		this.procedureManager.add(procedure_4);
+			Tenant boss = null;
+			Tenant obman = null;
+			Tenant protocol = null;
+			Tenant waterman = null;
+			for (Tenant tenant:
+				tenants) {
+				if (tenant.getEmail().equals("peter.klaus@email.com")) {
+					boss = tenant;
+				} else if (tenant.getEmail().equals("hubert.grumpel2@cloud.com")) {
+					obman = tenant;
+				} else if (tenant.getEmail().equals("francys@email.com")) {
+					protocol = tenant;
+				} else if (tenant.getEmail().equals("neptuns.bart@fishmail.com")) {
+					waterman = tenant;
+				}
+			}
 
-		LOG.info("Finished creating default procedures");
+			var procedure_1 = new Procedure(2019, plots.get(0), boss.getId());
+			this.procedureManager.add(procedure_1);
+			var procedure_2 = new Procedure(2019, plots.get(1), obman.getId());
+			this.procedureManager.add(procedure_2);
+			var procedure_3 = new Procedure(2019, plots.get(2), protocol.getId());
+			this.procedureManager.add(procedure_3);
+			var procedure_4 = new Procedure(2019, plots.get(3), waterman.getId());
+			this.procedureManager.add(procedure_4);
+
+			LOG.info("Finished creating default procedures");
+		}
 	}
-
 }
