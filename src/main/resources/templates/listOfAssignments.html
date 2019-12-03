@@ -25,11 +25,13 @@
     <table>
         <tr>
             <th>Datum</th>
-            <th>Zeit</th>
+            <th>Titel</th>
+            <th>Beschreibung</th>
         </tr>
-        <tr th:each="app : ${ListOfApps}">
-            <td th:text="${app.date}">Datum</td>
-            <td th:text="${app.time}">Zeit</td>
+        <tr th:each="assignment : ${ListOfAssignments}">
+            <td th:text="${assignment.date}">Datum</td>
+            <td th:text="${assignment.title}">Titel</td>
+            <td th:text="${assignment.description}">Beschreibung</td>
         </tr>
     </table>
     </center>
