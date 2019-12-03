@@ -1,19 +1,24 @@
 package kleingarten.Finance;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.List;
 
-//@Entity
+@Entity
 public class Bill {
 
+	private @Id @GeneratedValue long id;
+
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	/*
 	 *billID shows plot Nr. and created year
 	 */
 	private String billID;
-	Procedure procedure;
+	//Procedure procedure;
 
 	public String getBillID() {
 		return billID;
@@ -25,6 +30,7 @@ public class Bill {
 
 	public Bill(){}
 
+	@ManyToMany
 	List<Fee> fees;
 
 	public Bill(Procedure procedure){
@@ -46,9 +52,10 @@ public class Bill {
 		fees.add(waterMeterFee);
 		Fee electricityMeterFee = new ElectricityMeterFee();
 		fees.add(electricityMeterFee);
-		/*double water = procedure.getWatercount();
+
+		double water = procedure.getWatercount();
 		Fee waterFee = new WaterFee();
-		fees.add(waterFee);*/
+		fees.add(waterFee);
 	}
 
 	/*

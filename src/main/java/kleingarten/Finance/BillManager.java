@@ -5,7 +5,7 @@ import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class BillManager {
 	private BillRepository billRepository;
 	private String getBillID;

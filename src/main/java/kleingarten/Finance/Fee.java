@@ -1,5 +1,8 @@
 package kleingarten.Finance;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,9 +14,10 @@ import java.util.Map;
  * @author susho
  *
  */
+@Entity
 public abstract class Fee {
 
-
+	private @Id @GeneratedValue long id;
 
 	/**
 	 * Title shown on Bill.

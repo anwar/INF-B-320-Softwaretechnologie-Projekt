@@ -16,12 +16,12 @@ public class ProcedureController {
 
 
 	}
-
+/*
 	@GetMapping("/bill")
 	String viewBill() {
 		return "bill";
 	}
-/*
+
 	@GetMapping("/bill")
 	public String viewBill(Model model) {
 		model.addAttribute("ProcedureRepository", procedureManager.findAll());
