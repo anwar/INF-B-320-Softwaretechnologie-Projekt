@@ -3,6 +3,7 @@ package kleingarten.plot;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.core.SalespointIdentifier;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.util.Assert;
 import java.util.List;
 
 @Component
+@Order(10)
 public class PlotDataInitializer implements DataInitializer{
 	private static final Logger LOG = LoggerFactory.getLogger(PlotDataInitializer.class);
 	private final PlotCatalog catalog;

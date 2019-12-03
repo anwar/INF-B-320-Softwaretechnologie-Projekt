@@ -1,9 +1,12 @@
 package kleingarten.Finance;
 
+import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.util.Streamable;
+
+import kleingarten.plot.Plot;
 
 public interface ProcedureRepository extends CrudRepository<Procedure, Long> {
 
@@ -11,7 +14,14 @@ public interface ProcedureRepository extends CrudRepository<Procedure, Long> {
 
 	Procedure findById(long id);
 
-	Streamable<Procedure> findByPlotId(String plotId);
+	Streamable<Procedure> findByPlot(Plot plot);
+
+	Streamable<Procedure> findByPlotName(String plotName);
+	
+
+	Streamable<Procedure> findByPlotProductIdentifier(ProductIdentifier plotId);
+	
+	
 
 	Streamable<Procedure> findByYear(int year);
 	
