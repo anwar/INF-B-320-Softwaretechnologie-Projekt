@@ -32,4 +32,7 @@ public class AppointmentManager {
 		return times.save((new Appointment(localTime, localDate)));
 		}
 
+	public Appointment createAppointmentForInitializer(LocalTime time, LocalDate date){
+		return times.save((new Appointment(time, date)));
+	}
 	}
