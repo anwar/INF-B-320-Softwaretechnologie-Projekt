@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import kleingarten.plot.PlotService;
+import kleingarten.plot.PlotStatus;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.core.SalespointIdentifier;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +20,15 @@ import kleingarten.plot.Plot;
 public class ProcedureManager {
 
 	private final ProcedureRepository procedures;
+	//Add plotService to use it's methods (Ylvi)
+	private final PlotService plotService;
 
 
 	@Autowired
-	public ProcedureManager(ProcedureRepository procedures) {
+	public ProcedureManager(ProcedureRepository procedures, PlotService plotService) {
 		Assert.notNull(procedures, "ProcedureRepository must not be null!");
 		this.procedures = procedures;
+		this.plotService = plotService;
 	}
 
 /*
@@ -47,7 +52,9 @@ public class ProcedureManager {
 		return procedures.findById(id);
 	}
 
+	//Changed the method so that the status of the associated plot is changed (Ylvi)
 	public Procedure add(Procedure procedure) {
+		plotService.findById(procedure.getPlotId()).setStatus(PlotStatus.TAKEN);
 		return procedures.save(procedure);
 	}
 
@@ -112,7 +119,7 @@ public class ProcedureManager {
 	public Streamable<Procedure> findByPlotName(String plotName){
 		return procedures.findByPlotName(plotName);
 	}
-	
+
 	public Streamable<Procedure> findByPlotId(String plotName){
 		return null;//procedures.findByPlotsName(plotName);
 	}
