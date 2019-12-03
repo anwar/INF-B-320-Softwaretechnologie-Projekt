@@ -25,22 +25,22 @@ public class PlotDataInitializer implements DataInitializer{
 	}
 
 	public void initialize(){
-		if (this.plotService.existsByName("23")) {
+		if (this.plotService.existsByName("1")) {
 			return;
 		}
 
 		LOG.info("Creating default plots");
-		var Plot = this.plotService.addNewPlot("1", 300, "Kleine Parzelle mit angelegtem Teich.");
+		Plot Plot = this.plotService.addNewPlot("1", 300, "Kleine Parzelle mit angelegtem Teich.");
 		LOG.info(Plot.getId().toString());
-		var Plot_2 = this.plotService.addNewPlot("2", 500, "Sehr große Parzelle.");
+		Plot Plot_2 = this.plotService.addNewPlot("2", 500, "Sehr große Parzelle.");
 		LOG.info(Plot_2.getId().toString());
-		var Plot_3 = this.plotService.addNewPlot("3", 120, "Kleine Parzelle.");
+		Plot Plot_3 = this.plotService.addNewPlot("3", 120, "Kleine Parzelle.");
 		LOG.info(Plot_3.getId().toString());
-		var Plot_4 = this.plotService.addNewPlot("4", 1500, "Sehr, sehr große Parzelle.");
+		Plot Plot_4 = this.plotService.addNewPlot("4", 1500, "Sehr, sehr große Parzelle.");
 		LOG.info(Plot_4.getId().toString());
-		var Plot_5 = this.plotService.addNewPlot("5", 350, "Parzelle mit angelegtem Teich.");
+		Plot Plot_5 = this.plotService.addNewPlot("5", 350, "Parzelle mit angelegtem Teich.");
 		LOG.info(Plot_5.getId().toString());
-		var Plot_6 = this.plotService.addNewPlot("6", 200, "Große Parzelle.");
+		Plot Plot_6 = this.plotService.addNewPlot("6", 200, "Große Parzelle.");
 		LOG.info(Plot_6.getId().toString());
 		this.catalog.saveAll(List.of(Plot, Plot_2, Plot_3, Plot_4, Plot_5, Plot_6));
 
