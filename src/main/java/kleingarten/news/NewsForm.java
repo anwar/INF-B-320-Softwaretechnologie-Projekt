@@ -50,8 +50,7 @@ class NewsForm {
 	 * @return the newly created {@link NewsEntry}
 	 * @throws IllegalArgumentException if you call this on an instance without the text actually set.
 	 */
-	NewsEntry toNewEntry() {
-
+	NewsEntry toNewsEntry() {
 		return new NewsEntry(getText());
 	}
 }

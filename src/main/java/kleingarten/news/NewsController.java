@@ -83,7 +83,7 @@ class NewsController {
 			return home(model, form);
 		}
 
-		news.save(form.toNewEntry());
+		news.save(form.toNewsEntry());
 
 		return "redirect:/home";
 	}
