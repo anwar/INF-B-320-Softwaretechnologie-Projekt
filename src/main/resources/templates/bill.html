@@ -33,10 +33,10 @@
     </thead>
     <tbody th:remove="all-but-first">
     <tr th:each="bill : ${feeList}">
-        <td th:text="${bill.title}">Title</td>
-        <td th:text="${bill.text}">Text</td>
-        <td th:text="${bill.count}">Count</td>
-        <td th:text="${bill.defaultPrice}">Price</td>
+        <td th:text="${fee.title}">Title</td>
+        <td th:text="${fee.text}">Text</td>
+        <td th:text="${fee.count}">Count</td>
+        <td th:text="${fee.defaultPrice}">Price</td>
     </tr>
 </table>
 </div>

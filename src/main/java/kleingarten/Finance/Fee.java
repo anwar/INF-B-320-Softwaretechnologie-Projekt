@@ -36,8 +36,8 @@ public abstract class Fee {
 	double defaultPrice;
 
 	public Fee() {
-		this.title="DEFAULT_TITLE";
-		this.text="DEFAULT_TEXT";
+		this.title = "DEFAULT_TITLE";
+		this.text = "DEFAULT_TEXT";
 		this.count = 1;
 		this.defaultPrice = 1;
 	}
@@ -50,7 +50,7 @@ public abstract class Fee {
 		return text;
 	}
 
-	public double getCount(){
+	public double getCount() {
 		return count;
 	}
 

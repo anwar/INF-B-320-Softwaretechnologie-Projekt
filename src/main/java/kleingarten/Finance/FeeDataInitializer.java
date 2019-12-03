@@ -5,12 +5,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 
 @Component
 public class FeeDataInitializer implements DataInitializer {
 
 
 	private static final Logger LOG = LoggerFactory.getLogger(FeeDataInitializer.class);
+	List<Fee> feeList;
 
 	@Override
 	public void initialize() {
@@ -42,6 +45,7 @@ public class FeeDataInitializer implements DataInitializer {
 		LOG.info("PREIS TEST11:   "+waterMeterFee.getDefaultPrice(2018));
 		LOG.info("PREIS TEST12:   "+electricityMeterFee.getDefaultPrice(2018));
 
+		LOG.info("List:  " + feeList);
 
 
 	}

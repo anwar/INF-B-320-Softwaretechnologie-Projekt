@@ -54,9 +54,17 @@ public class Bill {
 		feeList.add(waterMeterFee);
 		Fee electricityMeterFee = new ElectricityMeterFee();
 		feeList.add(electricityMeterFee);
-
+		/**
+		 * Fees relevant to Procedure Class
+		 */
 		Fee waterFee = new WaterFee();
 		feeList.add(waterFee);
+		Fee powerFee = new PowerFee();
+		feeList.add(powerFee);
+		Fee rent = new Rent();
+		feeList.add(rent);
+		Fee penalty = new Penalty();
+		feeList.add(penalty);
 
 		//this.billID = billID;
 
