@@ -161,6 +161,18 @@ public class PlotController {
 		Map<Plot, String> colors = new HashMap<>();
 		for (Plot plot : plots) {
 			colors.put(plot, plot.getStatus() == PlotStatus.TAKEN ? "grey" : "olive");
+			if (plot.getStatus() == PlotStatus.TAKEN) {
+				Tenant mainTenant = dataService.findTenantById(dataService.getProcedure(LocalDateTime.now().getYear(), plot).getMainTenant());
+				if (dataService.tenantHasRole(mainTenant, Role.of("Vorstandsvorsitzender")) || dataService.tenantHasRole(mainTenant, Role.of("Stellvertreter"))) {
+					colors.put(plot, "yellow");
+				}
+				else if (dataService.tenantHasRole(mainTenant, Role.of("Kassierer"))) {
+					colors.put(plot, "red");
+				}
+				else if (dataService.tenantHasRole(mainTenant, Role.of("Obmann"))) {
+					colors.put(plot, "blue");
+				}
+			}
 		}
 		mav.addObject("plotList", plots);
 		mav.addObject("plotColors", colors);

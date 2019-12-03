@@ -1,16 +1,22 @@
 package kleingarten.plot;
 
+import kleingarten.Finance.Procedure;
+import kleingarten.Finance.ProcedureManager;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantRepository;
 import org.salespointframework.useraccount.Role;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
 @Component
 public class DataService {
 	private final TenantRepository tenantRepository;
+	private final ProcedureManager procedureManager;
 
-	DataService(TenantRepository tenantRepository) {
+	DataService(TenantRepository tenantRepository, ProcedureManager procedureManager) {
 		this.tenantRepository = tenantRepository;
+		this.procedureManager = procedureManager;
 	}
 
 	/**
@@ -44,12 +50,27 @@ public class DataService {
 	}
 
 	public boolean tenantHasRole(Tenant tenant, Role role) {
+		Set<Role> roles = findTenantById(tenant.getId()).getUserAccount().getRoles().toSet();
 		for (Role tenantRole:
-			 findTenantById(tenant.getId()).getUserAccount().getRoles()) {
-			if (tenantRole == role) {
+			 roles) {
+			if (tenantRole.toString().equals(role.toString())) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Get the associated {@link Procedure} for a {@link Plot}
+	 * @param year the year for which the {@link Procedure} should be found
+	 * @param plot the {@link Plot} for which the {@link Procedure} should be found
+	 * @return {@link Procedure} which is searched for
+	 */
+	public Procedure getProcedure(int year, Plot plot) {
+		Procedure procedure = procedureManager.getProcedure(year, plot);
+		if (procedure == null) {
+			throw new IllegalArgumentException("Procedure must not be null!");
+		}
+		return procedure;
 	}
 }
