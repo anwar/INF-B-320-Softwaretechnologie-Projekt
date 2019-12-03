@@ -33,12 +33,13 @@ public abstract class Fee {
 	 * Item count.
 	 */
 	double count;
+	double defaultPrice;
 
 	public Fee() {
 		this.title="DEFAULT_TITLE";
 		this.text="DEFAULT_TEXT";
 		this.count = 1;
-
+		this.defaultPrice = 1;
 	}
 
 	public String getTitle() {

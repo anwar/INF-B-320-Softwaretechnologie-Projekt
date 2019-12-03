@@ -29,37 +29,35 @@ public class Bill {
 		this.billID = billID;
 	}
 	*/
-
 	public Bill(){}
 
 	@ManyToMany
-	List<Fee> fees;
+	List<Fee> feeList;
 
 	public Bill(Procedure procedure){
 		/**
 		 * Basic fees for a bill
 		 */
 		Fee membershipFee = new MembershipFee();
-		fees.add(membershipFee);
+		feeList.add(membershipFee);
 		Fee liabilityFee = new LiabilityFee();
-		fees.add(liabilityFee);
+		feeList.add(liabilityFee);
 		Fee winterServiceFee = new WinterServiceFee();
-		fees.add(winterServiceFee);
+		feeList.add(winterServiceFee);
 		Fee socialContribution = new SocialContribution();
-		fees.add(socialContribution);
+		feeList.add(socialContribution);
 		Fee legalProtectionFee = new LegalProtectionFee();
-		fees.add(legalProtectionFee);
+		feeList.add(legalProtectionFee);
 		Fee expensesFlat = new ExpensesFlat();
-		fees.add(expensesFlat);
+		feeList.add(expensesFlat);
 		Fee waterMeterFee = new WaterMeterFee();
-		fees.add(waterMeterFee);
+		feeList.add(waterMeterFee);
 		Fee electricityMeterFee = new ElectricityMeterFee();
-		fees.add(electricityMeterFee);
-		/*
-		double water = procedure.getWatercount();
+		feeList.add(electricityMeterFee);
+
 		Fee waterFee = new WaterFee();
-		fees.add(waterFee);
-		*/
+		feeList.add(waterFee);
+
 		//this.billID = billID;
 
 	}

@@ -6,6 +6,7 @@ public class WinterServiceFee extends Fee {
 		this.title = "Winterdienst";
 		this.text = "";
 		this.count = 1;
+		this.defaultPrice = getDefaultPrice(2018);
 	}
 	@Override
 	public double getDefaultPrice(int year) {

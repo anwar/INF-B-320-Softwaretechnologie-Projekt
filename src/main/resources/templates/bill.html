@@ -20,8 +20,26 @@
 <nav th:include="navigation :: navigation"></nav>
 <div class="header-title">
     <h1>Rechnungen</h1>
+</div>
 
-
+<div><table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Text</th>
+        <th>Count</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody th:remove="all-but-first">
+    <tr th:each="bill : ${feeList}">
+        <td th:text="${bill.title}">Title</td>
+        <td th:text="${bill.text}">Text</td>
+        <td th:text="${bill.count}">Count</td>
+        <td th:text="${bill.defaultPrice}">Price</td>
+    </tr>
+</table>
+</div>
 </div>
 
 <div th:include="navigation :: footer"></div>
