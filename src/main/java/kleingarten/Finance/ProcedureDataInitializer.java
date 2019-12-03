@@ -7,16 +7,22 @@ import kleingarten.tenant.TenantRepository;
 import org.salespointframework.core.DataInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.util.Streamable;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import kleingarten.plot.PlotService;
+import kleingarten.tenant.TenantManager;
+import org.springframework.data.util.Streamable;
 
 import java.util.List;
 
 @Component
+@Order(100)
 public class ProcedureDataInitializer implements DataInitializer {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ProcedureDataInitializer.class);
 	private final ProcedureManager procedureManager;
+
 	private final PlotCatalog plotCatalog;
 	private final TenantRepository tenantRepository;
 
@@ -33,6 +39,7 @@ public class ProcedureDataInitializer implements DataInitializer {
 		}
 		LOG.info("Creating default procedures");
 		Streamable<Tenant> tenants = this.tenantRepository.findAll();
+		LOG.info(tenants.toList().toString());
 		Tenant boss = null;
 		Tenant obman = null;
 		Tenant protocol = null;

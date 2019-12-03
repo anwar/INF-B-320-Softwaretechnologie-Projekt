@@ -5,11 +5,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.core.SalespointIdentifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+import kleingarten.plot.Plot;
 
 @Service
 public class ProcedureManager {
@@ -49,22 +52,22 @@ public class ProcedureManager {
 	}
 
 	/**
-	 * Find a Procedure by a given year and plotId.
+	 * Find a Procedure by a given year and Plot.
 	 *
 	 * @param year
 	 * @param plotId
 	 * @return null if not found
 	 */
-	public Procedure getProcedure(int year, SalespointIdentifier plotId) {
-		for(Procedure procedure:procedures.findByPlotId(plotId.getIdentifier())) {
+	public Procedure getProcedure(int year, ProductIdentifier plotId) {
+		for(Procedure procedure:procedures.findByPlotProductIdentifier(plotId)) {
 			if(procedure.getYear() == year) return procedure;
 		}
 
 		return null;
 	}
 
-	public Procedure getProcedure(int year, String plotId) {
-		for(Procedure procedure:procedures.findByPlotId(plotId)) {
+	public Procedure getProcedure(int year, Plot plot) {
+		for(Procedure procedure:procedures.findByPlot(plot)) {
 			if(procedure.getYear() == year) return procedure;
 		}
 
@@ -106,8 +109,12 @@ public class ProcedureManager {
 		return procedures.save(procedure);
 	}
 
-	public Streamable<Procedure> findByPlotId(String plotId){
-		return procedures.findByPlotId(plotId);
+	public Streamable<Procedure> findByPlotName(String plotName){
+		return procedures.findByPlotName(plotName);
+	}
+	
+	public Streamable<Procedure> findByPlotId(String plotName){
+		return null;//procedures.findByPlotsName(plotName);
 	}
 
 

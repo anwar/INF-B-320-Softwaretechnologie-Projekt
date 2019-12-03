@@ -7,12 +7,14 @@ import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
 @Component
+@Order(50)
 public class TenantDataInitializer implements DataInitializer {
 
 	private static final Logger LOG = LoggerFactory.getLogger(TenantDataInitializer.class);
