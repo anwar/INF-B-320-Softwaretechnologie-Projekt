@@ -15,7 +15,6 @@
  */
 package kleingarten.message;
 
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +93,7 @@ public class MessageService {
 
 			String fileName = file.getFilename();
 			if (fileName == null || fileName.isEmpty()) {
-				fileName = "attachment" + FilenameUtils.getExtension(fileName);
+				fileName = "attachment";
 			}
 
 			helper.addAttachment(fileName, file);
