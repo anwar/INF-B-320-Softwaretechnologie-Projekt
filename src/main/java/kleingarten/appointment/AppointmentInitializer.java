@@ -28,6 +28,9 @@ public class AppointmentInitializer implements DataInitializer {
 
 	@Override
 	public void initialize() {
+		if (!this.appointmentManager.getAll().toList().isEmpty()) {
+			return;
+		}
 		LOG.info("create default Appointments");
 		var Appointment = this.appointmentManager.createAppointmentForInitializer(LocalTime.now(), LocalDate.now());
 		var Appointment1 = this.appointmentManager.createAppointmentForInitializer(LocalTime.of(18,29), LocalDate.of(2020,12,29));
