@@ -1,6 +1,5 @@
 package kleingarten.plot;
 
-import com.sun.xml.bind.v2.TODO;
 import kleingarten.Finance.Procedure;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantRepository;
@@ -115,7 +114,7 @@ public class PlotController {
 		mav.addObject("plotPrice", MonetaryFormats.getAmountFormat(Locale.GERMANY)
 			.format(shownPlot.getEstimator()));
 
-		mav.setViewName("myPlot");
+		mav.setViewName("/plot/myPlot");
 
 		return mav;
 	}
@@ -176,7 +175,7 @@ public class PlotController {
 		mav.addObject("plotList", plots);
 		mav.addObject("plotColors", colors);
 		mav.addObject("userRights", rights);
-		mav.setViewName("plotOverview");
+		mav.setViewName("/plot/plotOverview");
 
 		return mav;
 

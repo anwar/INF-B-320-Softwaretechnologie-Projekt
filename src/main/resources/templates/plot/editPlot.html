@@ -9,12 +9,12 @@
             src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
     <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
-          href="../static/resources/css/style.css" type="text/css"/>
-    <link th:href="@{/resources/css/tenantTable.css}" rel="stylesheet"
-
-    <script th:src="@{/resources/css/js/search.js}"
-            src="../static/resources/css/js/search.js"> </script>
+    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
+          href="../resources/css/style.css" type="text/css"/>
+    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
+          href="../resources/css/tenantTable.css" type="text/css"/>
+    <script th:src="@{../resources/css/js/search.js}"
+            src="../resources/css/js/search.js"> </script>
 
     <meta charset="UTF-8">
     <title>editPlot</title>
@@ -36,7 +36,7 @@
             <td> <label for="description">Beschreibung</label> </td>
             <td><input class="text_bgImage" id="description" name="id" th:value="${plot.getDescription()}" type="text" required="required"/></td>
         </tr>
-        <tr th:each="procedure : ${procedure}">
+        <tr th:each=": ${}">
             <td> <label for="number">Schätzwert</label> </td>
             <td><input class="text_bgImage" id="number" name="id" th:value="${plot.getEstimator()}" type="number" required="required"/></td>
         </tr>
