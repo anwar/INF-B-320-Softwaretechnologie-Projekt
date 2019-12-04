@@ -109,6 +109,10 @@ public class Tenant {
 		this.userAccount = userAccount;
 	}
 
+	public void setId(Long id){
+		this.id = id;
+	}
+
 	private Tenant(){}
 
 	public Tenant(String forename, String surname, String address /*, String email*/, String phonenumber, String birthdate, UserAccount userAccount){

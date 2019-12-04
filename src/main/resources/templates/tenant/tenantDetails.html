@@ -35,7 +35,7 @@
             <tr  th:each="tenant : ${tenant}">
 
                <th >ID</th>  <td th:text="${tenant.getId()}">1</td>
-                <td style="font-size:20px; background-color: white"> <a th:title="Bearbeiten" href="#open-modal"> &#9997; </a> </td> </tr>
+                <td style="font-size:20px; background-color: white"> <a th:title="Bearbeiten" th:href="'/modifyTenant?id=' +${tenant.getId()}" > &#9997; </a> </td> </tr>
             <tr> <th>Vorname</th><td th:text="${tenant.getForename()}">1</td></tr>
             <tr><th>Nachname</th><td th:text="${tenant.getSurname()}">1</td></tr>
             <tr><th>Geburtstag</th> <td th:text="${tenant.getBirthdate()}">1</td></tr>
@@ -45,71 +45,7 @@
             <tr><th>Rolle(n)</th> <td th:text="${tenant.getRoles()}">1 </tr>
 
         </table>
-        <div id="open-modal" class="modal-window">
-            <div>
-                 <!-- unicode by: https://www.w3schools.com/charsets/ref_utf_dingbats.asp -->
-                <a href="#modal-close" title="Schließen" class="modal-close">&#10060;</a>
-                <table>
-                   <div class="header-title">
-                       <h1>Bearbeiten</h1>
-                   </div>
-                    <div>
-                        <tr>
-                            <td> <label for="id">ID</label> </td>
-                            <td><input class="text_bgImage" id="id" name="id" th:value="${tenant.getId()}"  type="number" required="required"/></td>
-                        </tr>
-                    </div>
-                    <div>
-                        <tr>
-                            <td><label for="forename">Vorname</label></td>
-                            <td>  <input class="text_bgImage" id="forename" name="id" th:value="${tenant.getForename()}"  type="text" required="required"/>
-                        </tr>
-                    </div>
-                    <div>
-                        <tr>
-                            <td> <label for="surname">Nachname</label></td>
-                            <td> <input class="text_bgImage" id="surname" name="id" th:value="${tenant.getSurname()}"  type="text" required="required"/></td>
-                        </tr>
-                    </div>
-                    <div>
-                        <tr>
-                            <td> <label for="birthdate">Geburtstag</label></td>
-                            <td> <input class="text_bgImage" id="birthdate" name="id" th:value="${tenant.getBirthdate()}"  type="date" required="required"/></td>
-                        </tr>
-                    </div>
-                    <div>
-                        <tr>
-                            <td><label for="address">Adresse</label></td>
-                            <td> <input class="text_bgImage" id="address" name="id" th:value="${tenant.getAddress()}"  type="text" required="required"/></td>
-                        </tr>
-                    </div>
-                    <div>
-                        <tr>
-                            <td> <label for="email">Email</label></td>
-                            <td> <input class="text_bgImage" id="email" name="id" th:value="${tenant.getEmail()}"  type="email" required="required"/></td>
-                        </tr>
-                    </div>
-                    <div>
-                        <tr>
-                            <td> <label for="phone">Telefon</label></td>
-                            <td><input class="text_bgImage" id="phone" name="id" th:value="${tenant.getPhonenumber()}"  type="number" required="required"/></td>
-                        </tr>
-                    </div>
-                    <div>
-                        <tr>
-                            <td><label for="roles">Rolle(n)</label></td>
-                            <td> <input class="text_bgImage" id="roles" name="id" th:value="${tenant.getRoles()}"  type="text" required="required"/></td>
-                        </tr>
-                    </div>
-                </table>
-                <div class="button-section">
-
-                    <button  type="submit" class="button" >Änderungen speichern</button>
-                </div>
-            </div>
-
-
-
+        
         </div>
 
 

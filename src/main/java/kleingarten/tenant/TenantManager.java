@@ -34,9 +34,15 @@ public class TenantManager {
 		return tenants.findById(id).orElse(null);
 	}
 
-	public Tenant getTenantByUserAccount(UserAccount userAccount){
-		var a = tenants.findAll().filter(c -> c.getUserAccount().getLastname().equals(userAccount.getLastname()));
-		return a.toList().get(0);
+	public Tenant changeRoles(Role role, Role newRole,Tenant tenant){
+		tenant.getUserAccount().remove(role);
+		tenant.getUserAccount().add(newRole);
+		return tenant;
+	}
+
+	public Tenant modifiedTenant(Tenant tenant){
+		Tenant modifiedTenant = tenants.save(tenant);
+		return modifiedTenant;
 	}
 
 	public boolean tenantHasRole(Tenant tenant, Role role){
