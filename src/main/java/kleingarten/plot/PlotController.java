@@ -114,7 +114,7 @@ public class PlotController {
 		mav.addObject("plotPrice", MonetaryFormats.getAmountFormat(Locale.GERMANY)
 			.format(shownPlot.getEstimator()));
 
-		mav.setViewName("/plot/myPlot");
+		mav.setViewName("plot/myPlot");
 
 		return mav;
 	}
@@ -175,7 +175,7 @@ public class PlotController {
 		mav.addObject("plotList", plots);
 		mav.addObject("plotColors", colors);
 		mav.addObject("userRights", rights);
-		mav.setViewName("/plot/plotOverview");
+		mav.setViewName("plot/plotOverview");
 
 		return mav;
 

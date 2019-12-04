@@ -9,10 +9,10 @@
             src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
     <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
-          href="../static/resources/css/style.css" type="text/css"/>
-    <link th:href="@{/resources/css/tenantTable.css}" rel="stylesheet"
-          href="../static/resources/css/tenantTable.css" type="text/css">
+    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
+          href="../resources/css/style.css" type="text/css"/>
+    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
+          href="../resources/css/tenantTable.css" type="text/css">
     <meta charset="UTF-8">
     <title>Procedure</title>
 </head>
@@ -39,13 +39,13 @@
         <tr  >
             <td>Wasserstand</td>
             <td th:text="${procedure.getWatercount()}">Paul</td>
-            <td> <a type="button" th:value="${procedure.getPlotId()}" th:href="@{procedure/editWatercount/{plotId} (Id=${procedure.getPlotId()})}">Wasserzählerstand Bearbeiten</a></td>
+            <td> <a type="button" th:value="${procedure.getPlotId()}" th:href="@{finance/editWatercount/{plotId} (Id=${procedure.getPlotId()})}">Wasserzählerstand Bearbeiten</a></td>
         </tr>
 
         <tr >
             <td>Stromzählerstand</td>
             <td th:text="${procedure.getPowercount()}">Paul</td>
-            <td> <a type="button" th:value="${procedure.getPlotId()}" th:href="@{procedure/editPowercount/{plotId} (Id=${procedure.getPlotId()})}">Stromzählerstand Bearbeiten</a></td>
+            <td> <a type="button" th:value="${procedure.getPlotId()}" th:href="@{finance/editPowercount/{plotId} (Id=${procedure.getPlotId()})}">Stromzählerstand Bearbeiten</a></td>
         </tr>
 
         <tr>

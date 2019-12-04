@@ -9,10 +9,10 @@
             src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
     <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
-          href="../static/resources/css/style.css" type="text/css"/>
-    <link th:href="@{/resources/css/tenantTable.css}" rel="stylesheet"
-          href="../static/resources/css/tenantTable.css" type="text/css">
+    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
+          href="../resources/css/style.css" type="text/css"/>
+    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
+          href="../resources/css/tenantTable.css" type="text/css">
     <meta charset="UTF-8">
     <title>Procedure</title>
 </head>
@@ -26,7 +26,7 @@
 
         <h1>Edit Watercount</h1>
     </div>
-    <form th:object="${procedure}" th:action="@{procedure/editCount/{plotId}}" method="post">
+    <form th:object="${procedure}" th:action="@{}" method="post">
 
         <table class="plotTable">
 

@@ -31,7 +31,7 @@ class TenantController {
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String tenantDetails(@RequestParam("id") String id, Model model) {
 		model.addAttribute("tenant", tenantManager.get(Long.parseLong(id)));
-		return "/tenant/tenantDetails";
+		return "tenant/tenantDetails";
 	}
 
 	//GetMapping for ("/myPlot") already implemented in PlotController so I deleted it here (Ylvi)

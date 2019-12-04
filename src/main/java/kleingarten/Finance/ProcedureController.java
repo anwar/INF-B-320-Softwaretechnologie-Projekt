@@ -40,11 +40,11 @@ public class ProcedureController {
 	 * @return
 	 */
 	// there is an issue to call plotId. [sanghyun]
-	@GetMapping("procedure/editWatercount/{plotId}")
+	@GetMapping("/procedure/editWatercount/{plotId}")
 	//@PreAuthorize("hasRole('ROLE_VORSTAND')")
 	public String editWatercount(Model model, @PathVariable String plotId) {
 		model.addAttribute("procedure", procedureManager.findByPlotId(plotId).get());
-		return "editWatercount";
+		return "finance/editWatercount";
 	}
 
 	/**
@@ -52,14 +52,14 @@ public class ProcedureController {
 	 * @param procedure
 	 * @return
 	 */
-	@PostMapping("procedure/editWatercount/{plotId}")
+	@PostMapping("/procedure/editWatercount/{plotId}")
 	public String saveWatercount(Model model, Procedure procedure) {
 		// those three lines are just for checking the value. Not necessary to exist.
 		System.out.println("Plot ID:" + procedure.getPlotId());
 		System.out.println("Watercount:" + procedure.getWatercount());
 		System.out.println("Powercount:" + procedure.getPowercount());
 		procedureManager.save(procedure);
-		return "redirect:/procedure";
+		return "redirect:/finance/procedure";
 	}
 
 	// there is an issue to call plotId. [sanghyun]
@@ -67,7 +67,7 @@ public class ProcedureController {
 	//@PreAuthorize("hasRole('ROLE_VORSTAND')")
 	public String editCount(Model model, @PathVariable String plotId) {
 		model.addAttribute("procedure", procedureManager.findByPlotId(plotId).get());
-		return "editPowercount";
+		return "finance/editPowercount";
 	}
 
 	/**
@@ -75,25 +75,25 @@ public class ProcedureController {
 	 * @param procedure
 	 * @return
 	 */
-	@PostMapping("procedure/editPowercount/{plotId}")
+	@PostMapping("/procedure/editPowercount/{plotId}")
 	public String savePowercount(Model model, Procedure procedure) {
 		// those three lines are just for checking the value. Not necessary to exist.
 		System.out.println("Plot ID:" + procedure.getPlotId());
 		System.out.println("Powercount:" + procedure.getPowercount());
 		procedureManager.save(procedure);
-		return "redirect:/procedure";
+		return "redirect:/finance/procedure";
 	}
 
-	@GetMapping("procedure")
+	@GetMapping("/procedure")
 	String procedure(Model model) {
 		model.addAttribute("procedure", procedureManager.getAll());
-		return "procedure";
+		return "finance/procedure";
 	}
 
-	@GetMapping("updateProcedure")
+	@GetMapping("/updateProcedure")
 	String updateProcedure(Model model) {
 		model.addAttribute("procedure", procedureManager.getAll());
-		return "updateProcedure";
+		return "finance/updateProcedure";
 
 	}
 }
