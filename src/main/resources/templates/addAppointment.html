@@ -23,13 +23,31 @@
 </div>
 <center>
     <form method="post" role="form" id="form" th:action="@{/addAppointment}" th:object="${form}">
-        <select>
-            <option th:each="appointments : ${ListofAppointments}" th:text="${appointments.getDate()}"></option>
-            <option th:each="appointments : ${ListofAppointments}" th:text="${appointments.getTime()}"></option>
-        </select>
-        <button type="submit" class="ui button">Zum Termin eintragen</button></div>
+        <table>
+            <tr>
+                <td>
+                    <label>Datum</label>
+                    <br/>
+                    <select name="date">
+                    <option th:each="appointments : ${ListofAppointments}" th:text="${appointments.getDate()}" th:value="${appointments.getDate()}">test</option>
+                    </select>
+                </td>
+            </tr>
+            <br/>
+            <tr>
+                <td>
+                    <label>Uhrzeit</label>
+                    <br/>
+                    <select>
+                        <option th:each="appointments : ${ListOfTimes}" th:text="${appointments.getTime()}" th:value="${appointments.getTime()}">test</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <br/>
+        <button type="submit" class="ui button">Zum Termin eintragen</button>
     </form>
 </center>
-
 </body>
 </html>

@@ -58,4 +58,5 @@ class AppDataInitializer implements DataInitializer {
 		news.save(new NewsEntry("Guten Tag sint Bezirksschornsteinfegermeister cupidatat Wurst proident, Wiener Schnitzel in Joachim Löw qui Mertesacker deserunt Oktoberfest anim Wiener Schnitzel."));
 		news.save(new NewsEntry("Jürgen Klinsmann aute Zeitgeist dolor Warmduscher reprehenderit Hörspiele voluptate Michael Schuhmacher esse Reinheitsgebot dolore Hockenheim fugiat Volkswagen pariatur."));
 	}
+
 }

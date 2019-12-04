@@ -18,11 +18,8 @@ public class WorkAssignmentManager {
 
 	private WorkAssignmentRepository workAssignmentRepository;
 
-	private DateTimeFormatter formatter;
-
 	public WorkAssignmentManager(WorkAssignmentRepository workAssignmentRepository){
 		this.workAssignmentRepository = workAssignmentRepository;
-		formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
 	}
 	public List<WorkAssignment> getAll(){

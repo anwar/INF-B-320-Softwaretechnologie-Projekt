@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface WorkAssignmentRepository extends CrudRepository<WorkAssignment, Long> {
 
-	@NonNull
+	@Override
 	List<WorkAssignment> findAll();
 }
