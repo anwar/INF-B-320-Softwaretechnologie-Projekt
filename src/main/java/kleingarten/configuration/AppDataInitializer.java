@@ -45,7 +45,7 @@ class AppDataInitializer implements DataInitializer {
 	/**
 	 * Initializes dummy {@link NewsEntry}s on application startup.
 	 */
-	public void initializeNewsEntries(NewsRepository news) {
+	void initializeNewsEntries(NewsRepository news) {
 		Assert.notNull(news, "News must not be null!");
 
 		if (news.findAll().iterator().hasNext()) {
