@@ -58,54 +58,16 @@ class TenantController {
 						  @RequestParam("phone")     String phone,
 						  @RequestParam("email")     String email,
 						  @RequestParam("address")   String address,
-						  @RequestParam("birthdate") String birthdate,
-						  Model model){
+						  @RequestParam("birthdate") String birthdate){
 
-		String newForeName;
-		String newSurname;
-		String newEmail;
-		String newAddress;
-		String newPhone;
-		String newBirthdate;
+		tenantManager.get(id).setForename(forename);
+		tenantManager.get(id).setSurname(surname);
+		tenantManager.get(id).setPhonenumber(phone);
+		tenantManager.get(id).getUserAccount().setEmail(email);
+		tenantManager.get(id).setAddress(address);
+		tenantManager.get(id).setBirthdate(birthdate);
 
-		if (!forename.equals(tenantManager.get(id).getForename())){
-			newForeName = forename;
-		} else {
-			newForeName = tenantManager.get(id).getForename();
-;		}
-		if (!surname.equals(tenantManager.get(id).getSurname())){
-			newSurname = surname;
-		} else {
-			newSurname = tenantManager.get(id).getSurname();
-		}
-		if (!email.equals(tenantManager.get(id).getUserAccount().getEmail())){
-			newEmail = email;
-			tenantManager.get(id).getUserAccount().setEmail(newEmail);
-		} else {
-			newEmail = tenantManager.get(id).getUserAccount().getEmail();
-		}
-		if (!address.equals(tenantManager.get(id).getAddress())){
-			newAddress = address;
-		} else{
-			newAddress = tenantManager.get(id).getEmail();
-		}
-		if (!phone.equals(tenantManager.get(id).getPhonenumber())){
-			newPhone = phone;
-		} else {
-			newPhone = tenantManager.get(id).getPhonenumber();
-		}
-		if (!birthdate.equals(tenantManager.get(id).getBirthdate())){
-			newBirthdate = birthdate;
-		} else {
-			newBirthdate = tenantManager.get(id).getBirthdate();
-		}
-
-		Tenant tenant = new Tenant(newForeName, newSurname, newAddress, newPhone, newBirthdate,
-			userAccountManager.create("peterklaus1", Password.UnencryptedPassword.of(tenantManager.get(id).getUserAccount().getPassword().toString()),
-			newEmail, tenantManager.get(id).getUserAccount().getRoles().iterator().next()));
-		tenant.setId(id);
-
-		tenantRepository.save(tenant);
+		tenantRepository.save(tenantManager.get(id));
 
 		return "redirect:/tenants";
 	}
