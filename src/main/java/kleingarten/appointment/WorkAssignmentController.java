@@ -36,7 +36,7 @@ public class WorkAssignmentController {
 		}else{
 			workAssignmentManager.createAssignment(form);
 		}
-		return "redirect:/workAssignment/createAssignment";
+		return "redirect:/createAssignment";
 	}
 
 	@GetMapping("/listOfAssignments")

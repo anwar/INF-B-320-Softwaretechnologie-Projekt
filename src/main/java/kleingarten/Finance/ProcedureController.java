@@ -59,7 +59,7 @@ public class ProcedureController {
 		System.out.println("Watercount:" + procedure.getWatercount());
 		System.out.println("Powercount:" + procedure.getPowercount());
 		procedureManager.save(procedure);
-		return "redirect:/finance/procedure";
+		return "redirect:/procedure";
 	}
 
 	// there is an issue to call plotId. [sanghyun]
@@ -81,7 +81,7 @@ public class ProcedureController {
 		System.out.println("Plot ID:" + procedure.getPlotId());
 		System.out.println("Powercount:" + procedure.getPowercount());
 		procedureManager.save(procedure);
-		return "redirect:/finance/procedure";
+		return "redirect:/procedure";
 	}
 
 	@GetMapping("/procedure")

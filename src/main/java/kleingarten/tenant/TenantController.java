@@ -38,6 +38,6 @@ class TenantController {
 
 	@GetMapping("/complains")
 	String complains() {
-		return "complains/complains";
+		return "news/complains";
 	}
 }

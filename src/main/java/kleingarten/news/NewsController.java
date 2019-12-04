@@ -63,7 +63,7 @@ class NewsController {
 		model.addAttribute("entries", news.findAll());
 		model.addAttribute("form", form);
 
-		return "home";
+		return "news/home";
 	}
 
 	/**
