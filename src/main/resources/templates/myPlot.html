@@ -23,6 +23,12 @@
 
     <div align="center">
         <table>
+            <thead>
+                <tr>
+                    <th>Informationen zu</th>
+                    <th>Gespeicherte Daten</th>
+                </tr>
+            </thead>
             <tbody>
             <tr><th>Name</th> <td align="center" th:text="${plotName}"> Text </td></tr>
             <tr><th>Größe</th> <td align="center" th:text="${plotSize}"> Text </td></tr>
@@ -39,8 +45,8 @@
 
             </div>
         </table>
-        <div class="button-section">
-            <button class="button"  th:if="${!loggedIn}" onclick="location.href='/createApplication'" >Bewerben</button>
+        <div class="button-section" th:if="${canApply}">
+            <button class="button" onclick="location.href='/createApplication'" >Bewerben</button>
             <button class="button" onclick="location.href= '/application'" th:if="${canSeeApplications}">Bewerbungen anzeigen</button>
             <input type="hidden" id="plotID" name="plotID" th:value="${plotID}">
         </div>
