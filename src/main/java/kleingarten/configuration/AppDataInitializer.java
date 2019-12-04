@@ -15,10 +15,13 @@
  */
 package kleingarten.configuration;
 
+import kleingarten.news.NewsEntry;
+import kleingarten.news.NewsRepository;
 import org.salespointframework.core.DataInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A {@link DataInitializer} implementation that will create dummy data for the application
@@ -28,10 +31,31 @@ import org.springframework.stereotype.Component;
 class AppDataInitializer implements DataInitializer {
 	private static final Logger LOG = LoggerFactory.getLogger(AppDataInitializer.class);
 
-	AppDataInitializer() {
+	private final NewsRepository news;
+
+	AppDataInitializer(NewsRepository news) {
+		this.news = news;
 	}
 
 	@Override
 	public void initialize() {
+		initializeNewsEntries(this.news);
+	}
+
+	/**
+	 * Initializes dummy {@link NewsEntry}s on application startup.
+	 */
+	public void initializeNewsEntries(NewsRepository news) {
+		Assert.notNull(news, "News must not be null!");
+
+		if (news.findAll().iterator().hasNext()) {
+			return;
+		}
+
+		LOG.info("Creating default news entries...");
+
+		news.save(new NewsEntry("Deutsches Ipsum Dolor sit schnell consectetur Aperol Spritz elit, Die unendliche Geschichte do Fernweh tempor Grimms Märchen ut Handschuh et Bahnhof magna Frau Professor Ut Hallo ad Weihnachten veniam."));
+		news.save(new NewsEntry("Guten Tag sint Bezirksschornsteinfegermeister cupidatat Wurst proident, Wiener Schnitzel in Joachim Löw qui Mertesacker deserunt Oktoberfest anim Wiener Schnitzel."));
+		news.save(new NewsEntry("Jürgen Klinsmann aute Zeitgeist dolor Warmduscher reprehenderit Hörspiele voluptate Michael Schuhmacher esse Reinheitsgebot dolore Hockenheim fugiat Volkswagen pariatur."));
 	}
 }
