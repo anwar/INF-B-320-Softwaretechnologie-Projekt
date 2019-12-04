@@ -11,8 +11,8 @@
 			src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
 	<link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
 		  href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-	<link th:href="@{/resources/css/style.css}" rel="stylesheet"
-		  href="../static/resources/css/style.css" type="text/css"/>
+	<link th:href="@{../resources/css/style.css}" rel="stylesheet"
+		  href="../resources/css/style.css" type="text/css"/>
 
 	<title>Welcome</title>
 
@@ -28,7 +28,7 @@
 		<div class="news-section">
 			<table>
 				<tr>
-					<td><img class="event-pics" src="./resources/css/pics/glasses-919071_1280.jpg" alt="fest"/></td>
+					<td><img class="event-pics" src="../resources/css/pics/glasses-919071_1280.jpg" alt="fest"/></td>
 					<td>		<div class="news-section">
 						<div id="entries" class="mx-auto">
 							<div th:each="entry, it : ${entries}" th:with="index = ${it.count}">
@@ -59,7 +59,7 @@
 
 	</div>
 	<span sec:authorize="!isAuthenticated()">
-		<div th:include="Cookies.html"></div>
+		<div th:include="news/Cookies.html"></div>
 	</span>
 
 	<div th:include="navigation :: footer"></div>
