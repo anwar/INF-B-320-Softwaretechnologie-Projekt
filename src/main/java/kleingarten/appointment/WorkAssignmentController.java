@@ -24,7 +24,7 @@ public class WorkAssignmentController {
 		model.addAttribute("dateNow", LocalDate.now());
 		model.addAttribute("timeNow", LocalTime.now());
 		model.addAttribute("form", form);
-		return "/workAssignment/createAssignment";
+		return "workAssignment/createAssignment";
 	}
 
 	@PostMapping("/createAssignment")
@@ -42,7 +42,7 @@ public class WorkAssignmentController {
 	@GetMapping("/listOfAssignments")
 	String listOfAppointments(Model model){
 		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
-		return "/workAssignment/listOfAssignments";
+		return "workAssignment/listOfAssignments";
 	}
 
 
