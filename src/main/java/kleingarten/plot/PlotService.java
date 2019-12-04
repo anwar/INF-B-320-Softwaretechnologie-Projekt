@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 public class PlotService {
 	private final PlotCatalog plotCatalog;
 
+	/**
+	 * Constructor of the class {@link PlotService} used by Spring
+	 * @param plotCatalog repository of plots as {@link PlotCatalog}
+	 */
 	PlotService(PlotCatalog plotCatalog){
 		this.plotCatalog = plotCatalog;
 	}
@@ -18,6 +22,7 @@ public class PlotService {
 	 * @param name name of the {@link Plot} as String
 	 * @param size size of the {@link Plot} as int
 	 * @param description description of the {@link Plot} as String
+	 * @return {@link Plot} which is added
 	 */
 	public Plot addNewPlot(String name, int size, String description) {
 		if (this.existsByName(name)) {
