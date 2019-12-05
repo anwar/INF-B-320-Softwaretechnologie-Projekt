@@ -9,14 +9,14 @@
             src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
     <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
-          href="../static/resources/css/style.css" type="text/css"/>
+    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
+          href="../resources/css/style.css" type="text/css"/>
 
-    <link th:href="@{/resources/css/tenantdetailsTable.css}" rel="stylesheet"
-          href="../static/resources/css/tenantdetailsTable.css" type="text/css">
-    <link th:href="@{/resources/css/modifyTenant.css}" rel="stylesheet"
-          href="../static/resources/css/modifyTenant.css" type="text/css">
-    <script src="../static/resources/css/test.js"></script>
+    <link th:href="@{../resources/css/tenantdetailsTable.css}" rel="stylesheet"
+          href="../resources/css/tenantdetailsTable.css" type="text/css">
+    <link th:href="@{../resources/css/modifyTenant.css}" rel="stylesheet"
+          href="../resources/css/modifyTenant.css" type="text/css">
+    <script src="../resources/css/test.js"></script>
 
 
 </head>
@@ -25,60 +25,59 @@
 <div class="ui container">
     <nav th:include="navigation :: navigation"></nav>
     <div class="header-title">
-        <h1> Details</h1>
+        <h1> Details Bearbeiten</h1>
     </div>
 
     <div>
 <form method="post" th:action="@{/modifiedTenant}">
                 <table>
-                    <div class="header-title">
-                        <h1>Bearbeiten</h1>
-                    </div>
+
+                    <tr> </td><td style="font-size:25px; background-color: white;"> <a th:title="Abbrechen" th:href="'/tenantDetails?id=' +${tenant.getId()}" > &#10060; </a> </td></tr>
                     <div>
                         <tr>
-                            <td> <label for="id">ID</label> </td>
-                            <td><input class="text_bgImage" id="id" name="id" th:value="${tenant.getId()}"  type="number" required="required"/></td>
+                            <td hidden> <label for="id">ID</label> </td>
+                            <td hidden><input class="text_bgImage" id="id" name="id" th:value="${tenant.getId()}"  type="number" required="required"/></td>
                         </tr>
                     </div>
                     <div>
                         <tr>
-                            <td><label for="forename">Vorname</label></td>
+                            <th><label for="forename">Vorname</label></th>
                             <td>  <input class="text_bgImage" id="forename" name="forename" th:value="${tenant.getForename()}"  type="text" required="required"/>
                         </tr>
                     </div>
                     <div>
                         <tr>
-                            <td> <label for="surname">Nachname</label></td>
+                            <th> <label for="surname">Nachname</label></th>
                             <td> <input class="text_bgImage" id="surname" name="surname" th:value="${tenant.getSurname()}"  type="text" required="required"/></td>
                         </tr>
                     </div>
                     <div>
                         <tr>
-                            <td> <label for="birthdate">Geburtstag</label></td>
+                            <th> <label for="birthdate">Geburtstag</label></th>
                             <td> <input class="text_bgImage" id="birthdate" name="birthdate" th:value="${tenant.getBirthdate()}"  type="date" required="required"/></td>
                         </tr>
                     </div>
                     <div>
                         <tr>
-                            <td><label for="address">Adresse</label></td>
+                            <th><label for="address">Adresse</label></th>
                             <td> <input class="text_bgImage" id="address" name="address" th:value="${tenant.getAddress()}"  type="text" required="required"/></td>
                         </tr>
                     </div>
                     <div>
                         <tr>
-                            <td> <label for="email">Email</label></td>
+                            <th> <label for="email">Email</label></th>
                             <td> <input class="text_bgImage" id="email" name="email" th:value="${tenant.getEmail()}"  type="email" required="required"/></td>
                         </tr>
                     </div>
                     <div>
                         <tr>
-                            <td> <label for="phone">Telefon</label></td>
+                            <th> <label for="phone">Telefon</label></th>
                             <td><input class="text_bgImage" id="phone" name="phone" th:value="${tenant.getPhonenumber()}"  type="number" required="required"/></td>
                         </tr>
                     </div>
                     <div>
                         <tr>
-                            <td><label for="roles">Rolle(n)</label></td>
+                            <th><label for="roles">Rolle(n)</label></th>
                             <td> <input class="text_bgImage" id="roles" name="roles" th:value="${tenant.getRoles()}"  type="text" required="required"/></td>
                         </tr>
                     </div>

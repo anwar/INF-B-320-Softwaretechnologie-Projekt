@@ -34,9 +34,9 @@
         <table>
             <tr  th:each="tenant : ${tenant}">
 
-               <th >ID</th>  <td th:text="${tenant.getId()}">1</td>
-                <td style="font-size:20px; background-color: white"> <a th:title="Bearbeiten" th:href="'/modifyTenant?id=' +${tenant.getId()}" > &#9997; </a> </td> </tr>
-            <tr> <th>Vorname</th><td th:text="${tenant.getForename()}">1</td></tr>
+
+            <tr><td style="font-size:25px; background-color: white;"> <a th:title="Bearbeiten" th:href="'/modifyTenant?id=' +${tenant.getId()}" > &#9998; </a> </td></tr>
+            <tr> <th>Vorname</th><td th:text="${tenant.getForename()}">1</td> </tr>
             <tr><th>Nachname</th><td th:text="${tenant.getSurname()}">1</td></tr>
             <tr><th>Geburtstag</th> <td th:text="${tenant.getBirthdate()}">1</td></tr>
             <tr><th>Adresse</th> <td th:text="${tenant.getAddress()}">1</td></tr>
@@ -45,7 +45,7 @@
             <tr><th>Rolle(n)</th> <td th:text="${tenant.getRoles()}">1 </tr>
 
         </table>
-        
+
         </div>
 
 

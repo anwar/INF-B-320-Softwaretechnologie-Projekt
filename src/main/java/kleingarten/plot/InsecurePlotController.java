@@ -3,10 +3,12 @@ package kleingarten.plot;
 import kleingarten.Finance.Procedure;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantRepository;
+import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,15 +19,15 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
-public class PlotController {
+public class InsecurePlotController {
 	private final PlotService plotService;
 	private final PlotCatalog plotCatalog;
 	private final TenantRepository tenantRepository;
 	private final DataService dataService;
 	private final PlotControllerService plotControllerService;
 
-	PlotController(PlotService plotService, PlotCatalog plotCatalog, TenantRepository tenantRepository,
-				   DataService dataService, PlotControllerService plotControllerService) {
+	InsecurePlotController(PlotService plotService, PlotCatalog plotCatalog, TenantRepository tenantRepository,
+						   DataService dataService, PlotControllerService plotControllerService) {
 		this.plotService = plotService;
 		this.plotCatalog = plotCatalog;
 		this.tenantRepository = tenantRepository;
@@ -140,8 +142,8 @@ public class PlotController {
 		}*/
 
 		for (Plot plot : plots) {
-			plotControllerService.setPlotColor(plot, user, colors);
-			plotControllerService.setAccessRightForPlot(plot, user, rights);
+			plotControllerService.insecureSetPlotColor(plot, colors);
+			plotControllerService.insecureSetAccessRightForPlot(plot, rights);
 		}
 
 		mav.addObject("plotList", plots);
@@ -153,5 +155,10 @@ public class PlotController {
 
 	}
 
+@GetMapping("/editPlot")
+	String editPlot(@PathVariable Plot plot, Model model){
+		model.addAttribute("plot", plotService.findById(plot.getId()));
+		return "plot/editPlot";
+}
 
 }
