@@ -1,19 +1,12 @@
 package kleingarten.plot;
 
-import kleingarten.Finance.Procedure;
-import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantRepository;
-import org.salespointframework.useraccount.Role;
-import org.salespointframework.useraccount.UserAccount;
-import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.money.format.MonetaryFormats;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
@@ -34,7 +27,7 @@ public class InsecurePlotController {
 	}
 
 	@GetMapping("/plot/{plot}")
-	public ModelAndView detailsOfPlot(@LoggedIn Optional<UserAccount> user, @PathVariable Optional<Plot> plot) {
+	public ModelAndView detailsOfPlot(@PathVariable Optional<Plot> plot) {
 		ModelAndView mav = new ModelAndView();
 		Plot shownPlot = null;
 
@@ -45,69 +38,11 @@ public class InsecurePlotController {
 			shownPlot = plot.get();
 		}
 
-		if (user.isPresent()) {
-			if (tenantRepository.findByUserAccount(user.get()).isEmpty()) {
-				throw new IllegalArgumentException("User must exist!");
-			}
-			Tenant tenant = tenantRepository.findByUserAccount(user.get()).get();
-
-			if (plot.isEmpty()) {
-				Set<Plot> plots = dataService.getRentedPlots(LocalDateTime.now().getYear(), tenant);
-				shownPlot = plots.iterator().next();
-
-				Map<Plot, String> rentedPlots = new HashMap<>();
-				for (Plot parcel : plots) {
-					rentedPlots.put(parcel, parcel.getName());
-				}
-
-				mav.addObject("canSee", true);
-				mav.addObject("canSeeBills", true);
-				mav.addObject("canSeeApplications", true);
-				mav.addObject("canModify", true);
-				mav.addObject("plots", rentedPlots);
-			}
-
-			if (dataService.procedureExists(LocalDateTime.now().getYear(), shownPlot)) {
-				mav.addObject("canSee", true);
-
-				Procedure procedure = dataService.getProcedure(LocalDateTime.now().getYear(), shownPlot);
-				mav.addObject("mainTenant", dataService.findTenantById(procedure.getMainTenant()));
-
-				Set<Tenant> subTenants = new HashSet<>();
-				for (long tenantId : procedure.getSubTenants()) {
-					subTenants.add(dataService.findTenantById(tenantId));
-				}
-
-				mav.addObject("subTenants", subTenants);
-				mav.addObject("workHours", procedure.getWorkMinutes() + "min");
-			} else {
-				mav.addObject("canApply", true);
-			}
-
-			// Check which role the user has to provide the correct rights of access on the view
-			if (dataService.tenantHasRole(tenant, Role.of("Kassierer"))) {
-				mav.addObject("canSeeBills", true);
-				boolean condModify = dataService.tenantHasRole(tenant, Role.of("Obmann"))
-					|| dataService.tenantHasRole(tenant, Role.of("Wassermann"));
-				mav.addObject("canModify", condModify);
-			} else if (dataService.tenantHasRole(tenant, Role.of("Obmann"))
-				|| dataService.tenantHasRole(tenant, Role.of("Wassermann"))) {
-				mav.addObject("canModify", true);
-			} else if (dataService.tenantHasRole(tenant, Role.of("Vorstandsvorsitzender"))
-				|| dataService.tenantHasRole(tenant, Role.of("Stellvertreter"))) {
-				mav.addObject("canSeeBills", true);
-				mav.addObject("canSeeApplications", true);
-				mav.addObject("canModify", true);
-			}
-		}
-
-		// User is not logged in and should only see information of a free plot
-		else {
 			if (plot.get().getStatus() == PlotStatus.TAKEN) {
 				throw new IllegalArgumentException("Unauthenticated user must not have access to a rented plot!");
 			}
 			mav.addObject("canApply", true);
-		}
+
 
 		// Add default information to the model
 		mav.addObject("plotID", shownPlot.getId());
@@ -147,6 +82,4 @@ public class InsecurePlotController {
 		return mav;
 
 	}
-
-
 }
