@@ -15,12 +15,16 @@
  */
 package kleingarten.configuration;
 
-import kleingarten.appointment.WorkAssignment;
 import kleingarten.appointment.WorkAssignmentManager;
 import kleingarten.appointment.WorkAssignmentRepository;
 import kleingarten.news.NewsEntry;
 import kleingarten.news.NewsRepository;
+import kleingarten.tenant.Tenant;
+import kleingarten.tenant.TenantRepository;
 import org.salespointframework.core.DataInitializer;
+import org.salespointframework.useraccount.Password;
+import org.salespointframework.useraccount.Role;
+import org.salespointframework.useraccount.UserAccountManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -40,17 +44,24 @@ class AppDataInitializer implements DataInitializer {
 	private final NewsRepository news;
 	private final WorkAssignmentRepository workAssignmentRepo;
 	private final WorkAssignmentManager workAssignmentManager;
+	private final TenantRepository tenantRepository;
+	private final UserAccountManager userAccountManager;
 
-	AppDataInitializer(NewsRepository news, WorkAssignmentRepository workAssignmentRepo, WorkAssignmentManager workAssignmentManager) {
+	AppDataInitializer(NewsRepository news, WorkAssignmentRepository workAssignmentRepo, WorkAssignmentManager workAssignmentManager,
+					   TenantRepository tenantRepository, UserAccountManager userAccountManager) {
 		this.news = news;
 		this.workAssignmentRepo = workAssignmentRepo;
 		this.workAssignmentManager = workAssignmentManager;
+		this.tenantRepository = tenantRepository;
+		this.userAccountManager  = userAccountManager;
 	}
 
 	@Override
 	public void initialize() {
 		initializeNewsEntries(this.news);
 		initializeWorkAssigment(this.workAssignmentRepo);
+		initializeTenants(this.tenantRepository, this.userAccountManager);
+
 	}
 
 	/**
@@ -81,6 +92,60 @@ class AppDataInitializer implements DataInitializer {
 		var Appointment = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020,1,22,15,20,10), "Garten putzen", "Garten sauber machen Yalah");
 		this.workAssignmentRepo.saveAll(List.of(Appointment));
 
+	}
+
+	void initializeTenants(TenantRepository tenantRepository, UserAccountManager userAccountManager){
+		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
+		Assert.notNull(tenantRepository, "TenantRepository must not be null");
+
+		if(userAccountManager.findByUsername("peter.klaus").isPresent()){
+			return;
+		}
+
+		LOG.info("Creating default users and customers");
+		LOG.info("Habe fertig");
+
+		var password = Password.UnencryptedPassword.of("123");
+
+		var vorstandRole = Role.of("Vorstandsvorsitzender");
+		var protocolRole = Role.of("Protokollant");
+		var stellvertreterRole = Role.of("Stellvertreter");
+		var obmannRole = Role.of("Obmann");
+		var financeRole = Role.of("Kassierer");
+		var maintenantRole = Role.of("Hauptpächter");
+		var subtenantRole = Role.of("Nebenpächter");
+		var waterRole = Role.of("Wassermann");
+
+		Tenant boss = new Tenant("Peter", "Klaus", "Am Berg 5, 12423 Irgendwo im Nirgendwo",
+			"01242354356", "13.04.1999",
+			userAccountManager.create("peter.klaus", password,"peter.klaus@email.com", maintenantRole));
+
+
+		Tenant obmann = new Tenant("Hubert", "Grumpel", "Hinter den 7 Bergen, 98766 Zwergenhausen",
+			"012345678", "04.09.1978",
+			userAccountManager.create("hubertgrumpel", password,"hubert.grumpel2@cloud.com", maintenantRole));
+
+		Tenant cashier = new Tenant("Bill", "Richart", "Am Bahnhof 25, 07875 Dorfdorf",
+			"0123098874326", "13.05.1968", userAccountManager.create("bill", password,"billy,billbill@geld.com", subtenantRole));
+
+		Tenant replacement = new Tenant("Sophie", "Kirmse", "Am Teichplatz 5, 67807 Meldetsichnie",
+			"034567892132", "08.12.1988",
+			userAccountManager.create("sophie", password, "s.krimse@gemaile.com",subtenantRole));
+
+		Tenant protocol = new Tenant("Franziska", "Kiel", "Bei Isa",
+			"0896548786890", "19.08.1998", userAccountManager.create("franziska", password, "francys@email.com",maintenantRole));
+
+		Tenant waterman = new Tenant("Atlas", "Neptunius", "An der Promenade 34, 01298 Atlantis",
+			"0980790789","08.09.1567", userAccountManager.create("neptun", password,"neptuns.bart@fishmail.com", maintenantRole));
+
+		obmann.addRole(obmannRole);
+		boss.addRole(vorstandRole);
+		cashier.addRole(financeRole);
+		replacement.addRole(stellvertreterRole);
+		protocol.addRole(protocolRole);
+		waterman.addRole(waterRole);
+
+		tenantRepository.saveAll(List.of(boss, obmann, cashier, replacement, protocol, waterman));
 	}
 
 }
