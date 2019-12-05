@@ -1,0 +1,53 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
+          href="../resources/css/style.css" type="text/css"/>
+    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
+          href="../resources/css/tenantTable.css" type="text/css"/>
+    <script th:src="@{../resources/css/js/search.js}"
+            src="../resources/css/js/search.js"> </script>
+
+    <meta charset="UTF-8">
+    <title>editPlot</title>
+</head>
+<body>
+<nav th:include="navigation :: navigation"></nav>
+<div class="header-title">
+    <h1>Parzellenbearbeitung</h1>
+</div>
+<div>
+    <table  id="myTable">
+
+        <tbody>
+        <tr th:each=" : ${}">
+            <td> <label for="size">Größe</label> </td>
+            <td><input class="text_bgImage" id="size" name="id" th:value="${plot.getSize}" type="number" required="required"/></td>
+        </tr>
+        <tr th:each=" : ${">
+            <td> <label for="description">Beschreibung</label> </td>
+            <td><input class="text_bgImage" id="description" name="id" th:value="${plot.getDescription()}" type="text" required="required"/></td>
+        </tr>
+        <tr th:each=": ${}">
+            <td> <label for="number">Schätzwert</label> </td>
+            <td><input class="text_bgImage" id="number" name="id" th:value="${plot.getEstimator()}" type="number" required="required"/></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="button-section">
+
+        <button  type="submit"  class="button" >Speichern</button>
+    </div>
+</div>
+
+<div th:include="navigation :: footer"></div>
+</body>
+</html>

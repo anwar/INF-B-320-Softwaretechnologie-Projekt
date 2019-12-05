@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
+          href="../resources/css/style.css" type="text/css"/>
+    <title>Liste der Termine</title>
+</head>
+<body>
+
+    <div class="ui-container">
+        <nav th:include="navigation :: navigation"/>
+        <div class="header-title">
+            <h1>Liste aller Termine</h1>
+        </div>
+    </div>
+    <center>
+    <table>
+        <tr>
+            <th>Datum</th>
+            <th>Titel</th>
+            <th>Beschreibung</th>
+        </tr>
+        <tr th:each="assignment : ${ListOfAssignments}">
+            <td th:text="${assignment.date}">Datum</td>
+            <td th:text="${assignment.title}">Titel</td>
+            <td th:text="${assignment.description}">Beschreibung</td>
+        </tr>
+    </table>
+    </center>
+</body>
+</html>

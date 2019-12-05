@@ -2,6 +2,10 @@ package kleingarten.Finance;
 
 import javax.persistence.*;
 import java.util.List;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 @Entity
 public class Bill {

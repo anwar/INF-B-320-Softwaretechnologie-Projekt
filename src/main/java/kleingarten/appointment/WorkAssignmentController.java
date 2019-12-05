@@ -1,11 +1,8 @@
 package kleingarten.appointment;
 
-import org.apache.tomcat.jni.Local;
-import org.salespointframework.core.SalespointIdentifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -27,7 +24,7 @@ public class WorkAssignmentController {
 		model.addAttribute("dateNow", LocalDate.now());
 		model.addAttribute("timeNow", LocalTime.now());
 		model.addAttribute("form", form);
-		return "createAssignment";
+		return "workAssignment/createAssignment";
 	}
 
 	@PostMapping("/createAssignment")
@@ -45,7 +42,7 @@ public class WorkAssignmentController {
 	@GetMapping("/listOfAssignments")
 	String listOfAppointments(Model model){
 		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
-		return "listOfAssignments";
+		return "workAssignment/listOfAssignments";
 	}
 
 

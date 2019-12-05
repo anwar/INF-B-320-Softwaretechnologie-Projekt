@@ -63,7 +63,7 @@ class NewsController {
 		model.addAttribute("entries", news.findAll());
 		model.addAttribute("form", form);
 
-		return "home";
+		return "news/home";
 	}
 
 	/**
@@ -77,7 +77,7 @@ class NewsController {
 	 * @return a redirect string
 	 */
 	@PostMapping(path = "/home")
-	String addEntry(Model model, Errors errors, @Valid @ModelAttribute("form") NewsForm form) {
+	String addEntry(@Valid @ModelAttribute("form") NewsForm form, Errors errors, Model model) {
 
 		if (errors.hasErrors()) {
 			return home(model, form);

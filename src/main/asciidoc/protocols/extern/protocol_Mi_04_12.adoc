@@ -1,0 +1,292 @@
+= Protokoll Gruppe 43
+
+Treffen am 04.12.2019
+
+Ort:      APB +
+Beginn:   07:30 Uhr +
+Ende:     09:30 Uhr
+
+__Schriftführer:__ Isabell Zorr
+
+*Nächstes Treffen:* +
+11.12.2019, 07:30 Uhr, APB
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Uwe Schmidt (Tutor)
+- Albert Wellerdt
+- Franziska Kiel
+- Muhammad Talal Anwar
+- Sanghyun Lee
+- Sascha Seiffert
+- Ylvi Sarah Bachmann
+- Isabell Zorr
+
+== Bemerkungen
+Zunächst kam von Uwe die Bemerkung, dass wir auf den Master nur Dinge pushen sollen, die auch
+funktionieren, da dies schon öfter der Fall war, dass Code auf dem Master nicht compilierte.
+Auch sollen wir nicht mit Pullrequests arbeiten, da diese redundant sind. Da wir es erfolgreich
+vermasselt haben elementare Fragen zu klären, produzieren wir nicht wartbaren Code und erzielen kaum
+Fortschritte. Es liegt keine Projektstruktur vor und wir nutzen die uns gegebenen Tools nicht zur Erleichterung
+unserer Arbeit. Der Code ist schlichtweg zu kompliziert und komplex. Weniger ist mehr, also sollten wir darauf achten,
+weniger Klassen zu generieren. Ausserdem sollten wir, um die Komplexität zu verringern, nicht mehr als um 2 Stufen
+vererben, was momentan noch ein Problem im Finance-Package ist, weshalb wir uns da zusammensetzen sollten um eine Lösung zu
+finden. Wichtig ist auch, dass wir während des Programmierens Dokumentationskommentare hinzufügen, um das nicht am Ende
+in mühseeliger Kleinarbeit zu tun. Nichtsdestotrotz ist die Menge an auskommentierten Code viel zu groß und verringert die
+Übersichtlichkeit. Sanghyun und Talal sollten für jeweils ihr Package ein angepasstes Entwurfsdiagram entwerfen um
+ebenfalls ihren Code zu strukturieren. Unsere Branches sollten eindeutigere Namen enthalten und eventuell als Unterbranches
+gekennzeichnet werden. Ausserdem nutzen wir zu viele Initializer. Besser wäre es, eine Initializeklasse zu haben, in der
+die zum Start der Anwendung benötigten Daten erstellt werden. Dies könnten wir über eine initialize() Methode implementieren,
+in der die Reihenfolge der Inititalisierungen festgelegt wird. Auch sollten wir an der Benennung unserer Commits arbeiten,
+da diese als Änderungsdokumentation gesehen werden können. +
+Alles in Allem haben wir zu viele Vernetzungen, zu komplexe Controller und benötigen eine stabile, einfache Struktur für
+wartbaren Code.
+Diese Erkenntnisse stammen aus der Besprechung des Codes von jedem Gruppenmitglied, welche heute vorgenommen wurde.
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#24
+|Fix HTML/CSS for homepage news section
+| ...
+| ...
+| closed
+
+|#25
+|Implement Message package for sending emails
+| Basic functionality, integration Test
+|Talal
+|open
+
+|#27
+|Add diagram for appointmentManagement
+|...
+|Albert
+|closed
+
+|#28
+|Update diagram for financeManagement
+| rework diagram with new understanding from extern meeting
+| Sanghyun
+|closed
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#34
+|TenantDepartment
+| Issue to manage the TODOS for the tenantDepartment
+|Isabell
+|open
+
+|#35
+| Add classes PlotController and PlotService
+|Issue to manage TODOS for the PlotDepartment
+| Ylvi
+| closed
+
+|#36
+|Add class plotCatalog
+|adding catalog for plotEntities
+|Ylvi
+|closed
+
+|#38
+|Add classes PlotController and PlotService
+|dividing needed methods by context or use cases
+|Ylvi
+|closed
+
+|#39
+|Use class procedure to save counters
+| delete waterCount and electricityCount in class Plot and modify JUnit tests
+|Ylvi
+|closed
+
+|#41
+|Edit and add classes and attributes to the appointment diagram
+|editing diagram for appointment diagram
+|Albert
+|open
+
+|#42
+|Association class for working hours
+|adding needed classes and methods
+|Albert
+|closed
+
+|#44
+|Add isTenant() method to ProcedureManager
+|methode to determine wether or not a user is a tenant
+|Sascha and Sanghyun
+|open
+
+|#45
+|Add dataInitializer for plots
+|...
+|Ylvi
+|closed
+
+|#47
+|Add UpdatePlotService class
+|...
+|Ylvi
+|closed
+
+|#49
+|Show details of Plot
+|...
+|Ylvi
+|open
+
+|#50
+|Add getProcedure() Method to ProcedureManager
+|method should have year and plot as parameter and return the procedure
+|Sascha and Sanghyun
+|open
+
+|#51
+|Add getProcedures() to ProcedureManager
+|year and tenant as parameters and return a streamable
+|Sascha and Sangyhun
+|open
+
+|#53
+|Tests for initializing tenants
+|some tests to test if the initialization of a tenant worked
+|Isabell
+|open
+
+|#54
+|Show overview of plots
+|colours and html file for the plot overview
+|Ylvi
+|open
+
+|#59
+|Add the productIdentifier by plot
+|PlotID is missing for the plot
+|Ylvi
+|closed
+
+|#63
+|Finalize news package
+|implementing entry deletion, editing and unit tests
+|Talal
+|open
+|===
+
+
+== Aktueller Stand
+Die Anwendung befindet sich in der Implementationsphase. Aufgrund neuester Probleme müssen wir eine
+Umstrukturierung innerhalb einiger Packages vornehmen um wartbaren Code zu erzeugen.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#25
+|Implement Message package for sending emails
+| BAsic functionality, integration Test
+|Talal
+|open
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#34
+|TenantDepartment
+| Issue to manage the TODOS for the tenantDepartment
+|Isabell
+|open
+
+|#41
+|Edit and add classes and attributes to the appointment diagram
+|editing diagram for appointment diagram
+|Albert
+|open
+
+|#44
+|Add isTenant() method to ProcedureManager
+|methode to determine wether or not a user is a tenant
+|Sascha and Sanghyun
+|open
+
+|#49
+|Show details of Plot
+|...
+|Ylvi
+|open
+
+|#50
+|Add getProcedure() Method to ProcedureManager
+|method should have year and plot as parameter and return the procedure
+|Sascha and Sanghyun
+|open
+
+|#51
+|Add getProcedures() to ProcedureManager
+|year and tenant as parameters and return a streamable
+|Sascha and Sangyhun
+|open
+
+|#53
+|Tests for initializing tenants
+|some tests to test if the initialization of a tenant worked
+|Isabell
+|open
+
+|#54
+|Show overview of plots
+|colours and html file for the plot overview
+|Ylvi
+|open
+
+|#63
+|Finalize news package
+|implementing entry deletion, editing and unit tests
+|Talal
+|open
+
+|===

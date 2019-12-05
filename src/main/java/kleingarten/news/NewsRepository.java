@@ -20,6 +20,6 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * A repository to manage {@link NewsEntry} instances. The methods are dynamically implemented by Spring Data JPA.
  */
-interface NewsRepository extends CrudRepository<NewsEntry, Long> {
+public interface NewsRepository extends CrudRepository<NewsEntry, Long> {
 	// Nothing to see here :)
 }
