@@ -14,7 +14,7 @@ public interface PlotCatalog extends Catalog<Plot> {
 	 * @return plots as {@link Streamable} of {@link Plot}, never {@literal null}
 	 */
 	@Override
-	Set<Plot> findAll();
+	Streamable<Plot> findAll();
 
 	/**
 	 * Return all {@link Plot}s with the given name. There should only be one plot with this name.
