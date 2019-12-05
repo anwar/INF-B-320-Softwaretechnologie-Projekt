@@ -15,10 +15,15 @@
  */
 package kleingarten.configuration;
 
+import kleingarten.Finance.Procedure;
+import kleingarten.Finance.ProcedureManager;
 import kleingarten.appointment.WorkAssignmentManager;
 import kleingarten.appointment.WorkAssignmentRepository;
 import kleingarten.news.NewsEntry;
 import kleingarten.news.NewsRepository;
+import kleingarten.plot.Plot;
+import kleingarten.plot.PlotCatalog;
+import kleingarten.plot.PlotService;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantRepository;
 import org.salespointframework.core.DataInitializer;
@@ -46,14 +51,23 @@ class AppDataInitializer implements DataInitializer {
 	private final WorkAssignmentManager workAssignmentManager;
 	private final TenantRepository tenantRepository;
 	private final UserAccountManager userAccountManager;
+	private final PlotService plotService;
+	private final PlotCatalog catalog;
+	private final ProcedureManager procedureManager;
 
-	AppDataInitializer(NewsRepository news, WorkAssignmentRepository workAssignmentRepo, WorkAssignmentManager workAssignmentManager,
-					   TenantRepository tenantRepository, UserAccountManager userAccountManager) {
+	AppDataInitializer(NewsRepository news,
+					   WorkAssignmentRepository workAssignmentRepo, WorkAssignmentManager workAssignmentManager,
+					   TenantRepository tenantRepository, UserAccountManager userAccountManager,
+					   PlotService plotService, PlotCatalog catalog,
+					   ProcedureManager procedureManager) {
 		this.news = news;
 		this.workAssignmentRepo = workAssignmentRepo;
 		this.workAssignmentManager = workAssignmentManager;
 		this.tenantRepository = tenantRepository;
 		this.userAccountManager  = userAccountManager;
+		this.plotService = plotService;
+		this.catalog = catalog;
+		this.procedureManager = procedureManager;
 	}
 
 	@Override
@@ -61,7 +75,8 @@ class AppDataInitializer implements DataInitializer {
 		initializeNewsEntries(this.news);
 		initializeWorkAssigment(this.workAssignmentRepo);
 		initializeTenants(this.tenantRepository, this.userAccountManager);
-
+		initializePlots(this.catalog, this.plotService);
+		initializeProcedures(this.procedureManager);
 	}
 
 	/**
@@ -146,6 +161,69 @@ class AppDataInitializer implements DataInitializer {
 		waterman.addRole(waterRole);
 
 		tenantRepository.saveAll(List.of(boss, obmann, cashier, replacement, protocol, waterman));
+	}
+
+	public void initializePlots(PlotCatalog catalog, PlotService plotService){
+		if (this.plotService.existsByName("1")) {
+			return;
+		}
+
+		LOG.info("Creating default plots");
+		Plot Plot = plotService.addNewPlot("1", 300, "Kleine Parzelle mit angelegtem Teich.");
+		LOG.info(Plot.getId().toString());
+		Plot Plot_2 = plotService.addNewPlot("2", 500, "Sehr große Parzelle.");
+		LOG.info(Plot_2.getId().toString());
+		Plot Plot_3 = plotService.addNewPlot("3", 120, "Kleine Parzelle.");
+		LOG.info(Plot_3.getId().toString());
+		Plot Plot_4 = plotService.addNewPlot("4", 1500, "Sehr, sehr große Parzelle.");
+		LOG.info(Plot_4.getId().toString());
+		Plot Plot_5 = plotService.addNewPlot("5", 350, "Parzelle mit angelegtem Teich.");
+		LOG.info(Plot_5.getId().toString());
+		Plot Plot_6 = plotService.addNewPlot("6", 200, "Große Parzelle.");
+		LOG.info(Plot_6.getId().toString());
+		catalog.saveAll(List.of(Plot, Plot_2, Plot_3, Plot_4, Plot_5, Plot_6));
+
+		LOG.info("fertig");
+	}
+
+	public void initializeProcedures(ProcedureManager procedureManager) {
+		if (!procedureManager.getAll().toList().isEmpty()) {
+			return;
+		}
+
+		List<Plot> plots = catalog.findAll().toList();
+		List<Tenant> tenants = this.tenantRepository.findAll().toList();
+		if (!plots.isEmpty() && !tenants.isEmpty()) {
+			LOG.info("Creating default procedures");
+
+			Tenant boss = null;
+			Tenant obman = null;
+			Tenant protocol = null;
+			Tenant waterman = null;
+			for (Tenant tenant:
+					tenants) {
+				if (tenant.getEmail().equals("peter.klaus@email.com")) {
+					boss = tenant;
+				} else if (tenant.getEmail().equals("hubert.grumpel2@cloud.com")) {
+					obman = tenant;
+				} else if (tenant.getEmail().equals("francys@email.com")) {
+					protocol = tenant;
+				} else if (tenant.getEmail().equals("neptuns.bart@fishmail.com")) {
+					waterman = tenant;
+				}
+			}
+
+			var procedure_1 = new Procedure(2019, plots.get(0), boss.getId());
+			procedureManager.add(procedure_1);
+			var procedure_2 = new Procedure(2019, plots.get(1), obman.getId());
+			procedureManager.add(procedure_2);
+			var procedure_3 = new Procedure(2019, plots.get(2), protocol.getId());
+			procedureManager.add(procedure_3);
+			var procedure_4 = new Procedure(2019, plots.get(3), waterman.getId());
+			procedureManager.add(procedure_4);
+
+			LOG.info("Finished creating default procedures");
+		}
 	}
 
 }
