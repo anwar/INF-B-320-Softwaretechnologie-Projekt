@@ -18,24 +18,21 @@ import java.util.*;
 public class InsecurePlotController {
 	private final PlotService plotService;
 	private final PlotCatalog plotCatalog;
-	private final TenantRepository tenantRepository;
-	private final DataService dataService;
 	private final PlotControllerService plotControllerService;
 	private final SecurePlotController securePlotController;
 
-	InsecurePlotController(PlotService plotService, PlotCatalog plotCatalog, TenantRepository tenantRepository,
-						   DataService dataService, PlotControllerService plotControllerService,
+	InsecurePlotController(PlotService plotService, PlotCatalog plotCatalog,
+						   PlotControllerService plotControllerService,
 						   SecurePlotController securePlotController) {
 		this.plotService = plotService;
 		this.plotCatalog = plotCatalog;
-		this.tenantRepository = tenantRepository;
-		this.dataService = dataService;
 		this.plotControllerService = plotControllerService;
 		this.securePlotController = securePlotController;
 	}
 
 	/**
 	 * Use different methods to show the overview of all {@link Plot}s depending if a user is logged in or not
+	 * @param user {@link Optional} of {@link UserAccount}, contains the user's {@link UserAccount} when he is logged in
 	 * @return response as {@link ModelAndView}
 	 */
 	@GetMapping("/anlage")
@@ -46,37 +43,39 @@ public class InsecurePlotController {
 		return securePlotController.plotOverview(user.get());
 	}
 
+	/**
+	 * Use different methods to show the detail page of a {@link Plot} depending if a user is logged in or not
+	 * @param user {@link Optional} of {@link UserAccount}, contains the user's {@link UserAccount} when he is logged in
+	 * @param plot {@link Plot} to show the details of
+	 * @return response as {@link ModelAndView}
+	 */
 	@GetMapping("/plot/{plot}")
 	public ModelAndView detailsOfPlot(@LoggedIn Optional<UserAccount> user, @PathVariable Plot plot) {
 		if (user.isEmpty()) {
 			return detailsOfFreePlot(plot);
 		}
-		return securePlotController.detailsOfPlot(user.get(), Optional.of(plot));
+		return securePlotController.detailsOfPlot(user.get(), plot);
 	}
 
+	/**
+	 * Create model with general information of a {@link Plot} to show the detail page of a {@link Plot} when no user
+	 * is logged in
+	 * @param plot {@link Plot} of which general information should be shown
+	 * @return response as {@link ModelAndView}
+	 */
 	public ModelAndView detailsOfFreePlot(@PathVariable Plot plot) {
 		ModelAndView mav = new ModelAndView();
-		Plot shownPlot = null;
 
-			if (!plotService.existsByName(plot.getName())) {
-				throw new IllegalArgumentException("Plot must exist!");
-			}
-			shownPlot = plot;
+		if (!plotService.existsByName(plot.getName())) {
+			mav.addObject("error","Plot must exist!");
+		}
+		if (plot.getStatus() == PlotStatus.TAKEN) {
+			mav.addObject("error","Unauthenticated user must not have access to a rented plot!");
+		}
 
-			if (plot.getStatus() == PlotStatus.TAKEN) {
-				throw new IllegalArgumentException("Unauthenticated user must not have access to a rented plot!");
-			}
-			mav.addObject("canApply", true);
+		mav.addObject("canApply", true);
 
-
-		// Add default information to the model
-		mav.addObject("plotID", shownPlot.getId());
-		mav.addObject("plotName", shownPlot.getName());
-		mav.addObject("plotSize", shownPlot.getSize() + " m²");
-		mav.addObject("plotDescription", shownPlot.getDescription());
-		mav.addObject("plotPrice", MonetaryFormats.getAmountFormat(Locale.GERMANY)
-			.format(shownPlot.getEstimator()));
-
+		plotControllerService.addGeneralInformationOfPlot(plot, mav);
 		mav.setViewName("plot/myPlot");
 
 		return mav;
@@ -104,13 +103,11 @@ public class InsecurePlotController {
 		mav.setViewName("plot/plotOverview");
 
 		return mav;
-
 	}
 
-@GetMapping("/editPlot")
+	@GetMapping("/editPlot")
 	String editPlot(@PathVariable Plot plot, Model model){
-		model.addAttribute("plot", plotService.findById(plot.getId()));
-		return "plot/editPlot";
-}
-
+			model.addAttribute("plot", plotService.findById(plot.getId()));
+			return "plot/editPlot";
+	}
 }

@@ -10,11 +10,14 @@ import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.servlet.ModelAndView;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import javax.money.format.MonetaryFormats;
 import javax.transaction.Transactional;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -206,5 +209,20 @@ public class PlotControllerServiceIntegrationTests {
 
 		plotControllerService.secureSetPlotColor(takenPlot, user, colors);
 		assertThat(colors).isEqualTo(result);
+	}
+
+	@Test
+	public void addInformationOfPlotTest() {
+		ModelAndView mav = new ModelAndView();
+		ModelAndView result = new ModelAndView();
+		result.addObject("plotID", freePlot.getId());
+		result.addObject("plotName", freePlot.getName());
+		result.addObject("plotSize", freePlot.getSize() + " m²");
+		result.addObject("plotDescription", freePlot.getDescription());
+		result.addObject("plotPrice", MonetaryFormats.getAmountFormat(Locale.GERMANY)
+				.format(freePlot.getEstimator()));
+
+		plotControllerService.addGeneralInformationOfPlot(freePlot, mav);
+		assertThat(mav).isEqualTo(result);
 	}
 }
