@@ -33,8 +33,8 @@ public class InsecurePlotController {
 		this.plotControllerService = plotControllerService;
 	}
 
-	@GetMapping("/myPlot")
-	public ModelAndView details(@LoggedIn Optional<UserAccount> user, @RequestParam Optional<Plot> plot) {
+	@GetMapping("/plot/{plot}")
+	public ModelAndView detailsOfPlot(@LoggedIn Optional<UserAccount> user, @PathVariable Optional<Plot> plot) {
 		ModelAndView mav = new ModelAndView();
 		Plot shownPlot = null;
 
@@ -122,22 +122,17 @@ public class InsecurePlotController {
 		return mav;
 	}
 
-	@GetMapping("/myPlot/{plot}")
-	public ModelAndView rentedPlots(@LoggedIn Optional<UserAccount> user, @PathVariable Plot plot) {
-		return details(user, Optional.of(plot));
-	}
-
+	/**
+	 * Create model with needed information to show the overview of all {@link Plot}s when no user is logged in
+	 * @return response as {@link ModelAndView}
+	 */
 	@GetMapping("/anlage")
-	public ModelAndView plotOverview(@LoggedIn Optional<UserAccount> user) {
+	public ModelAndView plotOverview() {
 		ModelAndView mav = new ModelAndView();
 
 		Set<Plot> plots = plotCatalog.findAll().toSet();
 		Map<Plot, String> colors = new HashMap<>();
 		Map<Plot, Boolean> rights = new HashMap<>();
-
-		/*if (tenantRepository.findByUserAccount(user.get()).isEmpty()) {
-			throw new IllegalArgumentException("User must exist!");
-		}*/
 
 		for (Plot plot : plots) {
 			plotControllerService.insecureSetPlotColor(plot, colors);
