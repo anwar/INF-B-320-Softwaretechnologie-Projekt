@@ -223,6 +223,6 @@ public class PlotControllerServiceIntegrationTests {
 				.format(freePlot.getEstimator()));
 
 		plotControllerService.addGeneralInformationOfPlot(freePlot, mav);
-		assertThat(mav).isEqualTo(result);
+		assertThat(mav.getModelMap()).isEqualTo(result.getModelMap());
 	}
 }
