@@ -6,18 +6,18 @@ import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
-import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.parameters.P;
-
-import javax.transaction.Transactional;
-import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import javax.transaction.Transactional;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 @SpringBootTest
 @Transactional
@@ -26,35 +26,37 @@ public class PlotControllerServiceIntegrationTests {
 	private Tenant replacement = null;
 	private Tenant chashier = null;
 	private Tenant chairman = null;
-	private Set<Plot> plots = new HashSet<>();
-	private Plot plot;
 
+	private Map<Plot, String> colors;
+	private Map<Plot, String> result;
+	private Optional<UserAccount> user;
+
+	private Plot freePlot;
+	private Plot takenPlot;
 	private Plot bossPlot;
 
 	private final PlotControllerService plotControllerService;
 	private final DataService dataService;
 	private final TenantManager tenantManager;
-	private final UserAccountManager userAccountManager;
 	private final PlotService plotService;
 	private final PlotCatalog plotCatalog;
 	private final ProcedureManager procedureManager;
 
 	/**
 	 * Constructor of class, used by Spring
-	 * @param dataService {@link DataService} class which should be set as class attribute
+	 *
+	 * @param dataService   {@link DataService} class which should be set as class attribute
 	 * @param tenantManager {@link TenantManager} class which should be set as class attribute
 	 */
 	public PlotControllerServiceIntegrationTests(@Autowired PlotControllerService plotControllerService,
 												 @Autowired DataService dataService,
 												 @Autowired TenantManager tenantManager,
-												 @Autowired UserAccountManager userAccountManager,
 												 @Autowired PlotService plotService,
 												 @Autowired PlotCatalog plotCatalog,
 												 @Autowired ProcedureManager procedureManager) {
 		this.plotControllerService = plotControllerService;
 		this.dataService = dataService;
 		this.tenantManager = tenantManager;
-		this.userAccountManager = userAccountManager;
 		this.plotService = plotService;
 		this.plotCatalog = plotCatalog;
 		this.procedureManager = procedureManager;
@@ -66,8 +68,24 @@ public class PlotControllerServiceIntegrationTests {
 	@BeforeEach
 	public void setUp() {
 		Set<Tenant> tenants = tenantManager.getAll().toSet();
+		setUpImportantTenants(tenants);
+
+		Set<Plot> plots = plotCatalog.findByStatus(PlotStatus.FREE);
+		this.freePlot = setUpPlot(plots);
+		plots = plotCatalog.findByStatus(PlotStatus.TAKEN);
+		this.takenPlot = setUpPlot(plots);
+
+		this.colors = new HashMap<>();
+		this.result = new HashMap<>();
+	}
+
+	/**
+	 * Get and save the objects of type {@link Tenant} for all {@link Tenant}s with special roles as class attributes
+	 * @param tenants initialized {@link Tenant}s as {@link Set} of {@link Tenant}
+	 */
+	public void setUpImportantTenants(Set<Tenant> tenants) {
 		for (Tenant tenant:
-			 tenants) {
+			tenants) {
 			if (tenantManager.tenantHasRole(tenant, Role.of("Vorstandsvorsitzender"))) {
 				this.boss = tenant;
 			} else if (tenantManager.tenantHasRole(tenant, Role.of("Stellvertreter"))) {
@@ -78,29 +96,28 @@ public class PlotControllerServiceIntegrationTests {
 				this.chairman = tenant;
 			}
 		}
-		this.plots = plotCatalog.findByStatus(PlotStatus.FREE);
-		for (Plot freePlot:
-			 plots) {
-			this.plot = freePlot;
-			break;
-		}
 	}
+
+	/**
+	 * Get a {@link Plot}
+	 */
+	public Plot setUpPlot(Set<Plot> plots) {
+		if (plots.isEmpty()) {
+			return new Plot("467", 400, "testPlot");
+		}
+		return plots.iterator().next();
+	}
+
 
 	/**
 	 * Test if the right color is assigned to a free {@link Plot} if user is not logged in
 	 */
 	@Test
 	public void insecureGetColorOfFreePlotTest() {
-		Map<Plot, String> colors = new HashMap<>();
-		Map<Plot, String> result = new HashMap<>();
-		Optional<UserAccount> user = Optional.empty();
+		user = Optional.empty();
+		result.put(freePlot, "olive");
 
-		if (plot == null) {
-			plot = new Plot("467", 400, "testPlot");
-		}
-		result.put(plot, "olive");
-
-		plotControllerService.setPlotColor(plot, user, colors);
+		plotControllerService.setPlotColor(freePlot, user, colors);
 		assertThat(colors).isEqualTo(result);
 	}
 
@@ -109,42 +126,89 @@ public class PlotControllerServiceIntegrationTests {
 	 */
 	@Test
 	public void secureGetColorForFreePlotTest() {
-		Map<Plot, String> colors = new HashMap<>();
-		Map<Plot, String> result = new HashMap<>();
-		Optional<UserAccount> user = Optional.of(boss.getUserAccount());
+		user = Optional.of(boss.getUserAccount());
+		result.put(freePlot, "olive");
 
-		if (plot == null) {
-			plot = new Plot("467", 400, "testPlot");
-		}
-		result.put(plot, "olive");
-
-		plotControllerService.setPlotColor(plot, user, colors);
+		plotControllerService.setPlotColor(freePlot, user, colors);
 		assertThat(colors).isEqualTo(result);
 	}
 
 	/**
-	 * Test if the right color is assigned to a {@link Plot} taken by a {@link Tenant} with {@link Role} "Vorstandsvorsitzender"
+	 * Test if the right color is assigned to a {@link Plot} taken by a {@link Tenant} when the user is not logged in
+	 */
+	@Test
+	public void insecureGetColorForTakenPlotTest() {
+		user = Optional.empty();
+		if (!dataService.procedureExists(2019, takenPlot)) {
+			Procedure takenPlotProcedure = procedureManager.add(new Procedure(2019, takenPlot, boss.getId()));
+		}
+		result.put(takenPlot, "grey");
+
+		plotControllerService.setPlotColor(takenPlot, user, colors);
+		assertThat(colors).isEqualTo(result);
+	}
+
+	/**
+	 * Test if the right color is assigned to a {@link Plot} taken by a {@link Tenant} with
+	 * {@link Role} "Vorstandsvorsitzender" when the user is logged in
 	 */
 	@Test
 	public void securedGetColorForBossPlotTest() {
-		Map<Plot, String> colors = new HashMap<>();
-		Map<Plot, String> result = new HashMap<>();
-		Optional<UserAccount> user = Optional.of(boss.getUserAccount());
+		user = Optional.of(boss.getUserAccount());
 
-		if (dataService.getRentedPlots(2019, boss).isEmpty()) {
-			bossPlot = new Plot("399", 300, "test");
-			Procedure bossProcedure = new Procedure(2019, bossPlot, boss.getId());
-		} else {
-			for (Plot plot:
-				 dataService.getRentedPlots(2019, boss)) {
-				bossPlot = plot;
-				break;
-			}
-		}
-		result.put(bossPlot, "yellow");
+		Procedure procedure = tenantIsMaintenant(boss);
+		procedureManager.add(procedure);
+		takenPlot = plotService.findById(procedure.getPlotId());
+		result.put(takenPlot, "yellow");
 
-		plotControllerService.setPlotColor(bossPlot, user, colors);
+		plotControllerService.setPlotColor(takenPlot, user, colors);
 		assertThat(colors).isEqualTo(result);
+	}
 
+	/**
+	 * Get {@link Procedure} where the given {@link Tenant} is the main tenant
+	 * @param tenant {@link Tenant} who should be the main tenant of a {@link Plot}
+	 * @return
+	 */
+	public Procedure tenantIsMaintenant(Tenant tenant) {
+		for (Procedure procedure:
+			procedureManager.getProcedures(2019, tenant.getId())) {
+			return procedure;
+		}
+		return new Procedure(2019, takenPlot, tenant.getId());
+	}
+
+	/**
+	 * Test if the right color is assigned to a {@link Plot} taken by a {@link Tenant} with
+	 * {@link Role} "Stellvertreter" when the user is logged in
+	 */
+	@Test
+	public void securedGetColorForReplacementPlotTest() {
+		user = Optional.of(replacement.getUserAccount());
+
+		Procedure procedure = tenantIsMaintenant(replacement);
+		procedureManager.add(procedure);
+		takenPlot = plotService.findById(procedure.getPlotId());
+		result.put(takenPlot, "yellow");
+
+		plotControllerService.setPlotColor(takenPlot, user, colors);
+		assertThat(colors).isEqualTo(result);
+	}
+
+	/**
+	 * Test if the right color is assigned to a {@link Plot} taken by a {@link Tenant} with
+	 * {@link Role} "Obmann" when the user is logged in
+	 */
+	@Test
+	public void securedGetColorForChairmanPlotTest() {
+		user = Optional.of(chairman.getUserAccount());
+
+		Procedure procedure = tenantIsMaintenant(chairman);
+		procedureManager.add(procedure);
+		takenPlot = plotService.findById(procedure.getPlotId());
+		result.put(takenPlot, "blue");
+
+		plotControllerService.setPlotColor(takenPlot, user, colors);
+		assertThat(colors).isEqualTo(result);
 	}
 }
