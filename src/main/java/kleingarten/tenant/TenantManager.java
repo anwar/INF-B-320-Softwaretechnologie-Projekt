@@ -40,9 +40,12 @@ public class TenantManager {
 		return tenant;
 	}
 
-	public Tenant modifiedTenant(Tenant tenant){
-		Tenant modifiedTenant = tenants.save(tenant);
-		return modifiedTenant;
+	public Tenant getTenantByUserAccount(UserAccount userAccount){
+		if (tenants.findByUserAccount(userAccount).isEmpty()){
+			throw new IllegalArgumentException("Tenant not found");
+		} else {
+			return tenants.findByUserAccount(userAccount).get();
+		}
 	}
 
 	public boolean tenantHasRole(Tenant tenant, Role role){
