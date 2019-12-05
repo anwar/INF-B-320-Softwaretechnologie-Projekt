@@ -42,7 +42,7 @@
             <div class="button-section">
                 <button class="button" th:if="${canModify}">Zählerstände eintragen</button>
                 <button class="button" th:if="${canSeeBills}">Rechnungen anzeigen</button>
-               <a th:href="'/editPlot?id=' +${plot.getID()}"> <button class="button" >Bearbeiten</button></a>
+               <a th:href="'/editPlot?id=' +${plotID}"> <button class="button" >Bearbeiten</button></a>
 
 
 
