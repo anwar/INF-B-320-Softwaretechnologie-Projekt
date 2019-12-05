@@ -42,6 +42,9 @@
             <div class="button-section">
                 <button class="button" th:if="${canModify}">Zählerstände eintragen</button>
                 <button class="button" th:if="${canSeeBills}">Rechnungen anzeigen</button>
+               <a th:href="'/editPlot?id=' +${plot.getID()}"> <button class="button" >Bearbeiten</button></a>
+
+
 
             </div>
         </table>
@@ -49,7 +52,6 @@
             <button class="button" onclick="location.href='/createApplication'" >Bewerben</button>
             <button class="button" onclick="location.href= '/application'" th:if="${canSeeApplications}">Bewerbungen anzeigen</button>
             <input type="hidden" id="plotID" name="plotID" th:value="${plotID}">
-            <button class="button" onclick="location.href='/'" >Bearbeiten</button>
         </div>
     </div>
 </div>

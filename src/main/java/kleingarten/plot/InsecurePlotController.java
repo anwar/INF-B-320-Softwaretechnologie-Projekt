@@ -3,10 +3,12 @@ package kleingarten.plot;
 import kleingarten.Finance.Procedure;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantRepository;
+import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -153,5 +155,10 @@ public class InsecurePlotController {
 
 	}
 
+@GetMapping("/editPlot")
+	String editPlot(@PathVariable Plot plot, Model model){
+		model.addAttribute("plot", plotService.findById(plot.getId()));
+		return "plot/editPlot";
+}
 
 }
