@@ -1,5 +1,6 @@
 package kleingarten.tenant;
 
+import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+import java.util.Optional;
 
 @Service
 public class TenantManager {
@@ -59,4 +62,5 @@ public class TenantManager {
 	public  Streamable<Tenant> findDisabled(){
 		return  tenants.findAll().filter(c -> !c.getUserAccount().isEnabled());
 	}
+
 }
