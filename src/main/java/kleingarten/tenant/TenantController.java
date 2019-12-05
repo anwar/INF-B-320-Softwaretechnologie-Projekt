@@ -36,11 +36,6 @@ class TenantController {
 		return "tenant/tenantDetails";
 	}
 
-	@GetMapping("/complains")
-	String complains() {
-		return "news/complains";
-	}
-
 	@GetMapping("/modifyTenant")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String modifyTenant(@RequestParam("id") Long id, Model model){
