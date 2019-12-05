@@ -17,15 +17,15 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
-public class PlotController {
+public class InsecurePlotController {
 	private final PlotService plotService;
 	private final PlotCatalog plotCatalog;
 	private final TenantRepository tenantRepository;
 	private final DataService dataService;
 	private final PlotControllerService plotControllerService;
 
-	PlotController(PlotService plotService, PlotCatalog plotCatalog, TenantRepository tenantRepository,
-				   DataService dataService, PlotControllerService plotControllerService) {
+	InsecurePlotController(PlotService plotService, PlotCatalog plotCatalog, TenantRepository tenantRepository,
+						   DataService dataService, PlotControllerService plotControllerService) {
 		this.plotService = plotService;
 		this.plotCatalog = plotCatalog;
 		this.tenantRepository = tenantRepository;
@@ -140,8 +140,8 @@ public class PlotController {
 		}*/
 
 		for (Plot plot : plots) {
-			plotControllerService.setPlotColor(plot, user, colors);
-			plotControllerService.setAccessRightForPlot(plot, user, rights);
+			plotControllerService.insecureSetPlotColor(plot, colors);
+			plotControllerService.insecureSetAccessRightForPlot(plot, rights);
 		}
 
 		mav.addObject("plotList", plots);

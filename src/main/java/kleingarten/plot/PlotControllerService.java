@@ -21,26 +21,34 @@ public class PlotControllerService {
 	}
 
 	/**
-	 * Select color of a {@link Plot} and save the selection in a {@link Map} of {@link Plot} and {@link String}
+	 * Select color of a {@link Plot} when no user is logged in and save the selection in a {@link Map} of
+	 * {@link Plot} and {@link String}
 	 * @param plot {@link Plot} for which a color should be selected
-	 * @param user {@link UserAccount} of the logged in user, if he is logged in
 	 * @param colors {@link Map} with {@link Plot}s and their selected colors as {@link String}
 	 */
-	void setPlotColor(Plot plot, Optional<UserAccount> user, Map<Plot, String> colors) {
+	void insecureSetPlotColor(Plot plot, Map<Plot, String> colors) {
+		colors.put(plot, plot.getStatus() == PlotStatus.TAKEN ? "grey" : "olive");
+	}
+
+	/**
+	 * Select color of a {@link Plot} when a user is logged in and save the selection in a {@link Map} of
+	 * {@link Plot} and {@link String}
+	 * @param plot {@link Plot} for which a color should be selected
+	 * @param user {@link UserAccount} of the logged in user
+	 * @param colors {@link Map} with {@link Plot}s and their selected colors as {@link String}
+	 */
+	void secureSetPlotColor(Plot plot, UserAccount user, Map<Plot, String> colors) {
 		colors.put(plot, plot.getStatus() == PlotStatus.TAKEN ? "grey" : "olive");
 
-		if (user.isEmpty() || plot.getStatus() == PlotStatus.FREE) {
-			return;
-		}
-
 		if (plot.getStatus() == PlotStatus.TAKEN) {
-			Tenant mainTenant = tenantManager.get(dataService.getProcedure(LocalDateTime.now().getYear(), plot).getMainTenant());
+			Tenant mainTenant = tenantManager.get(dataService.getProcedure(LocalDateTime.now().getYear(), plot)
+											.getMainTenant());
 			if (mainTenant == null) {
 				throw new IllegalArgumentException("Tenant must not be null!");
 			}
 
 			if (tenantManager.tenantHasRole(mainTenant, Role.of("Vorstandsvorsitzender"))
-				|| tenantManager.tenantHasRole(mainTenant, Role.of("Stellvertreter"))) {
+					|| tenantManager.tenantHasRole(mainTenant, Role.of("Stellvertreter"))) {
 				colors.put(plot, "yellow");
 			} else if (tenantManager.tenantHasRole(mainTenant, Role.of("Kassierer"))) {
 				colors.put(plot, "red");
@@ -51,32 +59,34 @@ public class PlotControllerService {
 	}
 
 	/**
+	 * Select if details page of a specific {@link Plot} can be accessed when no user is logged in
+	 * @param plot {@link Plot} for which the access to the details page should be set
+	 * @param rights {@link Map} with {@link Plot}s and their kind of access as {@link Boolean}
+	 */
+	void insecureSetAccessRightForPlot(Plot plot, Map<Plot, Boolean> rights) {
+		if (plot.getStatus() == PlotStatus.FREE) {
+			rights.put(plot, true);
+		} else {
+			rights.put(plot, false);
+		}
+	}
+
+	/**
 	 * Select if a user can see the details page of a specific {@link Plot}
 	 * @param plot {@link Plot} for which the access to the details page should be set
-	 * @param user {@link UserAccount} of the logged in user, if he is logged in
+	 * @param user {@link UserAccount} of the logged in user
 	 * @param rights {@link Map} with {@link Plot}s and their kind of access as {@link Boolean} for the given user
 	 */
-	void setAccessRightForPlot(Plot plot, Optional<UserAccount> user, Map<Plot, Boolean> rights) {
-		if (user.isEmpty()) {
-			if (plot.getStatus() == PlotStatus.FREE) {
-				rights.put(plot, true);
-			} else {
-				rights.put(plot, false);
-			}
-		} else {
-			Tenant tenant = tenantManager.getTenantByUserAccount(user.get());
-			if (tenant == null) {
-				throw new IllegalArgumentException("Tenant must exist!");
-			}
+	void secureSetAccessRightForPlot(Plot plot, UserAccount user, Map<Plot, Boolean> rights) {
+		Tenant tenant = tenantManager.getTenantByUserAccount(user);
 
-			List<Role> permitted = List.of(Role.of("Vorstandsvorsitzender"), Role.of("Stellvertreter"),
-											Role.of("Protokollant"), Role.of("Kassierer"), Role.of("Wassermann"));
-			boolean condition = user.get().getRoles().stream().anyMatch(permitted::contains);
-			if (condition) {
-				rights.put(plot, true);
-			} else if (tenantManager.tenantHasRole(tenant, Role.of("Obmann"))) {
-				rights.put(plot, plot.getChairman().getId() == tenant.getId());
-			}
+		List<Role> permitted = List.of(Role.of("Vorstandsvorsitzender"), Role.of("Stellvertreter"),
+					Role.of("Protokollant"), Role.of("Kassierer"), Role.of("Wassermann"));
+		boolean condition = user.getRoles().stream().anyMatch(permitted::contains);
+		if (condition) {
+			rights.put(plot, true);
+		} else if (tenantManager.tenantHasRole(tenant, Role.of("Obmann"))) {
+			rights.put(plot, plot.getChairman().getId() == tenant.getId());
 		}
 	}
 }
