@@ -8,7 +8,7 @@ import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.money.format.MonetaryFormats;
@@ -32,8 +32,7 @@ public class SecurePlotController {
 		this.plotControllerService = plotControllerService;
 	}
 
-	@GetMapping("/plot/{plot}")
-	public ModelAndView detailsOfPlot(@LoggedIn UserAccount user, @PathVariable Optional<Plot> plot) {
+	public ModelAndView detailsOfPlot(@LoggedIn UserAccount user, @RequestParam Optional<Plot> plot) {
 		ModelAndView mav = new ModelAndView();
 		Plot shownPlot = null;
 
@@ -111,12 +110,16 @@ public class SecurePlotController {
 		return mav;
 	}
 
+	@GetMapping("/myPlot")
+	public ModelAndView rentedPlots(@LoggedIn UserAccount user) {
+		return detailsOfPlot(user, Optional.empty());
+	}
+
 	/**
 	 * Create model with needed information to show the overview of all {@link Plot}s when user is logged in
 	 * @param user {@link UserAccount} of the logged in user
 	 * @return response as {@link ModelAndView}
 	 */
-	@GetMapping("/anlage")
 	public ModelAndView plotOverview(@LoggedIn UserAccount user) {
 		ModelAndView mav = new ModelAndView();
 

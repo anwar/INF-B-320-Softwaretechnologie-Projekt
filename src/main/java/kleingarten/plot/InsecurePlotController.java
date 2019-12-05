@@ -1,6 +1,8 @@
 package kleingarten.plot;
 
 import kleingarten.tenant.TenantRepository;
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,29 +18,49 @@ public class InsecurePlotController {
 	private final TenantRepository tenantRepository;
 	private final DataService dataService;
 	private final PlotControllerService plotControllerService;
+	private final SecurePlotController securePlotController;
 
 	InsecurePlotController(PlotService plotService, PlotCatalog plotCatalog, TenantRepository tenantRepository,
-						   DataService dataService, PlotControllerService plotControllerService) {
+						   DataService dataService, PlotControllerService plotControllerService,
+						   SecurePlotController securePlotController) {
 		this.plotService = plotService;
 		this.plotCatalog = plotCatalog;
 		this.tenantRepository = tenantRepository;
 		this.dataService = dataService;
 		this.plotControllerService = plotControllerService;
+		this.securePlotController = securePlotController;
+	}
+
+	/**
+	 * Use different methods to show the overview of all {@link Plot}s depending if a user is logged in or not
+	 * @return response as {@link ModelAndView}
+	 */
+	@GetMapping("/anlage")
+	public ModelAndView plotOverview(@LoggedIn Optional<UserAccount> user) {
+		if (user.isEmpty()) {
+			return insecurePlotOverview();
+		}
+		return securePlotController.plotOverview(user.get());
 	}
 
 	@GetMapping("/plot/{plot}")
-	public ModelAndView detailsOfPlot(@PathVariable Optional<Plot> plot) {
+	public ModelAndView detailsOfPlot(@LoggedIn Optional<UserAccount> user, @PathVariable Plot plot) {
+		if (user.isEmpty()) {
+			return detailsOfFreePlot(plot);
+		}
+		return securePlotController.detailsOfPlot(user.get(), Optional.of(plot));
+	}
+
+	public ModelAndView detailsOfFreePlot(@PathVariable Plot plot) {
 		ModelAndView mav = new ModelAndView();
 		Plot shownPlot = null;
 
-		if (plot.isPresent()) {
-			if (!plotService.existsByName(plot.get().getName())) {
+			if (!plotService.existsByName(plot.getName())) {
 				throw new IllegalArgumentException("Plot must exist!");
 			}
-			shownPlot = plot.get();
-		}
+			shownPlot = plot;
 
-			if (plot.get().getStatus() == PlotStatus.TAKEN) {
+			if (plot.getStatus() == PlotStatus.TAKEN) {
 				throw new IllegalArgumentException("Unauthenticated user must not have access to a rented plot!");
 			}
 			mav.addObject("canApply", true);
@@ -61,8 +83,7 @@ public class InsecurePlotController {
 	 * Create model with needed information to show the overview of all {@link Plot}s when no user is logged in
 	 * @return response as {@link ModelAndView}
 	 */
-	@GetMapping("/anlage")
-	public ModelAndView plotOverview() {
+	public ModelAndView insecurePlotOverview() {
 		ModelAndView mav = new ModelAndView();
 
 		Set<Plot> plots = plotCatalog.findAll().toSet();
