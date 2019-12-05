@@ -40,7 +40,7 @@ class TenantController {
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String modifyTenant(@RequestParam("id") Long id, Model model){
 		model.addAttribute("tenant", tenantManager.get(id));
-		return "modifyTenant";
+		return "tenant/modifyTenant";
 	}
 
 	@PostMapping("/modifiedTenant")
