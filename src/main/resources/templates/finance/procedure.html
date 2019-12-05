@@ -25,65 +25,19 @@
     <div><table>
         <thead>
         <tr>
-            <!-- <th >ID</th>-->
-            <th>Name</th>
-            <th>Betrag</th>
-            <th> </th>
-
-
-
+            <th>Parzelle Nr.</th>
+            <th>Hauptpächter</th>
+            <th>Nebenpächter</th>
         </tr>
         </thead>
         <tbody th:remove="all-but-first">
-<div  th:each="procedure : ${procedure}">
-        <tr  >
-            <td>Wasserstand</td>
-            <td th:text="${procedure.getWatercount()}">Paul</td>
-            <td> <a type="button" th:value="${procedure.getPlotId()}" th:href="@{finance/editWatercount/{plotId} (Id=${procedure.getPlotId()})}">Wasserzählerstand Bearbeiten</a></td>
-        </tr>
 
-        <tr >
-            <td>Stromzählerstand</td>
-            <td th:text="${procedure.getPowercount()}">Paul</td>
-            <td> <a type="button" th:value="${procedure.getPlotId()}" th:href="@{finance/editPowercount/{plotId} (Id=${procedure.getPlotId()})}">Stromzählerstand Bearbeiten</a></td>
-        </tr>
+           <tr  th:each="procedure : ${procedureList}">
+               <td> <a th:href="'/procedureDetails?id=' +${procedure.getId()}" th:text="${procedure.getId()}">Paul</a> </td>
+               <td> <a th:href="'/procedureDetails?id=' +${procedure.getId()}" th:text="${procedure.getMainTenant()}">Paul</a> </td>
+               <td> <a th:href="'/procedureDetails?id=' +${procedure.getId()}" th:text="${procedure.getSubTenants()}">Paul</a> </td>
 
-        <tr>
-            <td>Größe</td>
-            <td th:text="${procedure.getSize()}">Paul</td>
-            <td> <a type="button">Bearbeiten</a></td>
-        </tr>
-        <tr>
-            <td>Arbeitsstunden</td>
-            <td th:text="${procedure.getWorkMinutes()}">Paul</td>
-            <td> <a type="button">Bearbeiten</a></td>
-        </tr>
-        <tr>
-            <td>ID</td>
-            <td th:text="${procedure.getId()}">Paul</td>
-            <td> <a type="button">Bearbeiten</a></td>
-        </tr>
-        <tr>
-            <td>Jahr</td>
-            <td th:text="${procedure.getYear()}">Paul</td>
-            <td> <a type="button">Bearbeiten</a></td>
-        </tr>
-        <tr>
-            <td>Hauptpächter</td>
-            <td th:text="${procedure.getMainTenant()}">Paul</td>
-            <td> <a type="button">Bearbeiten</a></td>
-        </tr>
-        <tr>
-            <td>Nebenpächter</td>
-            <td th:text="${procedure.getSubTenants()}">Paul</td>
-            <td> <a type="button">Bearbeiten</a></td>
-        </tr>
-        <tr>
-            <td>ZellenID</td>
-            <td th:text="${procedure.getPlotId()}">Paul</td>
-            <td> <a type="button">Bearbeiten</a></td>
-        </tr>
-</div>  </tbody>
+</tr>  </tbody>
     </table>
     </div>
 </div>
