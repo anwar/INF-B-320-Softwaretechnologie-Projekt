@@ -3,6 +3,8 @@ package kleingarten.plot;
 import org.salespointframework.catalog.Catalog;
 import org.springframework.data.util.Streamable;
 
+import java.util.Set;
+
 /**
  * Extension of {@link Catalog} to add specific query methods
  */
@@ -12,7 +14,7 @@ public interface PlotCatalog extends Catalog<Plot> {
 	 * @return plots as {@link Streamable} of {@link Plot}, never {@literal null}
 	 */
 	@Override
-	Streamable<Plot> findAll();
+	Set<Plot> findAll();
 
 	/**
 	 * Return all {@link Plot}s with the given name. There should only be one plot with this name.
@@ -27,5 +29,5 @@ public interface PlotCatalog extends Catalog<Plot> {
 	 * @param status status as {@link PlotStatus}, must not be {@literal null}
 	 * @return plots as {@link Streamable} of {@link Plot}, never {@literal null}
 	 */
-	Streamable<Plot> findByStatus(PlotStatus status);
+	Set<Plot> findByStatus(PlotStatus status);
 }
