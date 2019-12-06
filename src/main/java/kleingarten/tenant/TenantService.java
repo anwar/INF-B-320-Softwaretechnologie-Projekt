@@ -8,18 +8,30 @@ public class TenantService {
 	private final TenantManager tenantManager;
 	private final UserAccountManager userAccountManager;
 
+	/**
+	 * Constructor of the class {@link TenantService}
+	 * @param tenantManager manager class of the class {@link Tenant} as {@link TenantManager}
+	 * @param userAccountManager repository of userAccounts as {@link UserAccountManager}
+	 */
 	TenantService(TenantManager tenantManager, UserAccountManager userAccountManager){
 		this.tenantManager = tenantManager;
 		this.userAccountManager = userAccountManager;
 	}
 
-	public void changePassword(Long id, Password oldPassword, Password newPassword, Password repeatedPassword){
-		if(oldPassword.equals(tenantManager.get(id).getUserAccount().getPassword()) && newPassword.equals(repeatedPassword)){
-			userAccountManager.changePassword(tenantManager.get(id).getUserAccount(), Password.UnencryptedPassword.of(newPassword.toString()));
-		} else if (!oldPassword.equals(tenantManager.get(id).getUserAccount().getPassword()) && newPassword.equals(repeatedPassword)){
+	/** Method to change the password of a userAccount of a {@link Tenant}
+	 * @param id identifier of the {@link Tenant}
+	 * @param oldPassword old saved password of the userAccount
+	 * @param newPassword new password the {@link Tenant} has entered
+	 * @param repeatedPassword repeated password to check for spelling mistakes the {@link Tenant} could have made
+	 */
+	public void changePassword(Long id, String oldPassword, String newPassword, String repeatedPassword){
+
+		if(!oldPassword.equals(tenantManager.get(id).getUserAccount().getPassword())){
 			throw new IllegalArgumentException("Old Password is not identical");
-		} else if (oldPassword.equals(tenantManager.get(id).getUserAccount().getPassword()) && !newPassword.equals(repeatedPassword)){
+		}
+		if (!newPassword.equals(repeatedPassword)){
 			throw new IllegalArgumentException("New Password and repeated Password are not identical");
 		}
+		userAccountManager.changePassword(tenantManager.get(id).getUserAccount(), Password.UnencryptedPassword.of(newPassword));
 	}
 }
