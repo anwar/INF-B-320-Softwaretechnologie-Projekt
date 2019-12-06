@@ -33,7 +33,7 @@ public class Procedure {
 	 * When the bill gets calculated, the procedure closes and should not be opened or edited anymore.
 	 */
 	private boolean isOpen;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "PRODUCT_ID")
 	private Plot plot;
@@ -68,7 +68,7 @@ public class Procedure {
 	 */
 	@ElementCollection //Siehe Dokumentation ElementCollection, wurde auch analog im Salespoint-Produkt verwendet.
 	private Set<Long> subTenants = new HashSet<Long>();
-	
+
 	private Procedure() {
 		//Default Constructor for spring
 		super();
@@ -101,14 +101,14 @@ public class Procedure {
 		this(year, plot.getId().getIdentifier(), (double)plot.getSize(), mainTenant);
 		this.plot = plot;
 	}
-	
-	
+
+
 	public boolean isTenant(long tenantId) {
 		if(mainTenant==tenantId) return true;
 		if(subTenants.contains(tenantId)) return true;
 		return false;
 	}
-	
+
 
 	public double getWatercount() {
 		return watercount;
@@ -163,7 +163,8 @@ public class Procedure {
 	}
 
 	public ProductIdentifier getPlotId() {
-		return null;//plotId;
+		//Return right data (Ylvi)
+		return plot.getId();
 	}
 
 	/**
@@ -229,11 +230,11 @@ public class Procedure {
 		return true;
 
 	}
-	
+
 	private boolean editable() {
 		return isOpen;
 	} //this seems to be redundant, but it has internal use and may differ from isOpen later..
-	
+
 	public boolean isOpen() {
 		return isOpen;
 	}
@@ -244,9 +245,9 @@ public class Procedure {
 	public void close() {
 		isOpen=false;
 	}
-	
-	
-	
+
+
+
 	public String toString() {
 		return "Procedure Plot: " + plot.getName() + " Tenant: " + mainTenant + " isOpen? " + isOpen();
 	}

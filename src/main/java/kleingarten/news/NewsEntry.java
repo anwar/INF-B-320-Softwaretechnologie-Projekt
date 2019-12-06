@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 
 // A news entry. An entity as in the Domain Driven Design context. Mapped onto the database using JPA annotations.
 @Entity
-class NewsEntry {
+public class NewsEntry {
 
 	private final String text;
 	private final LocalDateTime date;

@@ -1,19 +1,29 @@
 package kleingarten.Finance;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.List;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
-//@Entity
+@Entity
 public class Bill {
+
+	private @Id @GeneratedValue long id;
+
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	/*
 	 *billID shows plot Nr. and created year
-	 */
+
 	private String billID;
-	Procedure procedure;
+	//Procedure procedure;
 
 	public String getBillID() {
 		return billID;
@@ -22,44 +32,48 @@ public class Bill {
 	public void setBillID(String billID) {
 		this.billID = billID;
 	}
-
+	*/
 	public Bill(){}
 
-	List<Fee> fees;
+	@ManyToMany
+	List<Fee> feeList;
 
 	public Bill(Procedure procedure){
-		this.billID = billID;
-
+		/**
+		 * Basic fees for a bill
+		 */
 		Fee membershipFee = new MembershipFee();
-		fees.add(membershipFee);
+		feeList.add(membershipFee);
 		Fee liabilityFee = new LiabilityFee();
-		fees.add(liabilityFee);
+		feeList.add(liabilityFee);
 		Fee winterServiceFee = new WinterServiceFee();
-		fees.add(winterServiceFee);
+		feeList.add(winterServiceFee);
 		Fee socialContribution = new SocialContribution();
-		fees.add(socialContribution);
+		feeList.add(socialContribution);
 		Fee legalProtectionFee = new LegalProtectionFee();
-		fees.add(legalProtectionFee);
+		feeList.add(legalProtectionFee);
 		Fee expensesFlat = new ExpensesFlat();
-		fees.add(expensesFlat);
+		feeList.add(expensesFlat);
 		Fee waterMeterFee = new WaterMeterFee();
-		fees.add(waterMeterFee);
+		feeList.add(waterMeterFee);
 		Fee electricityMeterFee = new ElectricityMeterFee();
-		fees.add(electricityMeterFee);
-		/*double water = procedure.getWatercount();
+		feeList.add(electricityMeterFee);
+		/**
+		 * Fees relevant to Procedure Class
+		 */
 		Fee waterFee = new WaterFee();
-		fees.add(waterFee);*/
+		feeList.add(waterFee);
+		Fee powerFee = new PowerFee();
+		feeList.add(powerFee);
+		Fee rent = new Rent();
+		feeList.add(rent);
+		Fee penalty = new Penalty();
+		feeList.add(penalty);
+
+		//this.billID = billID;
+
 	}
 
-	/*
-	public String generateString(Procedure procedure) {
-
-		Fee water = new WaterFee();
-		water.setCount(procedure.getWatercount());
-
-		return water.getTitle() + water.getText();
-	}
-	 */
 }
 
 

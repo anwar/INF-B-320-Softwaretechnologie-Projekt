@@ -1,12 +1,13 @@
 package kleingarten.Finance;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import kleingarten.plot.PlotService;
+import kleingarten.plot.PlotStatus;
+import kleingarten.tenant.Tenant;
 import org.salespointframework.catalog.ProductIdentifier;
-import org.salespointframework.core.SalespointIdentifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
@@ -18,26 +19,16 @@ import kleingarten.plot.Plot;
 public class ProcedureManager {
 
 	private final ProcedureRepository procedures;
+	//Add plotService to use it's methods (Ylvi)
+	private final PlotService plotService;
 
 
 	@Autowired
-	public ProcedureManager(ProcedureRepository procedures) {
+	public ProcedureManager(ProcedureRepository procedures, PlotService plotService) {
 		Assert.notNull(procedures, "ProcedureRepository must not be null!");
 		this.procedures = procedures;
+		this.plotService = plotService;
 	}
-
-/*
-	ProcedureManager(ProcedureRepository procedures){
-		Assert.notNull(procedures, "TenantRepository must not be null!");
-		this.procedures = procedures;
-	}
-*/
-
-	/*
-		public Iterable<Procedure> findAll(){
-		return procedures.findAll();
-	}
-	 */
 
 	public Streamable<Procedure> getAll() {
 		return procedures.findAll();
@@ -47,7 +38,9 @@ public class ProcedureManager {
 		return procedures.findById(id);
 	}
 
+	//Changed the method so that the status of the associated plot is changed (Ylvi)
 	public Procedure add(Procedure procedure) {
+		plotService.findById(procedure.getPlotId()).setStatus(PlotStatus.TAKEN);
 		return procedures.save(procedure);
 	}
 
@@ -104,7 +97,7 @@ public class ProcedureManager {
 		return Streamable.of(noDubes);
 	}
 
-	public Procedure save(Procedure procedure) { //?? why do we need this?[Sascha] --> I need a "save" function to edit and save watercount.[Sanghyun]
+	public Procedure save(Procedure procedure) {
 
 		return procedures.save(procedure);
 	}
@@ -112,9 +105,13 @@ public class ProcedureManager {
 	public Streamable<Procedure> findByPlotName(String plotName){
 		return procedures.findByPlotName(plotName);
 	}
-	
+
 	public Streamable<Procedure> findByPlotId(String plotName){
 		return null;//procedures.findByPlotsName(plotName);
+	}
+
+	public Procedure get(Long id){
+		return procedures.findById(id).orElse(null);
 	}
 
 

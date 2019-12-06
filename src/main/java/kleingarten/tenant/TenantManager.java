@@ -1,5 +1,6 @@
 package kleingarten.tenant;
 
+import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+import java.util.Optional;
 
 @Service
 public class TenantManager {
@@ -34,9 +37,18 @@ public class TenantManager {
 		return tenants.findById(id).orElse(null);
 	}
 
+	public Tenant changeRoles(Role role, Role newRole,Tenant tenant){
+		tenant.getUserAccount().remove(role);
+		tenant.getUserAccount().add(newRole);
+		return tenant;
+	}
+
 	public Tenant getTenantByUserAccount(UserAccount userAccount){
-		var a = tenants.findAll().filter(c -> c.getUserAccount().getLastname().equals(userAccount.getLastname()));
-		return a.toList().get(0);
+		if (tenants.findByUserAccount(userAccount).isEmpty()){
+			throw new IllegalArgumentException("Tenant not found");
+		} else {
+			return tenants.findByUserAccount(userAccount).get();
+		}
 	}
 
 	public boolean tenantHasRole(Tenant tenant, Role role){
@@ -50,4 +62,5 @@ public class TenantManager {
 	public  Streamable<Tenant> findDisabled(){
 		return  tenants.findAll().filter(c -> !c.getUserAccount().isEnabled());
 	}
+
 }

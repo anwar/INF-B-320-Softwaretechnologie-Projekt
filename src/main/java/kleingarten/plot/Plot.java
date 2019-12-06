@@ -1,9 +1,11 @@
 package kleingarten.plot;
 
+import kleingarten.tenant.Tenant;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
 import javax.money.MonetaryAmount;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 import static org.salespointframework.core.Currencies.EURO;
 
@@ -15,12 +17,16 @@ public class Plot extends Product {
 	private int size;
 	private String description;
 
+	@OneToOne
+	private Tenant chairman;
+
 	/**
 	 * Private constructor of class {@link Plot}, which is used by the Spring Framework
 	 */
 	private Plot() {
 		this.status = null;
 		this.description = null;
+		this.chairman = null;
 	}
 
 	/**
@@ -34,6 +40,7 @@ public class Plot extends Product {
 		this.status = PlotStatus.FREE;
 		this.size = size;
 		this.description = description;
+		this.chairman = null;
 	}
 
 	/**
@@ -113,5 +120,21 @@ public class Plot extends Product {
 			throw new IllegalArgumentException("Estimator must be positive!");
 		}
 		this.setPrice(estimator);
+	}
+
+	/**
+	 * Getter for the associated chairman of type {@link Tenant}
+	 * @return associated chairman as {@link Tenant}
+	 */
+	public Tenant getChairman() {
+		return chairman;
+	}
+
+	/**
+	 * Setter for the associated chairman of type {@link Tenant}
+	 * @param chairman chairman which should be associated as {@link Tenant}
+	 */
+	public void setChairman(Tenant chairman) {
+		this.chairman = chairman;
 	}
 }

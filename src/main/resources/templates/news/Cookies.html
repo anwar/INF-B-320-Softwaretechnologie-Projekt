@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <script src="cookies.js"></script>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
+          href="../resources/css/style.css" type="text/css"/>
+    <link th:href="@{../resources/css/popup.css}" rel="stylesheet"
+          href="../resources/css/popup.css" type="text/css"/>
+
+    <title>Cookies</title>
+
+    <script>
+        function closemodal() {
+            document.getElementById("open-modal").style.display = "none";
+        }
+    </script>
+
+</head>
+
+<body>
+
+<div id="open-modal" class="modal-window">
+    <div>
+        <div class="header-title">
+        <h1>Cookies</h1>
+        </div>
+       <center><div>Diese Seite verwendet Cookies. <br>
+            Bitte klicken Sie auf Zustimmen um fortzufahren!</div>
+        <div class="button-section">
+        <button class="button" onclick="closemodal()">Zustimmen</button>
+        </div>
+       </center>
+
+    </div>
+</div>
+</body>
+
+
+</body>
+
+</html>
+
+

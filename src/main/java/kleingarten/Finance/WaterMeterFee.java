@@ -6,6 +6,7 @@ public class WaterMeterFee extends Fee {
 		this.title = "Grundmiete für Wasseruhr";
 		this.text = "";
 		this.count = 1;
+		this.defaultPrice = getDefaultPrice(2018);
 	}
 	@Override
 	public double getDefaultPrice(int year) {

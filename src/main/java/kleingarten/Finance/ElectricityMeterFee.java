@@ -6,6 +6,7 @@ public class ElectricityMeterFee extends Fee {
 		this.title = "Grundmiete für Stromzähler";
 		this.text = "";
 		this.count = 1;
+		this.defaultPrice = getDefaultPrice(2018);
 	}
 	@Override
 	public double getDefaultPrice(int year) {

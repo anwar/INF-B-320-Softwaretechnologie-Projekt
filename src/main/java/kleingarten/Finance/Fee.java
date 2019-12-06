@@ -1,5 +1,8 @@
 package kleingarten.Finance;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,9 +14,10 @@ import java.util.Map;
  * @author susho
  *
  */
+@Entity
 public abstract class Fee {
 
-
+	private @Id @GeneratedValue long id;
 
 	/**
 	 * Title shown on Bill.
@@ -29,12 +33,13 @@ public abstract class Fee {
 	 * Item count.
 	 */
 	double count;
+	double defaultPrice;
 
 	public Fee() {
-		this.title="DEFAULT_TITLE";
-		this.text="DEFAULT_TEXT";
+		this.title = "DEFAULT_TITLE";
+		this.text = "DEFAULT_TEXT";
 		this.count = 1;
-
+		this.defaultPrice = 1;
 	}
 
 	public String getTitle() {
@@ -45,7 +50,7 @@ public abstract class Fee {
 		return text;
 	}
 
-	public double getCount(){
+	public double getCount() {
 		return count;
 	}
 

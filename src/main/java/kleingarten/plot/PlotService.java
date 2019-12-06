@@ -8,11 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class PlotService {
 	private final PlotCatalog plotCatalog;
-	private final ProcedureManager procedureManager;
 
-	PlotService(PlotCatalog plotCatalog, ProcedureManager procedureManager){
+	/**
+	 * Constructor of the class {@link PlotService} used by Spring
+	 * @param plotCatalog repository of plots as {@link PlotCatalog}
+	 */
+	PlotService(PlotCatalog plotCatalog){
 		this.plotCatalog = plotCatalog;
-		this.procedureManager = procedureManager;
 	}
 
 	/**
@@ -20,12 +22,13 @@ public class PlotService {
 	 * @param name name of the {@link Plot} as String
 	 * @param size size of the {@link Plot} as int
 	 * @param description description of the {@link Plot} as String
+	 * @return {@link Plot} which is added
 	 */
 	public Plot addNewPlot(String name, int size, String description) {
 		if (this.existsByName(name)) {
 			throw new IllegalArgumentException("Plot with the given name exists already!");
 		}
-		return this.plotCatalog.save(new Plot(name, size, description));
+		return plotCatalog.save(new Plot(name, size, description));
 	}
 
 	/**
@@ -34,23 +37,18 @@ public class PlotService {
 	 * @return true, if {@link Plot} with the given name exists
 	 */
 	public boolean existsByName(String name) {
-		return !this.plotCatalog.findByName(name).isEmpty();
+		return !plotCatalog.findByName(name).isEmpty();
 	}
 
 	/**
-	 * Get the associated {@link Procedure} for a {@link Plot}
-	 * @param year the year for which the {@link Procedure} should be found
-	 * @param plotId the Id of the {@link Plot} for which the {@link Procedure} should be found
-	 * @return {@link Procedure} which is searched for
+	 * Get the {@link Plot} object for a given Id of a {@link Plot} as {@link ProductIdentifier}
+	 * @param plotId the id of the {@link Plot} as {@link ProductIdentifier}
+	 * @return associated {@link Plot}
 	 */
-	public Procedure getProcedure(int year, ProductIdentifier plotId) {
-		Procedure procedure = procedureManager.getProcedure(year,plotId);
-		if (procedure == null) {
-			throw new IllegalArgumentException("Procedure must not be null!");
+	public Plot findById(ProductIdentifier plotId) {
+		if (!plotCatalog.existsById(plotId)) {
+			throw new IllegalArgumentException("Plot does not exist!");
 		}
-		return procedure;
+		return plotCatalog.findById(plotId).get();
 	}
-
-
-
 }
