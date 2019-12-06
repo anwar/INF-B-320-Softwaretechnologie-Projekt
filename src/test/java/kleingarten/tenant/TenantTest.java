@@ -41,21 +41,88 @@ public class TenantTest {
 	@Test
 	void initialUserAccountTest(){
 		assertThat(tenant.getUserAccount().getUsername().equals("jassi"));
-	}
-
-	@Test
-	void initialPasswordTest(){
+		assertThat(tenant.getUserAccount().getEmail().equals("jassis@email.com"));
 		assertThat(tenant.getUserAccount().getPassword().equals("123"));
 	}
 
 	@Test
-	void initializeTenant(){
-		assertThat(tenant.getForename().equals("Jasmin"));
-		assertThat(tenant.getSurname().equals("Gepackert"));
+	void getAddress() {
+		assertThat(tenant.getAddress().equals("Neben Isa und Francy"));
+	}
 
-	}
 	@Test
-	void initialEmailTest(){
-		assertThat(tenant.getUserAccount().getEmail().equals("jassis@email.com"));
+	void getForename() {
+		assertThat(tenant.getForename().equals("Jassi"));
 	}
+
+	@Test
+	void getSurname() {
+		assertThat(tenant.getSurname().equals("Gepackert"));
+	}
+
+	@Test
+	void getPhonenumber() {
+		assertThat(tenant.getPhonenumber().equals("908964875734"));
+	}
+
+	@Test
+	void getBirthdate() {
+		assertThat(tenant.getBirthdate().equals("13.05.1999"));
+	}
+
+	@Test
+	void getId() {
+		//assertThat();
+	}
+
+
+	@Test
+	void getRoles() {
+	}
+
+	@Test
+	void getRole() {
+	}
+
+	@Test
+	void getEmail() {
+		assertThat(tenant.getEmail().equals("jassis@email.com"));
+	}
+
+	@Test
+	void setForename() {
+	}
+
+	@Test
+	void setSurname() {
+	}
+
+	@Test
+	void setAddress() {
+	}
+
+	@Test
+	void setEmail() {
+	}
+
+	@Test
+	void setPhonenumber() {
+	}
+
+	@Test
+	void setBirthdate() {
+	}
+
+	@Test
+	void addRole() {
+	}
+
+	@Test
+	void removeRole() {
+	}
+
+	@Test
+	void setUserAccount() {
+	}
+
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
@@ -21,6 +21,12 @@
         <h1>Details</h1>
     </div>
 
+    <div align="left" th:if="${rents} and not ${plots.isEmpty()}">
+        <div class="button-section" th:each="plot : ${plots.keySet()}">
+            <button class="button" th:href="'/myPlot/' + ${plot}" th:text="${plots.get(plot)}"> Text </button>
+            <input type="hidden" id="rentedPlot" name="plot" th:value="${plot}">
+        </div>
+    </div>
     <div align="center">
         <table>
             <thead>
@@ -33,22 +39,22 @@
             <tr><th>Name</th> <td align="center" th:text="${plotName}"> Text </td></tr>
             <tr><th>Größe</th> <td align="center" th:text="${plotSize}"> Text </td></tr>
             <tr><th>Beschreibung</th> <td align="center" th:text="${plotDescription}"> Text </td></tr>
-            <tr><th>Schätzwert</th> <td align="center" th:text="${plotPrice}"> Text </td></tr>
-            <tr th:if="${canSee}"><th>Hauptpächter</th> <td align="center" th:text="${mainTenant.getForename()} + ' ' + ${mainTenant.getSurname()}"> Text </td></tr>
-            <tr th:if="${canSee}"><th>Nebenpächter</th> <td></td></tr>
-            <tr th:if="${canSee}" th:each="tenant : ${subTenants}"><th></th> <td align="center" th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()}"> Text </td></tr>
-            <tr th:if="${canSee}"><th>Arbeitsstunden</th> <td align="center" th:text="${workHours}"> Text </td></tr>
+            <tr th:if="not ${rented}"><th>Schätzwert</th> <td align="center" th:text="${plotPrice}"> Text </td></tr>
+            <tr th:if="${rented}"><th>Hauptpächter</th> <td align="center" th:text="${mainTenant.getForename()} + ' ' + ${mainTenant.getSurname()} + ${mainTenantRoles}"> Text </td></tr>
+            <tr th:if="${rented} and not ${subTenants.isEmpty()}"><th>Nebenpächter</th> <td></td></tr>
+            <tr th:if="${rented} and not ${subTenants.isEmpty()}" th:each="tenant : ${subTenants.keySet()}"><th></th> <td align="center" th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()} + ${subTenants.get(tenant)}"> Text </td></tr>
+            <tr th:if="${rented} and ${canSeeWorkhours}"><th>Arbeitsstunden</th> <td align="center" th:text="${workHours}"> Text </td></tr>
             </tbody>
             <div class="button-section">
                 <button class="button" th:if="${canModify}">Zählerstände eintragen</button>
                 <button class="button" th:if="${canSeeBills}">Rechnungen anzeigen</button>
                 <a th:href="'/editPlot/' + ${plotID}"> <button class="button" >Bearbeiten</button></a>
                 <input type="hidden" id="plot" name="plot" th:value="${plot}">
-
-
             </div>
+
         </table>
-        <div class="button-section" th:if="${canApply}">
+
+        <div class="button-section" th:if="not ${rented}">
             <a th:href="${'/createApplication/' + plotID}" ><button class="button" >Bewerben</button>
             </a>
 			<button class="button" onclick="location.href= '/application'" th:if="${canSeeApplications}">Bewerbungen anzeigen</button>

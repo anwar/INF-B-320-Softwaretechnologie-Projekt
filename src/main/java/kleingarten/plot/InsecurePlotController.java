@@ -1,5 +1,6 @@
 package kleingarten.plot;
 
+import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantRepository;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.Role;
@@ -9,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.money.MonetaryAmount;
 import javax.money.format.MonetaryFormats;
 import java.util.*;
 
@@ -55,6 +58,7 @@ public class InsecurePlotController {
 		if (user.isEmpty()) {
 			return detailsOfFreePlot(plot);
 		}
+		System.out.println(plot);
 		return securePlotController.detailsOfPlot(user.get(), plot);
 	}
 
@@ -74,7 +78,9 @@ public class InsecurePlotController {
 			mav.addObject("error","Unauthenticated user must not have access to a rented plot!");
 		}
 
-		mav.addObject("canApply", true);
+		mav.addObject("rented", false);
+		mav.addObject("subTenants", new HashMap<Tenant, String>());
+		mav.addObject("plots", new HashMap<Plot, String>());
 
 		plotControllerService.addGeneralInformationOfPlot(plot, mav);
 		mav.setViewName("plot/myPlot");
@@ -106,9 +112,4 @@ public class InsecurePlotController {
 		return mav;
 	}
 
-	@GetMapping("/editPlot/{plot}")
-	String editPlot(@PathVariable Plot plot, Model model){
-			model.addAttribute("plot", plotService.findById(plot.getId()));
-			return "plot/editPlot";
-	}
 }

@@ -16,12 +16,22 @@ class TenantController {
 	private final TenantManager tenantManager;
 	private final TenantRepository tenantRepository;
 
+	/**
+	 * Constructor of class {@link TenantController}
+	 * @param tenantManager manager class {@link TenantManager} for managing {@link Tenant}s
+	 * @param tenantRepository repository of tenants as {@link TenantRepository}
+	 */
 	TenantController(TenantManager tenantManager, TenantRepository tenantRepository) {
 		Assert.notNull(tenantManager, "TenantManager must not be null");
 		this.tenantManager = tenantManager;
 		this.tenantRepository = tenantRepository;
 	}
 
+	/**
+	 * Shows an overview of {@link Tenant} as a list
+	 * @param model view to show list of {@link Tenant}s as {@link Model}
+	 * @return html to show list of {@link Tenant}s
+	 */
 	@GetMapping("/tenants")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String tenants(Model model) {
@@ -29,6 +39,12 @@ class TenantController {
 		return "tenant/tenants";
 	}
 
+	/**
+	 * Shows the details of a specific {@link Tenant}
+	 * @param id identifier of {@link Tenant} to show the details
+	 * @param model view to show the details of {@link Tenant} as {@link Model}
+	 * @return html view to show the details of {@link Tenant}
+	 */
 	@GetMapping("/tenantDetails")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String tenantDetails(@RequestParam("id") String id, Model model) {
@@ -36,6 +52,12 @@ class TenantController {
 		return "tenant/tenantDetails";
 	}
 
+	/**
+	 * view to edit a {@link Tenant}s details
+	 * @param id identifier of {@link Tenant} to edit the details
+	 * @param model view for editing a {@link Tenant} as {@link Model}
+	 * @return html for editing a {@link Tenant}
+	 */
 	@GetMapping("/modifyTenant")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String modifyTenant(@RequestParam("id") Long id, Model model){
@@ -43,6 +65,17 @@ class TenantController {
 		return "tenant/modifyTenant";
 	}
 
+	/**
+	 * Getter for the changed details of a {@link Tenant} to save in the {@link Tenant}
+	 * @param id identifier of {@link Tenant}
+	 * @param forename input forename as String
+	 * @param surname input surname as String
+	 * @param phone input phone number as String
+	 * @param email input email as String
+	 * @param address input address as String
+	 * @param birthdate input birth date as String
+	 * @return html of the tenants html with saved new details of {@link Tenant}
+	 */
 	@PostMapping("/modifiedTenant")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String modifiedTenant( @RequestParam("id")		  Long id,

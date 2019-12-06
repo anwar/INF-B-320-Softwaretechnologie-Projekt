@@ -5,6 +5,7 @@ import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
 import javax.money.MonetaryAmount;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.OneToOne;
 
 import static org.salespointframework.core.Currencies.EURO;
@@ -137,4 +138,5 @@ public class Plot extends Product {
 	public void setChairman(Tenant chairman) {
 		this.chairman = chairman;
 	}
+
 }
