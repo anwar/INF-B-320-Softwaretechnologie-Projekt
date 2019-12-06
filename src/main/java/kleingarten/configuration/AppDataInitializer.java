@@ -77,6 +77,7 @@ class AppDataInitializer implements DataInitializer {
 		initializeTenants(this.tenantRepository, this.userAccountManager);
 		initializePlots(this.catalog, this.plotService);
 		initializeProcedures(this.procedureManager);
+		LOG.info("fertig");
 	}
 
 	/**
@@ -118,7 +119,7 @@ class AppDataInitializer implements DataInitializer {
 		}
 
 		LOG.info("Creating default users and customers");
-		LOG.info("Habe fertig");
+		LOG.info("Habe gleich fertig");
 
 		var password = Password.UnencryptedPassword.of("123");
 
@@ -183,7 +184,7 @@ class AppDataInitializer implements DataInitializer {
 		LOG.info(Plot_6.getId().toString());
 		catalog.saveAll(List.of(Plot, Plot_2, Plot_3, Plot_4, Plot_5, Plot_6));
 
-		LOG.info("fertig");
+		LOG.info("fast fertig");
 	}
 
 	public void initializeProcedures(ProcedureManager procedureManager) {
