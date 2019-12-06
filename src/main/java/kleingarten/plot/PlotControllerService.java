@@ -37,10 +37,9 @@ public class PlotControllerService {
 	 * Select color of a {@link Plot} when a user is logged in and save the selection in a {@link Map} of
 	 * {@link Plot} and {@link String}
 	 * @param plot {@link Plot} for which a color should be selected
-	 * @param user {@link UserAccount} of the logged in user
 	 * @param colors {@link Map} with {@link Plot}s and their selected colors as {@link String}
 	 */
-	void secureSetPlotColor(Plot plot, UserAccount user, Map<Plot, String> colors) {
+	void secureSetPlotColor(Plot plot, Map<Plot, String> colors) {
 		colors.put(plot, plot.getStatus() == PlotStatus.TAKEN ? "grey" : "olive");
 
 		if (plot.getStatus() == PlotStatus.TAKEN) {
@@ -50,15 +49,56 @@ public class PlotControllerService {
 				throw new IllegalArgumentException("Tenant must not be null!");
 			}
 
-			if (tenantManager.tenantHasRole(mainTenant, Role.of("Vorstandsvorsitzender"))
-					|| tenantManager.tenantHasRole(mainTenant, Role.of("Stellvertreter"))) {
+			Set<Role> rolesOfSubTenants = getRolesOfSubTenants(plot);
+			Set<Role> rolesOfMainTenant = getRolesOfTenant(plot);
+			Set<Role> administration = Set.of(Role.of("Vorstandsvorsitzender"), Role.of("Stellvertreter"));
+			Set<Role> chairman = Set.of(Role.of("Obmann"));
+
+			if (rolesOfMainTenant.stream().anyMatch(administration::contains)
+				|| rolesOfSubTenants.stream().anyMatch(administration::contains)) {
+				if (rolesOfMainTenant.stream().anyMatch(chairman::contains)
+					|| rolesOfSubTenants.stream().anyMatch(chairman::contains)) {
+					colors.put(plot, "orange");
+					return;
+				}
 				colors.put(plot, "yellow");
-			} else if (tenantManager.tenantHasRole(mainTenant, Role.of("Kassierer"))) {
-				colors.put(plot, "red");
-			} else if (tenantManager.tenantHasRole(mainTenant, Role.of("Obmann"))) {
+			} else if (rolesOfMainTenant.stream().anyMatch(chairman::contains)
+				|| rolesOfSubTenants.stream().anyMatch(chairman::contains)) {
 				colors.put(plot, "blue");
 			}
 		}
+	}
+
+	/**
+	 * Get the {@link Role}s of the mainTenant of a {@link Plot} as {@link Set} of {@link Role}
+	 * @param plot {@link Plot} for which the {@link Role}s of the mainTenant should be returned
+	 * @return {@link Role}s of the mainTenant as {@link Set} of {@link Role}
+	 */
+	Set<Role> getRolesOfTenant(Plot plot) {
+		Procedure procedure = dataService.getProcedure(LocalDateTime.now().getYear(), plot);
+		Tenant mainTenant = dataService.findTenantById(procedure.getMainTenant());
+		return mainTenant.getUserAccount().getRoles().toSet();
+	}
+
+	/**
+	 * Get the {@link Role}s of the subTenants of a {@link Plot} as {@link Set} of {@link Role}
+	 * @param plot {@link Plot} for which the {@link Role}s of the subTenants should be returned
+	 * @return {@link Role}s of the subTenants as {@link Set} of {@link Role}
+	 */
+	Set<Role> getRolesOfSubTenants(Plot plot) {
+		Procedure procedure = dataService.getProcedure(LocalDateTime.now().getYear(), plot);
+		List<Tenant> subTenants = new LinkedList<>();
+		Set<Role> subTenantRoles = new HashSet<>();
+
+		for (long subTenantId:
+				procedure.getSubTenants()) {
+			subTenants.add(dataService.findTenantById(subTenantId));
+		}
+		for (Tenant subTenant:
+			 subTenants) {
+			subTenantRoles.addAll(subTenant.getUserAccount().getRoles().toSet());
+		}
+		return subTenantRoles;
 	}
 
 	/**
