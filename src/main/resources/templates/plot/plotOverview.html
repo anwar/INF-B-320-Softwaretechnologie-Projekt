@@ -33,9 +33,24 @@
     <div class="button-section">
         <button class="button" th:if="${canAdd}" onclick="location.href='/plotRegistrationForm'">Parzelle hinzufügen</button>
     </div>
-
+   <center> <div>
+        <table >
+            <tr>
+                <td style="color: #7CB342 "> o </td>
+                <td>frei &nbsp </td>
+                <td style="color: #546E7A"> o </td>
+                <td>bewohnt &nbsp</td>
+                <td style="color: #FDD835"> o</td>
+                <td>Vorstandsvorsitzender &nbsp</td>
+                <td style="color: #039BE5"> o</td>
+                <td>Obmann</td>
+            </tr>
+        </table>
+    </div>
+   </center>
 
 </div>
+<div th:include="navigation :: footer"></div>
 </body>
 </html>
 

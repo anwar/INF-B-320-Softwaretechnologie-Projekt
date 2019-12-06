@@ -51,9 +51,7 @@
                 <a th:href="'/editPlot/' + ${plotID}"> <button class="button" >Bearbeiten</button></a>
                 <input type="hidden" id="plot" name="plot" th:value="${plot}">
             </div>
-            <div class="button-section" th:if="${canCancel}">
-                <button class="button" th:href="'/cancelPlot/' + ${plotID}"> Kündigen </button>
-            </div>
+
         </table>
         <div class="button-section" th:if="not ${rented}">
             <button class="button" onclick="location.href='/createApplication'" >Bewerben</button>

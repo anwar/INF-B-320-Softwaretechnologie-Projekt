@@ -40,7 +40,7 @@ public class PlotControllerService {
 	 * @param colors {@link Map} with {@link Plot}s and their selected colors as {@link String}
 	 */
 	void secureSetPlotColor(Plot plot, Map<Plot, String> colors) {
-		colors.put(plot, plot.getStatus() == PlotStatus.TAKEN ? "grey" : "olive");
+		colors.put(plot, plot.getStatus() == PlotStatus.TAKEN ? "#546E7A" : "#7CB342");
 
 		if (plot.getStatus() == PlotStatus.TAKEN) {
 			Tenant mainTenant = tenantManager.get(dataService.getProcedure(LocalDateTime.now().getYear(), plot)
@@ -61,10 +61,10 @@ public class PlotControllerService {
 					colors.put(plot, "orange");
 					return;
 				}
-				colors.put(plot, "yellow");
+				colors.put(plot, "#FDD835");
 			} else if (rolesOfMainTenant.stream().anyMatch(chairman::contains)
 				|| rolesOfSubTenants.stream().anyMatch(chairman::contains)) {
-				colors.put(plot, "blue");
+				colors.put(plot, "#039BE5");
 			}
 		}
 	}
