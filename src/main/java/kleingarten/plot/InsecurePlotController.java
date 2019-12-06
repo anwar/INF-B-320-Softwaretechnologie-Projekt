@@ -1,5 +1,6 @@
 package kleingarten.plot;
 
+import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantRepository;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.Role;
@@ -74,7 +75,9 @@ public class InsecurePlotController {
 			mav.addObject("error","Unauthenticated user must not have access to a rented plot!");
 		}
 
-		mav.addObject("canApply", true);
+		mav.addObject("rented", false);
+		mav.addObject("subTenants", new HashMap<Tenant, String>());
+		mav.addObject("plots", new HashMap<Plot, String>());
 
 		plotControllerService.addGeneralInformationOfPlot(plot, mav);
 		mav.setViewName("plot/myPlot");
