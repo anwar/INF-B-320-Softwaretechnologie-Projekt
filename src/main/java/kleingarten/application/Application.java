@@ -10,14 +10,19 @@ public class Application {
 
 	private @Id @GeneratedValue long id;
 	
-	String name, email;
+	String firstName, lastName, email;
 	String plotId;
 	//date
 	
 	ApplicationState state;
 	
-	public Application(String name, String email, String plotId) {
-		this.name = name;
+	public Application() {
+		state=ApplicationState.NEW;
+	}
+	
+	public Application(String firstName, String lastName, String email, String plotId) {
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.plotId = plotId;
 		
@@ -38,6 +43,10 @@ public class Application {
 	
 	void hide() {
 		state = ApplicationState.HIDDEN;
+	}
+	
+	public String toString() {
+		return "Um "+plotId+" - "+firstName+" "+lastName+" - "+email;
 	}
 	
 	

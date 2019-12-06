@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
+          href="../resources/css/style.css" type="text/css"/>
+    <title>Um Parzelle bewerben</title>
+</head>
+
+<body>
+
+<div class="ui-container">
+    <nav th:include="navigation :: navigation"/>
+    <div class="header-title">
+        <h1>Auf eine Parzelle bewerben</h1>
+    </div>
+</div>
+
+<center>
+    <form method="post" role="form" id="form" th:action="@{/createApplication}" th:object="${form}">
+        <table>
+            <tr>
+                <td>
+                    <label for="firstName">Vorname</label>
+                    <input id="firstName" th:field="*{firstName}" type="text" required="required"/>
+                </td>
+            </tr>
+            <br/>
+            <tr>
+                <td>
+                    <label for="lastName">Nachname</label>
+                    <input id="lastName" th:field="*{lastName}" type="text" required="required"/>
+                </td>
+            </tr>
+            <br/>
+            <tr>
+                <td>
+                    <label for="email">E-Mail</label>
+                    <input id="email" th:field="*{email}" type="text" required="required"/>
+                </td>
+            </tr>
+        </table>
+		
+		<input type="hidden" id="plotId" name="plotId" th:field="*{plotId}" th:value="${plotId}">
+
+        <button type="submit" class="ui button">Bewerbung abschicken</button></div>
+    </form>
+</center>
+
+</body>
+</html>

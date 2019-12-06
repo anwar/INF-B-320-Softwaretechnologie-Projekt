@@ -22,4 +22,14 @@ public class ApplicationManager {
 	public List<Application> getByPlotId(String plotId){
 		return repository.findByPlotId(plotId).toList();
 	}
+	
+	public void printAllToConsole() {
+		for(Application application:getAll()) {
+			System.out.println(application.toString());
+		}
+	}
+	
+	public void add(Application application) {
+		repository.save(application);
+	}
 }
