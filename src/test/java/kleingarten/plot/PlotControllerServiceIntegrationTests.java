@@ -26,12 +26,10 @@ import java.util.Set;
 public class PlotControllerServiceIntegrationTests {
 	private Tenant boss = null;
 	private Tenant replacement = null;
-	private Tenant chashier = null;
 	private Tenant chairman = null;
 
 	private Map<Plot, String> colors;
 	private Map<Plot, String> result;
-	private UserAccount user;
 
 	private Plot freePlot;
 	private Plot takenPlot;
@@ -91,8 +89,6 @@ public class PlotControllerServiceIntegrationTests {
 				this.boss = tenant;
 			} else if (tenantManager.tenantHasRole(tenant, Role.of("Stellvertreter"))) {
 				this.replacement = tenant;
-			} else if (tenantManager.tenantHasRole(tenant, Role.of("Kassierer"))) {
-				this.chashier = tenant;
 			} else if (tenantManager.tenantHasRole(tenant, Role.of("Obmann"))) {
 				this.chairman = tenant;
 			}
@@ -126,10 +122,9 @@ public class PlotControllerServiceIntegrationTests {
 	 */
 	@Test
 	public void secureGetColorForFreePlotTest() {
-		user = boss.getUserAccount();
 		result.put(freePlot, "olive");
 
-		plotControllerService.secureSetPlotColor(freePlot, user, colors);
+		plotControllerService.secureSetPlotColor(freePlot, colors);
 		assertThat(colors).isEqualTo(result);
 	}
 
@@ -153,28 +148,12 @@ public class PlotControllerServiceIntegrationTests {
 	 */
 	@Test
 	public void securedGetColorForBossPlotTest() {
-		user = boss.getUserAccount();
-
-		Procedure procedure = tenantIsMaintenant(boss);
-		procedureManager.add(procedure);
+		Procedure procedure = procedureManager.getProcedures(2019, boss.getId()).toList().get(0);
 		takenPlot = plotService.findById(procedure.getPlotId());
 		result.put(takenPlot, "yellow");
 
-		plotControllerService.secureSetPlotColor(takenPlot, user, colors);
+		plotControllerService.secureSetPlotColor(takenPlot, colors);
 		assertThat(colors).isEqualTo(result);
-	}
-
-	/**
-	 * Get {@link Procedure} where the given {@link Tenant} is the main tenant
-	 * @param tenant {@link Tenant} who should be the main tenant of a {@link Plot}
-	 * @return
-	 */
-	public Procedure tenantIsMaintenant(Tenant tenant) {
-		for (Procedure procedure:
-			procedureManager.getProcedures(2019, tenant.getId())) {
-			return procedure;
-		}
-		return new Procedure(2019, takenPlot, tenant.getId());
 	}
 
 	/**
@@ -183,14 +162,12 @@ public class PlotControllerServiceIntegrationTests {
 	 */
 	@Test
 	public void securedGetColorForReplacementPlotTest() {
-		user = replacement.getUserAccount();
-
-		Procedure procedure = tenantIsMaintenant(replacement);
+		Procedure procedure = new Procedure(2019,freePlot, replacement.getId());
 		procedureManager.add(procedure);
 		takenPlot = plotService.findById(procedure.getPlotId());
 		result.put(takenPlot, "yellow");
 
-		plotControllerService.secureSetPlotColor(takenPlot, user, colors);
+		plotControllerService.secureSetPlotColor(takenPlot, colors);
 		assertThat(colors).isEqualTo(result);
 	}
 
@@ -200,14 +177,28 @@ public class PlotControllerServiceIntegrationTests {
 	 */
 	@Test
 	public void securedGetColorForChairmanPlotTest() {
-		user = chairman.getUserAccount();
-
-		Procedure procedure = tenantIsMaintenant(chairman);
+		Procedure procedure = new Procedure(2019,freePlot, chairman.getId());
 		procedureManager.add(procedure);
 		takenPlot = plotService.findById(procedure.getPlotId());
 		result.put(takenPlot, "blue");
 
-		plotControllerService.secureSetPlotColor(takenPlot, user, colors);
+		plotControllerService.secureSetPlotColor(takenPlot, colors);
+		assertThat(colors).isEqualTo(result);
+	}
+
+	/**
+	 * Test if the right color is assigned to a {@link Plot} taken by a {@link Tenant} with
+	 * {@link Role} "Obmann" and a {@link Tenant} with the {@link Role} "Vorstandsvorsitzender" when the user is logged in
+	 */
+	@Test
+	public void securedGetColorForSpecialPlotTest() {
+		Procedure procedure = procedureManager.getProcedures(2019, boss.getId()).toList().get(0);
+		procedure.addSubTenant(chairman.getId());
+		procedureManager.add(procedure);
+		takenPlot = plotService.findById(procedure.getPlotId());
+		result.put(takenPlot, "orange");
+
+		plotControllerService.secureSetPlotColor(takenPlot, colors);
 		assertThat(colors).isEqualTo(result);
 	}
 

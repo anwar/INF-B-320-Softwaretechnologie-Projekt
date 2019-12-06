@@ -139,7 +139,7 @@ public class SecurePlotController {
 		Map<Plot, Boolean> rights = new HashMap<>();
 
 		for (Plot plot : plots) {
-			plotControllerService.secureSetPlotColor(plot, user, colors);
+			plotControllerService.secureSetPlotColor(plot, colors);
 			plotControllerService.secureSetAccessRightForPlot(plot, user, rights);
 		}
 
