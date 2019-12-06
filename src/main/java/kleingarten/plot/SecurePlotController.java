@@ -7,6 +7,7 @@ import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
@@ -49,29 +50,33 @@ public class SecurePlotController {
 		try {
 			Tenant tenant = tenantManager.getTenantByUserAccount(user);
 			if (dataService.procedureExists(LocalDateTime.now().getYear(), plot)) {
+				mav.addObject("rented", true);
 				Procedure procedure = dataService.getProcedure(LocalDateTime.now().getYear(), plot);
-				if (procedure.isTenant(tenant.getId())) {
-					return rentedPlots(user);
-				}
 
-				plotControllerService.secureSetAccessRightForPlotDetails(plot, tenant, mav);
-				plotControllerService.secureGetInformationOfProcedure(procedure, mav);
-			} else {
-				mav.addObject("canApply", true);
+				plotControllerService.secureSetAccessRightForPlotDetails(Optional.of(procedure), tenant, mav);
+				plotControllerService.addProcedureInformationOfPlot(procedure, tenant, mav);
+				if (procedure.isTenant(tenant.getId())) {
+					return detailsOfRentedPlot(user, plot, mav);
+				}
 			}
+			if (plot.getStatus() == PlotStatus.FREE) {
+				plotControllerService.secureSetAccessRightForPlotDetails(Optional.empty(), tenant, mav);
+				mav.addObject("rented", false);
+			}
+			mav.addObject("subTenants", new HashMap<Tenant, String>());
+			mav.addObject("plots", new HashMap<Plot, String>());
 		} catch (Exception e) {
 			mav.addObject("error", e);
 			mav.setViewName("error");
 			return mav;
 		}
 		mav.setViewName("plot/myPlot");
-
 		return mav;
 	}
 
 	/**
 	 * Create model with information of a {@link Plot} which is rented by the user to show the detail page of the
-	 * {@link Plot} when a user is logged in
+	 * {@link Plot} when a user is logged in and accesses his rented plots by using the entry in the navigation bar
 	 * @param user {@link UserAccount} of the logged in user
 	 * @return response as {@link ModelAndView}
 	 */
@@ -86,25 +91,39 @@ public class SecurePlotController {
 			Set<Plot> plots = dataService.getRentedPlots(LocalDateTime.now().getYear(), tenant);
 			shownPlot = plots.iterator().next();
 
-			Map<Plot, String> rentedPlots = new HashMap<>();
-			for (Plot parcel : plots) {
-				rentedPlots.put(parcel, parcel.getName());
-			}
-
+			Procedure procedureOfShownPlot = dataService.getProcedure(LocalDateTime.now().getYear(), shownPlot);
 			plotControllerService.addGeneralInformationOfPlot(shownPlot, mav);
-			mav.addObject("canSee", true);
-			mav.addObject("canSeeBills", true);
-			mav.addObject("canSeeApplications", true);
-			mav.addObject("canModify", true);
-			mav.addObject("plots", rentedPlots);
+			plotControllerService.secureSetAccessRightForPlotDetails(Optional.of(procedureOfShownPlot), tenant, mav);
+			plotControllerService.addProcedureInformationOfPlot(procedureOfShownPlot, tenant, mav);
+			mav.addObject("rents", true);
+			if (procedureOfShownPlot.getMainTenant() == tenant.getId()) {
+				mav.addObject("isMainTenant", true);
+			}
 		} catch (Exception e) {
 			mav.addObject("error", e);
 			mav.setViewName("error");
 			return mav;
 		}
-		mav.setViewName("plot");
+		return detailsOfRentedPlot(user, shownPlot, mav);
+	}
 
-		return mav;
+	/**
+	 * Create model with information of a {@link Plot} which is rented by the user to show the detail page of the
+	 * {@link Plot} with buttons for all rented {@link Plot}s of this user when a user is logged in
+	 * @param user {@link UserAccount} of the logged in user
+	 * @param plot {@link Plot} of which information should be shown
+	 * @param modelAndView {@link ModelAndView} with the information of the {@link Plot}
+	 * @return response as {@link ModelAndView}
+	 */
+	@GetMapping("/myPlot/{plot}")
+	public ModelAndView detailsOfRentedPlot(@LoggedIn UserAccount user, @PathVariable Plot plot,
+											ModelAndView modelAndView) {
+		Map<Plot, String> rentedPlots = new HashMap<>();
+		plotControllerService.secureGetRentedPlotsForTenant(tenantManager.getTenantByUserAccount(user), rentedPlots);
+		modelAndView.addObject("plots", rentedPlots);
+
+		modelAndView.setViewName("/plot/myPlot");
+		return modelAndView;
 	}
 
 	/**

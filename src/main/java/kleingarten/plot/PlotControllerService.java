@@ -109,41 +109,111 @@ public class PlotControllerService {
 	}
 
 	/**
+	 * Add information of a rented {@link Plot} to a {@link ModelAndView}
+	 * @param procedure {@link Procedure} to which the {@link Plot} is associated
+	 * @param tenant associated {@link Tenant} to the {@link UserAccount} who wants to access the details of the
+	 * 				{@link Plot}
+	 * @param mav {@link ModelAndView} to save the information of the {@link Plot}
+	 */
+	void addProcedureInformationOfPlot(Procedure procedure, Tenant tenant, ModelAndView mav) {
+		Map<Tenant, String>  mainTenant = secureGetInformationOfMainTenant(procedure);
+		Map<Tenant, String> subTenants = secureGetInformationOfSubTenants(procedure);
+
+		for (Tenant rents:
+			 mainTenant.keySet()) {
+			mav.addObject("mainTenant", rents);
+			mav.addObject("mainTenantRoles", mainTenant.get(rents));
+		}
+
+		mav.addObject("workHours", procedure.getWorkMinutes() + "min");
+		mav.addObject("subTenants", subTenants);
+	}
+
+	/**
 	 * Select which information a user can see on the details page of a {@link Plot} when he is logged in
-	 * @param plot {@link Plot} for which the access to the information should be set
-	 * @param tenant {@link UserAccount} of the logged in user
+	 * @param procedure {@link Optional} of {@link Procedure} for the {@link Plot} which details should be shown
+	 * @param tenant {@link Tenant} associated to the logged in {@link UserAccount}
 	 * @param mav {@link ModelAndView} to save the access rights to the information of the {@link Plot}
 	 */
-	void secureSetAccessRightForPlotDetails(Plot plot, Tenant tenant, ModelAndView mav) {
-		mav.addObject("canSee", true);
+	void secureSetAccessRightForPlotDetails(Optional<Procedure> procedure, Tenant tenant, ModelAndView mav) {
+		List<Role> permitted = List.of(Role.of("Vorstandsvorsitzender"), Role.of("Stellvertreter"),
+				Role.of("Protokollant"), Role.of("Kassierer"), Role.of("Wassermann"));
+		boolean condition = tenant.getUserAccount().getRoles().stream().anyMatch(permitted::contains);
+		if (condition) {
+			mav.addObject("canSeeWorkhours", true);
+			if (dataService.tenantHasRole(tenant, Role.of("Kassierer"))) {
+				mav.addObject("canSeeBills", true);
+				boolean condModify = dataService.tenantHasRole(tenant, Role.of("Obmann"))
+									|| dataService.tenantHasRole(tenant, Role.of("Wassermann"));
+				mav.addObject("canModify", condModify);
+			} else if (dataService.tenantHasRole(tenant, Role.of("Obmann"))
+						|| dataService.tenantHasRole(tenant, Role.of("Wassermann"))) {
+				mav.addObject("canModify", true);
+			} else if (dataService.tenantHasRole(tenant, Role.of("Vorstandsvorsitzender"))
+						|| dataService.tenantHasRole(tenant, Role.of("Stellvertreter"))) {
+				mav.addObject("canSeeBills", true);
+				mav.addObject("canSeeApplications", true);
+				mav.addObject("canModify", true);
+				mav.addObject("canCancel", true);
+			}
+		}
+		procedure.ifPresent(value -> secureSetAccessRightForTenantOfPlot(value, tenant, mav));
+	}
 
-		if (dataService.tenantHasRole(tenant, Role.of("Kassierer"))) {
-			mav.addObject("canSeeBills", true);
-			boolean condModify = dataService.tenantHasRole(tenant, Role.of("Obmann"))
-					              || dataService.tenantHasRole(tenant, Role.of("Wassermann"));
-			mav.addObject("canModify", condModify);
-		} else if (dataService.tenantHasRole(tenant, Role.of("Obmann"))
-					|| dataService.tenantHasRole(tenant, Role.of("Wassermann"))) {
-			mav.addObject("canModify", true);
-		} else if (dataService.tenantHasRole(tenant, Role.of("Vorstandsvorsitzender"))
-					|| dataService.tenantHasRole(tenant, Role.of("Stellvertreter"))) {
-			mav.addObject("canSeeBills", true);
-			mav.addObject("canSeeApplications", true);
-			mav.addObject("canModify", true);
+	/**
+	 * Select which information a user can see on the details page of a {@link Plot} when he is logged in
+	 * @param procedure {@link Procedure} for the {@link Plot} which details should be shown
+	 * @param tenant {@link Tenant} associated to the logged in {@link UserAccount}
+	 * @param modelAndView {@link ModelAndView} to save the access rights to the information of the {@link Plot}
+	 */
+	void secureSetAccessRightForTenantOfPlot(Procedure procedure, Tenant tenant, ModelAndView modelAndView) {
+		if (procedure.isTenant(tenant.getId())) {
+			modelAndView.addObject("canSeeWorkhours", true);
+			modelAndView.addObject("canSeeBills", true);
+			modelAndView.addObject("canSeeApplications", true);
+			modelAndView.addObject("canModify", true);
+			modelAndView.addObject("rents", true);
+			if (procedure.getMainTenant() == tenant.getId()) {
+				modelAndView.addObject("canCancel", true);
+			}
 		}
 	}
 
 	/**
-	 * Get information for a rented {@link Plot}
+	 * Get information for mainTenant who rents a {@link Plot}
 	 * @param procedure {@link Procedure} to which the {@link Plot} is associated to
-	 * @param mav {@link ModelAndView} to save the information of the rented {@link Plot}
+	 * @return {@link Map} with the {@link Tenant} and his {@link Role}s as {@link String}
 	 */
-	void secureGetInformationOfProcedure(Procedure procedure, ModelAndView mav) {
-		mav.addObject("mainTenant", dataService.findTenantById(procedure.getMainTenant()));
-		Set<Tenant> subTenants = new HashSet<>();
+	Map<Tenant, String> secureGetInformationOfMainTenant(Procedure procedure) {
+		Map<Tenant, String> mainTenantInfo = new HashMap<>();
+		Tenant tenant = dataService.findTenantById(procedure.getMainTenant());
+		mainTenantInfo.put(tenant, tenant.getRoles());
+		return mainTenantInfo;
+	}
+
+	/**
+	 * Get information for subTenants who rent a {@link Plot}
+	 * @param procedure {@link Procedure} to which the {@link Plot} is associated to
+	 * @return {@link Map} with the {@link Tenant}s and their {@link Role}s as {@link String}
+	 */
+	Map<Tenant, String> secureGetInformationOfSubTenants(Procedure procedure) {
+		Map<Tenant, String> subTenantsInfo = new HashMap<>();
 		for (long tenantId : procedure.getSubTenants()) {
-			subTenants.add(dataService.findTenantById(tenantId));
+			Tenant tenant = dataService.findTenantById(tenantId);
+			subTenantsInfo.put(tenant, tenant.getRoles());
 		}
-		mav.addObject("workHours", procedure.getWorkMinutes() + "min");
+		return subTenantsInfo;
+	}
+
+	/**
+	 * Get information of the {@link Plot}s a {@link Tenant} rents and save this information
+	 * @param tenant {@link Tenant} who's rented {@link Plot}s should be saved
+	 * @param rentedPlots {@link Map} of the {@link Plot}s the {@link Tenant} rents and their names as {@link String}
+	 */
+	void secureGetRentedPlotsForTenant(Tenant tenant, Map<Plot, String> rentedPlots) {
+		Set<Plot> plots = dataService.getRentedPlots(LocalDateTime.now().getYear(), tenant);
+		for (Plot parcel : plots) {
+			rentedPlots.put(parcel, parcel.getName());
+		}
 	}
 }
