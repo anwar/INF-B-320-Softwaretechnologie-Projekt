@@ -273,7 +273,7 @@ input.text_bgImage {
 	padding: 30px;
 	text-align: center;
 	color: white;
-	border: 3px solid green;
+	border: 3px solid #A1887F;
 }
 @media only screen and (max-width: 600px) {
 

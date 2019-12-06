@@ -30,7 +30,7 @@ public class PlotControllerService {
 	 * @param colors {@link Map} with {@link Plot}s and their selected colors as {@link String}
 	 */
 	void insecureSetPlotColor(Plot plot, Map<Plot, String> colors) {
-		colors.put(plot, plot.getStatus() == PlotStatus.TAKEN ? "grey" : "olive");
+		colors.put(plot, plot.getStatus() == PlotStatus.TAKEN ? "#546E7A" : "#7CB342");
 	}
 
 	/**

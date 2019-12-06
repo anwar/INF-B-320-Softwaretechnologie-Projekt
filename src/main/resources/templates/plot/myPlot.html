@@ -11,6 +11,10 @@
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
     <link th:href="@{../resources/css/style.css}" rel="stylesheet"
           href="../resources/css/style.css" type="text/css"/>
+    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
+          href="../resources/css/tenantTable.css" type="text/css">
+    <link th:href="@{../resources/css/dropdown.css}" rel="stylesheet"
+          href="../resources/css/dropdown.css" type="text/css">
 
     <title>Übersicht</title>
 </head>
@@ -32,7 +36,19 @@
             <thead>
                 <tr>
                     <th>Informationen zu</th>
-                    <th>Gespeicherte Daten</th>
+                    <th>Gespeicherte Daten <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn">. . .</button>
+                        <div id="myDropdown" class="dropdown-content">
+                            <a th:if="${canModify}">Zählerstände eintragen</a>
+                            <a th:if="${canSeeBills}">Rechnungen Anzeigen</a>
+                            <a th:if="not ${rented}" th:href="${'/createApplication/' + plotID}" >Bewerben</a>
+                            <a th:if="not ${rented}" th:href="'/application'">Bewerbungen anzeigen</a>
+                            <a th:if="${canModify}" th:href="'/editPlot/' + ${plotID}">Plot Bearbeiten</a>
+                            <a th:if="${canCancel}" th:href="'/cancelPlot/' + ${plotID}">Kündigen</a>
+                        </div>
+                    </div>
+                    </th>
+
                 </tr>
             </thead>
             <tbody>
@@ -45,22 +61,52 @@
             <tr th:if="${rented} and not ${subTenants.isEmpty()}" th:each="tenant : ${subTenants.keySet()}"><th></th> <td align="center" th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()} + ${subTenants.get(tenant)}"> Text </td></tr>
             <tr th:if="${rented} and ${canSeeWorkhours}"><th>Arbeitsstunden</th> <td align="center" th:text="${workHours}"> Text </td></tr>
             </tbody>
-            <div class="button-section">
+           <!-- <div class="button-section">
                 <button class="button" th:if="${canModify}">Zählerstände eintragen</button>
                 <button class="button" th:if="${canSeeBills}">Rechnungen anzeigen</button>
                 <a th:href="'/editPlot/' + ${plotID}"> <button class="button" >Bearbeiten</button></a>
                 <input type="hidden" id="plot" name="plot" th:value="${plot}">
-            </div>
+            </div> -->
 
         </table>
 
-        <div class="button-section" th:if="not ${rented}">
+       <!-- <div class="button-section" th:if="not ${rented}">
             <a th:href="${'/createApplication/' + plotID}" ><button class="button" >Bewerben</button>
             </a>
 			<button class="button" onclick="location.href= '/application'" th:if="${canSeeApplications}">Bewerbungen anzeigen</button>
-            <input type="hidden" id="plotID" name="plotID" th:value="${plotID}">
-        </div>
+
+        -->
+
     </div>
+
+
+    </div>
+
+
+
+    <script>
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+
+
 </div>
 <div th:include="navigation :: footer"></div>
 </body>
