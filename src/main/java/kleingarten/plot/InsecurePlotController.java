@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.money.MonetaryAmount;
 import javax.money.format.MonetaryFormats;
 import java.util.*;
 
@@ -56,6 +58,7 @@ public class InsecurePlotController {
 		if (user.isEmpty()) {
 			return detailsOfFreePlot(plot);
 		}
+		System.out.println(plot);
 		return securePlotController.detailsOfPlot(user.get(), plot);
 	}
 
@@ -109,9 +112,4 @@ public class InsecurePlotController {
 		return mav;
 	}
 
-	@GetMapping("/editPlot/{plot}")
-	String editPlot(@PathVariable Plot plot, Model model){
-			model.addAttribute("plot", plotService.findById(plot.getId()));
-			return "plot/editPlot";
-	}
 }

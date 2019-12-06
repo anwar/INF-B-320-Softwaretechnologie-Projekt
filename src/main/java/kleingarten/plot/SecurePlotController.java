@@ -3,13 +3,19 @@ package kleingarten.plot;
 import kleingarten.Finance.Procedure;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
+import org.javamoney.moneta.Money;
+import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.money.MonetaryAmount;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -70,6 +76,7 @@ public class SecurePlotController {
 			mav.setViewName("error");
 			return mav;
 		}
+		System.out.println(plot.getId().toString());
 		mav.setViewName("plot/myPlot");
 		return mav;
 	}
@@ -80,7 +87,7 @@ public class SecurePlotController {
 	 * @param user {@link UserAccount} of the logged in user
 	 * @return response as {@link ModelAndView}
 	 */
-	@GetMapping("/myPlot")
+	@GetMapping("/myPlot/")
 	public ModelAndView rentedPlots(@LoggedIn UserAccount user) {
 		ModelAndView mav = new ModelAndView();
 		Plot shownPlot;
@@ -150,5 +157,24 @@ public class SecurePlotController {
 
 		return mav;
 
+	}
+
+	@GetMapping("/editPlot/{plot}")
+	String editPlot(@PathVariable Plot plot, Model model){
+		model.addAttribute("plot", plotService.findById(plot.getId()));
+		System.out.println(plot.getId());
+		return "plot/editPlot";
+	}
+
+	@PostMapping("/editedPlot")
+	String editedPlot(@RequestParam(name = "plotID") ProductIdentifier plotId, @RequestParam("size") int size, @RequestParam("description") String description
+					 /* @RequestParam() int estimator */){
+		plotService.findById(plotId).setSize(size);
+		System.out.println(plotId);
+		plotService.findById(plotId).setDescription(description);
+		//plotService.findById(plotId).setEstimator(Money.of);
+
+		plotCatalog.save(plotService.findById(plotId));
+		return "redirect:plot/" + plotId.toString();
 	}
 }

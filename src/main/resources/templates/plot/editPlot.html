@@ -38,8 +38,8 @@
         </tr>
         <tr>
             <td> <label for="number">Schätzwert</label> </td>
-            <td><input class="text_bgImage" id="number" name="number" th:value="${plot.getEstimator()}" type="MonetaryAmount" required="required"/></td>
-            <input type="hidden" id="plotID" name="plotID" th:value="${plot.getID()}">
+            <td><input class="text_bgImage" id="number" name="number" th:value="${plot.getEstimator()}" type="number" required="required"/></td>
+            <input type="hidden" id="plotID" name="plotID" th:value="${plot.getId()}">
         </tr>
         </tbody>
     </table>
