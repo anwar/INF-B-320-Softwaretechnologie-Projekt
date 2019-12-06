@@ -28,15 +28,15 @@
     <table  id="myTable">
 
         <tbody>
-        <tr th:each=" : ${}">
+        <tr>
             <td> <label for="size">Größe</label> </td>
-            <td><input class="text_bgImage" id="size" name="id" th:value="${plot.getSize}" type="number" required="required"/></td>
+            <td><input class="text_bgImage" id="size" name="id" th:value="${plot.getSize()}" type="number" required="required"/></td>
         </tr>
-        <tr th:each=" : ${">
+        <tr>
             <td> <label for="description">Beschreibung</label> </td>
             <td><input class="text_bgImage" id="description" name="id" th:value="${plot.getDescription()}" type="text" required="required"/></td>
         </tr>
-        <tr th:each=": ${}">
+        <tr>
             <td> <label for="number">Schätzwert</label> </td>
             <td><input class="text_bgImage" id="number" name="id" th:value="${plot.getEstimator()}" type="number" required="required"/></td>
         </tr>

@@ -215,6 +215,7 @@ public class PlotControllerServiceIntegrationTests {
 	public void addInformationOfPlotTest() {
 		ModelAndView mav = new ModelAndView();
 		ModelAndView result = new ModelAndView();
+		result.addObject("plot", freePlot);
 		result.addObject("plotID", freePlot.getId());
 		result.addObject("plotName", freePlot.getName());
 		result.addObject("plotSize", freePlot.getSize() + " m²");

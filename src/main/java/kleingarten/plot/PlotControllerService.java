@@ -99,6 +99,7 @@ public class PlotControllerService {
 	 * @param mav {@link ModelAndView} to save the information of the {@link Plot}
 	 */
 	void addGeneralInformationOfPlot(Plot plot, ModelAndView mav) {
+		mav.addObject("plot", plot);
 		mav.addObject("plotID", plot.getId());
 		mav.addObject("plotName", plot.getName());
 		mav.addObject("plotSize", plot.getSize() + " m²");
