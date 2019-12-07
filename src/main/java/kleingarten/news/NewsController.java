@@ -31,21 +31,25 @@ import javax.validation.Valid;
  */
 @Controller
 class NewsController {
-
 	private final NewsRepository news;
 
 	/**
 	 * @param news must not be {@literal null}
 	 */
 	public NewsController(NewsRepository news) {
-
 		Assert.notNull(news, "News must not be null!");
 		this.news = news;
 	}
 
+	/**
+	 * Handles requests to the application root URI.
+	 * Note, that you can use {@code redirect:} as prefix to trigger a browser
+	 * redirect instead of simply rendering a view.
+	 *
+	 * @return a redirect string
+	 */
 	@RequestMapping("/")
 	public String index() {
-
 		return "redirect:/home";
 	}
 
@@ -59,7 +63,6 @@ class NewsController {
 	 */
 	@GetMapping(path = "/home")
 	String home(Model model, @ModelAttribute(binding = false) NewsForm form) {
-
 		model.addAttribute("entries", news.findAll());
 		model.addAttribute("form", form);
 
@@ -78,7 +81,6 @@ class NewsController {
 	 */
 	@PostMapping(path = "/home")
 	String addEntry(@Valid @ModelAttribute("form") NewsForm form, Errors errors, Model model) {
-
 		if (errors.hasErrors()) {
 			return home(model, form);
 		}
