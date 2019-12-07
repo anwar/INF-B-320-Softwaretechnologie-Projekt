@@ -30,7 +30,8 @@
         <li><a href="finance/bill.html" th:href="@{/bill}" sec:authorize="isAuthenticated()">Rechnungen</a></li>
         <li><a href="complains/complains.html" th:href="@{/complains}" sec:authorize="hasAnyRole('Hauptpächter') || hasAnyRole('Nebenpächter')">Beschwerden</a></li>
         <li><a href="tenant/tenants.html" th:href="@{/tenants}" sec:authorize="hasAnyRole('Vorstandsvorsitzender')"> Mitglieder</a></li>
-
+        <li><a href="tenant/changePassword.html" th:href="@{/changePassword}" sec:authorize="hasAnyRole('Hauptpächter') || hasAnyRole('Nebenpächter')">Password ändern</a></li>
+        <li><a href="tenant/changeEmail.html" th:href="@{/changeEmail}" sec:authorize="hasAnyRole('Hauptpächter') || hasAnyRole('Nebenpächter')">Email ändern</a></li>
         <li style="float:right"><a  href="login.html" th:href="@{/login}" sec:authorize="!isAuthenticated()">Login</a>
 
             <form  sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
