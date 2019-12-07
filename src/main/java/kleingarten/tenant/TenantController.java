@@ -98,4 +98,9 @@ class TenantController {
 		return "redirect:/tenants";
 	}
 
+	@GetMapping("/changePassword")
+	String changePassword(){
+		return"/tenant/changePassword";
+	}
+
 }
