@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @Transactional
 public class TenantTest {
 
+
 	private final UserAccountManager userAccountManager;
 
 	private Tenant tenant;

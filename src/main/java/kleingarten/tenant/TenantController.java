@@ -15,16 +15,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 class TenantController {
 	private final TenantManager tenantManager;
 	private final TenantRepository tenantRepository;
+	private final TenantService tenantService;
 
 	/**
 	 * Constructor of class {@link TenantController}
 	 * @param tenantManager manager class {@link TenantManager} for managing {@link Tenant}s
 	 * @param tenantRepository repository of tenants as {@link TenantRepository}
+	 * @param tenantService service class {@link TenantService}
 	 */
-	TenantController(TenantManager tenantManager, TenantRepository tenantRepository) {
+	TenantController(TenantManager tenantManager, TenantRepository tenantRepository, TenantService tenantService) {
 		Assert.notNull(tenantManager, "TenantManager must not be null");
 		this.tenantManager = tenantManager;
 		this.tenantRepository = tenantRepository;
+		this.tenantService = tenantService;
 	}
 
 	/**
@@ -102,8 +105,23 @@ class TenantController {
 	String changePassword(){
 		return"/tenant/changePassword";
 	}
+
+	@PostMapping("/changedPassword")
+	String changedPassword(@RequestParam("id") long id, @RequestParam("old") String oldPassword, @RequestParam("new") String newPassword,
+						   @RequestParam("repeat") String repeatedPassword){
+		tenantService.changePassword(id, oldPassword, newPassword, repeatedPassword);
+		return "redirect:/home";
+	}
+
 	@GetMapping("/changeEmail")
 	String changeEmail(){
 		return"/tenant/changeEmail";
+	}
+
+	@PostMapping("/changedEmail")
+	String changedEmail(@RequestParam("id") long id, @RequestParam("old") String oldEmail, @RequestParam("new") String newEmai,
+						@RequestParam("repeat") String repeatedEmail){
+		tenantService.changeEmail(id, oldEmail, newEmai, repeatedEmail);
+		return "redirect:/home";
 	}
 }
