@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ComplainsController {
 
-	private final ComplainsManager complainsManager;
-
-	ComplainsController(ComplainsManager complainsManager){
-		this.complainsManager  =complainsManager;
+	ComplainsController(){
 	}
 	@GetMapping("/complains")
 	String complains() {
