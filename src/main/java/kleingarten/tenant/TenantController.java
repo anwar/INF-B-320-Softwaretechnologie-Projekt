@@ -102,5 +102,8 @@ class TenantController {
 	String changePassword(){
 		return"/tenant/changePassword";
 	}
-
+	@GetMapping("/changeEmail")
+	String changeEmail(){
+		return"/tenant/changeEmail";
+	}
 }

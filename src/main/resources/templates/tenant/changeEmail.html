@@ -13,40 +13,40 @@
           href="../resources/css/style.css" type="text/css"/>
     <link th:href="@{../resources/css/tenantdetailsTable.css}" rel="stylesheet"
           href="../resources/css/tenantdetailsTable.css" type="text/css">
-    <title>changePassword</title>
+    <title>changeEMail</title>
 </head>
 <body>
 <nav th:include="navigation :: navigation"/>
 <div class="header-title">
-    <h1>Passwort ändern</h1>
+    <h1>Email ändern</h1>
 </div>
 <form method="post" role="form" id="form" >
     <table>
         <tr>
             <th>
-                <label for="old">altes Passwort</label>
+                <label for="old">alte Email</label>
             </th>
             <td>
-                <input class="text_bgImage" id="old"  type="text" required="required"/>
+                <input class="text_bgImage" id="old"  type="email" required="required"/>
             </td>
 
         </tr>
         <tr>
             <th>
-                <label for="new">neues Passwort</label>
+                <label for="new">neue Email</label>
             </th>
             <td>
-                <input class="text_bgImage" id="new"  type="text" required="required"/>
+                <input class="text_bgImage" id="new"  type="email" required="required"/>
             </td>
 
         </tr>
         <br/>
         <tr>
             <th>
-                <label for="again">neues Passwort</label>
+                <label for="again">neue Email</label>
             </th>
             <td>
-                <input class="text_bgImage" id="again"  type="text" required="required"/>
+                <input class="text_bgImage" id="again"  type="email" required="required"/>
             </td>
 
         </tr>
