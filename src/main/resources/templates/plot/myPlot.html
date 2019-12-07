@@ -15,6 +15,9 @@
           href="../resources/css/tenantTable.css" type="text/css">
     <link th:href="@{../resources/css/dropdown.css}" rel="stylesheet"
           href="../resources/css/dropdown.css" type="text/css">
+    <script th:src="@{../resources/css/js/dropdown.js}"
+            src="../resources/css/js/dropdown.js"> </script>
+
 
     <title>Übersicht</title>
 </head>
@@ -44,7 +47,7 @@
                             <a th:if="not ${rented}" th:href="${'/createApplication/' + plotID}" >Bewerben</a>
                             <a th:if="not ${rented}" th:href="'/application'">Bewerbungen anzeigen</a>
                             <a th:if="${canModify}" th:href="'/editPlot/' + ${plotID}">Plot Bearbeiten</a>
-                            <a th:if="${canCancel}" th:href="'/cancelPlot/' + ${plotID}">Kündigen</a>
+                            <a th:if="${rented}" sec:authorize="hasAnyRole('Vorstandsvorsitzender')" th:href="'/cancelPlot/' + ${plotID}">Kündigen</a>
                         </div>
                     </div>
                     </th>
@@ -56,7 +59,7 @@
             <tr><th>Größe</th> <td align="center" th:text="${plotSize}"> Text </td></tr>
             <tr><th>Beschreibung</th> <td align="center" th:text="${plotDescription}"> Text </td></tr>
             <tr th:if="not ${rented}"><th>Schätzwert</th> <td align="center" th:text="${plotPrice}"> Text </td></tr>
-            <tr th:if="${rented}"><th>Hauptpächter</th> <td align="center" th:text="${mainTenant.getForename()} + ' ' + ${mainTenant.getSurname()} + ${mainTenantRoles}"> Text </td></tr>
+            <tr th:if="${rented}"><th>Hauptpächter</th> <td align="center" th:text="${mainTenant.getForename()} + ' ' + ${mainTenant.getSurname()} +',  ' + ${mainTenantRoles}"> Text </td></tr>
             <tr th:if="${rented} and not ${subTenants.isEmpty()}"><th>Nebenpächter</th> <td></td></tr>
             <tr th:if="${rented} and not ${subTenants.isEmpty()}" th:each="tenant : ${subTenants.keySet()}"><th></th> <td align="center" th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()} + ${subTenants.get(tenant)}"> Text </td></tr>
             <tr th:if="${rented} and ${canSeeWorkhours}"><th>Arbeitsstunden</th> <td align="center" th:text="${workHours}"> Text </td></tr>
@@ -78,34 +81,7 @@
         -->
 
     </div>
-
-
     </div>
-
-
-
-    <script>
-        /* When the user clicks on the button,
-        toggle between hiding and showing the dropdown content */
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-    </script>
-
 
 </div>
 <div th:include="navigation :: footer"></div>

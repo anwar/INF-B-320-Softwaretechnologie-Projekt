@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
@@ -40,10 +40,12 @@
                 <td>frei &nbsp </td>
                 <td style="background-color: #546E7A"> &nbsp &nbsp </td>
                 <td>bewohnt &nbsp</td>
-                <td style="background-color: #FDD835"> &nbsp &nbsp</td>
-                <td>Vorstandsvorsitzender &nbsp</td>
-                <td style="background-color: #039BE5"> &nbsp &nbsp</td>
-                <td>Obmann</td>
+                <span sec:authorize="isAuthenticated()">
+                    <td style="background-color: #FDD835"> &nbsp &nbsp</td>
+                    <td>Vorstandsvorsitzender &nbsp</td>
+                    <td style="background-color: #039BE5"> &nbsp &nbsp</td>
+                    <td>Obmann</td>
+                </span>
             </tr>
         </table>
     </div>

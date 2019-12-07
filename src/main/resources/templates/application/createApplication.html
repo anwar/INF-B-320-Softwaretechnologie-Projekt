@@ -11,6 +11,9 @@
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
     <link th:href="@{../resources/css/style.css}" rel="stylesheet"
           href="../resources/css/style.css" type="text/css"/>
+    <link th:href="@{../resources/css/tenantdetailsTable.css}" rel="stylesheet"
+          href="../resources/css/tenantdetailsTable.css" type="text/css">
+
     <title>Um Parzelle bewerben</title>
 </head>
 
@@ -27,32 +30,41 @@
     <form method="post" role="form" id="form" th:action="@{/createApplication}" th:object="${form}">
         <table>
             <tr>
-                <td>
+                <th>
                     <label for="firstName">Vorname</label>
-                    <input id="firstName" th:field="*{firstName}" type="text" required="required"/>
-                </td>
-            </tr>
-            <br/>
-            <tr>
+                </th>
                 <td>
+                    <input class="text_bgImage" id="firstName" th:field="*{firstName}" type="text" required="required"/>
+                </td>
+
+            </tr>
+            <tr>
+                <th>
                     <label for="lastName">Nachname</label>
-                    <input id="lastName" th:field="*{lastName}" type="text" required="required"/>
+                </th>
+                <td>
+                    <input class="text_bgImage" id="lastName" th:field="*{lastName}" type="text" required="required"/>
                 </td>
+
             </tr>
             <br/>
             <tr>
-                <td>
+                <th>
                     <label for="email">E-Mail</label>
-                    <input id="email" th:field="*{email}" type="text" required="required"/>
+                </th>
+                <td>
+                    <input class="text_bgImage" id="email" th:field="*{email}" type="text" required="required"/>
                 </td>
+
             </tr>
         </table>
-		
-		<input type="hidden" id="plotId" name="plotId" th:field="*{plotId}" th:value="${plotId}">
+    <div class="button-section">
+		<input  type="hidden" id="plotId" name="plotId" th:field="*{plotId}" th:value="${plotId}">
 
-        <button type="submit" class="ui button">Bewerbung abschicken</button></div>
+        <button type="submit" class="button">Bewerbung abschicken</button>
+    </div>
     </form>
 </center>
-
+<div th:include="navigation :: footer"></div>
 </body>
 </html>
