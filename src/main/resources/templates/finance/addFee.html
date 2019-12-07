@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <title>neue Gebühr erstellen</title>
+</head>
+<body>
+<nav th:include="navigation :: navigation"/>
+<div class="header-title">
+    <h1>neue Gebühr hinzufügen</h1>
+</div>
+<div class="plotRegistration">
+
+    <form th:object="${feeForm}" th:action="@{/fees/add}" method="post">
+        <table class="plotTable">
+            <tr>
+                <td><label>Titel</label></td>
+                <td><input type="text" th:field="*{title}"></td>
+            </tr>
+            <tr>
+                <td><label>Menge</label></td>
+                <td><input type="number" min="0" step="0.01" th:field="*{count}"></td>
+            </tr>
+            <tr>
+                <td> <label>Basispreis</label></td>
+                <td> <input type="number" min="0" step="0.01" th:field="*{basePrice}"></td>
+            </tr>
+        </table>
+
+
+        <button class="button" type="submit">neue Gebühr erstellen</button>
+    </form>
+</div>
+</body>
+</html>

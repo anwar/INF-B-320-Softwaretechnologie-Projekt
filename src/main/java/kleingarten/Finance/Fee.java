@@ -3,51 +3,42 @@ package kleingarten.Finance;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.HashMap;
-import java.util.Map;
+import javax.persistence.Table;
 
-/**
- * The Fee is generated on runtime, depending on the things in Procedure.
- *
- * Main use is to make PDF create easier.
- *
- * @author susho
- *
- */
 @Entity
-public abstract class Fee {
+@Table(name = "fees")
+public class Fee {
+	public Fee(){}
 
 	private @Id @GeneratedValue long id;
 
-	/**
-	 * Title shown on Bill.
-	 */
-	String title;
+	private String title;
+	private double count;
+	private double basePrice;
+	private double price;
 
-	/**
-	 * Text shown on Bill. (More Details)
-	 */
-	String text;
+	public Fee(String title, double count, double basePrice, double price){
 
-	/**
-	 * Item count.
-	 */
-	double count;
-	double defaultPrice;
-
-	public Fee() {
-		this.title = "DEFAULT_TITLE";
-		this.text = "DEFAULT_TEXT";
-		this.count = 1;
-		this.defaultPrice = 1;
+		this.title = title;
+		this.count = count;
+		this.basePrice = basePrice;
+		this.price = basePrice * count;
+		this.id = id;
 	}
 
-	public String getTitle() {
+	public String getTitle(){
 		return title;
 	}
+	public void setTitle(String title){
+		this.title = title;
+	}
 
-	public String getText() {
-		return text;
+	public double getPrice(){
+		return basePrice * count;
+	}
+
+	public void setPrice(double price){
+		this.price = price;
 	}
 
 	public double getCount() {
@@ -57,9 +48,33 @@ public abstract class Fee {
 	public void setCount(double count) {
 		this.count = count;
 	}
+	public long getId(){
+		return id;
+	}
 
-	public double getDefaultPrice(int year) {
-		return 1;
+	public void setId(Long id){
+		this.id = id;
+	}
+
+	public double getBasePrice() {
+		return basePrice;
+	}
+
+	public void setBasePrice(double basePrice) {
+		this.basePrice = basePrice;
+	}
+
+	@Override
+	public String toString() {
+
+		var builder = new StringBuilder();
+		builder.append("Fee{id=").append(id).append(", title=")
+				.append(title).append(", count=")
+				.append(count).append(", basePrice=")
+				.append(basePrice).append(", price=")
+				.append(price).append("}");
+
+		return builder.toString();
 	}
 
 }

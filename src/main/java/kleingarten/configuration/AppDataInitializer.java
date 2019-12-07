@@ -15,8 +15,7 @@
  */
 package kleingarten.configuration;
 
-import kleingarten.Finance.Procedure;
-import kleingarten.Finance.ProcedureManager;
+import kleingarten.Finance.*;
 import kleingarten.appointment.WorkAssignmentManager;
 import kleingarten.appointment.WorkAssignmentRepository;
 import kleingarten.news.NewsEntry;
@@ -53,11 +52,13 @@ class AppDataInitializer implements DataInitializer {
 	private final UserAccountManager userAccountManager;
 	private final PlotService plotService;
 	private final PlotCatalog catalog;
+	private final FeeRepository feeRepository;
+	private final FeeManager feeManager;
 	private final ProcedureManager procedureManager;
 
 	AppDataInitializer(NewsRepository news,
 					   WorkAssignmentRepository workAssignmentRepo, WorkAssignmentManager workAssignmentManager,
-					   TenantRepository tenantRepository, UserAccountManager userAccountManager,
+					   TenantRepository tenantRepository, UserAccountManager userAccountManager, FeeRepository feeRepository, FeeManager feeManager,
 					   PlotService plotService, PlotCatalog catalog,
 					   ProcedureManager procedureManager) {
 		this.news = news;
@@ -67,6 +68,8 @@ class AppDataInitializer implements DataInitializer {
 		this.userAccountManager  = userAccountManager;
 		this.plotService = plotService;
 		this.catalog = catalog;
+		this.feeRepository = feeRepository;
+		this.feeManager = feeManager;
 		this.procedureManager = procedureManager;
 	}
 
@@ -76,6 +79,7 @@ class AppDataInitializer implements DataInitializer {
 		initializeWorkAssigment(this.workAssignmentRepo);
 		initializeTenants(this.tenantRepository, this.userAccountManager);
 		initializePlots(this.catalog, this.plotService);
+		initializeFee(this.feeRepository, this.feeManager);
 		initializeProcedures(this.procedureManager);
 		LOG.info("fertig");
 	}
@@ -185,6 +189,29 @@ class AppDataInitializer implements DataInitializer {
 		catalog.saveAll(List.of(Plot, Plot_2, Plot_3, Plot_4, Plot_5, Plot_6));
 
 		LOG.info("fast fertig");
+	}
+
+	public void initializeFee(FeeRepository feeRepository, FeeManager feeManager){
+		Assert.notNull(feeManager, "Catalog must not be null!");
+		LOG.info("Creating default fee lists");
+		if (feeManager.findAll().iterator().hasNext()) {
+			return;
+		}
+		feeManager.save(new Fee("Wasserkosten", 1, 1.95, 0));
+		feeManager.save(new Fee("Stromkosten", 1, 0.2, 0));
+		feeManager.save(new Fee("Miete", 1, 0.18, 0));
+		feeManager.save(new Fee("Strafgeld", 1, 8, 0));
+		feeManager.save(new Fee("Mitgliedsbeitrag", 1,17.25, 0));
+		feeManager.save(new Fee("Haftpflichtbeitrag", 1, 0.35, 0));
+		feeManager.save(new Fee("Winterdienst", 1, 3, 0));
+		feeManager.save(new Fee("Sozialbeitrag", 1, 0.5, 0));
+		feeManager.save(new Fee("Rechtsschutz", 1, 0.75, 0));
+		feeManager.save(new Fee("Aufwandspauschale", 1, 12, 0));
+		feeManager.save(new Fee("Sonstige Auslagen", 1, 1, 0));
+		feeManager.save(new Fee("Grundmiete für Wasseruhr", 1, 2.6, 0));
+		feeManager.save(new Fee("Grundmiete für Stromzähler", 1, 1.55, 0));
+
+		LOG.info("Finished creating default fee lists");
 	}
 
 	public void initializeProcedures(ProcedureManager procedureManager) {

@@ -32,16 +32,14 @@ public class Bill {
 	public void setBillID(String billID) {
 		this.billID = billID;
 	}
-	*/
+
 	public Bill(){}
 
 	@ManyToMany
 	List<Fee> feeList;
 
 	public Bill(Procedure procedure){
-		/**
-		 * Basic fees for a bill
-		 */
+
 		Fee membershipFee = new MembershipFee();
 		feeList.add(membershipFee);
 		Fee liabilityFee = new LiabilityFee();
@@ -58,9 +56,7 @@ public class Bill {
 		feeList.add(waterMeterFee);
 		Fee electricityMeterFee = new ElectricityMeterFee();
 		feeList.add(electricityMeterFee);
-		/**
-		 * Fees relevant to Procedure Class
-		 */
+
 		Fee waterFee = new WaterFee();
 		feeList.add(waterFee);
 		Fee powerFee = new PowerFee();
@@ -72,7 +68,7 @@ public class Bill {
 
 		//this.billID = billID;
 
-	}
+	}*/
 
 }
 
