@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 /**
  * A controller to handle web requests to manage {@link NewsEntry}s
@@ -93,15 +94,15 @@ class NewsController {
 	}
 
 	/**
-	 * Deletes a {@link NewsEntry}. This request can only be performed by authenticated users with
-	 * "Vorstandsvorsitzender" role.
+	 * Deletes a {@link NewsEntry}.
+	 * This request can only be performed by authenticated users with "Vorstandsvorsitzender" role.
 	 *
 	 * @param id of the {@link NewsEntry} to delete
 	 * @return a redirect string
 	 */
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	@PostMapping(path = "/home/news/deleteEntry/{id}")
-	String deleteEntry(@PathVariable("id") long id, Model model) {
+	String deleteEntry(@PathVariable("id") long id) {
 		NewsEntry entry = news.findById(id).
 				orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 		news.delete(entry);
@@ -109,5 +110,24 @@ class NewsController {
 		return "redirect:/home";
 	}
 
-	// TODO (Talal): Add mappings for editing.
+	/**
+	 * Updates a {@link NewsEntry}.
+	 * This request can only be performed by authenticated users with "Vorstandsvorsitzender" role.
+	 *
+	 * @param id   of the {@link NewsEntry} to delete
+	 * @param text for the updated entry
+	 * @return a redirect string
+	 */
+	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PostMapping(path = "/home/news/editEntry/{id}")
+	String editEntry(@PathVariable("id") long id, @RequestParam("text") String text) {
+		NewsEntry entry = news.findById(id).
+				orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+		entry.setText(text);
+		entry.setDate(LocalDateTime.now());
+		news.save(entry);
+
+		return "redirect:/home";
+	}
 }

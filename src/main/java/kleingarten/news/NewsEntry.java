@@ -22,12 +22,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-// A news entry. An entity as in the Domain Driven Design context. Mapped onto the database using JPA annotations.
+// A news entry is an entity in the Domain Driven Design context. Mapped onto the database using JPA annotations.
 @Entity
 public class NewsEntry {
-
-	private final String text;
-	private final LocalDateTime date;
+	private String text;
+	private LocalDateTime date;
 	private @Id @GeneratedValue Long id;
 
 	/**
@@ -49,17 +48,22 @@ public class NewsEntry {
 	}
 
 	public Long getId() {
-
 		return id;
 	}
 
 	public LocalDateTime getDate() {
-
 		return date;
 	}
 
-	public String getText() {
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
 
+	public String getText() {
 		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 }

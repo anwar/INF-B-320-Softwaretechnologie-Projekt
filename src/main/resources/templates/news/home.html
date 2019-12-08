@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-
-
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
 	<script th:src="@{/webjars/jquery/jquery.min.js}"
@@ -14,9 +12,18 @@
 	<link th:href="@{../resources/css/style.css}" rel="stylesheet"
 		  href="../resources/css/style.css" type="text/css"/>
 
+	<script>
+		function hideNewsEditForm(id) {
+			document.getElementById("edit-form-entry-"+id).style.display="none";
+			document.getElementById("entry-"+id).style.display="inline";
+		}
+		function showNewsEditForm(id) {
+			document.getElementById("edit-form-entry-"+id).style.display="inline";
+			document.getElementById("entry-"+id).style.display="none";
+		}
+	</script>
+
 	<title>Welcome</title>
-
-
 </head>
 	<body>
 
@@ -35,13 +42,13 @@
 						<div class="news-section">
 							<div id="entries" class="mx-auto">
 								<div th:each="entry, it : ${newsEntries}" th:with="index = ${it.count}">
-									<div class="card" th:fragment="entry" th:id="entry+${entry.id}">
+									<div class="card" th:fragment="entry" th:id="'entry-'+${entry.id}">
 										<div class="card-header">
-											<form method="post" th:action="@{/home/news/deleteEntry/{id}(id=${entry.id})}">
-												<button sec:authorize="hasRole('Vorstandsvorsitzender')" th:title="#{news.form.delete}" class="btn btn-sm float-right">
-													<span class="fas fa-times"></span>
-												</button>
+											<form sec:authorize="hasRole('Vorstandsvorsitzender')" method="post" th:action="@{/home/news/deleteEntry/{id}(id=${entry.id})}">
+												<button class="btn btn-sm float-right" style="font-size: 18px; background: white; border: none;" th:title="#{news.entryEdit.delete}">&#10060;</button>
 											</form>
+
+											<button sec:authorize="hasRole('Vorstandsvorsitzender')" class="btn btn-sm float-right" style="font-size: 20px; background: white; border: none;" th:onclick="'showNewsEditForm(\'' + ${entry.id} + '\');'">&#9998;</button>
 										</div>
 										<div class="card-body">
 											<blockquote class="entrytext" th:text="${entry.text}"></blockquote>
@@ -50,6 +57,19 @@
 											<div class="date" th:text="${#temporals.format(entry.date, 'dd. MMMM yyyy - HH:mm')}">Datum</div>
 										</div>
 									</div>
+
+									<!-- style.display=none keeps this form hidden until showNewsEditForm() is called -->
+									<form sec:authorize="hasRole('Vorstandsvorsitzender')" method="post" style="display:none" class="ui form" th:id="'edit-form-entry-'+${entry.id}" th:action="@{/home/news/editEntry/{id}(id=${entry.id})}">
+										<div class="field">
+											<label for="text" th:text="#{news.entryEdit.text}">Newseintrag Bearbeiten</label><br/>
+											<!-- TODO (Talal): fix textarea so that the current comment text is used -->
+											<textarea id="text" name="text" cols="45" rows="8" th:value="${entry.text}" required="required"></textarea>
+										</div>
+										<button class="ui submit button" th:onclick="'hideNewsEditForm(\'' + ${entry.id} + '\');'" th:value="#{news.entryEdit.back}">Zurück</button>
+										<input type="submit" class="ui submit button" th:value="#{news.entryEdit.submit}" value="Aktualisieren" />
+									</form>
+
+									<br/>
 								</div>
 							</div>
 
@@ -57,11 +77,11 @@
 
 							<form sec:authorize="hasRole('Vorstandsvorsitzender')" method="post" class="ui form" role="form" id="form" th:action="@{/home/news/addEntry}" th:object="${newsForm}">
 								<div class="field">
-									<label for="text" th:text="#{news.form.text}">Neuer Newseintrag</label><br/>
+									<label for="text" th:text="#{news.entryForm.text}">Neuer Newseintrag</label><br/>
 									<textarea id="text" name="text" cols="45" rows="8" th:field="*{text}" th:errorclass="is-invalid" required="required"></textarea>
-									<div class="ui error message" th:if="${#fields.hasErrors('text')}" th:text="#{news.form.text.required}">Bitte geben Sie eine Nachricht an.</div>
+									<div class="ui error message" th:if="${#fields.hasErrors('text')}" th:text="#{news.entryForm.text.required}">Bitte geben Sie eine Nachricht an.</div>
 								</div>
-								<input type="submit" class="ui submit button" th:value="#{news.form.submit}" value="Abschicken" />
+								<input type="submit" class="ui submit button" th:value="#{news.entryForm.submit}" value="Abschicken" />
 							</form>
 						</div>
 					</td>
