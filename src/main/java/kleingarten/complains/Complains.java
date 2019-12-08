@@ -1,11 +1,14 @@
-/*package kleingarten.complains;
+package kleingarten.complains;
 
 
 // WIP we still have to do this, but if someone got time, they can start working on this
 
 import kleingarten.plot.Plot;
 import kleingarten.tenant.Tenant;
+import org.salespointframework.catalog.ProductIdentifier;
+import org.salespointframework.useraccount.UserAccount;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,63 +17,65 @@ import javax.persistence.Id;
  * Class to specify {@link Complains}
  */
 
-/*
 @Entity
 public class Complains {
 
+
 	private @Id @GeneratedValue long id;
-	//public Tenant author;
-	//public Tenant subject;
-	//public Plot authorPlot;
-	//public Plot subjectPlot;
+	public long authorId;
+	public long subjectId;
+	//public ProductIdentifier authorPlotId;
+	//public ProductIdentifier subjectPlotId;
 	public ComplainsState state;
+	public String description;
 
 	/**
 	 * Private constructor of class {@link Complains}, which is used by the Spring Framework
 	 */
-/*
-	private Complains(){}
+	private Complains(){
+		super();
+	}
 
 	/**
 	 *
 	 *
-	 * @param authorPlot
-	 * @param subjectPlot
+	 *
 	 * @param state
 	 */
-/*
-	public Complains(/*Tenant author, Tenant subject, Plot authorPlot, Plot subjectPlot, ComplainsState state){
-		//this.author = author;
-		//this.subject = subject;
-		//this.authorPlot = authorPlot;
-		//this.subjectPlot = subjectPlot;
+
+	public Complains(long authorId, long subjectId /*, ProductIdentifier authorPlotId, ProductIdentifier subjectPlotId, */,ComplainsState state, String description){
+		this.authorId = authorId;
+		this.subjectId = subjectId;
+		//this.authorPlotId = authorPlotId;
+		//this.subjectPlotId = subjectPlotId;
 		this.state = state;
+		this.description = description;
 	}
 
 
-	/*public Tenant getAuthor() {
-		return author;
+	public long getAuthor() {
+		return authorId;
 	}
-
+/*
 	public String getAuthorName(){
-		return author.getForename() + " " + author.getSurname();
-	}
+		return authorId.getForename() + " " + authorId.getSurname();
+	}*/
 
-	public Tenant getSubject() {
-		return subject;
+	public long getSubject() {
+		return subjectId;
 	}
-
+/*
 	public String getSubjectName(){
 		return subject.getForename() + " " + subject.getSurname();
-	} */
+	}*/
 
-	/*public Plot getAuthorPlot() {
-		return authorPlot;
+	/*public ProductIdentifier getAuthorPlot() {
+		return authorPlotId;
 	}
 
-	public Plot getSubjectPlot() {
-		return subjectPlot;
-	}
+	public ProductIdentifier getSubjectPlot() {
+		return subjectPlotId;
+	}*/
 
 	public ComplainsState getState() {
 		return state;
@@ -102,7 +107,7 @@ public class Complains {
 			throw new IllegalArgumentException("Plot must exist!");
 		} else
 			this.subjectPlot = subjectPlot;
-	}
+	}*/
 
 	public void setState(ComplainsState state) {
 		if(state == null){
@@ -110,4 +115,12 @@ public class Complains {
 		} else
 			this.state = state;
 	}
-}*/
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+}

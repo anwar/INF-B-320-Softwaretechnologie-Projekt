@@ -1,6 +1,7 @@
 package kleingarten.complains;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -8,10 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ComplainsController {
 
-	ComplainsController(){
+	private ComplainsManager complainsManager;
+
+	ComplainsController(ComplainsManager complainsManager){
+		this.complainsManager = complainsManager;
 	}
 	@GetMapping("/complains")
-	String complains() {
+	String complains(Model model) {
+		model.addAttribute("complains", complainsManager.getAll());
 		return "complains/complains";
 	}
 }

@@ -1,16 +1,19 @@
 package kleingarten.complains;
 
-/*import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.util.Streamable;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface ComplainsRepository extends CrudRepository {
+@Repository
+public interface ComplainsRepository extends CrudRepository<Complains, Long> {
 
-	List<Complains> findAll();
+	Streamable<Complains> findAll();
 
-	List<Complains> findByPlot();
+	//Streamable<Complains> findByPlot();
 
 
-} */
+}

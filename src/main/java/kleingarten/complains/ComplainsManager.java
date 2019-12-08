@@ -1,7 +1,8 @@
-/*package kleingarten.complains;
+package kleingarten.complains;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,19 @@ public class ComplainsManager {
 		this.complainsRepository = complainsRepository;
 	}
 
-	public List<Complains> getAll(){
+	public Streamable<Complains> getAll(){
 		 return complainsRepository.findAll();
 	}
-}*/
+
+	public Complains get(long id){
+		return complainsRepository.findById(id).get();
+	}
+
+	public Streamable<Complains> pendingComplains(){
+		return complainsRepository.findAll().filter(c -> c.getState().equals(ComplainsState.PENDING));
+	}
+
+	public Streamable<Complains> finishedComplains(){
+		return complainsRepository.findAll().filter(c -> c.getState().equals(ComplainsState.FINISHED));
+	}
+}
