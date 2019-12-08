@@ -46,14 +46,18 @@
 								</div>
 							</div>
 
-						<form class="ui form" role="form" id="form" th:action="@{/home}" th:object="${newsForm}" method="post">
-							<div class="field">
-								<textarea th:field="*{text}" th:errorclass="is-invalid" required="required"></textarea>
-								<div class="ui error message" th:if="${#fields.hasErrors('text')}" th:text="#{news.form.text.required}">Bitte geben Sie eine Nachricht an.</div>
-							</div>
-							<input type="submit" class="ui submit button" th:value="#{news.form.submit}" value="Abschicken" />
-						</form>
-					</div></td>
+							<br/>
+
+							<form method="post" class="ui form" role="form" id="form" th:action="@{/home}" th:object="${newsForm}">
+								<div class="field">
+									<label for="text" th:text="#{news.form.text}">Neuer Newseintrag</label><br/>
+									<textarea id="text" name="text" cols="45" rows="8" th:field="*{text}" th:errorclass="is-invalid" required="required"></textarea>
+									<div class="ui error message" th:if="${#fields.hasErrors('text')}" th:text="#{news.form.text.required}">Bitte geben Sie eine Nachricht an.</div>
+								</div>
+								<input type="submit" class="ui submit button" th:value="#{news.form.submit}" value="Abschicken" />
+							</form>
+						</div>
+					</td>
 				</tr>
 			</table>
 		</div>
