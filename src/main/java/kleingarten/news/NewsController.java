@@ -54,7 +54,7 @@ class NewsController {
 	}
 
 	/**
-	 * Handles requests to access the home. Obtains all currently available {@link NewsEntry}s and puts them
+	 * Handles requests to access the home page. Obtains all currently available {@link NewsEntry}s and puts them
 	 * into the {@link Model} that's used to render the view.
 	 *
 	 * @param model the model that's used to render the view
@@ -63,8 +63,8 @@ class NewsController {
 	 */
 	@GetMapping(path = "/home")
 	String home(Model model, @ModelAttribute(binding = false) NewsForm form) {
-		model.addAttribute("entries", news.findAll());
-		model.addAttribute("form", form);
+		model.addAttribute("newsEntries", news.findAll());
+		model.addAttribute("newsForm", form);
 
 		return "news/home";
 	}
