@@ -25,19 +25,12 @@
 <div><table>
     <thead>
     <tr>
-        <th>Title</th>
-        <th>Text</th>
-        <th>Count</th>
-        <th>Price</th>
+        <th>Rechnungen</th>
     </tr>
     </thead>
-    <tbody th:remove="all-but-first">
-    <tr th:each="bill : ${feeList}">
-        <td th:text="${fee.title}">Title</td>
-        <td th:text="${fee.text}">Text</td>
-        <td th:text="${fee.count}">Count</td>
-        <td th:text="${fee.defaultPrice}">Price</td>
-    </tr>
+    <td>
+        <a type="ui-button" th:href="@{/PDF}">Rechnung in PDF</a>
+    </td>
 </table>
 </div>
 </div>

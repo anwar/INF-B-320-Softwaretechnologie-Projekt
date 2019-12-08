@@ -82,4 +82,9 @@ public class FeeController {
 				.contentType(MediaType.APPLICATION_PDF)
 				.body(new InputStreamResource(bis));
 	}
+
+	@GetMapping("bill")
+	public String viewBill(){
+		return "finance/bill";
+	}
 }
