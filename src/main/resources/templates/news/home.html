@@ -55,7 +55,7 @@
 
 							<br/>
 
-							<form method="post" class="ui form" role="form" id="form" th:action="@{/home/news/addEntry}" th:object="${newsForm}">
+							<form sec:authorize="hasRole('Vorstandsvorsitzender')" method="post" class="ui form" role="form" id="form" th:action="@{/home/news/addEntry}" th:object="${newsForm}">
 								<div class="field">
 									<label for="text" th:text="#{news.form.text}">Neuer Newseintrag</label><br/>
 									<textarea id="text" name="text" cols="45" rows="8" th:field="*{text}" th:errorclass="is-invalid" required="required"></textarea>

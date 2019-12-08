@@ -73,12 +73,14 @@ class NewsController {
 	 * Handles requests to create a new {@link NewsEntry}. Spring MVC automatically validates and binds the
 	 * HTML form to the {@code form} parameter. Validation or binding errors, if any, are exposed via
 	 * the {@code errors} parameter.
+	 * This request can only be performed by authenticated users with "Vorstandsvorsitzender" role.
 	 *
 	 * @param model  the model that's used to render the view
 	 * @param errors an object that stores any form validation or data binding errors
 	 * @param form   the form submitted by the user
 	 * @return a redirect string
 	 */
+	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	@PostMapping(path = "/home/news/addEntry")
 	String addEntry(@Valid @ModelAttribute("newsForm") NewsForm form, Errors errors, Model model) {
 		if (errors.hasErrors()) {
