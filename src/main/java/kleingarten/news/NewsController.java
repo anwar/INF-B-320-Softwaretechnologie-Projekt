@@ -15,14 +15,14 @@
  */
 package kleingarten.news;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
@@ -71,16 +71,16 @@ class NewsController {
 
 	/**
 	 * Handles requests to create a new {@link NewsEntry}. Spring MVC automatically validates and binds the
-	 * HTML form to the {@code form} parameter. Validation or binding errors, if any, are exposed via the {@code
-	 * errors} parameter.
+	 * HTML form to the {@code form} parameter. Validation or binding errors, if any, are exposed via
+	 * the {@code errors} parameter.
 	 *
 	 * @param model  the model that's used to render the view
 	 * @param errors an object that stores any form validation or data binding errors
 	 * @param form   the form submitted by the user
 	 * @return a redirect string
 	 */
-	@PostMapping(path = "/home")
-	String addEntry(@Valid @ModelAttribute("form") NewsForm form, Errors errors, Model model) {
+	@PostMapping(path = "/home/news/addEntry")
+	String addEntry(@Valid @ModelAttribute("newsForm") NewsForm form, Errors errors, Model model) {
 		if (errors.hasErrors()) {
 			return home(model, form);
 		}
@@ -90,5 +90,22 @@ class NewsController {
 		return "redirect:/home";
 	}
 
-	// TODO (Talal): Add mappings for editing and removing existing news entries.
+	/**
+	 * Deletes a {@link NewsEntry}. This request can only be performed by authenticated users with
+	 * "Vorstandsvorsitzender" role.
+	 *
+	 * @param id of the {@link NewsEntry} to delete
+	 * @return a redirect string
+	 */
+	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PostMapping(path = "/home/news/deleteEntry/{id}")
+	String deleteEntry(@PathVariable("id") long id, Model model) {
+		NewsEntry entry = news.findById(id).
+				orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		news.delete(entry);
+
+		return "redirect:/home";
+	}
+
+	// TODO (Talal): Add mappings for editing.
 }

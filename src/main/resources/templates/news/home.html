@@ -36,6 +36,13 @@
 							<div id="entries" class="mx-auto">
 								<div th:each="entry, it : ${newsEntries}" th:with="index = ${it.count}">
 									<div class="card" th:fragment="entry" th:id="entry+${entry.id}">
+										<div class="card-header">
+											<form method="post" th:action="@{/home/news/deleteEntry/{id}(id=${entry.id})}">
+												<button sec:authorize="hasRole('Vorstandsvorsitzender')" th:title="#{news.form.delete}" class="btn btn-sm float-right">
+													<span class="fas fa-times"></span>
+												</button>
+											</form>
+										</div>
 										<div class="card-body">
 											<blockquote class="entrytext" th:text="${entry.text}"></blockquote>
 										</div>
@@ -48,7 +55,7 @@
 
 							<br/>
 
-							<form method="post" class="ui form" role="form" id="form" th:action="@{/home}" th:object="${newsForm}">
+							<form method="post" class="ui form" role="form" id="form" th:action="@{/home/news/addEntry}" th:object="${newsForm}">
 								<div class="field">
 									<label for="text" th:text="#{news.form.text}">Neuer Newseintrag</label><br/>
 									<textarea id="text" name="text" cols="45" rows="8" th:field="*{text}" th:errorclass="is-invalid" required="required"></textarea>
