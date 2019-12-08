@@ -205,8 +205,8 @@ class AppDataInitializer implements DataInitializer {
 		LOG.info("fast fertig");
 	}
 
-		Assert.notNull(feeManager, "Catalog must not be null!");
 	public void initializeFee(FeeRepository feeRepository, FeeManager feeManager) {
+		Assert.notNull(feeManager, "feeManager must not be null!");
 		LOG.info("Creating default fee lists");
 		if (feeManager.findAll().iterator().hasNext()) {
 			return;
