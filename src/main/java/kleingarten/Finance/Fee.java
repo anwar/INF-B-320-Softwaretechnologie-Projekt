@@ -16,13 +16,22 @@ public class Fee {
 	private double count;
 	private double basePrice;
 	private double price;
+	private double sum = 0;
 
+	/**
+	 * Constructor of fee
+	 * @param title
+	 * @param count
+	 * @param basePrice
+	 * @param price
+	 */
 	public Fee(String title, double count, double basePrice, double price){
 
 		this.title = title;
 		this.count = count;
 		this.basePrice = basePrice;
 		this.price = basePrice * count;
+		this.sum += price;
 		this.id = id;
 	}
 
@@ -77,4 +86,11 @@ public class Fee {
 		return builder.toString();
 	}
 
+	public double getSum() {
+		return sum += price;
+	}
+
+	public void setSum(double sum) {
+		this.sum = sum;
+	}
 }
