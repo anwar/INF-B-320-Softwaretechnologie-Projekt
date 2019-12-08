@@ -9,15 +9,17 @@ public class TenantService {
 
 	private final TenantManager tenantManager;
 	private final UserAccountManager userAccountManager;
+	private final TenantRepository tenants;
 
 	/**
 	 * Constructor of the class {@link TenantService}
 	 * @param tenantManager manager class of the class {@link Tenant} as {@link TenantManager}
 	 * @param userAccountManager repository of userAccounts as {@link UserAccountManager}
 	 */
-	TenantService(TenantManager tenantManager, UserAccountManager userAccountManager){
+	TenantService(TenantManager tenantManager, UserAccountManager userAccountManager, TenantRepository tenants){
 		this.tenantManager = tenantManager;
 		this.userAccountManager = userAccountManager;
+		this.tenants = tenants;
 	}
 
 	/** Method to change the password of a userAccount of a {@link Tenant}
@@ -37,6 +39,12 @@ public class TenantService {
 		userAccountManager.changePassword(tenantManager.get(id).getUserAccount(), Password.UnencryptedPassword.of(newPassword));
 	}
 
+	/**
+	 * @param id
+	 * @param oldEmail
+	 * @param newEmail
+	 * @param repeatedEmail
+	 */
 	void changeEmail(Long id, String oldEmail, String newEmail, String repeatedEmail){
 		if(!oldEmail.equals(tenantManager.get(id).getUserAccount().getEmail())){
 			throw new IllegalArgumentException("Old Email not identical");
@@ -45,5 +53,6 @@ public class TenantService {
 			throw new IllegalArgumentException("New email and repeated email are not identical");
 		}
 		tenantManager.get(id).getUserAccount().setEmail(newEmail);
+		tenants.save(tenantManager.get(id));
 	}
 }

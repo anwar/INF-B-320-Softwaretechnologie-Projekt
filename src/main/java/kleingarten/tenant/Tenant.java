@@ -194,15 +194,8 @@ public class Tenant {
 		this.userAccount.remove(role);
 	}
 
-	/**
-	 * Setter for the userAccount of class {@link Tenant}
-	 * @param userAccount as class {@link UserAccount}
-	 */
-	public void setUserAccount(UserAccount userAccount){
-		if (userAccount == null){
-			throw new IllegalArgumentException("UserAccount must not be null!");
-		}
-		this.userAccount = userAccount;
+	public void setId(Long id){
+		this.id = id;
 	}
 
 

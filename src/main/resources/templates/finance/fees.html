@@ -56,6 +56,10 @@
         </table>
     </div>
     <p>
+        <tr>
+            <td colspan="4" />
+            <td>Summe: <b th:text="${#aggregates.sum(feeList.![price])}" /></td>
+        </tr>
     <div class="button-section">
         <button class="button" onclick="location.href='fees/add'">neue Gebühr erstellen</button></div>
 
