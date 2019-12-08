@@ -51,25 +51,39 @@ class AppDataInitializer implements DataInitializer {
 	private final TenantRepository tenantRepository;
 	private final UserAccountManager userAccountManager;
 	private final PlotService plotService;
-	private final PlotCatalog catalog;
+	private final PlotCatalog plotCatalog;
 	private final FeeRepository feeRepository;
 	private final FeeManager feeManager;
 	private final ProcedureManager procedureManager;
 
 	AppDataInitializer(NewsRepository news,
 					   WorkAssignmentRepository workAssignmentRepo, WorkAssignmentManager workAssignmentManager,
-					   TenantRepository tenantRepository, UserAccountManager userAccountManager, FeeRepository feeRepository, FeeManager feeManager,
-					   PlotService plotService, PlotCatalog catalog,
-					   ProcedureManager procedureManager) {
+					   TenantRepository tenantRepository, UserAccountManager userAccountManager,
+					   PlotService plotService, PlotCatalog plotCatalog,
+					   FeeRepository feeRepository, FeeManager feeManager, ProcedureManager procedureManager) {
+		Assert.notNull(news, "news must not be null!");
 		this.news = news;
+
+		Assert.notNull(workAssignmentRepo, "workAssignmentRepo must not be null!");
 		this.workAssignmentRepo = workAssignmentRepo;
+		Assert.notNull(workAssignmentManager, "workAssignmentManager must not be null!");
 		this.workAssignmentManager = workAssignmentManager;
+
+		Assert.notNull(tenantRepository, "tenantRepository must not be null!");
 		this.tenantRepository = tenantRepository;
-		this.userAccountManager  = userAccountManager;
+		Assert.notNull(userAccountManager, "userAccountManager must not be null!");
+		this.userAccountManager = userAccountManager;
+
+		Assert.notNull(plotService, "plotService must not be null!");
 		this.plotService = plotService;
-		this.catalog = catalog;
+		Assert.notNull(plotCatalog, "plotCatalog must not be null!");
+		this.plotCatalog = plotCatalog;
+
+		Assert.notNull(feeRepository, "feeRepository must not be null!");
 		this.feeRepository = feeRepository;
+		Assert.notNull(feeManager, "feeManager must not be null!");
 		this.feeManager = feeManager;
+		Assert.notNull(procedureManager, "procedureManager must not be null!");
 		this.procedureManager = procedureManager;
 	}
 
@@ -78,7 +92,7 @@ class AppDataInitializer implements DataInitializer {
 		initializeNewsEntries(this.news);
 		initializeWorkAssigment(this.workAssignmentRepo);
 		initializeTenants(this.tenantRepository, this.userAccountManager);
-		initializePlots(this.catalog, this.plotService);
+		initializePlots(this.plotCatalog, this.plotService);
 		initializeFee(this.feeRepository, this.feeManager);
 		initializeProcedures(this.procedureManager);
 		LOG.info("fertig");
@@ -102,23 +116,23 @@ class AppDataInitializer implements DataInitializer {
 	}
 
 
-	void initializeWorkAssigment(WorkAssignmentRepository workAssignmentRepo){
+	void initializeWorkAssigment(WorkAssignmentRepository workAssignmentRepo) {
 		Assert.notNull(workAssignmentRepo, "WorkAssignment must not be null");
 
 		if (!this.workAssignmentManager.getAll().isEmpty()) {
 			return;
 		}
 		LOG.info("create default Assignments");
-		var Appointment = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020,1,22,15,20,10), "Garten putzen", "Garten sauber machen Yalah");
+		var Appointment = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 1, 22, 15, 20, 10), "Garten putzen", "Garten sauber machen Yalah");
 		this.workAssignmentRepo.saveAll(List.of(Appointment));
 
 	}
 
-	void initializeTenants(TenantRepository tenantRepository, UserAccountManager userAccountManager){
+	void initializeTenants(TenantRepository tenantRepository, UserAccountManager userAccountManager) {
 		Assert.notNull(userAccountManager, "UserAccountManager must not be null!");
 		Assert.notNull(tenantRepository, "TenantRepository must not be null");
 
-		if(userAccountManager.findByUsername("peter.klaus").isPresent()){
+		if (userAccountManager.findByUsername("peter.klaus").isPresent()) {
 			return;
 		}
 
@@ -137,26 +151,26 @@ class AppDataInitializer implements DataInitializer {
 		var waterRole = Role.of("Wassermann");
 
 		Tenant boss = new Tenant("Peter", "Klaus", "Am Berg 5, 12423 Irgendwo im Nirgendwo",
-			"01242354356", "13.04.1999",
-			userAccountManager.create("peter.klaus", password,"peter.klaus@email.com", maintenantRole));
+				"01242354356", "13.04.1999",
+				userAccountManager.create("peter.klaus", password, "peter.klaus@email.com", maintenantRole));
 
 
 		Tenant obmann = new Tenant("Hubert", "Grumpel", "Hinter den 7 Bergen, 98766 Zwergenhausen",
-			"012345678", "04.09.1978",
-			userAccountManager.create("hubertgrumpel", password,"hubert.grumpel2@cloud.com", maintenantRole));
+				"012345678", "04.09.1978",
+				userAccountManager.create("hubertgrumpel", password, "hubert.grumpel2@cloud.com", maintenantRole));
 
 		Tenant cashier = new Tenant("Bill", "Richart", "Am Bahnhof 25, 07875 Dorfdorf",
-			"0123098874326", "13.05.1968", userAccountManager.create("bill", password,"billy,billbill@geld.com", subtenantRole));
+				"0123098874326", "13.05.1968", userAccountManager.create("bill", password, "billy,billbill@geld.com", subtenantRole));
 
 		Tenant replacement = new Tenant("Sophie", "Kirmse", "Am Teichplatz 5, 67807 Meldetsichnie",
-			"034567892132", "08.12.1988",
-			userAccountManager.create("sophie", password, "s.krimse@gemaile.com",subtenantRole));
+				"034567892132", "08.12.1988",
+				userAccountManager.create("sophie", password, "s.krimse@gemaile.com", subtenantRole));
 
 		Tenant protocol = new Tenant("Franziska", "Kiel", "Bei Isa",
-			"0896548786890", "19.08.1998", userAccountManager.create("franziska", password, "francys@email.com",maintenantRole));
+				"0896548786890", "19.08.1998", userAccountManager.create("franziska", password, "francys@email.com", maintenantRole));
 
 		Tenant waterman = new Tenant("Atlas", "Neptunius", "An der Promenade 34, 01298 Atlantis",
-			"0980790789","08.09.1567", userAccountManager.create("neptun", password,"neptuns.bart@fishmail.com", maintenantRole));
+				"0980790789", "08.09.1567", userAccountManager.create("neptun", password, "neptuns.bart@fishmail.com", maintenantRole));
 
 		obmann.addRole(obmannRole);
 		boss.addRole(vorstandRole);
@@ -168,7 +182,7 @@ class AppDataInitializer implements DataInitializer {
 		tenantRepository.saveAll(List.of(boss, obmann, cashier, replacement, protocol, waterman));
 	}
 
-	public void initializePlots(PlotCatalog catalog, PlotService plotService){
+	public void initializePlots(PlotCatalog plotCatalog, PlotService plotService) {
 		if (this.plotService.existsByName("1")) {
 			return;
 		}
@@ -186,13 +200,13 @@ class AppDataInitializer implements DataInitializer {
 		LOG.info(Plot_5.getId().toString());
 		Plot Plot_6 = plotService.addNewPlot("6", 200, "Große Parzelle.");
 		LOG.info(Plot_6.getId().toString());
-		catalog.saveAll(List.of(Plot, Plot_2, Plot_3, Plot_4, Plot_5, Plot_6));
+		plotCatalog.saveAll(List.of(Plot, Plot_2, Plot_3, Plot_4, Plot_5, Plot_6));
 
 		LOG.info("fast fertig");
 	}
 
-	public void initializeFee(FeeRepository feeRepository, FeeManager feeManager){
 		Assert.notNull(feeManager, "Catalog must not be null!");
+	public void initializeFee(FeeRepository feeRepository, FeeManager feeManager) {
 		LOG.info("Creating default fee lists");
 		if (feeManager.findAll().iterator().hasNext()) {
 			return;
@@ -201,7 +215,7 @@ class AppDataInitializer implements DataInitializer {
 		feeManager.save(new Fee("Stromkosten", 1, 0.2, 0));
 		feeManager.save(new Fee("Miete", 1, 0.18, 0));
 		feeManager.save(new Fee("Strafgeld", 1, 8, 0));
-		feeManager.save(new Fee("Mitgliedsbeitrag", 1,17.25, 0));
+		feeManager.save(new Fee("Mitgliedsbeitrag", 1, 17.25, 0));
 		feeManager.save(new Fee("Haftpflichtbeitrag", 1, 0.35, 0));
 		feeManager.save(new Fee("Winterdienst", 1, 3, 0));
 		feeManager.save(new Fee("Sozialbeitrag", 1, 0.5, 0));
@@ -219,7 +233,7 @@ class AppDataInitializer implements DataInitializer {
 			return;
 		}
 
-		List<Plot> plots = catalog.findAll().toList();
+		List<Plot> plots = plotCatalog.findAll().toList();
 		List<Tenant> tenants = this.tenantRepository.findAll().toList();
 		if (!plots.isEmpty() && !tenants.isEmpty()) {
 			LOG.info("Creating default procedures");
@@ -228,7 +242,7 @@ class AppDataInitializer implements DataInitializer {
 			Tenant obman = null;
 			Tenant protocol = null;
 			Tenant waterman = null;
-			for (Tenant tenant:
+			for (Tenant tenant :
 					tenants) {
 				if (tenant.getEmail().equals("peter.klaus@email.com")) {
 					boss = tenant;
