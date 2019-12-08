@@ -28,7 +28,7 @@ public class TenantService {
 	 */
 	void changePassword(Long id, String oldPassword, String newPassword, String repeatedPassword){
 
-		if(!oldPassword.equals(tenantManager.get(id).getUserAccount().getPassword())){
+		if(!oldPassword.equals(tenantManager.get(id).getUserAccount().getPassword().toString())){
 			throw new IllegalArgumentException("Old Password is not identical");
 		}
 		if (!newPassword.equals(repeatedPassword)){

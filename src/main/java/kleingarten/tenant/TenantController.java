@@ -3,7 +3,9 @@ package kleingarten.tenant;
 
 import com.mysema.commons.lang.Assert;
 import org.salespointframework.useraccount.Password;
+import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -107,9 +109,9 @@ class TenantController {
 	}
 
 	@PostMapping("/changedPassword")
-	String changedPassword(@RequestParam("id") long id, @RequestParam("old") String oldPassword, @RequestParam("new") String newPassword,
+	String changedPassword(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldPassword, @RequestParam("new") String newPassword,
 						   @RequestParam("repeat") String repeatedPassword){
-		tenantService.changePassword(id, oldPassword, newPassword, repeatedPassword);
+		tenantService.changePassword(tenantManager.getTenantByUserAccount(userAccount).getId(), oldPassword, newPassword, repeatedPassword);
 		return "redirect:/home";
 	}
 
@@ -119,9 +121,9 @@ class TenantController {
 	}
 
 	@PostMapping("/changedEmail")
-	String changedEmail(@RequestParam("id") long id, @RequestParam("old") String oldEmail, @RequestParam("new") String newEmai,
+	String changedEmail(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldEmail, @RequestParam("new") String newEmai,
 						@RequestParam("repeat") String repeatedEmail){
-		tenantService.changeEmail(id, oldEmail, newEmai, repeatedEmail);
+		tenantService.changeEmail(tenantManager.getTenantByUserAccount(userAccount).getId(), oldEmail, newEmai, repeatedEmail);
 		return "redirect:/home";
 	}
 }
