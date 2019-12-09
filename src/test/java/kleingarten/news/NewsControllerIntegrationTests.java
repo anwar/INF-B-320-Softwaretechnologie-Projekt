@@ -46,4 +46,17 @@ public class NewsControllerIntegrationTests {
 				.andExpect(status().is3xxRedirection()) //
 				.andExpect(view().name("redirect:/home"));
 	}
+
+	@Test
+	@WithMockUser(roles = "Vorstandsvorsitzender")
+	void deleteEntryAndRedirectToHome() throws Exception {
+		long noOfEntries = news.count();
+		NewsEntry entry = news.findAll().iterator().next();
+
+		mvc.perform(post("/home/news/deleteEntry/{id}", entry.getId())) //
+				.andExpect(status().is3xxRedirection()) //
+				.andExpect(view().name("redirect:/home"));
+
+		assertThat(news.count()).isEqualTo(noOfEntries - 1);
+	}
 }
