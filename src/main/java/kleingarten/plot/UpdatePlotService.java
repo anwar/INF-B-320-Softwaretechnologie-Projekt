@@ -6,15 +6,33 @@ import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
 
 import javax.money.MonetaryAmount;
+import java.time.LocalDateTime;
 
 @Component
 public class UpdatePlotService {
 	private final PlotCatalog plotCatalog;
-	private final ProcedureManager procedureManager;
+	private final DataService dataService;
 
-	UpdatePlotService(PlotCatalog plotCatalog, ProcedureManager procedureManager){
+	UpdatePlotService(PlotCatalog plotCatalog, DataService dataService){
 		this.plotCatalog = plotCatalog;
-		this.procedureManager = procedureManager;
+		this.dataService = dataService;
+	}
+
+	/**
+	 * Updates the information about a {@link Plot}
+	 * @param associatedPlot {@link Plot} that should to be changed
+	 * @param size new size of {@link Plot} as String
+	 */
+	public void updatePlotSize(Plot associatedPlot, int size) {
+		if (!this.plotCatalog.existsById(associatedPlot.getId())) {
+			throw new IllegalArgumentException("Plot must exist!");
+		}
+		associatedPlot.setSize(size);
+		plotCatalog.save(associatedPlot);
+		if (dataService.procedureExists(LocalDateTime.now().getYear(), associatedPlot)) {
+			dataService.getProcedure(LocalDateTime.now().getYear(), associatedPlot)
+					.setSize(size);
+		}
 	}
 
 	/**
@@ -27,6 +45,7 @@ public class UpdatePlotService {
 			throw new IllegalArgumentException("Plot must exist!");
 		}
 		associatedPlot.setDescription(description);
+		plotCatalog.save(associatedPlot);
 	}
 
 	/**
@@ -39,6 +58,7 @@ public class UpdatePlotService {
 			throw new IllegalArgumentException("Plot must exist!");
 		}
 		associatedPlot.setEstimator(estimator);
+		plotCatalog.save(associatedPlot);
 	}
 
 	/**
