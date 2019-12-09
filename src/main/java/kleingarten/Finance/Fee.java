@@ -31,7 +31,6 @@ public class Fee {
 		this.count = count;
 		this.basePrice = basePrice;
 		this.price = basePrice * count;
-		this.sum += price;
 		this.id = id;
 	}
 

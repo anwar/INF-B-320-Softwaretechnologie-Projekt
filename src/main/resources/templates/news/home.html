@@ -46,7 +46,7 @@
                             <div th:each="entry, it : ${newsEntries}" th:with="index = ${it.count}">
                                 <div class="card" th:fragment="entry" th:id="'entry-'+${entry.id}">
                                     <div class="card-header">
-                                        <form sec:authorize="hasRole('Vorstandsvorsitzender')" method="post"
+                                            <form style="display: inline-block" sec:authorize="hasRole('Vorstandsvorsitzender')" method="post"
                                               th:action="@{/home/news/deleteEntry/{id}(id=${entry.id})}">
                                             <button class="btn btn-sm float-right"
                                                     style="font-size: 18px; background: white; border: none;"
@@ -56,7 +56,7 @@
 
                                         <button sec:authorize="hasRole('Vorstandsvorsitzender')"
                                                 class="btn btn-sm float-right"
-                                                style="font-size: 20px; background: white; border: none;"
+                                                style=" display: inline-block;font-size: 20px; background: white; border: none;"
                                                 th:onclick="'showNewsEditForm(\'' + ${entry.id} + '\');'">&#9998;
                                         </button>
                                     </div>

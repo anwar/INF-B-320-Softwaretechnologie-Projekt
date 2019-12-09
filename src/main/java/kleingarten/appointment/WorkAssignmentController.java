@@ -1,5 +1,6 @@
 package kleingarten.appointment;
 
+import kleingarten.plot.Plot;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.core.SalespointIdentifier;
 import org.springframework.stereotype.Controller;
@@ -56,9 +57,9 @@ public class WorkAssignmentController {
 	}
 
 
-	@PostMapping("/addWorkAssignment/{plotID}/{workAssigmentID}")
-	public String addAppointment(Model model, @PathVariable ProductIdentifier plotID, @PathVariable long workAssigmentID) {
-		workAssignmentManager.addWorkAssignment(plotID, workAssigmentID);
+	@PostMapping("/addWorkAssignment/{plot}/{workAssigmentID}")
+	public String addAppointment(Model model, @PathVariable Plot plot, @PathVariable long workAssigmentID) {
+		workAssignmentManager.addPlotToWorkAssignment(plot, workAssigmentID);
 		return "redirect:/myPlot";
 	}
 }
