@@ -36,7 +36,7 @@
             <td><input class="text_bgImage" id="strom" name="id" th:value="${procedure.getPowercount()}" type="number" required="required"/></td>
         </tr>
         <tr th:each="procedure : ${procedure}">
-            <td> <label for="water">Stromzählerstand</label> </td>
+            <td> <label for="water">Wasserzählerstand</label> </td>
             <td><input class="text_bgImage" id="water" name="id" th:value="${procedure.getWatercount()}" type="number" required="required"/></td>
         </tr>
         </tbody>

@@ -11,6 +11,10 @@
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
     <link th:href="@{../resources/css/style.css}" rel="stylesheet"
           href="../resources/css/style.css" type="text/css"/>
+    <link th:href="@{../resources/css/dropdown.css}" rel="stylesheet"
+          href="../resources/css/dropdown.css" type="text/css">
+    <script th:src="@{../resources/css/js/dropdown.js}"
+            src="../resources/css/js/dropdown.js"> </script>
 
     <title>Übersicht</title>
 </head>
@@ -20,7 +24,14 @@
     <div class="header-title">
         <h1>Übersicht</h1>
     </div>
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Ansicht...</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a>Allgemein </a>
+            <a>nach Obmann</a>
 
+        </div>
+    </div>
 
     <div class="plotOverview">
         <div class="plotList" th:each="plot : ${plotList}">
