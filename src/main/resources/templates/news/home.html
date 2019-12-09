@@ -16,11 +16,13 @@
         function hideNewsEditForm(id) {
             document.getElementById("edit-form-entry-" + id).style.display = "none";
             document.getElementById("entry-" + id).style.display = "inline";
+            document.getElementById("news-entry-form").style.display = "inline";
         }
 
         function showNewsEditForm(id) {
             document.getElementById("edit-form-entry-" + id).style.display = "inline";
             document.getElementById("entry-" + id).style.display = "none";
+            document.getElementById("news-entry-form").style.display = "none";
         }
     </script>
 
@@ -46,7 +48,8 @@
                             <div th:each="entry, it : ${newsEntries}" th:with="index = ${it.count}">
                                 <div class="card" th:fragment="entry" th:id="'entry-'+${entry.id}">
                                     <div class="card-header">
-                                            <form style="display: inline-block" sec:authorize="hasRole('Vorstandsvorsitzender')" method="post"
+                                        <form style="display: inline-block"
+                                              sec:authorize="hasRole('Vorstandsvorsitzender')" method="post"
                                               th:action="@{/home/news/deleteEntry/{id}(id=${entry.id})}">
                                             <button class="btn btn-sm float-right"
                                                     style="font-size: 18px; background: white; border: none;"
@@ -63,10 +66,10 @@
                                     <div class="card-body">
                                         <blockquote class="entrytext" th:text="${entry.text}"></blockquote>
                                     </div>
-                                <div class="card-footer">
-                                      <!--    <div class="date"
+                                    <div class="card-footer">
+                                        <div class="date"
                                              th:text="${#temporals.format(entry.date, 'dd. MMMM yyyy - HH:mm')}">Datum
-                                    </div>-->
+                                        </div>
                                     </div>
                                 </div>
 
@@ -96,7 +99,7 @@
                         <br/>
 
                         <form sec:authorize="hasRole('Vorstandsvorsitzender')" method="post" class="ui form" role="form"
-                              id="form" th:action="@{/home/news/addEntry}" th:object="${newsForm}">
+                              id="news-entry-form" th:action="@{/home/news/addEntry}" th:object="${newsForm}">
                             <div class="field">
                                 <label for="text" th:text="#{news.entryForm.text}">Neuer Newseintrag</label><br/>
                                 <textarea id="text" name="text" cols="45" rows="8" th:field="*{text}"
