@@ -17,10 +17,12 @@ import java.util.*;
 public class PlotControllerService {
 	private final DataService dataService;
 	private final TenantManager tenantManager;
+	private final PlotCatalog plotCatalog;
 
-	PlotControllerService(DataService dataService, TenantManager tenantManager) {
+	PlotControllerService(DataService dataService, TenantManager tenantManager, PlotCatalog plotCatalog) {
 		this.dataService = dataService;
 		this.tenantManager = tenantManager;
+		this.plotCatalog = plotCatalog;
 	}
 
 	/**
@@ -58,7 +60,7 @@ public class PlotControllerService {
 				|| rolesOfSubTenants.stream().anyMatch(administration::contains)) {
 				if (rolesOfMainTenant.stream().anyMatch(chairman::contains)
 					|| rolesOfSubTenants.stream().anyMatch(chairman::contains)) {
-					colors.put(plot, "orange");
+					colors.put(plot, "#E69138");
 					return;
 				}
 				colors.put(plot, "#FDD835");
@@ -255,5 +257,37 @@ public class PlotControllerService {
 		for (Plot parcel : plots) {
 			rentedPlots.put(parcel, parcel.getName());
 		}
+	}
+
+	/**
+	 * Set the color of a {@link Plot} depending on who is its chairman
+	 * @return {@link Map} of {@link Plot}s and associated colors as {@link String}
+	 */
+	Map<Plot, String> secureSetColorOfChairmenForPlots() {
+		List<String> colors = Arrays.asList("#7CB342", "#546E7A","039BE5", "#E06666", "E69138", "FDD835",
+														"#6FA8DC", "#38761D", "#8E7CC3");
+		Map<Tenant, String> colorsForChairman = new HashMap<>();
+		int index = 1;
+		for (Tenant chairman:
+			 tenantManager.getAll()) {
+			if (tenantManager.tenantHasRole(chairman, Role.of("Obmann"))) {
+				colorsForChairman.put(chairman, colors.get(index));
+				index += 1;
+			}
+		}
+
+		Map<Plot, String> colorsForPlotAdministratedByChairman = new HashMap<>();
+		for (Plot administratedPlot:
+			 plotCatalog.findAll()) {
+			for (Tenant chairman:
+				 colorsForChairman.keySet()) {
+				if (administratedPlot.getChairman() == chairman) {
+					colorsForPlotAdministratedByChairman.put(administratedPlot, colorsForChairman.get(chairman));
+				}
+			}
+			colorsForPlotAdministratedByChairman.put(administratedPlot, colors.get(0));
+		}
+
+		return colorsForPlotAdministratedByChairman;
 	}
 }

@@ -159,6 +159,26 @@ public class SecurePlotController {
 
 	}
 
+	@GetMapping("/chairmenOverview")
+	public ModelAndView chairmenOverview(@LoggedIn UserAccount user) {
+		ModelAndView mav = new ModelAndView();
+		Set<Plot> plots = plotCatalog.findAll().toSet();
+		Map<Plot, Boolean> rights = new HashMap<>();
+
+		Map<Plot, String> administratedPlots = plotControllerService.secureSetColorOfChairmenForPlots();
+		for (Plot plot:
+			 administratedPlots.keySet()) {
+			plotControllerService.secureSetAccessRightForPlot(plot, user, rights);
+		}
+
+		mav.addObject("plotList", plots);
+		mav.addObject("plotColors", administratedPlots);
+		mav.addObject("userRights", rights);
+		mav.setViewName("plot/plotOverview");
+
+		return mav;
+	}
+
 	@GetMapping("/editPlot/{plot}")
 	String editPlot(@PathVariable Plot plot, Model model){
 		model.addAttribute("plot", plotService.findById(plot.getId()));
