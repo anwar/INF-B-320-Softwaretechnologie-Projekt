@@ -300,3 +300,10 @@ input.text_bgImage {
 	font-size: 1.5em;
 	width: 50%;
 }
+
+#deleteTH{
+	text-align: center;
+}
+#styleTheDeleteButton{
+	color: red;
+}

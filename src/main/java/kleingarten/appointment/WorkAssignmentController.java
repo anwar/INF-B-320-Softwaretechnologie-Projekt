@@ -1,8 +1,10 @@
 package kleingarten.appointment;
 
+import org.salespointframework.core.SalespointIdentifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -28,14 +30,13 @@ public class WorkAssignmentController {
 	}
 
 	@PostMapping("/createAssignment")
-	public String addAppointment(@Valid CreateWorkAssignmentForm form, Error error) {
-		String date = form.getDate() + " " + form.getTime();
-		LocalDateTime localDateTime = LocalDateTime.parse(date);
-		if (workAssignmentManager.getAll().contains(localDateTime)){
-			error.getMessage();
-		}else{
+	public String addAppointment(@Valid CreateWorkAssignmentForm form) {
+		if(!workAssignmentManager.containsListTheDate(form.getDateTime())){
 			workAssignmentManager.createAssignment(form);
+			System.out.println("true");
+			return "redirect:/createAssignment";
 		}
+		System.out.println("false");
 		return "redirect:/createAssignment";
 	}
 

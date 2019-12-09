@@ -11,6 +11,10 @@
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
     <link th:href="@{../resources/css/style.css}" rel="stylesheet"
           href="../resources/css/style.css" type="text/css"/>
+    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
+          href="../resources/css/tenantTable.css" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
     <title>Liste der Termine</title>
 </head>
 <body>
@@ -22,16 +26,18 @@
         </div>
     </div>
     <center>
-    <table>
+    <table id="myTable">
         <tr>
             <th>Datum</th>
             <th>Titel</th>
             <th>Beschreibung</th>
+            <th>Parzellen</th>
         </tr>
         <tr th:each="assignment : ${ListOfAssignments}">
             <td th:text="${assignment.date}">Datum</td>
             <td th:text="${assignment.title}">Titel</td>
             <td th:text="${assignment.description}">Beschreibung</td>
+            <td th:text="${assignment.plots.size()}">Parzellen</td>
         </tr>
     </table>
     </center>
