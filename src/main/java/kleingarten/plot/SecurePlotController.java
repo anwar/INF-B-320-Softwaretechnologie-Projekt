@@ -5,6 +5,7 @@ import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.ProductIdentifier;
+import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
@@ -144,14 +145,26 @@ public class SecurePlotController {
 		Set<Plot> plots = plotCatalog.findAll().toSet();
 		Map<Plot, String> colors = new HashMap<>();
 		Map<Plot, Boolean> rights = new HashMap<>();
+		Map<String, String> usedColors = new HashMap<>();
 
+		//Set colors of plots and access depending on the user's role to the details of the plots
 		for (Plot plot : plots) {
-			plotControllerService.secureSetPlotColor(plot, colors);
-			plotControllerService.secureSetAccessRightForPlot(plot, user, rights);
+			Map<Plot, String> colorOfPlot = plotControllerService.setPlotColor(plot, Optional.of(user));
+			Map<Plot, Boolean> accessForPlot = plotControllerService.setAccessRightForPlot(plot, Optional.of(user));
+			colors.put(plot, colorOfPlot.get(plot));
+			rights.put(plot, accessForPlot.get(plot));
 		}
+
+		//Add used colors and description to a map
+		usedColors.put("#7CB342", "frei");
+		usedColors.put("#546E7A", "besetzt");
+		usedColors.put("#FDD835", "Vorstand");
+		usedColors.put("#039BE5", "Obmann");
+		usedColors.put("#E69138", "Vorstand/Obmann");
 
 		mav.addObject("plotList", plots);
 		mav.addObject("plotColors", colors);
+		mav.addObject("colors", usedColors);
 		mav.addObject("userRights", rights);
 		mav.setViewName("plot/plotOverview");
 
@@ -159,20 +172,41 @@ public class SecurePlotController {
 
 	}
 
+	/**
+	 * Create model with needed information to show the overview of all {@link Plot}s and their associated chairmen
+	 * when user is logged in
+	 * @param user {@link UserAccount} of the logged in user
+	 * @return response as {@link ModelAndView}
+	 */
 	@GetMapping("/chairmenOverview")
 	public ModelAndView chairmenOverview(@LoggedIn UserAccount user) {
 		ModelAndView mav = new ModelAndView();
+
 		Set<Plot> plots = plotCatalog.findAll().toSet();
 		Map<Plot, Boolean> rights = new HashMap<>();
+		Map<String, String> colors = new HashMap<>();
 
+		//Set colors for plots and chairmen
 		Map<Plot, String> administratedPlots = plotControllerService.secureSetColorOfChairmenForPlots();
+		Map<Tenant, String> colorsForChairmen = plotControllerService.secureSetColorForChairman();
+
+		//Set same access rights to the details of the plots for user as in plot overview
 		for (Plot plot:
 			 administratedPlots.keySet()) {
-			plotControllerService.secureSetAccessRightForPlot(plot, user, rights);
+			Map<Plot, Boolean> accessForPlot = plotControllerService.setAccessRightForPlot(plot, Optional.of(user));
+			rights.put(plot, accessForPlot.get(plot));
 		}
+		//Add description of colors and associated chairmen to a map
+		for (Tenant chairman:
+				colorsForChairmen.keySet()) {
+			colors.put(colorsForChairmen.get(chairman), chairman.getForename() + " " + chairman.getSurname());
+		}
+		//Add description for free plots
+		colors.put("#7CB342", "frei");
 
 		mav.addObject("plotList", plots);
 		mav.addObject("plotColors", administratedPlots);
+		mav.addObject("colors", colors);
 		mav.addObject("userRights", rights);
 		mav.setViewName("plot/plotOverview");
 
