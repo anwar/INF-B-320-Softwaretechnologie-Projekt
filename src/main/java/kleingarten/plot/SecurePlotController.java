@@ -164,6 +164,9 @@ public class SecurePlotController {
 				colors.put(plot, colorOfPlot.get(plot));
 				rights.put(plot, accessForPlot.get(plot));
 			}
+			if (user.hasRole(Role.of("Vorstandsvorsitzender")) || user.hasRole(Role.of("Stellvertreter"))) {
+				mav.addObject("canAdd", true);
+			}
 		} catch (Exception e) {
 			mav.addObject("error", e);
 			mav.setViewName("error");
@@ -256,6 +259,7 @@ public class SecurePlotController {
 
 	/**
 	 * Get information from the form which is used to edit the details of a {@link Plot} and save them
+	 *
 	 * @param plotId {@link ProductIdentifier} of the {@link Plot} which details should be changed
 	 * @param size size of the {@link Plot} as int
 	 * @param description description of the {@link Plot} as {@link String}
