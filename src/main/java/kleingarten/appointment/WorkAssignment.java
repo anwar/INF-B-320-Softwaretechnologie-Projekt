@@ -14,6 +14,7 @@ import java.util.List;
 
 @Entity
 public class WorkAssignment {
+
 	private @Id @GeneratedValue long id;
 
 	private int workHours;
@@ -28,12 +29,13 @@ public class WorkAssignment {
 
 	private WorkAssignment(){}
 
-	public WorkAssignment(LocalDateTime date, int workHours, String title, String description){
+	public WorkAssignment(LocalDateTime date, int workHours, String title, String description, List<Plot> plots){
+		this.plots = plots;
 		this.date = date;
 		this.description = description;
 		this.title = title;
 		this.workHours = workHours;
-		plots = new ArrayList<>();
+		this.plots = new ArrayList<>();
 	}
 
 
@@ -70,6 +72,14 @@ public class WorkAssignment {
 	}
 
 	public void removePlot(Plot plot){
+		for (Plot parzelle : plots) {
+			if(plot == parzelle){
+				plots.remove(parzelle);
+			}
+		}
+	}
 
+	public long getId() {
+		return id;
 	}
 }
