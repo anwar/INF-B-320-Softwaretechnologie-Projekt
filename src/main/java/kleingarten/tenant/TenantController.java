@@ -111,7 +111,8 @@ class TenantController {
 	@PostMapping("/changedPassword")
 	String changedPassword(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldPassword, @RequestParam("new") String newPassword,
 						   @RequestParam("repeat") String repeatedPassword){
-		tenantService.changePassword(tenantManager.getTenantByUserAccount(userAccount).getId(), oldPassword, newPassword, repeatedPassword);
+		tenantService.changePassword(userAccount, Password.UnencryptedPassword.of(oldPassword),
+			Password.UnencryptedPassword.of(newPassword), Password.UnencryptedPassword.of(repeatedPassword));
 		return "redirect:/home";
 	}
 

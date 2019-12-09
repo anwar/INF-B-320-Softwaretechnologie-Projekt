@@ -1,6 +1,7 @@
 package kleingarten.tenant;
 
 import org.salespointframework.useraccount.Password;
+import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.stereotype.Component;
 
@@ -28,15 +29,15 @@ public class TenantService {
 	 * @param newPassword new password the {@link Tenant} has entered
 	 * @param repeatedPassword repeated password to check for spelling mistakes the {@link Tenant} could have made
 	 */
-	void changePassword(Long id, String oldPassword, String newPassword, String repeatedPassword){
+	void changePassword(UserAccount userAccount, Password oldPassword, Password newPassword, Password repeatedPassword){
 
-		if(!oldPassword.equals(tenantManager.get(id).getUserAccount().getPassword().toString())){
+		if(!Password.UnencryptedPassword.of(oldPassword.toString()).equals(Password.UnencryptedPassword.of(userAccount.getPassword().toString()))){
 			throw new IllegalArgumentException("Old Password is not identical");
 		}
 		if (!newPassword.equals(repeatedPassword)){
 			throw new IllegalArgumentException("New Password and repeated Password are not identical");
 		}
-		userAccountManager.changePassword(tenantManager.get(id).getUserAccount(), Password.UnencryptedPassword.of(newPassword));
+		userAccountManager.changePassword(tenantManager.getTenantByUserAccount(userAccount).getUserAccount(), Password.UnencryptedPassword.of(newPassword.toString()));
 	}
 
 	/**
