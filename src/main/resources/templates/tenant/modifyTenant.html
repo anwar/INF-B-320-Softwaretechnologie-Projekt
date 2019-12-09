@@ -78,7 +78,11 @@
                     <div>
                         <tr>
                             <th><label for="roles">Rolle(n)</label></th>
-                            <td> <input class="text_bgImage" id="roles" name="roles" th:value="${tenant.getRoles()}"  type="text" required="required"/></td>
+                            <td> <input class="text_bgImage" id="roles" name="roles" th:value="${tenant.getRoles()}"  type="search" list="roles" required="required"/></td>
+                           <!--<datalist id="roles" >
+                            <option value="1">
+                               <option value="2">
+                            </datalist> -->
                         </tr>
                     </div>
                 </table>
@@ -97,6 +101,7 @@
     </div>
 
 </div>
+
 <div th:include="navigation :: footer"></div>
 </body>
 </html>
