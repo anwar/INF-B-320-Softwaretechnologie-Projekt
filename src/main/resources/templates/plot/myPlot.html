@@ -29,10 +29,10 @@
     </div>
 
     <div align="left" th:if="${rents} and not ${plots.isEmpty()}">
-        <div class="button-section" th:each="plot : ${plots.keySet()}">
+        <!-- <div class="button-section" th:each="plot : ${plots.keySet()}">
             <button class="button" th:href="'/myPlot/' + ${plot}" th:text="${plots.get(plot)}"> Text </button>
             <input type="hidden" id="rentedPlot" name="plot" th:value="${plot}">
-        </div>
+        </div> -->
     </div>
     <div align="center">
         <table>
