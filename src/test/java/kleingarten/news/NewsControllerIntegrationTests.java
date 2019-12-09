@@ -53,10 +53,32 @@ public class NewsControllerIntegrationTests {
 		long noOfEntries = news.count();
 		NewsEntry entry = news.findAll().iterator().next();
 
-		mvc.perform(post("/home/news/deleteEntry/{id}", entry.getId())) //
-				.andExpect(status().is3xxRedirection()) //
+		mvc.perform(post("/home/news/deleteEntry/{id}", entry.getId()))
+				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/home"));
 
 		assertThat(news.count()).isEqualTo(noOfEntries - 1);
+	}
+
+	@Test
+	@WithMockUser(roles = "Vorstandsvorsitzender")
+	void editEntryAndRedirectToHome() throws Exception {
+		long noOfEntries = news.count();
+		NewsEntry entry = news.findAll().iterator().next();
+		long id = entry.getId();
+
+		String text = "This is the new text for the entry";
+
+		mvc.perform(post("/home/news/editEntry/{id}", id)
+				.param("text", text))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/home"));
+
+		assertThat(news.count()).isEqualTo(noOfEntries);
+
+		NewsEntry updatedEntry = news.findById(id).
+				orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+
+		assertThat(updatedEntry.getText()).isEqualTo(text);
 	}
 }
