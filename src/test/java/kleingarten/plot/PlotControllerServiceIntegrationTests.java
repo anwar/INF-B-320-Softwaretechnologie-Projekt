@@ -110,8 +110,7 @@ public class PlotControllerServiceIntegrationTests {
 	public void insecureGetColorOfFreePlotTest() {
 		result.put(freePlot, "#7CB342");
 
-		plotControllerService.setPlotColor(freePlot, Optional.empty());
-		assertThat(colors).isEqualTo(result);
+		assertThat(plotControllerService.setPlotColor(freePlot, Optional.empty())).isEqualTo(result);
 	}
 
 	/**
@@ -121,8 +120,8 @@ public class PlotControllerServiceIntegrationTests {
 	public void secureGetColorForFreePlotTest() {
 		result.put(freePlot, "#7CB342");
 
-		plotControllerService.setPlotColor(freePlot, Optional.of(chairman.getUserAccount()));
-		assertThat(colors).isEqualTo(result);
+		assertThat(plotControllerService.setPlotColor(freePlot, Optional.of(chairman.getUserAccount())))
+				.isEqualTo(result);
 	}
 
 	/**
@@ -135,8 +134,7 @@ public class PlotControllerServiceIntegrationTests {
 		}
 		result.put(takenPlot, "#546E7A");
 
-		plotControllerService.setPlotColor(takenPlot, Optional.empty());
-		assertThat(colors).isEqualTo(result);
+		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.empty())).isEqualTo(result);
 	}
 
 	/**
@@ -149,8 +147,8 @@ public class PlotControllerServiceIntegrationTests {
 		takenPlot = plotService.findById(procedure.getPlotId());
 		result.put(takenPlot, "#FDD835");
 
-		plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount()));
-		assertThat(colors).isEqualTo(result);
+		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount())))
+				.isEqualTo(result);
 	}
 
 	/**
@@ -164,8 +162,8 @@ public class PlotControllerServiceIntegrationTests {
 		takenPlot = plotService.findById(procedure.getPlotId());
 		result.put(takenPlot, "#FDD835");
 
-		plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount()));
-		assertThat(colors).isEqualTo(result);
+		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount())))
+				.isEqualTo(result);
 	}
 
 	/**
@@ -179,8 +177,8 @@ public class PlotControllerServiceIntegrationTests {
 		takenPlot = plotService.findById(procedure.getPlotId());
 		result.put(takenPlot, "#039BE5");
 
-		plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount()));
-		assertThat(colors).isEqualTo(result);
+		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount())))
+				.isEqualTo(result);
 	}
 
 	/**
@@ -195,8 +193,8 @@ public class PlotControllerServiceIntegrationTests {
 		takenPlot = plotService.findById(procedure.getPlotId());
 		result.put(takenPlot, "#E69138");
 
-		plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount()));
-		assertThat(colors).isEqualTo(result);
+		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount())))
+				.isEqualTo(result);
 	}
 
 	@Test
