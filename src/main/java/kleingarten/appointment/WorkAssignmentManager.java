@@ -29,13 +29,11 @@ public class WorkAssignmentManager {
 	}
 
 	public WorkAssignment createAssignment(CreateWorkAssignmentForm form){
-
-
 		return workAssignmentRepository.save(new WorkAssignment(form.getDateTime(), 0, form.getTitle(), form.getDescription(), null));
 	}
 
-	public WorkAssignment createAssignmentForInitializer(LocalDateTime date, String title, String description){
-		return workAssignmentRepository.save(new WorkAssignment(date, 0,title, description, null));
+	public WorkAssignment createAssignmentForInitializer(LocalDateTime date, String title, String description, List<Plot> plots){
+		return workAssignmentRepository.save(new WorkAssignment(date, 0,title, description, plots));
 	}
 
 	public boolean containsListTheDate(LocalDateTime localDateTime){
