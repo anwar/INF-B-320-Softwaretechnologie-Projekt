@@ -18,35 +18,28 @@
 <div class="ui-container">
     <nav th:include="navigation :: navigation"/>
     <div class="header-title">
-        <h1>Termin erstellen</h1>
+        <h1>Für Termin eintragen</h1>
     </div>
 </div>
 <center>
-    <form method="post" role="form" id="form" th:action="@{/addAppointment}" th:object="${form}">
-        <table>
+    <form method="post" role="form" id="form" th:action="@{/addWorkAssignment/{id}}(id={})" th:object="${form}">
+        <table id="myTable">
             <tr>
-                <td>
-                    <label>Datum</label>
-                    <br/>
-                    <select name="date">
-                    <option th:each="appointments : ${ListofAppointments}" th:text="${appointments.getDate()}" th:value="${appointments.getDate()}">test</option>
-                    </select>
-                </td>
+                <th>Datum / Zeit</th>
+                <th>Titel</th>
+                <th>Beschreibung</th>
+                <th>Eintragen</th>
             </tr>
-            <br/>
-            <tr>
-                <td>
-                    <label>Uhrzeit</label>
-                    <br/>
-                    <select>
-                        <option th:each="appointments : ${ListOfTimes}" th:text="${appointments.getTime()}" th:value="${appointments.getTime()}">test</option>
-                    </select>
-                </td>
+            <tr th:each="workassignemt : ${ListOfAssignments}">
+                <td th:text="${workassignemt.date}"></td>
+                <td th:text="${workassignemt.title}"></td>
+                <td th:text="${workassignemt.description}"></td>
+                <td><button style="font-size:13px; height: 35px" type="submit" class="ui button">Zum Termin eintragen</button></td>
             </tr>
         </table>
         <br/>
         <br/>
-        <button type="submit" class="ui button">Zum Termin eintragen</button>
+
     </form>
 </center>
 </body>

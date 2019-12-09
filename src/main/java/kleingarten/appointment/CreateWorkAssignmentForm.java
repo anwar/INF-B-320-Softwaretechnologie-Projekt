@@ -1,28 +1,39 @@
 package kleingarten.appointment;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 public class CreateWorkAssignmentForm {
 
-	private final String date;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate date;
 
-	private final String time;
+	@DateTimeFormat(pattern = "HH:mm")
+	private LocalTime time;
 
 	private final String title;
 
 	private final String description;
 
-	public CreateWorkAssignmentForm(String date, String time, String title, String description, String workHours){
+	public CreateWorkAssignmentForm(LocalDate date, LocalTime time, String title, String description, String workHours){
 		this.time = time;
 		this.date = date;
 		this.title = title;
 		this.description = description;
 	}
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
-
-	public String getTime() {
+	public LocalTime getTime() {
 		return time;
+	}
+
+	public LocalDateTime getDateTime(){
+		return LocalDateTime.of(date, time);
 	}
 
 	public String getTitle() {
