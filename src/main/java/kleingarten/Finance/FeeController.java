@@ -19,15 +19,18 @@ import java.util.List;
 public class FeeController {
 	private FeeManager feeManager;
 	private FeeRepository feeRepository;
-	private Procedure procedure;
+	private ProcedureManager procedureManger;
+	private ProcedureRepository procedureRepository;
 
 	@Autowired
 	private FeeServiceI feeServiceI;
 
 	@Autowired
-	public FeeController(FeeManager feeManager, FeeRepository feeRepository) {
+	public FeeController(FeeManager feeManager, FeeRepository feeRepository, ProcedureManager procedureManager, ProcedureRepository procedureRepository) {
 		this.feeManager = feeManager;
 		this.feeRepository = feeRepository;
+		this.procedureManger = procedureManager;
+		this.procedureRepository = procedureRepository;
 	}
 
 	@GetMapping("fees")

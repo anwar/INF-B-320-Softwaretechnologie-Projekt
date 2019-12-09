@@ -21,9 +21,9 @@ public class GeneratePDFBill {
 
 		try {
 
-			PdfPTable table = new PdfPTable(3);	// need numColumns: 4, but not working.
+			PdfPTable table = new PdfPTable(4);
 			table.setWidthPercentage(75);
-			table.setWidths(new int[]{1, 4, 4});
+			table.setWidths(new int[]{4, 4, 4, 4});
 
 			Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
 
