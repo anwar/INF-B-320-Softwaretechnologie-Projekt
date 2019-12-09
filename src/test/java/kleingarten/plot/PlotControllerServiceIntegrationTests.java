@@ -16,10 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.money.format.MonetaryFormats;
 import javax.transaction.Transactional;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @SpringBootTest
 @Transactional
@@ -111,9 +108,9 @@ public class PlotControllerServiceIntegrationTests {
 	 */
 	@Test
 	public void insecureGetColorOfFreePlotTest() {
-		result.put(freePlot, "olive");
+		result.put(freePlot, "#7CB342");
 
-		plotControllerService.insecureSetPlotColor(freePlot, colors);
+		plotControllerService.setPlotColor(freePlot, Optional.empty());
 		assertThat(colors).isEqualTo(result);
 	}
 
@@ -122,9 +119,9 @@ public class PlotControllerServiceIntegrationTests {
 	 */
 	@Test
 	public void secureGetColorForFreePlotTest() {
-		result.put(freePlot, "olive");
+		result.put(freePlot, "#7CB342");
 
-		plotControllerService.secureSetPlotColor(freePlot, colors);
+		plotControllerService.setPlotColor(freePlot, Optional.of(chairman.getUserAccount()));
 		assertThat(colors).isEqualTo(result);
 	}
 
@@ -136,9 +133,9 @@ public class PlotControllerServiceIntegrationTests {
 		if (!dataService.procedureExists(2019, takenPlot)) {
 			Procedure takenPlotProcedure = procedureManager.add(new Procedure(2019, takenPlot, boss.getId()));
 		}
-		result.put(takenPlot, "grey");
+		result.put(takenPlot, "#546E7A");
 
-		plotControllerService.insecureSetPlotColor(takenPlot, colors);
+		plotControllerService.setPlotColor(takenPlot, Optional.empty());
 		assertThat(colors).isEqualTo(result);
 	}
 
@@ -150,9 +147,9 @@ public class PlotControllerServiceIntegrationTests {
 	public void securedGetColorForBossPlotTest() {
 		Procedure procedure = procedureManager.getProcedures(2019, boss.getId()).toList().get(0);
 		takenPlot = plotService.findById(procedure.getPlotId());
-		result.put(takenPlot, "yellow");
+		result.put(takenPlot, "#FDD835");
 
-		plotControllerService.secureSetPlotColor(takenPlot, colors);
+		plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount()));
 		assertThat(colors).isEqualTo(result);
 	}
 
@@ -165,9 +162,9 @@ public class PlotControllerServiceIntegrationTests {
 		Procedure procedure = new Procedure(2019,freePlot, replacement.getId());
 		procedureManager.add(procedure);
 		takenPlot = plotService.findById(procedure.getPlotId());
-		result.put(takenPlot, "yellow");
+		result.put(takenPlot, "#FDD835");
 
-		plotControllerService.secureSetPlotColor(takenPlot, colors);
+		plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount()));
 		assertThat(colors).isEqualTo(result);
 	}
 
@@ -180,9 +177,9 @@ public class PlotControllerServiceIntegrationTests {
 		Procedure procedure = new Procedure(2019,freePlot, chairman.getId());
 		procedureManager.add(procedure);
 		takenPlot = plotService.findById(procedure.getPlotId());
-		result.put(takenPlot, "blue");
+		result.put(takenPlot, "#039BE5");
 
-		plotControllerService.secureSetPlotColor(takenPlot, colors);
+		plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount()));
 		assertThat(colors).isEqualTo(result);
 	}
 
@@ -196,9 +193,9 @@ public class PlotControllerServiceIntegrationTests {
 		procedure.addSubTenant(chairman.getId());
 		procedureManager.add(procedure);
 		takenPlot = plotService.findById(procedure.getPlotId());
-		result.put(takenPlot, "orange");
+		result.put(takenPlot, "#E69138");
 
-		plotControllerService.secureSetPlotColor(takenPlot, colors);
+		plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount()));
 		assertThat(colors).isEqualTo(result);
 	}
 

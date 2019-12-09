@@ -1,21 +1,13 @@
 package kleingarten.plot;
 
 import kleingarten.tenant.Tenant;
-import kleingarten.tenant.TenantRepository;
-import org.salespointframework.catalog.ProductIdentifier;
-import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.money.MonetaryAmount;
-import javax.money.format.MonetaryFormats;
 import java.util.*;
 
 @Controller
@@ -98,14 +90,22 @@ public class InsecurePlotController {
 		Set<Plot> plots = plotCatalog.findAll().toSet();
 		Map<Plot, String> colors = new HashMap<>();
 		Map<Plot, Boolean> rights = new HashMap<>();
+		Map<String, String> usedColors = new HashMap<>();
 
 		for (Plot plot : plots) {
-			plotControllerService.insecureSetPlotColor(plot, colors);
-			plotControllerService.insecureSetAccessRightForPlot(plot, rights);
+			Map<Plot, String> colorOfPlot = plotControllerService.setPlotColor(plot, Optional.empty());
+			Map<Plot, Boolean> accessForPlot = plotControllerService.setAccessRightForPlot(plot, Optional.empty());
+
+			colors.put(plot, colorOfPlot.get(plot));
+			rights.put(plot, accessForPlot.get(plot));
 		}
+
+		usedColors.put("#7CB342", "frei");
+		usedColors.put("#546E7A", "besetzt");
 
 		mav.addObject("plotList", plots);
 		mav.addObject("plotColors", colors);
+		mav.addObject("colors", usedColors);
 		mav.addObject("userRights", rights);
 		mav.setViewName("plot/plotOverview");
 

@@ -17,31 +17,30 @@ import java.util.*;
 public class PlotControllerService {
 	private final DataService dataService;
 	private final TenantManager tenantManager;
+	private final PlotCatalog plotCatalog;
 
-	PlotControllerService(DataService dataService, TenantManager tenantManager) {
+	PlotControllerService(DataService dataService, TenantManager tenantManager, PlotCatalog plotCatalog) {
 		this.dataService = dataService;
 		this.tenantManager = tenantManager;
-	}
-
-	/**
-	 * Select color of a {@link Plot} when no user is logged in and save the selection in a {@link Map} of
-	 * {@link Plot} and {@link String}
-	 * @param plot {@link Plot} for which a color should be selected
-	 * @param colors {@link Map} with {@link Plot}s and their selected colors as {@link String}
-	 */
-	void insecureSetPlotColor(Plot plot, Map<Plot, String> colors) {
-		colors.put(plot, plot.getStatus() == PlotStatus.TAKEN ? "#546E7A" : "#7CB342");
+		this.plotCatalog = plotCatalog;
 	}
 
 	/**
 	 * Select color of a {@link Plot} when a user is logged in and save the selection in a {@link Map} of
 	 * {@link Plot} and {@link String}
 	 * @param plot {@link Plot} for which a color should be selected
-	 * @param colors {@link Map} with {@link Plot}s and their selected colors as {@link String}
 	 */
-	void secureSetPlotColor(Plot plot, Map<Plot, String> colors) {
+	Map<Plot, String> setPlotColor(Plot plot, Optional<UserAccount> user) {
+		Map<Plot, String> colors = new HashMap<>();
+
+		//Set default colors of plot if there is no user logged in
 		colors.put(plot, plot.getStatus() == PlotStatus.TAKEN ? "#546E7A" : "#7CB342");
 
+		if (user.isEmpty()) {
+			return colors;
+		}
+
+		//Set color of plot if a user with role "Vorstand" or "Obmann" rents this plot
 		if (plot.getStatus() == PlotStatus.TAKEN) {
 			Tenant mainTenant = tenantManager.get(dataService.getProcedure(LocalDateTime.now().getYear(), plot)
 											.getMainTenant());
@@ -54,12 +53,13 @@ public class PlotControllerService {
 			Set<Role> administration = Set.of(Role.of("Vorstandsvorsitzender"), Role.of("Stellvertreter"));
 			Set<Role> chairman = Set.of(Role.of("Obmann"));
 
+			//Check if the maintenant or the subtenants of the plot have the role "Vorstand" or "Obmann"
 			if (rolesOfMainTenant.stream().anyMatch(administration::contains)
 				|| rolesOfSubTenants.stream().anyMatch(administration::contains)) {
 				if (rolesOfMainTenant.stream().anyMatch(chairman::contains)
 					|| rolesOfSubTenants.stream().anyMatch(chairman::contains)) {
-					colors.put(plot, "orange");
-					return;
+					colors.put(plot, "#E69138");
+					return colors;
 				}
 				colors.put(plot, "#FDD835");
 			} else if (rolesOfMainTenant.stream().anyMatch(chairman::contains)
@@ -67,6 +67,7 @@ public class PlotControllerService {
 				colors.put(plot, "#039BE5");
 			}
 		}
+		return colors;
 	}
 
 	/**
@@ -102,35 +103,32 @@ public class PlotControllerService {
 	}
 
 	/**
-	 * Select if details page of a specific {@link Plot} can be accessed when no user is logged in
+	 * Select if the details page of a specific {@link Plot} can be accessed depending on if a user is logged in or not
 	 * @param plot {@link Plot} for which the access to the details page should be set
-	 * @param rights {@link Map} with {@link Plot}s and their kind of access as {@link Boolean}
+	 * @param user {@link Optional} of type {@link UserAccount} of the logged in user
 	 */
-	void insecureSetAccessRightForPlot(Plot plot, Map<Plot, Boolean> rights) {
+	Map<Plot, Boolean> setAccessRightForPlot(Plot plot, Optional<UserAccount> user) {
+		Map<Plot, Boolean> rights = new HashMap<>();
+
 		if (plot.getStatus() == PlotStatus.FREE) {
 			rights.put(plot, true);
 		} else {
 			rights.put(plot, false);
 		}
-	}
 
-	/**
-	 * Select if a user can see the details page of a specific {@link Plot} when he is logged in
-	 * @param plot {@link Plot} for which the access to the details page should be set
-	 * @param user {@link UserAccount} of the logged in user
-	 * @param rights {@link Map} with {@link Plot}s and their kind of access as {@link Boolean} for the given user
-	 */
-	void secureSetAccessRightForPlot(Plot plot, UserAccount user, Map<Plot, Boolean> rights) {
-		Tenant tenant = tenantManager.getTenantByUserAccount(user);
+		if (user.isPresent()) {
+			Tenant tenant = tenantManager.getTenantByUserAccount(user.get());
 
-		List<Role> permitted = List.of(Role.of("Vorstandsvorsitzender"), Role.of("Stellvertreter"),
+			List<Role> permitted = List.of(Role.of("Vorstandsvorsitzender"), Role.of("Stellvertreter"),
 					Role.of("Protokollant"), Role.of("Kassierer"), Role.of("Wassermann"));
-		boolean condition = user.getRoles().stream().anyMatch(permitted::contains);
-		if (condition) {
-			rights.put(plot, true);
-		} else if (tenantManager.tenantHasRole(tenant, Role.of("Obmann"))) {
-			rights.put(plot, plot.getChairman().getId() == tenant.getId());
+			boolean condition = user.get().getRoles().stream().anyMatch(permitted::contains);
+			if (condition) {
+				rights.put(plot, true);
+			} else if (tenantManager.tenantHasRole(tenant, Role.of("Obmann"))) {
+				rights.put(plot, plot.getChairman().getId() == tenant.getId());
+			}
 		}
+		return rights;
 	}
 
 	/**
@@ -255,5 +253,44 @@ public class PlotControllerService {
 		for (Plot parcel : plots) {
 			rentedPlots.put(parcel, parcel.getName());
 		}
+	}
+
+	/**
+	 * Set the color of a {@link Plot} depending on who is its chairman of type {@link Tenant} and add the
+	 * @return {@link Map} of {@link Plot}s and associated colors as {@link String}
+	 */
+	Map<Plot, String> secureSetColorOfChairmenForPlots() {
+		//Set color for each tenant with the role "Obmann"
+		Map<Tenant, String> colorsForChairmen = secureSetColorForChairman();
+
+		//Set color for plot depending on who is its chairman
+		Map<Plot, String> colorsForPlotAdministratedByChairman = new HashMap<>();
+		for (Plot administratedPlot:
+			 plotCatalog.findAll()) {
+			for (Tenant chairman:
+				 colorsForChairmen.keySet()) {
+				if (administratedPlot.getChairman() == null) {
+					colorsForPlotAdministratedByChairman.put(administratedPlot, "#7CB342");
+				} else if (administratedPlot.getChairman() == chairman) {
+					colorsForPlotAdministratedByChairman.put(administratedPlot, colorsForChairmen.get(chairman));
+				}
+			}
+		}
+		return colorsForPlotAdministratedByChairman;
+	}
+
+	Map<Tenant, String> secureSetColorForChairman() {
+		Random randomColorGenerator = new Random();
+		Map<Tenant, String> colorsForChairman = new HashMap<>();
+
+		//Add random color for each tenant who has the role "Obmann"
+		for (Tenant chairman:
+				tenantManager.getAll()) {
+			if (tenantManager.tenantHasRole(chairman, Role.of("Obmann"))) {
+				int color = randomColorGenerator.nextInt(0x1000000);
+				colorsForChairman.put(chairman, String.format("#%06X", color));
+			}
+		}
+		return colorsForChairman;
 	}
 }
