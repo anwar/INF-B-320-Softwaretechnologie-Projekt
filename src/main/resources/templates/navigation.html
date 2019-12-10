@@ -30,7 +30,7 @@
         <li><a href="#" sec:authorize="isAuthenticated()">Meine Parzelle</a>
             <ul >
                 <li><a href="plot/myPlot.html" th:href="@{/myPlot}" sec:authorize="isAuthenticated()" >Meine Daten</a></li>
-                <li><a href="tenant/changePassword.html" th:href="@{/changePassword}" sec:authorize="isAuthenticated()">Password ändern</a></li>
+                <li><a href="tenant/changePassword.html" th:href="@{/changePassword}" sec:authorize="isAuthenticated()">Passwort ändern</a></li>
                 <li><a href="tenant/changeEmail.html" th:href="@{/changeEmail}" sec:authorize="isAuthenticated()">Email ändern</a></li>
             </ul>
         </li>
