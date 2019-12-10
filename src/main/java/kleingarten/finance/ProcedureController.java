@@ -88,11 +88,12 @@ public class ProcedureController {
 	 * @param plotId
 	 * @return
 	 */
-	@GetMapping("procedureDetails/editPowercount/{plotId}")
-	//@PreAuthorize("hasRole('ROLE_VORSTAND')")
-	public String editCount(Model model, @PathVariable String plotId) {
-		model.addAttribute("procedure", procedureManager.findByPlotId(plotId).get());
-		return "finance/editPowercount";
+	@PostMapping("/procedureDetails/editPowercount")
+	public String savePowercount(Model model, @RequestParam("procedureId") String procedureId, @RequestParam String power) {
+		Procedure procedure = procedureManager.get(Long.parseLong(procedureId));
+		procedure.setPowercount(Double.parseDouble(power));
+		procedureManager.save(procedure);
+		return "redirect:/editPlot/"+procedure.getPlotId().toString();
 	}
 
 	/**
