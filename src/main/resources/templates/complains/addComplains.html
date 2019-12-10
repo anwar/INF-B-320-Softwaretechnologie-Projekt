@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
+          href="../resources/css/style.css" type="text/css"/>
+    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
+          href="../resources/css/tenantTable.css" type="text/css">
+    <meta charset="UTF-8">
+    <title>Beschwerde schreiben</title>
+</head>
+<body>
+<div class="header-title">
+    <h1>Beschwerde schreiben</h1>
+</div>
+<form method="post" role="form" id="form" th:action="@{/}" th:object="${form}">
+    <table>
+        <tr>
+            <th>
+                <label for="name">Name des Angeklagten</label>
+            </th>
+            <td>
+                <input class="text_bgImage" id="name" th:field="*{name}" type="date" required="required" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="complain">Grund der Beschwerde</label>
+            </th>
+
+            <td> <input class="text_bgImage" id="complain" th:field="*{complain}" type="text" required="required" />
+            </td>
+        </tr>
+
+
+
+    </table>
+    <div class="button-section">
+        <button type="submit" class="button" >Beschwerde abschicken</button></div>
+    </div>
+</form>
+
+<div th:include="navigation :: footer"></div>
+</body>
+</html>
+
+

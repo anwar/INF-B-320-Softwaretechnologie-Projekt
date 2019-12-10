@@ -46,7 +46,7 @@
             <form method="post" th:action="@{/changeWorkHours}">
                 <td><input class="text_bgImage" style="width: 90px; text-align: center" type="text" id="workHours" name="workHours" th:value="${workAssignment.getWorkHours()}"/></td>
                 <td hidden><input class="text_bgImage" id="id" name="id" th:value="${(workAssignment.getId())}"  type="number" required="required"/></td>
-                <td><button style="font-size:13px; height: 35px; width: 200px" type="submit" class="ui button">Speichern</button></td>
+                <td><button style="font-size:13px; height: 35px; width: 120px" type="submit" class="ui button">Speichern</button></td>
             </form>
         </tr>
         </tbody>

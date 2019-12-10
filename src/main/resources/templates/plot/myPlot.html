@@ -47,6 +47,7 @@
                             <a th:if="not ${rented}" th:href="${'/createApplication/' + plotID}" >Bewerben</a>
                             <a th:if="not ${rented}" sec:authorize="hasAnyRole('Vorstandsvorsitzender')" th:href="'/application'">Bewerbungen anzeigen</a>
                             <a th:if="${rented}" sec:authorize="hasAnyRole('Vorstandsvorsitzender')" th:href="'/cancelPlot/' + ${plotID}">Kündigen</a>
+                            <a th:if="${rented}" th:href="'' + ${plotID}">Beschwerde schreiben</a>
                         </div>
                     </div>
                     </th>
