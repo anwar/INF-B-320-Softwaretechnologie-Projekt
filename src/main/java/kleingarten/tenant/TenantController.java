@@ -2,6 +2,7 @@ package kleingarten.tenant;
 
 
 import com.mysema.commons.lang.Assert;
+import org.salespointframework.useraccount.AuthenticationManager;
 import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
@@ -18,6 +19,7 @@ class TenantController {
 	private final TenantManager tenantManager;
 	private final TenantRepository tenantRepository;
 	private final TenantService tenantService;
+	private final AuthenticationManager authenticationManager;
 
 	/**
 	 * Constructor of class {@link TenantController}
@@ -25,11 +27,12 @@ class TenantController {
 	 * @param tenantRepository repository of tenants as {@link TenantRepository}
 	 * @param tenantService service class {@link TenantService}
 	 */
-	TenantController(TenantManager tenantManager, TenantRepository tenantRepository, TenantService tenantService) {
+	TenantController(TenantManager tenantManager, TenantRepository tenantRepository, TenantService tenantService, AuthenticationManager authenticationManager) {
 		Assert.notNull(tenantManager, "TenantManager must not be null");
 		this.tenantManager = tenantManager;
 		this.tenantRepository = tenantRepository;
 		this.tenantService = tenantService;
+		this.authenticationManager = authenticationManager;
 	}
 
 	/**
@@ -112,6 +115,7 @@ class TenantController {
 	String changedPassword(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldPassword, @RequestParam("new") String newPassword,
 						   @RequestParam("repeat") String repeatedPassword){
 		tenantService.changePassword(userAccount, oldPassword, newPassword, repeatedPassword);
+
 		return "redirect:/home";
 	}
 
