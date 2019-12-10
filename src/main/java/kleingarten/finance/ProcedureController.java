@@ -78,6 +78,7 @@ public class ProcedureController {
 		System.out.println("Plot ID:" + procedure.getPlotId());
 		System.out.println("Watercount:" + procedure.getWatercount());
 		System.out.println("Powercount:" + procedure.getPowercount());
+		procedure.setWatercount(Double.parseDouble(water));
 		procedureManager.save(procedure);
 		return "redirect:/editPlot/"+procedure.getPlotId().toString();
 	}
