@@ -18,25 +18,23 @@
 <div class="ui-container">
     <nav th:include="navigation :: navigation"/>
     <div class="header-title">
-        <h1>Für Termin eintragen</h1>
+        <h1>Deine Termine</h1>
     </div>
 </div>
 <center>
-    <form method="post" role="form" id="form" th:action="@{/addWorkAssignment}" th:object="${form}">
         <table id="myTable">
             <tr>
                 <th>Datum / Zeit</th>
                 <th>Titel</th>
                 <th>Beschreibung</th>
-                <th>Eintragen</th>
             </tr>
-            <tr th:each="workassignemt : ${ListOfAssignments}">
-                <td th:text="${workassignemt.date}"></td>
-                <td th:text="${workassignemt.title}"></td>
-                <td th:text="${workassignemt.description}"></td>
-                <td><button style="font-size:13px; height: 35px" type="submit" class="ui button">Zum Termin eintragen</button></td>
+            <tr th:each="workAssignments : ${ListWorkAssignmentsForPlot}">
+                <td th:text="${workAssignments.date}"></td>
+                <td th:text="${workAssignments.title}"></td>
+                <td th:text="${workAssignments.description}"></td>
             </tr>
         </table>
+        <button style="font-size:13px; height: 35px" type="submit" class="ui button">In Termine eintragen</button>
         <br/>
         <br/>
 

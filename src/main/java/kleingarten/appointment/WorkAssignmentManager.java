@@ -94,7 +94,7 @@ public class WorkAssignmentManager {
 		workAssignment.setWorkHours(workHours);
 	}
 
-	public int getWorkAssignment(Plot plot, long workAssignmentID){
+	public int getWorkHours(Plot plot, long workAssignmentID){
 
 		int actualYear = LocalDateTime.now().getYear();
 		List<WorkAssignment> buffer = new ArrayList<>();
@@ -111,6 +111,6 @@ public class WorkAssignmentManager {
 			sumOfWorkHours += workAssignment.getWorkHours();
 		}
 		return sumOfWorkHours;
-	}
+	} //nochmal überarbeiten
 
 }
