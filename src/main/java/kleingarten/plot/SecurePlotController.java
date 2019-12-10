@@ -9,14 +9,12 @@ import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.money.MonetaryAmount;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -29,17 +27,14 @@ public class SecurePlotController {
 	private final TenantManager tenantManager;
 	private final DataService dataService;
 	private final PlotControllerService plotControllerService;
-	private final UpdatePlotService updatePlotService;
 
 	SecurePlotController(PlotService plotService, PlotCatalog plotCatalog, TenantManager tenantManager,
-						 DataService dataService, PlotControllerService plotControllerService,
-						 UpdatePlotService updatePlotService) {
+						 DataService dataService, PlotControllerService plotControllerService) {
 		this.plotService = plotService;
 		this.plotCatalog = plotCatalog;
 		this.tenantManager = tenantManager;
 		this.dataService = dataService;
 		this.plotControllerService = plotControllerService;
-		this.updatePlotService = updatePlotService;
 	}
 
 	/**
@@ -272,9 +267,10 @@ public class SecurePlotController {
 		ModelAndView mav = new ModelAndView();
 		Plot plot = plotService.findById(plotId);
 		try {
-			updatePlotService.updatePlotSize(plot, size);
-			updatePlotService.updatePlotDescription(plot, description);
-			updatePlotService.updatePlotPrice(plot, Money.of(estimator, EURO));
+			plot.setSize(size);
+			plot.setDescription(description);
+			plot.setPrice(Money.of(estimator, EURO));
+			plotCatalog.save(plotService.findById(plotId));
 		} catch (Exception e) {
 			mav.addObject("error", e);
 			mav.setViewName("error");
