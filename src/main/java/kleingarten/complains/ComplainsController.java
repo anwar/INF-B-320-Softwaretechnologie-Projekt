@@ -1,9 +1,12 @@
 package kleingarten.complains;
 
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 // WIP we still have to do this, but if someone got time, they can start working on this
@@ -21,5 +24,12 @@ public class ComplainsController {
 	String complains(Model model) {
 		model.addAttribute("complains", complainsManager.getAll());
 		return "complains/complains";
+	}
+
+	@PreAuthorize("hasRole('Hauptpächter')")
+	@GetMapping("/addComplains")
+	String addComplains(Model model){
+		model.addAttribute("complain", complainsManager.getAll());
+		return "complains/addComplains";
 	}
 }
