@@ -49,7 +49,7 @@ public class TenantServiceTest {
 
 	@Test
 	void changePassword() {
-		assertThat(tenant.getUserAccount().getPassword().equals("123"));
+		assertThat(tenantRepository.findAll().toList().get(0).getUserAccount().getPassword().equals("123"));
 
 	}
 
