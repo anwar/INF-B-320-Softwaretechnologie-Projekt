@@ -15,6 +15,7 @@
           href="../resources/css/tenantTable.css" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
+
     <title>Für Termin eintragen</title>
 </head>
 <body>
@@ -25,9 +26,10 @@
         <h1>Arbeitsstunden hinzufügen</h1>
     </div>
 </div>
-<center>
+
 
     <table id="myTable">
+        <thead>
         <tr>
             <th>Datum / Zeit</th>
             <th>Titel</th>
@@ -35,20 +37,23 @@
             <th>Arbeitsstunden</th>
             <th>Speichern</th>
         </tr>
+        </thead>
+        <tbody>
         <tr th:each="workAssignment : ${ListOfAssignments}">
             <td th:text="${workAssignment.date}"></td>
             <td th:text="${workAssignment.title}"></td>
             <td th:text="${workAssignment.description}"></td>
             <form method="post" th:action="@{/changeWorkHours}">
-                <td><input type="text" id="workHours" name="workHours" th:value="${workAssignment.getWorkHours()}"/></td>
+                <td><input class="text_bgImage" style="width: 90px; text-align: center" type="text" id="workHours" name="workHours" th:value="${workAssignment.getWorkHours()}"/></td>
                 <td hidden><input class="text_bgImage" id="id" name="id" th:value="${(workAssignment.getId())}"  type="number" required="required"/></td>
-                <td><button style="font-size:13px; height: 35px; width: 200px" type="submit" class="ui button">Arbeitstunden speichern</button></td>
+                <td><button style="font-size:13px; height: 35px; width: 200px" type="submit" class="ui button">Speichern</button></td>
             </form>
         </tr>
+        </tbody>
     </table>
     <br/>
     <br/>
+<div th:include="navigation :: footer"></div>
 
-</center>
 </body>
 </html>
