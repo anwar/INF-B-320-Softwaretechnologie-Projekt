@@ -1,4 +1,4 @@
-package kleingarten.Finance;
+package kleingarten.finance;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

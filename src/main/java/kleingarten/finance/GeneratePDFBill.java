@@ -1,4 +1,4 @@
-package kleingarten.Finance;
+package kleingarten.finance;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;

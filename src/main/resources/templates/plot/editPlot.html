@@ -23,7 +23,8 @@
 <div class="header-title">
     <h1>Parzellenbearbeitung</h1>
 </div>
-<div>
+<!-- Plot-Info, ROLES: ? -->
+<div  sec:authorize="hasAnyRole('Vorstandsvorsitzender')">
     <form method="post" th:action="@{/editedPlot}">
     <table  id="myTable">
 
@@ -49,7 +50,32 @@
 
     </div></form>
 </div>
+<div th:if="${procedureExists}">
+<!-- Wasserstand, ROLES: Wassermann -->
+<div  sec:authorize="hasAnyRole('Wassermann', 'Vorstandsvorsitzender')">
+    <form method="post" th:action="@{/procedureDetails/editWatercount}">
+    <table  id="waterTable">
 
+        <tbody>
+        <tr>
+            <td> <label for="oldWater">Wasserstand Vorjahr</label> </td>
+            <td><label class="text_bgImage" id="oldWater" name="oldWater" th:value="${oldWater}" type="number"/></td>
+        </tr>
+        <tr>
+            <td> <label for="water">Wasserstand aktuell</label> </td>
+            <td><input class="text_bgImage" id="water" name="water" th:value="${procedure.getWatercount()}" type="text" required="required"/></td>
+        </tr>
+        </tbody>
+    </table>
+	<input type="hidden" id="procedureId" name="procedureId" th:value="${procedure.getId()}">
+    <div class="button-section">
+
+        <button  type="submit"  class="button" >Speichern</button>
+
+    </div></form>
+</div>
+
+</div>
 
 <div th:include="navigation :: footer"></div>
 </body>

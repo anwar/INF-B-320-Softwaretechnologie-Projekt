@@ -1,7 +1,6 @@
-package kleingarten.Finance;
+package kleingarten.finance;
 
 import org.hibernate.validator.constraints.Range;
-import java.util.*;
 
 public class FeeForm {
 

@@ -42,11 +42,10 @@
                     <th>Gespeicherte Daten <div class="dropdown">
                         <button onclick="myFunction()" class="dropbtn">. . .</button>
                         <div id="myDropdown" class="dropdown-content">
-                            <a th:if="${canModify}">Zählerstände eintragen</a>
+                            <a th:if="${canModify}" th:href="'/editPlot/' + ${plotID}">Parzelle bearbeiten</a>
                             <a th:if="${canSeeBills}">Rechnungen Anzeigen</a>
                             <a th:if="not ${rented}" th:href="${'/createApplication/' + plotID}" >Bewerben</a>
                             <a th:if="not ${rented}" sec:authorize="hasAnyRole('Vorstandsvorsitzender')" th:href="'/application'">Bewerbungen anzeigen</a>
-                            <a th:if="${canModify}" th:href="'/editPlot/' + ${plotID}">Plot Bearbeiten</a>
                             <a th:if="${rented}" sec:authorize="hasAnyRole('Vorstandsvorsitzender')" th:href="'/cancelPlot/' + ${plotID}">Kündigen</a>
                         </div>
                     </div>
