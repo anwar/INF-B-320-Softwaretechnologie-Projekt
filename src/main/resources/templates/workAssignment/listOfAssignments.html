@@ -26,29 +26,29 @@
         </div>
     </div>
     <center>
-    <table id="myTable">
-        <thead>
-        <tr>
-            <th>Datum</th>
-            <th>Titel</th>
-            <th>Beschreibung</th>
-            <th>Parzellen</th>
-            <th>Bearbeiten</th>
-            <th>Zeit</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="assignment : ${ListOfAssignments}">
-            <td th:text="${assignment.date}">Datum</td>
-            <td th:text="${assignment.title}">Titel</td>
-            <td th:text="${assignment.description}">Beschreibung</td>
-            <td th:text="${assignment.plots.size()}">Parzellen</td>
-            <td style="font-size:25px; background-color: white;"> <a th:title="Bearbeiten" th:href="'/workAssignmentModify?id=' +${assignment.getId()}" > &#9998; </a> </td>
-            <td th:text="${assignment.workHours}">test</td>
-        </tr>
-        </tr></tbody>
-    </table>
+        <form method="post" th:action="@{/deleteWorkAssignment}">
+            <table id="myTable">
+                <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Titel</th>
+                    <th>Beschreibung</th>
+                    <th>Parzellen</th>
+                    <th>Bearbeiten</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="assignment : ${ListOfAssignments}">
+                    <td th:text="${assignment.date}">Datum</td>
+                    <td th:text="${assignment.title}">Titel</td>
+                    <td th:text="${assignment.description}">Beschreibung</td>
+                    <td th:text="${assignment.plots.size()}">Parzellen</td>
+                    <td hidden><input class="text_bgImage" id="id" name="id" th:value="${(assignment.getId())}"  type="number" required="required"/></td>
+                    <td style="font-size:25px; background-color: white;"> <a th:title="Bearbeiten" th:href="'/workAssignmentModify?id=' +${assignment.getId()}" > &#9998; </a> </td>
+                </tr>
+                </tr></tbody>
+            </table>
+        </form>
     </center>
     <div th:include="navigation :: footer"></div>
 </body>

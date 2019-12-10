@@ -58,21 +58,23 @@ public class WorkAssignmentManager {
 		return null;
 	}
 
-	public boolean addPlotToWorkAssignment(Plot plot, long workAssigmentID){
-		WorkAssignment workAssignment = findByID(workAssigmentID);
+	public boolean addPlotToWorkAssignment(Plot plot, long workAssignmentID){
+		WorkAssignment workAssignment = findByID(workAssignmentID);
 
 		if(!workAssignment.containsPlot(plot)){
 			workAssignment.addPlot(plot);
+			workAssignmentRepository.save(workAssignment);
 			return true;
 		}
 		return false;
 	}
 
-	public boolean removePlotOutWorkAssignment(Plot plot, long workAssigmentID){
-		WorkAssignment workAssignment = findByID(workAssigmentID);
+	public boolean removePlotOutWorkAssignment(Plot plot, long workAssignmentID){
+		WorkAssignment workAssignment = findByID(workAssignmentID);
 
 		if(workAssignment.containsPlot(plot)){
 			workAssignment.removePlot(plot);
+			workAssignmentRepository.save(workAssignment);
 			return true;
 		}
 		return false;
@@ -115,5 +117,6 @@ public class WorkAssignmentManager {
 		}
 		return sumOfWorkHours;
 	} //nochmal überarbeiten
+
 
 }
