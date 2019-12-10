@@ -1,7 +1,7 @@
 package kleingarten.plot;
 
-import kleingarten.Finance.Procedure;
-import kleingarten.Finance.ProcedureManager;
+import kleingarten.finance.Procedure;
+import kleingarten.finance.ProcedureManager;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 import org.junit.jupiter.api.BeforeEach;

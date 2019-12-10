@@ -1,4 +1,4 @@
-package kleingarten.Finance;
+package kleingarten.finance;
 
 import java.util.HashSet;
 import java.util.Set;

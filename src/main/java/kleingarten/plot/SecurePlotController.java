@@ -1,6 +1,6 @@
 package kleingarten.plot;
 
-import kleingarten.Finance.Procedure;
+import kleingarten.finance.Procedure;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 import org.javamoney.moneta.Money;
@@ -232,25 +232,6 @@ public class SecurePlotController {
 		return mav;
 	}
 
-	/**
-	 * Create model with needed information to show a form to change the saved details of the {@link Plot}
-	 *
-	 * @param plot {@link Plot} for which a form with the saves details should be shown
-	 * @param mav  {@link ModelAndView} which contains the needed information of the {@link Plot}
-	 * @return response as {@link ModelAndView}
-	 */
-	@GetMapping("/editPlot/{plot}")
-	public ModelAndView editPlot(@PathVariable Plot plot, ModelAndView mav) {
-		try {
-			mav.addObject("plot", plotService.findById(plot.getId()));
-		} catch (Exception e) {
-			mav.addObject("error", e);
-			mav.setViewName("error");
-			return mav;
-		}
-		mav.setViewName("plot/editPlot");
-		return mav;
-	}
 
 	/**
 	 * Get information from the form which is used to edit the details of a {@link Plot} and save them
@@ -262,14 +243,14 @@ public class SecurePlotController {
 	 */
 	@PostMapping("/editedPlot")
 	public ModelAndView editedPlot(@LoggedIn UserAccount user, @RequestParam(name = "plotID") ProductIdentifier plotId,
-								   @RequestParam("size") int size, @RequestParam("description") String description,
-								   @RequestParam() int estimator) {
+								   @RequestParam("size") String size, @RequestParam("description") String description,
+								   @RequestParam() String estimator) {
 		ModelAndView mav = new ModelAndView();
 		Plot plot = plotService.findById(plotId);
 		try {
-			plot.setSize(size);
+			plot.setSize(Integer.parseInt(size));
 			plot.setDescription(description);
-			plot.setPrice(Money.of(estimator, EURO));
+			plot.setPrice(Money.of(Integer.parseInt(estimator), EURO));
 			plotCatalog.save(plotService.findById(plotId));
 		} catch (Exception e) {
 			mav.addObject("error", e);

@@ -1,4 +1,4 @@
-package kleingarten.Finance;
+package kleingarten.finance;
 
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.data.jpa.repository.Query;

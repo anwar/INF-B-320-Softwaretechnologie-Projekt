@@ -1,4 +1,4 @@
-package kleingarten.Finance;
+package kleingarten.finance;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.util.Streamable;
