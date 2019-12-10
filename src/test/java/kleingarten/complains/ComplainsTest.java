@@ -3,6 +3,7 @@
 
 import kleingarten.plot.Plot;
 import kleingarten.tenant.Tenant;
+import kleingarten.tenant.TenantManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.salespointframework.useraccount.Password;
@@ -20,74 +21,64 @@ public class ComplainsTest {
 
 	private Complains complains;
 	private final UserAccountManager userAccountManager;
-	private Plot authorPlot;
-	private  Plot subjectPlot;
-	private Tenant author;
-	private Tenant subject;
 
-	public ComplainsTest(@Autowired UserAccountManager userAccountManager){
+	private TenantManager tenantManager;
+
+	public ComplainsTest(@Autowired UserAccountManager userAccountManager, @Autowired TenantManager tenantManager){
 		this.userAccountManager = userAccountManager;
+		this.tenantManager = tenantManager;
 	}
 
 	@BeforeEach
 	void SetUp(){
 
-		author = new Tenant("Jassi", "Gepackert", "Neben Isa und Francy",
-			"908964875734", "13.05.1999", userAccountManager.create("jassi", Password.UnencryptedPassword.of("123"),"jassis@email.com", Role.of("Hauptpächter")));
-		subject = new Tenant("Der", "Behrens", "über meinem Bruder", "93596164", "14.09.1900",
-			userAccountManager.create("behrens", Password.UnencryptedPassword.of("123"), "behrens@mail.de", Role.of("Hauptpächter")));
-		authorPlot = new Plot("1", 25, "kleine Parzelle");
-		subjectPlot = new Plot("2", 30, "große Parzelle");
-		//complains = new Complains(author.getId(), subject.getId(), authorPlot.getId(), subjectPlot.getId(),ComplainsState.PENDING, "Der ist zu laut.");
+		complains = new Complains(tenantManager.getAll().toList().get(0).getId(), tenantManager.getAll().toList().get(1).getId(),
+			ComplainsState.PENDING, "Der ist zu laut");
 	}
 
-/*
 	@Test
 	void getAuthor() {
-		assertThat(complains.getAuthor().getUserAccount().getUsername().equals("jassi"));
-	} */
+		assertThat(complains.getAuthor() == (tenantManager.getAll().toList().get(0).getId()));
+	}
 
 	@Test
 	void getSubject() {
+		assertThat(complains.getSubject() == tenantManager.getAll().toList().get(1).getId());
 	}
 
-	@Test
-	void getAuthorPlot() {
-	}
-
-	@Test
-	void getSubjectPlot() {
-	}
 
 	@Test
 	void getState() {
+		assertThat(complains.getState().equals(ComplainsState.PENDING));
+	}
+
+	@Test
+	void getDescription() {
+		assertThat(complains.getDescription().equals("Der ist zu laut"));
 	}
 
 	@Test
 	void setAuthor() {
+		complains.setAuthor(tenantManager.getAll().toList().get(2).getId());
+		assertThat(complains.getAuthor() == (tenantManager.getAll().toList().get(2).getId()));
 	}
+	
 
 	@Test
 	void setSubject() {
-	}
-
-	@Test
-	void setAuthorPlot() {
-	}
-
-	@Test
-	void setSubjectPlot() {
+		complains.setSubject(tenantManager.getAll().toList().get(0).getId());
+		assertThat(complains.getSubject() == (tenantManager.getAll().toList().get(0).getId()));
 	}
 
 	@Test
 	void setState() {
+		complains.setState(ComplainsState.FINISHED);
+		assertThat(complains.getState().equals(ComplainsState.FINISHED));
 	}
 
 	@Test
-	void getAuthorName() {
-	}
-
-	@Test
-	void getSubjectName() {
+	void setDescription() {
+		complains.setDescription("Der ist doof.");
+		assertThat(complains.getDescription().equals("Der ist doof."));
 	}
 }

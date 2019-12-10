@@ -8,6 +8,7 @@ import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.UserAccount;
+import org.thymeleaf.context.ILazyContextVariable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,11 +26,9 @@ public class Complains {
 	private @Id @GeneratedValue long id;
 	public long authorId;
 	public long subjectId;
-	//public ProductIdentifier authorPlotId;
-	//public ProductIdentifier subjectPlotId;
 	public ComplainsState state;
 	public String description;
-	//private final TenantManager tenantManager;
+
 
 	/**
 	 * Private constructor of class {@link Complains}, which is used by the Spring Framework
@@ -44,14 +43,11 @@ public class Complains {
 	 * @param state
 	 */
 
-	public Complains(long authorId, long subjectId , /*ProductIdentifier authorPlotId, ProductIdentifier subjectPlotId,*/ ComplainsState state, String description/*, TenantManager tenantManager*/){
+	public Complains(long authorId, long subjectId , ComplainsState state, String description){
 		this.authorId = authorId;
 		this.subjectId = subjectId;
-		//this.authorPlotId = authorPlotId;
-		//this.subjectPlotId = subjectPlotId;
 		this.state = state;
 		this.description = description;
-		//this.tenantManager = tenantManager;
 	}
 
 
@@ -65,17 +61,6 @@ public class Complains {
 		return subjectId;
 	}
 
-	/*public String getSubjectName(){
-		return tenantManager.get(subjectId).getForename() + " " + tenantManager.get(subjectId).getSurname();
-	}*/
-
-/*	public ProductIdentifier getAuthorPlot() {
-		return authorPlotId;
-	}
-
-	public ProductIdentifier getSubjectPlot() {
-		return subjectPlotId;
-	}*/
 
 	public ComplainsState getState() {
 		return state;
@@ -95,19 +80,6 @@ public class Complains {
 			this.subjectId = subjectId;
 	}
 
-/*	public void setAuthorPlot(ProductIdentifier authorPlotId) {
-		if(authorPlotId == null){
-			throw new IllegalArgumentException("Plot must exist!");
-		} else
-			this.authorPlotId = authorPlotId;
-	}*/
-
-/*	public void setSubjectPlot(ProductIdentifier subjectPlotId) {
-		if(subjectPlotId == null){
-			throw new IllegalArgumentException("Plot must exist!");
-		} else
-			this.subjectPlotId = subjectPlotId;
-	}*/
 
 	public void setState(ComplainsState state) {
 		if(state == null){
@@ -122,5 +94,16 @@ public class Complains {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		if(description == null){
+			throw new IllegalArgumentException("Complains must have a description");
+		}
+		this.description = description;
 	}
 }
