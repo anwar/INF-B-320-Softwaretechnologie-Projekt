@@ -212,19 +212,19 @@ class AppDataInitializer implements DataInitializer {
 		if (feeManager.findAll().iterator().hasNext()) {
 			return;
 		}
-		feeManager.save(new Fee("Wasserkosten", 1, 1.95, 0));
-		feeManager.save(new Fee("Stromkosten", 1, 0.2, 0));
-		feeManager.save(new Fee("Miete", 1, 0.18, 0));
-		feeManager.save(new Fee("Strafgeld", 1, 8, 0));
-		feeManager.save(new Fee("Mitgliedsbeitrag", 1, 17.25, 0));
-		feeManager.save(new Fee("Haftpflichtbeitrag", 1, 0.35, 0));
-		feeManager.save(new Fee("Winterdienst", 1, 3, 0));
-		feeManager.save(new Fee("Sozialbeitrag", 1, 0.5, 0));
-		feeManager.save(new Fee("Rechtsschutz", 1, 0.75, 0));
-		feeManager.save(new Fee("Aufwandspauschale", 1, 12, 0));
-		feeManager.save(new Fee("Sonstige Auslagen", 1, 1, 0));
-		feeManager.save(new Fee("Grundmiete für Wasseruhr", 1, 2.6, 0));
-		feeManager.save(new Fee("Grundmiete für Stromzähler", 1, 1.55, 0));
+		feeManager.save(new Fee("Wasserkosten", 1, 1.95));
+		feeManager.save(new Fee("Stromkosten", 1, 0.2));
+		feeManager.save(new Fee("Miete", 1, 0.18));
+		feeManager.save(new Fee("Strafgeld", 1, 8));
+		feeManager.save(new Fee("Mitgliedsbeitrag", 1, 17.25));
+		feeManager.save(new Fee("Haftpflichtbeitrag", 1, 0.35));
+		feeManager.save(new Fee("Winterdienst", 1, 3));
+		feeManager.save(new Fee("Sozialbeitrag", 1, 0.5));
+		feeManager.save(new Fee("Rechtsschutz", 1, 0.75));
+		feeManager.save(new Fee("Aufwandspauschale", 1, 12));
+		feeManager.save(new Fee("Sonstige Auslagen", 1, 1));
+		feeManager.save(new Fee("Grundmiete für Wasseruhr", 1, 2.6));
+		feeManager.save(new Fee("Grundmiete für Stromzähler", 1, 1.55));
 
 		LOG.info("Finished creating default fee lists");
 	}

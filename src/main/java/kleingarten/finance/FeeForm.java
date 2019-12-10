@@ -19,14 +19,6 @@ public class FeeForm {
 		this.title = title;
 	}
 
-	public double getPrice() {
-
-		return basePrice * count;
-	}
-	public void setPrice(double price) {
-
-		this.price = price;
-	}
 	public long getId() {
 		return id;
 	}
