@@ -49,7 +49,7 @@ class NewsController {
 	 *
 	 * @return a redirect string
 	 */
-	@RequestMapping("/")
+	@GetMapping(path = "/")
 	public String index() {
 		return "redirect:/home";
 	}
