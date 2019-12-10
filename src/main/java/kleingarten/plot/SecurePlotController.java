@@ -47,6 +47,7 @@ public class SecurePlotController {
 	 */
 	public ModelAndView detailsOfPlot(@LoggedIn UserAccount user, Plot plot) {
 		ModelAndView mav = new ModelAndView();
+		Set<Plot> plotsToShow = new HashSet<>();
 
 		if (!plotService.existsByName(plot.getName())) {
 			mav.addObject("error", "Plot must exist!");
@@ -54,31 +55,48 @@ public class SecurePlotController {
 			return mav;
 		}
 
-		plotControllerService.addGeneralInformationOfPlot(plot, mav);
+		//Add general information of plot to the model
+		ModelAndView updatedModel = plotControllerService.addGeneralInformationOfPlot(plot, mav);
+		for (String attributeName:
+			 updatedModel.getModel().keySet()) {
+			mav.addObject(attributeName, updatedModel.getModel().get(attributeName));
+		}
 		try {
+			//Add information which is saved in the procedure of the plot to the model and set the access right to it
+			//depending on which role the user has
 			Tenant tenant = tenantManager.getTenantByUserAccount(user);
 			if (dataService.procedureExists(LocalDateTime.now().getYear(), plot)) {
 				mav.addObject("rented", true);
 				Procedure procedure = dataService.getProcedure(LocalDateTime.now().getYear(), plot);
 
-				plotControllerService.secureSetAccessRightForPlotDetails(Optional.of(procedure), tenant, mav);
-				plotControllerService.addProcedureInformationOfPlot(procedure, tenant, mav);
+				updatedModel = plotControllerService.secureSetAccessRightForPlotDetails(Optional.of(procedure),
+																						tenant, mav);
+				for (String attributeName:
+						updatedModel.getModel().keySet()) {
+					mav.addObject(attributeName, updatedModel.getModel().get(attributeName));
+				}
+				updatedModel = plotControllerService.addProcedureInformationOfPlot(procedure, mav);
+				for (String attributeName:
+						updatedModel.getModel().keySet()) {
+					mav.addObject(attributeName, updatedModel.getModel().get(attributeName));
+				}
+				//Show different detail page if user rents the plot
 				if (procedure.isTenant(tenant.getId())) {
-					return detailsOfRentedPlot(user, plot, mav);
+					return rentedPlotsFor(user);
 				}
 			}
 			if (plot.getStatus() == PlotStatus.FREE) {
 				plotControllerService.secureSetAccessRightForPlotDetails(Optional.empty(), tenant, mav);
 				mav.addObject("rented", false);
+				mav.addObject("subTenants", new HashMap<Tenant, String>());
 			}
-			mav.addObject("subTenants", new HashMap<Tenant, String>());
-			mav.addObject("plots", new HashMap<Plot, String>());
 		} catch (Exception e) {
 			mav.addObject("error", e);
 			mav.setViewName("error");
 			return mav;
 		}
-		System.out.println(plot.getId().toString());
+		plotsToShow.add(plot);
+		mav.addObject("plots", plotsToShow);
 		mav.setViewName("plot/myPlot");
 		return mav;
 	}
@@ -91,7 +109,8 @@ public class SecurePlotController {
 	 * @return response as {@link ModelAndView}
 	 */
 	@GetMapping("/myPlot/")
-	public ModelAndView rentedPlots(@LoggedIn UserAccount user) {
+	//TODO Change method so that return parameters are used
+	public ModelAndView rentedPlotsFor(@LoggedIn UserAccount user) {
 		ModelAndView mav = new ModelAndView();
 		Plot shownPlot;
 

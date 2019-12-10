@@ -62,19 +62,29 @@ public class InsecurePlotController {
 	 */
 	public ModelAndView detailsOfFreePlot(@PathVariable Plot plot) {
 		ModelAndView mav = new ModelAndView();
+		Set<Plot> plotsToShow = new HashSet<>();
 
 		if (!plotService.existsByName(plot.getName())) {
 			mav.addObject("error","Plot must exist!");
+			mav.setViewName("error");
+			return mav;
 		}
 		if (plot.getStatus() == PlotStatus.TAKEN) {
 			mav.addObject("error","Unauthenticated user must not have access to a rented plot!");
+			mav.setViewName("error");
+			return mav;
 		}
+		plotsToShow.add(plot);
 
 		mav.addObject("rented", false);
 		mav.addObject("subTenants", new HashMap<Tenant, String>());
-		mav.addObject("plots", new HashMap<Plot, String>());
+		mav.addObject("plots", plotsToShow);
 
-		plotControllerService.addGeneralInformationOfPlot(plot, mav);
+		ModelAndView updatedModel = plotControllerService.addGeneralInformationOfPlot(plot, mav);
+		for (String attributeName:
+			 updatedModel.getModel().keySet()) {
+			mav.addObject(attributeName, updatedModel.getModel().get(attributeName));
+		}
 		mav.setViewName("plot/myPlot");
 
 		return mav;
