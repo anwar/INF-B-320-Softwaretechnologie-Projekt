@@ -7,7 +7,6 @@ import java.util.Set;
 
 import kleingarten.plot.PlotService;
 import kleingarten.plot.PlotStatus;
-import kleingarten.tenant.Tenant;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;

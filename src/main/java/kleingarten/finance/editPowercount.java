@@ -2,8 +2,6 @@ package kleingarten.finance;
 import org.hibernate.validator.constraints.Range;
 import org.salespointframework.core.SalespointIdentifier;
 
-import kleingarten.plot.Plot;
-
 public class editPowercount {
 	private int year;
 	private SalespointIdentifier plotId;

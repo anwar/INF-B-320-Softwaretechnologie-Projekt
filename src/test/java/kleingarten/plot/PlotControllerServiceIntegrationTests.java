@@ -7,7 +7,6 @@ import kleingarten.tenant.TenantManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.salespointframework.useraccount.Role;
-import org.salespointframework.useraccount.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.servlet.ModelAndView;

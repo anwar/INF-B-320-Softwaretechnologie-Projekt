@@ -17,14 +17,14 @@ public interface ProcedureRepository extends CrudRepository<Procedure, Long> {
 	Streamable<Procedure> findByPlot(Plot plot);
 
 	Streamable<Procedure> findByPlotName(String plotName);
-	
+
 
 	Streamable<Procedure> findByPlotProductIdentifier(ProductIdentifier plotId);
-	
-	
+
+
 
 	Streamable<Procedure> findByYear(int year);
-	
+
 	Streamable<Procedure> findByMainTenant( long tenantId);
 
 	@Query("select p from Procedure p WHERE :tenant in elements(p.subTenants)")

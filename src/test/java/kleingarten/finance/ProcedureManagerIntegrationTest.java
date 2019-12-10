@@ -1,4 +1,4 @@
-package kleingarten.Finance;
+package kleingarten.finance;
 
 import javax.transaction.Transactional;
 
@@ -12,7 +12,7 @@ import kleingarten.finance.ProcedureManager;
 public class ProcedureManagerIntegrationTest {
 
 	public ProcedureManagerIntegrationTest(@Autowired ProcedureManager pm) {
-		
+
 	}
 
 }
