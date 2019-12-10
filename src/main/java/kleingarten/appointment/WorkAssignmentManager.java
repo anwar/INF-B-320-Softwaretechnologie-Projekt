@@ -36,8 +36,8 @@ public class WorkAssignmentManager {
 		return workAssignmentRepository.save(new WorkAssignment(form.getDateTime(), 0, form.getTitle(), form.getDescription(), null));
 	}
 
-	public WorkAssignment createAssignmentForInitializer(LocalDateTime date, String title, String description, List<Plot> plots){
-		return workAssignmentRepository.save(new WorkAssignment(date, 0,title, description, plots));
+	public WorkAssignment createAssignmentForInitializer(LocalDateTime date, int workHours, String title, String description, List<Plot> plots){
+		return workAssignmentRepository.save(new WorkAssignment(date, workHours,title, description, plots));
 	}
 
 	public boolean containsListTheDate(LocalDateTime localDateTime){
@@ -89,9 +89,12 @@ public class WorkAssignmentManager {
 	}
 
 	public void setWorkHours(int workHours, long workAssigmentID){
+
 		WorkAssignment workAssignment = findByID(workAssigmentID);
 
 		workAssignment.setWorkHours(workHours);
+
+		workAssignmentRepository.save(workAssignment);
 	}
 
 	public int getWorkHours(Plot plot, long workAssignmentID){
