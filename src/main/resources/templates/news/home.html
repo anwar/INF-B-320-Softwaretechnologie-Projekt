@@ -78,9 +78,8 @@
                                     <div class="field">
                                         <label for="text" th:text="#{news.entryEdit.text}">Newseintrag
                                             Bearbeiten</label><br/>
-                                        <!-- TODO (Talal): fix textarea so that the current comment text is used -->
                                         <textarea id="text" name="text" cols="45" rows="8" th:value="${entry.text}"
-                                                  required="required"></textarea>
+                                                  th:text="${entry.text}" required="required"></textarea>
                                     </div>
                                     <button class="ui submit button"
                                             th:onclick="'hideNewsEditForm(\'' + ${entry.id} + '\');'"
