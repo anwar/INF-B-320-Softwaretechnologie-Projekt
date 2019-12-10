@@ -123,7 +123,8 @@ class AppDataInitializer implements DataInitializer {
 			return;
 		}
 		LOG.info("create default Assignments");
-		var Appointment = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 1, 22, 15, 20, 10),2, "Garten putzen", "Garten sauber machen Yalah", null);
+		var Appointment = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 1,1, 1, 0),0, "Neujahrsputz", "Garten von Böllerresten und Müll befreien", null);
+		var Appointment2 = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 4, 25,  16, 0), 0, "In K(l)einanlage Müll aufsammeln", "Müll aufheben", null);
 		this.workAssignmentRepo.saveAll(List.of(Appointment));
 
 	}

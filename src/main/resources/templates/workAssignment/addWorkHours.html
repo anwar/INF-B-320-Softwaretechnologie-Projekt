@@ -26,7 +26,7 @@
     </div>
 </div>
 <center>
-    <form method="post" th:action="@{/changeWorkHours}">
+
     <table id="myTable">
         <tr>
             <th>Datum / Zeit</th>
@@ -39,14 +39,16 @@
             <td th:text="${workAssignment.date}"></td>
             <td th:text="${workAssignment.title}"></td>
             <td th:text="${workAssignment.description}"></td>
-            <td><input type="text" id="workHours" name="workHours" required="required" th:value="${workAssignment.workHours}"/></td>
-            <td hidden><input class="text_bgImage" id="id" name="id" th:value="${(workAssignment.getId())}"  type="number" required="required"/></td>
-            <td><button style="font-size:13px; height: 35px; width: 200px" type="submit" class="ui button">Arbeitstunden speichern</button></td>
+            <form method="post" th:action="@{/changeWorkHours}">
+                <td><input type="text" id="workHours" name="workHours" th:value="${workAssignment.getWorkHours()}"/></td>
+                <td hidden><input class="text_bgImage" id="id" name="id" th:value="${(workAssignment.getId())}"  type="number" required="required"/></td>
+                <td><button style="font-size:13px; height: 35px; width: 200px" type="submit" class="ui button">Arbeitstunden speichern</button></td>
+            </form>
         </tr>
     </table>
     <br/>
     <br/>
-    </form>
+
 </center>
 </body>
 </html>

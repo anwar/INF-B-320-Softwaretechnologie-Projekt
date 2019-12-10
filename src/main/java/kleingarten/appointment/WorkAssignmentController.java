@@ -53,11 +53,10 @@ public class WorkAssignmentController {
 
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	@GetMapping("/listOfAssignments")
-	String listOfAppointments(Model model) {
+	String listOfAssignments(Model model) {
 		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
 		return "workAssignment/listOfAssignments";
 	}
-
 
 	@GetMapping("/addWorkAssignment/{plot}")
 	public String appointmentList(@PathVariable Plot plot,  Model model) {
@@ -115,7 +114,7 @@ public class WorkAssignmentController {
 	String setWorkHours(@RequestParam("id") Long id,
 						@RequestParam("workHours") String workHours){
 		int workHoursInt = Integer.parseInt(workHours);
-		workAssignmentManager.setWorkHours(workHoursInt,id);
+		workAssignmentManager.setWorkHours(workHoursInt , id);
 		return "redirect:/addWorkHours";
 	}
 }
