@@ -27,21 +27,25 @@
     </div>
     <center>
     <table id="myTable">
+        <thead>
         <tr>
             <th>Datum</th>
             <th>Titel</th>
             <th>Beschreibung</th>
             <th>Parzellen</th>
-            <th>Bearbeiten</th>
+
         </tr>
+        </thead>
+        <tbody>
         <tr th:each="assignment : ${ListOfAssignments}">
             <td th:text="${assignment.date}">Datum</td>
             <td th:text="${assignment.title}">Titel</td>
             <td th:text="${assignment.description}">Beschreibung</td>
             <td th:text="${assignment.plots.size()}">Parzellen</td>
             <td style="font-size:25px; background-color: white;"> <a th:title="Bearbeiten" th:href="'/workAssignmentModify?id=' +${assignment.getId()}" > &#9998; </a> </td>
-        </tr>
+        </tr></tbody>
     </table>
     </center>
+    <div th:include="navigation :: footer"></div>
 </body>
 </html>
