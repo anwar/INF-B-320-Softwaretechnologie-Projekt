@@ -1,4 +1,4 @@
-package kleingarten.Finance;
+package kleingarten.finance;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

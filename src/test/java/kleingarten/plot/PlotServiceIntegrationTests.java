@@ -1,7 +1,7 @@
 package kleingarten.plot;
 
 
-import kleingarten.Finance.ProcedureManager;
+import kleingarten.finance.ProcedureManager;
 import kleingarten.tenant.TenantManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

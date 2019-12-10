@@ -15,7 +15,7 @@
  */
 package kleingarten.configuration;
 
-import kleingarten.Finance.*;
+import kleingarten.finance.*;
 import kleingarten.appointment.WorkAssignmentManager;
 import kleingarten.appointment.WorkAssignmentRepository;
 import kleingarten.news.NewsEntry;

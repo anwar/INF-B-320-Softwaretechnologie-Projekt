@@ -1,7 +1,5 @@
 package kleingarten.plot;
 
-import kleingarten.Finance.ProcedureManager;
-import kleingarten.Finance.Procedure;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.stereotype.Component;
 

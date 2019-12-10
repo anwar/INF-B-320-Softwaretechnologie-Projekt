@@ -1,11 +1,9 @@
 package kleingarten.plot;
 
-import kleingarten.Finance.Procedure;
+import kleingarten.finance.Procedure;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
-import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.ProductIdentifier;
-import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.money.MonetaryAmount;
 import java.time.LocalDateTime;
 import java.util.*;
 

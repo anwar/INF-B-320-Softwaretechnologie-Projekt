@@ -1,4 +1,4 @@
-package kleingarten.Finance;
+package kleingarten.finance;
 
 import javax.transaction.Transactional;
 
@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class ProcedureManagerIntegrationTest {
 
 	public ProcedureManagerIntegrationTest(@Autowired ProcedureManager pm) {
-		
+
 	}
 
 }

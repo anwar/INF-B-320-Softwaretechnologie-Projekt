@@ -1,7 +1,6 @@
 package kleingarten.plot;
 
-import com.querydsl.core.Tuple;
-import kleingarten.Finance.Procedure;
+import kleingarten.finance.Procedure;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 import org.salespointframework.useraccount.Role;

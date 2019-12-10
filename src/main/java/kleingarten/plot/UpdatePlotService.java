@@ -1,6 +1,6 @@
 package kleingarten.plot;
 
-import kleingarten.Finance.ProcedureManager;
+import kleingarten.finance.ProcedureManager;
 import kleingarten.tenant.Tenant;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Component;
@@ -42,7 +42,7 @@ public class UpdatePlotService {
 	}
 
 	/**
-	 * Updates the workHours of a {@link Plot} in the associated {@link kleingarten.Finance.Procedure}
+	 * Updates the workHours of a {@link Plot} in the associated {@link kleingarten.finance.Procedure}
 	 * @param associatedPlot {@link Plot} for which the workHours should be updated
 	 * @param workHours workHours of a {@link Plot} as int
 	 */
@@ -51,7 +51,7 @@ public class UpdatePlotService {
 	}
 
 	/**
-	 * Updates the powerCount of a {@link Plot} in the associated {@link kleingarten.Finance.Procedure}
+	 * Updates the powerCount of a {@link Plot} in the associated {@link kleingarten.finance.Procedure}
 	 * @param associatedPlot {@link Plot} for which the counters should be updated
 	 * @param powerCount value of the power meter of a {@link Plot} as double
 	 */
@@ -60,7 +60,7 @@ public class UpdatePlotService {
 	}
 
 	/**
-	 * Updates the waterCount of a {@link Plot} in the associated {@link kleingarten.Finance.Procedure}
+	 * Updates the waterCount of a {@link Plot} in the associated {@link kleingarten.finance.Procedure}
 	 * @param associatedPlot {@link Plot} for which the counters should be updated
 	 * @param waterCount value of the water meter of a {@link Plot} as double
 	 */
@@ -69,7 +69,7 @@ public class UpdatePlotService {
 	}
 
 	/**
-	 * Adds {@link Tenant}s for a {@link Plot} to the associated {@link kleingarten.Finance.Procedure}
+	 * Adds {@link Tenant}s for a {@link Plot} to the associated {@link kleingarten.finance.Procedure}
 	 * @param associatedPlot {@link Plot} for which the {@link Tenant}s should be added
 	 * @param tenants new {@link Tenant}s as {@link Streamable} of type {@link Tenant}
 	 */

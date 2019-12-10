@@ -1,16 +1,14 @@
-package kleingarten.Finance;
+package kleingarten.finance;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Persistence;
 
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.lang.NonNull;
