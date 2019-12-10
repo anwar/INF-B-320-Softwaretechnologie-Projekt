@@ -20,7 +20,7 @@
 | 0.1.5   | 14.11.2019        | Ylvi Bachmann
 | 0.1.6   | 20.11.2019        | Isabell Zorr
 | 0.1.7   | 21.11.2019        | Ylvi Bachmann
-
+| 0.1.8   | 10.12.2019        | Muhammad Talal Anwar
 |===
 
 toc::[]
@@ -281,19 +281,18 @@ image::models/design/user-interface.png[]
 | Externe Klasse                  | Pfad der externen Klasse                                   | Verwendet von (Klasse der eigenen Anwendung)
 | Salespoint.AbstractEntity       | org.salespointframework.core.AbstractEntity                | finance.Fee
 | Salespoint.Catalog              | org.salespointframework.catalog                            | plot.PlotCatalog
-| Salespoint.DataInitializer      | org.salespointframework.core.DataInitializer              a|
-* news.NewsDataInitializer +
-* tenant.TenantDataInitializer +
-* fee.FeeDataInitializer
+| Salespoint.DataInitializer      | org.salespointframework.core.DataInitializer               | configuration.AppDataInitializer
 | Salespoint.Product              | org.salespointframework.catalog.Product                    | plot.Plot
-| Salespoint.Role                 | org.salespointframework.useraccount.Role                   | tenant.TenantDataIntializer
+| Salespoint.Role                 | org.salespointframework.useraccount.Role                  a|
+* tenant.Tenant +
+* tenant.TenantManager +
+* tenant.TenantRole
 | Salespoint.SalespointIdentifier | org.salespointframework.core.SalespointIdentifier          | finance.Fee
 | Salespoint.UserAccount          | org.salespointframework.useraccount.UserAccount            | tenant.Tenant
 | Salespoint.UserAccountManager   | org.salespointframework.useraccount.UserAccountManager     | tenant.TenantManager
 | Spring.Assert                   | org.springframework.util.Assert                           a|
 * news.NewsEntry +
 * news.NewsController +
-* news.NewsDataInitializer +
 * tenant.TenantController +
 * tenant.TenantManager
 | Spring.CrudRepository           | org.springframework.data.repository.CrudRepository        a|
@@ -301,20 +300,18 @@ image::models/design/user-interface.png[]
 * tenant.TenantRepository +
 * finance.FeeCatalog
 | Spring.Errors                   | org.springframework.validation.Errors                     a|
-* news.NewsController +
-* message.MessageController
-| Spring.MailMessage              | org.springframework.mail.MailMessage                       | message.MessageController
-| Spring.MailSender               | org.springframework.mail.MailSender                        | message.MessageController
+* news.NewsController
+| Spring.SimpleMailMessage        | org.springframework.mail.SimpleMailMessage                 | message.MessageService
+| Spring.MimeMessageHelper        | org.springframework.mail.javamail.MimeMessageHelper        | message.MessageService
+| Spring.JavaMailSender           | org.springframework.mail.javamail.JavaMailSender           | message.MessageService
 | Spring.Model                    | org.springframework.ui.Model                              a|
 * finance.FeeController +
 * news.NewsController +
-* message.MessageController +
 * plot.PlotController +
 * tenant.tenantController
 | Spring.Streamable               | org.springframework.data.util.Streamable                  a|
 * tenant.TenantManager +
 * finance.FeeCatalog
-
 |===
 
 == Bausteinsicht

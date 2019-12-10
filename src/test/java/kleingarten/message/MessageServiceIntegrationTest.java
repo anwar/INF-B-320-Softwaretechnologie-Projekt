@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Integration tests for {@link MessageService}.
- * {@link GreenMail} is used to create a test server where we can send and received
+ * {@link GreenMail} is used to create a test server where we can send and retrieve
  * our emails for testing purposes.
  * These tests are based on the examples provided on the official Greenmail website.
  *
@@ -81,7 +81,7 @@ public class MessageServiceIntegrationTest {
 	 * {@link GreenMailUtil} is used to created random content for the email.
 	 */
 	@Test
-	public void sendMessageTest() throws MessagingException {
+	void sendMessageTest() throws MessagingException {
 		try {
 			greenMail.start();
 
@@ -110,7 +110,7 @@ public class MessageServiceIntegrationTest {
 	 * {@link GreenMailUtil} is used to created random content for the email.
 	 */
 	@Test
-	public void sendMessageWithAttachmentTest() throws Exception {
+	void sendMessageWithAttachmentTest() throws Exception {
 		try {
 			greenMail.start();
 

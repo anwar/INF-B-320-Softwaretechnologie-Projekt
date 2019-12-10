@@ -2,6 +2,7 @@ package kleingarten.finance;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import kleingarten.plot.PlotService;
@@ -65,6 +66,14 @@ public class ProcedureManager {
 
 		return null;
 	}
+	
+	public Procedure getActualProcedure(Plot plot) {
+		for(Procedure proc:procedures.findByPlot(plot)) {
+			if(proc.isOpen()) return proc;
+		}
+		
+		return null;
+	}
 
 	/**
 	 * Get all Procedures for the Tenant, if he is main or sub Tenant in it.
@@ -111,6 +120,10 @@ public class ProcedureManager {
 
 	public Procedure get(Long id){
 		return procedures.findById(id).orElse(null);
+	}
+	
+	public PlotService getPlotService() {
+		return plotService;
 	}
 
 

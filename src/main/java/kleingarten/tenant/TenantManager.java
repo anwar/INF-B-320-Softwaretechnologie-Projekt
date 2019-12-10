@@ -103,4 +103,8 @@ public class TenantManager {
 		return  tenants.findAll().filter(c -> !c.getUserAccount().isEnabled());
 	}
 
+	public void createNewTenant(String forename, String surname, String email, String password){
+		Tenant tenant = new Tenant(forename, surname, "", "", "", userAccounts.create(surname, Password.UnencryptedPassword.of(password), email));
+		tenants.save(tenant);
+	}
 }

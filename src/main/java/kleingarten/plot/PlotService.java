@@ -3,6 +3,9 @@ package kleingarten.plot;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.stereotype.Component;
 
+import kleingarten.finance.Procedure;
+import kleingarten.finance.ProcedureManager;
+
 @Component
 public class PlotService {
 	private final PlotCatalog plotCatalog;

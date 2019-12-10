@@ -1,5 +1,7 @@
 package kleingarten.plot;
 
+import com.querydsl.core.Tuple;
+
 import kleingarten.finance.Procedure;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;

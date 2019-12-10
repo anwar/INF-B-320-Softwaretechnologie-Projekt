@@ -19,16 +19,20 @@
     <title>Übersicht</title>
 </head>
 <body>
-<div class="ui container">
+
     <nav th:include="navigation :: navigation"/>
+    <div >
+
     <div class="header-title">
+
+
         <h1>Übersicht</h1>
     </div>
     <div class="dropdown">
         <button onclick="myFunction()" class="dropbtn">Ansicht...</button>
         <div id="myDropdown" class="dropdown-content">
-            <a>Allgemein </a>
-            <a>nach Obmann</a>
+            <a th:href="'/anlage'">Allgemein</a>
+            <a sec:authorize="isAuthenticated()" th:href="'/chairmenOverview'">nach Obmann</a>
 
         </div>
     </div>
@@ -41,26 +45,20 @@
             </div>
         </div>
     </div>
-    <div class="button-section">
-        <button class="button" th:if="${canAdd}" onclick="location.href='/plotRegistrationForm'">Parzelle hinzufügen</button>
-    </div>
    <center> <div>
         <table >
-            <tr>
-                <td style="background-color: #7CB342 "> &nbsp &nbsp</td>
-                <td>frei &nbsp </td>
-                <td style="background-color: #546E7A"> &nbsp &nbsp </td>
-                <td>bewohnt &nbsp</td>
-                <span sec:authorize="isAuthenticated()">
-                    <td style="background-color: #FDD835"> &nbsp &nbsp</td>
-                    <td>Vorstandsvorsitzender &nbsp</td>
-                    <td style="background-color: #039BE5"> &nbsp &nbsp</td>
-                    <td>Obmann</td>
-                </span>
-            </tr>
+           <div  th:each="color : ${colors.keySet()}"><td>&nbsp</td>
+                <td th:style="'background-color: ' + ${color} "> &nbsp &nbsp</td>
+
+                <td th:text="${colors.get(color)}"> Text &nbsp </td></div>
+
+
         </table>
     </div>
    </center>
+        <div class="button-section">
+            <button class="button" th:if="${canAdd}" onclick="location.href='/plotRegistration'">Parzelle hinzufügen</button>
+        </div>
 
 </div>
 <div th:include="navigation :: footer"></div>

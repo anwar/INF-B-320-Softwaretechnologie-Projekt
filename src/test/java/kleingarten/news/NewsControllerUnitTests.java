@@ -17,43 +17,28 @@ package kleingarten.news;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.util.Streamable;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 
 /**
  * Unit tests for {@link NewsController}.
  */
 @SpringBootTest
-@AutoConfigureMockMvc
 public class NewsControllerUnitTests {
-	@Autowired
-	MockMvc mvc;
-
-	@Test
-	void redirectRootUriToHome() throws Exception {
-		mvc.perform(get("/")) //
-				.andExpect(status().is3xxRedirection()) //
-				.andExpect(view().name("redirect:/home"));
-	}
-
 	@Mock
 	NewsRepository news;
 
+	/**
+	 * Test population of Spring {@link Model}.
+	 */
 	@Test
-	void newsModelPopulation() {
-
+	void modelPopulation() {
 		NewsEntry entry = new NewsEntry("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
 		doReturn(Streamable.of(entry)).when(news).findAll();
 

@@ -36,6 +36,9 @@ public class NewsRepositoryUnitTests {
 	@Autowired
 	NewsRepository news;
 
+	/**
+	 * Test the persistence of {@link NewsRepository}.
+	 */
 	@Test
 	void newsEntryPersistence() {
 		NewsEntry entry = news.save(new NewsEntry("Lorem ipsum dolor sit amet, consectetur adipiscing elit."));

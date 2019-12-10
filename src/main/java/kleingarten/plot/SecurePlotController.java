@@ -7,7 +7,6 @@ import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
 import java.util.*;
+
+import static org.salespointframework.core.Currencies.EURO;
 
 @Controller
 public class SecurePlotController {
@@ -26,7 +27,7 @@ public class SecurePlotController {
 	private final PlotControllerService plotControllerService;
 
 	SecurePlotController(PlotService plotService, PlotCatalog plotCatalog, TenantManager tenantManager,
-						   DataService dataService, PlotControllerService plotControllerService) {
+						 DataService dataService, PlotControllerService plotControllerService) {
 		this.plotService = plotService;
 		this.plotCatalog = plotCatalog;
 		this.tenantManager = tenantManager;
@@ -37,6 +38,7 @@ public class SecurePlotController {
 	/**
 	 * Create model with information of a {@link Plot} to show the detail page of a {@link Plot} when a user
 	 * is logged in
+	 *
 	 * @param user {@link UserAccount} of the logged in user
 	 * @param plot {@link Plot} of which information should be shown
 	 * @return response as {@link ModelAndView}
@@ -45,7 +47,7 @@ public class SecurePlotController {
 		ModelAndView mav = new ModelAndView();
 
 		if (!plotService.existsByName(plot.getName())) {
-			mav.addObject("error","Plot must exist!");
+			mav.addObject("error", "Plot must exist!");
 			mav.setViewName("error");
 			return mav;
 		}
@@ -82,6 +84,7 @@ public class SecurePlotController {
 	/**
 	 * Create model with information of a {@link Plot} which is rented by the user to show the detail page of the
 	 * {@link Plot} when a user is logged in and accesses his rented plots by using the entry in the navigation bar
+	 *
 	 * @param user {@link UserAccount} of the logged in user
 	 * @return response as {@link ModelAndView}
 	 */
@@ -115,8 +118,9 @@ public class SecurePlotController {
 	/**
 	 * Create model with information of a {@link Plot} which is rented by the user to show the detail page of the
 	 * {@link Plot} with buttons for all rented {@link Plot}s of this user when a user is logged in
-	 * @param user {@link UserAccount} of the logged in user
-	 * @param plot {@link Plot} of which information should be shown
+	 *
+	 * @param user         {@link UserAccount} of the logged in user
+	 * @param plot         {@link Plot} of which information should be shown
 	 * @param modelAndView {@link ModelAndView} with the information of the {@link Plot}
 	 * @return response as {@link ModelAndView}
 	 */
@@ -133,6 +137,7 @@ public class SecurePlotController {
 
 	/**
 	 * Create model with needed information to show the overview of all {@link Plot}s when user is logged in
+	 *
 	 * @param user {@link UserAccount} of the logged in user
 	 * @return response as {@link ModelAndView}
 	 */
@@ -144,12 +149,21 @@ public class SecurePlotController {
 		Map<Plot, Boolean> rights = new HashMap<>();
 		Map<String, String> usedColors = new HashMap<>();
 
-		//Set colors of plots and access depending on the user's role to the details of the plots
-		for (Plot plot : plots) {
-			Map<Plot, String> colorOfPlot = plotControllerService.setPlotColor(plot, Optional.of(user));
-			Map<Plot, Boolean> accessForPlot = plotControllerService.setAccessRightForPlot(plot, Optional.of(user));
-			colors.put(plot, colorOfPlot.get(plot));
-			rights.put(plot, accessForPlot.get(plot));
+		try {
+			//Set colors of plots and access depending on the user's role to the details of the plots
+			for (Plot plot : plots) {
+				Map<Plot, String> colorOfPlot = plotControllerService.setPlotColor(plot, Optional.of(user));
+				Map<Plot, Boolean> accessForPlot = plotControllerService.setAccessRightForPlot(plot, Optional.of(user));
+				colors.put(plot, colorOfPlot.get(plot));
+				rights.put(plot, accessForPlot.get(plot));
+			}
+			if (user.hasRole(Role.of("Vorstandsvorsitzender")) || user.hasRole(Role.of("Stellvertreter"))) {
+				mav.addObject("canAdd", true);
+			}
+		} catch (Exception e) {
+			mav.addObject("error", e);
+			mav.setViewName("error");
+			return mav;
 		}
 
 		//Add used colors and description to a map
@@ -172,6 +186,7 @@ public class SecurePlotController {
 	/**
 	 * Create model with needed information to show the overview of all {@link Plot}s and their associated chairmen
 	 * when user is logged in
+	 *
 	 * @param user {@link UserAccount} of the logged in user
 	 * @return response as {@link ModelAndView}
 	 */
@@ -183,49 +198,64 @@ public class SecurePlotController {
 		Map<Plot, Boolean> rights = new HashMap<>();
 		Map<String, String> colors = new HashMap<>();
 
-		//Set colors for plots and chairmen
-		Map<Plot, String> administratedPlots = plotControllerService.secureSetColorOfChairmenForPlots();
-		Map<Tenant, String> colorsForChairmen = plotControllerService.secureSetColorForChairman();
+		try {
+			//Set colors for plots and chairmen
+			Map<Plot, String> administratedPlots = plotControllerService.secureSetColorOfChairmenForPlots();
+			Map<Tenant, String> colorsForChairmen = plotControllerService.secureSetColorForChairman();
 
-		//Set same access rights to the details of the plots for user as in plot overview
-		for (Plot plot:
-			 administratedPlots.keySet()) {
-			Map<Plot, Boolean> accessForPlot = plotControllerService.setAccessRightForPlot(plot, Optional.of(user));
-			rights.put(plot, accessForPlot.get(plot));
+			//Set same access rights to the details of the plots for user as in plot overview
+			for (Plot plot :
+					administratedPlots.keySet()) {
+				Map<Plot, Boolean> accessForPlot = plotControllerService.setAccessRightForPlot(plot, Optional.of(user));
+				rights.put(plot, accessForPlot.get(plot));
+			}
+			//Add description of colors and associated chairmen to a map
+			for (Tenant chairman :
+					colorsForChairmen.keySet()) {
+				colors.put(colorsForChairmen.get(chairman), chairman.getForename() + " " + chairman.getSurname());
+			}
+			//Add description for free plots
+			colors.put("#7CB342", "frei");
+
+			mav.addObject("plotList", plots);
+			mav.addObject("plotColors", administratedPlots);
+			mav.addObject("colors", colors);
+			mav.addObject("userRights", rights);
+			mav.setViewName("plot/plotOverview");
+		} catch (Exception e) {
+			mav.addObject("error", e);
+			mav.setViewName("error");
+			return mav;
 		}
-		//Add description of colors and associated chairmen to a map
-		for (Tenant chairman:
-				colorsForChairmen.keySet()) {
-			colors.put(colorsForChairmen.get(chairman), chairman.getForename() + " " + chairman.getSurname());
-		}
-		//Add description for free plots
-		colors.put("#7CB342", "frei");
-
-		mav.addObject("plotList", plots);
-		mav.addObject("plotColors", administratedPlots);
-		mav.addObject("colors", colors);
-		mav.addObject("userRights", rights);
-		mav.setViewName("plot/plotOverview");
-
 		return mav;
 	}
 
-	@GetMapping("/editPlot/{plot}")
-	String editPlot(@PathVariable Plot plot, Model model){
-		model.addAttribute("plot", plotService.findById(plot.getId()));
-		System.out.println(plot.getId());
-		return "plot/editPlot";
-	}
 
+	/**
+	 * Get information from the form which is used to edit the details of a {@link Plot} and save them
+	 *
+	 * @param plotId {@link ProductIdentifier} of the {@link Plot} which details should be changed
+	 * @param size size of the {@link Plot} as int
+	 * @param description description of the {@link Plot} as {@link String}
+	 * @return response as {@link ModelAndView}
+	 */
 	@PostMapping("/editedPlot")
-	String editedPlot(@RequestParam(name = "plotID") ProductIdentifier plotId, @RequestParam("size") int size, @RequestParam("description") String description
-					 /* @RequestParam() int estimator */){
-		plotService.findById(plotId).setSize(size);
-		System.out.println(plotId);
-		plotService.findById(plotId).setDescription(description);
-		//plotService.findById(plotId).setEstimator(Money.of);
-
-		plotCatalog.save(plotService.findById(plotId));
-		return "redirect:plot/" + plotId.toString();
+	public ModelAndView editedPlot(@LoggedIn UserAccount user, @RequestParam(name = "plotID") ProductIdentifier plotId,
+								   @RequestParam("size") String size, @RequestParam("description") String description,
+								   @RequestParam() String estimator) {
+		ModelAndView mav = new ModelAndView();
+		Plot plot = plotService.findById(plotId);
+		try {
+			plot.setSize(Integer.parseInt(size));
+			plot.setDescription(description);
+			plot.setPrice(Money.of(Integer.parseInt(estimator), EURO));
+			plotCatalog.save(plotService.findById(plotId));
+		} catch (Exception e) {
+			mav.addObject("error", e);
+			mav.setViewName("error");
+			return mav;
+		}
+		return detailsOfPlot(user, plot);
 	}
 }
+

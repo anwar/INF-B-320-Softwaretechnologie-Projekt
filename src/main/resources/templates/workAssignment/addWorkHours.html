@@ -15,41 +15,38 @@
           href="../resources/css/tenantTable.css" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
-    <title>Liste der Termine</title>
+    <title>Für Termin eintragen</title>
 </head>
 <body>
 
-    <div class="ui-container">
-        <nav th:include="navigation :: navigation"/>
-        <div class="header-title">
-            <h1>Liste aller Termine</h1>
-        </div>
+<div class="ui-container">
+    <nav th:include="navigation :: navigation"/>
+    <div class="header-title">
+        <h1>Arbeitsstunden hinzufügen</h1>
     </div>
-    <center>
+</div>
+<center>
+    <form method="post" th:action="@{/changeWorkHours}">
     <table id="myTable">
-        <thead>
         <tr>
-            <th>Datum</th>
+            <th>Datum / Zeit</th>
             <th>Titel</th>
             <th>Beschreibung</th>
-            <th>Parzellen</th>
-            <th>Bearbeiten</th>
-            <th>Zeit</th>
-
+            <th>Arbeitsstunden</th>
+            <th>Speichern</th>
         </tr>
-        </thead>
-        <tbody>
-        <tr th:each="assignment : ${ListOfAssignments}">
-            <td th:text="${assignment.date}">Datum</td>
-            <td th:text="${assignment.title}">Titel</td>
-            <td th:text="${assignment.description}">Beschreibung</td>
-            <td th:text="${assignment.plots.size()}">Parzellen</td>
-            <td style="font-size:25px; background-color: white;"> <a th:title="Bearbeiten" th:href="'/workAssignmentModify?id=' +${assignment.getId()}" > &#9998; </a> </td>
-            <td th:text="${assignment.workHours}">test</td>
+        <tr th:each="workAssignment : ${ListOfAssignments}">
+            <td th:text="${workAssignment.date}"></td>
+            <td th:text="${workAssignment.title}"></td>
+            <td th:text="${workAssignment.description}"></td>
+            <td><input type="text" id="workHours" name="workHours" required="required" th:value="${workAssignment.workHours}"/></td>
+            <td hidden><input class="text_bgImage" id="id" name="id" th:value="${(workAssignment.getId())}"  type="number" required="required"/></td>
+            <td><button style="font-size:13px; height: 35px; width: 200px" type="submit" class="ui button">Arbeitstunden speichern</button></td>
         </tr>
-        </tr></tbody>
     </table>
-    </center>
-    <div th:include="navigation :: footer"></div>
+    <br/>
+    <br/>
+    </form>
+</center>
 </body>
 </html>

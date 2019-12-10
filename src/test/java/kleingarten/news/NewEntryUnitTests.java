@@ -24,12 +24,19 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
  * Unit tests for {@link NewsEntry}.
  */
 public class NewEntryUnitTests {
+
+	/**
+	 * Test that creation of {@link NewsEntry} with empty text is rejected.
+	 */
 	@Test
 	void rejectsEmptyText() {
 		assertThatExceptionOfType(IllegalArgumentException.class)//
 				.isThrownBy(() -> new NewsEntry(""));
 	}
 
+	/**
+	 * Test that creation of {@link NewsEntry} also creates the respective date.
+	 */
 	@Test
 	void dateCreation() {
 		assertThat(new NewsEntry("Lorem ipsum dolor sit amet, consectetur adipiscing elit.").getDate()).isNotNull();
