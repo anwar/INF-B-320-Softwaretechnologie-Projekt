@@ -47,6 +47,7 @@
                             <a th:if="not ${rented}" th:href="${'/createApplication/' + plotID}" >Bewerben</a>
                             <a th:if="not ${rented}" sec:authorize="hasAnyRole('Vorstandsvorsitzender')" th:href="'/application'">Bewerbungen anzeigen</a>
                             <a th:if="${rented}" sec:authorize="hasAnyRole('Vorstandsvorsitzender')" th:href="'/cancelPlot/' + ${plotID}">Kündigen</a>
+                            <a th:if="${rented}" th:href="'/addComplains' + ${plotID}">Beschwerde schreiben</a>
                         </div>
                     </div>
                     </th>
@@ -54,6 +55,7 @@
                 </tr>
             </thead>
             <tbody>
+            <input type="hidden" id="plot" name="plot" th:value="${plot}">
             <tr><th>Name</th> <td align="center" th:text="${plotName}"> Text </td></tr>
             <tr><th>Größe</th> <td align="center" th:text="${plotSize}"> Text </td></tr>
             <tr><th>Beschreibung</th> <td align="center" th:text="${plotDescription}"> Text </td></tr>
@@ -67,7 +69,7 @@
                 <button class="button" th:if="${canModify}">Zählerstände eintragen</button>
                 <button class="button" th:if="${canSeeBills}">Rechnungen anzeigen</button>
                 <a th:href="'/editPlot/' + ${plotID}"> <button class="button" >Bearbeiten</button></a>
-                <input type="hidden" id="plot" name="plot" th:value="${plot}">
+
             </div> -->
 
         </table>

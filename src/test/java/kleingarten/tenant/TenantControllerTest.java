@@ -37,26 +37,26 @@ public class TenantControllerTest {
 
 	@Test
 	void tenantDetailsIsAccessibleForManager() throws Exception{
-		mvc.perform(get("/tenantDetails?id=5").with(user("peter.klaus").roles("Vorstandsvorsitzender")))
+		mvc.perform(get("/tenantDetails?id=10" ).with(user("peter.klaus").roles("Vorstandsvorsitzender")))
 				.andExpect(status().isOk());
 	}
 
 	@Test
 	void tenantDetailsPreventPublicAccess() throws Exception{
-		mvc.perform(get("/tenantDetails?id=5"))
+		mvc.perform(get("/tenantDetails?id=10"))
 				.andExpect(status().isFound())
 				.andExpect(header().string(HttpHeaders.LOCATION, endsWith("/login")));
 	}
 
 	@Test
 	void modifyTenantIsAccessibleForManager() throws Exception{
-		mvc.perform(get("/modifyTenant?id=5").with(user("peter.klaus").roles("Vorstandsvorsitzender")))
+		mvc.perform(get("/modifyTenant?id=10").with(user("peter.klaus").roles("Vorstandsvorsitzender")))
 				.andExpect(status().isOk());
 	}
 
 	@Test
 	void modifyTenantPreventPublicAccess() throws Exception{
-		mvc.perform(get("/modifyTenant?id=5"))
+		mvc.perform(get("/modifyTenant?id=10"))
 				.andExpect(status().isFound())
 				.andExpect(header().string(HttpHeaders.LOCATION, endsWith("/login")));
 	}
