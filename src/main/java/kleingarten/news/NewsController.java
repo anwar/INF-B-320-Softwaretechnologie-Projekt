@@ -103,8 +103,8 @@ class NewsController {
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	@PostMapping(path = "/home/news/deleteEntry/{id}")
 	String deleteEntry(@PathVariable("id") long id) {
-		NewsEntry entry = news.findById(id).
-				orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		NewsEntry entry = news.findById(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 		news.delete(entry);
 
 		return "redirect:/home";
@@ -121,8 +121,8 @@ class NewsController {
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	@PostMapping(path = "/home/news/editEntry/{id}")
 	String editEntry(@PathVariable("id") long id, @RequestParam("text") String text) {
-		NewsEntry entry = news.findById(id).
-				orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		NewsEntry entry = news.findById(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
 		entry.setText(text);
 		entry.setDate(LocalDateTime.now());

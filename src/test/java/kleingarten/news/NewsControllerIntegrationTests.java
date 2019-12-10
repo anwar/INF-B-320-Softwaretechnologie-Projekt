@@ -40,6 +40,9 @@ public class NewsControllerIntegrationTests {
 	@Autowired
 	NewsRepository news;
 
+	/**
+	 * Test that root URI is redirected to "/home".
+	 */
 	@Test
 	void redirectRootUriToHome() throws Exception {
 		mvc.perform(get("/")) //
@@ -47,6 +50,10 @@ public class NewsControllerIntegrationTests {
 				.andExpect(view().name("redirect:/home"));
 	}
 
+	/**
+	 * Test that a {@link NewsEntry} is successfully deleted and user is
+	 * redirected to "/home".
+	 */
 	@Test
 	@WithMockUser(roles = "Vorstandsvorsitzender")
 	void deleteEntryAndRedirectToHome() throws Exception {
@@ -60,6 +67,10 @@ public class NewsControllerIntegrationTests {
 		assertThat(news.count()).isEqualTo(noOfEntries - 1);
 	}
 
+	/**
+	 * Test that a {@link NewsEntry} is successfully updated and user is
+	 * redirected to "/home".
+	 */
 	@Test
 	@WithMockUser(roles = "Vorstandsvorsitzender")
 	void editEntryAndRedirectToHome() throws Exception {
@@ -76,8 +87,8 @@ public class NewsControllerIntegrationTests {
 
 		assertThat(news.count()).isEqualTo(noOfEntries);
 
-		NewsEntry updatedEntry = news.findById(id).
-				orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+		NewsEntry updatedEntry = news.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 
 		assertThat(updatedEntry.getText()).isEqualTo(text);
 	}
