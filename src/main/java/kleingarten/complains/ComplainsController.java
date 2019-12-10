@@ -27,7 +27,7 @@ public class ComplainsController {
 	}
 
 	@PreAuthorize("hasRole('Hauptpächter')")
-	@GetMapping("/addComplains")
+	@GetMapping("/addComplains/{plot}")
 	String addComplains(Model model){
 		model.addAttribute("complain", complainsManager.getAll());
 		return "complains/addComplains";

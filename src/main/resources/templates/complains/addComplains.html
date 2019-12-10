@@ -17,6 +17,8 @@
     <title>Beschwerde schreiben</title>
 </head>
 <body>
+</head>
+<nav th:include="navigation :: navigation"></nav>
 <div class="header-title">
     <h1>Beschwerde schreiben</h1>
 </div>
@@ -27,7 +29,7 @@
                 <label for="name">Name des Angeklagten</label>
             </th>
             <td>
-                <input class="text_bgImage" id="name" th:field="*{name}" type="date" required="required" />
+                <input class="text_bgImage" id="name" th:field="*{name}" type="text" required="required" />
             </td>
         </tr>
         <tr>
