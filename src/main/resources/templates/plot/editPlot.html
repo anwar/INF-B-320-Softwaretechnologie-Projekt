@@ -50,6 +50,9 @@
 
     </div></form>
 </div>
+
+
+
 <div th:if="${procedureExists}">
 
 <!-- Wasserstand, ROLES: Wassermann -->
@@ -77,7 +80,7 @@
 	</div>
 	
 <!-- Stromstand, ROLES: Teanant, Vorstandsvorsitzender -->
-	<div  sec:authorize="hasAnyRole('Vorstandsvorsitzender','Hauptpächter')">
+	<div  sec:authorize="hasAnyRole('Vorstandsvorsitzender','Hauptpächter')" th:if="${tenantOrBoss}">
 		<form method="post" th:action="@{/procedureDetails/editPowercount}">
 		<table  id="powerTable">
 

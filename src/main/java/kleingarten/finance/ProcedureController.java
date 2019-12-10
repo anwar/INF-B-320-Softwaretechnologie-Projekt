@@ -1,5 +1,8 @@
 package kleingarten.finance;
 
+import org.salespointframework.useraccount.Role;
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,15 +10,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import kleingarten.plot.Plot;
+import kleingarten.tenant.Tenant;
+import kleingarten.tenant.TenantManager;
 
 @Controller
 public class ProcedureController {
 	private ProcedureManager procedureManager;
+	private TenantManager tenantManager;
 
 	@Autowired
 
 	public ProcedureController(ProcedureManager procedureManager) {
 		this.procedureManager = procedureManager;
+		this.tenantManager = tenantManager;
 	}
 
 	/**
@@ -141,7 +148,7 @@ public class ProcedureController {
 
 
 
-	public ModelAndView editPlot(@PathVariable Plot plot, ModelAndView mav) {
+	public ModelAndView editPlot(@LoggedIn UserAccount user, @PathVariable Plot plot, ModelAndView mav) {
 
 
 
@@ -152,11 +159,7 @@ public class ProcedureController {
 		System.out.println(procedureManager.getPlotService().findById(plot.getId())+" PLOT");
 
 
-
-
-
-
-
+		
 		try {
 
 
@@ -186,6 +189,24 @@ public class ProcedureController {
 
 
 		Procedure proc = (plot==null) ? null : procedureManager.getActualProcedure(plot);
+		
+		//decide if user can change powercount
+				Tenant tenant = procedureManager.getTenantManager().getTenantByUserAccount(user);
+				
+				boolean tenantOrBoss = false;
+				
+				if(proc!=null) { // Tenant ?
+					if(tenant.getId()==proc.getMainTenant() || proc.getSubTenants().contains(proc.getId()))
+						tenantOrBoss = true;
+				} 
+				
+				for(Role role:user.getRoles().toList()) { // Vorstand ?
+					System.out.println(role.toString());
+					if(role.toString().equalsIgnoreCase("Vorstandsvorsitzender")) {
+						tenantOrBoss=true;
+					}
+				}
+				mav.addObject("tenantOrBoss", tenantOrBoss);
 
 
 

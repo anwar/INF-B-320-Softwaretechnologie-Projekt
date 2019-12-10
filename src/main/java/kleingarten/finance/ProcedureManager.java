@@ -7,6 +7,8 @@ import java.util.Set;
 
 import kleingarten.plot.PlotService;
 import kleingarten.plot.PlotStatus;
+import kleingarten.tenant.TenantManager;
+
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
@@ -21,13 +23,15 @@ public class ProcedureManager {
 	private final ProcedureRepository procedures;
 	//Add plotService to use it's methods (Ylvi)
 	private final PlotService plotService;
+	private final TenantManager tenantManager;
 
 
 	@Autowired
-	public ProcedureManager(ProcedureRepository procedures, PlotService plotService) {
+	public ProcedureManager(ProcedureRepository procedures, PlotService plotService, TenantManager tenantManager) {
 		Assert.notNull(procedures, "ProcedureRepository must not be null!");
 		this.procedures = procedures;
 		this.plotService = plotService;
+		this.tenantManager = tenantManager;
 	}
 
 	public Streamable<Procedure> getAll() {
@@ -124,6 +128,10 @@ public class ProcedureManager {
 	
 	public PlotService getPlotService() {
 		return plotService;
+	}
+	
+	public TenantManager getTenantManager() {
+		return tenantManager;
 	}
 
 
