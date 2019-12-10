@@ -60,4 +60,8 @@ public class TenantService {
 		tenantManager.get(id).getUserAccount().setEmail(newEmail);
 		tenants.save(tenantManager.get(id));
 	}
+
+	void makePreTenant(Long id){
+		tenantManager.get(id).getUserAccount().setEnabled(false);
+	}
 }
