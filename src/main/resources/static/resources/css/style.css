@@ -126,10 +126,13 @@ ul li ul {
 	visibility: hidden;
 	opacity: 0;
 	position: absolute;
-	transition: all 0.5s ease;
-	left: 0;
+
+    text-align: center;
 	display: none;
-	margin: 3.3em 30em 0em 30em;
+
+	width: 100%;
+
+
 }
 
 ul li:hover > ul,
@@ -137,13 +140,15 @@ ul li:focus-within > ul,
 ul li ul:hover {
 	visibility: visible;
 	opacity: 1;
-	display: inline-block;
+	display: flex;
+    text-align: center;
 
 }
 
 ul li ul li {
 	clear: both;
-	width: 100%;}
+	width: 100%;
+    text-align: center}
 
 
 

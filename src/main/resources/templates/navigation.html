@@ -34,10 +34,11 @@
                 <li><a href="tenant/changeEmail.html" th:href="@{/changeEmail}" sec:authorize="isAuthenticated()">Email ändern</a></li>
             </ul>
         </li>
-        <li><a href="#" sec:authorize="hasAnyRole('Vorstandsvorsitzender,Obmann')">Termine</a>
-            <ul >
-                <li><a href="" th:href="@{/}"  >Termin erstellen</a></li>
-                <li><a href="" th:href="@{/}" >Termine einsehen</a></li>
+        <li><a href="#" sec:authorize="hasAnyRole('Vorstandsvorsitzender')">Termine</a>
+            <ul>
+                <li><a href="" th:href="@{/createAssignment}"  >Termin erstellen</a></li>
+                <li><a href="" th:href="@{/listOfAssignments}" >Termine einsehen</a></li>
+                <li><a href="" th:href="@{/addWorkHours}">Arbeitsstunden hinzufügen</a></li>
 
             </ul>
         <li><a href="finance/bill.html" th:href="@{/bill}" sec:authorize="isAuthenticated()">Rechnungen</a></li>
