@@ -110,9 +110,9 @@ class AppDataInitializer implements DataInitializer {
 
 		LOG.info("Creating default news entries...");
 
-		news.save(new NewsEntry("Hört hört, werte Leute, am 13.09.2020 ist wieder Zeit für das jährliche Ritterfest im Lande K(l)einGarten."));
-		news.save(new NewsEntry("Wiener Schnitzel. Ihr habt richtig gelesen. It's time for a d-d-duel. Schnitzelwettessen. Wo? Na hier natürlich. Wann? Am 30.02.2020."));
-		news.save(new NewsEntry("30.03.2019 Achtung: Bitte denkt daran, dass eure Stiefmütterchen auch wachsen können: Laub harken ist angesagt"));
+		news.save(new NewsEntry("Hört hört, werte Leute, am 13.09.2020 ist wieder Zeit für das jährliche Ritterfest im Lande K(l)einGarten. ⚔️"));
+		news.save(new NewsEntry("Wiener Schnitzel. Ihr habt richtig gelesen. It's time for a d-d-duel. Schnitzelwettessen. Wo? Na hier natürlich. Wann? Am 30.02.2020. \uD83E\uDD69"));
+		news.save(new NewsEntry("30.03.2019 Achtung: Bitte denkt daran, dass eure Stiefmütterchen auch wachsen können: Laub harken ist angesagt! \uD83C\uDF42 "));
 	}
 
 
