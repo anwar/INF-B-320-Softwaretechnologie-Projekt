@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import kleingarten.plot.Plot;
 
 @Controller
 public class ProcedureController {
@@ -68,9 +71,10 @@ public class ProcedureController {
 	 * @param procedure
 	 * @return
 	 */
-	@PostMapping("/procedureDetails/editWatercount/{plotId}")
-	public String saveWatercount(Model model, Procedure procedure) {
+	@PostMapping("/procedureDetails/editWatercount")
+	public String saveWatercount(Model model, @RequestParam("procedureId") String procedureId, @RequestParam String water) {
 		// those three lines are just for checking the value. Not necessary to exist.
+		Procedure procedure = procedureManager.get(Long.parseLong(procedureId));
 		System.out.println("Plot ID:" + procedure.getPlotId());
 		System.out.println("Watercount:" + procedure.getWatercount());
 		System.out.println("Powercount:" + procedure.getPowercount());
@@ -103,5 +107,257 @@ public class ProcedureController {
 		procedureManager.save(procedure);
 		return "redirect:/procedureDetails";
 	}
+	/**
 
+
+
+	 * Create model with needed information to show a form to change the saved details of the {@link Plot}
+
+
+
+	 *
+
+
+
+	 * @param plot {@link Plot} for which a form with the saves details should be shown
+
+
+
+	 * @param mav  {@link ModelAndView} which contains the needed information of the {@link Plot}
+
+
+
+	 * @return response as {@link ModelAndView}
+
+
+
+	 */
+
+
+
+	@GetMapping("/editPlot/{plot}")
+
+
+
+	public ModelAndView editPlot(@PathVariable Plot plot, ModelAndView mav) {
+
+
+
+
+
+
+
+		System.out.println(procedureManager.getPlotService().findById(plot.getId())+" PLOT");
+
+
+
+
+
+
+
+		try {
+
+
+
+			mav.addObject("plot", procedureManager.getPlotService().findById(plot.getId()));
+
+
+
+		} catch (Exception e) {
+
+
+
+			mav.addObject("error", e);
+
+
+
+			mav.setViewName("error");
+
+
+
+			return mav;
+
+
+
+		}
+
+
+
+		Procedure proc = (plot==null) ? null : procedureManager.getActualProcedure(plot);
+
+
+
+		Procedure oldProc = (proc==null) ? null : procedureManager.getProcedure(proc.getYear()-1, procedureManager.getPlotService().findById(plot.getId()));
+
+
+
+		if(oldProc==null) { // Add old procedure information
+
+
+
+			try {
+
+
+
+				System.out.println("OLDPROC is null");
+
+
+
+				mav.addObject("oldWater", 0);
+
+
+
+				mav.addObject("oldPower", 0);
+
+
+
+			} catch (Exception e) {
+
+
+
+				mav.addObject("error", e);
+
+
+
+				mav.setViewName("error");
+
+
+
+				return mav;
+
+
+
+			}
+
+
+
+		} else {
+
+
+
+			try {
+
+
+
+				mav.addObject("oldWater", ""+oldProc.getWatercount());
+
+
+
+				mav.addObject("oldPower", ""+oldProc.getPowercount());
+
+
+
+			} catch (Exception e) {
+
+
+
+				mav.addObject("error", e);
+
+
+
+				mav.setViewName("error");
+
+
+
+				return mav;
+
+
+
+			}
+
+
+
+
+
+
+
+		}
+
+
+
+		if(proc == null) {
+
+
+
+			try {
+
+
+
+				System.out.println("PROC is null");
+
+
+
+				mav.addObject("procedureExists", false);
+
+
+
+			} catch (Exception e) {
+
+
+
+				mav.addObject("error", e);
+
+
+
+				mav.setViewName("error");
+
+
+
+				return mav;
+
+
+
+			}
+
+
+
+		} else {
+
+
+
+			try { // add Procedure information
+
+
+
+				mav.addObject("procedure", proc);
+
+
+
+				mav.addObject("procedureExists", true);
+
+
+
+			} catch (Exception e) {
+
+
+
+				mav.addObject("error", e);
+
+
+
+				mav.setViewName("error");
+
+
+
+				return mav;
+
+
+
+			}
+
+
+
+		}
+
+
+
+		mav.setViewName("plot/editPlot");
+
+
+
+		return mav;
+
+
+
+	}
 }
