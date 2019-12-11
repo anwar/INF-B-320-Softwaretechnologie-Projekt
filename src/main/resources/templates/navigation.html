@@ -26,7 +26,11 @@
 
 
         <li><a href="news/home.html" th:href="@{/}" >Home</a></li>
-        <li><a href="plot/plotOverview.html" th:href="@{/anlage}">Anlage</a></li>
+        <li><a href="plot/plotOverview.html" th:href="@{/anlage}">Anlage</a>
+            <ul>
+                <li><a th:href="'/anlage'">Allgemein</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="'/chairmenOverview'">nach Obmann</a> </li>
+            </ul></li>
         <li><a href="#" sec:authorize="isAuthenticated()">Meine Parzelle</a>
             <ul >
                 <li><a href="plot/myPlot.html" th:href="@{/myPlot}" sec:authorize="isAuthenticated()" >Meine Daten</a></li>
@@ -34,10 +38,11 @@
                 <li><a href="tenant/changeEmail.html" th:href="@{/changeEmail}" sec:authorize="isAuthenticated()">Email ändern</a></li>
             </ul>
         </li>
-        <li><a href="#" sec:authorize="hasAnyRole('Vorstandsvorsitzender,Obmann')">Termine</a>
-            <ul >
-                <li><a href="" th:href="@{/}"  >Termin erstellen</a></li>
-                <li><a href="" th:href="@{/}" >Termine einsehen</a></li>
+        <li><a href="#" sec:authorize="hasAnyRole('Vorstandsvorsitzender')">Termine</a>
+            <ul>
+                <li><a href="" th:href="@{/createAssignment}"  >Termin erstellen</a></li>
+                <li><a href="" th:href="@{/listOfAssignments}" >Termine einsehen</a></li>
+                <li><a href="" th:href="@{/addWorkHours}">Arbeitsstunden hinzufügen</a></li>
 
             </ul>
         <li><a href="finance/bill.html" th:href="@{/bill}" sec:authorize="isAuthenticated()">Rechnungen</a></li>

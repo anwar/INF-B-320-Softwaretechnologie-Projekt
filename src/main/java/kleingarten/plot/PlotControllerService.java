@@ -1,6 +1,6 @@
 package kleingarten.plot;
 
-import kleingarten.Finance.Procedure;
+import kleingarten.finance.Procedure;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 import org.salespointframework.useraccount.Role;

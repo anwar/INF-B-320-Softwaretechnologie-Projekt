@@ -1,12 +1,14 @@
-package kleingarten.Finance;
+package kleingarten.finance;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import kleingarten.plot.PlotService;
 import kleingarten.plot.PlotStatus;
-import kleingarten.tenant.Tenant;
+import kleingarten.tenant.TenantManager;
+
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
@@ -21,13 +23,15 @@ public class ProcedureManager {
 	private final ProcedureRepository procedures;
 	//Add plotService to use it's methods (Ylvi)
 	private final PlotService plotService;
+	private final TenantManager tenantManager;
 
 
 	@Autowired
-	public ProcedureManager(ProcedureRepository procedures, PlotService plotService) {
+	public ProcedureManager(ProcedureRepository procedures, PlotService plotService, TenantManager tenantManager) {
 		Assert.notNull(procedures, "ProcedureRepository must not be null!");
 		this.procedures = procedures;
 		this.plotService = plotService;
+		this.tenantManager = tenantManager;
 	}
 
 	public Streamable<Procedure> getAll() {
@@ -64,6 +68,14 @@ public class ProcedureManager {
 			if(procedure.getYear() == year) return procedure;
 		}
 
+		return null;
+	}
+	
+	public Procedure getActualProcedure(Plot plot) {
+		for(Procedure proc:procedures.findByPlot(plot)) {
+			if(proc.isOpen()) return proc;
+		}
+		
 		return null;
 	}
 
@@ -112,6 +124,14 @@ public class ProcedureManager {
 
 	public Procedure get(Long id){
 		return procedures.findById(id).orElse(null);
+	}
+	
+	public PlotService getPlotService() {
+		return plotService;
+	}
+	
+	public TenantManager getTenantManager() {
+		return tenantManager;
 	}
 
 

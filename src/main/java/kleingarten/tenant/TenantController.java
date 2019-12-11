@@ -2,10 +2,12 @@ package kleingarten.tenant;
 
 
 import com.mysema.commons.lang.Assert;
+import org.salespointframework.useraccount.AuthenticationManager;
 import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ class TenantController {
 	private final TenantManager tenantManager;
 	private final TenantRepository tenantRepository;
 	private final TenantService tenantService;
+	private final AuthenticationManager authenticationManager;
 
 	/**
 	 * Constructor of class {@link TenantController}
@@ -25,11 +28,12 @@ class TenantController {
 	 * @param tenantRepository repository of tenants as {@link TenantRepository}
 	 * @param tenantService service class {@link TenantService}
 	 */
-	TenantController(TenantManager tenantManager, TenantRepository tenantRepository, TenantService tenantService) {
+	TenantController(TenantManager tenantManager, TenantRepository tenantRepository, TenantService tenantService, AuthenticationManager authenticationManager) {
 		Assert.notNull(tenantManager, "TenantManager must not be null");
 		this.tenantManager = tenantManager;
 		this.tenantRepository = tenantRepository;
 		this.tenantService = tenantService;
+		this.authenticationManager = authenticationManager;
 	}
 
 	/**
@@ -102,9 +106,10 @@ class TenantController {
 
 		return "redirect:/tenants";
 	}
-
+	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
 	@GetMapping("/changePassword")
-	String changePassword(){
+	String changePassword(@LoggedIn UserAccount userAccount, Model model){
+		// model.addAttribute("password", userAccount.getPassword().toString());
 		return"/tenant/changePassword";
 	}
 
@@ -112,11 +117,13 @@ class TenantController {
 	String changedPassword(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldPassword, @RequestParam("new") String newPassword,
 						   @RequestParam("repeat") String repeatedPassword){
 		tenantService.changePassword(userAccount, oldPassword, newPassword, repeatedPassword);
-		return "redirect:/home";
+
+		return "redirect:/changePassword";
 	}
 
 	@GetMapping("/changeEmail")
-	String changeEmail(){
+	String changeEmail(@LoggedIn UserAccount userAccount, Model model){
+		model.addAttribute("email", userAccount.getEmail());
 		return"/tenant/changeEmail";
 	}
 
@@ -124,6 +131,6 @@ class TenantController {
 	String changedEmail(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldEmail, @RequestParam("new") String newEmai,
 						@RequestParam("repeat") String repeatedEmail){
 		tenantService.changeEmail(tenantManager.getTenantByUserAccount(userAccount).getId(), oldEmail, newEmai, repeatedEmail);
-		return "redirect:/home";
+		return "redirect:/changeEmail";
 	}
 }

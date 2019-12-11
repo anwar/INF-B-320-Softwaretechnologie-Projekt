@@ -1,6 +1,8 @@
 package kleingarten.complains;
 
 
+import kleingarten.tenant.Tenant;
+import kleingarten.tenant.TenantManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,12 @@ import java.util.List;
 public class ComplainsManager {
 
 	private final ComplainsRepository complainsRepository;
+	private final TenantManager tenantManager;
 
 	@Autowired
-	public ComplainsManager(ComplainsRepository complainsRepository){
+	public ComplainsManager(ComplainsRepository complainsRepository, TenantManager tenantManager){
 		this.complainsRepository = complainsRepository;
+		this.tenantManager = tenantManager;
 	}
 
 	public Streamable<Complains> getAll(){
@@ -33,4 +37,5 @@ public class ComplainsManager {
 	public Streamable<Complains> finishedComplains(){
 		return complainsRepository.findAll().filter(c -> c.getState().equals(ComplainsState.FINISHED));
 	}
+
 }

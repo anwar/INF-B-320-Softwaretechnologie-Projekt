@@ -35,6 +35,7 @@ public class TenantService {
 	void changePassword(UserAccount userAccount, String oldPassword, String newPassword, String repeatedPassword){
 
 		if(!authenticationManager.matches(Password.UnencryptedPassword.of(oldPassword), userAccount.getPassword())){
+
 			throw new IllegalArgumentException("Old Password is not identical");
 		}
 		if (!newPassword.equals(repeatedPassword)){
@@ -58,5 +59,14 @@ public class TenantService {
 		}
 		tenantManager.get(id).getUserAccount().setEmail(newEmail);
 		tenants.save(tenantManager.get(id));
+	}
+
+	void makePreTenant(Long id){
+		tenantManager.get(id).getUserAccount().setEnabled(false);
+		tenantManager.get(id).setBirthdate("");
+		tenantManager.get(id).setPhonenumber("");
+		tenantManager.get(id).setAddress("");
+		tenantManager.get(id).setForename("");
+		//TODO delte roles method on pretenant
 	}
 }

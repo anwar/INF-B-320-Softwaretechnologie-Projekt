@@ -11,50 +11,63 @@
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
     <link th:href="@{../resources/css/style.css}" rel="stylesheet"
           href="../resources/css/style.css" type="text/css"/>
+    <link th:href="@{../resources/css/tenantdetailsTable.css}" rel="stylesheet"
+          href="../resources/css/tenantdetailsTable.css" type="text/css">
     <title>Termin erstellen</title>
 </head>
 <body>
 
-    <div class="ui-container">
+    <div >
         <nav th:include="navigation :: navigation"></nav>
         <div class="header-title">
             <h1>Einsatz erstellen</h1>
         </div>
     </div>
-    <center>
+
     <form method="post" role="form" id="form" th:action="@{/createAssignment}" th:object="${form}">
         <table>
             <tr>
-                <td>
+                <th>
                     <label for="date">Datum</label>
-                    <input id="date" th:field="*{date}" type="date" required="required" th:min="${dateNow}"/>
+                </th>
+                <td>
+                    <input class="text_bgImage" id="date" th:field="*{date}" type="date" required="required" th:min="${dateNow}"/>
                 </td>
             </tr>
-            <br/>
             <tr>
-                <td>
+                <th>
                     <label for="time">Zeit</label>
-                    <input id="time" th:field="*{time}" type="time" required="required" th:min="${timeNow}"/>
+                </th>
+
+                  <td> <input class="text_bgImage" id="time" th:field="*{time}" type="time" required="required" th:min="${timeNow}"/>
                 </td>
             </tr>
-            <br/>
+
             <tr>
-                <td>
+                <th>
                     <label for="title">Titel</label>
-                    <input id="title" th:field="*{title}"  type="text" required="required"/>
+                </th>
+                <td>
+                    <input  class="text_bgImage" id="title" th:field="*{title}"  type="text" required="required"/>
                 </td>
+
             </tr>
             <br/>
             <tr>
-                <td>
+                <th>
                     <label for="description">Beschreibung</label>
-                    <input id="description" th:field="*{description}" type="text" required="required"/>
+                </th>
+                <td>
+                    <input  class="text_bgImage" id="description" th:field="*{description}" type="text" required="required"/>
                 </td>
+
             </tr>
         </table>
-
-        <button type="submit" class="ui button">Neuen Termin hinzufügen</button></div>
+        <div class="button-section">
+        <button type="submit" class="button" >Neuen Termin hinzufügen</button></div>
+        </div>
     </form>
-    </center>
+
+    <div th:include="navigation :: footer"></div>
 </body>
 </html>

@@ -5,8 +5,10 @@ package kleingarten.complains;
 
 import kleingarten.plot.Plot;
 import kleingarten.tenant.Tenant;
+import kleingarten.tenant.TenantManager;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.UserAccount;
+import org.thymeleaf.context.ILazyContextVariable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,16 +26,14 @@ public class Complains {
 	private @Id @GeneratedValue long id;
 	public long authorId;
 	public long subjectId;
-	//public ProductIdentifier authorPlotId;
-	//public ProductIdentifier subjectPlotId;
 	public ComplainsState state;
 	public String description;
+
 
 	/**
 	 * Private constructor of class {@link Complains}, which is used by the Spring Framework
 	 */
 	private Complains(){
-		super();
 	}
 
 	/**
@@ -43,11 +43,9 @@ public class Complains {
 	 * @param state
 	 */
 
-	public Complains(long authorId, long subjectId /*, ProductIdentifier authorPlotId, ProductIdentifier subjectPlotId, */,ComplainsState state, String description){
+	public Complains(long authorId, long subjectId , ComplainsState state, String description){
 		this.authorId = authorId;
 		this.subjectId = subjectId;
-		//this.authorPlotId = authorPlotId;
-		//this.subjectPlotId = subjectPlotId;
 		this.state = state;
 		this.description = description;
 	}
@@ -56,58 +54,32 @@ public class Complains {
 	public long getAuthor() {
 		return authorId;
 	}
-/*
-	public String getAuthorName(){
-		return authorId.getForename() + " " + authorId.getSurname();
-	}*/
+
+
 
 	public long getSubject() {
 		return subjectId;
 	}
-/*
-	public String getSubjectName(){
-		return subject.getForename() + " " + subject.getSurname();
-	}*/
 
-	/*public ProductIdentifier getAuthorPlot() {
-		return authorPlotId;
-	}
-
-	public ProductIdentifier getSubjectPlot() {
-		return subjectPlotId;
-	}*/
 
 	public ComplainsState getState() {
 		return state;
 	}
 
-	/*public void setAuthor(Tenant author) {
-		if(author == null){
+	public void setAuthor(Long authorId) {
+		if(authorId == null){
 			throw new IllegalArgumentException("Complain must have an author!");
 		} else
-			this.author = author;
+			this.authorId = authorId;
 	}
 
-	public void setSubject(Tenant subject) {
-		if(subject == null){
+	public void setSubject(Long subjectId) {
+		if(subjectId  == null){
 			throw new IllegalArgumentException("Complain must have a subject!");
 		} else
-			this.subject = subject;
-	} */
-
-	/*public void setAuthorPlot(Plot authorPlot) {
-		if(authorPlot == null){
-			throw new IllegalArgumentException("Plot must exist!");
-		} else
-			this.authorPlot = authorPlot;
+			this.subjectId = subjectId;
 	}
 
-	public void setSubjectPlot(Plot subjectPlot) {
-		if(subjectPlot == null){
-			throw new IllegalArgumentException("Plot must exist!");
-		} else
-			this.subjectPlot = subjectPlot;
-	}*/
 
 	public void setState(ComplainsState state) {
 		if(state == null){
@@ -122,5 +94,16 @@ public class Complains {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		if(description == null){
+			throw new IllegalArgumentException("Complains must have a description");
+		}
+		this.description = description;
 	}
 }

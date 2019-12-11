@@ -1,9 +1,10 @@
 package kleingarten.plot;
 
-import kleingarten.Finance.ProcedureManager;
-import kleingarten.Finance.Procedure;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.stereotype.Component;
+
+import kleingarten.finance.Procedure;
+import kleingarten.finance.ProcedureManager;
 
 @Component
 public class PlotService {

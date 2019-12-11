@@ -42,12 +42,12 @@
                     <th>Gespeicherte Daten <div class="dropdown">
                         <button onclick="myFunction()" class="dropbtn">. . .</button>
                         <div id="myDropdown" class="dropdown-content">
-                            <a th:if="${canModify}">Zählerstände eintragen</a>
+                            <a th:if="${canModify}" th:href="'/editPlot/' + ${plotID}">Parzelle bearbeiten</a>
                             <a th:if="${canSeeBills}">Rechnungen Anzeigen</a>
                             <a th:if="not ${rented}" th:href="${'/createApplication/' + plotID}" >Bewerben</a>
                             <a th:if="not ${rented}" sec:authorize="hasAnyRole('Vorstandsvorsitzender')" th:href="'/application'">Bewerbungen anzeigen</a>
-                            <a th:if="${canModify}" th:href="'/editPlot/' + ${plotID}">Plot Bearbeiten</a>
                             <a th:if="${rented}" sec:authorize="hasAnyRole('Vorstandsvorsitzender')" th:href="'/cancelPlot/' + ${plotID}">Kündigen</a>
+                            <a th:if="${rented}" th:href="'/addComplains' + ${plotID}">Beschwerde schreiben</a>
                         </div>
                     </div>
                     </th>
@@ -55,6 +55,7 @@
                 </tr>
             </thead>
             <tbody>
+            <input type="hidden" id="plot" name="plot" th:value="${plot}">
                 <tr><th>Name</th> <td align="center" th:text="${plot.plotName}"> Text </td></tr>
                 <tr><th>Größe</th> <td align="center" th:text="${plot.plotSize}"> Text </td></tr>
                 <tr><th>Beschreibung</th> <td align="center" th:text="${plot.plotDescription}"> Text </td></tr>
@@ -69,7 +70,7 @@
                 <button class="button" th:if="${canModify}">Zählerstände eintragen</button>
                 <button class="button" th:if="${canSeeBills}">Rechnungen anzeigen</button>
                 <a th:href="'/editPlot/' + ${plotID}"> <button class="button" >Bearbeiten</button></a>
-                <input type="hidden" id="plot" name="plot" th:value="${plot}">
+
             </div> -->
 
         </table>

@@ -1,7 +1,6 @@
-package kleingarten.Finance;
+package kleingarten.finance;
 
 import org.hibernate.validator.constraints.Range;
-import java.util.*;
 
 public class FeeForm {
 
@@ -20,14 +19,6 @@ public class FeeForm {
 		this.title = title;
 	}
 
-	public double getPrice() {
-
-		return basePrice * count;
-	}
-	public void setPrice(double price) {
-
-		this.price = price;
-	}
 	public long getId() {
 		return id;
 	}

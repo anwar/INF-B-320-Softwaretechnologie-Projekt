@@ -1,4 +1,4 @@
-package kleingarten.Finance;
+package kleingarten.finance;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,7 +40,7 @@ public class FeeManager {
 
 	public void create(FeeForm form) {
 
-		feeRepository.save(new Fee(form.getTitle(), form.getCount(), form.getBasePrice(), form.getPrice()));
+		feeRepository.save(new Fee(form.getTitle(), form.getCount(), form.getBasePrice()));
 	}
 
 }

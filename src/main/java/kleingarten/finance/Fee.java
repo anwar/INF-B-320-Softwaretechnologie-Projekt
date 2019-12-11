@@ -1,4 +1,4 @@
-package kleingarten.Finance;
+package kleingarten.finance;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,9 +23,8 @@ public class Fee {
 	 * @param title
 	 * @param count
 	 * @param basePrice
-	 * @param price
 	 */
-	public Fee(String title, double count, double basePrice, double price){
+	public Fee(String title, double count, double basePrice){
 
 		this.title = title;
 		this.count = count;
@@ -83,13 +82,5 @@ public class Fee {
 				.append(price).append("}");
 
 		return builder.toString();
-	}
-
-	public double getSum() {
-		return sum += price;
-	}
-
-	public void setSum(double sum) {
-		this.sum = sum;
 	}
 }

@@ -28,13 +28,7 @@
 
         <h1>Übersicht</h1>
     </div>
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Ansicht...</button>
-        <div id="myDropdown" class="dropdown-content">
-            <a th:href="'/anlage'">Allgemein</a>
-            <a sec:authorize="isAuthenticated()" th:href="'/chairmenOverview'">nach Obmann</a>
 
-        </div>
     </div>
 
     <div class="plotOverview">

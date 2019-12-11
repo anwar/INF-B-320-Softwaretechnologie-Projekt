@@ -15,9 +15,9 @@
  */
 package kleingarten.configuration;
 
-import kleingarten.Finance.*;
 import kleingarten.appointment.WorkAssignmentManager;
 import kleingarten.appointment.WorkAssignmentRepository;
+import kleingarten.finance.*;
 import kleingarten.news.NewsEntry;
 import kleingarten.news.NewsRepository;
 import kleingarten.plot.Plot;
@@ -110,9 +110,9 @@ class AppDataInitializer implements DataInitializer {
 
 		LOG.info("Creating default news entries...");
 
-		news.save(new NewsEntry("Hört hört, werte Leute, am 13.09.2020 ist wieder Zeit für das jährliche Ritterfest im Lande K(l)einGarten."));
-		news.save(new NewsEntry("Wiener Schnitzel. Ihr habt richtig gelesen. It's time for a d-d-duel. Schnitzelwettessen. Wo? Na hier natürlich. Wann? Am 30.02.2020."));
-		news.save(new NewsEntry("30.03.2019 Achtung: Bitte denkt daran, dass eure Stiefmütterchen auch wachsen können: Laub harken ist angesagt"));
+		news.save(new NewsEntry("Hört hört, werte Leute, am 13.09.2020 ist wieder Zeit für das jährliche Ritterfest im Lande K(l)einGarten. ⚔️"));
+		news.save(new NewsEntry("Wiener Schnitzel. Ihr habt richtig gelesen. It's time for a d-d-duel. Schnitzelwettessen. Wo? Na hier natürlich. Wann? Am 30.02.2020. \uD83E\uDD69"));
+		news.save(new NewsEntry("30.03.2019 Achtung: Bitte denkt daran, dass eure Stiefmütterchen auch wachsen können: Laub harken ist angesagt! \uD83C\uDF42 "));
 	}
 
 
@@ -123,7 +123,8 @@ class AppDataInitializer implements DataInitializer {
 			return;
 		}
 		LOG.info("create default Assignments");
-		var Appointment = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 1, 22, 15, 20, 10), "Garten putzen", "Garten sauber machen Yalah", null);
+		var Appointment = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 1,1, 1, 0),0, "Neujahrsputz", "Garten von Böllerresten und Müll befreien", null);
+		var Appointment2 = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 4, 25,  16, 0), 0, "In K(l)einanlage Müll aufsammeln", "Müll aufheben", null);
 		this.workAssignmentRepo.saveAll(List.of(Appointment));
 
 	}
@@ -211,19 +212,19 @@ class AppDataInitializer implements DataInitializer {
 		if (feeManager.findAll().iterator().hasNext()) {
 			return;
 		}
-		feeManager.save(new Fee("Wasserkosten", 1, 1.95, 0));
-		feeManager.save(new Fee("Stromkosten", 1, 0.2, 0));
-		feeManager.save(new Fee("Miete", 1, 0.18, 0));
-		feeManager.save(new Fee("Strafgeld", 1, 8, 0));
-		feeManager.save(new Fee("Mitgliedsbeitrag", 1, 17.25, 0));
-		feeManager.save(new Fee("Haftpflichtbeitrag", 1, 0.35, 0));
-		feeManager.save(new Fee("Winterdienst", 1, 3, 0));
-		feeManager.save(new Fee("Sozialbeitrag", 1, 0.5, 0));
-		feeManager.save(new Fee("Rechtsschutz", 1, 0.75, 0));
-		feeManager.save(new Fee("Aufwandspauschale", 1, 12, 0));
-		feeManager.save(new Fee("Sonstige Auslagen", 1, 1, 0));
-		feeManager.save(new Fee("Grundmiete für Wasseruhr", 1, 2.6, 0));
-		feeManager.save(new Fee("Grundmiete für Stromzähler", 1, 1.55, 0));
+		feeManager.save(new Fee("Wasserkosten", 1, 1.95));
+		feeManager.save(new Fee("Stromkosten", 1, 0.2));
+		feeManager.save(new Fee("Miete", 1, 0.18));
+		feeManager.save(new Fee("Strafgeld", 1, 8));
+		feeManager.save(new Fee("Mitgliedsbeitrag", 1, 17.25));
+		feeManager.save(new Fee("Haftpflichtbeitrag", 1, 0.35));
+		feeManager.save(new Fee("Winterdienst", 1, 3));
+		feeManager.save(new Fee("Sozialbeitrag", 1, 0.5));
+		feeManager.save(new Fee("Rechtsschutz", 1, 0.75));
+		feeManager.save(new Fee("Aufwandspauschale", 1, 12));
+		feeManager.save(new Fee("Sonstige Auslagen", 1, 1));
+		feeManager.save(new Fee("Grundmiete für Wasseruhr", 1, 2.6));
+		feeManager.save(new Fee("Grundmiete für Stromzähler", 1, 1.55));
 
 		LOG.info("Finished creating default fee lists");
 	}

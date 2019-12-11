@@ -20,14 +20,14 @@
 <div class="header-title">
     <h1>Email ändern</h1>
 </div>
-<form method="post" role="form" id="form" th:action="@{/changedEmail}"  >
+<form method="post" role="form" id="form" th:action="@{/changedEmail}"   >
     <table>
         <tr>
             <th>
                 <label for="old">alte Email</label>
             </th>
             <td>
-                <input class="text_bgImage" id="old" name="old" type="email" required="required"/>
+                <input class="text_bgImage" id="old" name="old" type="email" th:value="${email}" required="required"/>
             </td>
 
         </tr>
@@ -46,7 +46,7 @@
                 <label for="again">neue Email</label>
             </th>
             <td>
-                <input class="text_bgImage" id="again" name="repeat" type="email" required="required"/>
+                <input class="text_bgImage" id="again" name="repeat"  type="email" required="required"/>
             </td>
 
         </tr>
@@ -54,7 +54,8 @@
     <div class="button-section">
         <input  type="hidden" id="" name="">
 
-        <button type="submit" class="button">Speichern</button>
+        <button type="submit" class="button" >Speichern</button>
+
     </div>
 </form>
 

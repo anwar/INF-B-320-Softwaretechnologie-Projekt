@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.*;
 import javax.transaction.Transactional;
 import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
@@ -49,14 +50,33 @@ public class TenantServiceTest {
 
 	@Test
 	void changePassword() {
-		assertThat(tenantRepository.findAll().toList().get(0).getUserAccount().getPassword().equals("123"));
+		tenantService.changePassword(tenantRepository.findAll().toList().get(0).getUserAccount(), "123", "1234", "1234");
+		assertThat(tenantRepository.findAll().toList().get(0).getUserAccount().getPassword().equals("1234"));
+	}
 
+	@Test
+	void illegalOldPassword(){
+		assertThrows(IllegalArgumentException.class, () ->  tenantService.changePassword(tenantRepository.findAll().toList().get(0).getUserAccount(), "1234", "1234", "1234"));
+	}
+
+	@Test
+	void IllegalRepeatedPassword(){
+		assertThrows(IllegalArgumentException.class, () ->  tenantService.changePassword(tenantRepository.findAll().toList().get(0).getUserAccount(), "123", "1234", "12345"));
 	}
 
 	@Test
 	void changeEmail(){
-		//assertThat(tenant.getUserAccount().getEmail().equals("jassis@email.com"));
 		tenantService.changeEmail(tenantRepository.findAll().toList().get(0).getId(), tenantRepository.findAll().toList().get(0).getEmail(), "jasmins@email.com", "jasmins@email.com");
 		assertThat(tenantRepository.findAll().toList().get(0).getEmail().equals("jasmins@email.com"));
+	}
+
+	@Test
+	void IllegalOldEmail(){
+		assertThrows(IllegalArgumentException.class, () ->tenantService.changeEmail(tenantRepository.findAll().toList().get(0).getId(), "1234", "jasmins@email.com", "jasmins@email.com"));
+	}
+
+	@Test
+	void IllegalRepeatedEmail(){
+		assertThrows(IllegalArgumentException.class, () ->tenantService.changeEmail(tenantRepository.findAll().toList().get(0).getId(), tenantRepository.findAll().toList().get(0).getEmail(), "jasmins@email.com", "jasmins1@email.com"));
 	}
 }

@@ -1,0 +1,386 @@
+package kleingarten.finance;
+
+import org.salespointframework.useraccount.Role;
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import kleingarten.plot.Plot;
+import kleingarten.tenant.Tenant;
+import kleingarten.tenant.TenantManager;
+
+@Controller
+public class ProcedureController {
+	private ProcedureManager procedureManager;
+	private TenantManager tenantManager;
+
+	@Autowired
+
+	public ProcedureController(ProcedureManager procedureManager) {
+		this.procedureManager = procedureManager;
+		this.tenantManager = tenantManager;
+	}
+
+	/**
+	 * Provide simple Lists of procedure
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/procedure")
+	//@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	String procedure(Model model) {
+		model.addAttribute("procedureList", procedureManager.getAll());
+		return "finance/procedure";
+	}
+
+	/**
+	 *By clicking: able to see all the details of selected procedure.
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/procedureDetails")
+	//@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	String procedureDetails(@RequestParam("id") String id, Model model) {
+		model.addAttribute("procedure", procedureManager.get(Long.parseLong(id)));
+		return "finance/procedureDetails";
+	}
+
+	/**
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/updateProcedure")
+	String updateProcedure(Model model) {
+		model.addAttribute("procedure", procedureManager.getAll());
+		return "finance/updateProcedure";
+	}
+
+	/**
+	 * Obmann will be able to change the value of watercount
+	 * @param model
+	 * @param plotId
+	 * @return
+	 */
+	@GetMapping("/procedureDetails/editWatercount/{plotId}")
+	//@PreAuthorize("hasRole('ROLE_VORSTAND')")
+	public String editWatercount(Model model, @PathVariable String plotId) {
+		model.addAttribute("procedure", procedureManager.findByPlotId(plotId).get());
+		return "finance/editWatercount";
+	}
+
+	/**
+	 * @param model
+	 * @param procedure
+	 * @return
+	 */
+	@PostMapping("/procedureDetails/editWatercount")
+	public String saveWatercount(Model model, @RequestParam("procedureId") String procedureId, @RequestParam String water) {
+		// those three lines are just for checking the value. Not necessary to exist.
+		Procedure procedure = procedureManager.get(Long.parseLong(procedureId));
+		System.out.println("Plot ID:" + procedure.getPlotId());
+		System.out.println("Watercount:" + procedure.getWatercount());
+		System.out.println("Powercount:" + procedure.getPowercount());
+		procedure.setWatercount(Double.parseDouble(water));
+		procedureManager.save(procedure);
+		return "redirect:/editPlot/"+procedure.getPlotId().toString();
+	}
+
+	/**
+	 * @param model
+	 * @param plotId
+	 * @return
+	 */
+	@PostMapping("/procedureDetails/editPowercount")
+	public String savePowercount(Model model, @RequestParam("procedureId") String procedureId, @RequestParam String power) {
+		Procedure procedure = procedureManager.get(Long.parseLong(procedureId));
+		procedure.setPowercount(Double.parseDouble(power));
+		procedureManager.save(procedure);
+		return "redirect:/editPlot/"+procedure.getPlotId().toString();
+	}
+
+	/**
+	 * @param model
+	 * @param procedure
+	 * @return
+	 */
+	@PostMapping("/procedureDetails/editPowercount/{plotId}")
+	public String savePowercount(Model model, Procedure procedure) {
+		// those three lines are just for checking the value. Not necessary to exist.
+		System.out.println("Plot ID:" + procedure.getPlotId());
+		System.out.println("Powercount:" + procedure.getPowercount());
+		procedureManager.save(procedure);
+		return "redirect:/procedureDetails";
+	}
+	/**
+
+
+
+	 * Create model with needed information to show a form to change the saved details of the {@link Plot}
+
+
+
+	 *
+
+
+
+	 * @param plot {@link Plot} for which a form with the saves details should be shown
+
+
+
+	 * @param mav  {@link ModelAndView} which contains the needed information of the {@link Plot}
+
+
+
+	 * @return response as {@link ModelAndView}
+
+
+
+	 */
+
+
+
+	@GetMapping("/editPlot/{plot}")
+
+
+
+	public ModelAndView editPlot(@LoggedIn UserAccount user, @PathVariable Plot plot, ModelAndView mav) {
+
+
+
+
+
+
+
+		System.out.println(procedureManager.getPlotService().findById(plot.getId())+" PLOT");
+
+
+		
+		try {
+
+
+
+			mav.addObject("plot", procedureManager.getPlotService().findById(plot.getId()));
+
+
+
+		} catch (Exception e) {
+
+
+
+			mav.addObject("error", e);
+
+
+
+			mav.setViewName("error");
+
+
+
+			return mav;
+
+
+
+		}
+
+
+
+		Procedure proc = (plot==null) ? null : procedureManager.getActualProcedure(plot);
+		
+		//decide if user can change powercount
+				Tenant tenant = procedureManager.getTenantManager().getTenantByUserAccount(user);
+				
+				boolean tenantOrBoss = false;
+				
+				if(proc!=null) { // Tenant ?
+					if(tenant.getId()==proc.getMainTenant() || proc.getSubTenants().contains(proc.getId()))
+						tenantOrBoss = true;
+				} 
+				
+				for(Role role:user.getRoles().toList()) { // Vorstand ?
+					System.out.println(role.toString());
+					if(role.toString().equalsIgnoreCase("Vorstandsvorsitzender")) {
+						tenantOrBoss=true;
+					}
+				}
+				mav.addObject("tenantOrBoss", tenantOrBoss);
+
+
+
+		Procedure oldProc = (proc==null) ? null : procedureManager.getProcedure(proc.getYear()-1, procedureManager.getPlotService().findById(plot.getId()));
+
+
+
+		if(oldProc==null) { // Add old procedure information
+
+
+
+			try {
+
+
+
+				System.out.println("OLDPROC is null");
+
+
+
+				mav.addObject("oldWater", 0);
+
+
+
+				mav.addObject("oldPower", 0);
+
+
+
+			} catch (Exception e) {
+
+
+
+				mav.addObject("error", e);
+
+
+
+				mav.setViewName("error");
+
+
+
+				return mav;
+
+
+
+			}
+
+
+
+		} else {
+
+
+
+			try {
+
+
+
+				mav.addObject("oldWater", ""+oldProc.getWatercount());
+
+
+
+				mav.addObject("oldPower", ""+oldProc.getPowercount());
+
+
+
+			} catch (Exception e) {
+
+
+
+				mav.addObject("error", e);
+
+
+
+				mav.setViewName("error");
+
+
+
+				return mav;
+
+
+
+			}
+
+
+
+
+
+
+
+		}
+
+
+
+		if(proc == null) {
+
+
+
+			try {
+
+
+
+				System.out.println("PROC is null");
+
+
+
+				mav.addObject("procedureExists", false);
+
+
+
+			} catch (Exception e) {
+
+
+
+				mav.addObject("error", e);
+
+
+
+				mav.setViewName("error");
+
+
+
+				return mav;
+
+
+
+			}
+
+
+
+		} else {
+
+
+
+			try { // add Procedure information
+
+
+
+				mav.addObject("procedure", proc);
+
+
+
+				mav.addObject("procedureExists", true);
+
+
+
+			} catch (Exception e) {
+
+
+
+				mav.addObject("error", e);
+
+
+
+				mav.setViewName("error");
+
+
+
+				return mav;
+
+
+
+			}
+
+
+
+		}
+
+
+
+		mav.setViewName("plot/editPlot");
+
+
+
+		return mav;
+
+
+
+	}
+}
