@@ -10,11 +10,11 @@ public class Application {
 
 	private @Id @GeneratedValue long id;
 	
-	String firstName, lastName, email;
-	String plotId;
+	private String firstName, lastName, email;
+	private String plotId;
 	//date
 	
-	ApplicationState state;
+	private ApplicationState state;
 	
 	public Application() {
 		state=ApplicationState.NEW;
@@ -30,13 +30,53 @@ public class Application {
 	}
 	
 	public void accept() {
-		if(state == ApplicationState.NEW) {
+		if(state == ApplicationState.NEW || state == ApplicationState.DENIED) {
 			state = ApplicationState.ACCEPTED;
 		}
 	}
 	
+	public long getId() {
+		return id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPlotId() {
+		return plotId;
+	}
+	
+	public ApplicationState getState() {
+		return state;
+	}
+	
+	public String getStateAsString() {
+		switch (state) {
+		case NEW:
+			return "neu";
+		case ACCEPTED:
+			return "angenommen";
+		case DENIED:
+			return "abgelehnt";
+		case HIDDEN:
+			return "hidden";
+			
+		default:
+			return "fehler";
+		}
+	}
+
 	public void deny() {
-		if(state == ApplicationState.NEW) {
+		if(state == ApplicationState.NEW || state == ApplicationState.ACCEPTED) {
 			state = ApplicationState.DENIED;
 		}
 	}
