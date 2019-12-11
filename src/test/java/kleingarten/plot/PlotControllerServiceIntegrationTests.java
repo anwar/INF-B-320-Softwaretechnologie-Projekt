@@ -199,7 +199,7 @@ public class PlotControllerServiceIntegrationTests {
 	@Test
 	public void addInformationOfPlotTest() {
 		PlotInformationBuffer result = new PlotInformationBuffer(freePlot);
-		assertThat(plotControllerService.addInformationOfPlotToPlotInformationPuffer(Optional.empty(), freePlot))
+		assertThat(plotControllerService.addInformationOfPlotToPlotInformationBuffer(Optional.empty(), freePlot))
 				.isEqualTo(result);
 	}
 }

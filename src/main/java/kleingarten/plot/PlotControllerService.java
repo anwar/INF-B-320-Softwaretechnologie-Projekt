@@ -123,7 +123,7 @@ public class PlotControllerService {
 	 * @param procedure {@link Procedure} to which the {@link Plot} is associated
 	 * @return information of {@link Plot} saved in a {@link PlotInformationBuffer}
 	 */
-	PlotInformationBuffer addInformationOfPlotToPlotInformationPuffer(Optional<Procedure> procedure, Plot plot) {
+	PlotInformationBuffer addInformationOfPlotToPlotInformationBuffer(Optional<Procedure> procedure, Plot plot) {
 		PlotInformationBuffer buffer = new PlotInformationBuffer(plot);
 		if (procedure.isEmpty()) {
 			return buffer;
@@ -159,6 +159,14 @@ public class PlotControllerService {
 		boolean condition = tenant.getUserAccount().getRoles().stream().anyMatch(permitted::contains);
 
 		//Check if user has a special role and set access rights for plot information
+		if (procedure.isPresent()) {
+			if (procedure.get().isTenant(tenant.getId())) {
+				mav.addAttribute("canSeeWorkhours", true);
+				mav.addAttribute("canSeeBills", true);
+				mav.addAttribute("canModify", true);
+				mav.addAttribute("rents", true);
+			}
+		}
 		if (condition) {
 			if (dataService.tenantHasRole(tenant, Role.of("Kassierer"))) {
 				mav.addAttribute("canSeeBills", true);
@@ -168,7 +176,7 @@ public class PlotControllerService {
 			} else if (dataService.tenantHasRole(tenant, Role.of("Wassermann"))) {
 				mav.addAttribute("canModify", true);
 			} else if (dataService.tenantHasRole(tenant, Role.of("Vorstandsvorsitzender"))
-						|| dataService.tenantHasRole(tenant, Role.of("Stellvertreter"))) {
+					|| dataService.tenantHasRole(tenant, Role.of("Stellvertreter"))) {
 				mav.addAttribute("canSeeBills", true);
 				mav.addAttribute("canSeeWorkhours", true);
 				mav.addAttribute("canSeeApplications", true);
@@ -180,14 +188,6 @@ public class PlotControllerService {
 					mav.addAttribute("canSeeWorkhours", true);
 					mav.addAttribute("canModify", true);
 				}
-			}
-		} else if (procedure.isPresent()) {
-			if (procedure.get().isTenant(tenant.getId())) {
-				mav.addAttribute("isTenant", true);
-				mav.addAttribute("canSeeWorkhours", true);
-				mav.addAttribute("canSeeBills", true);
-				mav.addAttribute("canModify", true);
-				mav.addAttribute("rents", true);
 			}
 		}
 	}

@@ -28,12 +28,6 @@
         <h1>Details</h1>
     </div>
 
-   <div align="left" th:if="${rents} and not ${plots.isEmpty()}">
-        <!-- <div class="button-section" th:each="plot : ${plots.keySet()}">
-            <button class="button" th:href="'/myPlot/' + ${plot}" th:text="${plots.get(plot)}"> Text </button>
-            <input type="hidden" id="rentedPlot" name="plot" th:value="${plot}">
-        </div> -->
-    </div>
     <div align="center" th:each="plot : ${plots}">
      <center> <div class="dropdown">
                         <button onclick="myFunction()" class="dropbtn">&#9660; Optionen</button>
@@ -44,7 +38,7 @@
                             <a th:if="not ${rented} and ${canSeeApplications}"  th:href="'/application'">Bewerbungen anzeigen</a>
                             <a th:if="${rented}" sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')" th:href="'/cancelPlot/' + ${plot.getPlotId()}">Parzelle freigeben</a>
                             <a th:if="${rented}" th:href="'/addComplains/' + ${plot.getPlotId()}">Beschwerde schreiben</a>
-                            <a th:if="${rented}" th:href="'/listForPlotAssignments/' + ${plot.getPlotId()}">Termine anzeigen</a>
+                            <a th:if="${rented} and ${rents}" th:href="'/listForPlotAssignments/' + ${plot.getPlotId()}">Termine anzeigen</a>
                         </div>
     </div></center>
         <br>

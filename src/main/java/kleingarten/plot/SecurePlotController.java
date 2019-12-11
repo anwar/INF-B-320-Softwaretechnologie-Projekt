@@ -55,13 +55,16 @@ public class SecurePlotController {
 			Tenant tenant = tenantManager.getTenantByUserAccount(user);
 			if (dataService.procedureExists(LocalDateTime.now().getYear(), plot)) {
 				Procedure procedure = dataService.getProcedure(LocalDateTime.now().getYear(), plot);
-				plotsToShow.add(plotControllerService.addInformationOfPlotToPlotInformationPuffer(Optional.of(procedure), plot));
+				plotsToShow.add(plotControllerService.addInformationOfPlotToPlotInformationBuffer(Optional.of(procedure), plot));
 
 				plotControllerService.secureSetAccessRightForPlotDetails(Optional.of(procedure), tenant, mav);
 				//Show different detail page if user rents the plot
 				/*if (procedure.isTenant(tenant.getId())) {
 					return rentedPlotsFor(user);
 				}*/
+			} else {
+				plotsToShow.add(plotControllerService.addInformationOfPlotToPlotInformationBuffer(Optional.empty(), plot));
+				plotControllerService.secureSetAccessRightForPlotDetails(Optional.empty(), tenant, mav);
 			}
 			if (plot.getStatus() == PlotStatus.FREE) {
 				plotControllerService.secureSetAccessRightForPlotDetails(Optional.empty(), tenant,mav);
