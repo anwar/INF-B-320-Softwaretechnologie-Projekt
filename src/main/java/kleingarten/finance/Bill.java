@@ -15,7 +15,7 @@ public class Bill {
 		Fee winterServiceFee = new Fee("Winterdienst",1,3);
 		feeList.add(winterServiceFee);
 		Fee socialContribution = new Fee("Sozialbeitrag",1,0.5);
-		feeList.add(membershipFee);
+		feeList.add(socialContribution);
 		Fee legalProtectionFee = new Fee("Rechtsschutz",1,0.75);
 		feeList.add(legalProtectionFee);
 		Fee expensesFlat = new Fee("Aufwandspauschale",1,12);
