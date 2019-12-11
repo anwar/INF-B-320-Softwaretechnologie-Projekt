@@ -40,6 +40,10 @@ footer {
 	font-size: 40px;
 	text-align: center;
 }
+.header-title h2{
+
+	text-align: center;
+}
 
 .news-section table{
 	margin: 0 auto;
