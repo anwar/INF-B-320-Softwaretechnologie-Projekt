@@ -38,4 +38,5 @@ public class ComplainsManager {
 		return complainsRepository.findAll().filter(c -> c.getState().equals(ComplainsState.FINISHED));
 	}
 
+
 }
