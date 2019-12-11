@@ -116,44 +116,17 @@ public class ProcedureController {
 		procedureManager.save(procedure);
 		return "redirect:/procedureDetails";
 	}
+	
+	
 	/**
-
-
-
 	 * Create model with needed information to show a form to change the saved details of the {@link Plot}
-
-
-
 	 *
-
-
-
 	 * @param plot {@link Plot} for which a form with the saves details should be shown
-
-
-
 	 * @param mav  {@link ModelAndView} which contains the needed information of the {@link Plot}
-
-
-
 	 * @return response as {@link ModelAndView}
-
-
-
 	 */
-
-
-
 	@GetMapping("/editPlot/{plot}")
-
-
-
 	public ModelAndView editPlot(@LoggedIn UserAccount user, @PathVariable Plot plot, ModelAndView mav) {
-
-
-
-
-
 
 
 		System.out.println(procedureManager.getPlotService().findById(plot.getId())+" PLOT");
@@ -170,19 +143,10 @@ public class ProcedureController {
 
 		} catch (Exception e) {
 
-
-
 			mav.addObject("error", e);
-
-
-
 			mav.setViewName("error");
 
-
-
 			return mav;
-
-
 
 		}
 
@@ -223,128 +187,64 @@ public class ProcedureController {
 
 
 				System.out.println("OLDPROC is null");
-
-
-
+				
 				mav.addObject("oldWater", 0);
-
-
-
 				mav.addObject("oldPower", 0);
 
 
 
 			} catch (Exception e) {
-
-
-
+				
 				mav.addObject("error", e);
-
-
-
 				mav.setViewName("error");
-
-
-
+				
 				return mav;
 
-
-
 			}
-
 
 
 		} else {
 
 
-
 			try {
 
-
-
 				mav.addObject("oldWater", ""+oldProc.getWatercount());
-
-
-
 				mav.addObject("oldPower", ""+oldProc.getPowercount());
-
-
 
 			} catch (Exception e) {
 
-
-
 				mav.addObject("error", e);
-
-
-
 				mav.setViewName("error");
-
-
 
 				return mav;
 
-
-
 			}
-
-
-
-
-
-
 
 		}
 
 
-
 		if(proc == null) {
-
-
-
+			
 			try {
-
-
 
 				System.out.println("PROC is null");
 
-
-
 				mav.addObject("procedureExists", false);
-
-
 
 			} catch (Exception e) {
 
-
-
 				mav.addObject("error", e);
-
-
-
 				mav.setViewName("error");
 
-
-
 				return mav;
-
-
-
+				
 			}
-
-
 
 		} else {
 
-
-
 			try { // add Procedure information
 
-
-
 				mav.addObject("procedure", proc);
-
-
 
 				mav.addObject("procedureExists", true);
 
@@ -352,35 +252,19 @@ public class ProcedureController {
 
 			} catch (Exception e) {
 
-
-
 				mav.addObject("error", e);
-
-
-
 				mav.setViewName("error");
-
-
 
 				return mav;
 
-
-
 			}
-
-
 
 		}
 
 
-
 		mav.setViewName("plot/editPlot");
 
-
-
 		return mav;
-
-
 
 	}
 }
