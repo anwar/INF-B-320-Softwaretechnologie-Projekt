@@ -61,6 +61,9 @@ public class TenantService {
 		tenants.save(tenantManager.get(id));
 	}
 
+	/**
+	 * @param id Id of the {@link Tenant} we want to make a pre {@link Tenant}
+	 */
 	void makePreTenant(Long id){
 		tenantManager.get(id).getUserAccount().setEnabled(false);
 		tenantManager.get(id).setBirthdate("");
@@ -68,5 +71,6 @@ public class TenantService {
 		tenantManager.get(id).setAddress("");
 		tenantManager.get(id).setForename("");
 		//TODO delte roles method on pretenant
+		tenantManager.deleteRoles(tenantManager.get(id));
 	}
 }

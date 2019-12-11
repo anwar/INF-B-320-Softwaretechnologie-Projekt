@@ -79,4 +79,10 @@ public class TenantServiceTest {
 	void IllegalRepeatedEmail(){
 		assertThrows(IllegalArgumentException.class, () ->tenantService.changeEmail(tenantRepository.findAll().toList().get(0).getId(), tenantRepository.findAll().toList().get(0).getEmail(), "jasmins@email.com", "jasmins1@email.com"));
 	}
+
+	@Test
+	void makePreTenant(){
+		tenantService.makePreTenant(tenantManager.getAll().toList().get(0).getId());
+		assertThat(tenantManager.getAll().toList().get(0).getForename().equals(""));
+	}
 }

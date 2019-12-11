@@ -58,10 +58,13 @@ public class TenantManager {
 	 * @param tenant tenant who gets its roles changed
 	 * @return
 	 */
-	public Tenant changeRoles(Role role, Role newRole,Tenant tenant){
-		tenant.getUserAccount().remove(role);
-		tenant.getUserAccount().add(newRole);
-		return tenant;
+	public void changeRoles(Role role, Role newRole,Tenant tenant){
+		//tenant.getUserAccount().remove(role);
+		//tenant.getUserAccount().add(newRole);
+		for (int i = 0; i < tenant.getUserAccount().getRoles().toList().size(); i++){
+			tenant.getUserAccount().getRoles().toList().get(i).equals(role);
+			tenant.getUserAccount().remove(tenant.getUserAccount().getRoles().toList().get(i));
+		}
 	}
 
 	/**
@@ -128,5 +131,11 @@ public class TenantManager {
 	public void createNewPerson(String forename, String surname, String address, String phonenumber, String birthdate, String email){
 		Tenant tenant = new Tenant(forename, surname, address, phonenumber, birthdate, userAccounts.create(surname, Password.UnencryptedPassword.of(phonenumber), email));
 		tenants.save(tenant);
+	}
+
+	public void deleteRoles(Tenant tenant){
+		for (int i = 0; i < tenant.getUserAccount().getRoles().toList().size(); i++) {
+			tenant.getUserAccount().remove(tenant.getUserAccount().getRoles().toList().get(i));
+		}
 	}
 }

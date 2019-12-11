@@ -33,13 +33,6 @@ public class TenantManagerTest {
 //			"908964875734", "13.05.1999", userAccountManager.create("jassi", Password.UnencryptedPassword.of("123"),"jassis@email.com", Role.of("Hauptpächter")));
 //	}
 
-	@Test
-	void getAll() {
-	}
-
-	@Test
-	void get() {
-	}
 
 	@Test
 	void changeRoles() {
