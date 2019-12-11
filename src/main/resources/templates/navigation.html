@@ -26,7 +26,11 @@
 
 
         <li><a href="news/home.html" th:href="@{/}" >Home</a></li>
-        <li><a href="plot/plotOverview.html" th:href="@{/anlage}">Anlage</a></li>
+        <li><a href="plot/plotOverview.html" th:href="@{/anlage}">Anlage</a>
+            <ul>
+                <li><a th:href="'/anlage'">Allgemein</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="'/chairmenOverview'">nach Obmann</a> </li>
+            </ul></li>
         <li><a href="#" sec:authorize="isAuthenticated()">Meine Parzelle</a>
             <ul >
                 <li><a href="plot/myPlot.html" th:href="@{/myPlot}" sec:authorize="isAuthenticated()" >Meine Daten</a></li>
