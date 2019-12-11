@@ -34,7 +34,7 @@
             <input type="hidden" id="rentedPlot" name="plot" th:value="${plot}">
         </div> -->
     </div>
-    <div align="center">
+    <div align="center" th:each="plot : ${plots}">
         <table>
             <thead>
                 <tr>
@@ -55,14 +55,15 @@
                 </tr>
             </thead>
             <tbody>
-            <tr><th>Name</th> <td align="center" th:text="${plotName}"> Text </td></tr>
-            <tr><th>Größe</th> <td align="center" th:text="${plotSize}"> Text </td></tr>
-            <tr><th>Beschreibung</th> <td align="center" th:text="${plotDescription}"> Text </td></tr>
-            <tr th:if="not ${rented}"><th>Schätzwert</th> <td align="center" th:text="${plotPrice}"> Text </td></tr>
-            <tr th:if="${rented}"><th>Hauptpächter</th> <td align="center" th:text="${mainTenant.getForename()} + ' ' + ${mainTenant.getSurname()} +',  ' + ${mainTenantRoles}"> Text </td></tr>
-            <tr th:if="${rented} and not ${subTenants.isEmpty()}"><th>Nebenpächter</th> <td></td></tr>
-            <tr th:if="${rented} and not ${subTenants.isEmpty()}" th:each="tenant : ${subTenants.keySet()}"><th></th> <td align="center" th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()} + ${subTenants.get(tenant)}"> Text </td></tr>
-            <tr th:if="${rented} and ${canSeeWorkhours}"><th>Arbeitsstunden</th> <td align="center" th:text="${workHours}"> Text </td></tr>
+                <tr><th>Name</th> <td align="center" th:text="${plot.plotName}"> Text </td></tr>
+                <tr><th>Größe</th> <td align="center" th:text="${plot.plotSize}"> Text </td></tr>
+                <tr><th>Beschreibung</th> <td align="center" th:text="${plot.plotDescription}"> Text </td></tr>
+                <tr th:if="not ${rented}"><th>Schätzwert</th> <td align="center" th:text="${plot.plotPrice}"> Text </td></tr>
+                <tr th:if="${rented} and not ${plot.mainTenantRoles.isEmpty()}"><th>Hauptpächter</th> <td></td></tr>
+                <tr th:if="${rented} and not ${plot.mainTenantRoles.isEmpty()}" th:each="tenant : ${plot.mainTenantRoles.keySet()}" th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()} +',  ' + ${plot.mainTenantRoles.get(tenant)}"> Text </tr></tr>
+                <tr th:if="${rented} and not ${plot.subTenantRoles.isEmpty()}"><th>Nebenpächter</th> <td></td></tr>
+                <tr th:if="${rented} and not ${plot.subTenantRoles.isEmpty()}" th:each="tenant : ${plot.subTenantRoles.keySet()}"><th></th> <td align="center" th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()} + ${plot.subTenantRoles.get(tenant)}"> Text </td></tr>
+                <tr th:if="${rented} and ${canSeeWorkhours}"><th>Arbeitsstunden</th> <td align="center" th:text="${plot.workHours}"> Text </td></tr>
             </tbody>
            <!-- <div class="button-section">
                 <button class="button" th:if="${canModify}">Zählerstände eintragen</button>

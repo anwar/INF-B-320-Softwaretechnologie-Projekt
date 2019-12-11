@@ -199,17 +199,8 @@ public class PlotControllerServiceIntegrationTests {
 
 	@Test
 	public void addInformationOfPlotTest() {
-		ModelAndView mav = new ModelAndView();
-		ModelAndView result = new ModelAndView();
-		result.addObject("plot", freePlot);
-		result.addObject("plotID", freePlot.getId());
-		result.addObject("plotName", freePlot.getName());
-		result.addObject("plotSize", freePlot.getSize() + " m²");
-		result.addObject("plotDescription", freePlot.getDescription());
-		result.addObject("plotPrice", MonetaryFormats.getAmountFormat(Locale.GERMANY)
-				.format(freePlot.getEstimator()));
-
-		plotControllerService.addGeneralInformationOfPlot(freePlot, mav);
-		assertThat(mav.getModelMap()).isEqualTo(result.getModelMap());
+		PlotInformationBuffer result = new PlotInformationBuffer(freePlot);
+		assertThat(plotControllerService.addInformationOfPlotToPlotInformationPuffer(Optional.empty(), freePlot))
+				.isEqualTo(result);
 	}
 }

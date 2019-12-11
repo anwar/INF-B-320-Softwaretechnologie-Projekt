@@ -4,6 +4,7 @@ import kleingarten.tenant.Tenant;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,48 +47,35 @@ public class InsecurePlotController {
 	 * @return response as {@link ModelAndView}
 	 */
 	@GetMapping("/plot/{plot}")
-	public ModelAndView detailsOfPlot(@LoggedIn Optional<UserAccount> user, @PathVariable Plot plot) {
+	public String detailsOfPlot(@LoggedIn Optional<UserAccount> user, @PathVariable Plot plot, Model model) {
 		if (user.isEmpty()) {
-			return detailsOfFreePlot(plot);
+			return detailsOfFreePlot(plot, model);
 		}
-		System.out.println(plot);
-		return securePlotController.detailsOfPlot(user.get(), plot);
+		return securePlotController.detailsOfPlot(user.get(), plot, model);
 	}
 
 	/**
 	 * Create model with general information of a {@link Plot} to show the detail page of a {@link Plot} when no user
 	 * is logged in
 	 * @param plot {@link Plot} of which general information should be shown
-	 * @return response as {@link ModelAndView}
+	 * @param mav {@link Model} to add needed information
+	 * @return view as {@link String}
 	 */
-	public ModelAndView detailsOfFreePlot(@PathVariable Plot plot) {
-		ModelAndView mav = new ModelAndView();
-		Set<Plot> plotsToShow = new HashSet<>();
+	public String detailsOfFreePlot(@PathVariable Plot plot, Model mav) {
+		Set<PlotInformationBuffer> plotsToShow = new HashSet<>();
 
-		if (!plotService.existsByName(plot.getName())) {
-			mav.addObject("error","Plot must exist!");
-			mav.setViewName("error");
-			return mav;
+		try {
+			if (plot.getStatus() == PlotStatus.TAKEN) {
+				mav.addAttribute("error", "Unauthenticated user must not have access to a rented plot!");
+				return "error";
+			}
+			plotsToShow.add(new PlotInformationBuffer(plot));
+		} catch (Exception e) {
+			mav.addAttribute("error", e);
+			return "error";
 		}
-		if (plot.getStatus() == PlotStatus.TAKEN) {
-			mav.addObject("error","Unauthenticated user must not have access to a rented plot!");
-			mav.setViewName("error");
-			return mav;
-		}
-		plotsToShow.add(plot);
-
-		mav.addObject("rented", false);
-		mav.addObject("subTenants", new HashMap<Tenant, String>());
-		mav.addObject("plots", plotsToShow);
-
-		ModelAndView updatedModel = plotControllerService.addGeneralInformationOfPlot(plot, mav);
-		for (String attributeName:
-			 updatedModel.getModel().keySet()) {
-			mav.addObject(attributeName, updatedModel.getModel().get(attributeName));
-		}
-		mav.setViewName("plot/myPlot");
-
-		return mav;
+		mav.addAttribute("plots", plotsToShow);
+		return "plot/myPlot";
 	}
 
 	/**

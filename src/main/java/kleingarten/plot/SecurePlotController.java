@@ -9,6 +9,7 @@ import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,65 +41,39 @@ public class SecurePlotController {
 	/**
 	 * Create model with information of a {@link Plot} to show the detail page of a {@link Plot} when a user
 	 * is logged in
-	 *
 	 * @param user {@link UserAccount} of the logged in user
 	 * @param plot {@link Plot} of which information should be shown
+	 * @param mav {@link ModelAndView}
 	 * @return response as {@link ModelAndView}
 	 */
-	public ModelAndView detailsOfPlot(@LoggedIn UserAccount user, Plot plot) {
-		ModelAndView mav = new ModelAndView();
-		Set<Plot> plotsToShow = new HashSet<>();
+	public String detailsOfPlot(@LoggedIn UserAccount user, final Plot plot, Model mav) {
+		Set<PlotInformationBuffer> plotsToShow = new HashSet<>();
 
-		if (!plotService.existsByName(plot.getName())) {
-			mav.addObject("error", "Plot must exist!");
-			mav.setViewName("error");
-			return mav;
-		}
-
-		//Add general information of plot to the model
-		ModelAndView updatedModel = plotControllerService.addGeneralInformationOfPlot(plot, mav);
-		for (String attributeName:
-			 updatedModel.getModel().keySet()) {
-			mav.addObject(attributeName, updatedModel.getModel().get(attributeName));
-		}
 		try {
-			//Add information which is saved in the procedure of the plot to the model and set the access right to it
+			//Add information of the plot to the buffer and set the access right to it
 			//depending on which role the user has
 			Tenant tenant = tenantManager.getTenantByUserAccount(user);
 			if (dataService.procedureExists(LocalDateTime.now().getYear(), plot)) {
-				mav.addObject("rented", true);
 				Procedure procedure = dataService.getProcedure(LocalDateTime.now().getYear(), plot);
+				plotsToShow.add(plotControllerService.addInformationOfPlotToPlotInformationPuffer(Optional.of(procedure), plot));
 
-				updatedModel = plotControllerService.secureSetAccessRightForPlotDetails(Optional.of(procedure),
-																						tenant, mav);
-				for (String attributeName:
-						updatedModel.getModel().keySet()) {
-					mav.addObject(attributeName, updatedModel.getModel().get(attributeName));
-				}
-				updatedModel = plotControllerService.addProcedureInformationOfPlot(procedure, mav);
-				for (String attributeName:
-						updatedModel.getModel().keySet()) {
-					mav.addObject(attributeName, updatedModel.getModel().get(attributeName));
-				}
+				plotControllerService.secureSetAccessRightForPlotDetails(Optional.of(procedure), tenant, mav);
 				//Show different detail page if user rents the plot
-				if (procedure.isTenant(tenant.getId())) {
+				/*if (procedure.isTenant(tenant.getId())) {
 					return rentedPlotsFor(user);
-				}
+				}*/
 			}
 			if (plot.getStatus() == PlotStatus.FREE) {
-				plotControllerService.secureSetAccessRightForPlotDetails(Optional.empty(), tenant, mav);
-				mav.addObject("rented", false);
-				mav.addObject("subTenants", new HashMap<Tenant, String>());
+				plotControllerService.secureSetAccessRightForPlotDetails(Optional.empty(), tenant,mav);
+			} else {
+				mav.addAttribute("rented", true);
 			}
 		} catch (Exception e) {
-			mav.addObject("error", e);
-			mav.setViewName("error");
-			return mav;
+			mav.addAttribute("error", e);
+			return "error";
 		}
-		plotsToShow.add(plot);
-		mav.addObject("plots", plotsToShow);
-		mav.setViewName("plot/myPlot");
-		return mav;
+		mav.addAttribute("plots", plotsToShow);
+		return "plot/myPlot";
 	}
 
 	/**
@@ -108,9 +83,9 @@ public class SecurePlotController {
 	 * @param user {@link UserAccount} of the logged in user
 	 * @return response as {@link ModelAndView}
 	 */
-	@GetMapping("/myPlot/")
+	//@GetMapping("/myPlot/")
 	//TODO Change method so that return parameters are used
-	public ModelAndView rentedPlotsFor(@LoggedIn UserAccount user) {
+	/*public ModelAndView rentedPlotsFor(@LoggedIn UserAccount user) {
 		ModelAndView mav = new ModelAndView();
 		Plot shownPlot;
 
@@ -134,7 +109,7 @@ public class SecurePlotController {
 			return mav;
 		}
 		return detailsOfRentedPlot(user, shownPlot, mav);
-	}
+	}*/
 
 	/**
 	 * Create model with information of a {@link Plot} which is rented by the user to show the detail page of the
@@ -186,7 +161,6 @@ public class SecurePlotController {
 			mav.setViewName("error");
 			return mav;
 		}
-
 		//Add used colors and description to a map
 		usedColors.put("#7CB342", "frei");
 		usedColors.put("#546E7A", "besetzt");
@@ -201,7 +175,6 @@ public class SecurePlotController {
 		mav.setViewName("plot/plotOverview");
 
 		return mav;
-
 	}
 
 	/**
@@ -279,7 +252,7 @@ public class SecurePlotController {
 	 * @param description description of the {@link Plot} as {@link String}
 	 * @return response as {@link ModelAndView}
 	 */
-	@PostMapping("/editedPlot")
+	/*@PostMapping("/editedPlot")
 	public ModelAndView editedPlot(@LoggedIn UserAccount user, @RequestParam(name = "plotID") ProductIdentifier plotId,
 								   @RequestParam("size") int size, @RequestParam("description") String description,
 								   @RequestParam() int estimator) {
@@ -294,8 +267,8 @@ public class SecurePlotController {
 			mav.addObject("error", e);
 			mav.setViewName("error");
 			return mav;
-		}
-		return detailsOfPlot(user, plot);
+		}*/
+		//return detailsOfPlot(user, plot, Model model);
 	}
-}
+//}
 
