@@ -27,7 +27,7 @@
                 <label for="old">alte Email</label>
             </th>
             <td>
-                <input class="text_bgImage" id="old" name="old" type="email" required="required"/>
+                <input class="text_bgImage" id="old" name="old" type="email" th:value="${email}" required="required"/>
             </td>
 
         </tr>
@@ -46,7 +46,7 @@
                 <label for="again">neue Email</label>
             </th>
             <td>
-                <input class="text_bgImage" id="again" name="repeat" type="email" required="required"/>
+                <input class="text_bgImage" id="again" name="repeat"  type="email" required="required"/>
             </td>
 
         </tr>

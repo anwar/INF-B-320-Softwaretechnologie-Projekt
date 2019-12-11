@@ -7,6 +7,7 @@ import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -105,9 +106,10 @@ class TenantController {
 
 		return "redirect:/tenants";
 	}
-
+	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
 	@GetMapping("/changePassword")
-	String changePassword(){
+	String changePassword(@LoggedIn UserAccount userAccount, Model model){
+		// model.addAttribute("password", userAccount.getPassword().toString());
 		return"/tenant/changePassword";
 	}
 
@@ -116,11 +118,12 @@ class TenantController {
 						   @RequestParam("repeat") String repeatedPassword){
 		tenantService.changePassword(userAccount, oldPassword, newPassword, repeatedPassword);
 
-		return "redirect:/home";
+		return "redirect:/changePassword";
 	}
 
 	@GetMapping("/changeEmail")
-	String changeEmail(){
+	String changeEmail(@LoggedIn UserAccount userAccount, Model model){
+		model.addAttribute("email", userAccount.getEmail());
 		return"/tenant/changeEmail";
 	}
 
@@ -128,6 +131,6 @@ class TenantController {
 	String changedEmail(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldEmail, @RequestParam("new") String newEmai,
 						@RequestParam("repeat") String repeatedEmail){
 		tenantService.changeEmail(tenantManager.getTenantByUserAccount(userAccount).getId(), oldEmail, newEmai, repeatedEmail);
-		return "redirect:/home";
+		return "redirect:/changeEmail";
 	}
 }

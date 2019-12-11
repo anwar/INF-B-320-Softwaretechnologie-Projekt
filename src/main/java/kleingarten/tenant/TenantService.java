@@ -63,5 +63,10 @@ public class TenantService {
 
 	void makePreTenant(Long id){
 		tenantManager.get(id).getUserAccount().setEnabled(false);
+		tenantManager.get(id).setBirthdate("");
+		tenantManager.get(id).setPhonenumber("");
+		tenantManager.get(id).setAddress("");
+		tenantManager.get(id).setForename("");
+		//TODO delte roles method on pretenant
 	}
 }
