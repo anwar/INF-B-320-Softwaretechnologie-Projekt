@@ -7,22 +7,26 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.Entity;
 
-//@Component
-//public class ComplainsService {
+@Component
+public class ComplainsService {
 
-/*	private final Complains complains;
-	private final ComplainsManager complainsManager;*/
-/*	private final Tenant tenant;
-	private final TenantManager tenantManager;*/
+	private final ComplainsRepository complains;
+	private final ComplainsManager complainsManager;
+	@Autowired
+	private final TenantManager tenantManager;
 
-/*	ComplainsService(*//*@Autowired Complains complains, ComplainsManager complainsManager*//* Tenant tenant, TenantManager tenantManager){
-		*//*this.complains = complains;
-		this.complainsManager = complainsManager;*//*
-		this.tenant = tenant;
+	ComplainsService(@Autowired ComplainsRepository complains, ComplainsManager complainsManager,  @Autowired TenantManager tenantManager){
+		this.complains = complains;
+		this.complainsManager = complainsManager;
+
 		this.tenantManager = tenantManager;
 	}
 
-	public String getAuthorName(){
-		return tenantManager.get(tenant.getId()).getForename() + " " + tenantManager.get(tenant.getId()).getSurname();
+	public String getAuthorName(Complains complains){
+		return tenantManager.get(complains.getAuthor()).getForename() + " " + tenantManager.get(complains.getAuthor()).getSurname();
 	}
-}*/
+
+	public String getSubjectName(Complains complains){
+		return tenantManager.get(complains.getSubject()).getForename() + " " + tenantManager.get(complains.getSubject()).getSurname();
+	}
+}

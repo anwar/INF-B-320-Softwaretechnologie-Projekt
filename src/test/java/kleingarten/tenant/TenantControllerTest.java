@@ -61,5 +61,11 @@ public class TenantControllerTest {
 				.andExpect(header().string(HttpHeaders.LOCATION, endsWith("/login")));
 	}
 
+	/*@Test
+	void changePasswordPreventPublicAccsess()throws Exception{
+		mvc.perform(get("/changePassword").param("email", ""))
+			.andExpect(status().isFound())
+			.andExpect(header().string(HttpHeaders.LOCATION, endsWith("/login")));
+	}*/
 
 }
