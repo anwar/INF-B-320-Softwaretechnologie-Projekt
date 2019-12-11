@@ -1,6 +1,7 @@
 package kleingarten.plot;
 
 import kleingarten.tenant.Tenant;
+import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.Role;
 
 import javax.money.format.MonetaryFormats;
@@ -11,6 +12,8 @@ import java.util.Set;
 
 
 public class PlotInformationBuffer {
+	Plot associatedPlot;
+	ProductIdentifier plotId;
 	String plotName;
 	int plotSize;
 	String plotDescription;
@@ -19,7 +22,9 @@ public class PlotInformationBuffer {
 	Map<Tenant, String> subTenantRoles;
 	String workHours;
 
-	public PlotInformationBuffer(final Plot plot){
+	public PlotInformationBuffer(final Plot plot) {
+		associatedPlot = plot;
+		plotId = plot.getId();
 		plotName = plot.getName();
 		plotSize = plot.getSize();
 		plotDescription = plot.getDescription();
@@ -52,7 +57,7 @@ public class PlotInformationBuffer {
 		this.plotDescription = plotDescription;
 	}
 
-	public String  getPlotPrice() {
+	public String getPlotPrice() {
 		return plotPrice;
 	}
 
@@ -60,11 +65,11 @@ public class PlotInformationBuffer {
 		this.plotPrice = plotPrice;
 	}
 
-	public Map<Tenant, String> getMainTenantRole() {
+	public Map<Tenant, String> getMainTenantRoles() {
 		return mainTenantRoles;
 	}
 
-	public void setMainTenantRole(Map<Tenant, String> mainTenantRole) {
+	public void setMainTenantRoles(Map<Tenant, String> mainTenantRole) {
 		this.mainTenantRoles = mainTenantRole;
 	}
 
@@ -82,5 +87,21 @@ public class PlotInformationBuffer {
 
 	public void setWorkHours(String workHours) {
 		this.workHours = workHours;
+	}
+
+	public Plot getAssociatedPlot() {
+		return associatedPlot;
+	}
+
+	public void setAssociatedPlot(Plot associatedPlot) {
+		this.associatedPlot = associatedPlot;
+	}
+
+	public ProductIdentifier getPlotId() {
+		return plotId;
+	}
+
+	public void setPlotId(ProductIdentifier plotId) {
+		this.plotId = plotId;
 	}
 }

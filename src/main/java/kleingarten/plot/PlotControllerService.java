@@ -134,7 +134,7 @@ public class PlotControllerService {
 			//Get information and roles of mainTenant
 			Tenant mainTenant = dataService.findTenantById(procedure.get().getMainTenant());
 			mainTenantInformation.put(mainTenant, mainTenant.getRoles());
-			buffer.setMainTenantRole(mainTenantInformation);
+			buffer.setMainTenantRoles(mainTenantInformation);
 
 			//Get information and roles of subTenants
 			for (long tenantId : procedure.get().getSubTenants()) {
@@ -183,6 +183,7 @@ public class PlotControllerService {
 			}
 		} else if (procedure.isPresent()) {
 			if (procedure.get().isTenant(tenant.getId())) {
+				mav.addAttribute("isTenant", true);
 				mav.addAttribute("canSeeWorkhours", true);
 				mav.addAttribute("canSeeBills", true);
 				mav.addAttribute("canModify", true);
