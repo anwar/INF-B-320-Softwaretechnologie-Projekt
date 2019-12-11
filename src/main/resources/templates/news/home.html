@@ -56,14 +56,14 @@
                                               sec:authorize="hasRole('Vorstandsvorsitzender')" method="post"
                                               th:action="@{/home/news/deleteEntry/{id}(id=${entry.id})}">
                                             <button class="btn btn-sm float-right"
-                                                    style="font-size: 18px; background: #EFF2FB; border: none;"
+                                                    style="font-size: 18px; background: white; border: none;"
                                                     th:title="#{news.entryEdit.delete}">&#10060;
                                             </button>
                                         </form>
 
                                         <button sec:authorize="hasRole('Vorstandsvorsitzender')"
                                                 class="btn btn-sm float-right"
-                                                style=" display: inline-block;font-size: 20px; background: #EFF2FB; border: none;"
+                                                style=" display: inline-block;font-size: 20px; background: white; border: none;"
                                                 th:onclick="'showNewsEditForm(\'' + ${entry.id} + '\');'">&#9998;
                                         </button>
                                     </div>
