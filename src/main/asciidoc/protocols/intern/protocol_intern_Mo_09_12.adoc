@@ -1,0 +1,248 @@
+= Protokoll Gruppe 43
+
+Treffen am 09.12.2019
+
+Ort:      APB +
+Beginn:   13:00 Uhr +
+Ende:     14:50 Uhr
+
+__Schriftführer:__ Isabell Zorr
+
+*Nächstes Treffen:* +
+11.12.2019, 13:00 Uhr, Ort des nächsten Treffens
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Albert Wellerdt
+- Franziska Kiel
+- Sascha Seiffert
+- Sanghyun Lee
+- Ylvi Sarah Bachmann
+- Isabell Zorr
+
+== Bemerkungen
+Verwarnungen, besondere Vorfälle, Organisatorisches, wichtige getroffene Entscheidungen
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#25
+|Implement Message package for sending emails
+| BAsic functionality, integration Test
+|Talal
+|open
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#34
+|TenantDepartment
+| Issue to manage the TODOS for the tenantDepartment
+|Isabell
+|open
+
+|#41
+|Edit and add classes and attributes to the appointment diagram
+|editing diagram for appointment diagram
+|Albert
+|open
+
+|#44
+|Add isTenant() method to ProcedureManager
+|methode to determine wether or not a user is a tenant
+|Sascha and Sanghyun
+|open
+
+|#49
+|Show details of Plot
+|...
+|Ylvi
+|open
+
+|#50
+|Add getProcedure() Method to ProcedureManager
+|method should have year and plot as parameter and return the procedure
+|Sascha and Sanghyun
+|open
+
+|#51
+|Add getProcedures() to ProcedureManager
+|year and tenant as parameters and return a streamable
+|Sascha and Sangyhun
+|open
+
+|#53
+|Tests for initializing tenants
+|some tests to test if the initialization of a tenant worked
+|Isabell
+|open
+
+|#54
+|Show overview of plots
+|colours and html file for the plot overview
+|Ylvi
+|open
+
+|#63
+|Finalize news package
+|implementing entry deletion, editing and unit tests
+|Talal
+|open
+
+|#67
+|Overviwe table for appointments
+|table showing appointments and maybe editing them
+|Albert
+|open
+
+|#68
+|Overview table for Bills
+|table showing bills and maybe editing them
+|Sanghyun
+|open
+
+|#69
+|edit() Method for Tenants
+|adding an edit() or modify() method
+|Isabell
+|closed
+
+|#70
+|Application Package
+|applicationRepo, applicationManager, applicationController, application class
+|Sascha
+|open
+
+|===
+
+
+== Aktueller Stand
+Die Software befindet sich in der Fertigstellung der Muss-Kriterien, welche bis Sonntag fertig sein mpssen
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#25
+|Implement Message package for sending emails
+| BAsic functionality, integration Test
+|Talal
+|open
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#34
+|TenantDepartment
+| Issue to manage the TODOS for the tenantDepartment
+|Isabell
+|open
+
+|#41
+|Edit and add classes and attributes to the appointment diagram
+|editing diagram for appointment diagram
+|Albert
+|open
+
+|#44
+|Add isTenant() method to ProcedureManager
+|methode to determine wether or not a user is a tenant
+|Sascha and Sanghyun
+|open
+
+|#49
+|Show details of Plot
+|...
+|Ylvi
+|open
+
+|#50
+|Add getProcedure() Method to ProcedureManager
+|method should have year and plot as parameter and return the procedure
+|Sascha and Sanghyun
+|open
+
+|#51
+|Add getProcedures() to ProcedureManager
+|year and tenant as parameters and return a streamable
+|Sascha and Sangyhun
+|open
+
+|#53
+|Tests for initializing tenants
+|some tests to test if the initialization of a tenant worked
+|Isabell
+|open
+
+|#54
+|Show overview of plots
+|colours and html file for the plot overview
+|Ylvi
+|open
+
+|#63
+|Finalize news package
+|implementing entry deletion, editing and unit tests
+|Talal
+|open
+
+|#67
+|Overviwe table for appointments
+|table showing appointments and maybe editing them
+|Albert
+|open
+
+|#68
+|Overview table for Bills
+|table showing bills and maybe editing them
+|Sanghyun
+|open
+
+|#70
+|Application Package
+|applicationRepo, applicationManager, applicationController, application class
+|Sascha
+|open
+
+|===
