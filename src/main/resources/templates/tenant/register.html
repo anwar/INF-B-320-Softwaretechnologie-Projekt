@@ -1,0 +1,102 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
+          href="../resources/css/style.css" type="text/css"/>
+
+    <link th:href="@{../resources/css/tenantdetailsTable.css}" rel="stylesheet"
+          href="../resources/css/tenantdetailsTable.css" type="text/css">
+    <link th:href="@{../resources/css/modifyTenant.css}" rel="stylesheet"
+          href="../resources/css/modifyTenant.css" type="text/css">
+    <script src="../resources/css/test.js"></script>
+
+
+</head>
+<body>
+
+<div class="ui container">
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="header-title">
+        <h1> Details Bearbeiten</h1>
+    </div>
+
+    <div>
+        <form method="post" th:action="@{/registered}">
+            <table>
+
+                <tr> </td><td style="font-size:25px; background-color: white;"> <a th:title="Abbrechen" ><!-- th:href="'/tenant/tenants" --> &#10060; </a> </td></tr>
+
+                <div>
+                    <tr>
+                        <th><label for="forename">Vorname</label></th>
+                        <td>  <input class="text_bgImage" id="forename" name="forename"  type="text" required="required"/>
+                    </tr>
+                </div>
+                <div>
+                    <tr>
+                        <th> <label for="surname">Nachname</label></th>
+                        <td> <input class="text_bgImage" id="surname" name="surname"  type="text" required="required"/></td>
+                    </tr>
+                </div>
+                <div>
+                    <tr>
+                        <th> <label for="birthdate">Geburtstag</label></th>
+                        <td> <input class="text_bgImage" id="birthdate" name="birthdate"   type="date" required="required"/></td>
+                    </tr>
+                </div>
+                <div>
+                    <tr>
+                        <th><label for="address">Adresse</label></th>
+                        <td> <input class="text_bgImage" id="address" name="address"  type="text" required="required"/></td>
+                    </tr>
+                </div>
+                <div>
+                    <tr>
+                        <th> <label for="email">Email</label></th>
+                        <td> <input class="text_bgImage" id="email" name="email"  type="email" required="required"/></td>
+                    </tr>
+                </div>
+                <div>
+                    <tr>
+                        <th> <label for="phone">Telefon</label></th>
+                        <td><input class="text_bgImage" id="phone" name="phone"  type="number" required="required"/></td>
+                    </tr>
+                </div>
+                <div>
+                    <tr>
+                        <th><label for="roles">Rolle(n)</label></th>
+                        <td> <input class="text_bgImage" id="roles" name="roles"  type="search" list="roles" required="required"/></td>
+                        <!--<datalist id="roles" >
+                         <option value="1">
+                            <option value="2">
+                         </datalist> -->
+                    </tr>
+                </div>
+            </table>
+            <div class="button-section">
+
+                <button  type="submit" class="button" >Änderungen speichern</button>
+            </div>
+        </form> </div>
+
+
+
+</div>
+
+
+
+</div>
+
+</div>
+
+<div th:include="navigation :: footer"></div>
+</body>
+</html>

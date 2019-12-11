@@ -36,22 +36,22 @@
                 <td> <input class="text_bgImage" th:value="${bewerbung.getFirstName() + ' ' + bewerbung.getLastName()}" type="text" readonly/></td>
                 <td> <input class="text_bgImage" th:value="${bewerbung.getEmail()}" type="text" readonly/></td>
 				<td> <input class="text_bgImage" th:value="${bewerbung.getStateAsString()}" type="text" readonly/></td>
-                <td> 
+                <td>
 					<form method="post" th:action="@{/accept}">
                         <input type="hidden" name="plotId" value="0" th:value="${bewerbung.getPlotId()}"/>
                         <input type="hidden" name="appId" value="0" th:value="${bewerbung.getId()}"/>
 						<button  type="submit" class="button" >Annehmen</button>
-				
+
 					</form>
 					<form method="post" th:action="@{/deny}">
                         <input type="hidden" name="plotId" value="0" th:value="${bewerbung.getPlotId()}"/>
                         <input type="hidden" name="appId" value="0" th:value="${bewerbung.getId()}"/>
 						<button  type="submit" class="button" >Ablehnen</button>
-				
+
 					</form>
 				</td>
 
-			</tr>  
+			</tr>
 		</tbody>
     </table>
     </div>

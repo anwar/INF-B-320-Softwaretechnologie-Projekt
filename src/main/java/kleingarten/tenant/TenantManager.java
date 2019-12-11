@@ -103,8 +103,30 @@ public class TenantManager {
 		return  tenants.findAll().filter(c -> !c.getUserAccount().isEnabled());
 	}
 
+	/**
+	 * @param forename
+	 * @param surname
+	 * @param email
+	 * @param password
+	 */
 	public void createNewTenant(String forename, String surname, String email, String password){
 		Tenant tenant = new Tenant(forename, surname, "", "", "", userAccounts.create(surname, Password.UnencryptedPassword.of(password), email));
+		tenant.addRole(Role.of("Hauptpächter"));
+		tenants.save(tenant);
+		System.out.println(tenant.getForename());
+	}
+
+	/**
+	 * Method to create a new Person who can become an additional tenant
+	 * @param forename
+	 * @param surname
+	 * @param address
+	 * @param phonenumber
+	 * @param birthdate
+	 * @param email
+	 */
+	public void createNewPerson(String forename, String surname, String address, String phonenumber, String birthdate, String email){
+		Tenant tenant = new Tenant(forename, surname, address, phonenumber, birthdate, userAccounts.create(surname, Password.UnencryptedPassword.of(phonenumber), email));
 		tenants.save(tenant);
 	}
 }
