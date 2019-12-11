@@ -110,6 +110,7 @@ class TenantController {
 	@GetMapping("/changePassword")
 	String changePassword(@LoggedIn UserAccount userAccount, Model model){
 		// model.addAttribute("password", userAccount.getPassword().toString());
+		//model.addAttribute("password", authenticationManager.getCurrentUser().get().getPassword().);
 		return"/tenant/changePassword";
 	}
 
@@ -132,5 +133,19 @@ class TenantController {
 						@RequestParam("repeat") String repeatedEmail){
 		tenantService.changeEmail(tenantManager.getTenantByUserAccount(userAccount).getId(), oldEmail, newEmai, repeatedEmail);
 		return "redirect:/changeEmail";
+	}
+
+	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@GetMapping("/register")
+	String register(){
+		return "/tenant/register";
+	}
+
+	@PostMapping("/registered")
+	String registered(@RequestParam("forename") String forename, @RequestParam("surname") String surname, @RequestParam("birthdate") String birthdate,
+					  @RequestParam("address") String address, @RequestParam("email") String email, @RequestParam("phone") String phone){
+		tenantManager.createNewPerson(forename, surname, address, phone, birthdate, email);
+
+		return ("redirect:/tenants");
 	}
 }

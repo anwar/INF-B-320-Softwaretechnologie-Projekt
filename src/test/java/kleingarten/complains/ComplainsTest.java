@@ -12,6 +12,7 @@ import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.transaction.Transactional;
 
@@ -62,12 +63,23 @@ public class ComplainsTest {
 		complains.setAuthor(tenantManager.getAll().toList().get(2).getId());
 		assertThat(complains.getAuthor() == (tenantManager.getAll().toList().get(2).getId()));
 	}
-	
+
+	@Test
+	void setIllegalAuthor(){
+		Long authorId = Long.valueOf(0);
+		assertThrows(IllegalArgumentException.class, () -> complains.setAuthor(authorId));
+	}
 
 	@Test
 	void setSubject() {
 		complains.setSubject(tenantManager.getAll().toList().get(0).getId());
 		assertThat(complains.getSubject() == (tenantManager.getAll().toList().get(0).getId()));
+	}
+
+	@Test
+	void setIllegalSubject(){
+		Long subjectId = Long.valueOf(0);
+		assertThrows(IllegalArgumentException.class, () -> complains.setSubject(subjectId));
 	}
 
 	@Test
@@ -77,8 +89,20 @@ public class ComplainsTest {
 	}
 
 	@Test
+	void setIllegalState(){
+		ComplainsState state = null;
+		assertThrows(IllegalArgumentException.class, () -> complains.setState(state));
+	}
+
+	@Test
 	void setDescription() {
 		complains.setDescription("Der ist doof.");
 		assertThat(complains.getDescription().equals("Der ist doof."));
+	}
+
+	@Test
+	void setIllegalDescription(){
+		String description = null;
+		assertThrows(IllegalArgumentException.class, () -> complains.setDescription(description));
 	}
 }

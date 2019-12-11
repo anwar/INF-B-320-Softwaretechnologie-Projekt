@@ -1,5 +1,5 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
@@ -11,10 +11,10 @@
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
     <link th:href="@{../resources/css/style.css}" rel="stylesheet"
           href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
-          href="../resources/css/tenantTable.css" type="text/css"/>
-    <script th:src="@{../resources/css/js/search.js}"
-            src="../resources/css/js/search.js"> </script>
+	<link th:href="@{../resources/css/tenantdetailsTable.css}" rel="stylesheet"
+		  href="../resources/css/tenantdetailsTable.css" type="text/css">
+
+
 
     <meta charset="UTF-8">
     <title>editPlot</title>
@@ -26,19 +26,20 @@
 <!-- Plot-Info, ROLES: ? -->
 <div  sec:authorize="hasAnyRole('Vorstandsvorsitzender')">
     <form method="post" th:action="@{/editedPlot}">
-    <table  id="myTable">
+		<div class="header-title"><h2>Allgemein</h2></div>
+<table  id="myTable">
 
         <tbody>
         <tr>
-            <td> <label for="size">Größe</label> </td>
+            <th> <label for="size">Größe</label> </th>
             <td><input class="text_bgImage" id="size" name="size" th:value="${plot.getSize()}" type="number" required="required"/></td>
         </tr>
         <tr>
-            <td> <label for="description">Beschreibung</label> </td>
+            <th> <label for="description">Beschreibung</label> </th>
             <td><input class="text_bgImage" id="description" name="description" th:value="${plot.getDescription()}" type="text" required="required"/></td>
         </tr>
         <tr>
-            <td> <label for="number">Schätzwert</label> </td>
+            <th> <label for="number">Schätzwert</label> </th>
             <td><input class="text_bgImage" id="number"  name="estimator" th:value="${plot.getEstimator().getNumber()}" type="number" required="required"/></td>
             <input type="hidden" id="plotID" name="plotID" th:value="${plot.getId()}">
         </tr>
@@ -50,9 +51,10 @@
 
     </div></form>
 </div>
+<br><br>
 
 
-
+<div class="header-title"><h2>Wasserstand</h2></div>
 <div th:if="${procedureExists}">
 
 <!-- Wasserstand, ROLES: Wassermann -->
@@ -62,11 +64,11 @@
 
 			<tbody>
 			<tr>
-				<td> <label for="oldWater">Wasserstand Vorjahr</label> </td>
+				<th> <label for="oldWater">Wasserstand Vorjahr</label> </th>
 				<td><input class="text_bgImage" id="oldWater" name="oldWater" th:value="${oldWater}" type="number" readonly/></td>
 			</tr>
 			<tr>
-				<td> <label for="water">Wasserstand aktuell</label> </td>
+				<th> <label for="water">Wasserstand aktuell</label> </th>
 				<td><input class="text_bgImage" id="water" name="water" th:value="${procedure.getWatercount()}" type="text" required="required"/></td>
 			</tr>
 			</tbody>
@@ -78,6 +80,8 @@
 
 		</div></form>
 	</div>
+	<br><br>
+	<div class="header-title"><h2>Stromstand</h2></div>
 
 <!-- Stromstand, ROLES: Teanant, Vorstandsvorsitzender -->
 	<div  sec:authorize="hasAnyRole('Vorstandsvorsitzender','Hauptpächter')" th:if="${tenantOrBoss}">
@@ -86,11 +90,11 @@
 
 			<tbody>
 			<tr>
-				<td> <label for="oldPower">Stromstand Vorjahr</label> </td>
+				<th> <label for="oldPower">Stromstand Vorjahr</label> </th>
 				<td><input class="text_bgImage" id="oldPower" name="oldPower" th:value="${oldPower}" type="number" readonly/></td>
 			</tr>
 			<tr>
-				<td> <label for="power">Stromstand aktuell</label> </td>
+				<th> <label for="power">Stromstand aktuell</label> </th>
 				<td><input class="text_bgImage" id="power" name="power" th:value="${procedure.getPowercount()}" type="text" required="required"/></td>
 			</tr>
 			</tbody>

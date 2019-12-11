@@ -67,14 +67,14 @@ public class Complains {
 	}
 
 	public void setAuthor(Long authorId) {
-		if(authorId == null){
+		if(authorId == Long.valueOf(0)){
 			throw new IllegalArgumentException("Complain must have an author!");
 		} else
 			this.authorId = authorId;
 	}
 
 	public void setSubject(Long subjectId) {
-		if(subjectId  == null){
+		if(subjectId  == Long.valueOf(0)){
 			throw new IllegalArgumentException("Complain must have a subject!");
 		} else
 			this.subjectId = subjectId;
