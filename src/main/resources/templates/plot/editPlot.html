@@ -39,7 +39,7 @@
         </tr>
         <tr>
             <td> <label for="number">Schätzwert</label> </td>
-            <td><input class="text_bgImage" id="number" name="estimator" th:value="${plot.getEstimator().getNumber().doubleValue()}" type="number" required="required"/></td>
+            <td><input class="text_bgImage" id="number"  name="estimator" th:value="${plot.getEstimator().getNumber()}" type="number" required="required"/></td>
             <input type="hidden" id="plotID" name="plotID" th:value="${plot.getId()}">
         </tr>
         </tbody>
@@ -78,7 +78,7 @@
 
 		</div></form>
 	</div>
-	
+
 <!-- Stromstand, ROLES: Teanant, Vorstandsvorsitzender -->
 	<div  sec:authorize="hasAnyRole('Vorstandsvorsitzender','Hauptpächter')" th:if="${tenantOrBoss}">
 		<form method="post" th:action="@{/procedureDetails/editPowercount}">
