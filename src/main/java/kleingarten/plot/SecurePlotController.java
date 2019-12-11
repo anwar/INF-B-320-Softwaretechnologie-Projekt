@@ -44,7 +44,7 @@ public class SecurePlotController {
 	 * @param user {@link UserAccount} of the logged in user
 	 * @param plot {@link Plot} of which information should be shown
 	 * @param mav {@link ModelAndView}
-	 * @return response as {@link ModelAndView}
+	 * @return URL of the view as {@link String}
 	 */
 	public String detailsOfPlot(@LoggedIn UserAccount user, final Plot plot, Model mav) {
 		Set<PlotInformationBuffer> plotsToShow = new HashSet<>();
@@ -224,6 +224,25 @@ public class SecurePlotController {
 		return mav;
 	}
 
+	/**
+	 * Set the {@link PlotStatus} of a {@link Plot} to FREE
+	 * @param user {@link UserAccount} of the logged in user
+	 * @param plot {@link Plot} which status should be changed
+	 * @param model {@link Model} to save the needed information for the view
+	 * @return URL of the view as {@link String}
+	 */
+	@GetMapping("/cancelPlot/{plot}")
+	public String cancelPlot(@LoggedIn UserAccount user, @PathVariable Plot plot, Model model) {
+		try {
+			Plot plotToCancel = plotService.findById(plot.getId());
+			plotToCancel.setStatus(PlotStatus.FREE);
+			plotCatalog.save(plotToCancel);
+		} catch (Exception e) {
+			model.addAttribute("error", e);
+			return "/error";
+		}
+		return "redirect:/anlage";
+	}
 
 	/**
 	 * Get information from the form which is used to edit the details of a {@link Plot} and save them
