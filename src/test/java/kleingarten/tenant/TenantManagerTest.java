@@ -8,6 +8,7 @@ import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 import javax.transaction.Transactional;
@@ -57,8 +58,11 @@ public class TenantManagerTest {
 	void findByRole(){
 		Role testRole = Role.of("Pupskönig");
 		tenantManager.findByRole(testRole);
-		assertThat(tenantManager.findByRole(testRole).isEmpty());
-		assertThat(tenantManager.findByRole(Role.of("Vorstandsvorsitzender")).size() == 1);
-
+		assertTrue(tenantManager.findByRole(testRole).isEmpty());
+		System.out.println(tenantManager.findByRole(Role.of("Hauptpächter")));
+		System.out.println(tenantManager.findByRole(Role.of("Hauptpächter")).size());
+		//assertThat(tenantManager.findByRole(Role.of("Hauptpächter")).size() == 4);
+		//assertTrue(tenantManager.findByRole(Role.of("Vorstandsvorsitzender")).size() == 0);
+		//assertTrue(tenantManager.findByRole(Role.of("Vorstandsvorsitzender")).size() == 1);
 	}
 }

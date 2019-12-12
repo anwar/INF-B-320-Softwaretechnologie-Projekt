@@ -28,6 +28,4 @@ public interface TenantRepository extends CrudRepository<Tenant, Long> {
 	 */
 	Optional<Tenant> findByUserAccount(UserAccount userAccount);
 
-	List<Tenant> findByRole(Role role);
-
 }

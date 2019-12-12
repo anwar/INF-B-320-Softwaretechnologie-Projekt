@@ -1,9 +1,11 @@
 package kleingarten.tenant;
 
 import org.salespointframework.useraccount.Role;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TenantRole implements Comparable {
 
@@ -11,16 +13,38 @@ public class TenantRole implements Comparable {
 	/**
 	 * List is a sorted list to compare the streamable of {@link Role} of a {@link Tenant}
 	 */
-	static private final List<String> list = new LinkedList<String>();
+	private static class RoleEntry{
+
+		String name;
+		Boolean unique;
+
+		private RoleEntry(){}
+
+		public RoleEntry(String name, Boolean unique){
+			this.name = name;
+			this.unique = unique;
+		}
+	}
+	static private final List<RoleEntry> list = new LinkedList<RoleEntry>();
 	static {
-		list.add("Hauptpächter");
-		list.add("Nebenpächter");
-		list.add("Vorstandsvorsitzender");
-		list.add("Protokollant");
-		list.add("Stellvertreter");
-		list.add("Obmann");
-		list.add("Kassierer");
-		list.add("Wassermann");
+		list.add(new RoleEntry("Hauptpächter", Boolean.FALSE));
+		list.add(new RoleEntry("Nebenpächter", Boolean.FALSE));
+		list.add(new RoleEntry("Vorstandsvorsitzender", Boolean.TRUE));
+		list.add(new RoleEntry("Protokollant", Boolean.FALSE));
+		list.add(new RoleEntry("Stellvertreter", Boolean.TRUE));
+		list.add(new RoleEntry("Obmann", Boolean.FALSE));
+		list.add(new RoleEntry("Kassierer", Boolean.TRUE));
+		list.add(new RoleEntry("Wassermann", Boolean.FALSE));
+	}
+
+	Integer indexOf(String name)
+	{
+		for(RoleEntry l : list){
+			if(l.name.equals(name)){
+				return list.indexOf(l);
+			}
+		}
+		throw new NullPointerException();
 	}
 
 	/**
@@ -51,11 +75,20 @@ public class TenantRole implements Comparable {
 	@Override
 	public int compareTo(Object o) {
 		TenantRole r = (TenantRole) o;
-		return Integer.compare(list.indexOf(this.toString()), list.indexOf(r.toString()));
+		return Integer.compare(indexOf(this.toString()), indexOf(r.toString()));
 	}
 
 	public static List<String> getRoleList(){
-		return list;
+		return list.stream().map(n -> n.name).collect(Collectors.toList());
+	}
+
+	public static List<String> getUniqueRoleList()
+	{
+		return list.stream().filter(n -> n.unique).map(n -> n.name).collect(Collectors.toList());
+	}
+
+	public static Boolean isUnique(String role){
+		return getUniqueRoleList().contains(role);
 	}
 
 }

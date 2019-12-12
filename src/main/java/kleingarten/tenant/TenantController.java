@@ -107,6 +107,11 @@ class TenantController {
 		tenantManager.get(id).deleteRoles();
 		for(String role : roles.split(",")){
 			tenantManager.get(id).addRole(Role.of(role));
+			if(TenantRole.isUnique(role)){
+				for (Tenant t : tenantManager.findByRole(Role.of(role))){
+					t.removeRole(Role.of(role));
+				}
+			}
 		}
 		tenantRepository.save(tenantManager.get(id));
 
