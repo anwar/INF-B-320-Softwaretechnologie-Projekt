@@ -17,6 +17,8 @@ package kleingarten.news;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -30,15 +32,52 @@ public class NewEntryUnitTests {
 	 */
 	@Test
 	void rejectsEmptyText() {
-		assertThatExceptionOfType(IllegalArgumentException.class)//
+		assertThatExceptionOfType(IllegalArgumentException.class)
 				.isThrownBy(() -> new NewsEntry(""));
 	}
 
 	/**
 	 * Test that creation of {@link NewsEntry} also creates the respective date.
+	 * This also serves as a test for date getter.
 	 */
 	@Test
 	void dateCreation() {
-		assertThat(new NewsEntry("Lorem ipsum dolor sit amet, consectetur adipiscing elit.").getDate()).isNotNull();
+		assertThat(new NewsEntry("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+				.getDate()).isNotNull();
+	}
+
+	/**
+	 * Test the date setter for {@link NewsEntry}.
+	 */
+	@Test
+	void dateSetter() {
+		NewsEntry entry = new NewsEntry("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
+		LocalDateTime date = LocalDateTime.now();
+
+		entry.setDate(date);
+		assertThat(entry.getDate()).isEqualTo(date);
+	}
+
+	/**
+	 * Test the text getter for {@link NewsEntry}.
+	 */
+	@Test
+	void textGetter() {
+		String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+		NewsEntry entry = new NewsEntry(text);
+
+		assertThat(entry.getText()).isEqualTo(text);
+	}
+
+	/**
+	 * Test the text setter for {@link NewsEntry}.
+	 */
+	@Test
+	void textSetter() {
+		NewsEntry entry = new NewsEntry("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
+		String text = "new text";
+
+		entry.setText(text);
+		assertThat(entry.getText()).isEqualTo(text);
 	}
 }

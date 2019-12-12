@@ -44,14 +44,15 @@
                 </td>
                 <td>
 
-                    <div class="news-section" >
+                    <div class="news-section">
                         <div class="header-title">
                             <h2>News</h2>
                         </div>
-                        <div id="entries" class="mx-auto" >
+                        <div id="entries" class="mx-auto">
                             <div th:each="entry, it : ${newsEntries}" th:with="index = ${it.count}">
-                                <div style="box-shadow: 0px 0px 88px 3px rgba(0,0,0,0.05); padding: 15px; border-radius: 10px; border-color: #043353; border-width: 1px; border-style: solid; width: 700px; margin-left: 30px" class="card" th:fragment="entry" th:id="'entry-'+${entry.id}">
-                                    <div  class="card-header">
+                                <div style="box-shadow: 0px 0px 88px 3px rgba(0,0,0,0.05); padding: 15px; border-radius: 10px; border-color: #043353; border-width: 1px; border-style: solid; width: 700px; margin-left: 30px"
+                                     class="card" th:fragment="entry" th:id="'entry-'+${entry.id}">
+                                    <div class="card-header">
                                         <form style="display: inline-block"
                                               sec:authorize="hasRole('Vorstandsvorsitzender')" method="post"
                                               th:action="@{/home/news/deleteEntry/{id}(id=${entry.id})}">
@@ -99,15 +100,12 @@
 
                         <br/>
 
-                        <form sec:authorize="hasRole('Vorstandsvorsitzender')" method="post" class="ui form" role="form"
-                              id="news-entry-form" th:action="@{/home/news/addEntry}" th:object="${newsForm}">
+                        <form sec:authorize="hasRole('Vorstandsvorsitzender')" method="post" class="ui form"
+                              id="news-entry-form"
+                              th:action="@{/home/news/addEntry}">
                             <div class="field">
                                 <label for="text" th:text="#{news.entryForm.text}">Neuer Newseintrag</label><br/>
-                                <textarea id="text" name="text" cols="45" rows="8" th:field="*{text}"
-                                          th:errorclass="is-invalid" required="required"></textarea>
-                                <div class="ui error message" th:if="${#fields.hasErrors('text')}"
-                                     th:text="#{news.entryForm.text.required}">Bitte geben Sie eine Nachricht an.
-                                </div>
+                                <textarea id="text" name="text" cols="45" rows="8" required="required"></textarea>
                             </div>
                             <input type="submit" class="ui submit button" th:value="#{news.entryForm.submit}"
                                    value="Abschicken"/>

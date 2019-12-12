@@ -45,11 +45,10 @@ public class NewsControllerUnitTests {
 		Model model = new ExtendedModelMap();
 
 		NewsController controller = new NewsController(news);
-		String viewName = controller.home(model, new NewsForm(null));
+		String viewName = controller.home(model);
 
 		assertThat(viewName).isEqualTo("news/home");
 		assertThat(model.asMap().get("newsEntries")).isInstanceOf(Iterable.class);
-		assertThat(model.asMap().get("newsForm")).isNotNull();
 
 		verify(news, times(1)).findAll();
 	}

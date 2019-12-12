@@ -20,11 +20,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
 import java.time.LocalDateTime;
 
 /**
@@ -58,14 +59,12 @@ class NewsController {
 	 * Handles requests to access the home page. Obtains all currently available {@link NewsEntry}s and puts them
 	 * into the {@link Model} that's used to render the view.
 	 *
-	 * @param model the model that's used to render the view
-	 * @param form  the form to be added to the model
+	 * @param model that's used to render the view
 	 * @return a view name
 	 */
 	@GetMapping(path = "/home")
-	String home(Model model, @ModelAttribute(binding = false) NewsForm form) {
+	String home(Model model) {
 		model.addAttribute("newsEntries", news.findAll());
-		model.addAttribute("newsForm", form);
 
 		return "news/home";
 	}
@@ -76,19 +75,14 @@ class NewsController {
 	 * the {@code errors} parameter.
 	 * This request can only be performed by authenticated users with "Vorstandsvorsitzender" role.
 	 *
-	 * @param model  the model that's used to render the view
-	 * @param errors an object that stores any form validation or data binding errors
-	 * @param form   the form submitted by the user
+	 * @param text for {@link NewsEntry}
 	 * @return a redirect string
 	 */
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	@PostMapping(path = "/home/news/addEntry")
-	String addEntry(@Valid @ModelAttribute("newsForm") NewsForm form, Errors errors, Model model) {
-		if (errors.hasErrors()) {
-			return home(model, form);
-		}
-
-		news.save(form.toNewsEntry());
+	String addEntry(@RequestParam("text") String text) {
+		NewsEntry entry = new NewsEntry(text);
+		news.save(entry);
 
 		return "redirect:/home";
 	}
