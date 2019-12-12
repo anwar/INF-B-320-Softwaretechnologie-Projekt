@@ -225,17 +225,17 @@ public class SecurePlotController {
 
 	/**
 	 * Get information from the form which is used to edit the details of a {@link Plot} and save them
-	 *
+	 * @param user {@link UserAccount} of the logged in user
+	 * @param model {@link Model} to save the needed information
 	 * @param plotId {@link ProductIdentifier} of the {@link Plot} which details should be changed
 	 * @param size size of the {@link Plot} as int
 	 * @param description description of the {@link Plot} as {@link String}
-	 * @return response as {@link ModelAndView}
+	 * @return name of view as {@link String}
 	 */
-	/*@PostMapping("/editedPlot")
-	public ModelAndView editedPlot(@LoggedIn UserAccount user, @RequestParam(name = "plotID") ProductIdentifier plotId,
+	@PostMapping("/editedPlot")
+	public String editedPlot(@LoggedIn UserAccount user, Model model, @RequestParam(name = "plotID") ProductIdentifier plotId,
 								   @RequestParam("size") String size, @RequestParam("description") String description,
 								   @RequestParam() String estimator) {
-		ModelAndView mav = new ModelAndView();
 		Plot plot = plotService.findById(plotId);
 		try {
 			plot.setSize(Integer.parseInt(size));
@@ -243,11 +243,11 @@ public class SecurePlotController {
 			plot.setPrice(Money.of(Integer.parseInt(estimator), EURO));
 			plotCatalog.save(plotService.findById(plotId));
 		} catch (Exception e) {
-			mav.addObject("error", e);
-			mav.setViewName("error");
-			return mav;
-		}*/
-		//return detailsOfPlot(user, plot, Model model);
+			model.addAttribute("error", e);
+			model.addAttribute("error");
+			return "error";
+		}
+		return detailsOfPlot(user, plot, model);
 	}
-//}
+}
 
