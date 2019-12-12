@@ -80,7 +80,7 @@
                             <th><label > <!--for="roles"--> Rolle(n)</label></th>
                             <td> <ul>
                                 <li style="display:block" th:each="role : ${roles}">
-                                    <label th:inline="text"><input type="checkbox" th:checked="${tenant.hasRole(role)}" name="role" th:value="${role}"> [[${role}]]
+                                    <label th:inline="text"><input id="role" type="checkbox" th:checked="${tenant.hasRole(role)}" name="role" th:value="${role}"> [[${role}]]
                                     </label>
                                 </li>
 

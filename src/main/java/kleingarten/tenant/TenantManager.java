@@ -115,7 +115,6 @@ public class TenantManager {
 		Tenant tenant = new Tenant(forename, surname, "", "", "", userAccounts.create(email, Password.UnencryptedPassword.of(password), email));
 		tenant.addRole(Role.of("Hauptpächter"));
 		tenants.save(tenant);
-		System.out.println(tenant.getForename());
 	}
 
 	/**
@@ -132,9 +131,6 @@ public class TenantManager {
 		tenants.save(tenant);
 	}
 
-	public void deleteRoles(Tenant tenant){
-		tenant.getUserAccount().getRoles().stream().map(n -> tenant.getUserAccount().remove(n));
-	}
 
 	public List<Tenant> findByRole(Role role){
 		return tenants.findByRole(role);
