@@ -18,16 +18,15 @@ package kleingarten.message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import javax.activation.DataSource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.io.File;
 
 /**
  * {@link MessageService} provides convenient methods based on the {@link org.springframework.mail} package
@@ -90,14 +89,19 @@ public class MessageService {
 	/**
 	 * A method for sending a multi part {@link MimeMessage}.
 	 *
-	 * @param to               email address of the recipient
-	 * @param subject          for the email
-	 * @param text             for the email
-	 * @param pathToAttachment for the email
+	 * @param to                   email address of the recipient
+	 * @param subject              for the email
+	 * @param text                 for the email
+	 * @param attachmentFilename   for the email
+	 * @param attachmentDataSource for the email
 	 */
-	public void sendMessageWithAttachment(String to, String subject, String text, String pathToAttachment) {
+	public void sendMessageWithAttachment(String to,
+										  String subject,
+										  String text,
+										  String attachmentFilename,
+										  DataSource attachmentDataSource) {
 		if (printToLog) {
-			LOG.info(String.format("Sending an email to \"%s\" with subject \"%s\" and message \"%s\" and an attachment with name \"%s\"", to, subject, text, "fileName"));
+			LOG.info(String.format("Sending an email to \"%s\" with subject \"%s\" and message \"%s\" and an attachment with name \"%s\"", to, subject, text, attachmentFilename));
 		}
 
 		if (!enabled) {
@@ -111,15 +115,7 @@ public class MessageService {
 			helper.setTo(to);
 			helper.setSubject(subject);
 			helper.setText(text);
-
-			FileSystemResource file = new FileSystemResource(new File(pathToAttachment));
-
-			String fileName = file.getFilename();
-			if (fileName == null || fileName.isEmpty()) {
-				fileName = "attachment";
-			}
-
-			helper.addAttachment(fileName, file);
+			helper.addAttachment(attachmentFilename, attachmentDataSource);
 
 			mailSender.send(message);
 		} catch (MessagingException | MailException e) {

@@ -21,6 +21,7 @@ import com.icegreen.greenmail.util.ServerSetup;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -28,9 +29,8 @@ import javax.mail.BodyPart;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import javax.mail.util.ByteArrayDataSource;
+import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -85,9 +85,9 @@ public class MessageServiceIntegrationTest {
 		try {
 			greenMail.start();
 
-			final String to = "bar@example.com";
-			final String subject = GreenMailUtil.random();
-			final String text = GreenMailUtil.random();
+			String to = "bar@example.com";
+			String subject = GreenMailUtil.random();
+			String text = GreenMailUtil.random();
 
 			messageService.sendMessage(to, subject, text);
 
@@ -114,29 +114,14 @@ public class MessageServiceIntegrationTest {
 		try {
 			greenMail.start();
 
-			final String to = "bar@example.com";
-			final String subject = GreenMailUtil.random();
-			final String text = GreenMailUtil.random();
+			String to = "bar@example.com";
+			String subject = GreenMailUtil.random();
+			String text = GreenMailUtil.random();
 
-			/*
-			  Create a temporary file that will be used as an attachment for the email, and will
-			  also be used for the assertion tests on the retrieved email from the test server.
+			byte[] attachmentBytes = GreenMailUtil.random().getBytes(StandardCharsets.UTF_8);
+			ByteArrayDataSource attachmentDataSource = new ByteArrayDataSource(attachmentBytes, MediaType.TEXT_PLAIN.toString());
 
-			  I, originally, used a test text file in the fixtures subdirectory for the attachment
-			  but on assertion the tests were failing because the test file stored locally and the content
-			  of the received attachment from the email had different line endings (LF vs CRLF).
-
-			  As an added bonus with this approach, we can avoid shipping a test file with the code :)
-			 */
-			File tempFile = File.createTempFile("test-attachment", ".txt");
-			tempFile.deleteOnExit();
-
-			String attachmentContent = GreenMailUtil.random();
-			BufferedWriter out = new BufferedWriter(new FileWriter(tempFile));
-			out.write(attachmentContent);
-			out.close();
-
-			messageService.sendMessageWithAttachment(to, subject, text, tempFile.getAbsolutePath());
+			messageService.sendMessageWithAttachment(to, subject, text, "attachment.txt", attachmentDataSource);
 
 			// wait for max 5s for 1 email to arrive
 			assertTrue(greenMail.waitForIncomingEmail(3000, 1));
@@ -152,7 +137,7 @@ public class MessageServiceIntegrationTest {
 			assertEquals(2, mp.getCount());
 
 			assertEquals(text, getTextFromBodyPart(mp.getBodyPart(0)).trim());
-			assertEquals(attachmentContent, GreenMailUtil.getBody(mp.getBodyPart(1)));
+			assertEquals(new String(attachmentBytes), GreenMailUtil.getBody(mp.getBodyPart(1)));
 		} finally {
 			greenMail.stop();
 		}
