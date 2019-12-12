@@ -1,49 +1,40 @@
-package kleingarten.complains;
+package kleingarten.complaint;
 
 
 // WIP we still have to do this, but if someone got time, they can start working on this
 
-import kleingarten.plot.Plot;
-import kleingarten.tenant.Tenant;
-import kleingarten.tenant.TenantManager;
-import org.salespointframework.catalog.ProductIdentifier;
-import org.salespointframework.useraccount.UserAccount;
-import org.thymeleaf.context.ILazyContextVariable;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- * Class to specify {@link Complains}
+ * Class to specify {@link Complaint}
  */
 
 @Entity
-public class Complains {
+public class Complaint {
 
 
-	private @Id @GeneratedValue long id;
 	public long authorId;
 	public long subjectId;
-	public ComplainsState state;
+	public ComplaintState state;
 	public String description;
+	private @Id
+	@GeneratedValue
+	long id;
 
 
 	/**
-	 * Private constructor of class {@link Complains}, which is used by the Spring Framework
+	 * Private constructor of class {@link Complaint}, which is used by the Spring Framework
 	 */
-	private Complains(){
+	private Complaint() {
 	}
 
 	/**
-	 *
-	 *
-	 *
 	 * @param state
 	 */
 
-	public Complains(long authorId, long subjectId , ComplainsState state, String description){
+	public Complaint(long authorId, long subjectId, ComplaintState state, String description) {
 		this.authorId = authorId;
 		this.subjectId = subjectId;
 		this.state = state;
@@ -55,34 +46,30 @@ public class Complains {
 		return authorId;
 	}
 
-
-
-	public long getSubject() {
-		return subjectId;
-	}
-
-
-	public ComplainsState getState() {
-		return state;
-	}
-
 	public void setAuthor(Long authorId) {
-		if(authorId == Long.valueOf(0)){
+		if (authorId == Long.valueOf(0)) {
 			throw new IllegalArgumentException("Complain must have an author!");
 		} else
 			this.authorId = authorId;
 	}
 
+	public long getSubject() {
+		return subjectId;
+	}
+
 	public void setSubject(Long subjectId) {
-		if(subjectId  == Long.valueOf(0)){
+		if (subjectId == Long.valueOf(0)) {
 			throw new IllegalArgumentException("Complain must have a subject!");
 		} else
 			this.subjectId = subjectId;
 	}
 
+	public ComplaintState getState() {
+		return state;
+	}
 
-	public void setState(ComplainsState state) {
-		if(state == null){
+	public void setState(ComplaintState state) {
+		if (state == null) {
 			throw new IllegalArgumentException("Complain must have a state");
 		} else
 			this.state = state;
@@ -101,7 +88,7 @@ public class Complains {
 	}
 
 	public void setDescription(String description) {
-		if(description == null){
+		if (description == null) {
 			throw new IllegalArgumentException("Complains must have a description");
 		}
 		this.description = description;

@@ -44,15 +44,10 @@
                 <li ><a href="" th:href="@{/listOfAssignments}" >Termine einsehen</a></li>
 
             </ul>
-
                 <li ><a sec:authorize="hasAnyRole('Obmann')" href="" th:href="@{/listOfAssignments}" >Termine einsehen</a></li>
-
-
-
        <!-- <li><a href="finance/bill.html" th:href="@{/bill}" sec:authorize="isAuthenticated()">Rechnungen</a></li>-->
         <li><a href="complains/complains.html" th:href="@{/complains}" sec:authorize="isAuthenticated()">Beschwerden</a></li>
         <li><a href="tenant/tenants.html" th:href="@{/tenants}" sec:authorize="hasAnyRole('Vorstandsvorsitzender, Stellvertreter')"> Mitglieder</a></li>
-
         <li style="float:right"><a  href="login.html" th:href="@{/login}" sec:authorize="!isAuthenticated()">Login</a>
 
             <form  sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
