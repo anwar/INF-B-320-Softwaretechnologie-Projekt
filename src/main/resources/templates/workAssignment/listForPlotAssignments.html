@@ -52,13 +52,15 @@
         <h1>Termine zum eintragen</h1>
     </div>
     <table id="myTable">
-        <tr>
+        <thead><tr>
             <th>Datum / Zeit</th>
             <th>Titel</th>
             <th>Beschreibung</th>
-            <th>id</th>
+            <th>ID</th>
             <th>Eintragen</th>
         </tr>
+        </thead>
+        <tbody>
         <tr th:each="workAssignment : ${ListOfAssignments}">
             <td th:text="${workAssignment.date}">date</td>
             <td th:text="${workAssignment.title}">title</td>
@@ -72,6 +74,7 @@
             </form>
 
         </tr>
+        </tbody>
     </table>
 </center>
 </body>

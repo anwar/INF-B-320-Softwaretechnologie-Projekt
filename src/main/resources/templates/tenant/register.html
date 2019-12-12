@@ -72,8 +72,14 @@
                 </div>
                 <div>
                     <tr>
-                        <th><label for="roles">Rolle(n)</label></th>
-                        <td> <input class="text_bgImage" id="roles" name="roles"  type="search" list="roles" required="required"/></td>
+                        <th><label > <!--for="roles"--> Rolle(n)</label></th>
+                        <td><br>
+                            <li style="display:block; background-color: #CED8F6;text-align: left" th:each="role : ${roles}">
+                                <label th:inline="text"><input id="role" type="checkbox" th:checked="${tenant.hasRole(role)}" name="role" th:value="${role}"> [[${role}]]
+                                </label>
+                            </li>
+
+                            <!-- <input class="text_bgImage" id="roles" name="roles" th:value="${tenant.getRoles()}"  type="search" list="roles" required="required"/> --></td>
                         <!--<datalist id="roles" >
                          <option value="1">
                             <option value="2">
