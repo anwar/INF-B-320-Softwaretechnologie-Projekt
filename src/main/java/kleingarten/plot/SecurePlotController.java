@@ -43,8 +43,8 @@ public class SecurePlotController {
 	 * is logged in
 	 * @param user {@link UserAccount} of the logged in user
 	 * @param plot {@link Plot} of which information should be shown
-	 * @param mav {@link ModelAndView}
-	 * @return URL of the view as {@link String}
+	 * @param mav {@link Model} to save the needed information
+	 * @return name of the view as {@link String}
 	 */
 	public String detailsOfPlot(@LoggedIn UserAccount user, final Plot plot, Model mav) {
 		Set<PlotInformationBuffer> plotsToShow = new HashSet<>();
@@ -53,15 +53,15 @@ public class SecurePlotController {
 			//Add information of the plot to the buffer and set the access right to it
 			//depending on which role the user has
 			Tenant tenant = tenantManager.getTenantByUserAccount(user);
-			if (dataService.procedureExists(LocalDateTime.now().getYear(), plot)) {
-				Procedure procedure = dataService.getProcedure(LocalDateTime.now().getYear(), plot);
+			if (dataService.procedureExists(plot)) {
+				Procedure procedure = dataService.getProcedure(plot);
 				plotsToShow.add(plotControllerService.addInformationOfPlotToPlotInformationBuffer(Optional.of(procedure), plot));
 
 				plotControllerService.secureSetAccessRightForPlotDetails(Optional.of(procedure), tenant, mav);
 				//Show different detail page if user rents the plot
-				/*if (procedure.isTenant(tenant.getId())) {
-					return rentedPlotsFor(user);
-				}*/
+				if (procedure.isTenant(tenant.getId())) {
+					return rentedPlotsFor(user, mav);
+				}
 			} else {
 				plotsToShow.add(plotControllerService.addInformationOfPlotToPlotInformationBuffer(Optional.empty(), plot));
 				plotControllerService.secureSetAccessRightForPlotDetails(Optional.empty(), tenant, mav);
@@ -84,54 +84,30 @@ public class SecurePlotController {
 	 * {@link Plot} when a user is logged in and accesses his rented plots by using the entry in the navigation bar
 	 *
 	 * @param user {@link UserAccount} of the logged in user
-	 * @return response as {@link ModelAndView}
+	 * @param model {@link Model} to save the needed information
+	 * @return name of the view as {@link String}
 	 */
-	//@GetMapping("/myPlot/")
-	//TODO Change method so that return parameters are used
-	/*public ModelAndView rentedPlotsFor(@LoggedIn UserAccount user) {
-		ModelAndView mav = new ModelAndView();
-		Plot shownPlot;
+	@GetMapping("/myPlot")
+	public String rentedPlotsFor(@LoggedIn UserAccount user, Model model) {
+		Set<PlotInformationBuffer> shownPlots = new HashSet<>();
 
 		try {
 			Tenant tenant = tenantManager.getTenantByUserAccount(user);
 
-			Set<Plot> plots = dataService.getRentedPlots(LocalDateTime.now().getYear(), tenant);
-			shownPlot = plots.iterator().next();
-
-			Procedure procedureOfShownPlot = dataService.getProcedure(LocalDateTime.now().getYear(), shownPlot);
-			plotControllerService.addGeneralInformationOfPlot(shownPlot, mav);
-			plotControllerService.secureSetAccessRightForPlotDetails(Optional.of(procedureOfShownPlot), tenant, mav);
-			plotControllerService.addProcedureInformationOfPlot(procedureOfShownPlot, tenant, mav);
-			mav.addObject("rents", true);
-			if (procedureOfShownPlot.getMainTenant() == tenant.getId()) {
-				mav.addObject("isMainTenant", true);
+			Set<Plot> plots = dataService.getRentedPlots(tenant);
+			for (Plot plot:
+				 plots) {
+				Procedure procedure = dataService.getProcedure(plot);
+				shownPlots.add(plotControllerService.addInformationOfPlotToPlotInformationBuffer(Optional.of(procedure), plot));
+				plotControllerService.secureSetAccessRightForPlotDetails(Optional.of(procedure), tenant, model);
 			}
 		} catch (Exception e) {
-			mav.addObject("error", e);
-			mav.setViewName("error");
-			return mav;
+			model.addAttribute("error", e);
+			return "error";
 		}
-		return detailsOfRentedPlot(user, shownPlot, mav);
-	}*/
-
-	/**
-	 * Create model with information of a {@link Plot} which is rented by the user to show the detail page of the
-	 * {@link Plot} with buttons for all rented {@link Plot}s of this user when a user is logged in
-	 *
-	 * @param user         {@link UserAccount} of the logged in user
-	 * @param plot         {@link Plot} of which information should be shown
-	 * @param modelAndView {@link ModelAndView} with the information of the {@link Plot}
-	 * @return response as {@link ModelAndView}
-	 */
-	@GetMapping("/myPlot/{plot}")
-	public ModelAndView detailsOfRentedPlot(@LoggedIn UserAccount user, @PathVariable Plot plot,
-											ModelAndView modelAndView) {
-		Map<Plot, String> rentedPlots = new HashMap<>();
-		plotControllerService.secureGetRentedPlotsForTenant(tenantManager.getTenantByUserAccount(user), rentedPlots);
-		modelAndView.addObject("plots", rentedPlots);
-
-		modelAndView.setViewName("/plot/myPlot");
-		return modelAndView;
+		model.addAttribute("plots", shownPlots);
+		model.addAttribute("rented", true);
+		return "plot/myPlot";
 	}
 
 	/**

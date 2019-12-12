@@ -128,7 +128,7 @@ public class PlotControllerServiceIntegrationTests {
 	 */
 	@Test
 	public void insecureGetColorForTakenPlotTest() {
-		if (!dataService.procedureExists(2019, takenPlot)) {
+		if (!dataService.procedureExists(takenPlot)) {
 			Procedure takenPlotProcedure = procedureManager.add(new Procedure(2019, takenPlot, boss.getId()));
 		}
 		result.put(takenPlot, "#546E7A");
@@ -186,7 +186,7 @@ public class PlotControllerServiceIntegrationTests {
 	 */
 	@Test
 	public void securedGetColorForSpecialPlotTest() {
-		Procedure procedure = procedureManager.getProcedures(2019, boss.getId()).toList().get(0);
+		Procedure procedure = procedureManager.getAll(boss.getId()).toList().get(0);
 		procedure.addSubTenant(chairman.getId());
 		procedureManager.add(procedure);
 		takenPlot = plotService.findById(procedure.getPlotId());

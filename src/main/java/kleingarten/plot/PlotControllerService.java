@@ -48,13 +48,13 @@ public class PlotControllerService {
 
 		//Set color of plot if a user with role "Vorstand" or "Obmann" rents this plot
 		if (plot.getStatus() == PlotStatus.TAKEN) {
-			Tenant mainTenant = dataService.findTenantById(dataService.getProcedure(LocalDateTime.now().getYear(), plot)
+			Tenant mainTenant = dataService.findTenantById(dataService.getProcedure(plot)
 											.getMainTenant());
 			if (mainTenant == null) {
 				throw new IllegalArgumentException("Tenant must not be null!");
 			}
 			//Get roles of mainTenant and subTenants
-			Procedure procedure = dataService.getProcedure(LocalDateTime.now().getYear(), plot);
+			Procedure procedure = dataService.getProcedure(plot);
 			rolesOfMainTenant.addAll(mainTenant.getUserAccount().getRoles().toSet());
 
 			List<Tenant> subTenants = new LinkedList<>();
@@ -189,19 +189,6 @@ public class PlotControllerService {
 					mav.addAttribute("canModify", true);
 				}
 			}
-		}
-	}
-
-	//ModelAndView secure
-	/**
-	 * Get information of the {@link Plot}s a {@link Tenant} rents and save this information
-	 * @param tenant {@link Tenant} who's rented {@link Plot}s should be saved
-	 * @param rentedPlots {@link Map} of the {@link Plot}s the {@link Tenant} rents and their names as {@link String}
-	 */
-	void secureGetRentedPlotsForTenant(Tenant tenant, Map<Plot, String> rentedPlots) {
-		Set<Plot> plots = dataService.getRentedPlots(LocalDateTime.now().getYear(), tenant);
-		for (Plot parcel : plots) {
-			rentedPlots.put(parcel, parcel.getName());
 		}
 	}
 

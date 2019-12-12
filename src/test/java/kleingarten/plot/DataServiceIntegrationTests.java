@@ -69,8 +69,8 @@ public class DataServiceIntegrationTests {
 	 */
 	@Test
 	public void getProcedureTest() {
-		assertThat(dataService.getProcedure(2019, firstPlot)).isEqualTo(firstProcedure);
-		assertThat(dataService.getProcedure(2019, secondPlot)).isEqualTo(secondProcedure);
+		assertThat(dataService.getProcedure(firstPlot)).isEqualTo(firstProcedure);
+		assertThat(dataService.getProcedure(secondPlot)).isEqualTo(secondProcedure);
 	}
 
 	/**
@@ -79,10 +79,10 @@ public class DataServiceIntegrationTests {
 	@Test
 	public void noProcedureTest() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			dataService.getProcedure(2018, firstPlot);
+			dataService.getProcedure(firstPlot);
 		});
 		assertThrows(IllegalArgumentException.class, () -> {
-			dataService.getProcedure(2000, secondPlot);
+			dataService.getProcedure(secondPlot);
 		});
 	}
 
@@ -91,10 +91,10 @@ public class DataServiceIntegrationTests {
 	 */
 	@Test
 	public void procedureExistsTest() {
-		assertThat(dataService.procedureExists(2019, firstPlot)).isEqualTo(true);
-		assertThat(dataService.procedureExists(2019, secondPlot)).isEqualTo(true);
-		assertThat(dataService.procedureExists(2000, firstPlot)).isEqualTo(false);
-		assertThat(dataService.procedureExists(2018, secondPlot)).isEqualTo(false);
+		assertThat(dataService.procedureExists(firstPlot)).isEqualTo(true);
+		assertThat(dataService.procedureExists(secondPlot)).isEqualTo(true);
+		assertThat(dataService.procedureExists(firstPlot)).isEqualTo(false);
+		assertThat(dataService.procedureExists(secondPlot)).isEqualTo(false);
 	}
 
 	/**
@@ -105,7 +105,7 @@ public class DataServiceIntegrationTests {
 		Set<Plot> rentedPlots = new HashSet<>();
 		rentedPlots.add(firstPlot);
 		rentedPlots.add(secondPlot);
-		assertThat(dataService.getRentedPlots(2019, tenant)).isEqualTo(rentedPlots);
-		assertThat(dataService.getRentedPlots(2015, tenant)).isEqualTo(Set.of());
+		assertThat(dataService.getRentedPlots(tenant)).isEqualTo(rentedPlots);
+		assertThat(dataService.getRentedPlots(tenant)).isEqualTo(Set.of());
 	}
 }
