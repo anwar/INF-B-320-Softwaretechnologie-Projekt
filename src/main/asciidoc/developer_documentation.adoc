@@ -388,26 +388,16 @@ image::models/analysis/FinanceManagement.png[]
 |BillManagement
 |BillManagement Klasse ist für Berechnungen und ist verantwortlich für die Erstellung der jährlichen Rechnung
 
-
 |===
 
 === News
 image::models/analysis/KleinGartenAnlagen.news.png[]
 
-
 === Bewerbungen
 image::models/analysis/ApplicationManagement.png[]
 
-
 === Nachrichtensystem
 image::models/analysis/KleinGartenAnlagen.message.png[]
-
-[options="header"]
-|===
-| Klasse/Enumeration | Description
-| Message            | Die Message Klasse beschreibt eine Nachricht, die von dem System geschickt wird.
-| MessageController  | Die MessageController Klasse ist verantwortlich für das Schicken und Erzeugen einer Nachricht.
-|===
 
 === Termine
 image::models/analysis/kleingarten.appointment.png[]
