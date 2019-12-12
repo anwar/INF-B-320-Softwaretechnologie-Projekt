@@ -40,16 +40,23 @@ import java.io.File;
 @Service
 public class MessageService {
 	private static final Logger LOG = LoggerFactory.getLogger(MessageService.class);
-
+	private MessageProperties messageProperties;
 	private JavaMailSender mailSender;
+
+	private boolean enabled;
+	private boolean printToLog;
 
 	/**
 	 * Spring Framework provides an easy abstraction for sending email by using the {@link JavaMailSender}
 	 * interface. Spring creates a {@link JavaMailSender}, if none exists, using the configuration provided
 	 * in {@code src/main/resources/application.properties}.
 	 */
-	public MessageService(@Autowired JavaMailSender mailSender) {
+	public MessageService(@Autowired MessageProperties messageProperties, @Autowired JavaMailSender mailSender) {
+		this.messageProperties = messageProperties;
 		this.mailSender = mailSender;
+
+		this.enabled = this.messageProperties.isEnabled();
+		this.printToLog = this.messageProperties.isLogging();
 	}
 
 	/**
@@ -60,6 +67,14 @@ public class MessageService {
 	 * @param text    for the email
 	 */
 	public void sendMessage(String to, String subject, String text) {
+		if (printToLog) {
+			LOG.info(String.format("Sending an email to \"%s\" with subject \"%s\" and message \"%s\"", to, subject, text));
+		}
+
+		if (!enabled) {
+			return; // no need to proceed further
+		}
+
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(to);
 		message.setSubject(subject);
@@ -81,6 +96,14 @@ public class MessageService {
 	 * @param pathToAttachment for the email
 	 */
 	public void sendMessageWithAttachment(String to, String subject, String text, String pathToAttachment) {
+		if (printToLog) {
+			LOG.info(String.format("Sending an email to \"%s\" with subject \"%s\" and message \"%s\" and an attachment with name \"%s\"", to, subject, text, "fileName"));
+		}
+
+		if (!enabled) {
+			return; // no need to proceed further
+		}
+
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
