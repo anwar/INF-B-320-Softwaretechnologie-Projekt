@@ -63,6 +63,7 @@ public class WorkAssignmentController {
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String modifyWorkAssignment(@RequestParam("id") Long id, Model model){
 		model.addAttribute("workAssignment", workAssignmentManager.findByID(id));
+		model.addAttribute("plotListForWorkAssignment",workAssignmentManager.getPlotsInWorkAssignment(id));
 		return "workAssignment/workAssignmentModify";
 	}
 
@@ -81,6 +82,13 @@ public class WorkAssignmentController {
 		return "redirect:/listOfAssignments";
 	}
 
+	@PostMapping("/removePlotOfWorkAssignment")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	String removePlot(@RequestParam("plotID") ProductIdentifier plotID, @RequestParam("assignmentID") Long assignmentID){
+		workAssignmentManager.removePlotOutWorkAssignment(plotID, assignmentID);
+		return "redirect:/listOfAssignments";
+	}
+
 	@GetMapping("/listForPlotAssignments/{plotID}")
 	String getForPlotWorkAssignments(@PathVariable ProductIdentifier plotID, Model model){
 		model.addAttribute("ListWorkAssignmentsForPlot", workAssignmentManager.getForPlotWorkAssignments(plotID));
@@ -92,7 +100,6 @@ public class WorkAssignmentController {
 	@PostMapping("/setWorkAssignment")
 	public String AddWorkAssignmentToPlot(@RequestParam("plotID") ProductIdentifier plotID, @RequestParam("assignmentID") Long id){
 		workAssignmentManager.addPlotToWorkAssignment(plotID, id);
-		System.out.println("workAssignmentID im Controller" + id);
 		return "redirect:/myPlot";
 	}
 

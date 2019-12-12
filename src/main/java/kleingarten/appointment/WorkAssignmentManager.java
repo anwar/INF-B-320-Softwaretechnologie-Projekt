@@ -73,7 +73,6 @@ public class WorkAssignmentManager {
 		WorkAssignment workAssignment = findByID(workAssignmentID);
 		Plot plot = findByID(plotID);
 		if(!workAssignment.containsPlot(plot)){
-			System.out.println(workAssignmentID + " workAssignmentID im Manager");
 			workAssignment.addPlot(plot);
 			workAssignmentRepository.save(workAssignment);
 		}
@@ -88,6 +87,7 @@ public class WorkAssignmentManager {
 			workAssignmentRepository.save(workAssignment);
 		}
 	}
+
 
 	public List<WorkAssignment> getForPlotWorkAssignments(ProductIdentifier plotID){
 		Plot plot = findByID(plotID);
@@ -128,5 +128,16 @@ public class WorkAssignmentManager {
 		return sumOfWorkHours;
 	} //nochmal überarbeiten
 
+	public List<Plot> getPlotsInWorkAssignment(long workAssignmentID){
+
+		List<Plot> plotList = new ArrayList<>();
+
+		for (WorkAssignment workAssignment: workAssignmentRepository.findAll()) {
+			if(workAssignment.getId() == workAssignmentID){
+				plotList = workAssignment.getPlots();
+			}
+		}
+		return plotList;
+	}
 
 }

@@ -24,6 +24,32 @@
     </div>
 
     <div>
+        <div class="header-title">
+            <h1>Parzellen entfernen</h1>
+        </div>
+            <table>
+                <tr>
+                    <th>Parzelle</th>
+                    <th>Löschen</th>
+                </tr>
+                <tr th:each="plot: ${plotListForWorkAssignment}">
+                    <td th:text="${plot.description}">Plot</td>
+                    <form method="post" th:action="@{/removePlotOfWorkAssignment}">
+                        <td hidden><input hidden id="plotID" name="plotID" th:value="${(plot.getId())}" required="required"/></td>
+                        <td hidden><input class="text_bgImage" id="assignmentID" name="assignmentID" th:value="${(workAssignment.getId())}"  type="number" required="required"/></td>
+                        <td><button style="font-size:13px; height: 35px; width: 120px" type="submit" class="ui button">Löschen</button></td>
+                    </form>
+                </tr>
+            </table>
+
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div>
+        <div class="header-title">
+            <h1>Termin bearbeiten</h1>
+        </div>
         <form method="post" th:action="@{/modifiedWorkAssignment}">
             <table>
 
@@ -53,6 +79,9 @@
             </div>
         </form>
     </div>
+    <br/>
+    <br/>
+    <br/>
 </div>
 </body>
 </html>
