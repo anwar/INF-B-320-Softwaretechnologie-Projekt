@@ -50,7 +50,7 @@
                         </div>
                         <div id="entries" class="mx-auto">
                             <div th:each="entry, it : ${newsEntries}" th:with="index = ${it.count}">
-                                <div style="box-shadow: 0px 0px 88px 3px rgba(0,0,0,0.05); padding: 15px; border-radius: 10px; border-color: #043353; border-width: 1px; border-style: solid; width: 550px; margin-left: 30px"
+                                <div style="box-shadow: 0px 0px 88px 3px rgba(0,0,0,0.05); padding: 5px; border-radius: 10px; border-color: #043353; border-width: 1px; border-style: solid; width: 550px; margin-left: 20px"
                                      class="card" th:fragment="entry" th:id="'entry-'+${entry.id}">
                                     <div class="card-header">
                                         <form style="display: inline-block"
