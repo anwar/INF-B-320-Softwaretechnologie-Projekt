@@ -54,4 +54,8 @@ public class TenantRole implements Comparable {
 		return Integer.compare(list.indexOf(this.toString()), list.indexOf(r.toString()));
 	}
 
+	public static List<String> getRoleList(){
+		return list;
+	}
+
 }

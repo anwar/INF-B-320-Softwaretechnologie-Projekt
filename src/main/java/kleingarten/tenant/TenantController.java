@@ -71,6 +71,7 @@ class TenantController {
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String modifyTenant(@RequestParam("id") Long id, Model model){
 		model.addAttribute("tenant", tenantManager.get(id));
+		model.addAttribute("roles", TenantRole.getRoleList());
 		return "tenant/modifyTenant";
 	}
 

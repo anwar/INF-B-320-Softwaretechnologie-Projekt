@@ -70,6 +70,7 @@ public class TenantService {
 		tenantManager.get(id).setPhonenumber("");
 		tenantManager.get(id).setAddress("");
 		tenantManager.get(id).setForename("");
+		tenantManager.get(id).setSurname("");
 		//TODO delte roles method on pretenant
 		tenantManager.deleteRoles(tenantManager.get(id));
 	}

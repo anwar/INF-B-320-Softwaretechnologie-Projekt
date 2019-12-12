@@ -1,9 +1,11 @@
 package kleingarten.tenant;
 
+import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.util.Streamable;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -25,4 +27,7 @@ public interface TenantRepository extends CrudRepository<Tenant, Long> {
 	 * @return tenants as {@link Streamable} of {@link Tenant}, never {@literal null}
 	 */
 	Optional<Tenant> findByUserAccount(UserAccount userAccount);
+
+	List<Tenant> findByRole(Role role);
+
 }

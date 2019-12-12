@@ -198,6 +198,9 @@ public class Tenant {
 		this.id = id;
 	}
 
+	public boolean hasRole(String role){
+		return userAccount.hasRole(Role.of(role));
+	}
 
 	/**
 	 * Private constructor of class {@link Tenant}, which is used by the Spring Framework
