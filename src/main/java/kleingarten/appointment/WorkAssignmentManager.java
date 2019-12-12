@@ -1,24 +1,30 @@
 package kleingarten.appointment;
 
 import kleingarten.plot.Plot;
+import kleingarten.plot.PlotCatalog;
+import kleingarten.plot.PlotService;
 import org.apache.catalina.filters.RemoteIpFilter;
 import org.apache.tomcat.jni.Local;
 import org.hibernate.jdbc.Work;
+import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class WorkAssignmentManager {
 
 
 	private WorkAssignmentRepository workAssignmentRepository;
+	private PlotService plotService;
 
-	public WorkAssignmentManager(WorkAssignmentRepository workAssignmentRepository){
+	public WorkAssignmentManager(WorkAssignmentRepository workAssignmentRepository, PlotService plotService){
 		this.workAssignmentRepository = workAssignmentRepository;
+		this.plotService = plotService;
 	}
 
 	public List<WorkAssignment> getAll(){
@@ -58,8 +64,14 @@ public class WorkAssignmentManager {
 		return null;
 	}
 
-	public boolean addPlotToWorkAssignment(Plot plot, long workAssignmentID){
+	public Plot findByID(ProductIdentifier plotID) {
+		return plotService.findById(plotID);
+	}
+
+
+	public boolean addPlotToWorkAssignment(ProductIdentifier plotID, long workAssignmentID){
 		WorkAssignment workAssignment = findByID(workAssignmentID);
+		Plot plot = findByID(plotID);
 
 		if(!workAssignment.containsPlot(plot)){
 			workAssignment.addPlot(plot);
@@ -69,8 +81,9 @@ public class WorkAssignmentManager {
 		return false;
 	}
 
-	public boolean removePlotOutWorkAssignment(Plot plot, long workAssignmentID){
+	public boolean removePlotOutWorkAssignment(ProductIdentifier plotID, long workAssignmentID){
 		WorkAssignment workAssignment = findByID(workAssignmentID);
+		Plot plot = findByID(plotID);
 
 		if(workAssignment.containsPlot(plot)){
 			workAssignment.removePlot(plot);
@@ -80,7 +93,8 @@ public class WorkAssignmentManager {
 		return false;
 	}
 
-	public List<WorkAssignment> getForPlotWorkAssignments(Plot plot){
+	public List<WorkAssignment> getForPlotWorkAssignments(ProductIdentifier plotID){
+		Plot plot = findByID(plotID);
 		List<WorkAssignment> buffer = new ArrayList<>();
 		for(WorkAssignment workAssignment: workAssignmentRepository.findAll()){
 			if(workAssignment.containsPlot(plot)){
@@ -99,8 +113,8 @@ public class WorkAssignmentManager {
 		workAssignmentRepository.save(workAssignment);
 	}
 
-	public int getWorkHours(Plot plot, long workAssignmentID){
-
+	public int getWorkHours(ProductIdentifier plotID, long workAssignmentID){
+		Plot plot = findByID(plotID);
 		int actualYear = LocalDateTime.now().getYear();
 		List<WorkAssignment> buffer = new ArrayList<>();
 
