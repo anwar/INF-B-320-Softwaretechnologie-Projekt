@@ -11,6 +11,8 @@
           href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
     <link th:href="@{../resources/css/style.css}" rel="stylesheet"
           href="../resources/css/style.css" type="text/css"/>
+    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
+          href="../resources/css/tenantTable.css" type="text/css">
     <title>Für Termin eintragen</title>
 </head>
 <body>
@@ -22,7 +24,8 @@
     </div>
 </div>
 <center>
-    <form method="post" role="form" id="form" th:action="@{/addWorkAssignment}" th:object="${form}">
+    <form method="post" role="form" id="form" th:action="@{/listForPlotAssignments/{id}(id=${plotID})}" th:object="${form}">
+
         <table id="myTable">
             <tr>
                 <th>Datum / Zeit</th>
@@ -30,10 +33,12 @@
                 <th>Beschreibung</th>
                 <th>Eintragen</th>
             </tr>
-            <tr th:each="workassignemt : ${ListOfAssignments}">
-                <td th:text="${workassignemt.date}"></td>
-                <td th:text="${workassignemt.title}"></td>
-                <td th:text="${workassignemt.description}"></td>
+            <tr th:each="workassignment : ${ListOfAssignments}">
+                <td th:text="${workassignment.date}">date</td>
+                <td th:text="${workassignment.title}">title</td>
+                <td th:text="${workassignment.description}">description</td>
+                <td hidden id="WorkAssignmentID" th:text="${workassignment.getId()}">id</td>
+                <td hidden id="plotID" th:text="${plotID}">plotID</td>
                 <td><button style="font-size:13px; height: 35px" type="submit" class="ui button">Zum Termin eintragen</button></td>
             </tr>
         </table>

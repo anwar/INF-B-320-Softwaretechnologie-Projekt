@@ -26,7 +26,7 @@
     </div>
 </div>
 <center>
-    <form method="post" th:action="@{/directToAddAssignments}">
+        <p th:text="${plotID}"></p>
         <table id="myTable">
             <thead>
             <tr>
@@ -44,12 +44,10 @@
             </tbody>
         </table>
     <div class="button-section">
-        <button  type="submit" class="button">In Termine eintragen</button>
+        <a th:href="'/addWorkAssignment/' + ${plotID}">In Termine eintragen</a>
     </div>
         <br/>
         <br/>
-
-    </form>
 </center>
 </body>
 </html>

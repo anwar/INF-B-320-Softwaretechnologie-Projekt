@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
@@ -112,6 +111,11 @@ public class WorkAssignmentsTest {
 
 	@Test
 	public void initialIDTest(){
+		assertThat(workAssignment.getId());
+	}
+
+	@Test
+	public void getIDTest(){
 		assertThat(workAssignment.getId());
 	}
 

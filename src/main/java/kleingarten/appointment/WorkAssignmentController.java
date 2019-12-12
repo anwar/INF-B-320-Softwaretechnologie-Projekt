@@ -81,31 +81,24 @@ public class WorkAssignmentController {
 		return "redirect:/listOfAssignments";
 	}
 
-
-
 	@GetMapping("/listForPlotAssignments/{plotID}")
 	String getForPlotWorkAssignments(@PathVariable ProductIdentifier plotID, Model model){
 		model.addAttribute("ListWorkAssignmentsForPlot", workAssignmentManager.getForPlotWorkAssignments(plotID));
+		model.addAttribute("plotID", plotID);
 		return "workAssignment/listForPlotAssignments";
 	}
-
-	@PostMapping("/directToAddAssignments/{plotID}")
-	String redirectToAddWorkAssignment(@PathVariable ProductIdentifier plotID){
-		return "redirect:/addWorkAssignment";
-	}
-
 
 	@GetMapping("/addWorkAssignment/{plotID}")
 	public String workAssignmentToPlot(@PathVariable ProductIdentifier plotID,  Model model) {
 		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
-		model.addAttribute("Plot", plotID);
+		model.addAttribute("plotID", plotID);
 		return "workAssignment/addWorkAssignment";
 	}
 
 
-	@PostMapping("/addWorkAssignment/")
-	public String AddWorkAssignmentToPlot(Model model, @PathVariable ProductIdentifier plot, @PathVariable long workAssigmentID) {
-		workAssignmentManager.addPlotToWorkAssignment(plot, workAssigmentID);
+	@PostMapping("/addWorkAssignment/{plotID}")
+	public String AddWorkAssignmentToPlot(@PathVariable ProductIdentifier plotID, @RequestParam("WorkAssignmentID") Long workAssignmentID){
+		workAssignmentManager.addPlotToWorkAssignment(plotID, workAssignmentID);
 		return "redirect:/myPlot";
 	}
 
