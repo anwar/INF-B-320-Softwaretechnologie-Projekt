@@ -213,7 +213,7 @@ Umstrukturierung innerhalb einiger Packages vornehmen um wartbaren Code zu erzeu
 
 |#25
 |Implement Message package for sending emails
-| BAsic functionality, integration Test
+| Basic functionality, integration Test
 |Talal
 |open
 
