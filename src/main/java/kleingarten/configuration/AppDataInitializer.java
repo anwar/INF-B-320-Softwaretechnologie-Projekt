@@ -24,6 +24,7 @@ import kleingarten.plot.Plot;
 import kleingarten.plot.PlotCatalog;
 import kleingarten.plot.PlotService;
 import kleingarten.tenant.Tenant;
+import kleingarten.tenant.TenantManager;
 import kleingarten.tenant.TenantRepository;
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Password;
@@ -55,12 +56,14 @@ class AppDataInitializer implements DataInitializer {
 	private final FeeRepository feeRepository;
 	private final FeeManager feeManager;
 	private final ProcedureManager procedureManager;
+	private final TenantManager tenantManager;
 
 	AppDataInitializer(NewsRepository news,
 					   WorkAssignmentRepository workAssignmentRepo, WorkAssignmentManager workAssignmentManager,
 					   TenantRepository tenantRepository, UserAccountManager userAccountManager,
 					   PlotService plotService, PlotCatalog plotCatalog,
-					   FeeRepository feeRepository, FeeManager feeManager, ProcedureManager procedureManager) {
+					   FeeRepository feeRepository, FeeManager feeManager, ProcedureManager procedureManager,
+					   TenantManager tenantManager) {
 		Assert.notNull(news, "news must not be null!");
 		this.news = news;
 
@@ -73,6 +76,7 @@ class AppDataInitializer implements DataInitializer {
 		this.tenantRepository = tenantRepository;
 		Assert.notNull(userAccountManager, "userAccountManager must not be null!");
 		this.userAccountManager = userAccountManager;
+		this.tenantManager = tenantManager;
 
 		Assert.notNull(plotService, "plotService must not be null!");
 		this.plotService = plotService;
@@ -181,6 +185,10 @@ class AppDataInitializer implements DataInitializer {
 		waterman.addRole(waterRole);
 
 		tenantRepository.saveAll(List.of(boss, obmann, cashier, replacement, protocol, waterman));
+
+		//this one is just for testing the method createNewTenant()
+		tenantManager.createNewTenant("Pascall", "Fahrenheit", "fahrenheit@web.de", "123");
+
 	}
 
 	public void initializePlots(PlotCatalog plotCatalog, PlotService plotService) {

@@ -27,12 +27,6 @@ public class TenantManagerTest {
 		this.tenantRepository = tenantRepository;
 	}
 
-//	@BeforeEach
-//	void SetUp(){
-//		tenant = new Tenant("Jassi", "Gepackert", "Neben Isa und Francy",
-//			"908964875734", "13.05.1999", userAccountManager.create("jassi", Password.UnencryptedPassword.of("123"),"jassis@email.com", Role.of("Hauptpächter")));
-//	}
-
 
 	@Test
 	void changeRoles() {
@@ -55,14 +49,16 @@ public class TenantManagerTest {
 	}
 
 	@Test
-	void createTenant(){
-		String forename = "Pascall";
-		String surname = "Fahrenheit";
-		String email = "fahrenheit@web.de";
-		String password = email;
+	void createNewTenant(){
+		assertThat(tenantRepository.existsById(tenantManager.getTenantByUserAccount(userAccountManager.findByUsername("fahrenheit@web.de").get()).getId()));
+	}
 
-		tenantManager.createNewTenant(forename, surname, email, password);
-		//assertThat(tenantRepository.existsById(tenantManager.getTenantByUserAccount(userAccountManager.findByUsername("fahrenheit@web.de").get()).getId()));
+	@Test
+	void findByRole(){
+		Role testRole = Role.of("Pupskönig");
+		tenantManager.findByRole(testRole);
+		assertThat(tenantManager.findByRole(testRole).isEmpty());
+		assertThat(tenantManager.findByRole(Role.of("Vorstandsvorsitzender")).size() == 1);
 
 	}
 }
