@@ -133,6 +133,6 @@ public class TenantManager {
 
 
 	public List<Tenant> findByRole(Role role){
-		return tenants.findByRole(role);
+		return tenants.findAll().filter(t -> t.getUserAccount().hasRole(role)).toList();
 	}
 }

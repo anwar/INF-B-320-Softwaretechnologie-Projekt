@@ -69,7 +69,7 @@ haben wir noch einiges zu tun aber wir können das bis Montag schaffen.
 |Implement Message package for sending emails
 | BAsic functionality, integration Test
 |Talal
-|open
+|closed
 
 |#29
 | Add diagram for applicationManagement
@@ -217,12 +217,6 @@ Dann beginnt nächste Woche das Cross Testing.
 |HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
 |Franziska
 | open
-
-|#25
-|Implement Message package for sending emails
-| BAsic functionality, integration Test
-|Talal
-|open
 
 |#29
 | Add diagram for applicationManagement
