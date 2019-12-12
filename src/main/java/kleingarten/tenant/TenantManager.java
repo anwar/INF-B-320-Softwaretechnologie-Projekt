@@ -10,6 +10,7 @@ import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,16 +55,14 @@ public class TenantManager {
 	/**
 	 * Method to change the roles of a {@link Tenant}
 	 * @param role old role to be changed
-	 * @param newRole new role to be added
+	 * @param newRole new role to be added, removes role if null
 	 * @param tenant tenant who gets its roles changed
 	 * @return
 	 */
 	public void changeRoles(Role role, Role newRole,Tenant tenant){
-		//tenant.getUserAccount().remove(role);
-		//tenant.getUserAccount().add(newRole);
-		for (int i = 0; i < tenant.getUserAccount().getRoles().toList().size(); i++){
-			tenant.getUserAccount().getRoles().toList().get(i).equals(role);
-			tenant.getUserAccount().remove(tenant.getUserAccount().getRoles().toList().get(i));
+		tenant.getUserAccount().getRoles().stream().filter(c -> c.equals(role)).map(n -> tenant.getUserAccount().remove(n));
+		if(newRole != null) {
+			tenant.getUserAccount().add(newRole);
 		}
 	}
 
@@ -113,10 +112,9 @@ public class TenantManager {
 	 * @param password
 	 */
 	public void createNewTenant(String forename, String surname, String email, String password){
-		Tenant tenant = new Tenant(forename, surname, "", "", "", userAccounts.create(surname, Password.UnencryptedPassword.of(password), email));
+		Tenant tenant = new Tenant(forename, surname, "", "", "", userAccounts.create(email, Password.UnencryptedPassword.of(password), email));
 		tenant.addRole(Role.of("Hauptpächter"));
 		tenants.save(tenant);
-		System.out.println(tenant.getForename());
 	}
 
 	/**
@@ -129,13 +127,12 @@ public class TenantManager {
 	 * @param email
 	 */
 	public void createNewPerson(String forename, String surname, String address, String phonenumber, String birthdate, String email){
-		Tenant tenant = new Tenant(forename, surname, address, phonenumber, birthdate, userAccounts.create(surname, Password.UnencryptedPassword.of(phonenumber), email));
+		Tenant tenant = new Tenant(forename, surname, address, phonenumber, birthdate, userAccounts.create(email, Password.UnencryptedPassword.of(phonenumber), email));
 		tenants.save(tenant);
 	}
 
-	public void deleteRoles(Tenant tenant){
-		for (int i = 0; i < tenant.getUserAccount().getRoles().toList().size(); i++) {
-			tenant.getUserAccount().remove(tenant.getUserAccount().getRoles().toList().get(i));
-		}
+
+	public List<Tenant> findByRole(Role role){
+		return tenants.findByRole(role);
 	}
 }

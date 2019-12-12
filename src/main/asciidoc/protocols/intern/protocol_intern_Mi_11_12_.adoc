@@ -1,36 +1,26 @@
 = Protokoll Gruppe 43
 
-Treffen am 09.12.2019
+Treffen am 11.12.2019
 
 Ort:      APB +
 Beginn:   13:00 Uhr +
-Ende:     14:50 Uhr
+Ende:     14:30 Uhr
 
 __Schriftführer:__ Isabell Zorr
 
 *Nächstes Treffen:* +
-11.12.2019, 13:00 Uhr, Ort des nächsten Treffens
+18.12.2019, 13:00 Uhr, APB
 
 __Teilnehmer:__
 //Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
 
 - Albert Wellerdt
 - Franziska Kiel
-- Sascha Seiffert
 - Sanghyun Lee
-- Ylvi Sarah Bachmann
 - Isabell Zorr
 
 == Bemerkungen
-Bei diesem Treffen arbeiteten wir wieder als Gruppe die Probleme aus, welche aufgetreten sind.
-Sascha half Sanghyun beim Verständnis seines Package und der Strukturierung dieses, während wir
-untereinander noch besprachen welche Funktionen dringend benötigt werden und welche Ideen jeder noch
-hat. Zudem teilten wir Ylvis Package zu den Parzellen ein bisschen auf. Sascha arbeitet weiter an
-seinem Package zu den Bewerbungen und übernimmt auch die Bearbeitung der Zählerstände und das hinzufügen
-von Nebenpächtern. Ylvi bearbeitet die Übersicht der Parzelle nach Obmännern, Isabell fügt letzte Methoden
-zum Pächter Package hinzu und arbeitet am Package für die Beschwerden, Albert beendet sein Termin Package
-und Sanghyun überarbeitet die Procedure. Franziska kümmert sich weiterhin um den Feinschliff an der Website
-in der HTML.
+Wir haben zusammen programmiert.
 
 == Retrospektive des letzten Sprints
 *Issue referenziert die Issue ID von GitHub*
@@ -81,7 +71,7 @@ in der HTML.
 |Add isTenant() method to ProcedureManager
 |methode to determine wether or not a user is a tenant
 |Sascha and Sanghyun
-|open
+|closed
 
 |#49
 |Show details of Plot
@@ -93,19 +83,19 @@ in der HTML.
 |Add getProcedure() Method to ProcedureManager
 |method should have year and plot as parameter and return the procedure
 |Sascha and Sanghyun
-|open
+|closed
 
 |#51
 |Add getProcedures() to ProcedureManager
 |year and tenant as parameters and return a streamable
 |Sascha and Sangyhun
-|open
+|closed
 
 |#53
 |Tests for initializing tenants
 |some tests to test if the initialization of a tenant worked
 |Isabell
-|open
+|closed
 
 |#54
 |Show overview of plots
@@ -117,7 +107,7 @@ in der HTML.
 |Finalize news package
 |implementing entry deletion, editing and unit tests
 |Talal
-|open
+|closed
 
 |#67
 |Overviwe table for appointments
@@ -131,35 +121,61 @@ in der HTML.
 |Sanghyun
 |open
 
-|#69
-|edit() Method for Tenants
-|adding an edit() or modify() method
-|Isabell
-|closed
-
 |#70
 |Application Package
 |applicationRepo, applicationManager, applicationController, application class
 |Sascha
+|closed
+
+|#71
+| Adding each Initializer to AppDataInitializer
+| ...
+| Sascha, Ylvi, Sanghyun
 |open
 
 |#72
 | Update Entwurfsdiagramm for message package
 | ...
 | Talal
-|open
+|closed
 
 |#73
 | Update Entwurfsdiagramm for news package
 | ...
 | Talal
+|closed
+
+|#74
+|Show overview of plots administrated by chairmen
+| add colour for each chairman, modify plotOverview.html, implement needed methods
+| Ylvi
 |open
+
+|#75
+|update external framework usage table
+| ...
+| all
+| open
+
+|#76
+|Complains package
+|adding classes for package
+|all
+|open
+
+|#77
+|Update user interface diagram
+|...
+|Talal
+|open
+
 
 |===
 
 
 == Aktueller Stand
 Die Software befindet sich in der Fertigstellung der Muss-Kriterien, welche bis Montag fertig sein müssen.
+Dann beginnt nächste Woche das Cross Testing
 
 == Planung des nächsten Sprints
 *Issue referenziert die Issue ID von GitHub*
@@ -205,46 +221,16 @@ Die Software befindet sich in der Fertigstellung der Muss-Kriterien, welche bis 
 |Albert
 |open
 
-|#44
-|Add isTenant() method to ProcedureManager
-|methode to determine wether or not a user is a tenant
-|Sascha and Sanghyun
-|open
-
 |#49
 |Show details of Plot
 |...
 |Ylvi
 |open
 
-|#50
-|Add getProcedure() Method to ProcedureManager
-|method should have year and plot as parameter and return the procedure
-|Sascha and Sanghyun
-|open
-
-|#51
-|Add getProcedures() to ProcedureManager
-|year and tenant as parameters and return a streamable
-|Sascha and Sangyhun
-|open
-
-|#53
-|Tests for initializing tenants
-|some tests to test if the initialization of a tenant worked
-|Isabell
-|open
-
 |#54
 |Show overview of plots
 |colours and html file for the plot overview
 |Ylvi
-|open
-
-|#63
-|Finalize news package
-|implementing entry deletion, editing and unit tests
-|Talal
 |open
 
 |#67
@@ -259,28 +245,60 @@ Die Software befindet sich in der Fertigstellung der Muss-Kriterien, welche bis 
 |Sanghyun
 |open
 
-|#70
-|Application Package
-|applicationRepo, applicationManager, applicationController, application class
-|Sascha
-|open
-
 |#71
 | Adding each Initializer to AppDataInitializer
 | ...
 | Sascha, Ylvi, Sanghyun
 |open
 
-|#72
-| Update Entwurfsdiagramm for message package
-| ...
-| Talal
+|#74
+|Show overview of plots administrated by chairmen
+| add colour for each chairman, modify plotOverview.html, implement needed methods
+| Ylvi
 |open
 
-|#73
-| Update Entwurfsdiagramm for news package
+|#75
+|update external framework usage table
 | ...
-| Talal
+| all
+| open
+
+|#76
+|Complains package
+|adding classes for package
+|all
 |open
 
+|#77
+|Update user interface diagram
+|...
+|Talal
+|open
+
+|#79
+|PDF Rechnung sending through email
+| ...
+|Talal
+| open
+
+|#80
+|Better format for generated PDF bill
+| ...
+|...
+|open
+
+|#81
+|Show details of plot rented by tenant
+| adding controller methods, write test for showing plot details
+| Ylvi
+| open
+
+|#82
+|Add function to "Parzelle freigeben" button
+|add method to controller and write tests
+|Ylvi
+|open
+
+|#83
+|Add functionality to "Parzelle hinzufügen" button
 |===

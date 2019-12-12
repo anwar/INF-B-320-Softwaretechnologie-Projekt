@@ -2,10 +2,7 @@ package kleingarten.tenant;
 
 
 import com.mysema.commons.lang.Assert;
-import org.salespointframework.useraccount.AuthenticationManager;
-import org.salespointframework.useraccount.Password;
-import org.salespointframework.useraccount.UserAccount;
-import org.salespointframework.useraccount.UserAccountManager;
+import org.salespointframework.useraccount.*;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,6 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.awt.desktop.SystemSleepEvent;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 class TenantController {
@@ -71,6 +72,7 @@ class TenantController {
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String modifyTenant(@RequestParam("id") Long id, Model model){
 		model.addAttribute("tenant", tenantManager.get(id));
+		model.addAttribute("roles", TenantRole.getRoleList());
 		return "tenant/modifyTenant";
 	}
 
@@ -93,7 +95,8 @@ class TenantController {
 						  @RequestParam("phone")     String phone,
 						  @RequestParam("email")     String email,
 						  @RequestParam("address")   String address,
-						  @RequestParam("birthdate") String birthdate){
+						  @RequestParam("birthdate") String birthdate,
+						   @RequestParam("role") String roles){
 
 		tenantManager.get(id).setForename(forename);
 		tenantManager.get(id).setSurname(surname);
@@ -101,7 +104,10 @@ class TenantController {
 		tenantManager.get(id).getUserAccount().setEmail(email);
 		tenantManager.get(id).setAddress(address);
 		tenantManager.get(id).setBirthdate(birthdate);
-
+		tenantManager.get(id).deleteRoles();
+		for(String role : roles.split(",")){
+			tenantManager.get(id).addRole(Role.of(role));
+		}
 		tenantRepository.save(tenantManager.get(id));
 
 		return "redirect:/tenants";

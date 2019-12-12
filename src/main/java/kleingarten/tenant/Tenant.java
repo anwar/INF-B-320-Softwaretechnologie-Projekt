@@ -181,7 +181,6 @@ public class Tenant {
 	 * @param role as class {@link Role}
 	 */
 	public void addRole(Role role){
-		this.role = role;
 		this.userAccount.add(role);
 	}
 
@@ -190,14 +189,23 @@ public class Tenant {
 	 * @param role as class {@link Role}
 	 */
 	public void removeRole(Role role){
-		this.role = role;
 		this.userAccount.remove(role);
+	}
+
+	public void deleteRoles(){
+		for(Role r : userAccount.getRoles().toList()){
+
+			userAccount.remove(r);
+		}
 	}
 
 	public void setId(Long id){
 		this.id = id;
 	}
 
+	public boolean hasRole(String role){
+		return userAccount.hasRole(Role.of(role));
+	}
 
 	/**
 	 * Private constructor of class {@link Tenant}, which is used by the Spring Framework
