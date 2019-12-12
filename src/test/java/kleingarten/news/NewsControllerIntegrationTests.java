@@ -51,6 +51,24 @@ public class NewsControllerIntegrationTests {
 	}
 
 	/**
+	 * Test that a {@link NewsEntry} is successfully added and user is
+	 * redirected to "/home".
+	 */
+	@Test
+	@WithMockUser(roles = "Vorstandsvorsitzender")
+	void addEntryAndRedirectToHome() throws Exception {
+		long noOfEntries = news.count();
+		String text = "This is the new text for the entry";
+
+		mvc.perform(post("/home/news/addEntry")
+				.param("text", text))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/home"));
+
+		assertThat(news.count()).isEqualTo(noOfEntries + 1);
+	}
+
+	/**
 	 * Test that a {@link NewsEntry} is successfully deleted and user is
 	 * redirected to "/home".
 	 */
