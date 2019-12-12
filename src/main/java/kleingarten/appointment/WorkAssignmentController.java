@@ -84,24 +84,17 @@ public class WorkAssignmentController {
 	@GetMapping("/listForPlotAssignments/{plotID}")
 	String getForPlotWorkAssignments(@PathVariable ProductIdentifier plotID, Model model){
 		model.addAttribute("ListWorkAssignmentsForPlot", workAssignmentManager.getForPlotWorkAssignments(plotID));
+		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
 		model.addAttribute("plotID", plotID);
 		return "workAssignment/listForPlotAssignments";
 	}
 
-	@GetMapping("/addWorkAssignment/{plotID}")
-	public String workAssignmentToPlot(@PathVariable ProductIdentifier plotID,  Model model) {
-		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
-		model.addAttribute("plotID", plotID);
-		return "workAssignment/addWorkAssignment";
-	}
-
-
-	@PostMapping("/addWorkAssignment/{plotID}")
-	public String AddWorkAssignmentToPlot(@PathVariable ProductIdentifier plotID, @RequestParam("WorkAssignmentID") Long workAssignmentID){
-		workAssignmentManager.addPlotToWorkAssignment(plotID, workAssignmentID);
+	@PostMapping("/setWorkAssignment")
+	public String AddWorkAssignmentToPlot(@RequestParam("plotID") ProductIdentifier plotID, @RequestParam("assignmentID") Long id){
+		workAssignmentManager.addPlotToWorkAssignment(plotID, id);
+		System.out.println("workAssignmentID im Controller" + id);
 		return "redirect:/myPlot";
 	}
-
 
 	@GetMapping("/addWorkHours")
 	String addWorkHours(Model model){

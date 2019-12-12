@@ -26,7 +26,6 @@
     </div>
 </div>
 <center>
-        <p th:text="${plotID}"></p>
         <table id="myTable">
             <thead>
             <tr>
@@ -43,11 +42,37 @@
             </tr>
             </tbody>
         </table>
-    <div class="button-section">
-        <a th:href="'/addWorkAssignment/' + ${plotID}">In Termine eintragen</a>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+    <hr/>
+
+    <div class="header-title">
+        <h1>Termine zum eintragen</h1>
     </div>
-        <br/>
-        <br/>
+    <table id="myTable">
+        <tr>
+            <th>Datum / Zeit</th>
+            <th>Titel</th>
+            <th>Beschreibung</th>
+            <th>id</th>
+            <th>Eintragen</th>
+        </tr>
+        <tr th:each="workAssignment : ${ListOfAssignments}">
+            <td th:text="${workAssignment.date}">date</td>
+            <td th:text="${workAssignment.title}">title</td>
+            <td th:text="${workAssignment.description}">description</td>
+            <td th:text="${workAssignment.id}">id</td>
+
+            <form method="post" role="form" id="form" th:action="@{/setWorkAssignment}" th:object="${form}">
+                <td hidden><input hidden id="assignmentID" name="assignmentID" th:value="${(workAssignment.getId())}"/></td>
+                <td hidden><input hidden id="plotID" name="plotID" th:value="${plotID}"/></td>
+                <td><button style="font-size:13px; height: 35px" type="submit" class="ui button">Zum Termin eintragen</button></td>
+            </form>
+
+        </tr>
+    </table>
 </center>
 </body>
 </html>

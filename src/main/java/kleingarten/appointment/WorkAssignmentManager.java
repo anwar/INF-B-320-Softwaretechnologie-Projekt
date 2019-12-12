@@ -69,28 +69,24 @@ public class WorkAssignmentManager {
 	}
 
 
-	public boolean addPlotToWorkAssignment(ProductIdentifier plotID, long workAssignmentID){
+	public void addPlotToWorkAssignment(ProductIdentifier plotID, long workAssignmentID){
 		WorkAssignment workAssignment = findByID(workAssignmentID);
 		Plot plot = findByID(plotID);
-
 		if(!workAssignment.containsPlot(plot)){
+			System.out.println(workAssignmentID + " workAssignmentID im Manager");
 			workAssignment.addPlot(plot);
 			workAssignmentRepository.save(workAssignment);
-			return true;
 		}
-		return false;
 	}
 
-	public boolean removePlotOutWorkAssignment(ProductIdentifier plotID, long workAssignmentID){
+	public void removePlotOutWorkAssignment(ProductIdentifier plotID, long workAssignmentID){
 		WorkAssignment workAssignment = findByID(workAssignmentID);
 		Plot plot = findByID(plotID);
 
 		if(workAssignment.containsPlot(plot)){
 			workAssignment.removePlot(plot);
 			workAssignmentRepository.save(workAssignment);
-			return true;
 		}
-		return false;
 	}
 
 	public List<WorkAssignment> getForPlotWorkAssignments(ProductIdentifier plotID){
