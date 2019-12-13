@@ -71,6 +71,7 @@ public class WorkAssignmentManager {
 
 	public void addPlotToWorkAssignment(ProductIdentifier plotID, long workAssignmentID){
 		WorkAssignment workAssignment = findByID(workAssignmentID);
+		System.out.println(workAssignment);
 		Plot plot = findByID(plotID);
 		if(!workAssignment.containsPlot(plot)){
 			workAssignment.addPlot(plot);
