@@ -31,6 +31,12 @@ import kleingarten.appointment.WorkAssignmentManager;
 import kleingarten.appointment.WorkAssignmentRepository;
 import kleingarten.finance.Procedure;
 import kleingarten.finance.ProcedureManager;
+
+import kleingarten.complaint.Complaint;
+import kleingarten.complaint.ComplaintRepository;
+import kleingarten.complaint.ComplaintState;
+
+
 import kleingarten.news.NewsEntry;
 import kleingarten.news.NewsRepository;
 import kleingarten.plot.Plot;
@@ -58,12 +64,14 @@ public class AppDataInitializer implements DataInitializer {
 	private final PlotCatalog plotCatalog;
 	private final ProcedureManager procedureManager;
 	private final TenantManager tenantManager;
+	private final ComplaintRepository complaints;
 
 	AppDataInitializer(NewsRepository news,
 					   WorkAssignmentRepository workAssignmentRepo, WorkAssignmentManager workAssignmentManager,
-					   TenantRepository tenantRepository, UserAccountManager userAccountManager,
+					   TenantRepository tenantRepository, UserAccountManager userAccountManager, ComplaintRepository complaints,
 					   PlotService plotService, PlotCatalog plotCatalog, ProcedureManager procedureManager,
 					   TenantManager tenantManager) {
+
 		Assert.notNull(news, "news must not be null!");
 		this.news = news;
 
@@ -85,6 +93,9 @@ public class AppDataInitializer implements DataInitializer {
 
 		Assert.notNull(procedureManager, "procedureManager must not be null!");
 		this.procedureManager = procedureManager;
+
+		Assert.notNull(complaints, "complaints must not be null!");
+		this.complaints = complaints;
 	}
 
 	@Override
@@ -94,6 +105,7 @@ public class AppDataInitializer implements DataInitializer {
 		initializeTenants(this.tenantRepository, this.userAccountManager);
 		initializePlots(this.plotCatalog, this.plotService, this.tenantRepository);
 		initializeProcedures(this.procedureManager);
+		initializeComplaints(this.complaints, this.tenantManager, this.plotCatalog);
 		LOG.info("fertig");
 	}
 
@@ -112,6 +124,39 @@ public class AppDataInitializer implements DataInitializer {
 		news.save(new NewsEntry("Hört hört, werte Leute, am 13.09.2020 ist wieder Zeit für das jährliche Ritterfest im Lande K(l)einGarten. ⚔️"));
 		news.save(new NewsEntry("Wiener Schnitzel. Ihr habt richtig gelesen. It's time for a d-d-duel. Schnitzelwettessen. Wo? Na hier natürlich. Wann? Am 30.02.2020. \uD83E\uDD69"));
 		news.save(new NewsEntry("30.03.2019 Achtung: Bitte denkt daran, dass eure Stiefmütterchen auch wachsen können: Laub harken ist angesagt! \uD83C\uDF42 "));
+	}
+
+
+	void initializeComplaints(ComplaintRepository complaints, TenantManager tenantManager, PlotCatalog plotCatalog) {
+		Assert.notNull(complaints, "complaints must not be null!");
+
+		if (complaints.findAll().iterator().hasNext()) {
+			return;
+		}
+
+		LOG.info("Creating dummy complaints...");
+
+		Tenant boss = null;
+		Tenant wassermann = null;
+		Tenant normalTenant = null;
+		for (Tenant t : tenantManager.getAll().toList()) {
+			if (t.hasRole("Vorstandsvorsitzender")) {
+				boss = t;
+			} else if (t.hasRole("Wassermann")) {
+				wassermann = t;
+			} else if (t.hasRole("Hauptpächter") || t.hasRole("Nebenpächter")) {
+				normalTenant = t;
+			}
+		}
+
+		List<Plot> plots = plotCatalog.findAll().toList();
+
+		complaints.save(new Complaint(
+				plots.get(0), normalTenant, "Test subject", "This is text for the complaint description. Lorem ipsum tooty dooty doo.", ComplaintState.PENDING));
+		complaints.save(new Complaint(
+				plots.get(1), wassermann, "Test subject2", "Lorem ipsum tooty dooty doo. This is text for the complaint description. ", ComplaintState.PENDING));
+		complaints.save(new Complaint(
+				plots.get(2), boss, "Another one", "Lorem ipsum tooty dooty doo. Lorem ipsum tooty dooty doo.", ComplaintState.FINISHED));
 	}
 
 
@@ -229,7 +274,9 @@ public class AppDataInitializer implements DataInitializer {
 		LOG.info("fast fertig");
 	}
 
+
 	public void initializeProcedures(ProcedureManager procedureManager) {
+
 		if (!procedureManager.getAll().toList().isEmpty()) {
 			return;
 		}
@@ -268,5 +315,4 @@ public class AppDataInitializer implements DataInitializer {
 			LOG.info("Finished creating default procedures");
 		}
 	}
-
 }
