@@ -52,17 +52,6 @@ public class DataService {
 		throw new IllegalArgumentException("Tenant must exist!");
 	}
 
-	public boolean tenantHasRole(Tenant tenant, Role role) {
-		Set<Role> roles = findTenantById(tenant.getId()).getUserAccount().getRoles().toSet();
-		for (Role tenantRole:
-			 roles) {
-			if (tenantRole.toString().equals(role.toString())) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	/**
 	 * Get the associated {@link Procedure} for a {@link Plot}
 	 * @param plot the {@link Plot} for which the {@link Procedure} should be found
