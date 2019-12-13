@@ -1,5 +1,5 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
@@ -25,32 +25,49 @@
 </div>
 
 <center>
-    <form method="post">
-        <table id="complaints-table">
-            <thead>
-            <tr>
-                <th>gegen</th>
-                <th>von</th>
-                <th>Titel</th>
-                <th>Beschreibung</th>
-                <th>Status</th>
-                <th>zugeordneter Obmann</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="c : ${complaints}">
-                <td>
-                    <a th:text="'Plot ' + ${c.plot.getName()}" th:href="'/plot/' + ${c.plot.getId().toString()}">gegen</a>
-                </td>
-                <td th:text="${c.complainant.getFullName()}">von</td>
-                <td th:text="${c.subject}">Titel</td>
-                <td th:text="${c.description}">Beschreibung</td>
-                <td th:text="${c.state}">Status</td>
-                <td th:text="${c.assignedObmann.getFullName()}">zugeordneter Obmann</td>
-            </tr>
-            </tbody>
-        </table>
-    </form>
+    <table id="complaints-table">
+        <thead>
+        <tr>
+            <th>gegen</th>
+            <th>von</th>
+            <th>Titel</th>
+            <th>Beschreibung</th>
+            <th>Status</th>
+            <th>zugeordneter Obmann</th>
+            <th>Bearbeiten</th>
+            <th sec:authorize="hasRole('Vorstandsvorsitzender')">Löschen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="c : ${complaints}">
+            <td>
+                <a th:text="'Plot ' + ${c.plot.getName()}"
+                   th:href="@{/plot/{plot_id}(plot_id=${c.plot.getId().toString()})}">gegen</a>
+            </td>
+            <td th:text="${c.complainant.getFullName()}">von</td>
+            <td th:text="${c.subject}">Titel</td>
+            <td th:text="${c.description}">Beschreibung</td>
+            <td th:text="${c.state}">Status</td>
+            <td th:text="${c.assignedObmann.getFullName()}">zugeordneter Obmann</td>
+            <td>
+                <form method="post" style="display: inline-block" th:action="@{/edit-complaint/{id}(id=${c.id})}">
+                    <button class="btn btn-sm float-center"
+                            style="font-size: 18px; background: transparent; border: none;"
+                            th:title="Bearbeiten">&#9998;
+                    </button>
+                </form>
+            </td>
+            <td sec:authorize="hasRole('Vorstandsvorsitzender')">
+                <form method="post" style="display: inline-block" th:action="@{/delete-complaint/{id}(id=${c.id})}">
+                    <button class="btn btn-sm float-center"
+                            style="font-size: 18px; background: transparent; border: none;"
+                            th:title="Löschen">&#10060;
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </center>
 
 <div th:include="navigation :: footer"></div>

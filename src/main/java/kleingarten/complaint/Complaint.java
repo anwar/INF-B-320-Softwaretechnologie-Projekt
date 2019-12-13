@@ -79,6 +79,10 @@ public class Complaint {
 		this.state = null;
 	}
 
+	public long getId() {
+		return id;
+	}
+
 	public Plot getPlot() {
 		return plot;
 	}

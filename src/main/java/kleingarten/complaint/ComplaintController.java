@@ -16,6 +16,7 @@
 package kleingarten.complaint;
 
 import kleingarten.finance.Procedure;
+import kleingarten.news.NewsEntry;
 import kleingarten.plot.DataService;
 import kleingarten.plot.Plot;
 import kleingarten.plot.PlotService;
@@ -24,6 +25,7 @@ import kleingarten.tenant.TenantManager;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.data.util.Streamable;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +34,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 import java.util.Set;
@@ -126,6 +129,13 @@ public class ComplaintController {
 		Tenant complainant = tenantManager.getTenantByUserAccount(user.get());
 
 		complaintManager.save(new Complaint(plot, complainant, subject, description, ComplaintState.PENDING));
+		return "redirect:/complaints";
+	}
+
+	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PostMapping("/delete-complaint/{id}")
+	String deleteComplaint(@PathVariable("id") long id) {
+		complaintManager.delete(id);
 		return "redirect:/complaints";
 	}
 }

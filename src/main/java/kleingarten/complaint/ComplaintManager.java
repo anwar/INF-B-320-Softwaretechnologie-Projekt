@@ -20,8 +20,10 @@ import kleingarten.tenant.TenantManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.util.Streamable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class ComplaintManager {
@@ -47,7 +49,13 @@ public class ComplaintManager {
 	}
 
 	public Complaint get(long id) {
-		return complaints.findById(id).get();
+		return complaints.findById(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+	}
+
+	public void delete(long id) {
+		Complaint complaint = get(id);
+		complaints.delete(complaint);
 	}
 
 	public void save(Complaint complaint) {
