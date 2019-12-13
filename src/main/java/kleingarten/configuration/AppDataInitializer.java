@@ -159,7 +159,6 @@ public class AppDataInitializer implements DataInitializer {
 				plots.get(2), boss, "Another one", "Lorem ipsum tooty dooty doo. Lorem ipsum tooty dooty doo.", ComplaintState.FINISHED));
 	}
 
-
 	void initializeWorkAssigment(WorkAssignmentRepository workAssignmentRepo) {
 		Assert.notNull(workAssignmentRepo, "WorkAssignment must not be null");
 
@@ -170,7 +169,6 @@ public class AppDataInitializer implements DataInitializer {
 		var Appointment = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 1, 1, 1, 0), 0, "Neujahrsputz", "Garten von Böllerresten und Müll befreien", null);
 		var Appointment2 = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 4, 25, 16, 0), 0, "In K(l)einanlage Müll aufsammeln", "Müll aufheben", null);
 		this.workAssignmentRepo.saveAll(List.of(Appointment));
-
 	}
 
 	void initializeTenants(TenantRepository tenantRepository, UserAccountManager userAccountManager) {
@@ -238,7 +236,7 @@ public class AppDataInitializer implements DataInitializer {
 
 		Tenant obmann = null;
 		for (Tenant t : tenants.findAll()) {
-			if (t.hasRole("Vorstandsvorsitzender")) {
+			if (t.hasRole("Obmann")) {
 				obmann = t;
 				break;
 			}
