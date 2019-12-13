@@ -79,10 +79,10 @@ public class DataServiceIntegrationTests {
 	@Test
 	public void noProcedureTest() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			dataService.getProcedure(firstPlot);
+			dataService.getProcedure(new Plot("890", 40, "test"));
 		});
 		assertThrows(IllegalArgumentException.class, () -> {
-			dataService.getProcedure(secondPlot);
+			dataService.getProcedure(new Plot("3000", 300, "test"));
 		});
 	}
 
@@ -93,8 +93,6 @@ public class DataServiceIntegrationTests {
 	public void procedureExistsTest() {
 		assertThat(dataService.procedureExists(firstPlot)).isEqualTo(true);
 		assertThat(dataService.procedureExists(secondPlot)).isEqualTo(true);
-		assertThat(dataService.procedureExists(firstPlot)).isEqualTo(false);
-		assertThat(dataService.procedureExists(secondPlot)).isEqualTo(false);
 	}
 
 	/**
@@ -102,10 +100,6 @@ public class DataServiceIntegrationTests {
 	 */
 	@Test
 	public void getRentedPlotsTest() {
-		Set<Plot> rentedPlots = new HashSet<>();
-		rentedPlots.add(firstPlot);
-		rentedPlots.add(secondPlot);
-		assertThat(dataService.getRentedPlots(tenant)).isEqualTo(rentedPlots);
-		assertThat(dataService.getRentedPlots(tenant)).isEqualTo(Set.of());
+		assertThat(dataService.getRentedPlots(tenant)).isEqualTo(Set.of(firstPlot, secondPlot));
 	}
 }

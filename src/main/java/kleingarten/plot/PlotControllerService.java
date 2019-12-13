@@ -3,6 +3,7 @@ package kleingarten.plot;
 import kleingarten.finance.Procedure;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
+import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.springframework.stereotype.Component;
@@ -91,7 +92,7 @@ public class PlotControllerService {
 	 * Select if the details page of a specific {@link Plot} can be accessed depending on if a user is logged in or not
 	 * @param plot {@link Plot} for which the access to the details page should be set
 	 * @param user {@link Optional} of type {@link UserAccount} of the logged in user
-	 * @return access rights saved in a {@link ModelAndView}
+	 * @return access rights saved in a {@link Map} with the {@link Plot} and the access right as {@link Boolean}
 	 */
 	Map<Plot, Boolean> setAccessRightForPlot(Plot plot, Optional<UserAccount> user) {
 		Map<Plot, Boolean> rights = new HashMap<>();
@@ -168,15 +169,15 @@ public class PlotControllerService {
 			}
 		}
 		if (condition) {
-			if (dataService.tenantHasRole(tenant, Role.of("Kassierer"))) {
+			if (tenant.getUserAccount().hasRole(Role.of("Kassierer"))) {
 				mav.addAttribute("canSeeBills", true);
 				mav.addAttribute("canSeeWorkhours", true);
-				boolean condModify = dataService.tenantHasRole(tenant, Role.of("Wassermann"));
+				boolean condModify = tenant.getUserAccount().hasRole(Role.of("Wassermann"));
 				mav.addAttribute("canModify", condModify);
-			} else if (dataService.tenantHasRole(tenant, Role.of("Wassermann"))) {
+			} else if (tenant.getUserAccount().hasRole(Role.of("Wassermann"))) {
 				mav.addAttribute("canModify", true);
-			} else if (dataService.tenantHasRole(tenant, Role.of("Vorstandsvorsitzender"))
-					|| dataService.tenantHasRole(tenant, Role.of("Stellvertreter"))) {
+			} else if (tenant.getUserAccount().hasRole(Role.of("Vorstandsvorsitzender"))
+					|| tenant.getUserAccount().hasRole(Role.of("Stellvertreter"))) {
 				mav.addAttribute("canSeeBills", true);
 				mav.addAttribute("canSeeWorkhours", true);
 				mav.addAttribute("canSeeApplications", true);
@@ -196,10 +197,7 @@ public class PlotControllerService {
 	 * Set the color of a {@link Plot} depending on who is its chairman of type {@link Tenant} and add the
 	 * @return {@link Map} of {@link Plot}s and associated colors as {@link String}
 	 */
-	Map<Plot, String> secureSetColorOfChairmenForPlots() {
-		//Set color for each tenant with the role "Obmann"
-		Map<Tenant, String> colorsForChairmen = secureSetColorForChairman();
-
+	Map<Plot, String> secureSetColorOfChairmenForPlots(Map<Tenant, String> colorsForChairmen) {
 		//Set color for plot depending on who is its chairman
 		Map<Plot, String> colorsForPlotAdministratedByChairman = new HashMap<>();
 		for (Plot administratedPlot:
@@ -233,5 +231,49 @@ public class PlotControllerService {
 			}
 		}
 		return colorsForChairman;
+	}
+
+	/**
+	 * Get all {@link Tenant}s with the role "Obmann"
+	 * @return {@link Set} of {@link Tenant}s
+	 */
+	Set<Tenant> getAllChairmen() {
+		Set<Tenant> chairmen = new HashSet<>();
+		for (Tenant chairman:
+			 tenantManager.getAll()) {
+			if (tenantManager.tenantHasRole(chairman, Role.of("Obmann"))) {
+				chairmen.add(chairman);
+			}
+		}
+		return chairmen;
+	}
+
+	/**
+	 * Get all {@link Plot}s which chairman was modified
+	 * @param tenant {@link Tenant} who has the {@link Role} "Obmann" and should be the new chairman of the {@link Plot}
+	 * @param changedPlots {@link List} of all {@link ProductIdentifier}s of the {@link Plot}s which chairman was changed
+	 */
+	void saveChairmanForPlots(Tenant tenant, List<ProductIdentifier> changedPlots) {
+		Set<Tenant> chairmen = getAllChairmen();
+		Set<Plot> unchangablePlots = new HashSet<>();
+		for (Tenant chairman:
+			 chairmen) {
+			if (!(chairman.getId() == tenant.getId())) {
+				unchangablePlots.addAll(dataService.getRentedPlots(chairman));
+			}
+		}
+		for (Plot administratedPlot:
+			 plotService.getPlotsFor(tenant)) {
+			if (!(dataService.getRentedPlots(tenant).contains(administratedPlot)))
+				administratedPlot.setChairman(null);
+		}
+		//Prevent changes on plots that are rented by other chairmen
+		for (ProductIdentifier modifiedPlot:
+			 changedPlots) {
+			if (!(unchangablePlots.contains(plotService.findById(modifiedPlot)))) {
+				plotService.findById(modifiedPlot).setChairman(tenant);
+				plotCatalog.save(plotService.findById(modifiedPlot));
+			}
+		}
 	}
 }
