@@ -116,8 +116,8 @@ public class ProcedureController {
 		procedureManager.save(procedure);
 		return "redirect:/procedureDetails";
 	}
-	
-	
+
+
 	/**
 	 * Create model with needed information to show a form to change the saved details of the {@link Plot}
 	 *
@@ -127,43 +127,25 @@ public class ProcedureController {
 	 */
 	@GetMapping("/editPlot/{plot}")
 	public ModelAndView editPlot(@LoggedIn UserAccount user, @PathVariable Plot plot, ModelAndView mav) {
-
-
 		System.out.println(procedureManager.getPlotService().findById(plot.getId())+" PLOT");
-
-
-		
 		try {
-
-
-
 			mav.addObject("plot", procedureManager.getPlotService().findById(plot.getId()));
-
-
-
 		} catch (Exception e) {
-
 			mav.addObject("error", e);
 			mav.setViewName("error");
-
 			return mav;
-
 		}
-
-
-
 		Procedure proc = (plot==null) ? null : procedureManager.getActualProcedure(plot);
-		
 		//decide if user can change powercount
 				Tenant tenant = procedureManager.getTenantManager().getTenantByUserAccount(user);
-				
+
 				boolean tenantOrBoss = false;
-				
+
 				if(proc!=null) { // Tenant ?
 					if(tenant.getId()==proc.getMainTenant() || proc.getSubTenants().contains(proc.getId()))
 						tenantOrBoss = true;
-				} 
-				
+				}
+
 				for(Role role:user.getRoles().toList()) { // Vorstand ?
 					System.out.println(role.toString());
 					if(role.toString().equalsIgnoreCase("Vorstandsvorsitzender")) {
@@ -171,100 +153,47 @@ public class ProcedureController {
 					}
 				}
 				mav.addObject("tenantOrBoss", tenantOrBoss);
-
-
-
 		Procedure oldProc = (proc==null) ? null : procedureManager.getProcedure(proc.getYear()-1, procedureManager.getPlotService().findById(plot.getId()));
-
-
-
 		if(oldProc==null) { // Add old procedure information
-
-
-
 			try {
-
-
-
 				System.out.println("OLDPROC is null");
-				
 				mav.addObject("oldWater", 0);
 				mav.addObject("oldPower", 0);
-
-
-
 			} catch (Exception e) {
-				
 				mav.addObject("error", e);
 				mav.setViewName("error");
-				
 				return mav;
-
 			}
-
-
 		} else {
-
-
 			try {
-
 				mav.addObject("oldWater", ""+oldProc.getWatercount());
 				mav.addObject("oldPower", ""+oldProc.getPowercount());
-
 			} catch (Exception e) {
-
 				mav.addObject("error", e);
 				mav.setViewName("error");
-
 				return mav;
-
 			}
-
 		}
-
-
 		if(proc == null) {
-			
 			try {
-
 				System.out.println("PROC is null");
-
 				mav.addObject("procedureExists", false);
-
 			} catch (Exception e) {
-
 				mav.addObject("error", e);
 				mav.setViewName("error");
-
 				return mav;
-				
 			}
-
 		} else {
-
 			try { // add Procedure information
-
 				mav.addObject("procedure", proc);
-
 				mav.addObject("procedureExists", true);
-
-
-
 			} catch (Exception e) {
-
 				mav.addObject("error", e);
 				mav.setViewName("error");
-
 				return mav;
-
 			}
-
 		}
-
-
 		mav.setViewName("plot/editPlot");
-
 		return mav;
-
 	}
 }

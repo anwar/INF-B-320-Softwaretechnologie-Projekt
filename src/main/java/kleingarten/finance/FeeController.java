@@ -2,6 +2,12 @@ package kleingarten.finance;
 
 
 
+import kleingarten.plot.Plot;
+import kleingarten.tenant.Tenant;
+import org.salespointframework.core.SalespointIdentifier;
+import org.salespointframework.useraccount.Role;
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -17,21 +23,21 @@ import java.util.List;
 @Controller
 public class FeeController {
 
-	private ProcedureManager procedureManger;
+	private ProcedureManager procedureManager;
 
 	@Autowired
 	public FeeController(ProcedureManager procedureManager) {
-		this.procedureManger = procedureManager;
+		this.procedureManager = procedureManager;
 	}
 
 	@GetMapping(value = "/PDF", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> bill(Procedure mainProcedure, Procedure oldProcedure) { //oldProcedure can be null
 		//I dicide to pass plotid and year instead, we could make two functions: currentBillAndFinalizeProcedure(plotId) and bill(plotId, year)
 		//both can get the main and old Procedure from procedureManager, so you can simply work with those procedures in the body right now.
-		
-		
+
+
 		Bill billToShow = new Bill(mainProcedure, oldProcedure);
-		
+
 		ByteArrayInputStream bis = GeneratePDFBill.bill( billToShow.feeList ); //you may add a getter for feelist
 
 		var headers = new HttpHeaders();

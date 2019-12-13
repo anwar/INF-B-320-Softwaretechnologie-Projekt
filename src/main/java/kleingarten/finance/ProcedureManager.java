@@ -1,12 +1,10 @@
 package kleingarten.finance;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import kleingarten.plot.PlotService;
 import kleingarten.plot.PlotStatus;
+import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 
 import org.salespointframework.catalog.ProductIdentifier;
@@ -70,12 +68,12 @@ public class ProcedureManager {
 
 		return null;
 	}
-	
+
 	public Procedure getActualProcedure(Plot plot) {
 		for(Procedure proc:procedures.findByPlot(plot)) {
 			if(proc.isOpen()) return proc;
 		}
-		
+
 		return null;
 	}
 
@@ -125,16 +123,35 @@ public class ProcedureManager {
 	public Procedure get(Long id){
 		return procedures.findById(id).orElse(null);
 	}
-	
+
 	public PlotService getPlotService() {
 		return plotService;
 	}
-	
+
 	public TenantManager getTenantManager() {
 		return tenantManager;
 	}
 
 
+	/**
+	 * They will provide all information for creating a bill.
+	 * @param year
+	 * @param plotId
+	 * @return
+	 */
+	public Procedure getMainProcedure(int year, ProductIdentifier plotId) {
+		for(Procedure mainProcedure: procedures.findByPlotProductIdentifier(plotId)) {
+			if(mainProcedure.getYear() == year)
+				return mainProcedure;
+		}
+		return null;
+	}
 
-
+	public Procedure getOldProcedure(int year, ProductIdentifier plotId){
+		for (Procedure oldProcedure: procedures.findByPlotProductIdentifier(plotId)){
+			if(oldProcedure.getYear() == year-1)
+				return oldProcedure;
+		}
+		return null;
+	}
 }
