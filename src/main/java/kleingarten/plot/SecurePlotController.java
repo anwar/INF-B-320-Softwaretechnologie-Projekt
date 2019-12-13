@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -264,6 +265,40 @@ public class SecurePlotController {
 	}
 
 	/**
+	 * Get the registration form for a new {@link Plot}
+	 * @param user {@link UserAccount} of the logged in user
+	 * @return URL of the view as {@link String}
+	 */
+	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')")
+	@GetMapping("/plotRegistration")
+	public String showPlotRegistrationForm(@LoggedIn UserAccount user) {
+		return "plot/addPlot";
+	}
+
+	/**
+	 * Save given data of a new {@link Plot} to the {@link PlotCatalog}
+	 * @param user {@link UserAccount} of the logged in user
+	 * @param model {@link Model} to save the needed information
+	 * @param name name of the {@link Plot} as {@link String}
+	 * @param size size of the {@link Plot} as int
+	 * @param description description of the {@link Plot} as {@link String}
+	 * @return name of view as {@link String}
+	 */
+	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')")
+	@PostMapping("/addPlot")
+	public String addNewPlot(@LoggedIn UserAccount user, Model model, @RequestParam("name") String name,
+							 @RequestParam("size") String size, @RequestParam("description") String description) {
+		try {
+			plotService.addNewPlot(name, Integer.parseInt(size), description);
+			Map<String, Object> modelMap = plotOverview(user).getModelMap();
+		} catch (Exception e) {
+			model.addAttribute("error", e);
+			return "error";
+		}
+		return "redirect:/anlage";
+	}
+
+	/**
 	 * Get information from the form which is used to edit the details of a {@link Plot} and save them
 	 * @param user {@link UserAccount} of the logged in user
 	 * @param model {@link Model} to save the needed information
@@ -284,7 +319,6 @@ public class SecurePlotController {
 			plotCatalog.save(plotService.findById(plotId));
 		} catch (Exception e) {
 			model.addAttribute("error", e);
-			model.addAttribute("error");
 			return "error";
 		}
 		return detailsOfPlot(user, plot, model);

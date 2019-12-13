@@ -19,29 +19,24 @@
 </head>
 <nav th:include="navigation :: navigation"></nav>
 <div class="header-title">
-    <h1>Parzellenbearbeitung</h1>
+    <h1>Parzelle hinzufügen</h1>
 </div>
 <div>
-    <form method="post" th:action="@{/}">
+    <form method="post" th:action="@{/addPlot}">
         <table  id="myTable">
 
             <tbody>
             <tr>
-                <td> <label for="size">ID</label> </td>
-                <td><input class="text_bgImage" id="size" name="size" th:value="${plot.getId(}" type="number" required="required"/></td>
+                <td> <label for="size">Name</label> </td>
+                <td><input class="text_bgImage" id="name" name="name" type="number" min="1" required="required"/></td>
             </tr>
             <tr>
                 <td> <label for="size">Größe</label> </td>
-                <td><input class="text_bgImage" id="size" name="size" th:value="${plot.getSize()}" type="number" required="required"/></td>
+                <td><input class="text_bgImage" id="size" name="size" type="number" min="1" required="required"/></td>
             </tr>
             <tr>
                 <td> <label for="description">Beschreibung</label> </td>
-                <td><input class="text_bgImage" id="description" name="description" th:value="${plot.getDescription()}" type="text" required="required"/></td>
-            </tr>
-            <tr>
-                <td> <label for="number">Schätzwert</label> </td>
-                <td><input class="text_bgImage" id="number" name="number" th:value="${plot.getEstimator()}" type="number" required="required"/></td>
-                <input type="hidden" id="plotID" name="plotID" th:value="${plot.getId()}">
+                <td><input class="text_bgImage" id="description" name="description" type="text" required="required"/></td>
             </tr>
             </tbody>
         </table>
