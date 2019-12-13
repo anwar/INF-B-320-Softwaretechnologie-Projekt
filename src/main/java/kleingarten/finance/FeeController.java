@@ -50,8 +50,9 @@ public class FeeController {
 				.body(new InputStreamResource(bis));
 	}
 
-	@GetMapping("bill") //{plot}
+	@GetMapping("bill/{plot}")
 	public String viewBill(Model model, @PathVariable Plot plot){
+		//By checking main-/subTenant create a bill.
 		model.addAttribute("plot", procedureManager.getPlotService().findById(plot.getId())); // need to figure out plotId to continue creating a bill?
 
 		Procedure mainProcedure = procedureManager.getActualProcedure(plot); // need to initialize mainProcedure
