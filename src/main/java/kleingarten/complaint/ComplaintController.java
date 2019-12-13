@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -69,8 +70,12 @@ public class ComplaintController {
 
 	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
 	@GetMapping("/complaints")
-	String complains(@LoggedIn UserAccount user, Model model) {
-		Tenant tenant = tenantManager.getTenantByUserAccount(user);
+	String complains(@LoggedIn Optional<UserAccount> user, Model model) {
+		if (user.isEmpty()) {
+			return "redirect:/login";
+		}
+
+		Tenant tenant = tenantManager.getTenantByUserAccount(user.get());
 
 		Streamable<Complaint> complaints = null;
 		if (tenant.hasRole("Vorstandsvorsitzender")) {
@@ -108,13 +113,17 @@ public class ComplaintController {
 
 	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
 	@PostMapping("/save-complaint/{plot_id}")
-	String saveComplaint(@LoggedIn UserAccount user,
+	String saveComplaint(@LoggedIn Optional<UserAccount> user,
 						 @PathVariable("plot_id") String plotId,
 						 @RequestParam("subject") String subject,
 						 @RequestParam("description") String description) {
 
+		if (user.isEmpty()) {
+			return "redirect:/login";
+		}
+
 		Plot plot = plotService.findById(plotId);
-		Tenant complainant = tenantManager.getTenantByUserAccount(user);
+		Tenant complainant = tenantManager.getTenantByUserAccount(user.get());
 
 		complaintManager.save(new Complaint(plot, complainant, subject, description, ComplaintState.PENDING));
 		return "redirect:/complaints";
