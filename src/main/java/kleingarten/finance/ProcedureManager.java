@@ -149,7 +149,7 @@ public class ProcedureManager {
 
 	public Procedure getOldProcedure(int year, ProductIdentifier plotId){
 		for (Procedure oldProcedure: procedures.findByPlotProductIdentifier(plotId)){
-			if(oldProcedure.getYear() == year-1)
+			if(oldProcedure.getYear() == year)
 				return oldProcedure;
 		}
 		return null;

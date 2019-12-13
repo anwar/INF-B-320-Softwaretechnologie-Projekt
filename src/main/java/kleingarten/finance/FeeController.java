@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
@@ -35,7 +36,6 @@ public class FeeController {
 		//I dicide to pass plotid and year instead, we could make two functions: currentBillAndFinalizeProcedure(plotId) and bill(plotId, year)
 		//both can get the main and old Procedure from procedureManager, so you can simply work with those procedures in the body right now.
 
-
 		Bill billToShow = new Bill(mainProcedure, oldProcedure);
 
 		ByteArrayInputStream bis = GeneratePDFBill.bill( billToShow.feeList ); //you may add a getter for feelist
@@ -50,8 +50,18 @@ public class FeeController {
 				.body(new InputStreamResource(bis));
 	}
 
-	@GetMapping("bill")
-	public String viewBill(){
+	@GetMapping("bill") //{plot}
+	public String viewBill(Model model, @PathVariable Plot plot){
+		model.addAttribute("plot", procedureManager.getPlotService().findById(plot.getId())); // need to figure out plotId to continue creating a bill?
+
+		Procedure mainProcedure = procedureManager.getActualProcedure(plot); // need to initialize mainProcedure
+
+		mainProcedure = procedureManager.getProcedure(mainProcedure.getYear(), procedureManager.getPlotService().findById(plot.getId())); // getProcedure of mainProcedure
+
+		Procedure oldProcedure = procedureManager.getProcedure(mainProcedure.getYear()-1, procedureManager.getPlotService().findById(plot.getId())); // getProcedure of oldProcedure
+
+		//bill(mainProcedure, oldProcedure);
+
 		return "finance/bill";
 	}
 }
