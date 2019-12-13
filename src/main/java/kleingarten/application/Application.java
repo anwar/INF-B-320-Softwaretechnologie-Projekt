@@ -30,7 +30,7 @@ public class Application {
 	}
 	
 	public void accept() {
-		if(state == ApplicationState.NEW || state == ApplicationState.DENIED) {
+		if(state == ApplicationState.NEW) {
 			state = ApplicationState.ACCEPTED;
 		}
 	}

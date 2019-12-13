@@ -30,4 +30,7 @@ public interface PlotCatalog extends Catalog<Plot> {
 	 * @return plots as {@link Set} of {@link Plot}, never {@literal null}
 	 */
 	Set<Plot> findByChairman(Tenant chairman);
+	
+	Plot findByProductIdentifierId(String id);
+	
 }
