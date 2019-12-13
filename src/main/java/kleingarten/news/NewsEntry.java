@@ -25,9 +25,11 @@ import java.time.LocalDateTime;
 // A news entry is an entity in the Domain Driven Design context. Mapped onto the database using JPA annotations.
 @Entity
 public class NewsEntry {
+	@Id
+	@GeneratedValue
+	private Long id;
 	private String text;
 	private LocalDateTime date;
-	private @Id @GeneratedValue Long id;
 
 	/**
 	 * Creates a new {@link NewsEntry} for the given text.
@@ -56,6 +58,7 @@ public class NewsEntry {
 	}
 
 	public void setDate(LocalDateTime date) {
+		Assert.notNull(date, "date must not be null!");
 		this.date = date;
 	}
 
@@ -64,6 +67,7 @@ public class NewsEntry {
 	}
 
 	public void setText(String text) {
+		Assert.hasText(text, "Text must not be null or empty!");
 		this.text = text;
 	}
 }

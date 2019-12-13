@@ -29,7 +29,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDateTime;
 
 /**
- * A controller to handle web requests to manage {@link NewsEntry}s
+ * A controller to handle web requests to manage {@link NewsEntry}s.
  */
 @Controller
 class NewsController {
