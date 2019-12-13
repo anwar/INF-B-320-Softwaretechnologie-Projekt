@@ -87,7 +87,9 @@ public class DataService {
 		Set<Plot> rentedPlots = new HashSet<>();
 		Set<Procedure> procedures = procedureManager.getAll(tenant.getId()).toSet();
 		for (Procedure procedure : procedures) {
-			rentedPlots.add(plotService.findById(procedure.getPlotId()));
+			if (procedure.isOpen()) {
+				rentedPlots.add(plotService.findById(procedure.getPlotId()));
+			}
 		}
 		return rentedPlots;
 	}
