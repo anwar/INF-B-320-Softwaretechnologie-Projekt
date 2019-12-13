@@ -55,6 +55,14 @@ public class Tenant {
 	}
 
 	/**
+	 * Getter for full name of a {@link Tenant}
+	 * @return full name as String
+	 */
+	public String getFullName() {
+		return forename + " " + surname;
+	}
+
+	/**
 	 * Getter for the phone number of a {@link Tenant}
 	 * @return phonenumber as String
 	 */
