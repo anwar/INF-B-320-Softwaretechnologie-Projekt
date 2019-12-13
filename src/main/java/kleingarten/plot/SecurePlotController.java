@@ -8,6 +8,7 @@ import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -173,8 +175,9 @@ public class SecurePlotController {
 
 		try {
 			//Set colors for plots and chairmen
-			Map<Plot, String> administratedPlots = plotControllerService.secureSetColorOfChairmenForPlots();
 			Map<Tenant, String> colorsForChairmen = plotControllerService.secureSetColorForChairman();
+			Map<Plot, String> administratedPlots = plotControllerService
+					.secureSetColorOfChairmenForPlots(colorsForChairmen);
 
 			//Set same access rights to the details of the plots for user as in plot overview
 			for (Plot plot :
@@ -194,6 +197,8 @@ public class SecurePlotController {
 			mav.addObject("plotColors", administratedPlots);
 			mav.addObject("colors", colors);
 			mav.addObject("userRights", rights);
+			mav.addObject("chairmenList", plotControllerService.getAllChairmen());
+			mav.addObject("modify", true);
 			mav.setViewName("plot/plotOverview");
 		} catch (Exception e) {
 			mav.addObject("error", e);
@@ -204,12 +209,48 @@ public class SecurePlotController {
 	}
 
 	/**
+	 * Show and modify the {@link Plot}s administrated by a given {@link Tenant} with the {@link Role} "Obmann"
+	 * @param user {@link UserAccount} of the logged in user
+	 * @param tenantID id of the {@link Tenant} with the {@link Role} "Obmann"
+	 * @param model {@link Model} to save the needed information for the view
+	 * @return URL of the view as {@link String}
+	 */
+	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')")
+	@PostMapping("/addchairman")
+	public String addChairman(@LoggedIn UserAccount user, String tenantID, Model model) {
+		Map<String, Object> modelMap = chairmenOverview(user).getModelMap();
+		for (String attribute:
+			 modelMap.keySet()) {
+			model.addAttribute(attribute, modelMap.get(attribute));
+		}
+		model.addAttribute("administratedPlots", plotService.getPlotsFor(tenantManager.get(Long.parseLong(tenantID))));
+		model.addAttribute("updateChairmanForm", new UpdateChairmanForm());
+		model.addAttribute("tenant", Long.parseLong(tenantID));
+		model.addAttribute("canAddChairman", true);
+		return "plot/plotOverview";
+	}
+
+	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')")
+	@PostMapping("/chairmenOverview")
+	public String saveChairman(@LoggedIn UserAccount user, UpdateChairmanForm form,  long tenantID,
+							   Model model) {
+		plotControllerService.saveChairmanForPlots(tenantManager.get(tenantID), form.getUpdatedPlots());
+		Map<String, Object> modelMap = chairmenOverview(user).getModelMap();
+		for (String attribute:
+				modelMap.keySet()) {
+			model.addAttribute(attribute, modelMap.get(attribute));
+		}
+		return "plot/plotOverview";
+	}
+
+	/**
 	 * Set the {@link PlotStatus} of a {@link Plot} to FREE
 	 * @param user {@link UserAccount} of the logged in user
 	 * @param plot {@link Plot} which status should be changed
 	 * @param model {@link Model} to save the needed information for the view
 	 * @return URL of the view as {@link String}
 	 */
+	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')")
 	@GetMapping("/cancelPlot/{plot}")
 	public String cancelPlot(@LoggedIn UserAccount user, @PathVariable Plot plot, Model model) {
 		try {
@@ -219,6 +260,40 @@ public class SecurePlotController {
 		} catch (Exception e) {
 			model.addAttribute("error", e);
 			return "/error";
+		}
+		return "redirect:/anlage";
+	}
+
+	/**
+	 * Get the registration form for a new {@link Plot}
+	 * @param user {@link UserAccount} of the logged in user
+	 * @return URL of the view as {@link String}
+	 */
+	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')")
+	@GetMapping("/plotRegistration")
+	public String showPlotRegistrationForm(@LoggedIn UserAccount user) {
+		return "plot/addPlot";
+	}
+
+	/**
+	 * Save given data of a new {@link Plot} to the {@link PlotCatalog}
+	 * @param user {@link UserAccount} of the logged in user
+	 * @param model {@link Model} to save the needed information
+	 * @param name name of the {@link Plot} as {@link String}
+	 * @param size size of the {@link Plot} as int
+	 * @param description description of the {@link Plot} as {@link String}
+	 * @return name of view as {@link String}
+	 */
+	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')")
+	@PostMapping("/addPlot")
+	public String addNewPlot(@LoggedIn UserAccount user, Model model, @RequestParam("name") String name,
+							 @RequestParam("size") String size, @RequestParam("description") String description) {
+		try {
+			plotService.addNewPlot(name, Integer.parseInt(size), description);
+			Map<String, Object> modelMap = plotOverview(user).getModelMap();
+		} catch (Exception e) {
+			model.addAttribute("error", e);
+			return "error";
 		}
 		return "redirect:/anlage";
 	}
@@ -244,7 +319,6 @@ public class SecurePlotController {
 			plotCatalog.save(plotService.findById(plotId));
 		} catch (Exception e) {
 			model.addAttribute("error", e);
-			model.addAttribute("error");
 			return "error";
 		}
 		return detailsOfPlot(user, plot, model);

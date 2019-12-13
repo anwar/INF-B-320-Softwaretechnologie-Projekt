@@ -54,11 +54,13 @@
 <br><br>
 
 
-<div class="header-title"><h2>Wasserstand</h2></div>
 <div th:if="${procedureExists}">
+
+
 
 <!-- Wasserstand, ROLES: Wassermann -->
 	<div  sec:authorize="hasAnyRole('Wassermann', 'Vorstandsvorsitzender')">
+		<div class="header-title"><h2>Wasserstand</h2></div>
 		<form method="post" th:action="@{/procedureDetails/editWatercount}">
 		<table  id="waterTable">
 
@@ -81,9 +83,10 @@
 		</div></form>
 	</div>
 	<br><br>
-	<div class="header-title"><h2>Stromstand</h2></div>
+
 
 <!-- Stromstand, ROLES: Teanant, Vorstandsvorsitzender -->
+	<div class="header-title"><h2>Stromstand</h2></div>
 	<div  sec:authorize="hasAnyRole('Vorstandsvorsitzender','Hauptpächter')" th:if="${tenantOrBoss}">
 		<form method="post" th:action="@{/procedureDetails/editPowercount}">
 		<table  id="powerTable">

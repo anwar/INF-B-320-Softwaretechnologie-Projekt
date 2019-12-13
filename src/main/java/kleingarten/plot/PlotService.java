@@ -1,10 +1,11 @@
 package kleingarten.plot;
 
+import kleingarten.tenant.Tenant;
 import org.salespointframework.catalog.ProductIdentifier;
+import org.salespointframework.useraccount.Role;
 import org.springframework.stereotype.Component;
 
-import kleingarten.finance.Procedure;
-import kleingarten.finance.ProcedureManager;
+import java.util.Set;
 
 @Component
 public class PlotService {
@@ -53,4 +54,15 @@ public class PlotService {
 		return plotCatalog.findById(plotId).get();
 	}
 
+	/**
+	 * Get the {@link Plot}s which are administrated by the given {@link Tenant}
+	 * @param chairman {@link Tenant} with {@link Role} "Obmann" who administrates {@link Plot}s
+	 * @return administrated {@link Plot}s as {@link Set}
+	 */
+	public Set<Plot> getPlotsFor(Tenant chairman) {
+		if (!chairman.getUserAccount().hasRole(Role.of("Obmann"))) {
+			throw new IllegalArgumentException("Tenant must have role 'Obmann'");
+		}
+		return plotCatalog.findByChairman(chairman);
+	}
 }
