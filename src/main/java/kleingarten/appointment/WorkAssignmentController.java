@@ -43,10 +43,8 @@ public class WorkAssignmentController {
 	public String addAppointment(@Valid CreateWorkAssignmentForm form) {
 		if (!workAssignmentManager.containsListTheDate(form.getDateTime())) {
 			workAssignmentManager.createAssignment(form);
-			System.out.println("true");
 			return "redirect:/createAssignment";
 		}
-		System.out.println("false");
 		return "redirect:/createAssignment";
 	}
 
@@ -86,6 +84,7 @@ public class WorkAssignmentController {
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String removePlot(@RequestParam("plotID") ProductIdentifier plotID, @RequestParam("assignmentID") Long assignmentID){
 		workAssignmentManager.removePlotOutWorkAssignment(plotID, assignmentID);
+		System.out.println("debug after function in Controller");
 		return "redirect:/listOfAssignments";
 	}
 

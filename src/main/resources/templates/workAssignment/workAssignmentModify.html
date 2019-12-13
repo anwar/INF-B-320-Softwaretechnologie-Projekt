@@ -35,7 +35,7 @@
                 <tr th:each="plot: ${plotListForWorkAssignment}">
                     <td th:text="${plot.description}">Plot</td>
                     <form method="post" th:action="@{/removePlotOfWorkAssignment}">
-                        <td hidden><input hidden id="plotID" name="plotID" th:value="${(plot.getId())}" required="required"/></td>
+                        <td hidden><input hidden id="plotID" name="plotID" th:value="${plot.getId()}" required="required"/></td>
                         <td hidden><input class="text_bgImage" id="assignmentID" name="assignmentID" th:value="${(workAssignment.getId())}"  type="number" required="required"/></td>
                         <td><button style="font-size:13px; height: 35px; width: 120px" type="submit" class="ui button">Löschen</button></td>
                     </form>
