@@ -49,6 +49,10 @@ public class ComplaintManager {
 		return complaints.findById(id).get();
 	}
 
+	public void save(Complaint complaint) {
+		complaints.save(complaint);
+	}
+
 	public Streamable<Complaint> getPending() {
 		return complaints.findAll().filter(c -> c.getState().equals(ComplaintState.PENDING));
 	}

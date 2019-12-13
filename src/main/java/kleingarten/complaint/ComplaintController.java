@@ -15,11 +15,24 @@
  */
 package kleingarten.complaint;
 
+import kleingarten.finance.Procedure;
+import kleingarten.plot.DataService;
+import kleingarten.plot.Plot;
+import kleingarten.plot.PlotService;
+import kleingarten.tenant.Tenant;
+import kleingarten.tenant.TenantManager;
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Set;
 
 /**
  * A controller to handle web requests to manage {@link Complaint}s.
@@ -27,13 +40,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ComplaintController {
 	private ComplaintManager complaintManager;
+	private TenantManager tenantManager;
+	private PlotService plotService;
+	private DataService plotDataService;
 
 	/**
 	 * @param complaintManager must not be {@literal null}
+	 * @param tenantManager    must not be {@literal null}
+	 * @param plotService      must not be {@literal null}
+	 * @param plotDataService  must not be {@literal null}
 	 */
-	ComplaintController(ComplaintManager complaintManager) {
+	ComplaintController(ComplaintManager complaintManager,
+						TenantManager tenantManager,
+						PlotService plotService,
+						DataService plotDataService) {
+
 		Assert.notNull(complaintManager, "complaintManager must not be null!");
+		Assert.notNull(tenantManager, "tenantManager must not be null!");
+		Assert.notNull(plotService, "plotService must not be null!");
+		Assert.notNull(plotDataService, "plotDataService must not be null!");
+
 		this.complaintManager = complaintManager;
+		this.tenantManager = tenantManager;
+		this.plotService = plotService;
+		this.plotDataService = plotDataService;
 	}
 
 	@PreAuthorize("hasRole('Hauptpächter')")
@@ -43,10 +73,38 @@ public class ComplaintController {
 		return "complaint/complaints";
 	}
 
-	@PreAuthorize("hasRole('Hauptpächter')")
-	@GetMapping("/addComplaint/{plot}")
-	String addComplaint(Model model) {
-		model.addAttribute("complaints", complaintManager.getAll());
+	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
+	@GetMapping("/add-complaint/{plot_id}")
+	String showComplaintCreationForm(@PathVariable("plot_id") String plotId, Model model) {
+		Plot plot = plotService.findById(plotId);
+		Procedure plotProcedure = plotDataService.getProcedure(plot);
+		StringBuilder plotTenants = new StringBuilder().
+				append(plotDataService.findTenantById(plotProcedure.getMainTenant()).getFullName());
+
+		Set<Long> subTenantIds = plotDataService.getProcedure(plot).getSubTenants();
+		if (!subTenantIds.isEmpty()) {
+			for (Long id : subTenantIds) {
+				String name = plotDataService.findTenantById(id).getFullName();
+				plotTenants.append(", ").append(name);
+			}
+		}
+
+		model.addAttribute("plotId", plot.getId().toString());
+		model.addAttribute("plotTenants", plotTenants.toString());
 		return "complaint/addComplaint";
+	}
+
+	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
+	@PostMapping("/save-complaint/{plot_id}")
+	String saveComplaint(@LoggedIn UserAccount user,
+						 @PathVariable("plot_id") String plotId,
+						 @RequestParam("subject") String subject,
+						 @RequestParam("description") String description) {
+
+		Plot plot = plotService.findById(plotId);
+		Tenant complainant = tenantManager.getTenantByUserAccount(user);
+
+		complaintManager.save(new Complaint(plot, complainant, subject, description, ComplaintState.PENDING));
+		return "redirect:/complaints";
 	}
 }

@@ -17,35 +17,39 @@
     <title>Beschwerde schreiben</title>
 </head>
 <body>
-</head>
 <nav th:include="navigation :: navigation"></nav>
 <div class="header-title">
     <h1>Beschwerde schreiben</h1>
 </div>
-<form method="post" role="form" id="form" th:action="@{/}" th:object="${form}">
+<form method="post" role="form" id="form" th:action="@{/save-complaint/{plot_id}(plot_id=${plotId})}">
     <table>
         <tr>
             <th>
                 <label for="name">Name des Angeklagten</label>
             </th>
             <td>
-                <input class="text_bgImage" id="name" th:field="*{name}" type="text" required="required" />
+                <input class="text_bgImage" id="name" name="name" th:value="${plotTenants}" required="required"/>
             </td>
         </tr>
         <tr>
             <th>
-                <label for="complain">Grund der Beschwerde</label>
+                <label for="subject">Grund der Beschwerde</label>
             </th>
-
-            <td> <input class="text_bgImage" id="complain" th:field="*{complain}" type="text" required="required" />
+            <td>
+                <input class="text_bgImage" id="subject" name="subject" type="text" required="required"/>
             </td>
         </tr>
-
-
-
+        <tr>
+            <th>
+                <label for="description">Beschreibung</label>
+            </th>
+            <td>
+                <textarea id="description" name="description" cols="45" rows="8" required="required"></textarea>
+            </td>
+        </tr>
     </table>
     <div class="button-section">
-        <button type="submit" class="button" >Beschwerde abschicken</button></div>
+        <button type="submit" class="button">Beschwerde abschicken</button>
     </div>
 </form>
 

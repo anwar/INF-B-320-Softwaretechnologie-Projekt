@@ -37,7 +37,7 @@
                             <a th:if="not ${rented}" th:href="${'/createApplication/'} + ${plot.getPlotId()}" >Bewerben</a>
                             <a th:if="not ${rented} and ${canSeeApplications}"  th:href="${'/showApplications/'} + ${plot.getPlotId()}">Bewerbungen anzeigen</a>
                             <a th:if="${rented}" sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')" th:href="'/cancelPlot/' + ${plot.getPlotId()}">Parzelle freigeben</a>
-                            <a th:if="${rented}" th:href="'/addComplaint/' + ${plot.getPlotId()}">Beschwerde schreiben</a>
+                            <a th:if="${rented}" th:href="'/add-complaint/' + ${plot.getPlotId().toString()}">Beschwerde schreiben</a>
                             <a th:if="${rented} and ${rents}" th:href="'/listForPlotAssignments/' + ${plot.getPlotId()}">Termine anzeigen</a>
                         </div>
     </div></center>
