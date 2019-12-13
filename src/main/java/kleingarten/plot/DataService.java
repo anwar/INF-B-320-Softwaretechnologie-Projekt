@@ -4,7 +4,6 @@ import kleingarten.finance.Procedure;
 import kleingarten.finance.ProcedureManager;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantRepository;
-import org.salespointframework.useraccount.Role;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -20,21 +19,6 @@ public class DataService {
 		this.tenantRepository = tenantRepository;
 		this.procedureManager = procedureManager;
 		this.plotService = plotService;
-	}
-
-	/**
-	 * Compare if object of type {@link Tenant} is identical to an {@link Tenant} in the {@link TenantRepository}
-	 * @param tenantId id as {@literal long} of the {@link Tenant}
-	 * @return true, if there is a matching {@link Tenant}
-	 */
-	public boolean compareTenants(long tenantId) {
-		for (Tenant user:
-			tenantRepository.findAll()) {
-			if (user.getId() == tenantId) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	/**

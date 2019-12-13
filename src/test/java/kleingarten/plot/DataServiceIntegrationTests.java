@@ -87,7 +87,7 @@ public class DataServiceIntegrationTests {
 	}
 
 	/**
-	 * Test if there are saved {@link Procedure} for a specific year for the saved {@link Plot}s
+	 * Test if there are saved {@link Procedure}s for the saved {@link Plot}s
 	 */
 	@Test
 	public void procedureExistsTest() {
@@ -96,10 +96,30 @@ public class DataServiceIntegrationTests {
 	}
 
 	/**
-	 * Test if method for getting all rented {@link Plot}s for a specific {@link Tenant} and year works correctly
+	 * Negative test for checking if there is saved a {@link Procedure} for a {@link Plot}
+	 */
+	@Test
+	public void procedureExistsNotTest() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			dataService.procedureExists(new Plot("80", 30, "test"));
+		});
+	}
+
+	/**
+	 * Test if method for getting all rented {@link Plot}s for a specific {@link Tenant} works correctly
 	 */
 	@Test
 	public void getRentedPlotsTest() {
 		assertThat(dataService.getRentedPlots(tenant)).isEqualTo(Set.of(firstPlot, secondPlot));
+	}
+
+	/**
+	 * Negative test for finding a {@link Tenant} by a provided id of type long
+	 */
+	@Test
+	public void illegalTenantTest() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			dataService.findTenantById(300);
+		});
 	}
 }
