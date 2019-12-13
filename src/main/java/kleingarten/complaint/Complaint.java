@@ -1,86 +1,100 @@
+/*
+ * Copyright 2019 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package kleingarten.complaint;
 
-
-// WIP we still have to do this, but if someone got time, they can start working on this
+import kleingarten.plot.Plot;
+import kleingarten.tenant.Tenant;
+import org.springframework.util.Assert;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
- * Class to specify {@link Complaint}
+ * Class to specify a {@link Complaint}.
  */
-
 @Entity
 public class Complaint {
 
-
-	public long authorId;
-	public long subjectId;
-	public ComplaintState state;
-	public String description;
-	private @Id
+	@Id
 	@GeneratedValue
-	long id;
-
+	private long id;
+	@OneToOne
+	private Plot plot;
+	@OneToOne
+	private Tenant complainant;
+	private String subject;
+	private String description;
+	private ComplaintState state;
+	@OneToOne
+	private Tenant assignedObmann;
 
 	/**
-	 * Private constructor of class {@link Complaint}, which is used by the Spring Framework
+	 * Creates a new {@link Complaint}.
+	 *
+	 * @param plot           against which the complaint is created
+	 * @param complainant    that made the complaint
+	 * @param subject        for the complaint
+	 * @param description    for the complaint
+	 * @param state          of the complaint
 	 */
-	private Complaint() {
-	}
+	public Complaint(Plot plot, Tenant complainant,
+					 String subject, String description,
+					 ComplaintState state) {
+		Assert.notNull(plot, "plot must not be null!");
+		Assert.notNull(complainant, "tenant must not be null!");
+		Assert.hasText(subject, "subject must not be null or empty!");
+		Assert.hasText(description, "description must not be null or empty!");
+		Assert.notNull(state, "state must not be null!");
 
-	/**
-	 * @param state
-	 */
-
-	public Complaint(long authorId, long subjectId, ComplaintState state, String description) {
-		this.authorId = authorId;
-		this.subjectId = subjectId;
-		this.state = state;
+		this.plot = plot;
+		this.complainant = complainant;
+		this.subject = subject;
 		this.description = description;
+		this.state = state;
+		// At the time of creation, the Obmann that is responsible for the plot in question is assigned.
+		this.assignedObmann = plot.getChairman();
+		System.out.println(this.assignedObmann);
 	}
 
-
-	public long getAuthor() {
-		return authorId;
+	@SuppressWarnings("unused")
+	private Complaint() {
+		this.plot = null;
+		this.complainant = null;
+		this.subject = null;
+		this.description = null;
+		this.state = null;
 	}
 
-	public void setAuthor(Long authorId) {
-		if (authorId == Long.valueOf(0)) {
-			throw new IllegalArgumentException("Complain must have an author!");
-		} else
-			this.authorId = authorId;
+	public Plot getPlot() {
+		return plot;
 	}
 
-	public long getSubject() {
-		return subjectId;
+	public Tenant getComplainant() {
+		return complainant;
 	}
 
-	public void setSubject(Long subjectId) {
-		if (subjectId == Long.valueOf(0)) {
-			throw new IllegalArgumentException("Complain must have a subject!");
-		} else
-			this.subjectId = subjectId;
+	public String getSubject() {
+		return subject;
 	}
 
-	public ComplaintState getState() {
-		return state;
-	}
-
-	public void setState(ComplaintState state) {
-		if (state == null) {
-			throw new IllegalArgumentException("Complain must have a state");
-		} else
-			this.state = state;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
+	public void setSubject(String subject) {
+		Assert.hasText(subject, "subject must not be null!");
+		this.subject = subject;
 	}
 
 	public String getDescription() {
@@ -88,9 +102,24 @@ public class Complaint {
 	}
 
 	public void setDescription(String description) {
-		if (description == null) {
-			throw new IllegalArgumentException("Complains must have a description");
-		}
+		Assert.hasText(description, "description must not be null!");
 		this.description = description;
+	}
+
+	public ComplaintState getState() {
+		return state;
+	}
+
+	public void setState(ComplaintState state) {
+		this.state = state;
+	}
+
+	public Tenant getAssignedObmann() {
+		return assignedObmann;
+	}
+
+	public void setAssignedObmann(Tenant assignedObmann) {
+		Assert.notNull(assignedObmann, "assignedObmann must not be null!");
+		this.assignedObmann = assignedObmann;
 	}
 }

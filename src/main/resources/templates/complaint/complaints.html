@@ -23,6 +23,36 @@
 <div class="header-title">
     <h1>Beschwerden</h1>
 </div>
+
+<center>
+    <form method="post">
+        <table id="complaints-table">
+            <thead>
+            <tr>
+                <th>gegen</th>
+                <th>von</th>
+                <th>Titel</th>
+                <th>Beschreibung</th>
+                <th>Status</th>
+                <th>zugeordneter Obmann</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="c : ${complaints}">
+                <td>
+                    <a th:text="'Plot ' + ${c.plot.getName()}" th:href="'/plot/' + ${c.plot.getId().toString()}">gegen</a>
+                </td>
+                <td th:text="${c.complainant.getFullName()}">von</td>
+                <td th:text="${c.subject}">Titel</td>
+                <td th:text="${c.description}">Beschreibung</td>
+                <td th:text="${c.state}">Status</td>
+                <td th:text="${c.assignedObmann.getFullName()}">zugeordneter Obmann</td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</center>
+
 <div th:include="navigation :: footer"></div>
 </body>
 </html>
