@@ -22,6 +22,12 @@ public class WorkAssignmentManager {
 	private WorkAssignmentRepository workAssignmentRepository;
 	private PlotService plotService;
 
+	/**
+	 * Constructor of class {@link WorkAssignment}
+	 * @param workAssignmentRepository is a list of {@link Plot} as ArrayList {@link ArrayList}
+	 * @param plotService date of the {@link WorkAssignment} as LocalDateTime {@link LocalDateTime}
+	 */
+
 	public WorkAssignmentManager(WorkAssignmentRepository workAssignmentRepository, PlotService plotService){
 		this.workAssignmentRepository = workAssignmentRepository;
 		this.plotService = plotService;
