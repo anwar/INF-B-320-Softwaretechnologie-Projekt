@@ -16,64 +16,23 @@ import java.util.List;
 
 @Controller
 public class FeeController {
-	private FeeManager feeManager;
-	private FeeRepository feeRepository;
+
 	private ProcedureManager procedureManger;
-	private ProcedureRepository procedureRepository;
 
 	@Autowired
-	private FeeServiceI feeServiceI;
-
-	@Autowired
-	public FeeController(FeeManager feeManager, FeeRepository feeRepository, ProcedureManager procedureManager, ProcedureRepository procedureRepository) {
-		this.feeManager = feeManager;
-		this.feeRepository = feeRepository;
+	public FeeController(ProcedureManager procedureManager) {
 		this.procedureManger = procedureManager;
-		this.procedureRepository = procedureRepository;
-	}
-
-	@GetMapping("fees")
-	public String feeList(Model model) {
-		model.addAttribute("feeList", feeManager.findAll());
-		return "finance/fees";
-	}
-
-	@PostMapping("fees/add")
-	public String addFee(FeeForm form) {
-		feeManager.create(form);
-		return "redirect:/fees";
-	}
-
-	@GetMapping("fees/add")
-	public String feeForm(Model model, FeeForm form) {
-		model.addAttribute("feeForm", form);
-		return "finance/addFee";
-	}
-
-	@GetMapping("fees/{id}/delete")
-	public String deleteFee(@PathVariable(value = "id") Long id) {
-		feeManager.delete(id);
-		return "redirect:/fees";
-	}
-
-	@GetMapping("fees/{id}/edit")
-	public String editFee(Model model, @PathVariable long id) {
-		model.addAttribute("fee", feeManager.findById(id).get());
-		return "finance/editFee";
-	}
-
-	@PostMapping("fees/{id}/edit")
-	public String saveFee(Model model, Fee fee) {
-		feeManager.save(fee);
-		return "redirect:/fees";
 	}
 
 	@GetMapping(value = "/PDF", produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> bill() {
-
-		var fees = (List<Fee>) feeServiceI.findAll();
-
-		ByteArrayInputStream bis = GeneratePDFBill.bill(fees);
+	public ResponseEntity<InputStreamResource> bill(Procedure mainProcedure, Procedure oldProcedure) { //oldProcedure can be null
+		//I dicide to pass plotid and year instead, we could make two functions: currentBillAndFinalizeProcedure(plotId) and bill(plotId, year)
+		//both can get the main and old Procedure from procedureManager, so you can simply work with those procedures in the body right now.
+		
+		
+		Bill billToShow = new Bill(mainProcedure, oldProcedure);
+		
+		ByteArrayInputStream bis = GeneratePDFBill.bill( billToShow.feeList ); //you may add a getter for feelist
 
 		var headers = new HttpHeaders();
 		headers.add("Content-Disposition", "inline; filename=Rechnungen.pdf");
