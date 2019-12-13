@@ -23,6 +23,7 @@ import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.springframework.data.util.Streamable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,10 +67,21 @@ public class ComplaintController {
 		this.plotDataService = plotDataService;
 	}
 
-	@PreAuthorize("hasRole('Hauptpächter')")
+	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
 	@GetMapping("/complaints")
-	String complains(Model model) {
-		model.addAttribute("complaints", complaintManager.getAll());
+	String complains(@LoggedIn UserAccount user, Model model) {
+		Tenant tenant = tenantManager.getTenantByUserAccount(user);
+
+		Streamable<Complaint> complaints = null;
+		if (tenant.hasRole("Vorstandsvorsitzender")) {
+			complaints = complaintManager.getAll();
+		} else if (tenant.hasRole("Obmann")) {
+			complaints = complaintManager.getForAssignedObmann(tenant);
+		} else {
+			complaints = complaintManager.getForComplainant(tenant);
+		}
+
+		model.addAttribute("complaints", complaints);
 		return "complaint/complaints";
 	}
 

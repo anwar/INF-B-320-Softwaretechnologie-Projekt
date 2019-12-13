@@ -15,6 +15,8 @@
  */
 package kleingarten.complaint;
 
+import kleingarten.tenant.Tenant;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Repository;
@@ -30,4 +32,22 @@ public interface ComplaintRepository extends CrudRepository<Complaint, Long> {
 	 */
 	@Override
 	Streamable<Complaint> findAll();
+
+	/**
+	 * Returns all {@link Complaint}s created by a {@link Tenant} and sorted by the given sort criteria.
+	 *
+	 * @param complainant who authored the {@link Complaint}s
+	 * @param sort        the given sorting criteria
+	 * @return all {@link Complaint}s matching the query
+	 */
+	Streamable<Complaint> findByComplainant(Tenant complainant, Sort sort);
+
+	/**
+	 * Returns all {@link Complaint}s that are assigned to an Obmann.
+	 *
+	 * @param assignedObmann who the {@link Complaint}s are assigned to
+	 * @param sort           the given sorting criteria
+	 * @return all {@link Complaint}s matching the query
+	 */
+	Streamable<Complaint> findByAssignedObmann(Tenant assignedObmann, Sort sort);
 }

@@ -46,11 +46,11 @@ public class Complaint {
 	/**
 	 * Creates a new {@link Complaint}.
 	 *
-	 * @param plot           against which the complaint is created
-	 * @param complainant    that made the complaint
-	 * @param subject        for the complaint
-	 * @param description    for the complaint
-	 * @param state          of the complaint
+	 * @param plot        against which the complaint is created
+	 * @param complainant that made the complaint
+	 * @param subject     for the complaint
+	 * @param description for the complaint
+	 * @param state       of the complaint
 	 */
 	public Complaint(Plot plot, Tenant complainant,
 					 String subject, String description,
@@ -68,7 +68,6 @@ public class Complaint {
 		this.state = state;
 		// At the time of creation, the Obmann that is responsible for the plot in question is assigned.
 		this.assignedObmann = plot.getChairman();
-		System.out.println(this.assignedObmann);
 	}
 
 	@SuppressWarnings("unused")

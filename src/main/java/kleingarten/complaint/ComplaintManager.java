@@ -18,6 +18,7 @@ package kleingarten.complaint;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -59,6 +60,14 @@ public class ComplaintManager {
 
 	public Streamable<Complaint> getFinished() {
 		return complaints.findAll().filter(c -> c.getState().equals(ComplaintState.FINISHED));
+	}
+
+	public Streamable<Complaint> getForComplainant(Tenant complainant) {
+		return complaints.findByComplainant(complainant, Sort.by("id"));
+	}
+
+	public Streamable<Complaint> getForAssignedObmann(Tenant assignedObmann) {
+		return complaints.findByAssignedObmann(assignedObmann, Sort.by("id"));
 	}
 
 	public String getComplainantName(Complaint complaint) {
