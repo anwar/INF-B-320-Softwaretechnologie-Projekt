@@ -13,6 +13,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -50,18 +51,16 @@ public class FeeController {
 				.body(new InputStreamResource(bis));
 	}
 
+	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
 	@GetMapping("bill/{plot}")
-	public String viewBill(Model model, @PathVariable Plot plot){
-		//By checking main-/subTenant create a bill.
+	public String viewBill(Model model, @PathVariable Plot plot, @LoggedIn UserAccount userAccount){
+
 		model.addAttribute("plot", procedureManager.getPlotService().findById(plot.getId())); // need to figure out plotId to continue creating a bill?
 
-		Procedure mainProcedure = procedureManager.getActualProcedure(plot); // need to initialize mainProcedure
-
+		Procedure mainProcedure = procedureManager.getCurrentBillAndFinalizeProcedure(plot); // need to initialize mainProcedure
 		mainProcedure = procedureManager.getProcedure(mainProcedure.getYear(), procedureManager.getPlotService().findById(plot.getId())); // getProcedure of mainProcedure
-
 		Procedure oldProcedure = procedureManager.getProcedure(mainProcedure.getYear()-1, procedureManager.getPlotService().findById(plot.getId())); // getProcedure of oldProcedure
-
-		//bill(mainProcedure, oldProcedure);
+		//new Bill(mainProcedure, oldProcedure);
 
 		return "finance/bill";
 	}

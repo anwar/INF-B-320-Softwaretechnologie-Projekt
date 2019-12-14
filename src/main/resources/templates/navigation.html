@@ -45,7 +45,7 @@
                 <li><a href="" th:href="@{/addWorkHours}">Arbeitsstunden hinzufügen</a></li>
 
             </ul>
-        <li><a href="finance/bill.html" th:href="@{/bill}" sec:authorize="isAuthenticated()">Rechnungen</a></li>
+       <!-- <li><a href="finance/bill.html" th:href="@{/bill}" sec:authorize="isAuthenticated()">Rechnungen</a></li>-->
         <li><a href="complains/complains.html" th:href="@{/complains}" sec:authorize="isAuthenticated()">Beschwerden</a></li>
         <li><a href="tenant/tenants.html" th:href="@{/tenants}" sec:authorize="hasAnyRole('Vorstandsvorsitzender')"> Mitglieder</a></li>
 

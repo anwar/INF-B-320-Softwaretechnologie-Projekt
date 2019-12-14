@@ -132,25 +132,14 @@ public class ProcedureManager {
 		return tenantManager;
 	}
 
-
 	/**
-	 * They will provide all information for creating a bill.
-	 * @param year
-	 * @param plotId
+	 * Before Creating a bill, Need to check whether the procedure is still isOpen() or not
+	 * @param plot
 	 * @return
 	 */
-	public Procedure getMainProcedure(int year, ProductIdentifier plotId) {
-		for(Procedure mainProcedure: procedures.findByPlotProductIdentifier(plotId)) {
-			if(mainProcedure.getYear() == year)
-				return mainProcedure;
-		}
-		return null;
-	}
-
-	public Procedure getOldProcedure(int year, ProductIdentifier plotId){
-		for (Procedure oldProcedure: procedures.findByPlotProductIdentifier(plotId)){
-			if(oldProcedure.getYear() == year)
-				return oldProcedure;
+	public Procedure getCurrentBillAndFinalizeProcedure(Plot plot){
+		for(Procedure procedure :procedures.findByPlot(plot)) {
+			if(procedure.isOpen() == false) return procedure;
 		}
 		return null;
 	}
