@@ -96,21 +96,10 @@ public class ComplaintController {
 	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
 	@GetMapping("/add-complaint/{plot_id}")
 	String showComplaintCreationForm(@PathVariable("plot_id") String plotId, Model model) {
-		Plot plot = plotService.findById(plotId);
-		Procedure plotProcedure = plotDataService.getProcedure(plot);
-		StringBuilder plotTenants = new StringBuilder().
-				append(plotDataService.findTenantById(plotProcedure.getMainTenant()).getFullName());
+		String plotTenants = getPlotTenantNames(plotService.findById(plotId));
 
-		Set<Long> subTenantIds = plotDataService.getProcedure(plot).getSubTenants();
-		if (!subTenantIds.isEmpty()) {
-			for (Long id : subTenantIds) {
-				String name = plotDataService.findTenantById(id).getFullName();
-				plotTenants.append(", ").append(name);
-			}
-		}
-
-		model.addAttribute("plotId", plot.getId().toString());
-		model.addAttribute("plotTenants", plotTenants.toString());
+		model.addAttribute("plotId", plotId);
+		model.addAttribute("plotTenants", plotTenants);
 		return "complaint/addComplaint";
 	}
 
@@ -137,5 +126,21 @@ public class ComplaintController {
 	String deleteComplaint(@PathVariable("id") long id) {
 		complaintManager.delete(id);
 		return "redirect:/complaints";
+	}
+
+	private String getPlotTenantNames(Plot plot) {
+		Procedure plotProcedure = plotDataService.getProcedure(plot);
+		StringBuilder plotTenants = new StringBuilder().
+				append(plotDataService.findTenantById(plotProcedure.getMainTenant()).getFullName());
+
+		Set<Long> subTenantIds = plotDataService.getProcedure(plot).getSubTenants();
+		if (!subTenantIds.isEmpty()) {
+			for (Long id : subTenantIds) {
+				String name = plotDataService.findTenantById(id).getFullName();
+				plotTenants.append(", ").append(name);
+			}
+		}
+
+		return plotTenants.toString();
 	}
 }
