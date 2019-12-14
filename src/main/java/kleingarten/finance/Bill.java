@@ -45,6 +45,6 @@ public class Bill {
 		feeList.add(rent);
 		Fee penalty = new Fee("Strafgeld", Math.round((double)(240-mainProcedure.getWorkMinutes())/60), 8);
 		feeList.add(penalty);
-
 	}
+
 }

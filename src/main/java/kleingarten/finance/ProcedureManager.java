@@ -133,7 +133,8 @@ public class ProcedureManager {
 	}
 
 	/**
-	 * Before Creating a bill, Need to check whether the procedure is still isOpen() or not
+	 * Before Creating a bill, Need to check whether the procedure is still isOpen() or not.
+	 * If the isOpen == false, then bill will be created.
 	 * @param plot
 	 * @return
 	 */

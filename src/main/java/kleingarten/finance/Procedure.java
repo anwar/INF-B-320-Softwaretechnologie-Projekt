@@ -249,4 +249,5 @@ public class Procedure {
 	public String toString() {
 		return "Procedure Plot: " + plot.getName() + " Tenant: " + mainTenant + " isOpen? " + isOpen();
 	}
+
 }

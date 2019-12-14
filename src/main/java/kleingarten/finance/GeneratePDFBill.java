@@ -41,7 +41,7 @@ public class GeneratePDFBill {
 			table.setWidthPercentage(75);
 			table.setWidths(new int[]{4, 4, 4, 4});
 
-			Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+			Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 13, BaseColor.BLACK);
 
 			PdfPCell hcell;
 			hcell = new PdfPCell(new Phrase("Titel", headFont));
