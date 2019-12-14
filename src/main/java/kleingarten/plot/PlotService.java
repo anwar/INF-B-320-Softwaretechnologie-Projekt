@@ -52,6 +52,18 @@ public class PlotService {
 			throw new IllegalArgumentException("Plot does not exist!");
 		}
 		return plotCatalog.findById(plotId).get();
+	}	
+	
+	/**
+	 * Get the {@link Plot} object for a given Id of a {@link Plot} as {@link ProductIdentifier}
+	 * @param plotId the id of the {@link Plot} as {@link ProductIdentifier}
+	 * @return associated {@link Plot}
+	 */
+	public Plot findById(String plotId) {
+//		if (!plotCatalog.existsById(plotId)) {
+//			throw new IllegalArgumentException("Plot does not exist!");
+//		}
+		return plotCatalog.findByProductIdentifierId(plotId);
 	}
 
 	/**

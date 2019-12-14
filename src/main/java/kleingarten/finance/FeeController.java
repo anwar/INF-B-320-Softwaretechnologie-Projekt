@@ -2,78 +2,44 @@ package kleingarten.finance;
 
 
 
+import kleingarten.plot.Plot;
+import kleingarten.tenant.Tenant;
+import org.salespointframework.core.SalespointIdentifier;
+import org.salespointframework.useraccount.Role;
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
 
 @Controller
 public class FeeController {
-	private FeeManager feeManager;
-	private FeeRepository feeRepository;
-	private ProcedureManager procedureManger;
-	private ProcedureRepository procedureRepository;
+
+	private ProcedureManager procedureManager;
 
 	@Autowired
-	private FeeServiceI feeServiceI;
-
-	@Autowired
-	public FeeController(FeeManager feeManager, FeeRepository feeRepository, ProcedureManager procedureManager, ProcedureRepository procedureRepository) {
-		this.feeManager = feeManager;
-		this.feeRepository = feeRepository;
-		this.procedureManger = procedureManager;
-		this.procedureRepository = procedureRepository;
-	}
-
-	@GetMapping("fees")
-	public String feeList(Model model) {
-		model.addAttribute("feeList", feeManager.findAll());
-		return "finance/fees";
-	}
-
-	@PostMapping("fees/add")
-	public String addFee(FeeForm form) {
-		feeManager.create(form);
-		return "redirect:/fees";
-	}
-
-	@GetMapping("fees/add")
-	public String feeForm(Model model, FeeForm form) {
-		model.addAttribute("feeForm", form);
-		return "finance/addFee";
-	}
-
-	@GetMapping("fees/{id}/delete")
-	public String deleteFee(@PathVariable(value = "id") Long id) {
-		feeManager.delete(id);
-		return "redirect:/fees";
-	}
-
-	@GetMapping("fees/{id}/edit")
-	public String editFee(Model model, @PathVariable long id) {
-		model.addAttribute("fee", feeManager.findById(id).get());
-		return "finance/editFee";
-	}
-
-	@PostMapping("fees/{id}/edit")
-	public String saveFee(Model model, Fee fee) {
-		feeManager.save(fee);
-		return "redirect:/fees";
+	public FeeController(ProcedureManager procedureManager) {
+		this.procedureManager = procedureManager;
 	}
 
 	@GetMapping(value = "/PDF", produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> bill() {
+	public ResponseEntity<InputStreamResource> bill(Procedure mainProcedure, Procedure oldProcedure) { //oldProcedure can be null
+		//I dicide to pass plotid and year instead, we could make two functions: currentBillAndFinalizeProcedure(plotId) and bill(plotId, year)
+		//both can get the main and old Procedure from procedureManager, so you can simply work with those procedures in the body right now.
 
-		var fees = (List<Fee>) feeServiceI.findAll();
+		Bill billToShow = new Bill(mainProcedure, oldProcedure);
 
-		ByteArrayInputStream bis = GeneratePDFBill.bill(fees);
+		ByteArrayInputStream bis = GeneratePDFBill.bill( billToShow.feeList ); //you may add a getter for feelist
 
 		var headers = new HttpHeaders();
 		headers.add("Content-Disposition", "inline; filename=Rechnungen.pdf");
@@ -85,8 +51,17 @@ public class FeeController {
 				.body(new InputStreamResource(bis));
 	}
 
-	@GetMapping("bill")
-	public String viewBill(){
+	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
+	@GetMapping("bill/{plot}")
+	public String viewBill(Model model, @PathVariable Plot plot, @LoggedIn UserAccount userAccount){
+
+		model.addAttribute("plot", procedureManager.getPlotService().findById(plot.getId())); // need to figure out plotId to continue creating a bill?
+
+		Procedure mainProcedure = procedureManager.getCurrentBillAndFinalizeProcedure(plot); // need to initialize mainProcedure
+		mainProcedure = procedureManager.getProcedure(mainProcedure.getYear(), procedureManager.getPlotService().findById(plot.getId())); // getProcedure of mainProcedure
+		Procedure oldProcedure = procedureManager.getProcedure(mainProcedure.getYear()-1, procedureManager.getPlotService().findById(plot.getId())); // getProcedure of oldProcedure
+		//new Bill(mainProcedure, oldProcedure);
+
 		return "finance/bill";
 	}
 }

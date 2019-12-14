@@ -33,7 +33,7 @@
                         <button onclick="myFunction()" class="dropbtn">&#9660; Optionen</button>
                         <div id="myDropdown" class="dropdown-content">
                             <a th:if="${canModify}" th:href="'/editPlot/' + ${plot.getPlotId()}">Parzelle bearbeiten</a>
-                            <a th:if="${canSeeBills}">Rechnungen Anzeigen</a>
+                            <a th:if="${canSeeBills}" th:href="'/bill/' + ${plot.getPlotId()}" >Rechnungen Anzeigen</a>
                             <a th:if="not ${rented}" th:href="${'/createApplication/'} + ${plot.getPlotId()}" >Bewerben</a>
                             <a th:if="not ${rented} and ${canSeeApplications}"  th:href="${'/showApplications/'} + ${plot.getPlotId()}">Bewerbungen anzeigen</a>
                             <a th:if="${rented}" sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')" th:href="'/cancelPlot/' + ${plot.getPlotId()}">Parzelle freigeben</a>

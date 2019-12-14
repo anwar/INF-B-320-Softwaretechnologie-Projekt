@@ -1,12 +1,10 @@
 package kleingarten.finance;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import kleingarten.plot.PlotService;
 import kleingarten.plot.PlotStatus;
+import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 
 import org.salespointframework.catalog.ProductIdentifier;
@@ -70,12 +68,12 @@ public class ProcedureManager {
 
 		return null;
 	}
-	
+
 	public Procedure getActualProcedure(Plot plot) {
 		for(Procedure proc:procedures.findByPlot(plot)) {
 			if(proc.isOpen()) return proc;
 		}
-		
+
 		return null;
 	}
 
@@ -125,16 +123,24 @@ public class ProcedureManager {
 	public Procedure get(Long id){
 		return procedures.findById(id).orElse(null);
 	}
-	
+
 	public PlotService getPlotService() {
 		return plotService;
 	}
-	
+
 	public TenantManager getTenantManager() {
 		return tenantManager;
 	}
 
-
-
-
+	/**
+	 * Before Creating a bill, Need to check whether the procedure is still isOpen() or not
+	 * @param plot
+	 * @return
+	 */
+	public Procedure getCurrentBillAndFinalizeProcedure(Plot plot){
+		for(Procedure procedure :procedures.findByPlot(plot)) {
+			if(procedure.isOpen() == false) return procedure;
+		}
+		return null;
+	}
 }

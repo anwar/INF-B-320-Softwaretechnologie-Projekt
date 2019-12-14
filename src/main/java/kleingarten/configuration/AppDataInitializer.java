@@ -15,17 +15,9 @@
  */
 package kleingarten.configuration;
 
-import kleingarten.appointment.WorkAssignmentManager;
-import kleingarten.appointment.WorkAssignmentRepository;
-import kleingarten.finance.*;
-import kleingarten.news.NewsEntry;
-import kleingarten.news.NewsRepository;
-import kleingarten.plot.Plot;
-import kleingarten.plot.PlotCatalog;
-import kleingarten.plot.PlotService;
-import kleingarten.tenant.Tenant;
-import kleingarten.tenant.TenantManager;
-import kleingarten.tenant.TenantRepository;
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.Role;
@@ -35,15 +27,26 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import kleingarten.appointment.WorkAssignmentManager;
+import kleingarten.appointment.WorkAssignmentRepository;
+import kleingarten.finance.Procedure;
+import kleingarten.finance.ProcedureManager;
+import kleingarten.news.NewsEntry;
+import kleingarten.news.NewsRepository;
+import kleingarten.plot.Plot;
+import kleingarten.plot.PlotCatalog;
+import kleingarten.plot.PlotService;
+import kleingarten.tenant.Tenant;
+import kleingarten.tenant.TenantManager;
+import kleingarten.tenant.TenantRepository;
 
 /**
  * A {@link DataInitializer} implementation that will create dummy data for the application
  * on application startup.
  */
+
 @Component
-class AppDataInitializer implements DataInitializer {
+public class AppDataInitializer implements DataInitializer {
 	private static final Logger LOG = LoggerFactory.getLogger(AppDataInitializer.class);
 
 	private final NewsRepository news;
@@ -53,16 +56,13 @@ class AppDataInitializer implements DataInitializer {
 	private final UserAccountManager userAccountManager;
 	private final PlotService plotService;
 	private final PlotCatalog plotCatalog;
-	private final FeeRepository feeRepository;
-	private final FeeManager feeManager;
 	private final ProcedureManager procedureManager;
 	private final TenantManager tenantManager;
 
 	AppDataInitializer(NewsRepository news,
 					   WorkAssignmentRepository workAssignmentRepo, WorkAssignmentManager workAssignmentManager,
 					   TenantRepository tenantRepository, UserAccountManager userAccountManager,
-					   PlotService plotService, PlotCatalog plotCatalog,
-					   FeeRepository feeRepository, FeeManager feeManager, ProcedureManager procedureManager,
+					   PlotService plotService, PlotCatalog plotCatalog, ProcedureManager procedureManager,
 					   TenantManager tenantManager) {
 		Assert.notNull(news, "news must not be null!");
 		this.news = news;
@@ -83,10 +83,6 @@ class AppDataInitializer implements DataInitializer {
 		Assert.notNull(plotCatalog, "plotCatalog must not be null!");
 		this.plotCatalog = plotCatalog;
 
-		Assert.notNull(feeRepository, "feeRepository must not be null!");
-		this.feeRepository = feeRepository;
-		Assert.notNull(feeManager, "feeManager must not be null!");
-		this.feeManager = feeManager;
 		Assert.notNull(procedureManager, "procedureManager must not be null!");
 		this.procedureManager = procedureManager;
 	}
@@ -96,8 +92,7 @@ class AppDataInitializer implements DataInitializer {
 		initializeNewsEntries(this.news);
 		initializeWorkAssigment(this.workAssignmentRepo);
 		initializeTenants(this.tenantRepository, this.userAccountManager);
-		initializePlots(this.plotCatalog, this.plotService);
-		initializeFee(this.feeRepository, this.feeManager);
+		initializePlots(this.plotCatalog, this.plotService, this.tenantRepository);
 		initializeProcedures(this.procedureManager);
 		LOG.info("fertig");
 	}
@@ -127,8 +122,8 @@ class AppDataInitializer implements DataInitializer {
 			return;
 		}
 		LOG.info("create default Assignments");
-		var Appointment = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 1,1, 1, 0),0, "Neujahrsputz", "Garten von Böllerresten und Müll befreien", null);
-		var Appointment2 = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 4, 25,  16, 0), 0, "In K(l)einanlage Müll aufsammeln", "Müll aufheben", null);
+		var Appointment = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 1, 1, 1, 0), 0, "Neujahrsputz", "Garten von Böllerresten und Müll befreien", null);
+		var Appointment2 = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 4, 25, 16, 0), 0, "In K(l)einanlage Müll aufsammeln", "Müll aufheben", null);
 		this.workAssignmentRepo.saveAll(List.of(Appointment));
 
 	}
@@ -151,31 +146,31 @@ class AppDataInitializer implements DataInitializer {
 		var stellvertreterRole = Role.of("Stellvertreter");
 		var obmannRole = Role.of("Obmann");
 		var financeRole = Role.of("Kassierer");
-		var maintenantRole = Role.of("Hauptpächter");
-		var subtenantRole = Role.of("Nebenpächter");
+		var mainTenantRole = Role.of("Hauptpächter");
+		var subTenantRole = Role.of("Nebenpächter");
 		var waterRole = Role.of("Wassermann");
 
 		Tenant boss = new Tenant("Peter", "Klaus", "Am Berg 5, 12423 Irgendwo im Nirgendwo",
 				"01242354356", "13.04.1999",
-				userAccountManager.create("peter.klaus", password, "peter.klaus@email.com", maintenantRole));
+				userAccountManager.create("peter.klaus", password, "peter.klaus@email.com", mainTenantRole));
 
 
 		Tenant obmann = new Tenant("Hubert", "Grumpel", "Hinter den 7 Bergen, 98766 Zwergenhausen",
 				"012345678", "04.09.1978",
-				userAccountManager.create("hubertgrumpel", password, "hubert.grumpel2@cloud.com", maintenantRole));
+				userAccountManager.create("hubertgrumpel", password, "hubert.grumpel2@cloud.com", mainTenantRole));
 
 		Tenant cashier = new Tenant("Bill", "Richart", "Am Bahnhof 25, 07875 Dorfdorf",
-				"0123098874326", "13.05.1968", userAccountManager.create("bill", password, "billy,billbill@geld.com", subtenantRole));
+				"0123098874326", "13.05.1968", userAccountManager.create("bill", password, "billy,billbill@geld.com", subTenantRole));
 
 		Tenant replacement = new Tenant("Sophie", "Kirmse", "Am Teichplatz 5, 67807 Meldetsichnie",
 				"034567892132", "08.12.1988",
-				userAccountManager.create("sophie", password, "s.krimse@gemaile.com", subtenantRole));
+				userAccountManager.create("sophie", password, "s.krimse@gemaile.com", subTenantRole));
 
 		Tenant protocol = new Tenant("Franziska", "Kiel", "Bei Isa",
-				"0896548786890", "19.08.1998", userAccountManager.create("franziska", password, "francys@email.com", maintenantRole));
+				"0896548786890", "19.08.1998", userAccountManager.create("franziska", password, "francys@email.com", mainTenantRole));
 
 		Tenant waterman = new Tenant("Atlas", "Neptunius", "An der Promenade 34, 01298 Atlantis",
-				"0980790789", "08.09.1567", userAccountManager.create("neptun", password, "neptuns.bart@fishmail.com", maintenantRole));
+				"0980790789", "08.09.1567", userAccountManager.create("neptun", password, "neptuns.bart@fishmail.com", mainTenantRole));
 
 		obmann.addRole(obmannRole);
 		boss.addRole(vorstandRole);
@@ -191,50 +186,47 @@ class AppDataInitializer implements DataInitializer {
 
 	}
 
-	public void initializePlots(PlotCatalog plotCatalog, PlotService plotService) {
+	public void initializePlots(PlotCatalog plotCatalog, PlotService plotService, TenantRepository tenants) {
 		if (this.plotService.existsByName("1")) {
 			return;
 		}
 
+		Tenant obmann = null;
+		for (Tenant t : tenants.findAll()) {
+			if (t.hasRole("Vorstandsvorsitzender")) {
+				obmann = t;
+				break;
+			}
+		}
+
 		LOG.info("Creating default plots");
-		Plot Plot = plotService.addNewPlot("1", 300, "Kleine Parzelle mit angelegtem Teich.");
-		LOG.info(Plot.getId().toString());
-		Plot Plot_2 = plotService.addNewPlot("2", 500, "Sehr große Parzelle.");
-		LOG.info(Plot_2.getId().toString());
-		Plot Plot_3 = plotService.addNewPlot("3", 120, "Kleine Parzelle.");
-		LOG.info(Plot_3.getId().toString());
-		Plot Plot_4 = plotService.addNewPlot("4", 1500, "Sehr, sehr große Parzelle.");
-		LOG.info(Plot_4.getId().toString());
-		Plot Plot_5 = plotService.addNewPlot("5", 350, "Parzelle mit angelegtem Teich.");
-		LOG.info(Plot_5.getId().toString());
-		Plot Plot_6 = plotService.addNewPlot("6", 200, "Große Parzelle.");
-		LOG.info(Plot_6.getId().toString());
-		plotCatalog.saveAll(List.of(Plot, Plot_2, Plot_3, Plot_4, Plot_5, Plot_6));
+		Plot plot = plotService.addNewPlot("1", 300, "Kleine Parzelle mit angelegtem Teich.");
+		plot.setChairman(obmann);
+		LOG.info(plot.getId().toString());
+
+		Plot plot_2 = plotService.addNewPlot("2", 500, "Sehr große Parzelle.");
+		plot_2.setChairman(obmann);
+		LOG.info(plot_2.getId().toString());
+
+		Plot plot_3 = plotService.addNewPlot("3", 120, "Kleine Parzelle.");
+		plot_3.setChairman(obmann);
+		LOG.info(plot_3.getId().toString());
+
+		Plot plot_4 = plotService.addNewPlot("4", 1500, "Sehr, sehr große Parzelle.");
+		plot_4.setChairman(obmann);
+		LOG.info(plot_4.getId().toString());
+
+		Plot plot_5 = plotService.addNewPlot("5", 350, "Parzelle mit angelegtem Teich.");
+		plot_5.setChairman(obmann);
+		LOG.info(plot_5.getId().toString());
+
+		Plot plot_6 = plotService.addNewPlot("6", 200, "Große Parzelle.");
+		plot_6.setChairman(obmann);
+		LOG.info(plot_6.getId().toString());
+
+		plotCatalog.saveAll(List.of(plot, plot_2, plot_3, plot_4, plot_5, plot_6));
 
 		LOG.info("fast fertig");
-	}
-
-	public void initializeFee(FeeRepository feeRepository, FeeManager feeManager) {
-		Assert.notNull(feeManager, "feeManager must not be null!");
-		LOG.info("Creating default fee lists");
-		if (feeManager.findAll().iterator().hasNext()) {
-			return;
-		}
-		feeManager.save(new Fee("Wasserkosten", 1, 1.95));
-		feeManager.save(new Fee("Stromkosten", 1, 0.2));
-		feeManager.save(new Fee("Miete", 1, 0.18));
-		feeManager.save(new Fee("Strafgeld", 1, 8));
-		feeManager.save(new Fee("Mitgliedsbeitrag", 1, 17.25));
-		feeManager.save(new Fee("Haftpflichtbeitrag", 1, 0.35));
-		feeManager.save(new Fee("Winterdienst", 1, 3));
-		feeManager.save(new Fee("Sozialbeitrag", 1, 0.5));
-		feeManager.save(new Fee("Rechtsschutz", 1, 0.75));
-		feeManager.save(new Fee("Aufwandspauschale", 1, 12));
-		feeManager.save(new Fee("Sonstige Auslagen", 1, 1));
-		feeManager.save(new Fee("Grundmiete für Wasseruhr", 1, 2.6));
-		feeManager.save(new Fee("Grundmiete für Stromzähler", 1, 1.55));
-
-		LOG.info("Finished creating default fee lists");
 	}
 
 	public void initializeProcedures(ProcedureManager procedureManager) {
