@@ -35,17 +35,6 @@ public class TenantServiceTest {
 	@BeforeEach
 	void SetUp(){
 
-//		tenant = new Tenant("Jassi", "Gepackert", "Neben Isa und Francy",
-//				"908964875734", "13.05.1999", userAccountManager.create("jassi", Password.UnencryptedPassword.of("123"),"jassis@email.com", Role.of("Hauptpächter")));
-//		tenant.setId(Long.valueOf(1000));
-//		tenantRepository.saveAll(List.of(tenant));
-//		System.out.println(tenant);
-//		System.out.println(tenantRepository.findAll().toList().get(0).getEmail());
-//		System.out.println(tenant.getId());
-//		System.out.println(tenantRepository.existsById(tenant.getId()));
-//		System.out.println(tenantRepository.existsById(Long.valueOf(1000)));
-//		System.out.println(tenantManager.get(Long.valueOf(1000)));
-//		System.out.println(tenant.getId());
 	}
 
 	@Test

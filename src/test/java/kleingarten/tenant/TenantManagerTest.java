@@ -28,17 +28,14 @@ public class TenantManagerTest {
 		this.tenantRepository = tenantRepository;
 	}
 
-
-	@Test
-	void changeRoles() {
-	}
-
 	@Test
 	void getTenantByUserAccount() {
+		assertThat(tenantManager.getTenantByUserAccount(userAccountManager.findByUsername("peter.klaus").get()).getForename().equals("Peter"));
 	}
 
 	@Test
 	void tenantHasRole() {
+		assertTrue(tenantManager.get(Long.valueOf(10)).hasRole("Hauptpächter"));
 	}
 
 	@Test
@@ -59,10 +56,10 @@ public class TenantManagerTest {
 		Role testRole = Role.of("Pupskönig");
 		tenantManager.findByRole(testRole);
 		assertTrue(tenantManager.findByRole(testRole).isEmpty());
-		System.out.println(tenantManager.findByRole(Role.of("Hauptpächter")));
-		System.out.println(tenantManager.findByRole(Role.of("Hauptpächter")).size());
-		//assertThat(tenantManager.findByRole(Role.of("Hauptpächter")).size() == 4);
-		//assertTrue(tenantManager.findByRole(Role.of("Vorstandsvorsitzender")).size() == 0);
-		//assertTrue(tenantManager.findByRole(Role.of("Vorstandsvorsitzender")).size() == 1);
+	}
+
+	@Test
+	void createNewPerson() {
+		assertThat(tenantRepository.existsById(tenantManager.getTenantByUserAccount(userAccountManager.findByUsername("fred.feuerstain@steinmail.com").get()).getId()));
 	}
 }

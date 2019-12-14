@@ -245,4 +245,15 @@ public class TenantTest {
 		tenant.removeRole(Role.of("Hauptpächter"));
 		assertThat(tenant.getRoles().equals(""));
 	}
+
+	@Test
+	void deleteRoles() {
+		tenant.deleteRoles();
+		assertThat(tenant.getRoles().equals(""));
+	}
+
+	@Test
+	void hasRole() {
+		assertTrue(tenant.hasRole("Hauptpächter"));
+	}
 }
