@@ -80,10 +80,10 @@ public class TenantManager {
 	}
 
 	/**
-	 * Method to determine whether or not a tenant has a specific role
-	 * @param tenant to test if its has the role
+	 * Method to determine whether or not a {@link Tenant} has a specific {@link Role}
+	 * @param tenant to test if {@link Tenant} has the {@link Role}
 	 * @param role to test
-	 * @return boolean true if role is found, boolean false if not
+	 * @return boolean true if {@link Role} is found, boolean false if not
 	 */
 	public boolean tenantHasRole(Tenant tenant, Role role){
 		return tenant.getUserAccount().hasRole(role);
@@ -91,7 +91,7 @@ public class TenantManager {
 
 	/**
 	 * Method to find enabled userAccounts of tenants
-	 * @return Streamable of class {@link Tenant} of all tenants with enabled userAccounts
+	 * @return Streamable of class {@link Tenant} of all {@link Tenant}s with enabled {@link UserAccount}s
 	 */
 	public Streamable<Tenant> findEnabled(){
 		return tenants.findAll().filter(c -> c.getUserAccount().isEnabled());
@@ -99,17 +99,18 @@ public class TenantManager {
 
 	/**
 	 * Method to find disabled userAccounts of tenants
-	 * @return Streamable of class {@link Tenant} of all tenants with disabled userAccounts
+	 * @return Streamable of class {@link Tenant} of all {@link Tenant}s with disabled {@link UserAccount}s
 	 */
 	public  Streamable<Tenant> findDisabled(){
 		return  tenants.findAll().filter(c -> !c.getUserAccount().isEnabled());
 	}
 
 	/**
-	 * @param forename
-	 * @param surname
-	 * @param email
-	 * @param password
+	 * Method to create a new {@link Tenant} of an accepted {@link kleingarten.application.Application}
+	 * @param forename of the {@link Tenant} as {@link String}
+	 * @param surname of the {@link Tenant} as {@link String}
+	 * @param email of the {@link Tenant} as {@link String}
+	 * @param password of the {@link Tenant} as {@link String}
 	 */
 	public void createNewTenant(String forename, String surname, String email, String password){
 		Tenant tenant = new Tenant(forename, surname, "", "", "", userAccounts.create(email, Password.UnencryptedPassword.of(password), email));
@@ -118,13 +119,13 @@ public class TenantManager {
 	}
 
 	/**
-	 * Method to create a new Person who can become an additional tenant
-	 * @param forename
-	 * @param surname
-	 * @param address
-	 * @param phonenumber
-	 * @param birthdate
-	 * @param email
+	 * Method to create a new Person who can become an additional {@link Tenant}
+	 * @param forename of the {@link Tenant} as {@link String}
+	 * @param surname of the {@link Tenant} as {@link String}
+	 * @param address of the {@link Tenant} as {@link String}
+	 * @param phonenumber of the {@link Tenant} as {@link String}
+	 * @param birthdate of the {@link Tenant} as {@link String}
+	 * @param email of the {@link Tenant} as {@link String}
 	 */
 	public void createNewPerson(String forename, String surname, String address, String phonenumber, String birthdate, String email){
 		Tenant tenant = new Tenant(forename, surname, address, phonenumber, birthdate, userAccounts.create(email, Password.UnencryptedPassword.of(phonenumber), email));
@@ -132,6 +133,11 @@ public class TenantManager {
 	}
 
 
+	/**
+	 * Method to find {@link Tenant}s by their {@link Role}
+	 * @param role to find the {@link Tenant}s by
+	 * @return {@link List} of {@link Tenant}s
+	 */
 	public List<Tenant> findByRole(Role role){
 		return tenants.findAll().filter(t -> t.getUserAccount().hasRole(role)).toList();
 	}

@@ -63,7 +63,7 @@ class TenantController {
 	}
 
 	/**
-	 * view to edit a {@link Tenant}s details
+	 * View to edit a {@link Tenant}s details
 	 * @param id identifier of {@link Tenant} to edit the details
 	 * @param model view for editing a {@link Tenant} as {@link Model}
 	 * @return html for editing a {@link Tenant}
@@ -78,14 +78,15 @@ class TenantController {
 
 	/**
 	 * Getter for the changed details of a {@link Tenant} to save in the {@link Tenant}
-	 * @param id identifier of {@link Tenant}
-	 * @param forename input forename as String
-	 * @param surname input surname as String
-	 * @param phone input phone number as String
-	 * @param email input email as String
-	 * @param address input address as String
-	 * @param birthdate input birth date as String
-	 * @return html of the tenants html with saved new details of {@link Tenant}
+	 * @param id identifier of {@link Tenant} as {@link Long}
+	 * @param forename input forename as {@link String}
+	 * @param surname input surname as {@link String}
+	 * @param phone input phone number as {@link String}
+	 * @param email input email as {@link String}
+	 * @param address input address as {@link String}
+	 * @param birthdate input birth date as {@link String}
+	 * @param roles input role as {@link String}
+	 * @return html of the {@link Tenant}s html with saved new details of {@link Tenant}
 	 */
 	@PostMapping("/modifiedTenant")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
@@ -117,14 +118,25 @@ class TenantController {
 
 		return "redirect:/tenants";
 	}
+
+	/**
+	 * View to change the password of a logged in {@link Tenant}
+	 * @return html to change the password
+	 */
 	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
 	@GetMapping("/changePassword")
-	String changePassword(@LoggedIn UserAccount userAccount, Model model){
-		// model.addAttribute("password", userAccount.getPassword().toString());
-		//model.addAttribute("password", authenticationManager.getCurrentUser().get().getPassword().);
+	String changePassword(){
 		return"/tenant/changePassword";
 	}
 
+	/**
+	 * Getter to save the changed password in {@link Tenant}
+	 * @param userAccount {@link UserAccount} of logged in {@link Tenant} as {@link String}
+	 * @param oldPassword of the {@link Tenant} as {@link String}
+	 * @param newPassword of the {@link Tenant} as {@link String}
+	 * @param repeatedPassword checks if the {@link Tenant} had a typo in their new password
+	 * @return html to change the password
+	 */
 	@PostMapping("/changedPassword")
 	String changedPassword(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldPassword, @RequestParam("new") String newPassword,
 						   @RequestParam("repeat") String repeatedPassword){
@@ -133,12 +145,25 @@ class TenantController {
 		return "redirect:/changePassword";
 	}
 
+	/**
+	 * View to change the email of a logged in {@link Tenant}
+	 * @param userAccount {@link UserAccount} of logged in {@link Tenant}
+	 * @param model to show the email of {@link Tenant}
+	 * @return html to change the email
+	 */
 	@GetMapping("/changeEmail")
 	String changeEmail(@LoggedIn UserAccount userAccount, Model model){
 		model.addAttribute("email", userAccount.getEmail());
 		return"/tenant/changeEmail";
 	}
 
+	/**
+	 * @param userAccount
+	 * @param oldEmail
+	 * @param newEmai
+	 * @param repeatedEmail
+	 * @return
+	 */
 	@PostMapping("/changedEmail")
 	String changedEmail(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldEmail, @RequestParam("new") String newEmai,
 						@RequestParam("repeat") String repeatedEmail){
@@ -146,12 +171,24 @@ class TenantController {
 		return "redirect:/changeEmail";
 	}
 
+	/**
+	 * @return
+	 */
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	@GetMapping("/register")
 	String register(){
 		return "/tenant/register";
 	}
 
+	/**
+	 * @param forename
+	 * @param surname
+	 * @param birthdate
+	 * @param address
+	 * @param email
+	 * @param phone
+	 * @return
+	 */
 	@PostMapping("/registered")
 	String registered(@RequestParam("forename") String forename, @RequestParam("surname") String surname, @RequestParam("birthdate") String birthdate,
 					  @RequestParam("address") String address, @RequestParam("email") String email, @RequestParam("phone") String phone){

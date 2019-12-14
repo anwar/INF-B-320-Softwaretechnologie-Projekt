@@ -45,10 +45,11 @@ public class TenantService {
 	}
 
 	/**
-	 * @param id
-	 * @param oldEmail
-	 * @param newEmail
-	 * @param repeatedEmail
+	 * Method to change the Email of a {@link Tenant}
+	 * @param id of the {@link Tenant}
+	 * @param oldEmail of the {@link Tenant} as {@link String}
+	 * @param newEmail of the {@link Tenant} as {@link String}
+	 * @param repeatedEmail to verify and check if the {@link Tenant} had a typo in their new Email
 	 */
 	void changeEmail(Long id, String oldEmail, String newEmail, String repeatedEmail){
 		if(!oldEmail.equals(tenantManager.get(id).getUserAccount().getEmail())){
@@ -62,6 +63,7 @@ public class TenantService {
 	}
 
 	/**
+	 * Method to make an existing {@link Tenant} a pre tenant
 	 * @param id Id of the {@link Tenant} we want to make a pre {@link Tenant}
 	 */
 	void makePreTenant(Long id){
@@ -71,7 +73,6 @@ public class TenantService {
 		tenantManager.get(id).setAddress("");
 		tenantManager.get(id).setForename("");
 		tenantManager.get(id).setSurname("");
-		//TODO delte roles method on pretenant
 		tenantManager.get(id).deleteRoles();
 	}
 }
