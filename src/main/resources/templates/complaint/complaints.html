@@ -13,6 +13,8 @@
           href="../resources/css/style.css" type="text/css"/>
     <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
           href="../resources/css/tenantTable.css" type="text/css">
+    <script th:src="@{../resources/css/js/dropdown.js}"
+            src="../resources/css/js/dropdown.js"></script>
 
     <meta charset="UTF-8">
 
@@ -32,9 +34,9 @@
             <th>von</th>
             <th>Titel</th>
             <th>Beschreibung</th>
-            <th>Status</th>
+            <th>Zustand</th>
             <th>zugeordneter Obmann</th>
-            <th>Bearbeiten</th>
+            <th sec:authorize="hasRole('Vorstandsvorsitzender') || hasRole('Obmann')">Bearbeiten</th>
             <th sec:authorize="hasRole('Vorstandsvorsitzender')">Löschen</th>
         </tr>
         </thead>
@@ -47,10 +49,11 @@
             <td th:text="${c.complainant.getFullName()}">von</td>
             <td th:text="${c.subject}">Titel</td>
             <td th:text="${c.description}">Beschreibung</td>
-            <td th:text="${c.state}">Status</td>
+            <td th:text="${c.state}">Zustand</td>
             <td th:text="${c.assignedObmann.getFullName()}">zugeordneter Obmann</td>
-            <td>
-                <form method="post" style="display: inline-block" th:action="@{/edit-complaint/{id}(id=${c.id})}">
+            <td sec:authorize="hasRole('Vorstandsvorsitzender') || hasRole('Obmann')">
+                <form th:unless="${c.state} == ${finishedState}" method="post" style="display: inline-block"
+                      th:action="@{/edit-complaint/{id}(id=${c.id})}">
                     <button class="btn btn-sm float-center"
                             style="font-size: 18px; background: transparent; border: none;"
                             th:title="Bearbeiten">&#9998;

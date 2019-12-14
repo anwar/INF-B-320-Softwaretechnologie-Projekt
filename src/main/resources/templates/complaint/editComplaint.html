@@ -19,10 +19,22 @@
 <body>
 <nav th:include="navigation :: navigation"></nav>
 <div class="header-title">
-    <h1>Beschwerde schreiben</h1>
+    <h1>Beschwerde bearbeiten</h1>
 </div>
-<form method="post" role="form" id="form" th:action="@{/save-complaint/{plot_id}(plot_id=${plotId})}">
+<form method="post" role="form" id="form" th:action="@{/update-complaint/{id}(id=${complaint.id})}">
     <table>
+        <tr>
+            <th>
+                <label for="state">Zustand</label>
+            </th>
+            <td id="state" th:text="${complaint.state}">Zustand</td>
+        </tr>
+        <tr>
+            <th>
+                <label for="assigned-obmann">zugeordneter Obmann</label>
+            </th>
+            <td id="assigned-obmann" th:text="${complaint.assignedObmann.getFullName()}">zugeordneter Obmann</td>
+        </tr>
         <tr>
             <th>
                 <label for="plot-tenants-name">Name des Angeklagten</label>
@@ -34,7 +46,8 @@
                 <label for="subject">Grund der Beschwerde</label>
             </th>
             <td>
-                <input class="text_bgImage" id="subject" name="subject" type="text" required="required"/>
+                <input class="text_bgImage" id="subject" name="subject" type="text" th:value="${complaint.subject}"
+                       required="required"/>
             </td>
         </tr>
         <tr>
@@ -42,7 +55,8 @@
                 <label for="description">Beschreibung</label>
             </th>
             <td>
-                <textarea id="description" name="description" cols="45" rows="8" required="required"></textarea>
+                <textarea id="description" name="description" cols="45" rows="8" th:text="${complaint.description}"
+                          th:value="${complaint.description}" required="required"></textarea>
             </td>
         </tr>
     </table>

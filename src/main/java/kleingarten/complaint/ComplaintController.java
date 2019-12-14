@@ -118,6 +118,31 @@ public class ComplaintController {
 		return "redirect:/complaints";
 	}
 
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
+	@PostMapping("/edit-complaint/{id}")
+	String showComplaintUpdateForm(@PathVariable("id") long id, Model model) {
+		Complaint complaint = complaintManager.get(id);
+		String plotTenants = getPlotTenantNames(complaint.getPlot());
+
+		model.addAttribute("complaint", complaintManager.get(id));
+		model.addAttribute("plotTenants", plotTenants);
+		return "complaint/editComplaint";
+	}
+
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
+	@PostMapping("/update-complaint/{id}")
+	String updateComplaint(@PathVariable("id") long id,
+						   @RequestParam("subject") String subject,
+						   @RequestParam("description") String description) {
+
+		Complaint complaint = complaintManager.get(id);
+		complaint.setSubject(subject);
+		complaint.setDescription(description);
+
+		complaintManager.save(complaint);
+		return "redirect:/complaints";
+	}
+
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	@PostMapping("/delete-complaint/{id}")
 	String deleteComplaint(@PathVariable("id") long id) {
