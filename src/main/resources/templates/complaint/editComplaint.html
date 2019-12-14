@@ -64,6 +64,9 @@
         <button type="submit" class="button">Beschwerde abschicken</button>
     </div>
 </form>
+<form method="post" style="display: inline-block" th:action="@{/change-complaint-state/{id}(id=${id})}">
+    <button class="button">Zustand ändern</button>
+</form>
 
 <div th:include="navigation :: footer"></div>
 </body>

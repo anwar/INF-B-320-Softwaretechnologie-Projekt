@@ -143,6 +143,24 @@ public class ComplaintController {
 		return "redirect:/complaints";
 	}
 
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
+	@PostMapping("/change-complaint-state/{id}")
+	String changeState(@PathVariable("id") long id) {
+		Complaint complaint = complaintManager.get(id);
+		ComplaintState currentState = complaint.getState();
+
+		System.out.println("we here");
+
+		if (currentState == ComplaintState.PENDING) {
+			complaint.setState(ComplaintState.FINISHED);
+		} else {
+			complaint.setState(ComplaintState.PENDING);
+		}
+
+		complaintManager.save(complaint);
+		return "redirect:/complaints";
+	}
+
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	@PostMapping("/delete-complaint/{id}")
 	String deleteComplaint(@PathVariable("id") long id) {
