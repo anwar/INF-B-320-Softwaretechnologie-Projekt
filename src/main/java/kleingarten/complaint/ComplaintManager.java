@@ -30,7 +30,6 @@ import java.util.List;
 
 @Service
 public class ComplaintManager {
-
 	private final ComplaintRepository complaints;
 	private final TenantManager tenantManager;
 
@@ -65,14 +64,6 @@ public class ComplaintManager {
 		complaints.save(complaint);
 	}
 
-	public Streamable<Complaint> getPending() {
-		return complaints.findAll().filter(c -> c.getState().equals(ComplaintState.PENDING));
-	}
-
-	public Streamable<Complaint> getFinished() {
-		return complaints.findAll().filter(c -> c.getState().equals(ComplaintState.FINISHED));
-	}
-
 	public Streamable<Complaint> getForComplainant(Tenant complainant) {
 		return complaints.findByComplainant(complainant, Sort.by("id"));
 	}
@@ -104,15 +95,5 @@ public class ComplaintManager {
 		}
 
 		return allComplaints;
-	}
-
-	public String getComplainantName(Complaint complaint) {
-		Tenant tenant = tenantManager.get(complaint.getComplainant().getId());
-		return tenant.getFullName();
-	}
-
-	public String getAssignedObmannName(Complaint complaint) {
-		Tenant tenant = tenantManager.get(complaint.getAssignedObmann().getId());
-		return tenant.getFullName();
 	}
 }
