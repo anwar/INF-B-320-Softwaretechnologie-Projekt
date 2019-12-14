@@ -53,20 +53,6 @@ public class TenantManager {
 	}
 
 	/**
-	 * Method to change the roles of a {@link Tenant}
-	 * @param role old role to be changed
-	 * @param newRole new role to be added, removes role if null
-	 * @param tenant tenant who gets its roles changed
-	 * @return
-	 */
-	public void changeRoles(Role role, Role newRole,Tenant tenant){
-		tenant.getUserAccount().getRoles().stream().filter(c -> c.equals(role)).map(n -> tenant.getUserAccount().remove(n));
-		if(newRole != null) {
-			tenant.getUserAccount().add(newRole);
-		}
-	}
-
-	/**
 	 * Getter to find a tenant by its userAccount
 	 * @param userAccount userAccount of tenant to find
 	 * @return object of class {@link Tenant}

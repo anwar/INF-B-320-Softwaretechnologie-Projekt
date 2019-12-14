@@ -158,11 +158,12 @@ class TenantController {
 	}
 
 	/**
-	 * @param userAccount
-	 * @param oldEmail
-	 * @param newEmai
-	 * @param repeatedEmail
-	 * @return
+	 * Getter to save the new Email of a {@link Tenant}
+	 * @param userAccount {@link UserAccount} of {@link Tenant} to change their email
+	 * @param oldEmail of {@link Tenant} as {@link String}
+	 * @param newEmai of {@link Tenant} as {@link String}
+	 * @param repeatedEmail to check if {@link Tenant} had a typo in their new email
+	 * @return view to change the email
 	 */
 	@PostMapping("/changedEmail")
 	String changedEmail(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldEmail, @RequestParam("new") String newEmai,
@@ -172,7 +173,7 @@ class TenantController {
 	}
 
 	/**
-	 * @return
+	 * @return View to register a new {@link Tenant} as {@link String}
 	 */
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	@GetMapping("/register")
@@ -181,13 +182,14 @@ class TenantController {
 	}
 
 	/**
-	 * @param forename
-	 * @param surname
-	 * @param birthdate
-	 * @param address
-	 * @param email
-	 * @param phone
-	 * @return
+	 * Getter to save the new registered {@link Tenant}
+	 * @param forename of the new {@link Tenant} as {@link String}
+	 * @param surname of the new {@link Tenant} as {@link String}
+	 * @param birthdate of the new {@link Tenant} as {@link String}
+	 * @param address of the new {@link Tenant} as {@link String}
+	 * @param email of the new {@link Tenant} as {@link String}
+	 * @param phone of the new {@link Tenant} as {@link String}
+	 * @return html of the {@link Tenant} overview
 	 */
 	@PostMapping("/registered")
 	String registered(@RequestParam("forename") String forename, @RequestParam("surname") String surname, @RequestParam("birthdate") String birthdate,
