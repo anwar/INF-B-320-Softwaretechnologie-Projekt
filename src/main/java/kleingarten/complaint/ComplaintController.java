@@ -21,6 +21,7 @@ import kleingarten.plot.Plot;
 import kleingarten.plot.PlotService;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
+import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -123,9 +124,11 @@ public class ComplaintController {
 	String showComplaintUpdateForm(@PathVariable("id") long id, Model model) {
 		Complaint complaint = complaintManager.get(id);
 		String plotTenants = getPlotTenantNames(complaint.getPlot());
+		List<Tenant> obmannList = tenantManager.findByRole(Role.of("Obmann"));
 
 		model.addAttribute("complaint", complaintManager.get(id));
 		model.addAttribute("plotTenants", plotTenants);
+		model.addAttribute("obmannList", obmannList);
 		return "complaint/editComplaint";
 	}
 
@@ -149,14 +152,25 @@ public class ComplaintController {
 		Complaint complaint = complaintManager.get(id);
 		ComplaintState currentState = complaint.getState();
 
-		System.out.println("we here");
-
 		if (currentState == ComplaintState.PENDING) {
 			complaint.setState(ComplaintState.FINISHED);
 		} else {
 			complaint.setState(ComplaintState.PENDING);
 		}
 
+		complaintManager.save(complaint);
+		return "redirect:/complaints";
+	}
+
+	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@GetMapping("/change-assigned-obmann/{id}/{obmann_id}")
+	String changeAssignedObmann(@PathVariable("id") long id,
+								@PathVariable("obmann_id") Long obmannId) {
+
+		Complaint complaint = complaintManager.get(id);
+		Tenant newAssignedObmann = plotDataService.findTenantById(obmannId);
+
+		complaint.setAssignedObmann(newAssignedObmann);
 		complaintManager.save(complaint);
 		return "redirect:/complaints";
 	}

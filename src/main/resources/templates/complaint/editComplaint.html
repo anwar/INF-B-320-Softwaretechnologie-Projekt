@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
-          href="../resources/css/tenantTable.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantTable.css}" type="text/css">
+    <link href="../resources/css/dropdown.css" rel="stylesheet"
+          th:href="@{../resources/css/dropdown.css}" type="text/css">
+    <script src="../resources/css/js/dropdown.js"
+            th:src="@{../resources/css/js/dropdown.js}"></script>
+
     <meta charset="UTF-8">
     <title>Beschwerde schreiben</title>
 </head>
@@ -21,7 +26,22 @@
 <div class="header-title">
     <h1>Beschwerde bearbeiten</h1>
 </div>
-<form method="post" role="form" id="form" th:action="@{/update-complaint/{id}(id=${complaint.id})}">
+
+<center>
+    <div class="dropdown">
+        <button class="dropbtn" onclick="myFunction()">&#9660; neuer Obmann zuordnen</button>
+        <div class="dropdown-content" id="myDropdown">
+            <span th:each="obmann : ${obmannList}">
+                <a th:href="'/change-assigned-obmann/' + ${complaint.id} + '/' + ${obmann.id}"
+                   th:text="${obmann.getFullName()}">Obmann</a>
+            </span>
+        </div>
+    </div>
+</center>
+
+<br/>
+
+<form id="form" method="post" role="form" th:action="@{/update-complaint/{id}(id=${complaint.id})}">
     <table>
         <tr>
             <th>
@@ -46,8 +66,9 @@
                 <label for="subject">Grund der Beschwerde</label>
             </th>
             <td>
-                <input class="text_bgImage" id="subject" name="subject" type="text" th:value="${complaint.subject}"
-                       required="required"/>
+                <input class="text_bgImage" id="subject" name="subject" required="required"
+                       th:value="${complaint.subject}"
+                       type="text"/>
             </td>
         </tr>
         <tr>
@@ -55,15 +76,16 @@
                 <label for="description">Beschreibung</label>
             </th>
             <td>
-                <textarea id="description" name="description" cols="45" rows="8" th:text="${complaint.description}"
-                          th:value="${complaint.description}" required="required"></textarea>
+                <textarea cols="45" id="description" name="description" required="required" rows="8"
+                          th:text="${complaint.description}" th:value="${complaint.description}"></textarea>
             </td>
         </tr>
     </table>
     <div class="button-section">
-        <button type="submit" class="button">Beschwerde abschicken</button>
+        <button class="button" type="submit">Beschwerde abschicken</button>
     </div>
 </form>
+
 <form method="post" style="display: inline-block" th:action="@{/change-complaint-state/{id}(id=${id})}">
     <button class="button">Zustand ändern</button>
 </form>
