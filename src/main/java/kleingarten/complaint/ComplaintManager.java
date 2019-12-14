@@ -25,6 +25,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ComplaintManager {
 
@@ -74,8 +77,33 @@ public class ComplaintManager {
 		return complaints.findByComplainant(complainant, Sort.by("id"));
 	}
 
-	public Streamable<Complaint> getForAssignedObmann(Tenant assignedObmann) {
-		return complaints.findByAssignedObmann(assignedObmann, Sort.by("id"));
+	public List<Complaint> getForObmann(Tenant obmann) {
+		List<Complaint> allComplaints = new ArrayList<>();
+
+		// first we get the complaints that are assigned to Obmann
+		Streamable<Complaint> complaintsAssignedToObmann = complaints.findByAssignedObmann(obmann, Sort.by("id"));
+		if (!complaintsAssignedToObmann.isEmpty()) {
+			for (Complaint c : complaintsAssignedToObmann) {
+				allComplaints.add(c);
+			}
+		}
+
+		// then we get all complaints that were made by Obmann
+		Streamable<Complaint> complaintsByObmann = complaints.findByComplainant(obmann, Sort.by("id"));
+		if (!complaintsByObmann.isEmpty()) {
+			outerLoop:
+			for (Complaint c : complaintsByObmann) {
+				// only add it to the list if it doesn't exist already
+				for (Complaint cInList : allComplaints) {
+					if (cInList.getId() == c.getId()) {
+						continue outerLoop; // to next complaint in complaintsByObmann
+					}
+				}
+				allComplaints.add(c);
+			}
+		}
+
+		return allComplaints;
 	}
 
 	public String getComplainantName(Complaint complaint) {
