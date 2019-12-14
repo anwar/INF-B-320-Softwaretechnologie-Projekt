@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @Transactional
@@ -232,8 +233,8 @@ public class TenantTest {
 	 */
 	@Test
 	void addRole() {
-		tenant.addRole(Role.of("Vostandsvorsitzender"));
-		assertThat(tenant.getRoles().equals("Hauptpächchter, Vorstandsvorsitzender"));
+		tenant.addRole(Role.of("Obmann"));
+		assertThat(tenant.getRoles().equals("Hauptpächchter, Obmann"));
 	}
 
 	/**
