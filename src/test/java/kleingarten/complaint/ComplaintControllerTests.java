@@ -22,7 +22,6 @@ import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 import org.junit.jupiter.api.Test;
 import org.salespointframework.useraccount.Role;
-import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -97,8 +96,6 @@ public class ComplaintControllerTests {
 	 */
 	@Test
 	void showComplaintCreationForm() throws Exception {
-		UserAccount user = userAccountManager.findByUsername("neptun").get();
-
 		Tenant tenant = tenantManager.findByRole(Role.of("Hauptpächter")).iterator().next();
 		Plot plot = plotDataService.getRentedPlots(tenant).iterator().next();
 
@@ -127,5 +124,44 @@ public class ComplaintControllerTests {
 				.andExpect(view().name("redirect:/complaints"));
 
 		assertThat(complaintManager.getAll().toList().size()).isEqualTo(noOfComplaints + 1);
+	}
+
+	/**
+	 * Test for the access of the {@link Complaint} editing page.
+	 *
+	 * @throws Exception if wrong
+	 */
+	@Test
+	void showComplaintUpdateForm() throws Exception {
+		Complaint complaint = complaintManager.getAll().iterator().next();
+
+		mvc.perform(post("/edit-complaint/{id}", complaint.getId())
+				.with(user("peter.klaus").roles("Vorstandsvorsitzender")))
+				.andExpect(status().isOk())
+				.andExpect(view().name("complaint/editComplaint"));
+	}
+
+	/**
+	 * Test that a {@link Complaint} is successfully updated.
+	 *
+	 * @throws Exception if wrong
+	 */
+	@Test
+	void updateComplaint() throws Exception {
+		long complaintId = complaintManager.getAll().iterator().next().getId();
+		String newSubject = "New subject for the complaint";
+		String newDescription = "New description for the complaint";
+
+		mvc.perform(post("/update-complaint/{id}", complaintId)
+				.param("subject", newSubject)
+				.param("description", newDescription)
+				.with(user("peter.klaus").roles("Vorstandsvorsitzender")))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/complaints"));
+
+		Complaint updatedComplaint = complaintManager.get(complaintId);
+
+		assertThat(updatedComplaint.getSubject()).isEqualTo(newSubject);
+		assertThat(updatedComplaint.getDescription()).isEqualTo(newDescription);
 	}
 }
