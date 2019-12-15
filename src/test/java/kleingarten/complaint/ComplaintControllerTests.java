@@ -32,4 +32,6 @@ public class ComplaintControllerTests {
 		mvc.perform(get("/complaints").with(user("peter.klaus").roles("Hauptpächter")))
 				.andExpect(status().isOk());
 	}
+
+
 }
