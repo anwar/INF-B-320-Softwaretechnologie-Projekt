@@ -114,6 +114,7 @@ public class Complaint {
 	}
 
 	public void setState(ComplaintState state) {
+		Assert.notNull(state, "state must not be null!");
 		this.state = state;
 	}
 
