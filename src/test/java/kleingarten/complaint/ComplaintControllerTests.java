@@ -17,12 +17,10 @@ package kleingarten.complaint;
 
 import kleingarten.plot.DataService;
 import kleingarten.plot.Plot;
-import kleingarten.plot.PlotService;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 import org.junit.jupiter.api.Test;
 import org.salespointframework.useraccount.Role;
-import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -46,22 +44,16 @@ public class ComplaintControllerTests {
 	MockMvc mvc;
 
 	private ComplaintManager complaintManager;
-	private PlotService plotService;
 	private DataService plotDataService;
 	private TenantManager tenantManager;
-	private UserAccountManager userAccountManager;
 
 	public ComplaintControllerTests(@Autowired ComplaintManager complaintManager,
-									@Autowired PlotService plotService,
 									@Autowired DataService plotDataService,
-									@Autowired TenantManager tenantManager,
-									@Autowired UserAccountManager userAccountManager) {
+									@Autowired TenantManager tenantManager) {
 
 		this.complaintManager = complaintManager;
-		this.plotService = plotService;
 		this.plotDataService = plotDataService;
 		this.tenantManager = tenantManager;
-		this.userAccountManager = userAccountManager;
 	}
 
 	/**
@@ -210,5 +202,23 @@ public class ComplaintControllerTests {
 		 */
 		assertThat(complaintManager.get(complaintId).getAssignedObmann().getId()).isEqualTo(newObmann.getId());
 		assertThat(complaintManager.get(complaintId).getAssignedObmann().getFullName()).isEqualTo(newObmann.getFullName());
+	}
+
+	/**
+	 * Test that a {@link Complaint} is successfully deleted.
+	 *
+	 * @throws Exception if wrong
+	 */
+	@Test
+	void deleteComplaint() throws Exception {
+		long noOfComplaints = complaintManager.getAll().toList().size();
+		long complaintId = complaintManager.getAll().iterator().next().getId();
+
+		mvc.perform(post("/delete-complaint/{id}", complaintId)
+				.with(user("peter.klaus").roles("Vorstandsvorsitzender")))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/complaints"));
+
+		assertThat(complaintManager.getAll().toList().size()).isEqualTo(noOfComplaints - 1);
 	}
 }
