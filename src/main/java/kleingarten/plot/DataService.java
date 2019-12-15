@@ -57,7 +57,7 @@ public class DataService {
 	public boolean procedureExists(Plot plot) {
 		Procedure procedure = procedureManager.getActualProcedure(plot);
 		if (procedure == null) {
-			return false;
+			throw new IllegalArgumentException("No Procedure found for the given plot!");
 		}
 		return true;
 	}
