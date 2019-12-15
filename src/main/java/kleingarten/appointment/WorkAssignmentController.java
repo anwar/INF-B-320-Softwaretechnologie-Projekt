@@ -49,7 +49,7 @@ public class WorkAssignmentController {
 	}
 
 
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	@GetMapping("/listOfAssignments")
 	String listOfAssignments(Model model) {
 		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
@@ -58,7 +58,7 @@ public class WorkAssignmentController {
 
 
 	@GetMapping("/workAssignmentModify")
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	String modifyWorkAssignment(@RequestParam("id") Long id, Model model){
 		model.addAttribute("workAssignment", workAssignmentManager.findByID(id));
 		model.addAttribute("plotListForWorkAssignment",workAssignmentManager.getPlotsInWorkAssignment(id));
@@ -68,7 +68,7 @@ public class WorkAssignmentController {
 
 
 	@PostMapping("/modifiedWorkAssignment")
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	String modifiedWorkAssignment(@RequestParam("id")		  Long id,
 						   @RequestParam("title") String title,
 						   @RequestParam("description")  String description){
@@ -81,7 +81,7 @@ public class WorkAssignmentController {
 	}
 
 	@PostMapping("/removePlotOfWorkAssignment")
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	String removePlot(@RequestParam("plotID") ProductIdentifier plotID, @RequestParam("assignmentID") Long assignmentID){
 		workAssignmentManager.removePlotOutWorkAssignment(plotID, assignmentID);
 		System.out.println("debug after function in Controller");
@@ -89,6 +89,7 @@ public class WorkAssignmentController {
 	}
 
 	@GetMapping("/listForPlotAssignments/{plotID}")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	String getForPlotWorkAssignments(@PathVariable ProductIdentifier plotID, Model model){
 		model.addAttribute("ListWorkAssignmentsForPlot", workAssignmentManager.getForPlotWorkAssignments(plotID));
 		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
@@ -97,22 +98,33 @@ public class WorkAssignmentController {
 	}
 
 	@PostMapping("/setWorkAssignment")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	public String AddWorkAssignmentToPlot(@RequestParam("plotID") ProductIdentifier plotID, @RequestParam("assignmentID") Long id){
 		workAssignmentManager.addPlotToWorkAssignment(plotID, id);
 		return "redirect:/myPlot";
 	}
 
 	@GetMapping("/addWorkHours")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	String addWorkHours(Model model){
 		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
 		return "workAssignment/addWorkHours";
 	}
 
 	@PostMapping("/changeWorkHours")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	String setWorkHours(@RequestParam("id") Long id,
 						@RequestParam("workHours") String workHours){
 		int workHoursInt = Integer.parseInt(workHours);
 		workAssignmentManager.setWorkHours(workHoursInt , id);
 		return "redirect:/addWorkHours";
+	}
+
+	@PostMapping("/removeWorkAssignment")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
+	String removeWorkAssignment(@RequestParam("id") Long id){
+		System.out.println(id);
+		workAssignmentManager.removeWorkAssignment(id);
+		return "redirect:/listOfAssignments";
 	}
 }

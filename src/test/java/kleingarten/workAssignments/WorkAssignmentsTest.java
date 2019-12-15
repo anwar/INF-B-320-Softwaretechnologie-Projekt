@@ -123,9 +123,4 @@ public class WorkAssignmentsTest {
 	public void initialGetPlotsTest(){
 		assertThat(workAssignment.getPlots());
 	}
-
-	@Test
-	public void initialContainsPlotTest(){
-		assertThat(workAssignment.containsPlot(plot));
-	}
 }

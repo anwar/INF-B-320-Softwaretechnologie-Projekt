@@ -26,7 +26,6 @@
         </div>
     </div>
     <center>
-        <form method="post" th:action="@{/deleteWorkAssignment}">
             <table id="myTable">
                 <thead>
                 <tr>
@@ -35,6 +34,7 @@
                     <th>Beschreibung</th>
                     <th>Parzellen</th>
                     <th>Bearbeiten</th>
+                    <th>Löschen</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,10 +45,13 @@
                     <td th:text="${assignment.plots.size()}">Parzellen</td>
                     <td hidden><input class="text_bgImage" id="id" name="id" th:value="${(assignment.getId())}"  type="number" required="required"/></td>
                     <td style="font-size:25px;"> <a th:title="Bearbeiten" th:href="'/workAssignmentModify?id=' +${assignment.getId()}" > &#9998; </a> </td>
+                    <form method="post" role="form" th:action="@{/removeWorkAssignment}">
+                        <td hidden><input class="text_bgImage" id="id" name="id" th:value="${(assignment.getId())}"  type="number" required="required"/></td>
+                        <td><button type="submit"><i style="color: red" class="material-icons">delete</i></button></td>
+                    </form>
                 </tr>
                 </tr></tbody>
             </table>
-        </form>
     </center>
     <div th:include="navigation :: footer"></div>
 </body>

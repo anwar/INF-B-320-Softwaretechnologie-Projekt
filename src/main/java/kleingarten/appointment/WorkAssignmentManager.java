@@ -23,9 +23,9 @@ public class WorkAssignmentManager {
 	private PlotService plotService;
 
 	/**
-	 * Constructor of class {@link WorkAssignment}
-	 * @param workAssignmentRepository is a list of {@link Plot} as ArrayList {@link ArrayList}
-	 * @param plotService date of the {@link WorkAssignment} as LocalDateTime {@link LocalDateTime}
+	 * Constructor of class {@link WorkAssignmentManager}
+	 * @param workAssignmentRepository repository of WorkAssignments as {@link WorkAssignmentRepository}
+	 * @param plotService is the Manager of the {@link Plot}s {@link PlotService}
 	 */
 
 	public WorkAssignmentManager(WorkAssignmentRepository workAssignmentRepository, PlotService plotService){
@@ -33,6 +33,11 @@ public class WorkAssignmentManager {
 		this.plotService = plotService;
 	}
 
+	/**
+	 * function in {@link WorkAssignmentManager}
+	 * its a Getter to get all the WorkAssignments {@link WorkAssignment} and take it from the repository {@link WorkAssignmentRepository}
+	 * is sorted by current year {@link LocalDateTime}
+	 */
 	public List<WorkAssignment> getAll(){
 		LocalDateTime localDateTime = LocalDateTime.now();
 		List<WorkAssignment> workAssignments = new ArrayList<>();
@@ -44,9 +49,24 @@ public class WorkAssignmentManager {
 		return workAssignments;
 	}
 
+
+	/**
+	 * function to create a {@link WorkAssignment} in {@link WorkAssignmentManager}
+	 * @param form from type {@link CreateWorkAssignmentForm}
+	 */
+
 	public WorkAssignment createAssignment(CreateWorkAssignmentForm form){
 		return workAssignmentRepository.save(new WorkAssignment(form.getDateTime(), 0, form.getTitle(), form.getDescription(), null));
 	}
+
+	/**
+	 * function to create a {@link WorkAssignment} in {@link WorkAssignmentManager} for the {@link kleingarten.configuration.AppDataInitializer}
+	 * @param date from type {@link LocalDateTime}
+	 * @param workHours from type {@link Integer}
+	 * @param title from type {@link String}
+	 * @param description from type {@link String}
+	 * @param plots from type {@link List} from {@link Plot}
+	 */
 
 	public WorkAssignment createAssignmentForInitializer(LocalDateTime date, int workHours, String title, String description, List<Plot> plots){
 		return workAssignmentRepository.save(new WorkAssignment(date, workHours,title, description, plots));
@@ -77,29 +97,19 @@ public class WorkAssignmentManager {
 
 	public void addPlotToWorkAssignment(ProductIdentifier plotID, long workAssignmentID){
 		WorkAssignment workAssignment = findByID(workAssignmentID);
-		System.out.println(workAssignment + " workAssignment in manager");
 		Plot plot = findByID(plotID);
-		System.out.println(plot + " plot in manager");
 		if(!workAssignment.containsPlot(plot)){
-			System.out.println("in if bedingung " + workAssignment.containsPlot(plot));
 			workAssignment.addPlot(plot);
-			System.out.println("nach add");
 			workAssignmentRepository.save(workAssignment);
-			System.out.println("nach Abspeichern");
 		}
 	}
 
 	public void removePlotOutWorkAssignment(ProductIdentifier plotID, long workAssignmentID){
 		WorkAssignment workAssignment = findByID(workAssignmentID);
 		Plot plot = findByID(plotID);
-		System.out.println(plot + " plot in manager");
-		System.out.println(workAssignment + " workAssignment in manager");
 		if(workAssignment.containsPlot(plot)){
-			System.out.println("in if bedingung " + workAssignment.containsPlot(plot));
 			workAssignment.removePlot(plot);
-			System.out.println("nach remove");
 			workAssignmentRepository.save(workAssignment);
-			System.out.println("nach Abspeichern");
 		}
 	}
 
@@ -154,6 +164,12 @@ public class WorkAssignmentManager {
 			}
 		}
 		return plotList;
+	}
+
+	public void removeWorkAssignment(long WorkAssignmentID){
+		WorkAssignment workAssignment = findByID(WorkAssignmentID);
+
+		workAssignmentRepository.delete(workAssignment);
 	}
 
 }
