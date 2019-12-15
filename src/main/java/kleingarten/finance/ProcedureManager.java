@@ -106,6 +106,16 @@ public class ProcedureManager {
 		Set<Procedure> noDubes = procedures.findByMainTenant(tenantId).and(procedures.findBySubTenant(tenantId)).toSet();
 		return Streamable.of(noDubes);
 	}
+	
+	public Streamable<Procedure> getAllByYear(int year) {
+		return procedures.findByYear(year);
+	}
+	
+	public Streamable<Procedure> getAllByPlot(Plot plot) {
+		
+		return procedures.findByPlot(plot);
+		
+	}
 
 	public Procedure save(Procedure procedure) {
 

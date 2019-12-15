@@ -13,15 +13,16 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import kleingarten.plot.*;
+import kleingarten.tenant.Tenant;
 
 public class GeneratePDFBill {
 	private static final Logger logger = LoggerFactory.getLogger(GeneratePDFBill.class);
 
-	public static ByteArrayInputStream bill(List<Fee> fees) {
-		AtomicReference<Plot> atomicPlot = new AtomicReference<>();
+	public static ByteArrayInputStream bill(List<Fee> fees, Plot plot) {
+//		AtomicReference<Plot> atomicPlot = new AtomicReference<>();
 		Document document = new Document();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		Plot plot = atomicPlot.get();
+//		Plot plot = atomicPlot.get();
 
 		String plotName = plot.getName();
 

@@ -73,22 +73,6 @@ public class Procedure {
 	}
 
 	/**
-	 * Constructor with needed types. Good for testing.
-	 *
-	 * @param year
-	 * @param plotId
-	 * @param size
-	 * @param mainTenant
-	 */
-	public Procedure(int year, String plotId, double size, long mainTenant) {
-		super();
-		this.year = year;
-		this.size = size;
-		this.mainTenant = mainTenant;
-		isOpen = true;
-	}
-
-	/**
 	 * Constructor with some parsing, best to use this one.
 	 *
 	 * @param year
@@ -96,7 +80,10 @@ public class Procedure {
 	 * @param mainTenant
 	 */
 	public Procedure(int year, Plot plot, long mainTenant) {
-		this(year, plot.getId().getIdentifier(), (double)plot.getSize(), mainTenant);
+		this.year = year;
+		this.size = plot.getSize();
+		this.mainTenant = mainTenant;
+		isOpen = true;
 		this.plot = plot;
 	}
 
@@ -163,6 +150,10 @@ public class Procedure {
 	public ProductIdentifier getPlotId() {
 		//Return right data (Ylvi)
 		return plot.getId();
+	}
+	
+	public Plot getPlot() {
+		return plot;
 	}
 
 	/**
