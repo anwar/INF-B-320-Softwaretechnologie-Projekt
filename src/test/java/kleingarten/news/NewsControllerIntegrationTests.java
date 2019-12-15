@@ -37,8 +37,11 @@ public class NewsControllerIntegrationTests {
 	@Autowired
 	MockMvc mvc;
 
-	@Autowired
-	NewsRepository news;
+	private NewsRepository news;
+
+	public NewsControllerIntegrationTests(@Autowired NewsRepository news) {
+		this.news = news;
+	}
 
 	/**
 	 * Test that root URI is redirected to "/home".
