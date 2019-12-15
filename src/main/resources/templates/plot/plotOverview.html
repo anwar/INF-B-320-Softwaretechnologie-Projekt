@@ -60,7 +60,7 @@
             <button type="submit" class="ui button">Hinzufügen</button>
         </div>
     </form>
-
+   <br>
         <div class="plotOverview" th:if="not ${canAddChairman}">
             <div class="plotList" th:each="plot : ${plotList}">
               <div class="plot" th:style="'background: ' + ${plotColors.get(plot)}">

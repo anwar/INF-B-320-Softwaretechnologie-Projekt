@@ -72,6 +72,12 @@
                         <td>  <input class="text_bgImage" id="description" name="description" th:value="${(workAssignment.getDescription())}"  type="text" required="required"/>
                     </tr>
                 </div>
+                <div>
+                    <tr>
+                        <th><label for="workHours">Arbeitsstunden</label></th>
+                        <td><input class="text_bgImage" id="workHours" name="workHours" th:value="${(workAssignment.getWorkHours())}" type="text" required="required"/>
+                    </tr>
+                </div>
             </table>
             <div class="button-section">
 

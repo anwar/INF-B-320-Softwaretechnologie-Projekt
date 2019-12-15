@@ -71,10 +71,12 @@ public class WorkAssignmentController {
 	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	String modifiedWorkAssignment(@RequestParam("id")		  Long id,
 						   @RequestParam("title") String title,
-						   @RequestParam("description")  String description){
+						   @RequestParam("description")  String description,
+	@RequestParam("workHours") int workHours){
 
 		workAssignmentManager.findByID(id).setTitle(title);
 		workAssignmentManager.findByID(id).setDescription(description);
+		workAssignmentManager.findByID(id).setWorkHours(workHours);
 		workAssignmentRepository.save(workAssignmentManager.findByID(id));
 
 		return "redirect:/listOfAssignments";
@@ -89,7 +91,6 @@ public class WorkAssignmentController {
 	}
 
 	@GetMapping("/listForPlotAssignments/{plotID}")
-	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	String getForPlotWorkAssignments(@PathVariable ProductIdentifier plotID, Model model){
 		model.addAttribute("ListWorkAssignmentsForPlot", workAssignmentManager.getForPlotWorkAssignments(plotID));
 		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
@@ -98,7 +99,6 @@ public class WorkAssignmentController {
 	}
 
 	@PostMapping("/setWorkAssignment")
-	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	public String AddWorkAssignmentToPlot(@RequestParam("plotID") ProductIdentifier plotID, @RequestParam("assignmentID") Long id){
 		workAssignmentManager.addPlotToWorkAssignment(plotID, id);
 		return "redirect:/myPlot";

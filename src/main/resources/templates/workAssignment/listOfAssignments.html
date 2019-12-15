@@ -32,6 +32,7 @@
                     <th>Datum / Zeit</th>
                     <th>Titel</th>
                     <th>Beschreibung</th>
+                    <th>Arbeitsaufwand in Stunden</th>
                     <th>Parzellen</th>
                     <th>Bearbeiten</th>
                     <th>Löschen</th>
@@ -42,6 +43,7 @@
                     <td th:text="${assignment.date}">Datum</td>
                     <td th:text="${assignment.title}">Titel</td>
                     <td th:text="${assignment.description}">Beschreibung</td>
+                    <td th:text="${assignment.getWorkHours()}">Arbeitsaufwand</td>
                     <td th:text="${assignment.plots.size()}">Parzellen</td>
                     <td hidden><input class="text_bgImage" id="id" name="id" th:value="${(assignment.getId())}"  type="number" required="required"/></td>
                     <td style="font-size:25px;"> <a th:title="Bearbeiten" th:href="'/workAssignmentModify?id=' +${assignment.getId()}" > &#9998; </a> </td>
