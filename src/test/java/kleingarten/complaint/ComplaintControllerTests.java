@@ -164,4 +164,27 @@ public class ComplaintControllerTests {
 		assertThat(updatedComplaint.getSubject()).isEqualTo(newSubject);
 		assertThat(updatedComplaint.getDescription()).isEqualTo(newDescription);
 	}
+
+	/**
+	 * Test that the {@link ComplaintState} for a {@link Complaint} is successfully updated.
+	 *
+	 * @throws Exception if wrong
+	 */
+	@Test
+	void changeState() throws Exception {
+		Complaint complaint = complaintManager.getAll().iterator().next();
+		long complaintId = complaint.getId();
+		ComplaintState currentState = complaint.getState();
+
+		mvc.perform(post("/change-complaint-state/{id}", complaintId)
+				.with(user("peter.klaus").roles("Vorstandsvorsitzender")))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/complaints"));
+
+		if (currentState == ComplaintState.PENDING) {
+			assertThat(complaintManager.get(complaintId).getState()).isEqualTo(ComplaintState.FINISHED);
+		} else {
+			assertThat(complaintManager.get(complaintId).getState()).isEqualTo(ComplaintState.PENDING);
+		}
+	}
 }
