@@ -35,6 +35,7 @@ public class ComplaintManager {
 
 	/**
 	 * Constructor of {@link ComplaintManager}
+	 *
 	 * @param complaints    must not be {@literal null}
 	 * @param tenantManager must not be {@literal null}
 	 */
@@ -49,6 +50,7 @@ public class ComplaintManager {
 
 	/**
 	 * Getter for all {@link Complaint}s
+	 *
 	 * @return {@link Complaint} as {@link Streamable}
 	 */
 	public Streamable<Complaint> getAll() {
@@ -57,6 +59,7 @@ public class ComplaintManager {
 
 	/**
 	 * Getter for one {@link Complaint}
+	 *
 	 * @param id identifier of a {@link Complaint} as {@link Long}
 	 * @return complain as {@link Complaint}
 	 */
@@ -67,6 +70,7 @@ public class ComplaintManager {
 
 	/**
 	 * Deletes a {@link Complaint} of the {@link ComplaintRepository}
+	 *
 	 * @param id identifier of {@link Complaint}
 	 */
 	public void delete(long id) {
@@ -76,6 +80,7 @@ public class ComplaintManager {
 
 	/**
 	 * Saves a {@link Complaint} in {@link ComplaintRepository}
+	 *
 	 * @param complaint as {@link Complaint} to be saved
 	 */
 	public void save(Complaint complaint) {
@@ -84,6 +89,7 @@ public class ComplaintManager {
 
 	/**
 	 * Getter for the {@link Complaint}s of a complainant
+	 *
 	 * @param complainant as {@link Tenant}
 	 * @return {@link Complaint} as {@link Streamable}
 	 */
@@ -93,6 +99,7 @@ public class ComplaintManager {
 
 	/**
 	 * Getter for the {@link Complaint} of a obmann
+	 *
 	 * @param obmann as {@link Tenant}
 	 * @return {@link List} of {@link Complaint}s
 	 */

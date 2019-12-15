@@ -84,6 +84,7 @@ public class Complaint {
 
 	/**
 	 * Getter for the id of a {@link Complaint}
+	 *
 	 * @return id as long
 	 */
 	public long getId() {
@@ -92,6 +93,7 @@ public class Complaint {
 
 	/**
 	 * Getter for the {@link Plot} of a {@link Complaint}
+	 *
 	 * @return plot as {@link Plot}
 	 */
 	public Plot getPlot() {
@@ -100,6 +102,7 @@ public class Complaint {
 
 	/**
 	 * Getter for the complainant of a {@link Complaint}
+	 *
 	 * @return complainant as {@link Tenant}
 	 */
 	public Tenant getComplainant() {
@@ -108,6 +111,7 @@ public class Complaint {
 
 	/**
 	 * Getter for the subject of a {@link Complaint}
+	 *
 	 * @return subject as {@link String}
 	 */
 	public String getSubject() {
@@ -116,6 +120,7 @@ public class Complaint {
 
 	/**
 	 * Setter for the subject of a {@link Complaint}
+	 *
 	 * @param subject as {@link String}
 	 */
 	public void setSubject(String subject) {
@@ -125,6 +130,7 @@ public class Complaint {
 
 	/**
 	 * Getter for the description of a {@link Complaint}
+	 *
 	 * @return description as {@link String}
 	 */
 	public String getDescription() {
@@ -133,6 +139,7 @@ public class Complaint {
 
 	/**
 	 * Setter for the description of a {@link Complaint}
+	 *
 	 * @param description as {@link String}
 	 */
 	public void setDescription(String description) {
@@ -142,6 +149,7 @@ public class Complaint {
 
 	/**
 	 * Getter for the state of a {@link Complaint}
+	 *
 	 * @return state as {@link ComplaintState}
 	 */
 	public ComplaintState getState() {
@@ -150,6 +158,7 @@ public class Complaint {
 
 	/**
 	 * Setter for the state of a {@link Complaint}
+	 *
 	 * @param state as {@link ComplaintState}
 	 */
 	public void setState(ComplaintState state) {
@@ -159,6 +168,7 @@ public class Complaint {
 
 	/**
 	 * Getter for the assigned obmann of a {@link Complaint}
+	 *
 	 * @return assigned obmann as {@link Tenant}
 	 */
 	public Tenant getAssignedObmann() {
@@ -167,6 +177,7 @@ public class Complaint {
 
 	/**
 	 * Setter for the assigned obmann
+	 *
 	 * @param assignedObmann as {@link Tenant}
 	 */
 	public void setAssignedObmann(Tenant assignedObmann) {

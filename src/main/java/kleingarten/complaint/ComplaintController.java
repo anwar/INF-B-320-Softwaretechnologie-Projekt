@@ -49,6 +49,7 @@ public class ComplaintController {
 
 	/**
 	 * Constructor of {@link ComplaintController}
+	 *
 	 * @param complaintManager must not be {@literal null}
 	 * @param tenantManager    must not be {@literal null}
 	 * @param plotService      must not be {@literal null}
@@ -72,13 +73,14 @@ public class ComplaintController {
 
 	/**
 	 * Controller for the view of the {@link Complaint}s
-	 * @param user logged in user as {@link UserAccount}
+	 *
+	 * @param user  logged in user as {@link UserAccount}
 	 * @param model of type {@link Model}
 	 * @return html as {@link String}
 	 */
 	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
 	@GetMapping("/complaints")
-	String complains(@LoggedIn Optional<UserAccount> user, Model model) {
+	String complaints(@LoggedIn Optional<UserAccount> user, Model model) {
 		if (user.isEmpty()) {
 			return "redirect:/login";
 		}
@@ -100,8 +102,9 @@ public class ComplaintController {
 
 	/**
 	 * View for creating a new {@link Complaint}
+	 *
 	 * @param plotId of the {@link Plot} of which {@link Tenant} authors the {@link Complaint}
-	 * @param model as {@link Model}
+	 * @param model  as {@link Model}
 	 * @return html as {@link String}
 	 */
 	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
@@ -116,9 +119,10 @@ public class ComplaintController {
 
 	/**
 	 * saves the new {@link Complaint}
-	 * @param user logged in user as {@link UserAccount}
-	 * @param plotId of the {@link Plot} of which {@link Tenant} authors the {@link Complaint}
-	 * @param subject of the {@link Complaint} as {@link String}
+	 *
+	 * @param user        logged in user as {@link UserAccount}
+	 * @param plotId      of the {@link Plot} of which {@link Tenant} authors the {@link Complaint}
+	 * @param subject     of the {@link Complaint} as {@link String}
 	 * @param description of the {@link Complaint} as {@link String}
 	 * @return html as {@link String}
 	 */
@@ -142,7 +146,8 @@ public class ComplaintController {
 
 	/**
 	 * Form to update a {@link Complaint}
-	 * @param id  identifier of the {@link Complaint}
+	 *
+	 * @param id    identifier of the {@link Complaint}
 	 * @param model as {@link Model}
 	 * @return html as {@link String}
 	 */
@@ -161,8 +166,9 @@ public class ComplaintController {
 
 	/**
 	 * Updated {@link Complaint}
-	 * @param id identifier of the {@link Complaint} as {@link Long}
-	 * @param subject of the {@link Complaint} as {@link String}
+	 *
+	 * @param id          identifier of the {@link Complaint} as {@link Long}
+	 * @param subject     of the {@link Complaint} as {@link String}
 	 * @param description of the {@link Complaint} as {@link String}
 	 * @return html as {@link String}
 	 */
@@ -182,6 +188,7 @@ public class ComplaintController {
 
 	/**
 	 * Changes the state of a {@link Complaint}
+	 *
 	 * @param id identifier of {@link Complaint} as {@link Long}
 	 * @return html as {@link String}
 	 */
@@ -203,7 +210,8 @@ public class ComplaintController {
 
 	/**
 	 * Changes the assigned obmann of a {@link Complaint}
-	 * @param id identifier of the {@link Complaint} as {@link Long}
+	 *
+	 * @param id       identifier of the {@link Complaint} as {@link Long}
 	 * @param obmannId identifier of the new obmann as {@link Long}
 	 * @return html as {@link String}
 	 */
@@ -222,6 +230,7 @@ public class ComplaintController {
 
 	/**
 	 * Deletes a {@link Complaint}
+	 *
 	 * @param id identifier of a {@link Complaint} as {@link Long}
 	 * @return html as {@link String}
 	 */
@@ -233,7 +242,8 @@ public class ComplaintController {
 	}
 
 	/**
-	 * Getter for the name of a {@link Tenant} of a {@link Plot}
+	 * Getter for retrieving the full names of all {@link Tenant}s of a {@link Plot}.
+	 *
 	 * @param plot as {@link Plot}
 	 * @return name of the {@link Tenant} as {@link String}
 	 */
