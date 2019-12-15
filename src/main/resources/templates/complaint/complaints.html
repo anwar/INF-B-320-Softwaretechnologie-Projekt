@@ -36,14 +36,15 @@
             <th>Beschreibung</th>
             <th>Zustand</th>
             <th>zugeordneter Obmann</th>
-            <th sec:authorize="hasRole('Vorstandsvorsitzender') || hasRole('Obmann')">Bearbeiten</th>
-            <th sec:authorize="hasRole('Vorstandsvorsitzender')">Löschen</th>
+            <th sec:authorize="hasRole('Vorstandsvorsitzender') || hasRole('Obmann')|| hasRole('Stellvertreter')">Bearbeiten</th>
+            <th sec:authorize="hasRole('Vorstandsvorsitzender')|| hasRole('Stellvertreter')">Löschen</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="c : ${complaints}">
             <td>
-                <a th:text="'Plot ' + ${c.plot.getName()}"
+                <a style="color: #043353; text-decoration: underline"
+                        th:text="'Plot ' + ${c.plot.getName()}"
                    th:href="@{/plot/{plot_id}(plot_id=${c.plot.getId().toString()})}">gegen</a>
             </td>
             <td th:text="${c.complainant.getFullName()}">von</td>
@@ -51,7 +52,7 @@
             <td th:text="${c.description}">Beschreibung</td>
             <td th:text="${c.state}">Zustand</td>
             <td th:text="${c.assignedObmann.getFullName()}">zugeordneter Obmann</td>
-            <td sec:authorize="hasRole('Vorstandsvorsitzender') || hasRole('Obmann')">
+            <td sec:authorize="hasRole('Vorstandsvorsitzender') || hasRole('Obmann') || hasRole('Stellvertreter')">
                 <form th:unless="${c.state} == ${finishedState}" method="post" style="display: inline-block"
                       th:action="@{/edit-complaint/{id}(id=${c.id})}">
                     <button class="btn btn-sm float-center"
@@ -60,7 +61,7 @@
                     </button>
                 </form>
             </td>
-            <td sec:authorize="hasRole('Vorstandsvorsitzender')">
+            <td sec:authorize="hasRole('Vorstandsvorsitzender') || hasRole('Stellvertreter')">
                 <form method="post" style="display: inline-block" th:action="@{/delete-complaint/{id}(id=${c.id})}">
                     <button class="btn btn-sm float-center"
                             style="font-size: 18px; background: transparent; border: none;"
