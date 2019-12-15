@@ -41,7 +41,13 @@
         <li><a href="#" sec:authorize="hasAnyRole('Vorstandsvorsitzender')">Termine</a>
             <ul>
                 <li><a href="" th:href="@{/createAssignment}"  >Termin erstellen</a></li>
-                <li><a href="" th:href="@{/listOfAssignments}" >Termine einsehen</a></li>
+                <li ><a href="" th:href="@{/listOfAssignments}" >Termine einsehen</a></li>
+                <li><a href="" th:href="@{/addWorkHours}">Arbeitsstunden hinzufügen</a></li>
+
+            </ul>
+        <li><a href="#" sec:authorize="hasAnyRole('Obmann')">Termine</a>
+            <ul>
+                <li ><a href="" th:href="@{/listOfAssignments}" >Termine einsehen</a></li>
                 <li><a href="" th:href="@{/addWorkHours}">Arbeitsstunden hinzufügen</a></li>
 
             </ul>
