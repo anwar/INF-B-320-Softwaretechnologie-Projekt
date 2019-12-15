@@ -28,20 +28,21 @@
     <thead>
     <tr>
         <th>Rechnungen</th>
+        <th>Download</th>
     </tr>
     </thead>
         <tbody th:remove="all-but-first">
 
            <tr  th:each="procedure : ${procedures}">
-               <td> <input th:text="${procedure.getYear()}">Paul</input> </td>
+               <td> <input th:text="${procedure.getYear()}"> Paul</input> </td>
 			   <td>
-			   
+
 		<form method="post" th:action="@{/PDF}">
 		<input type="hidden" id="procedureId" name="procedureId" th:value="${procedure.getId()}">
 		<input type="hidden" id="year" name="year" th:value="${procedure.getYear()}">
 		<div class="button-section">
 
-			<button  type="submit"  class="button" >Anzeigen</button>
+			<button  type="submit" style="width: 50px" class="button" > &#10515; </button>
 
 		</div></form>
 			   </td>
