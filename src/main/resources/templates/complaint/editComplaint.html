@@ -11,8 +11,8 @@
           th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
     <link href="../resources/css/style.css" rel="stylesheet"
           th:href="@{../resources/css/style.css}" type="text/css"/>
-    <link href="../resources/css/tenantTable.css" rel="stylesheet"
-          th:href="@{../resources/css/tenantTable.css}" type="text/css">
+    <link href="../resources/css/tenantdetailsTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantdetailsTable.css}" type="text/css">
     <link href="../resources/css/dropdown.css" rel="stylesheet"
           th:href="@{../resources/css/dropdown.css}" type="text/css">
     <script src="../resources/css/js/dropdown.js"
@@ -29,7 +29,7 @@
 
 <center>
     <div sec:authorize="hasRole('Vorstandsvorsitzender')"  class="dropdown">
-        <button class="dropbtn" onclick="myFunction()">&#9660; neuer Obmann zuordnen</button>
+        <button class="dropbtn" style="width: auto" onclick="myFunction()">&#9660; neuer Obmann zuordnen</button>
         <div class="dropdown-content" id="myDropdown">
             <span th:each="obmann : ${obmannList}">
                 <a th:href="'/change-assigned-obmann/' + ${complaint.id} + '/' + ${obmann.id}"
@@ -37,17 +37,18 @@
             </span>
         </div>
     </div>
-</center>
 
-<br/>
 
-<form id="form" method="post" role="form" th:action="@{/update-complaint/{id}(id=${complaint.id})}">
+<form id="form"  method="post" role="form" th:action="@{/update-complaint/{id}(id=${complaint.id})}">
+
+    <br>
     <table>
         <tr>
             <th>
                 <label for="state">Zustand</label>
             </th>
             <td id="state" th:text="${complaint.state}">Zustand</td>
+
         </tr>
         <tr>
             <th>
@@ -81,15 +82,16 @@
             </td>
         </tr>
     </table>
-    <div class="button-section">
-        <button class="button" type="submit">Beschwerde abschicken</button>
+        <div class="button-section" >
+        <button style="display: inline-block;" class="button" type="submit">Beschwerde abschicken</button>
     </div>
 </form>
 
+<div class="button-section">
 <form method="post" style="display: inline-block" th:action="@{/change-complaint-state/{id}(id=${id})}">
     <button class="button">Zustand ändern</button>
-</form>
-
+</form></div>
+</center>
 <div th:include="navigation :: footer"></div>
 </body>
 </html>
