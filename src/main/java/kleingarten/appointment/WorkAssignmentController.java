@@ -71,10 +71,12 @@ public class WorkAssignmentController {
 	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	String modifiedWorkAssignment(@RequestParam("id")		  Long id,
 						   @RequestParam("title") String title,
-						   @RequestParam("description")  String description){
+						   @RequestParam("description")  String description,
+	@RequestParam("workHours") int workHours){
 
 		workAssignmentManager.findByID(id).setTitle(title);
 		workAssignmentManager.findByID(id).setDescription(description);
+		workAssignmentManager.findByID(id).setWorkHours(workHours);
 		workAssignmentRepository.save(workAssignmentManager.findByID(id));
 
 		return "redirect:/listOfAssignments";
