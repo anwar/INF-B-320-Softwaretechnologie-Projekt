@@ -187,4 +187,28 @@ public class ComplaintControllerTests {
 			assertThat(complaintManager.get(complaintId).getState()).isEqualTo(ComplaintState.PENDING);
 		}
 	}
+
+	/**
+	 * Test that the assigned Obmann for a {@link Complaint} is successfully updated.
+	 *
+	 * @throws Exception if wrong
+	 */
+	@Test
+	void changeAssignedObmann() throws Exception {
+		long complaintId = complaintManager.getAll().iterator().next().getId();
+		Tenant newObmann = tenantManager.findByRole(Role.of("Obmann")).iterator().next();
+
+		mvc.perform(get("/change-assigned-obmann/{id}/{obmann_id}", complaintId, newObmann.getId())
+				.with(user("peter.klaus").roles("Vorstandsvorsitzender")))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/complaints"));
+
+		/**
+		 * We simply can't do an assertion on getAssignedObmann() here since that returns a {@link Tenant}
+		 * and the underlying reference to the specific {@link Tenant} could be different, therefore we use
+		 * something more consistent for our tests such as Id or name.
+		 */
+		assertThat(complaintManager.get(complaintId).getAssignedObmann().getId()).isEqualTo(newObmann.getId());
+		assertThat(complaintManager.get(complaintId).getAssignedObmann().getFullName()).isEqualTo(newObmann.getFullName());
+	}
 }
