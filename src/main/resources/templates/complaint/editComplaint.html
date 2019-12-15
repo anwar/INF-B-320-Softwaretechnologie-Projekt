@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
@@ -28,7 +28,7 @@
 </div>
 
 <center>
-    <div class="dropdown">
+    <div sec:authorize="hasRole('Vorstandsvorsitzender')"  class="dropdown">
         <button class="dropbtn" onclick="myFunction()">&#9660; neuer Obmann zuordnen</button>
         <div class="dropdown-content" id="myDropdown">
             <span th:each="obmann : ${obmannList}">
