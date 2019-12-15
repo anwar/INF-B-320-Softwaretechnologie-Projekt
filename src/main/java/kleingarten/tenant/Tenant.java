@@ -192,6 +192,9 @@ public class Tenant {
 		this.userAccount.remove(role);
 	}
 
+	/**
+	 * Deletes {@link Role} of a {@link Tenant}
+	 */
 	public void deleteRoles(){
 		for(Role r : userAccount.getRoles().toList()){
 
@@ -199,10 +202,11 @@ public class Tenant {
 		}
 	}
 
-	public void setId(Long id){
-		this.id = id;
-	}
-
+	/**
+	 * Method to check if a {@link Tenant} has a specific {@link Role}
+	 * @param role {@link Role} to be checked as {@link String}
+	 * @return {@link Boolean} true if {@link Tenant} has {@link Role}, {@link Boolean} false if not
+	 */
 	public boolean hasRole(String role){
 		return userAccount.hasRole(Role.of(role));
 	}
