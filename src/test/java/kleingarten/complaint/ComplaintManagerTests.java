@@ -28,11 +28,10 @@ public class ComplaintManagerTests {
 		this.tenantManager = tenantManager;
 		this.userAccountManager = userAccountManager;
 	}
-
+	
 	@Test
 	void getForObmann(){
-		assertThat(complaintManager.getForObmann(tenantManager.findByRole(Role.of("Obmann")).get(0))
-			.equals(tenantManager.getTenantByUserAccount(userAccountManager.findByUsername("hubertgrumpel").get())));
+		assertFalse(complaintManager.getForObmann(tenantManager.findByRole(Role.of("Obmann")).get(0)).isEmpty());
 
 	}
 

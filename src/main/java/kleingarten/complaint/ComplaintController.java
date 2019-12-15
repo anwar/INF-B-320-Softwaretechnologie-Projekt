@@ -48,6 +48,7 @@ public class ComplaintController {
 	private DataService plotDataService;
 
 	/**
+	 * Constructor of {@link ComplaintController}
 	 * @param complaintManager must not be {@literal null}
 	 * @param tenantManager    must not be {@literal null}
 	 * @param plotService      must not be {@literal null}
@@ -69,6 +70,12 @@ public class ComplaintController {
 		this.plotDataService = plotDataService;
 	}
 
+	/**
+	 * Controller for the view of the {@link Complaint}s
+	 * @param user logged in user as {@link UserAccount}
+	 * @param model of type {@link Model}
+	 * @return html as {@link String}
+	 */
 	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
 	@GetMapping("/complaints")
 	String complains(@LoggedIn Optional<UserAccount> user, Model model) {
@@ -91,6 +98,12 @@ public class ComplaintController {
 		return "complaint/complaints";
 	}
 
+	/**
+	 * View for creating a new {@link Complaint}
+	 * @param plotId of the {@link Plot} of which {@link Tenant} authors the {@link Complaint}
+	 * @param model as {@link Model}
+	 * @return html as {@link String}
+	 */
 	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
 	@GetMapping("/add-complaint/{plot_id}")
 	String showComplaintCreationForm(@PathVariable("plot_id") String plotId, Model model) {
@@ -101,6 +114,14 @@ public class ComplaintController {
 		return "complaint/addComplaint";
 	}
 
+	/**
+	 * saves the new {@link Complaint}
+	 * @param user logged in user as {@link UserAccount}
+	 * @param plotId of the {@link Plot} of which {@link Tenant} authors the {@link Complaint}
+	 * @param subject of the {@link Complaint} as {@link String}
+	 * @param description of the {@link Complaint} as {@link String}
+	 * @return html as {@link String}
+	 */
 	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
 	@PostMapping("/save-complaint/{plot_id}")
 	String saveComplaint(@LoggedIn Optional<UserAccount> user,
@@ -119,6 +140,12 @@ public class ComplaintController {
 		return "redirect:/complaints";
 	}
 
+	/**
+	 * Form to update a {@link Complaint}
+	 * @param id  identifier of the {@link Complaint}
+	 * @param model as {@link Model}
+	 * @return html as {@link String}
+	 */
 	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	@PostMapping("/edit-complaint/{id}")
 	String showComplaintUpdateForm(@PathVariable("id") long id, Model model) {
@@ -132,6 +159,13 @@ public class ComplaintController {
 		return "complaint/editComplaint";
 	}
 
+	/**
+	 * Updated {@link Complaint}
+	 * @param id identifier of the {@link Complaint} as {@link Long}
+	 * @param subject of the {@link Complaint} as {@link String}
+	 * @param description of the {@link Complaint} as {@link String}
+	 * @return html as {@link String}
+	 */
 	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	@PostMapping("/update-complaint/{id}")
 	String updateComplaint(@PathVariable("id") long id,
@@ -146,6 +180,11 @@ public class ComplaintController {
 		return "redirect:/complaints";
 	}
 
+	/**
+	 * Changes the state of a {@link Complaint}
+	 * @param id identifier of {@link Complaint} as {@link Long}
+	 * @return html as {@link String}
+	 */
 	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	@PostMapping("/change-complaint-state/{id}")
 	String changeState(@PathVariable("id") long id) {
@@ -162,6 +201,12 @@ public class ComplaintController {
 		return "redirect:/complaints";
 	}
 
+	/**
+	 * Changes the assigned obmann of a {@link Complaint}
+	 * @param id identifier of the {@link Complaint} as {@link Long}
+	 * @param obmannId identifier of the new obmann as {@link Long}
+	 * @return html as {@link String}
+	 */
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	@GetMapping("/change-assigned-obmann/{id}/{obmann_id}")
 	String changeAssignedObmann(@PathVariable("id") long id,
@@ -175,6 +220,11 @@ public class ComplaintController {
 		return "redirect:/complaints";
 	}
 
+	/**
+	 * Deletes a {@link Complaint}
+	 * @param id identifier of a {@link Complaint} as {@link Long}
+	 * @return html as {@link String}
+	 */
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	@PostMapping("/delete-complaint/{id}")
 	String deleteComplaint(@PathVariable("id") long id) {
@@ -182,6 +232,11 @@ public class ComplaintController {
 		return "redirect:/complaints";
 	}
 
+	/**
+	 * Getter for the name of a {@link Tenant} of a {@link Plot}
+	 * @param plot as {@link Plot}
+	 * @return name of the {@link Tenant} as {@link String}
+	 */
 	private String getPlotTenantNames(Plot plot) {
 		Procedure plotProcedure = plotDataService.getProcedure(plot);
 		StringBuilder plotTenants = new StringBuilder().

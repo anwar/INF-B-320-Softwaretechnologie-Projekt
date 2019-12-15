@@ -70,6 +70,9 @@ public class Complaint {
 		this.assignedObmann = plot.getChairman();
 	}
 
+	/**
+	 * Private constructor for {@link Complaint} used by Spring
+	 */
 	@SuppressWarnings("unused")
 	private Complaint() {
 		this.plot = null;
@@ -79,49 +82,93 @@ public class Complaint {
 		this.state = null;
 	}
 
+	/**
+	 * Getter for the id of a {@link Complaint}
+	 * @return id as long
+	 */
 	public long getId() {
 		return id;
 	}
 
+	/**
+	 * Getter for the {@link Plot} of a {@link Complaint}
+	 * @return plot as {@link Plot}
+	 */
 	public Plot getPlot() {
 		return plot;
 	}
 
+	/**
+	 * Getter for the complainant of a {@link Complaint}
+	 * @return complainant as {@link Tenant}
+	 */
 	public Tenant getComplainant() {
 		return complainant;
 	}
 
+	/**
+	 * Getter for the subject of a {@link Complaint}
+	 * @return subject as {@link String}
+	 */
 	public String getSubject() {
 		return subject;
 	}
 
+	/**
+	 * Setter for the subject of a {@link Complaint}
+	 * @param subject as {@link String}
+	 */
 	public void setSubject(String subject) {
 		Assert.hasText(subject, "subject must not be null!");
 		this.subject = subject;
 	}
 
+	/**
+	 * Getter for the description of a {@link Complaint}
+	 * @return description as {@link String}
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * Setter for the description of a {@link Complaint}
+	 * @param description as {@link String}
+	 */
 	public void setDescription(String description) {
 		Assert.hasText(description, "description must not be null!");
 		this.description = description;
 	}
 
+	/**
+	 * Getter for the state of a {@link Complaint}
+	 * @return state as {@link ComplaintState}
+	 */
 	public ComplaintState getState() {
 		return state;
 	}
 
+	/**
+	 * Setter for the state of a {@link Complaint}
+	 * @param state as {@link ComplaintState}
+	 */
 	public void setState(ComplaintState state) {
 		Assert.notNull(state, "state must not be null!");
 		this.state = state;
 	}
 
+	/**
+	 * Getter for the assigned obmann of a {@link Complaint}
+	 * @return assigned obmann as {@link Tenant}
+	 */
 	public Tenant getAssignedObmann() {
 		return assignedObmann;
 	}
 
+	/**
+	 * Setter for the assigned obmann
+	 * @param assignedObmann as {@link Tenant}
+	 */
 	public void setAssignedObmann(Tenant assignedObmann) {
 		Assert.notNull(assignedObmann, "assignedObmann must not be null!");
 		this.assignedObmann = assignedObmann;
