@@ -267,8 +267,9 @@ public class PlotControllerService {
 		}
 		for (Plot administratedPlot:
 			 plotService.getPlotsFor(tenant)) {
-			if (!(dataService.getRentedPlots(tenant).contains(administratedPlot)))
+			if (!(dataService.getRentedPlots(tenant).contains(administratedPlot))) {
 				administratedPlot.setChairman(null);
+			}
 		}
 		//Prevent changes on plots that are rented by other chairmen
 		for (ProductIdentifier modifiedPlot:
