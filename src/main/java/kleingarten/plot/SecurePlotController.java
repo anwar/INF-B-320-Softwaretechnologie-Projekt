@@ -62,7 +62,7 @@ public class SecurePlotController {
 				plotControllerService.secureSetAccessRightForPlotDetails(Optional.of(procedure), tenant, mav);
 				//Show different detail page if user rents the plot
 				if (procedure.isTenant(tenant.getId())) {
-					return rentedPlotsFor(user, mav);
+					return "redirect:/myPlot";
 				}
 			} else {
 				plotsToShow.add(plotControllerService.addInformationOfPlotToPlotInformationBuffer(Optional.empty(), plot));
@@ -295,7 +295,7 @@ public class SecurePlotController {
 			model.addAttribute("error", e);
 			return "error";
 		}
-		return "redirect:/anlage";
+		return "redirect:/chairmenOverview";
 	}
 
 	/**
