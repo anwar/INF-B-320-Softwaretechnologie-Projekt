@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Service class which is used to get information about the {@link Tenant}s who rent a {@link Plot} and the details of the renting
+ */
 @Component
 public class DataService {
 	private final TenantRepository tenantRepository;
@@ -23,12 +26,13 @@ public class DataService {
 
 	/**
 	 * Get object of type {@link Tenant} for a given tenantId
+	 *
 	 * @param tenantId id of the {@link Tenant} as {@literal long}
 	 * @return associated {@link Tenant} if it is found, else an exception of type {@link IllegalArgumentException} is thrown
 	 */
 	public Tenant findTenantById(long tenantId) {
-		for (Tenant tenant:
-			tenantRepository.findAll()) {
+		for (Tenant tenant :
+				tenantRepository.findAll()) {
 			if (tenant.getId() == tenantId) {
 				return tenant;
 			}
@@ -38,6 +42,7 @@ public class DataService {
 
 	/**
 	 * Get the associated {@link Procedure} for a {@link Plot}
+	 *
 	 * @param plot the {@link Plot} for which the {@link Procedure} should be found
 	 * @return {@link Procedure} which is searched for
 	 */
@@ -51,19 +56,21 @@ public class DataService {
 
 	/**
 	 * Check if there is a {@link Procedure} for the given {@link Plot} and year
+	 *
 	 * @param plot plot of type {@link Plot}for which a {@link Procedure} is searched
 	 * @return true, if {@link Procedure} exists, else false
 	 */
 	public boolean procedureExists(Plot plot) {
 		Procedure procedure = procedureManager.getActualProcedure(plot);
 		if (procedure == null) {
-			throw new IllegalArgumentException("No Procedure found for the given plot!");
+			return false;
 		}
 		return true;
 	}
 
 	/**
 	 * Create a {@link Set} of {@link Plot}s which are rented by a specific {@link Tenant}
+	 *
 	 * @param tenant tenant of type {@link Tenant} who's rented {@link Plot}s are searched
 	 * @return {@link Set} of {@link Plot}s which a associated to the given {@link Tenant}
 	 */

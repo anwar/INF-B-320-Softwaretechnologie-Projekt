@@ -12,6 +12,7 @@ import java.util.Set;
 public interface PlotCatalog extends Catalog<Plot> {
 	/**
 	 * Return all {@link Plot}s
+	 *
 	 * @return plots as {@link Streamable} of {@link Plot}, never {@literal null}
 	 */
 	@Override
@@ -19,6 +20,7 @@ public interface PlotCatalog extends Catalog<Plot> {
 
 	/**
 	 * Return all {@link Plot}s with the given status of type {@link PlotStatus}
+	 *
 	 * @param status status as {@link PlotStatus}, must not be {@literal null}
 	 * @return plots as {@link Set} of {@link Plot}, never {@literal null}
 	 */
@@ -26,11 +28,17 @@ public interface PlotCatalog extends Catalog<Plot> {
 
 	/**
 	 * Return all {@link Plot}s with the given chairman of type {@link Tenant}
+	 *
 	 * @param chairman chairman as {@link Tenant}, must not be {@literal null}
 	 * @return plots as {@link Set} of {@link Plot}, never {@literal null}
 	 */
 	Set<Plot> findByChairman(Tenant chairman);
-	
+
+	/**
+	 * Return the {@link Plot} with the given id as {@link org.salespointframework.catalog.ProductIdentifier}
+	 *
+	 * @param id id of the searched {@link Plot} as {@link org.salespointframework.catalog.ProductIdentifier}
+	 * @return {@link Plot} with the given id
+	 */
 	Plot findByProductIdentifierId(String id);
-	
 }
