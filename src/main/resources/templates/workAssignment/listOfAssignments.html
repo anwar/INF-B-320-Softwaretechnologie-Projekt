@@ -35,7 +35,7 @@
                     <th>Arbeitsaufwand in Stunden</th>
                     <th>Parzellen</th>
                     <th>Bearbeiten</th>
-                    <th>Löschen</th>
+                    <th sec:authorize="hasAnyRole('Vorstandsvorsitzender,Stellvertreter')">Löschen</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -49,7 +49,7 @@
                     <td style="font-size:25px;"> <a th:title="Bearbeiten" th:href="'/workAssignmentModify?id=' +${assignment.getId()}" > &#9998; </a> </td>
                     <form method="post" role="form" th:action="@{/removeWorkAssignment}">
                         <td hidden><input class="text_bgImage" id="id" name="id" th:value="${(assignment.getId())}"  type="number" required="required"/></td>
-                        <td><button type="submit"><i style="color: red" class="material-icons">delete</i></button></td>
+                        <td sec:authorize="hasAnyRole('Vorstandsvorsitzender,Stellvertreter')"><button type="submit"><i style="color: red" class="material-icons">delete</i></button></td>
                     </form>
                 </tr>
                 </tr></tbody>

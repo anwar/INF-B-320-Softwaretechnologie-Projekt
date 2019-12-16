@@ -1,5 +1,5 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
@@ -19,13 +19,10 @@
 <body>
 <div class="ui container">
     <nav th:include="navigation :: navigation"></nav>
-    <div class="header-title">
-        <h1> Termin Bearbeiten</h1>
-    </div>
 
     <div>
         <div class="header-title">
-            <h1>Parzellen entfernen</h1>
+            <h1>Parzellen aus dem Termin entfernen</h1>
         </div>
             <table>
                 <tr>
@@ -44,7 +41,7 @@
 
     </div>
     <br/>
-    <br/>
+    <hr/>
     <br/>
     <div>
         <div class="header-title">
@@ -72,7 +69,7 @@
                         <td>  <input class="text_bgImage" id="description" name="description" th:value="${(workAssignment.getDescription())}"  type="text" required="required"/>
                     </tr>
                 </div>
-                <div>
+                <div sec:authorize="hasAnyRole('Obmann')">
                     <tr>
                         <th><label for="workHours">Arbeitsstunden</label></th>
                         <td><input class="text_bgImage" id="workHours" name="workHours" th:value="${(workAssignment.getWorkHours())}" type="text" required="required"/>
