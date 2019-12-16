@@ -3,6 +3,7 @@ package kleingarten.plot;
 import kleingarten.finance.Procedure;
 import kleingarten.finance.ProcedureManager;
 import kleingarten.tenant.Tenant;
+import kleingarten.tenant.TenantRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.salespointframework.useraccount.Password;
@@ -34,6 +35,7 @@ public class DataServiceTests {
 	private final PlotService plotService;
 	private final UserAccountManager userAccountManager;
 	private final ProcedureManager procedureManager;
+	private final TenantRepository tenantRepository;
 
 	/**
 	 * Constructor of class, used by Spring
@@ -45,11 +47,13 @@ public class DataServiceTests {
 	 */
 	public DataServiceTests(@Autowired DataService dataService, @Autowired PlotService plotService,
 							@Autowired ProcedureManager procedureManager,
-							@Autowired UserAccountManager userAccountManager) {
+							@Autowired UserAccountManager userAccountManager,
+							@Autowired TenantRepository tenantRepository) {
 		this.dataService = dataService;
 		this.plotService = plotService;
 		this.userAccountManager = userAccountManager;
 		this.procedureManager = procedureManager;
+		this.tenantRepository = tenantRepository;
 	}
 
 	/**
@@ -64,6 +68,7 @@ public class DataServiceTests {
 				"01242354356", "13.04.1999",
 				userAccountManager.create("max.mustermann", Password.UnencryptedPassword.of("123"),
 						"max.mustermann@email.com", Role.of("Hauptpächter")));
+		tenantRepository.save(tenant);
 	}
 
 	/**
@@ -125,6 +130,14 @@ public class DataServiceTests {
 	@Test
 	public void noPlotsRentedTest() {
 		assertThat(dataService.getRentedPlots(tenant)).isEqualTo(new HashSet<>());
+	}
+
+	/**
+	 * Test for getting a {@link Tenant} by his id
+	 */
+	@Test
+	public void getTenantTest() {
+		assertThat(dataService.findTenantById(tenant.getId())).isEqualTo(tenant);
 	}
 
 	/**
