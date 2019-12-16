@@ -162,8 +162,9 @@ public class WorkAssignmentManager {
 
 		for (WorkAssignment workAssignment: workAssignmentRepository.findAll()) {
 			if(workAssignment.getId() == workAssignmentID){
-				for(String plotId : workAssignment.getPlots())
-				plotList.add(plotService.findById(plotId));
+				for(String plotId : workAssignment.getPlots()) {
+					plotList.add(plotService.findById(plotId));
+				}
 			}
 		}
 		return plotList;
