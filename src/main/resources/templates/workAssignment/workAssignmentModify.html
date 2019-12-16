@@ -60,19 +60,19 @@
                 <div>
                     <tr>
                         <th><label for="title">Titel</label></th>
-                        <td>  <input class="text_bgImage" id="title" name="title" th:value="${(workAssignment.getTitle())}"  type="text" required="required"/>
+                        <td>  <input class="text_bgImage" id="title" name="title" minlength="1" th:value="${(workAssignment.getTitle())}"  type="text" required="required"/>
                     </tr>
                 </div>
                 <div>
                     <tr>
                         <th><label for="description">Beschreibung</label></th>
-                        <td>  <input class="text_bgImage" id="description" name="description" th:value="${(workAssignment.getDescription())}"  type="text" required="required"/>
+                        <td>  <input class="text_bgImage" id="description" name="description" minlength="1" th:value="${(workAssignment.getDescription())}"  type="text" required="required"/>
                     </tr>
                 </div>
                 <div sec:authorize="hasAnyRole('Obmann')">
                     <tr>
                         <th><label for="workHours">Arbeitsstunden</label></th>
-                        <td><input class="text_bgImage" id="workHours" name="workHours" th:value="${(workAssignment.getWorkHours())}" type="text" required="required"/>
+                        <td><input class="text_bgImage" id="workHours" name="workHours" min="0" th:value="${(workAssignment.getWorkHours())}" type="number" required="required"/>
                     </tr>
                 </div>
             </table>

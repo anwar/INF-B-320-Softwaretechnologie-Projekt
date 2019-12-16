@@ -44,12 +44,14 @@ public class WorkAssignment {
 		this.plots = new ArrayList<String>();
 
 
-		if(plots!=null)
-		for(Plot p : plots) {
-			if(p == null) continue;
-			this.plots.add(p.getId().toString());
+		if(plots!=null) {
+			for (Plot p : plots) {
+				if (p == null){
+					continue;
+				}
+				this.plots.add(p.getId().toString());
+			}
 		}
-
 
 		this.date = date;
 		this.description = description;
