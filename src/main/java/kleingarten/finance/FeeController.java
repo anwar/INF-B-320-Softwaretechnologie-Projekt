@@ -31,9 +31,7 @@ public class FeeController {
 	}
 
 	@PostMapping(value = "/PDF", produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> bill(@RequestParam String procedureId) { //oldProcedure can be null
-		//I dicide to pass plotid and year instead, we could make two functions: currentBillAndFinalizeProcedure(plotId) and bill(plotId, year)
-		//both can get the main and old Procedure from procedureManager, so you can simply work with those procedures in the body right now.
+	public ResponseEntity<InputStreamResource> bill(@RequestParam String procedureId) {
 
 		Procedure mainProcedure = procedureManager.get(Long.parseLong(procedureId));
 
@@ -53,7 +51,6 @@ public class FeeController {
 				.body(new InputStreamResource(bis));
 	}
 
-	//@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
 	@GetMapping("bill/{plot}")
 	public String viewBill(Model model, @PathVariable Plot plot, @LoggedIn UserAccount userAccount){
 

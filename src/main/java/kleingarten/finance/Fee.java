@@ -15,7 +15,6 @@ public class Fee {
 
 	/**
 	 * Construct a Fee item. Used to generate a Bill as PDF.
-	 *
 	 * @param title as String
 	 * @param count as double
 	 * @param basePrice as double
