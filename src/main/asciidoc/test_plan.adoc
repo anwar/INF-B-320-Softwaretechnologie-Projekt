@@ -345,12 +345,12 @@ zuständig: Sanghyun Lee und Sascha Seiffert
 [options="headers"]
 |===
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|F-I-003  |Rechnen Wasserkosten einer Parzelle      |Wasserzählerstand einer Parzelle      |Wasserzählerstand (und Wasserkosten pro Kubikmeter)  |Ein Preis von Wasserkost einer Parzelle wird gerechnet
-|F-I-005  |Rechnen Stromkosten einer Parzelle       |Stromzählerstand einer Parzelle       |Stromzählerstand (und Stromkosten pro Kilowatt)      |Ein Preis von Stromkost einer Parzelle wird gerechnet
-|F-I-007  |Rechnen Miete einer Parzelle             |Größe einer Parzelle                  |Größe der Parzelle (und Miete pro Quadratmeter)      |Eine jährliche Miete der Parzelle wird gerechnet
-|F-I-015  |Schätzen fehlender Rechnungspositionen   |Rechnung existiert, alle bekannten Positionen sind angelegt  |Alle Positionen  |Fehlende Kosten oder Verbräuche werden geschätzt
-|F-I-020  |Rechnen eine jährliche Rechnung einer Parzelle   |Parzelle enthält alle nötige Daten für Berechnung    |Wasser/Stromzählerstand und Größe der Parzelle        |Eine jährliche Rechnung der Parzelle wird erstellt
-|F-I-023  |Erstellen eine jährliche Rechnung in PDF         |Rechnung ist erstellt         |Button                |Eine jährliche Rechnung der Parzelle wird in PDF erstellt
+|F-U-003  |Rechnen Wasserkosten einer Parzelle      |Wasserzählerstand einer Parzelle      |Wasserzählerstand (und Wasserkosten pro Kubikmeter)  |Ein Preis von Wasserkost einer Parzelle wird gerechnet
+|F-U-005  |Rechnen Stromkosten einer Parzelle       |Stromzählerstand einer Parzelle       |Stromzählerstand (und Stromkosten pro Kilowatt)      |Ein Preis von Stromkost einer Parzelle wird gerechnet
+|F-U-007  |Rechnen Miete einer Parzelle             |Größe einer Parzelle                  |Größe der Parzelle (und Miete pro Quadratmeter)      |Eine jährliche Miete der Parzelle wird gerechnet
+|F-U-015  |Schätzen fehlender Rechnungspositionen   |Rechnung existiert, alle bekannten Positionen sind angelegt  |Alle Positionen  |Fehlende Kosten oder Verbräuche werden geschätzt
+|F-U-020  |Rechnen eine jährliche Rechnung einer Parzelle   |Parzelle enthält alle nötige Daten für Berechnung    |Wasser/Stromzählerstand und Größe der Parzelle        |Eine jährliche Rechnung der Parzelle wird erstellt
+|F-U-023  |Erstellen eine jährliche Rechnung in PDF         |Rechnung ist erstellt         |Button                |Eine jährliche Rechnung der Parzelle wird in PDF erstellt
 |F-I-030  |Versenden per E-Mail  |Rechnung ist erstellt     |Adressat und PDF  |Die Rechnung wird dem Empfänger zugestellt
 |===
 

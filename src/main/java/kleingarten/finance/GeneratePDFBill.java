@@ -10,19 +10,17 @@ import org.slf4j.LoggerFactory;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
+
 
 import kleingarten.plot.*;
-import kleingarten.tenant.Tenant;
 
 public class GeneratePDFBill {
 	private static final Logger logger = LoggerFactory.getLogger(GeneratePDFBill.class);
 
 	public static ByteArrayInputStream bill(List<Fee> fees, Plot plot) {
-//		AtomicReference<Plot> atomicPlot = new AtomicReference<>();
 		Document document = new Document();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-//		Plot plot = atomicPlot.get();
+
 
 		String plotName = plot.getName();
 
@@ -34,7 +32,8 @@ public class GeneratePDFBill {
 					+ ("Deutschland") + "\n"
 					+ ("+49 123456789"), font);
 			company.setAlignment(Element.ALIGN_RIGHT);
-			Paragraph billFor = new Paragraph(plotName, font);
+			Paragraph billFor = new Paragraph(("Parzelle Nr. ")
+				+ (plotName), font);
 			billFor.setSpacingBefore(40);
 
 
@@ -94,6 +93,8 @@ public class GeneratePDFBill {
 			document.open();
 			document.add(company);
 			document.add(billFor);
+			document.add( Chunk.NEWLINE );
+			document.add( Chunk.NEWLINE );
 			document.add(table);
 
 			document.close();
