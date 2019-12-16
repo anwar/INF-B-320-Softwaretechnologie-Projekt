@@ -18,17 +18,17 @@ public class Bill {
 	 * @param oldProcedure The procedure of the year before. !! [to SangHyun] Decide if oldProcedure can be null or not. if not, write another constructor with just the mainProcedure.
 	 */
 	public Bill(Procedure mainProcedure, Procedure oldProcedure){
-		
+
 		Assert.notNull(mainProcedure, "Main Procedure can not be null!");
-		
+
 		feeList = new ArrayList<Fee>();
-		
+
 		initFixedCost();
 
 		initDependentCost(mainProcedure, oldProcedure);
-		
+
 	}
-	
+
 	private void initFixedCost() {
 
 		Fee membershipFee = new Fee("Mitgliedsbeitrag", 1, 17.25);
@@ -49,9 +49,9 @@ public class Bill {
 		feeList.add(waterMeterFee);
 		Fee electricityMeterFee = new Fee("Grundmiete für Stromzähler", 1, 1.55);
 		feeList.add(electricityMeterFee);
-		
+
 	}
-	
+
 	private void initDependentCost(Procedure mainProcedure) {
 		Fee waterFee = new Fee("Wasserkosten", mainProcedure.getWatercount(), 1.95);
 		feeList.add(waterFee);
@@ -62,9 +62,9 @@ public class Bill {
 		feeList.add(rent);
 		Fee penalty = new Fee("Strafgeld", Math.round((double)(240-mainProcedure.getWorkMinutes())/60), 8);
 		feeList.add(penalty);
-		
+
 	}
-	
+
 	private void initDependentCost(Procedure mainProcedure, Procedure oldProcedure) {
 		if(oldProcedure == null) {
 			initFixedCost();
@@ -80,7 +80,7 @@ public class Bill {
 		feeList.add(rent);
 		Fee penalty = new Fee("Strafgeld", Math.round((double)(240-mainProcedure.getWorkMinutes())/60), 8);
 		feeList.add(penalty);
-		
+
 	}
 
 }

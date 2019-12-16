@@ -32,10 +32,11 @@ public class GeneratePDFBill {
 					+ ("Deutschland") + "\n"
 					+ ("+49 123456789"), font);
 			company.setAlignment(Element.ALIGN_RIGHT);
+
 			Paragraph billFor = new Paragraph(("Parzelle Nr. ")
 				+ (plotName), font);
+			billFor.setAlignment(Element.ALIGN_CENTER);
 			billFor.setSpacingBefore(40);
-
 
 			PdfPTable table = new PdfPTable(4);
 			table.setWidthPercentage(75);
@@ -89,13 +90,23 @@ public class GeneratePDFBill {
 				table.addCell(cell);
 			}
 
+			double totalPrice = 0.0;
+			for (final Fee fee : fees) {
+				totalPrice += (fee.getPrice());
+			}
+
+			Paragraph sum = new Paragraph(("Summe: ") + (String.format("%.2f", totalPrice)), font);
+			sum.setAlignment(Element.ALIGN_CENTER);
+			sum.setSpacingBefore(5);
+
 			PdfWriter.getInstance(document, out);
 			document.open();
 			document.add(company);
 			document.add(billFor);
 			document.add( Chunk.NEWLINE );
-			document.add( Chunk.NEWLINE );
 			document.add(table);
+			document.add( Chunk.NEWLINE );
+			document.add(sum);
 
 			document.close();
 
