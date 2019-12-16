@@ -22,7 +22,8 @@ public class WorkAssignmentController {
 	private WorkAssignmentManager workAssignmentManager;
 	private WorkAssignmentRepository workAssignmentRepository;
 
-	public WorkAssignmentController(WorkAssignmentManager workAssignmentManager, WorkAssignmentRepository workAssignmentRepository) {
+	public WorkAssignmentController(WorkAssignmentManager workAssignmentManager,
+									WorkAssignmentRepository workAssignmentRepository) {
 		this.workAssignmentManager = workAssignmentManager;
 		this.workAssignmentRepository = workAssignmentRepository;
 	}
@@ -84,7 +85,8 @@ public class WorkAssignmentController {
 
 	@PostMapping("/removePlotOfWorkAssignment")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
-	String removePlot(@RequestParam("plotID") ProductIdentifier plotID, @RequestParam("assignmentID") Long assignmentID){
+	String removePlot(@RequestParam("plotID") ProductIdentifier plotID,
+					  @RequestParam("assignmentID") Long assignmentID){
 		workAssignmentManager.removePlotOutWorkAssignment(plotID, assignmentID);
 		System.out.println("debug after function in Controller");
 		return "redirect:/listOfAssignments";
@@ -99,7 +101,8 @@ public class WorkAssignmentController {
 	}
 
 	@PostMapping("/setWorkAssignment")
-	public String AddWorkAssignmentToPlot(@RequestParam("plotID") ProductIdentifier plotID, @RequestParam("assignmentID") Long id){
+	public String AddWorkAssignmentToPlot(@RequestParam("plotID") ProductIdentifier plotID,
+										  @RequestParam("assignmentID") Long id){
 		workAssignmentManager.addPlotToWorkAssignment(plotID, id);
 		return "redirect:/myPlot";
 	}

@@ -57,7 +57,8 @@ public class WorkAssignmentManager {
 	 * @return a @{@link WorkAssignment}
 	 */
 	public WorkAssignment createAssignment(CreateWorkAssignmentForm form){
-		return workAssignmentRepository.save(new WorkAssignment(form.getDateTime(), 0, form.getTitle(), form.getDescription(), null));
+		return workAssignmentRepository.save(new WorkAssignment(form.getDateTime(), 0, form.getTitle(),
+				form.getDescription(), null));
 	}
 
 	/**
@@ -69,7 +70,8 @@ public class WorkAssignmentManager {
 	 * @param plots from type {@link List} from {@link Plot}
 	 * @return a @{@link WorkAssignment}
 	 */
-	public WorkAssignment createAssignmentForInitializer(LocalDateTime date, int workHours, String title, String description, List<Plot> plots){
+	public WorkAssignment createAssignmentForInitializer(LocalDateTime date, int workHours, String title,
+														 String description, List<Plot> plots){
 		return workAssignmentRepository.save(new WorkAssignment(date, workHours,title, description, plots));
 	}
 
