@@ -137,7 +137,7 @@ public class WorkAssignmentManager {
 		workAssignmentRepository.save(workAssignment);
 	}
 
-	public int getWorkHours(ProductIdentifier plotID, long workAssignmentID){
+	public int getWorkHours(ProductIdentifier plotID){
 		Plot plot = findByID(plotID);
 		int actualYear = LocalDateTime.now().getYear();
 		List<WorkAssignment> buffer = new ArrayList<>();
