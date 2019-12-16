@@ -13,11 +13,12 @@ import java.util.List;
 
 
 import kleingarten.plot.*;
+import kleingarten.tenant.Tenant;
 
 public class GeneratePDFBill {
 	private static final Logger logger = LoggerFactory.getLogger(GeneratePDFBill.class);
 
-	public static ByteArrayInputStream bill(List<Fee> fees, Plot plot) {
+	public static ByteArrayInputStream bill(List<Fee> fees, Plot plot, Tenant mainTenant, int year) {
 		Document document = new Document();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 
@@ -32,10 +33,11 @@ public class GeneratePDFBill {
 					+ ("Deutschland") + "\n"
 					+ ("+49 123456789"), font);
 			company.setAlignment(Element.ALIGN_RIGHT);
+
 			Paragraph billFor = new Paragraph(("Parzelle Nr. ")
 				+ (plotName), font);
+			billFor.setAlignment(Element.ALIGN_CENTER);
 			billFor.setSpacingBefore(40);
-
 
 			PdfPTable table = new PdfPTable(4);
 			table.setWidthPercentage(75);
@@ -88,14 +90,21 @@ public class GeneratePDFBill {
 				cell.setPaddingRight(5);
 				table.addCell(cell);
 			}
+			
+//SUMME aller Fees
+
+			Paragraph sum = new Paragraph(("Summe: ") + (String.format("%.2f", Bill.getSum(fees))), font);
+			sum.setAlignment(Element.ALIGN_CENTER);
+			sum.setSpacingBefore(5);
 
 			PdfWriter.getInstance(document, out);
 			document.open();
 			document.add(company);
 			document.add(billFor);
 			document.add( Chunk.NEWLINE );
-			document.add( Chunk.NEWLINE );
 			document.add(table);
+			document.add( Chunk.NEWLINE );
+			document.add(sum);
 
 			document.close();
 
