@@ -52,9 +52,7 @@ public class PlotControllerService {
 		if (plot.getStatus() == PlotStatus.TAKEN) {
 			Tenant mainTenant = dataService.findTenantById(dataService.getProcedure(plot)
 											.getMainTenant());
-			if (mainTenant == null) {
-				throw new IllegalArgumentException("Tenant must not be null!");
-			}
+
 			//Get roles of mainTenant and subTenants
 			Procedure procedure = dataService.getProcedure(plot);
 			rolesOfMainTenant.addAll(mainTenant.getUserAccount().getRoles().toSet());

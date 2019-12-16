@@ -13,7 +13,6 @@ import java.util.Map;
  * is needed to show the details of a specific {@link Plot}
  */
 public class PlotInformationBuffer {
-	Plot associatedPlot;
 	ProductIdentifier plotId;
 	String plotName;
 	int plotSize;
@@ -29,7 +28,6 @@ public class PlotInformationBuffer {
 	 * @param plot associated {@link Plot} which details and information of the renting should be saved
 	 */
 	public PlotInformationBuffer(final Plot plot) {
-		associatedPlot = plot;
 		plotId = plot.getId();
 		plotName = plot.getName();
 		plotSize = plot.getSize();
@@ -171,24 +169,6 @@ public class PlotInformationBuffer {
 	 */
 	public void setWorkHours(String workHours) {
 		this.workHours = workHours;
-	}
-
-	/**
-	 * Getter for the associated {@link Plot}
-	 *
-	 * @return associated {@link Plot}
-	 */
-	public Plot getAssociatedPlot() {
-		return associatedPlot;
-	}
-
-	/**
-	 * Setter for the associated {@link Plot}
-	 *
-	 * @param associatedPlot associated {@link Plot}
-	 */
-	public void setAssociatedPlot(Plot associatedPlot) {
-		this.associatedPlot = associatedPlot;
 	}
 
 	/**

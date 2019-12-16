@@ -27,7 +27,6 @@ public class PlotInformationBufferTests {
 	 */
 	@Test
 	public void initialSetupTest() {
-		assertThat(buffer.getAssociatedPlot()).isEqualTo(plot);
 		assertThat(buffer.getPlotId()).isEqualTo(plot.getId());
 		assertThat(buffer.getPlotName()).isEqualTo(plot.getName());
 		assertThat(buffer.getPlotSize()).isEqualTo(plot.getSize());

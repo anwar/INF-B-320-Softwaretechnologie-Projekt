@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -27,9 +26,6 @@ public class PlotControllerServiceTests {
 	private Tenant boss = null;
 	private Tenant replacement = null;
 	private Tenant chairman = null;
-
-	private Map<Plot, String> colors;
-	private Map<Plot, String> result;
 
 	private Plot freePlot;
 	private Plot takenPlot;
@@ -77,9 +73,6 @@ public class PlotControllerServiceTests {
 		this.freePlot = setUpPlot(plots);
 		plots = plotCatalog.findByStatus(PlotStatus.TAKEN);
 		this.takenPlot = setUpPlot(plots);
-
-		this.colors = new HashMap<>();
-		this.result = new HashMap<>();
 	}
 
 	/**
@@ -116,9 +109,7 @@ public class PlotControllerServiceTests {
 	 */
 	@Test
 	public void insecureGetColorOfFreePlotTest() {
-		result.put(freePlot, "#7CB342");
-
-		assertThat(plotControllerService.setPlotColor(freePlot, Optional.empty())).isEqualTo(result);
+		assertThat(plotControllerService.setPlotColor(freePlot, Optional.empty())).isEqualTo(Map.of(freePlot, "#7CB342"));
 	}
 
 	/**
@@ -126,10 +117,8 @@ public class PlotControllerServiceTests {
 	 */
 	@Test
 	public void secureGetColorForFreePlotTest() {
-		result.put(freePlot, "#7CB342");
-
 		assertThat(plotControllerService.setPlotColor(freePlot, Optional.of(chairman.getUserAccount())))
-				.isEqualTo(result);
+				.isEqualTo(Map.of(freePlot, "#7CB342"));
 	}
 
 	/**
@@ -140,9 +129,7 @@ public class PlotControllerServiceTests {
 		if (!dataService.procedureExists(takenPlot)) {
 			Procedure takenPlotProcedure = procedureManager.add(new Procedure(2019, takenPlot, boss.getId()));
 		}
-		result.put(takenPlot, "#546E7A");
-
-		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.empty())).isEqualTo(result);
+		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.empty())).isEqualTo(Map.of(takenPlot, "#546E7A"));
 	}
 
 	/**
@@ -153,10 +140,8 @@ public class PlotControllerServiceTests {
 	public void securedGetColorForBossPlotTest() {
 		Procedure procedure = procedureManager.getProcedures(2019, boss.getId()).toList().get(0);
 		takenPlot = plotService.findById(procedure.getPlotId());
-		result.put(takenPlot, "#FDD835");
-
 		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount())))
-				.isEqualTo(result);
+				.isEqualTo(Map.of(takenPlot, "#FDD835"));
 	}
 
 	/**
@@ -168,10 +153,8 @@ public class PlotControllerServiceTests {
 		Procedure procedure = new Procedure(2019, freePlot, replacement.getId());
 		procedureManager.add(procedure);
 		takenPlot = plotService.findById(procedure.getPlotId());
-		result.put(takenPlot, "#FDD835");
-
 		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount())))
-				.isEqualTo(result);
+				.isEqualTo(Map.of(takenPlot, "#FDD835"));
 	}
 
 	/**
@@ -183,10 +166,15 @@ public class PlotControllerServiceTests {
 		Procedure procedure = new Procedure(2019, freePlot, chairman.getId());
 		procedureManager.add(procedure);
 		takenPlot = plotService.findById(procedure.getPlotId());
-		result.put(takenPlot, "#039BE5");
-
 		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount())))
-				.isEqualTo(result);
+				.isEqualTo(Map.of(takenPlot, "#039BE5"));
+
+		Tenant tenant = tenantManager.findByRole(Role.of("Protokollant")).get(0);
+		Procedure rentsAsSubtenant = procedureManager.add(new Procedure(2019, freePlot, tenant.getId()));
+		rentsAsSubtenant.addSubTenant(chairman.getId());
+		takenPlot = rentsAsSubtenant.getPlot();
+		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount())))
+				.isEqualTo(Map.of(takenPlot, "#039BE5"));
 	}
 
 	/**
@@ -199,10 +187,15 @@ public class PlotControllerServiceTests {
 		procedure.addSubTenant(chairman.getId());
 		procedureManager.add(procedure);
 		takenPlot = plotService.findById(procedure.getPlotId());
-		result.put(takenPlot, "#E69138");
-
 		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount())))
-				.isEqualTo(result);
+				.isEqualTo(Map.of(takenPlot, "#E69138"));
+
+		Procedure renting = procedureManager.getAll(chairman.getId()).toList().get(0);
+		renting.addSubTenant(boss.getId());
+		procedureManager.add(renting);
+		takenPlot = plotService.findById(renting.getPlotId());
+		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount())))
+				.isEqualTo(Map.of(takenPlot, "#E69138"));
 	}
 
 	/**
@@ -210,8 +203,15 @@ public class PlotControllerServiceTests {
 	 */
 	@Test
 	public void addInformationOfPlotTest() {
-		PlotInformationBuffer buffer = plotControllerService
+		PlotInformationBuffer bufferForFreePlot = plotControllerService
 				.addInformationOfPlotToPlotInformationBuffer(Optional.empty(), freePlot);
-		assertThat(buffer.getPlotId()).isEqualTo(freePlot.getId());
+		assertThat(bufferForFreePlot.getPlotId()).isEqualTo(freePlot.getId());
+
+		Procedure procedure = procedureManager.getAll(boss.getId()).toList().get(0);
+		PlotInformationBuffer bufferForTakenPlot = plotControllerService
+				.addInformationOfPlotToPlotInformationBuffer(Optional.of(procedure), procedure.getPlot());
+		assertThat(bufferForTakenPlot.getPlotId()).isEqualTo(procedure.getPlotId());
+		assertThat(bufferForTakenPlot.getMainTenantRoles()).isEqualTo(Map.of(boss, boss.getRoles()));
+		assertThat(bufferForTakenPlot.getSubTenantRoles()).isEqualTo(Map.of());
 	}
 }
