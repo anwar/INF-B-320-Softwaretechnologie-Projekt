@@ -28,6 +28,7 @@ class TenantController {
 	 * @param tenantManager manager class {@link TenantManager} for managing {@link Tenant}s
 	 * @param tenantRepository repository of tenants as {@link TenantRepository}
 	 * @param tenantService service class {@link TenantService}
+	 * @param authenticationManager service class of {@link AuthenticationManager}
 	 */
 	TenantController(TenantManager tenantManager, TenantRepository tenantRepository, TenantService tenantService, AuthenticationManager authenticationManager) {
 		Assert.notNull(tenantManager, "TenantManager must not be null");

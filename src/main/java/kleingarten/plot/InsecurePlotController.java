@@ -44,6 +44,7 @@ public class InsecurePlotController {
 	 * Use different methods to show the detail page of a {@link Plot} depending if a user is logged in or not
 	 * @param user {@link Optional} of {@link UserAccount}, contains the user's {@link UserAccount} when he is logged in
 	 * @param plot {@link Plot} to show the details of
+	 * @param model as {@link Model}
 	 * @return response as {@link ModelAndView}
 	 */
 	@GetMapping("/plot/{plot}")

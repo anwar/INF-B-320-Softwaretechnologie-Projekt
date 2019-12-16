@@ -18,6 +18,7 @@ public class TenantService {
 	 * Constructor of the class {@link TenantService}
 	 * @param tenantManager manager class of the class {@link Tenant} as {@link TenantManager}
 	 * @param userAccountManager repository of userAccounts as {@link UserAccountManager}
+	 * @param authenticationManager service class of {@link AuthenticationManager}
 	 */
 	TenantService(TenantManager tenantManager, UserAccountManager userAccountManager, TenantRepository tenants, AuthenticationManager authenticationManager){
 		this.tenantManager = tenantManager;

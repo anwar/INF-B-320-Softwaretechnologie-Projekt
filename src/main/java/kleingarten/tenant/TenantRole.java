@@ -120,7 +120,7 @@ public class TenantRole implements Comparable {
 	/**
 	 * Method tests if a {@link Role} is unique
 	 * @param role to be tested if it's unique
-	 * @return
+	 * @return a {@link Boolean}
 	 */
 	public static Boolean isUnique(String role){
 		return getUniqueRoleList().contains(role);

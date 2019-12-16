@@ -33,6 +33,7 @@ public class PlotControllerService {
 	 * Select color of a {@link Plot} when a user is logged in and save the selection in a {@link Map} of
 	 * {@link Plot} and {@link String}
 	 * @param plot {@link Plot} for which a color should be selected
+	 * @param user as {@link UserAccount}
 	 * @return color of {@link Plot} saved in a {@link ModelAndView}
 	 */
 	Map<Plot, String> setPlotColor(Plot plot, Optional<UserAccount> user) {
@@ -122,6 +123,7 @@ public class PlotControllerService {
 	/**
 	 * Add information of a {@link Plot} to a {@link PlotInformationBuffer}
 	 * @param procedure {@link Procedure} to which the {@link Plot} is associated
+	 * @param plot {@link Plot} to which the information is added
 	 * @return information of {@link Plot} saved in a {@link PlotInformationBuffer}
 	 */
 	PlotInformationBuffer addInformationOfPlotToPlotInformationBuffer(Optional<Procedure> procedure, Plot plot) {
@@ -195,6 +197,7 @@ public class PlotControllerService {
 
 	/**
 	 * Set the color of a {@link Plot} depending on who is its chairman of type {@link Tenant} and add the
+	 * @param colorsForChairmen is the {@link Map} of tenant to color string
 	 * @return {@link Map} of {@link Plot}s and associated colors as {@link String}
 	 */
 	Map<Plot, String> secureSetColorOfChairmenForPlots(Map<Tenant, String> colorsForChairmen) {

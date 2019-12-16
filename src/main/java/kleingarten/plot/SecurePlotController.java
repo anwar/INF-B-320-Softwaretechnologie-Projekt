@@ -305,6 +305,7 @@ public class SecurePlotController {
 	 * @param plotId {@link ProductIdentifier} of the {@link Plot} which details should be changed
 	 * @param size size of the {@link Plot} as int
 	 * @param description description of the {@link Plot} as {@link String}
+	 * @param estimator is the estimation of the {@link Plot} as {@link String}
 	 * @return name of view as {@link String}
 	 */
 	@PostMapping("/editedPlot")

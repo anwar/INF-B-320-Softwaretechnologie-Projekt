@@ -49,9 +49,9 @@ public class ProcedureManager {
 	/**
 	 * Find a Procedure by a given year and Plot.
 	 *
-	 * @param year
-	 * @param plotId
-	 * @return null if not found
+	 * @param year for which to get the {@link Procedure}
+	 * @param plotId is the Id for the {@link Plot}
+	 * @return a {@link Procedure} or null if not found
 	 */
 	public Procedure getProcedure(int year, ProductIdentifier plotId) {
 		for(Procedure procedure:procedures.findByPlotProductIdentifier(plotId)) {
@@ -80,9 +80,9 @@ public class ProcedureManager {
 	/**
 	 * Get all Procedures for the Tenant, if he is main or sub Tenant in it.
 	 *
-	 * @param year
-	 * @param tenantId
-	 * @return Empty Steamable or Procedures
+	 * @param year for which to get the {@link Procedure}s
+	 * @param tenantId is the Id for the {@link Tenant}
+	 * @return Empty {@link Streamable} or {@link Procedure}s
 	 */
 	public Streamable<Procedure> getProcedures(int year, long tenantId) {
 		List<Procedure> procList = new LinkedList<Procedure>();
@@ -98,7 +98,7 @@ public class ProcedureManager {
 	 * It doesnt matter if he is main or sub Tenant.
 	 * Main Teanant Procedures will come first.
 	 *
-	 * @param tenantId
+	 * @param tenantId is the Id for the {@link Tenant}
 	 * @return (mainTenantProcedures):(subTenantProcedures)
 	 */
 	public Streamable<Procedure> getAll(long tenantId) {
@@ -106,15 +106,15 @@ public class ProcedureManager {
 		Set<Procedure> noDubes = procedures.findByMainTenant(tenantId).and(procedures.findBySubTenant(tenantId)).toSet();
 		return Streamable.of(noDubes);
 	}
-	
+
 	public Streamable<Procedure> getAllByYear(int year) {
 		return procedures.findByYear(year);
 	}
-	
+
 	public Streamable<Procedure> getAllByPlot(Plot plot) {
-		
+
 		return procedures.findByPlot(plot);
-		
+
 	}
 
 	public Procedure save(Procedure procedure) {
@@ -145,8 +145,8 @@ public class ProcedureManager {
 	/**
 	 * Before Creating a bill, Need to check whether the procedure is still isOpen() or not.
 	 * If the isOpen == false, then bill will be created.
-	 * @param plot
-	 * @return
+	 * @param plot as {@link Plot}
+	 * @return a {@link Procedure}
 	 */
 	public Procedure getCurrentBillAndFinalizeProcedure(Plot plot){
 		for(Procedure procedure :procedures.findByPlot(plot)) {

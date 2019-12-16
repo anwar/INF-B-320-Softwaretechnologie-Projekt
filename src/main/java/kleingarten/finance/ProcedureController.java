@@ -18,17 +18,15 @@ public class ProcedureController {
 	private ProcedureManager procedureManager;
 	private TenantManager tenantManager;
 
-	@Autowired
-
-	public ProcedureController(ProcedureManager procedureManager) {
+	public ProcedureController(ProcedureManager procedureManager, TenantManager tenantManager) {
 		this.procedureManager = procedureManager;
 		this.tenantManager = tenantManager;
 	}
 
 	/**
 	 * Provide simple Lists of procedure
-	 * @param model
-	 * @return
+	 * @param model for the view
+	 * @return a view
 	 */
 	@GetMapping("/procedure")
 	//@PreAuthorize("hasRole('Vorstandsvorsitzender')")
@@ -39,9 +37,9 @@ public class ProcedureController {
 
 	/**
 	 *By clicking: able to see all the details of selected procedure.
-	 * @param id
-	 * @param model
-	 * @return
+	 * @param id of the procedure
+	 * @param model for the view
+	 * @return a view
 	 */
 	@GetMapping("/procedureDetails")
 	//@PreAuthorize("hasRole('Vorstandsvorsitzender')")
@@ -51,8 +49,8 @@ public class ProcedureController {
 	}
 
 	/**
-	 * @param model
-	 * @return
+	 * @param model for the view
+	 * @return a view
 	 */
 	@GetMapping("/updateProcedure")
 	String updateProcedure(Model model) {
@@ -62,9 +60,10 @@ public class ProcedureController {
 
 	/**
 	 * Obmann will be able to change the value of watercount
-	 * @param model
-	 * @param plotId
-	 * @return
+	 *
+	 * @param model for the view
+	 * @param plotId is the Id of the plot
+	 * @return a view
 	 */
 	@GetMapping("/procedureDetails/editWatercount/{plotId}")
 	//@PreAuthorize("hasRole('ROLE_VORSTAND')")
@@ -74,9 +73,10 @@ public class ProcedureController {
 	}
 
 	/**
-	 * @param model
-	 * @param procedure
-	 * @return
+	 * @param model for the view
+	 * @param procedureId is the Id of the procedure
+	 * @param water is the water count
+	 * @return a redirect string
 	 */
 	@PostMapping("/procedureDetails/editWatercount")
 	public String saveWatercount(Model model, @RequestParam("procedureId") String procedureId, @RequestParam String water) {
@@ -91,9 +91,10 @@ public class ProcedureController {
 	}
 
 	/**
-	 * @param model
-	 * @param plotId
-	 * @return
+	 * @param model for the view
+	 * @param procedureId is the Id of the procedure
+	 * @param power is the power count
+	 * @return a redirect string
 	 */
 	@PostMapping("/procedureDetails/editPowercount")
 	public String savePowercount(Model model, @RequestParam("procedureId") String procedureId, @RequestParam String power) {
@@ -104,9 +105,9 @@ public class ProcedureController {
 	}
 
 	/**
-	 * @param model
-	 * @param procedure
-	 * @return
+	 * @param model for the view
+	 * @param procedure as {@link Procedure}
+	 * @return a redirect string
 	 */
 	@PostMapping("/procedureDetails/editPowercount/{plotId}")
 	public String savePowercount(Model model, Procedure procedure) {
@@ -121,6 +122,7 @@ public class ProcedureController {
 	/**
 	 * Create model with needed information to show a form to change the saved details of the {@link Plot}
 	 *
+	 * @param user as {@link UserAccount}
 	 * @param plot {@link Plot} for which a form with the saves details should be shown
 	 * @param mav  {@link ModelAndView} which contains the needed information of the {@link Plot}
 	 * @return response as {@link ModelAndView}

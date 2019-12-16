@@ -226,11 +226,11 @@ public class Tenant {
 
 	/**
 	 * Constructor of class {@link Tenant}
-	 * @param forename
+	 * @param forename of the tenant
 	 * @param surname both parameters are used to identify the tenant by name
 	 * @param address address of the tenant for physical mailing service as String
-	 * @param phonenumber phone number of the tenant as String
-	 * @param birthdate birth date of the tenant as String
+	 * @param phonenumber of the tenant as String
+	 * @param birthdate of the tenant as String
 	 * @param userAccount userAccount of the tenant as class {@link UserAccount} given by the Salespoint-Framework containing and saving
 	 *                    user data (such as password, email and username)
 	 */

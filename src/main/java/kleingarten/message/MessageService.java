@@ -49,6 +49,9 @@ public class MessageService {
 	 * Spring Framework provides an easy abstraction for sending email by using the {@link JavaMailSender}
 	 * interface. Spring creates a {@link JavaMailSender}, if none exists, using the configuration provided
 	 * in {@code src/main/resources/application.properties}.
+	 *
+	 * @param mailSender        is the {@link JavaMailSender} used for sending emails
+	 * @param messageProperties are the custom defined application properties
 	 */
 	public MessageService(@Autowired MessageProperties messageProperties, @Autowired JavaMailSender mailSender) {
 		this.messageProperties = messageProperties;
