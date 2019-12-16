@@ -18,12 +18,14 @@ import kleingarten.tenant.Tenant;
 public class GeneratePDFBill {
 	private static final Logger logger = LoggerFactory.getLogger(GeneratePDFBill.class);
 
-	public static ByteArrayInputStream bill(List<Fee> fees, Plot plot, Tenant mainTenant, int year) {
+	public static ByteArrayInputStream bill(List<Fee> fees, Plot plot, Tenant tenant, int year) {
+
 		Document document = new Document();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-
 		String plotName = plot.getName();
+		String tenantName = tenant.getFullName();
+		String tenantAddress = tenant.getAddress();
 
 		try {
 			Font font = FontFactory.getFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
@@ -34,10 +36,13 @@ public class GeneratePDFBill {
 					+ ("+49 123456789"), font);
 			company.setAlignment(Element.ALIGN_RIGHT);
 
-			Paragraph billFor = new Paragraph(("Parzelle Nr. ")
-				+ (plotName), font);
-			billFor.setAlignment(Element.ALIGN_CENTER);
+			Paragraph billFor = new Paragraph((tenantName) + "\n" + (tenantAddress), font);
+			billFor.setAlignment(Element.ALIGN_LEFT);
 			billFor.setSpacingBefore(40);
+
+			Paragraph billFor1 = new Paragraph(("Rechnung im Jahr ") + (year) + " " + ("(Parzelle Nr. ") + (plotName) + (")"), font);
+			billFor1.setAlignment(Element.ALIGN_CENTER);
+			billFor1.setSpacingBefore(40);
 
 			PdfPTable table = new PdfPTable(4);
 			table.setWidthPercentage(75);
@@ -90,10 +95,8 @@ public class GeneratePDFBill {
 				cell.setPaddingRight(5);
 				table.addCell(cell);
 			}
-			
-//SUMME aller Fees
 
-			Paragraph sum = new Paragraph(("Summe: ") + (String.format("%.2f", Bill.getSum(fees))), font);
+			Paragraph sum = new Paragraph(("Summe: ") + (String.format("%.2f", Bill.getSum(fees))) + (" Euro"), headFont);
 			sum.setAlignment(Element.ALIGN_CENTER);
 			sum.setSpacingBefore(5);
 
@@ -101,6 +104,7 @@ public class GeneratePDFBill {
 			document.open();
 			document.add(company);
 			document.add(billFor);
+			document.add(billFor1);
 			document.add( Chunk.NEWLINE );
 			document.add(table);
 			document.add( Chunk.NEWLINE );

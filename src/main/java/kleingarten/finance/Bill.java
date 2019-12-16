@@ -28,17 +28,17 @@ public class Bill {
 		initDependentCost(mainProcedure, oldProcedure);
 
 	}
-	
+
 	public static double getSum(List<Fee> feeList) {
 		double sum = 0d;
-		
+
 		for(Fee fee : feeList) {
 			sum += fee.getPrice();
 		}
-		
+
 		return sum;
 	}
-	
+
 	private void initFixedCost() {
 
 		Fee membershipFee = new Fee("Mitgliedsbeitrag", 1, 17.25);
@@ -70,7 +70,7 @@ public class Bill {
 		feeList.add(powerFee);
 		Fee rent = new Fee("Miete", mainProcedure.getSize(), 0.18);
 		feeList.add(rent);
-		Fee penalty = new Fee("Strafgeld", Math.round((double)(240-mainProcedure.getWorkMinutes())/60), 8);
+		Fee penalty = new Fee("Strafgeld", Math.round(Math.max(0,(double)(240-mainProcedure.getWorkMinutes())/60)), 8);
 		feeList.add(penalty);
 
 	}

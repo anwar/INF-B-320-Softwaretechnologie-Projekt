@@ -36,12 +36,12 @@ public class FeeController {
 		//both can get the main and old Procedure from procedureManager, so you can simply work with those procedures in the body right now.
 
 		Procedure mainProcedure = procedureManager.get(Long.parseLong(procedureId));
-		
+
 		Procedure oldProcedure = procedureManager.getProcedure(mainProcedure.getYear()-1, mainProcedure.getPlotId());
-		
+
 		Bill billToShow = new Bill(mainProcedure, oldProcedure);
 
-		ByteArrayInputStream bis = GeneratePDFBill.bill( billToShow.feeList , mainProcedure.getPlot(), procedureManager.getTenantManager().get(mainProcedure.getMainTenant()), mainProcedure.getYear() ); //you may add a getter for feelist
+		ByteArrayInputStream bis = GeneratePDFBill.bill( billToShow.feeList , mainProcedure.getPlot(), procedureManager.getTenantManager().get(mainProcedure.getMainTenant()), mainProcedure.getYear() );
 
 		var headers = new HttpHeaders();
 		headers.add("Content-Disposition", "inline; filename=Rechnungen.pdf");
@@ -58,16 +58,11 @@ public class FeeController {
 	public String viewBill(Model model, @PathVariable Plot plot, @LoggedIn UserAccount userAccount){
 
 		model.addAttribute("plot", procedureManager.getPlotService().findById(plot.getId()));
-		
-		
-		List<Procedure> toDisplay = new ArrayList<Procedure>(), procedures = procedureManager.getAllByPlot(plot).toList();
-		
-		Tenant tenant = procedureManager.getTenantManager().getTenantByUserAccount(userAccount);
 
-//		Procedure mainProcedure = procedureManager.getActualProcedure(plot); // need to initialize mainProcedure	//getCurrentBillAndFinalizeProcedure(plot);
-//		mainProcedure = procedureManager.getProcedure(mainProcedure.getYear(), procedureManager.getPlotService().findById(plot.getId())); // getProcedure of mainProcedure
-//		Procedure oldProcedure = procedureManager.getProcedure(mainProcedure.getYear()-1, procedureManager.getPlotService().findById(plot.getId())); // getProcedure of oldProcedure
-		//new Bill(mainProcedure, oldProcedure);
+
+		List<Procedure> toDisplay = new ArrayList<Procedure>(), procedures = procedureManager.getAllByPlot(plot).toList();
+
+		Tenant tenant = procedureManager.getTenantManager().getTenantByUserAccount(userAccount);
 
 		if(tenant.hasRole("Vorstandsvorsitzender")) {
 			model.addAttribute("procedures", procedures);
@@ -79,17 +74,17 @@ public class FeeController {
 			}
 			model.addAttribute("procedures", toDisplay);
 		}
-		
+
 		return "finance/bill";
 	}
-	
+
 	public String finalizeProcedures(Model model, @PathVariable String year) {
-		
-		List<Procedure> procedures = procedureManager.getAllByYear(Integer.parseInt(year)).toList(); 
+
+		List<Procedure> procedures = procedureManager.getAllByYear(Integer.parseInt(year)).toList();
 		for(Procedure proc : procedures) {
 			System.out.println(proc.toString());
 		}
-		
+
 		return "nix";
 	}
 }
