@@ -40,8 +40,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * {@link GreenMail} is used to create a test server where we can send and retrieve
  * our emails for testing purposes.
  * These tests are based on the examples provided on the official Greenmail website.
- *
- * @see http://www.icegreen.com/greenmail/#examples
+ * Link for reference:
+ * http://www.icegreen.com/greenmail/#examples
  */
 @SpringBootTest
 @ActiveProfiles("test")

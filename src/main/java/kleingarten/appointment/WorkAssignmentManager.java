@@ -37,6 +37,7 @@ public class WorkAssignmentManager {
 	 * function in {@link WorkAssignmentManager}
 	 * its a Getter to get all the WorkAssignments {@link WorkAssignment} and take it from the repository {@link WorkAssignmentRepository}
 	 * is sorted by current year {@link LocalDateTime}
+	 * @return  a list of all @{@link WorkAssignment}
 	 */
 	public List<WorkAssignment> getAll(){
 		LocalDateTime localDateTime = LocalDateTime.now();
@@ -53,8 +54,8 @@ public class WorkAssignmentManager {
 	/**
 	 * function to create a {@link WorkAssignment} in {@link WorkAssignmentManager}
 	 * @param form from type {@link CreateWorkAssignmentForm}
+	 * @return a @{@link WorkAssignment}
 	 */
-
 	public WorkAssignment createAssignment(CreateWorkAssignmentForm form){
 		return workAssignmentRepository.save(new WorkAssignment(form.getDateTime(), 0, form.getTitle(), form.getDescription(), null));
 	}
@@ -66,8 +67,8 @@ public class WorkAssignmentManager {
 	 * @param title from type {@link String}
 	 * @param description from type {@link String}
 	 * @param plots from type {@link List} from {@link Plot}
+	 * @return a @{@link WorkAssignment}
 	 */
-
 	public WorkAssignment createAssignmentForInitializer(LocalDateTime date, int workHours, String title, String description, List<Plot> plots){
 		return workAssignmentRepository.save(new WorkAssignment(date, workHours,title, description, plots));
 	}

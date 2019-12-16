@@ -15,9 +15,21 @@
  */
 package kleingarten.configuration;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
+import kleingarten.appointment.WorkAssignmentManager;
+import kleingarten.appointment.WorkAssignmentRepository;
+import kleingarten.complaint.Complaint;
+import kleingarten.complaint.ComplaintRepository;
+import kleingarten.complaint.ComplaintState;
+import kleingarten.finance.Procedure;
+import kleingarten.finance.ProcedureManager;
+import kleingarten.news.NewsEntry;
+import kleingarten.news.NewsRepository;
+import kleingarten.plot.Plot;
+import kleingarten.plot.PlotCatalog;
+import kleingarten.plot.PlotService;
+import kleingarten.tenant.Tenant;
+import kleingarten.tenant.TenantManager;
+import kleingarten.tenant.TenantRepository;
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.Role;
@@ -27,24 +39,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import kleingarten.appointment.WorkAssignmentManager;
-import kleingarten.appointment.WorkAssignmentRepository;
-import kleingarten.finance.Procedure;
-import kleingarten.finance.ProcedureManager;
-
-import kleingarten.complaint.Complaint;
-import kleingarten.complaint.ComplaintRepository;
-import kleingarten.complaint.ComplaintState;
-
-
-import kleingarten.news.NewsEntry;
-import kleingarten.news.NewsRepository;
-import kleingarten.plot.Plot;
-import kleingarten.plot.PlotCatalog;
-import kleingarten.plot.PlotService;
-import kleingarten.tenant.Tenant;
-import kleingarten.tenant.TenantManager;
-import kleingarten.tenant.TenantRepository;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * A {@link DataInitializer} implementation that will create dummy data for the application
@@ -109,9 +105,6 @@ public class AppDataInitializer implements DataInitializer {
 		LOG.info("fertig");
 	}
 
-	/**
-	 * Initializes dummy {@link NewsEntry}s on application startup.
-	 */
 	void initializeNewsEntries(NewsRepository news) {
 		Assert.notNull(news, "News must not be null!");
 

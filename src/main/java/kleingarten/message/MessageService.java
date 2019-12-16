@@ -32,9 +32,9 @@ import javax.mail.internet.MimeMessage;
  * {@link MessageService} provides convenient methods based on the {@link org.springframework.mail} package
  * to send emails using a SMTP server.
  * The methods are based on the official Spring documentation and the guide on Baeldung website.
- *
- * @see https://docs.spring.io/spring/docs/5.2.2.RELEASE/spring-framework-reference/integration.html#mail
- * @see https://www.baeldung.com/spring-email
+ * Links for reference:
+ * https://docs.spring.io/spring/docs/5.2.2.RELEASE/spring-framework-reference/integration.html#mail}
+ * https://www.baeldung.com/spring-email
  */
 @Service
 public class MessageService {

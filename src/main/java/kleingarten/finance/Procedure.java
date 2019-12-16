@@ -75,9 +75,9 @@ public class Procedure {
 	/**
 	 * Constructor with some parsing, best to use this one.
 	 *
-	 * @param year
-	 * @param plot
-	 * @param mainTenant
+	 * @param year as int
+	 * @param plot as {@link Plot}
+	 * @param mainTenant as long
 	 */
 	public Procedure(int year, Plot plot, long mainTenant) {
 		this.year = year;
@@ -151,7 +151,7 @@ public class Procedure {
 		//Return right data (Ylvi)
 		return plot.getId();
 	}
-	
+
 	public Plot getPlot() {
 		return plot;
 	}
@@ -159,7 +159,7 @@ public class Procedure {
 	/**
 	 * Add a new Sub Tenant to the Procedure.
 	 *
-	 * @param tenantID
+	 * @param tenantID as long
 	 * @return true when added, false if not
 	 */
 	public boolean addSubTenant(long tenantID) {
@@ -189,7 +189,7 @@ public class Procedure {
 	 * Set a main Tenant for the Process, the old Tenant will be overwritten.
 	 * Also keep the subTenants as they are.
 	 *
-	 * @param tenantID
+	 * @param tenantID as long
 	 * @return false if tenant is already main tenant
 	 */
 	public boolean setMainTenant(long tenantID) {
@@ -204,7 +204,7 @@ public class Procedure {
 	 * Set the new main Tenant for the Process.
 	 * Will also remove all sub Tenants.
 	 *
-	 * @param tenantID
+	 * @param tenantID as long
 	 * @return false if its the same main Tenant as before
 	 */
 	public boolean setNewMainTenant(long tenantID) {

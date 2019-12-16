@@ -139,6 +139,7 @@ public class WorkAssignment {
 
 	/**
 	 * Check if the current plot is in {@link WorkAssignment}
+	 * @param plot as {@link Plot}
 	 * @return boolean as Boolean of type {@link Boolean }
 	 */
 

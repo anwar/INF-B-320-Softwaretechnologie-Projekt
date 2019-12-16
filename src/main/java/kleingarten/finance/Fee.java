@@ -15,10 +15,10 @@ public class Fee {
 
 	/**
 	 * Construct a Fee item. Used to generate a Bill as PDF.
-	 * 
-	 * @param title
-	 * @param count
-	 * @param basePrice
+	 *
+	 * @param title as String
+	 * @param count as String
+	 * @param basePrice as String
 	 */
 	public Fee(String title, double count, double basePrice){
 
@@ -26,7 +26,7 @@ public class Fee {
 		this.count = count;
 		this.basePrice = basePrice;
 		//this.price = basePrice * count;
-		
+
 	}
 
 	public String getTitle(){

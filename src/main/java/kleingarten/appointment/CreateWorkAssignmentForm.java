@@ -26,6 +26,7 @@ public class CreateWorkAssignmentForm {
 	 * @param date is a LocalDate of {@link LocalDate}
 	 * @param title String that gives the {@link WorkAssignment} a title
 	 * @param description String that describes the{@link WorkAssignment}
+	 * @param workHours String that describes the work hours
 	 */
 
 	public CreateWorkAssignmentForm(LocalDate date, LocalTime time, String title, String description, String workHours){
