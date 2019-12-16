@@ -9,17 +9,21 @@ import org.junit.jupiter.api.Test;
 import org.salespointframework.useraccount.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.servlet.ModelAndView;
+
+import javax.transaction.Transactional;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import javax.money.format.MonetaryFormats;
-import javax.transaction.Transactional;
-import java.util.*;
-
+/**
+ * Class with test cases for the methods implemented in {@link PlotControllerService}
+ */
 @SpringBootTest
 @Transactional
-public class PlotControllerServiceIntegrationTests {
+public class PlotControllerServiceTests {
 	private Tenant boss = null;
 	private Tenant replacement = null;
 	private Tenant chairman = null;
@@ -40,15 +44,19 @@ public class PlotControllerServiceIntegrationTests {
 	/**
 	 * Constructor of class, used by Spring
 	 *
-	 * @param dataService   {@link DataService} class which should be set as class attribute
-	 * @param tenantManager {@link TenantManager} class which should be set as class attribute
+	 * @param plotControllerService {@link PlotControllerService}
+	 * @param dataService           {@link DataService} class which should be set as class attribute
+	 * @param tenantManager         {@link TenantManager} class which should be set as class attribute
+	 * @param plotService           {@link PlotService} class which should be set as class attribute
+	 * @param plotCatalog           {@link PlotCatalog} class which should be set as class attribute
+	 * @param procedureManager      {@link ProcedureManager} class which should be set as class attribute
 	 */
-	public PlotControllerServiceIntegrationTests(@Autowired PlotControllerService plotControllerService,
-												 @Autowired DataService dataService,
-												 @Autowired TenantManager tenantManager,
-												 @Autowired PlotService plotService,
-												 @Autowired PlotCatalog plotCatalog,
-												 @Autowired ProcedureManager procedureManager) {
+	public PlotControllerServiceTests(@Autowired PlotControllerService plotControllerService,
+									  @Autowired DataService dataService,
+									  @Autowired TenantManager tenantManager,
+									  @Autowired PlotService plotService,
+									  @Autowired PlotCatalog plotCatalog,
+									  @Autowired ProcedureManager procedureManager) {
 		this.plotControllerService = plotControllerService;
 		this.dataService = dataService;
 		this.tenantManager = tenantManager;
@@ -76,11 +84,12 @@ public class PlotControllerServiceIntegrationTests {
 
 	/**
 	 * Get and save the objects of type {@link Tenant} for all {@link Tenant}s with special roles as class attributes
+	 *
 	 * @param tenants initialized {@link Tenant}s as {@link Set} of {@link Tenant}
 	 */
 	public void setUpImportantTenants(Set<Tenant> tenants) {
-		for (Tenant tenant:
-			tenants) {
+		for (Tenant tenant :
+				tenants) {
 			if (tenantManager.tenantHasRole(tenant, Role.of("Vorstandsvorsitzender"))) {
 				this.boss = tenant;
 			} else if (tenantManager.tenantHasRole(tenant, Role.of("Stellvertreter"))) {
@@ -156,7 +165,7 @@ public class PlotControllerServiceIntegrationTests {
 	 */
 	@Test
 	public void securedGetColorForReplacementPlotTest() {
-		Procedure procedure = new Procedure(2019,freePlot, replacement.getId());
+		Procedure procedure = new Procedure(2019, freePlot, replacement.getId());
 		procedureManager.add(procedure);
 		takenPlot = plotService.findById(procedure.getPlotId());
 		result.put(takenPlot, "#FDD835");
@@ -171,7 +180,7 @@ public class PlotControllerServiceIntegrationTests {
 	 */
 	@Test
 	public void securedGetColorForChairmanPlotTest() {
-		Procedure procedure = new Procedure(2019,freePlot, chairman.getId());
+		Procedure procedure = new Procedure(2019, freePlot, chairman.getId());
 		procedureManager.add(procedure);
 		takenPlot = plotService.findById(procedure.getPlotId());
 		result.put(takenPlot, "#039BE5");
@@ -196,11 +205,13 @@ public class PlotControllerServiceIntegrationTests {
 				.isEqualTo(result);
 	}
 
+	/**
+	 * Test if information of a {@link Plot} is correctly added to the associated {@link PlotInformationBuffer}
+	 */
 	@Test
 	public void addInformationOfPlotTest() {
-		PlotInformationBuffer result = new PlotInformationBuffer(freePlot);
 		PlotInformationBuffer buffer = plotControllerService
 				.addInformationOfPlotToPlotInformationBuffer(Optional.empty(), freePlot);
-		assertThat(buffer.plotId).isEqualTo(result.plotId);
+		assertThat(buffer.getPlotId()).isEqualTo(freePlot.getId());
 	}
 }

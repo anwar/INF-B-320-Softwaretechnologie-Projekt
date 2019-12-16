@@ -84,7 +84,7 @@
 
                 <tr th:if="${rented} and ${canSeeWorkhours}">
                     <th>Arbeitsstunden</th>
-                    <td align="center" th:text="${plot.workHours}"> Text </td>
+                    <td align="center" th:text="${plot.workHours} + ' min'"> Text </td>
                 </tr>
             </tbody>
         </table>

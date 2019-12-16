@@ -162,13 +162,11 @@ public class PlotControllerService {
 		boolean condition = tenant.getUserAccount().getRoles().stream().anyMatch(permitted::contains);
 
 		//Check if user has a special role and set access rights for plot information
-		if (procedure.isPresent()) {
-			if (procedure.get().isTenant(tenant.getId())) {
-				mav.addAttribute("canSeeWorkhours", true);
-				mav.addAttribute("canSeeBills", true);
-				mav.addAttribute("canModify", true);
-				mav.addAttribute("rents", true);
-			}
+		if (procedure.isPresent() && procedure.get().isTenant(tenant.getId())) {
+			mav.addAttribute("canSeeWorkhours", true);
+			mav.addAttribute("canSeeBills", true);
+			mav.addAttribute("canModify", true);
+			mav.addAttribute("rents", true);
 		}
 		if (condition) {
 			if (tenant.getUserAccount().hasRole(Role.of("Kassierer"))) {

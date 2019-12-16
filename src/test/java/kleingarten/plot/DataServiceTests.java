@@ -44,6 +44,7 @@ public class DataServiceTests {
 	 * @param plotService        {@link PlotService} class which should be set as class attribute
 	 * @param procedureManager   {@link ProcedureManager} class which should be set as class attribute
 	 * @param userAccountManager {@link UserAccountManager} class which should be set as class attribute
+	 * @param tenantRepository   {@link TenantRepository} class which should be set as class attribute
 	 */
 	public DataServiceTests(@Autowired DataService dataService, @Autowired PlotService plotService,
 							@Autowired ProcedureManager procedureManager,

@@ -3,13 +3,16 @@ package kleingarten.plot;
 import kleingarten.tenant.Tenant;
 import org.javamoney.moneta.Money;
 import org.salespointframework.catalog.Product;
+
 import javax.money.MonetaryAmount;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.OneToOne;
 
 import static org.salespointframework.core.Currencies.EURO;
 
+/**
+ * Class which describes a {@link Plot} in the system
+ */
 @Entity
 public class Plot extends Product {
 
@@ -32,8 +35,9 @@ public class Plot extends Product {
 
 	/**
 	 * Constructor of class {@link Plot}
-	 * @param name number to identify the {@link Plot} as String to be easy readable by the user
-	 * @param size size of the {@link Plot} as int
+	 *
+	 * @param name        number to identify the {@link Plot} as String to be easy readable by the user
+	 * @param size        size of the {@link Plot} as int
 	 * @param description String that describes the look of a {@link Plot}
 	 */
 	public Plot(String name, int size, String description) {
@@ -46,6 +50,7 @@ public class Plot extends Product {
 
 	/**
 	 * Getter for the status of a {@link Plot}
+	 *
 	 * @return status as Enum of type {@link PlotStatus}
 	 */
 	public PlotStatus getStatus() {
@@ -54,6 +59,7 @@ public class Plot extends Product {
 
 	/**
 	 * Setter for the status of a {@link Plot}
+	 *
 	 * @param status status as {@link PlotStatus}
 	 */
 	public void setStatus(PlotStatus status) {
@@ -65,6 +71,7 @@ public class Plot extends Product {
 
 	/**
 	 * Getter for the size of a {@link Plot}
+	 *
 	 * @return size as int
 	 */
 	public int getSize() {
@@ -73,6 +80,7 @@ public class Plot extends Product {
 
 	/**
 	 * Setter for the size of a {@link Plot}
+	 *
 	 * @param size size as int
 	 */
 	public void setSize(int size) {
@@ -84,6 +92,7 @@ public class Plot extends Product {
 
 	/**
 	 * Getter for the description of a {@link Plot}
+	 *
 	 * @return description as String
 	 */
 	public String getDescription() {
@@ -92,6 +101,7 @@ public class Plot extends Product {
 
 	/**
 	 * Setter for the description of a {@link Plot}
+	 *
 	 * @param description description as String
 	 */
 	public void setDescription(String description) {
@@ -103,6 +113,7 @@ public class Plot extends Product {
 
 	/**
 	 * Getter for the estimator (or price) of a {@link Plot}
+	 *
 	 * @return estimator as {@link MonetaryAmount}
 	 */
 	public MonetaryAmount getEstimator() {
@@ -111,6 +122,7 @@ public class Plot extends Product {
 
 	/**
 	 * Setter for the estimator (or price) of a {@link Plot}
+	 *
 	 * @param estimator estimator as {@link MonetaryAmount}
 	 */
 	public void setEstimator(MonetaryAmount estimator) {
@@ -125,6 +137,7 @@ public class Plot extends Product {
 
 	/**
 	 * Getter for the associated chairman of type {@link Tenant}
+	 *
 	 * @return associated chairman as {@link Tenant}
 	 */
 	public Tenant getChairman() {
@@ -133,6 +146,7 @@ public class Plot extends Product {
 
 	/**
 	 * Setter for the associated chairman of type {@link Tenant}
+	 *
 	 * @param chairman chairman which should be associated as {@link Tenant}
 	 */
 	public void setChairman(Tenant chairman) {
