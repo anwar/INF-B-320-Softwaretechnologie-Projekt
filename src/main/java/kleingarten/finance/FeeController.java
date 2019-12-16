@@ -41,7 +41,7 @@ public class FeeController {
 		
 		Bill billToShow = new Bill(mainProcedure, oldProcedure);
 
-		ByteArrayInputStream bis = GeneratePDFBill.bill( billToShow.feeList , mainProcedure.getPlot() ); //you may add a getter for feelist
+		ByteArrayInputStream bis = GeneratePDFBill.bill( billToShow.feeList , mainProcedure.getPlot(), procedureManager.getTenantManager().get(mainProcedure.getMainTenant()), mainProcedure.getYear() ); //you may add a getter for feelist
 
 		var headers = new HttpHeaders();
 		headers.add("Content-Disposition", "inline; filename=Rechnungen.pdf");

@@ -29,6 +29,16 @@ public class Bill {
 		
 	}
 	
+	public static double getSum(List<Fee> feeList) {
+		double sum = 0d;
+		
+		for(Fee fee : feeList) {
+			sum += fee.getPrice();
+		}
+		
+		return sum;
+	}
+	
 	private void initFixedCost() {
 
 		Fee membershipFee = new Fee("Mitgliedsbeitrag", 1, 17.25);
@@ -67,7 +77,7 @@ public class Bill {
 	
 	private void initDependentCost(Procedure mainProcedure, Procedure oldProcedure) {
 		if(oldProcedure == null) {
-			initFixedCost();
+			initDependentCost(mainProcedure);
 			return;
 		}
 

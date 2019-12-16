@@ -13,11 +13,12 @@ import java.util.List;
 
 
 import kleingarten.plot.*;
+import kleingarten.tenant.Tenant;
 
 public class GeneratePDFBill {
 	private static final Logger logger = LoggerFactory.getLogger(GeneratePDFBill.class);
 
-	public static ByteArrayInputStream bill(List<Fee> fees, Plot plot) {
+	public static ByteArrayInputStream bill(List<Fee> fees, Plot plot, Tenant mainTenant, int year) {
 		Document document = new Document();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 
@@ -88,6 +89,35 @@ public class GeneratePDFBill {
 				cell.setPaddingRight(5);
 				table.addCell(cell);
 			}
+			
+//SUMME aller Fees
+
+			PdfPCell cell;
+
+			cell = new PdfPCell(new Phrase("Summe:"));
+			cell.setPaddingLeft(5);
+			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table.addCell(cell);
+			cell = new PdfPCell(new Phrase(""));
+			cell.setPaddingLeft(5);
+			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table.addCell(cell);
+			cell = new PdfPCell(new Phrase(""));
+			cell.setPaddingLeft(5);
+			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+			cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table.addCell(cell);
+
+			cell = new PdfPCell(new Phrase(String.valueOf(Bill.getSum(fees))));
+			cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+			cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+			cell.setPaddingRight(5);
+			table.addCell(cell);
+			
+
+//Put anything together
 
 			PdfWriter.getInstance(document, out);
 			document.open();
