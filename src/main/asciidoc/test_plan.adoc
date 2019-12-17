@@ -156,8 +156,8 @@ zuständig Ylvi Sarah Bachmann
 |
 |
 |Erstellen einer Parzelle
-|Nutzer hat die Rolle Admin
-|Parzellengröße, Wasserzähler, Stromzähler, Beschreibung
+|Nutzer hat die Rolle Vorstand
+|Parzellengröße, Beschreibung, Schätzwert
 |Parzelle wird erstellt, Attribute in passendem Format
 
 |P-U-011
@@ -165,8 +165,80 @@ zuständig Ylvi Sarah Bachmann
 |
 |Erstellen einer Parzelle
 |Nutzer hat andere Rolle als Admin
-|Parzellengröße, Wasserzähler, Stromzähler, Beschreibung
+|Parzellengröße, Beschreibung, Schätzwert
 |Fehlermeldung
+
+|P-U-020
+|
+|
+|Freigeben einer Parzelle
+|Nutzer hat die Rolle Vorstand
+|ausgewählte Parzelle
+|Parzellenstatus wird auf FREE gesetzt
+
+|P-U-021
+|
+|
+|Freigeben einer Parzelle
+|Nutzer hat andere Rolle als Admin
+|ausgewählte Parzelle
+|Fehlermeldung
+
+|P-U-030
+|
+|
+|Anzeigen der Parzellenübersicht
+|Nutzer ist nicht angemeldet
+|
+|alle Parzellen haben ihre zugehörigen Farben (grün/grau)
+
+|P-U-031
+|
+|
+|Anzeigen der Parzellenübersicht
+|Nutzer ist angemeldet
+|
+|alle Parzellen haben ihre zugehörigen Farben (grün/grau, besondere Farben für Obmann- und Vorstandsparzelle)
+
+|P-U-032
+|
+|
+|Anzeigen der Parzellenübersicht
+|Nutzer ist nicht angemeldet
+|
+|Zugriff nur auf Detailseiten von freien Parzellen
+
+|P-U-033
+|
+|
+|Anzeigen der Parzellenübersicht
+|Nutzer ist angemeldet
+|
+|Zugriff auf Detailseiten der Parzellen nach Rolle des Nutzers
+
+|P-U-040
+|
+|
+|Anzeigen der Informationen einer Parzelle
+|Parzelle ist nicht vermietet
+|gewünschte Parzelle
+|PlotInformationBuffer mit den allgemeinen Informationen der Parzelle wird erstellt
+
+|P-U-041
+|
+|
+|Anzeigen der Informationen einer Parzelle
+|Parzelle ist vermietet
+|gewünschte Parzelle
+|PlotInformationBuffer mit den Informationen der Parzelle wird erstellt
+
+|P-U-042
+|
+|
+|Anzeigen der Informationen einer Parzelle
+|Parzelle ist vermietet, Nutzer ist angemeldet
+|gewünschte Parzelle
+|Model enthält Zugriffsrechte des Nutzers abhängig von seiner Rolle
 
 |P-I-010
 |**<<AT0010>>**
@@ -180,25 +252,17 @@ zuständig Ylvi Sarah Bachmann
 |
 |**<<UC0010>>**
 |Bewerben für eine Parzelle
-|Parzelle hat den Status TAKEN
+|Parzelle hat den Status TAKEN, Nutzer ist nicht angemeldet
 |Model mit Parzelle
 |Fehlermeldung
-
-|P-U-012
-|**<<AT0010>>**
-|**<<UC0010>>**
-|Hinzufügen einer Bewerbung zu einer Parzelle
-|Bewerbung für die Parzelle
-|--
-|Bewerbung ist im zugehörigen Attribut der Parzelle gespeichert
 
 |P-I-012
 |**<<AT0011>>**
 |**<<UC0010>>**
 |Ansehen von Bewerbungen für eine Parzelle
-|Nutzer hat Rolle Obmann
+|Nutzer hat Rolle Vorstand
 |Model mit Parzelle
-|Model mit Bewerbungen für die gegebene Parzelle
+|String "/showApplications"
 
 |P-I-013
 |
@@ -208,159 +272,39 @@ zuständig Ylvi Sarah Bachmann
 |Model mit Parzelle
 |Fehlermeldung
 
-|P-U-012
-|**<<AT0012>>**
-|**<<UC0010>>**
-|Hinzufügen eines Hauptpächters
-|angenomme Bewerbung für die Parzelle, Parzelle hat den Status FREE
-|Parzelle, Bewerbung
-|Jahr, Parzelle, Pächter
-
-|P-I-014
-|**<<AT0012>>**
-|**<<UC0010>>**
-|Hinzufügen eines Hauptpächters
-|angenomme Bewerbung für die Parzelle, Parzelle hat den Status FREE
-|--
-|Model mit Jahr, Parzelle und Pächter
-
-|P-U-013
-|
-|**<<UC0010>>**
-|Hinzufügen eines Hauptpächters
-|angenommene Bewerbung für die Parzelle
-|Parzelle hat den Status TAKEN
-|Fehlermeldung
-
-|P-U-040
-|
-|
-|Hinzufügen eines Nebenpächters
-|Hauptpächter für Parzelle existiert, Nebenpächter hat einen User Account
-|Name und Email des Nebenpächters
-|Jahr, Parzelle und Pächter
-
-|P-U-041
-|
-|
-|Hinzufügen eines Nebenpächters
-|Hauptpächter für Parzelle existiert, Nebenpächter hat keinen User Account
-|Namen und Email des Nebenpächters
-|Fehlermeldung
-
-|P-I-040
-|
-|
-|Hinzufügen eines Nebenpächters
-|Hauptpächter für Parzelle existiert
-|Model mit Parzelle
-|Form mit Nebenpächtern der Parzelle
-
-|P-I-041
-|
-|
-|Hinzufügen eines Nebenpächters
-|Hauptpächter für Parzelle existiert
-|Form mit Email und Name des Nebenpächters, Parzelle
-|Model mit Jahr, Parzelle und Pächter
-
-|P-U-020
-|**<<AT0021>>**
-|**<<UC0020>>**
-|Eintragen der geleisteten Pflichtstunden
-|Nutzer hat die Rolle Obmann, Parzelle hat den Status TAKEN
-|gewünschte Parzelle
-|Parzelle und Summe der Pflichtstunden
-
-|P-U-021
-|
-|**<<UC0020>>**
-|Eintragen der geleisteten Pflichtstunden
-|Nutzer hat die Rolle Obmann, Parzelle hat den Status FREE
-|gewünschte Parzelle
-|Fehlermeldung
-
-|P-U-022
-|**<<AT0021>>**
-|**<<UC0020>>**
-|Eintragen der geleisteten Pflichtstunden
-|Parzelle hat den Status TAKEN
-|Parzelle und Summe der Pflichtstunden
-|Jahr, Parzelle und Summe der Pflichtstunden
-
-|P-U-023
-|
-|**<<UC0020>>**
-|Eintragen der geleisteten Pflichtstunden
-|Nutzer hat andere Rolle als Obmann
-|gewünschte Parzelle
-|Fehlermeldung
-
 |P-I-020
-|**<<AT0021>>**
-|**<<UC0020>>**
-|Eintragen der geleisteten Pflichtstunden
-|Nutzer hat die Rolle Obmann
-|Model mit Parzelle
-|Form mit geleisteten Pflichtstunden
-
-|P-I-021
-|**<<AT0021>>**
-|**<<UC0020>>**
-|Eintragen der geleisteten Pflichtstunden
-|Nutzer hat die Rolle Obmann
-|Form mit geleisteten Pflichtstunden, Parzelle
-|Model mit Jahr, Parzelle und Summe der Pflichtstunden
-
-|P-U-023
 |
 |
 |Hinzufügen des Wasserzählerstands
 |Nutzer hat die Rolle Obmann, Parzelle hat den Status TAKEN
-|gewünschte Parzelle, Wasserzählerstand
-|Wasserzählerstand ist im zugehörigen Attribut der Parzelle gespeichert
-
-|P-I-023
-|
-|
-|Hinzufügen des Wasserzählerstands
-|Nutzer hat die Rolle Obmann
-|Model mit Parzelle
-|Form zum Eintragen des Wasserzählerstands
-
-|P-U-030
-|**<<AT0030>>**
-|**<<UC0030>>**
-|Eintragen des Elektrozählerstands
-|Parzelle hat den Status TAKEN
-|gewünschte Parzelle, Elektrozählerstand
-|Elektrozählerstand ist im zugehörigen Attribut der Parzelle gespeichert
-
-|P-U-031
-|
-|**<<UC0030>>**
-|Eintragen des Elektrozählerstands
-|Parzelle hat den Status FREE
-|gewünschte Parzelle, Elektrozählerstand
-|Fehlermeldung
+|gewünschte Parzelle
+|String "/editPlot"
 
 |P-I-030
 |**<<AT0030>>**
 |**<<UC0030>>**
-|Eintragen des Elektrozählerwerts
-|Nutzer hat die Rolle Obmann
-|Model mit Parzelle
-|Form zum Eintragen des Elektrozählerstands
+|Eintragen des Elektrozählerstands
+|Parzelle hat den Status TAKEN
+|gewünschte Parzelle
+|String "/editPlot"
 
-|P-I-032
+|P-I-031
+|
+|**<<UC0030>>**
+|Eintragen des Elektrozählerstands
+|Nutzer ist nicht angemeldet
+|gewünschte Parzelle
+|Fehlermeldung
+
+|P-I-040
 |**<<AT0031>>**
 |**<<UC0030>>**
 |Aufrufen der Rechnungen
 |Nutzer hat die Rolle Kassierer
 |Parzelle
-|Model mit allen Rechnungen für die Parzelle
+|String "/listForPlotAssignments"
 
-|P-I-033
+|P-I-041
 |**<<AT0031>>**
 |**<<UC0030>>**
 |Aufrufen der Rechnungen

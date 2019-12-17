@@ -103,7 +103,7 @@ public class PlotControllerServiceTests {
 
 
 	/**
-	 * Test if the right color is assigned to a free {@link Plot} if user is not logged in
+	 * Test if the right color is assigned to a free {@link Plot} if user is not logged in; P-U-030
 	 */
 	@Test
 	public void insecureGetColorOfFreePlotTest() {
@@ -111,7 +111,7 @@ public class PlotControllerServiceTests {
 	}
 
 	/**
-	 * Test if the right color is assigned to a free {@link Plot} if user is logged in
+	 * Test if the right color is assigned to a free {@link Plot} if user is logged in; P-U-031
 	 */
 	@Test
 	public void secureGetColorForFreePlotTest() {
@@ -120,7 +120,8 @@ public class PlotControllerServiceTests {
 	}
 
 	/**
-	 * Test if the right color is assigned to a {@link Plot} taken by a {@link Tenant} when the user is not logged in
+	 * Test if the right color is assigned to a {@link Plot} taken by a {@link Tenant} when the user is not logged in;
+	 * P-U-030
 	 */
 	@Test
 	public void insecureGetColorForTakenPlotTest() {
@@ -132,7 +133,7 @@ public class PlotControllerServiceTests {
 
 	/**
 	 * Test if the right color is assigned to a {@link Plot} taken by a {@link Tenant} with
-	 * {@link Role} "Vorstandsvorsitzender" when the user is logged in
+	 * {@link Role} "Vorstandsvorsitzender" when the user is logged in; P-U-031
 	 */
 	@Test
 	public void securedGetColorForBossPlotTest() {
@@ -144,7 +145,7 @@ public class PlotControllerServiceTests {
 
 	/**
 	 * Test if the right color is assigned to a {@link Plot} taken by a {@link Tenant} with
-	 * {@link Role} "Stellvertreter" when the user is logged in
+	 * {@link Role} "Stellvertreter" when the user is logged in; P-U-031
 	 */
 	@Test
 	public void securedGetColorForReplacementPlotTest() {
@@ -157,7 +158,7 @@ public class PlotControllerServiceTests {
 
 	/**
 	 * Test if the right color is assigned to a {@link Plot} taken by a {@link Tenant} with
-	 * {@link Role} "Obmann" when the user is logged in
+	 * {@link Role} "Obmann" when the user is logged in; P-U-031
 	 */
 	@Test
 	public void securedGetColorForChairmanPlotTest() {
@@ -177,7 +178,8 @@ public class PlotControllerServiceTests {
 
 	/**
 	 * Test if the right color is assigned to a {@link Plot} taken by a {@link Tenant} with
-	 * {@link Role} "Obmann" and a {@link Tenant} with the {@link Role} "Vorstandsvorsitzender" when the user is logged in
+	 * {@link Role} "Obmann" and a {@link Tenant} with the {@link Role} "Vorstandsvorsitzender" when the user is logged in;
+	 * P-U-031
 	 */
 	@Test
 	public void securedGetColorForSpecialPlotTest() {
@@ -197,19 +199,28 @@ public class PlotControllerServiceTests {
 	}
 
 	/**
-	 * Test if information of a {@link Plot} is correctly added to the associated {@link PlotInformationBuffer}
+	 * Test if information of a free {@link Plot} is correctly added to the associated {@link PlotInformationBuffer};
+	 * P-U-040
 	 */
 	@Test
-	public void addInformationOfPlotTest() {
+	public void addInformationOfFreePlotTest() {
 		PlotInformationBuffer bufferForFreePlot = plotControllerService
 				.addInformationOfPlotToPlotInformationBuffer(Optional.empty(), freePlot);
 		assertThat(bufferForFreePlot.getPlotId()).isEqualTo(freePlot.getId());
+	}
 
+	/**
+	 * Test if information of a rented {@link Plot} is correctly added to the associated {@link PlotInformationBuffer};
+	 * P-U-041
+	 */
+	@Test
+	public void addInformationOfRentedPlotTest() {
 		Procedure procedure = procedureManager.getAll(boss.getId()).toList().get(0);
+		procedure.addSubTenant(chairman.getId());
 		PlotInformationBuffer bufferForTakenPlot = plotControllerService
 				.addInformationOfPlotToPlotInformationBuffer(Optional.of(procedure), procedure.getPlot());
 		assertThat(bufferForTakenPlot.getPlotId()).isEqualTo(procedure.getPlotId());
 		assertThat(bufferForTakenPlot.getMainTenantRoles()).isEqualTo(Map.of(boss, boss.getRoles()));
-		assertThat(bufferForTakenPlot.getSubTenantRoles()).isEqualTo(Map.of());
+		assertThat(bufferForTakenPlot.getSubTenantRoles()).isEqualTo(Map.of(chairman, chairman.getRoles()));
 	}
 }
