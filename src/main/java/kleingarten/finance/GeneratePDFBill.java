@@ -107,6 +107,9 @@ public class GeneratePDFBill {
 			sum.setAlignment(Element.ALIGN_CENTER);
 			sum.setSpacingBefore(5);
 
+			/**
+			 * Create a PDF file
+			 */
 			PdfWriter.getInstance(document, out);
 			document.open();
 			document.add(company);

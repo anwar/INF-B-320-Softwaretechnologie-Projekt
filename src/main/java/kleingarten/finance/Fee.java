@@ -5,7 +5,6 @@ public class Fee {
 	private String title;
 	private double count;
 	private double basePrice;
-	//private double price;
 	private double sum = 0;
 
 	/**
@@ -20,8 +19,6 @@ public class Fee {
 		this.title = title;
 		this.count = count;
 		this.basePrice = basePrice;
-		//this.price = basePrice * count;
-
 	}
 
 	public String getTitle() {

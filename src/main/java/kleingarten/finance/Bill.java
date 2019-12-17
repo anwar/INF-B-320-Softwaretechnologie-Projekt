@@ -15,7 +15,7 @@ public class Bill {
 	 * Create a Bill with two given Procedures.
 	 *
 	 * @param mainProcedure The procedure of the current year.
-	 * @param oldProcedure  The procedure of the year before. !! [to SangHyun] Decide if oldProcedure can be null or not. if not, write another constructor with just the mainProcedure.
+	 * @param oldProcedure  The procedure of the year before.
 	 */
 	public Bill(Procedure mainProcedure, Procedure oldProcedure) {
 
