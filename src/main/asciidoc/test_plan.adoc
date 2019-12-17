@@ -402,7 +402,7 @@ zuständig: Muhammad Talal Anwar
 |===
 
 === ComplaintDepartment
-zuständig: Muhammad Talal Anwar
+zuständig: Muhammad Talal Anwar und Isabell Zorr
 [options="headers"]
 |===
 | ID      | Anwendungsfall                       | Vorbedingungen                                                               | Eingabe                  | Ausgabe
