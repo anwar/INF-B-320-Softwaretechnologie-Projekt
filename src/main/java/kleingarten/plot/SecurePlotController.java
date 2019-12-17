@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.time.LocalDateTime;
 import java.util.*;
 
 import static org.salespointframework.core.Currencies.EURO;
@@ -43,9 +41,10 @@ public class SecurePlotController {
 	/**
 	 * Create model with information of a {@link Plot} to show the detail page of a {@link Plot} when a user
 	 * is logged in
+	 *
 	 * @param user {@link UserAccount} of the logged in user
 	 * @param plot {@link Plot} of which information should be shown
-	 * @param mav {@link Model} to save the needed information
+	 * @param mav  {@link Model} to save the needed information
 	 * @return name of the view as {@link String}
 	 */
 	public String detailsOfPlot(@LoggedIn UserAccount user, final Plot plot, Model mav) {
@@ -69,7 +68,7 @@ public class SecurePlotController {
 				plotControllerService.secureSetAccessRightForPlotDetails(Optional.empty(), tenant, mav);
 			}
 			if (plot.getStatus() == PlotStatus.FREE) {
-				plotControllerService.secureSetAccessRightForPlotDetails(Optional.empty(), tenant,mav);
+				plotControllerService.secureSetAccessRightForPlotDetails(Optional.empty(), tenant, mav);
 			} else {
 				mav.addAttribute("rented", true);
 			}
@@ -85,7 +84,7 @@ public class SecurePlotController {
 	 * Create model with information of a {@link Plot} which is rented by the user to show the detail page of the
 	 * {@link Plot} when a user is logged in and accesses his rented plots by using the entry in the navigation bar
 	 *
-	 * @param user {@link UserAccount} of the logged in user
+	 * @param user  {@link UserAccount} of the logged in user
 	 * @param model {@link Model} to save the needed information
 	 * @return name of the view as {@link String}
 	 */
@@ -97,8 +96,8 @@ public class SecurePlotController {
 			Tenant tenant = tenantManager.getTenantByUserAccount(user);
 
 			Set<Plot> plots = dataService.getRentedPlots(tenant);
-			for (Plot plot:
-				 plots) {
+			for (Plot plot :
+					plots) {
 				Procedure procedure = dataService.getProcedure(plot);
 				shownPlots.add(plotControllerService.addInformationOfPlotToPlotInformationBuffer(Optional.of(procedure), plot));
 				plotControllerService.secureSetAccessRightForPlotDetails(Optional.of(procedure), tenant, model);
@@ -210,17 +209,18 @@ public class SecurePlotController {
 
 	/**
 	 * Show and modify the {@link Plot}s administrated by a given {@link Tenant} with the {@link Role} "Obmann"
-	 * @param user {@link UserAccount} of the logged in user
+	 *
+	 * @param user     {@link UserAccount} of the logged in user
 	 * @param tenantID id of the {@link Tenant} with the {@link Role} "Obmann"
-	 * @param model {@link Model} to save the needed information for the view
+	 * @param model    {@link Model} to save the needed information for the view
 	 * @return URL of the view as {@link String}
 	 */
 	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')")
 	@PostMapping("/addchairman")
 	public String addChairman(@LoggedIn UserAccount user, String tenantID, Model model) {
 		Map<String, Object> modelMap = chairmenOverview(user).getModelMap();
-		for (String attribute:
-			 modelMap.keySet()) {
+		for (String attribute :
+				modelMap.keySet()) {
 			model.addAttribute(attribute, modelMap.get(attribute));
 		}
 		model.addAttribute("administratedPlots", plotService.getPlotsFor(tenantManager.get(Long.parseLong(tenantID))));
@@ -232,11 +232,11 @@ public class SecurePlotController {
 
 	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')")
 	@PostMapping("/chairmenOverview")
-	public String saveChairman(@LoggedIn UserAccount user, UpdateChairmanForm form,  long tenantID,
+	public String saveChairman(@LoggedIn UserAccount user, UpdateChairmanForm form, long tenantID,
 							   Model model) {
 		plotControllerService.saveChairmanForPlots(tenantManager.get(tenantID), form.getUpdatedPlots());
 		Map<String, Object> modelMap = chairmenOverview(user).getModelMap();
-		for (String attribute:
+		for (String attribute :
 				modelMap.keySet()) {
 			model.addAttribute(attribute, modelMap.get(attribute));
 		}
@@ -245,8 +245,9 @@ public class SecurePlotController {
 
 	/**
 	 * Set the {@link PlotStatus} of a {@link Plot} to FREE
-	 * @param user {@link UserAccount} of the logged in user
-	 * @param plot {@link Plot} which status should be changed
+	 *
+	 * @param user  {@link UserAccount} of the logged in user
+	 * @param plot  {@link Plot} which status should be changed
 	 * @param model {@link Model} to save the needed information for the view
 	 * @return URL of the view as {@link String}
 	 */
@@ -266,6 +267,7 @@ public class SecurePlotController {
 
 	/**
 	 * Get the registration form for a new {@link Plot}
+	 *
 	 * @param user {@link UserAccount} of the logged in user
 	 * @return URL of the view as {@link String}
 	 */
@@ -277,10 +279,11 @@ public class SecurePlotController {
 
 	/**
 	 * Save given data of a new {@link Plot} to the {@link PlotCatalog}
-	 * @param user {@link UserAccount} of the logged in user
-	 * @param model {@link Model} to save the needed information
-	 * @param name name of the {@link Plot} as {@link String}
-	 * @param size size of the {@link Plot} as int
+	 *
+	 * @param user        {@link UserAccount} of the logged in user
+	 * @param model       {@link Model} to save the needed information
+	 * @param name        name of the {@link Plot} as {@link String}
+	 * @param size        size of the {@link Plot} as int
 	 * @param description description of the {@link Plot} as {@link String}
 	 * @return name of view as {@link String}
 	 */
@@ -300,18 +303,19 @@ public class SecurePlotController {
 
 	/**
 	 * Get information from the form which is used to edit the details of a {@link Plot} and save them
-	 * @param user {@link UserAccount} of the logged in user
-	 * @param model {@link Model} to save the needed information
-	 * @param plotId {@link ProductIdentifier} of the {@link Plot} which details should be changed
-	 * @param size size of the {@link Plot} as int
+	 *
+	 * @param user        {@link UserAccount} of the logged in user
+	 * @param model       {@link Model} to save the needed information
+	 * @param plotId      {@link ProductIdentifier} of the {@link Plot} which details should be changed
+	 * @param size        size of the {@link Plot} as int
 	 * @param description description of the {@link Plot} as {@link String}
-	 * @param estimator is the estimation of the {@link Plot} as {@link String}
+	 * @param estimator   is the estimation of the {@link Plot} as {@link String}
 	 * @return name of view as {@link String}
 	 */
 	@PostMapping("/editedPlot")
 	public String editedPlot(@LoggedIn UserAccount user, Model model, @RequestParam(name = "plotID") ProductIdentifier plotId,
-								   @RequestParam("size") String size, @RequestParam("description") String description,
-								   @RequestParam() String estimator) {
+							 @RequestParam("size") String size, @RequestParam("description") String description,
+							 @RequestParam() String estimator) {
 		Plot plot = plotService.findById(plotId);
 		try {
 			plot.setSize(Integer.parseInt(size));

@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.money.format.MonetaryFormats;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Component
@@ -22,7 +20,7 @@ public class PlotControllerService {
 	private final PlotService plotService;
 
 	PlotControllerService(DataService dataService, TenantManager tenantManager, PlotCatalog plotCatalog,
-							PlotService plotService) {
+						  PlotService plotService) {
 		this.dataService = dataService;
 		this.tenantManager = tenantManager;
 		this.plotCatalog = plotCatalog;
@@ -32,6 +30,7 @@ public class PlotControllerService {
 	/**
 	 * Select color of a {@link Plot} when a user is logged in and save the selection in a {@link Map} of
 	 * {@link Plot} and {@link String}
+	 *
 	 * @param plot {@link Plot} for which a color should be selected
 	 * @param user as {@link UserAccount}
 	 * @return color of {@link Plot} saved in a {@link ModelAndView}
@@ -51,18 +50,18 @@ public class PlotControllerService {
 		//Set color of plot if a user with role "Vorstand" or "Obmann" rents this plot
 		if (plot.getStatus() == PlotStatus.TAKEN) {
 			Tenant mainTenant = dataService.findTenantById(dataService.getProcedure(plot)
-											.getMainTenant());
+					.getMainTenant());
 
 			//Get roles of mainTenant and subTenants
 			Procedure procedure = dataService.getProcedure(plot);
 			rolesOfMainTenant.addAll(mainTenant.getUserAccount().getRoles().toSet());
 
 			List<Tenant> subTenants = new LinkedList<>();
-			for (long subTenantId:
+			for (long subTenantId :
 					procedure.getSubTenants()) {
 				subTenants.add(dataService.findTenantById(subTenantId));
 			}
-			for (Tenant subTenant:
+			for (Tenant subTenant :
 					subTenants) {
 				rolesOfSubTenants.addAll(subTenant.getUserAccount().getRoles().toSet());
 			}
@@ -72,15 +71,15 @@ public class PlotControllerService {
 
 			//Check if the maintenant or the subtenants of the plot have the role "Vorstand" or "Obmann"
 			if (rolesOfMainTenant.stream().anyMatch(administration::contains)
-				|| rolesOfSubTenants.stream().anyMatch(administration::contains)) {
+					|| rolesOfSubTenants.stream().anyMatch(administration::contains)) {
 				if (rolesOfMainTenant.stream().anyMatch(chairman::contains)
-					|| rolesOfSubTenants.stream().anyMatch(chairman::contains)) {
+						|| rolesOfSubTenants.stream().anyMatch(chairman::contains)) {
 					colors.put(plot, "#E69138");
 					return colors;
 				}
 				colors.put(plot, "#FDD835");
 			} else if (rolesOfMainTenant.stream().anyMatch(chairman::contains)
-				|| rolesOfSubTenants.stream().anyMatch(chairman::contains)) {
+					|| rolesOfSubTenants.stream().anyMatch(chairman::contains)) {
 				colors.put(plot, "#039BE5");
 			}
 		}
@@ -89,6 +88,7 @@ public class PlotControllerService {
 
 	/**
 	 * Select if the details page of a specific {@link Plot} can be accessed depending on if a user is logged in or not
+	 *
 	 * @param plot {@link Plot} for which the access to the details page should be set
 	 * @param user {@link Optional} of type {@link UserAccount} of the logged in user
 	 * @return access rights saved in a {@link Map} with the {@link Plot} and the access right as {@link Boolean}
@@ -120,8 +120,9 @@ public class PlotControllerService {
 
 	/**
 	 * Add information of a {@link Plot} to a {@link PlotInformationBuffer}
+	 *
 	 * @param procedure {@link Procedure} to which the {@link Plot} is associated
-	 * @param plot {@link Plot} to which the information is added
+	 * @param plot      {@link Plot} to which the information is added
 	 * @return information of {@link Plot} saved in a {@link PlotInformationBuffer}
 	 */
 	PlotInformationBuffer addInformationOfPlotToPlotInformationBuffer(Optional<Procedure> procedure, Plot plot) {
@@ -150,9 +151,10 @@ public class PlotControllerService {
 
 	/**
 	 * Select which information a user can see and modify on the details page of a {@link Plot} when he is logged in
+	 *
 	 * @param procedure {@link Optional} of {@link Procedure} for the {@link Plot} which details should be shown
-	 * @param tenant {@link Tenant} associated to the logged in {@link UserAccount}
-	 * @param mav {@link Model} to save the access rights to the information of the {@link Plot}
+	 * @param tenant    {@link Tenant} associated to the logged in {@link UserAccount}
+	 * @param mav       {@link Model} to save the access rights to the information of the {@link Plot}
 	 */
 	void secureSetAccessRightForPlotDetails(Optional<Procedure> procedure, Tenant tenant, Model mav) {
 		List<Role> permitted = List.of(Role.of("Vorstandsvorsitzender"), Role.of("Stellvertreter"),
@@ -193,16 +195,17 @@ public class PlotControllerService {
 
 	/**
 	 * Set the color of a {@link Plot} depending on who is its chairman of type {@link Tenant} and add the
+	 *
 	 * @param colorsForChairmen is the {@link Map} of tenant to color string
 	 * @return {@link Map} of {@link Plot}s and associated colors as {@link String}
 	 */
 	Map<Plot, String> secureSetColorOfChairmenForPlots(Map<Tenant, String> colorsForChairmen) {
 		//Set color for plot depending on who is its chairman
 		Map<Plot, String> colorsForPlotAdministratedByChairman = new HashMap<>();
-		for (Plot administratedPlot:
-			 plotCatalog.findAll()) {
-			for (Tenant chairman:
-				 colorsForChairmen.keySet()) {
+		for (Plot administratedPlot :
+				plotCatalog.findAll()) {
+			for (Tenant chairman :
+					colorsForChairmen.keySet()) {
 				if (administratedPlot.getChairman() == null) {
 					colorsForPlotAdministratedByChairman.put(administratedPlot, "#7CB342");
 				} else if (administratedPlot.getChairman() == chairman) {
@@ -215,6 +218,7 @@ public class PlotControllerService {
 
 	/**
 	 * Generate a random color for each {@link Tenant} with the {@link Role} "Obmann"
+	 *
 	 * @return {@link Map} of {@link Tenant}s and colors as {@link String}
 	 */
 	Map<Tenant, String> secureSetColorForChairman() {
@@ -222,7 +226,7 @@ public class PlotControllerService {
 		Map<Tenant, String> colorsForChairman = new HashMap<>();
 
 		//Add random color for each tenant who has the role "Obmann"
-		for (Tenant chairman:
+		for (Tenant chairman :
 				tenantManager.getAll()) {
 			if (tenantManager.tenantHasRole(chairman, Role.of("Obmann"))) {
 				int color = randomColorGenerator.nextInt(0x1000000);
@@ -234,12 +238,13 @@ public class PlotControllerService {
 
 	/**
 	 * Get all {@link Tenant}s with the role "Obmann"
+	 *
 	 * @return {@link Set} of {@link Tenant}s
 	 */
 	Set<Tenant> getAllChairmen() {
 		Set<Tenant> chairmen = new HashSet<>();
-		for (Tenant chairman:
-			 tenantManager.getAll()) {
+		for (Tenant chairman :
+				tenantManager.getAll()) {
 			if (tenantManager.tenantHasRole(chairman, Role.of("Obmann"))) {
 				chairmen.add(chairman);
 			}
@@ -249,27 +254,28 @@ public class PlotControllerService {
 
 	/**
 	 * Get all {@link Plot}s which chairman was modified
-	 * @param tenant {@link Tenant} who has the {@link Role} "Obmann" and should be the new chairman of the {@link Plot}
+	 *
+	 * @param tenant       {@link Tenant} who has the {@link Role} "Obmann" and should be the new chairman of the {@link Plot}
 	 * @param changedPlots {@link List} of all {@link ProductIdentifier}s of the {@link Plot}s which chairman was changed
 	 */
 	void saveChairmanForPlots(Tenant tenant, List<ProductIdentifier> changedPlots) {
 		Set<Tenant> chairmen = getAllChairmen();
 		Set<Plot> unchangablePlots = new HashSet<>();
-		for (Tenant chairman:
-			 chairmen) {
+		for (Tenant chairman :
+				chairmen) {
 			if (!(chairman.getId() == tenant.getId())) {
 				unchangablePlots.addAll(dataService.getRentedPlots(chairman));
 			}
 		}
-		for (Plot administratedPlot:
-			 plotService.getPlotsFor(tenant)) {
+		for (Plot administratedPlot :
+				plotService.getPlotsFor(tenant)) {
 			if (!(dataService.getRentedPlots(tenant).contains(administratedPlot))) {
 				administratedPlot.setChairman(null);
 			}
 		}
 		//Prevent changes on plots that are rented by other chairmen
-		for (ProductIdentifier modifiedPlot:
-			 changedPlots) {
+		for (ProductIdentifier modifiedPlot :
+				changedPlots) {
 			if (!(unchangablePlots.contains(plotService.findById(modifiedPlot)))) {
 				plotService.findById(modifiedPlot).setChairman(tenant);
 				plotCatalog.save(plotService.findById(modifiedPlot));

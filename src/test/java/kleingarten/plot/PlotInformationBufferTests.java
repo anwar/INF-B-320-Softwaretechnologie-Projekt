@@ -7,8 +7,6 @@ import javax.money.format.MonetaryFormats;
 import java.util.HashMap;
 import java.util.Locale;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class PlotInformationBufferTests {
 	private Plot plot;
 	private PlotInformationBuffer buffer;

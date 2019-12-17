@@ -1,6 +1,5 @@
 package kleingarten.plot;
 
-import kleingarten.tenant.Tenant;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.stereotype.Controller;
@@ -29,6 +28,7 @@ public class InsecurePlotController {
 
 	/**
 	 * Use different methods to show the overview of all {@link Plot}s depending if a user is logged in or not
+	 *
 	 * @param user {@link Optional} of {@link UserAccount}, contains the user's {@link UserAccount} when he is logged in
 	 * @return response as {@link ModelAndView}
 	 */
@@ -42,8 +42,9 @@ public class InsecurePlotController {
 
 	/**
 	 * Use different methods to show the detail page of a {@link Plot} depending if a user is logged in or not
-	 * @param user {@link Optional} of {@link UserAccount}, contains the user's {@link UserAccount} when he is logged in
-	 * @param plot {@link Plot} to show the details of
+	 *
+	 * @param user  {@link Optional} of {@link UserAccount}, contains the user's {@link UserAccount} when he is logged in
+	 * @param plot  {@link Plot} to show the details of
 	 * @param model as {@link Model}
 	 * @return response as {@link ModelAndView}
 	 */
@@ -58,8 +59,9 @@ public class InsecurePlotController {
 	/**
 	 * Create model with general information of a {@link Plot} to show the detail page of a {@link Plot} when no user
 	 * is logged in
+	 *
 	 * @param plot {@link Plot} of which general information should be shown
-	 * @param mav {@link Model} to add needed information
+	 * @param mav  {@link Model} to add needed information
 	 * @return view as {@link String}
 	 */
 	public String detailsOfFreePlot(@PathVariable Plot plot, Model mav) {
@@ -81,6 +83,7 @@ public class InsecurePlotController {
 
 	/**
 	 * Create model with needed information to show the overview of all {@link Plot}s when no user is logged in
+	 *
 	 * @return response as {@link ModelAndView}
 	 */
 	public ModelAndView insecurePlotOverview() {

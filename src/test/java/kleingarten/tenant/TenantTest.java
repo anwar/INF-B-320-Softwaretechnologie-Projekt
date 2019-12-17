@@ -1,6 +1,5 @@
 package kleingarten.tenant;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.salespointframework.useraccount.Password;
@@ -11,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -33,16 +32,16 @@ public class TenantTest {
 	 * Set up for a mock {@link Tenant} for each testing
 	 */
 	@BeforeEach
-	void SetUp(){
+	void SetUp() {
 		tenant = new Tenant("Jassi", "Gepackert", "Neben Isa und Francy",
-			"908964875734", "13.05.1999", userAccountManager.create("jassi", Password.UnencryptedPassword.of("123"),"jassis@email.com", Role.of("Hauptpächter")));
+				"908964875734", "13.05.1999", userAccountManager.create("jassi", Password.UnencryptedPassword.of("123"), "jassis@email.com", Role.of("Hauptpächter")));
 	}
 
 	/**
 	 * Test to determine if the initialization of the {@link Role} for the {@link Tenant} worked
 	 */
 	@Test
-	void initialRoleTest(){
+	void initialRoleTest() {
 		assertThat(tenant.getUserAccount().getRoles().equals("Hauptpächchter"));
 	}
 
@@ -50,7 +49,7 @@ public class TenantTest {
 	 * Test to determine if the initialization of the {@link UserAccount} for the {@link Tenant} worked
 	 */
 	@Test
-	void initialUserAccountTest(){
+	void initialUserAccountTest() {
 		assertThat(tenant.getUserAccount().getUsername().equals("jassi"));
 		assertThat(tenant.getUserAccount().getEmail().equals("jassis@email.com"));
 		assertThat(tenant.getUserAccount().getPassword().equals("123"));
@@ -134,7 +133,7 @@ public class TenantTest {
 	 * Test for the Setter of an illegal forename to throw an {@link IllegalArgumentException}
 	 */
 	@Test
-	void illegalForename(){
+	void illegalForename() {
 		String forename = null;
 		assertThrows(IllegalArgumentException.class, () -> tenant.setForename(forename));
 	}
@@ -152,7 +151,7 @@ public class TenantTest {
 	 * Test for the Setter of an illegal surname to throw an I{@link IllegalArgumentException}
 	 */
 	@Test
-	void illegalSurname(){
+	void illegalSurname() {
 		String surname = null;
 		assertThrows(IllegalArgumentException.class, () -> tenant.setSurname(surname));
 	}
@@ -170,7 +169,7 @@ public class TenantTest {
 	 * Test for the Setter of an illegal address to throw an {@link IllegalArgumentException}
 	 */
 	@Test
-	void illegalAddress(){
+	void illegalAddress() {
 		String address = null;
 		assertThrows(IllegalArgumentException.class, () -> tenant.setAddress(address));
 	}
@@ -188,7 +187,7 @@ public class TenantTest {
 	 * Test for the Setter of an illegal email to throw an {@link IllegalArgumentException}
 	 */
 	@Test
-	void illegalEmail(){
+	void illegalEmail() {
 		String email = null;
 		assertThrows(IllegalArgumentException.class, () -> tenant.setEmail(email));
 	}
@@ -201,11 +200,12 @@ public class TenantTest {
 		tenant.setPhonenumber("89765434568790");
 		assertThat(tenant.getPhonenumber().equals("89765434568790"));
 	}
+
 	/**
 	 * Test for the Setter of an illegal phone number to throw an {@link IllegalArgumentException}
 	 */
 	@Test
-	void illegalPhonenumber(){
+	void illegalPhonenumber() {
 		String phonenumber = null;
 		assertThrows(IllegalArgumentException.class, () -> tenant.setAddress(phonenumber));
 	}
@@ -223,7 +223,7 @@ public class TenantTest {
 	 * Test for the Setter of an illegal birth date to throw an {@link IllegalArgumentException}
 	 */
 	@Test
-	void illegalBirthdate(){
+	void illegalBirthdate() {
 		String birthdate = null;
 		assertThrows(IllegalArgumentException.class, () -> tenant.setBirthdate(birthdate));
 	}

@@ -6,8 +6,6 @@ import org.salespointframework.catalog.ProductIdentifier;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class UpdateChairmanFormTests {
 	private List<ProductIdentifier> plots;
 

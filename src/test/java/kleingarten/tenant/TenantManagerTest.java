@@ -1,17 +1,15 @@
 package kleingarten.tenant;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 import javax.transaction.Transactional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @Transactional
@@ -47,12 +45,12 @@ public class TenantManagerTest {
 	}
 
 	@Test
-	void createNewTenant(){
+	void createNewTenant() {
 		assertThat(tenantRepository.existsById(tenantManager.getTenantByUserAccount(userAccountManager.findByUsername("fahrenheit@web.de").get()).getId()));
 	}
 
 	@Test
-	void findByRole(){
+	void findByRole() {
 		Role testRole = Role.of("Pupskönig");
 		tenantManager.findByRole(testRole);
 		assertTrue(tenantManager.findByRole(testRole).isEmpty());

@@ -53,8 +53,8 @@ public class Application {
 			http.csrf().disable();
 
 			http.authorizeRequests().antMatchers("/**").permitAll().and().//
-				formLogin().loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE).and(). //
-				logout().logoutUrl("/logout").logoutSuccessUrl("/");
+					formLogin().loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE).and(). //
+					logout().logoutUrl("/logout").logoutSuccessUrl("/");
 		}
 	}
 }

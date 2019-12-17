@@ -1,24 +1,16 @@
 package kleingarten.application;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
-
-import javax.validation.Valid;
-
 import kleingarten.tenant.TenantManager;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kleingarten.appointment.CreateWorkAssignmentForm;
-import kleingarten.plot.Plot;
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class ApplicationController {
@@ -33,9 +25,9 @@ public class ApplicationController {
 	}
 
 	@GetMapping("/createApplication/{plotId}")
-	public String addPlotToModel(Model model, CreateApplicationForm form, @PathVariable String plotId){
+	public String addPlotToModel(Model model, CreateApplicationForm form, @PathVariable String plotId) {
 
-		System.out.println("ID  "+plotId);
+		System.out.println("ID  " + plotId);
 		model.addAttribute("plotId", plotId);
 		form.setPlotId(plotId);
 		model.addAttribute("form", form);
@@ -45,17 +37,17 @@ public class ApplicationController {
 	@PostMapping("/createApplication")
 	public String addApplication(@Valid CreateApplicationForm form, Error error) {
 
-		System.out.println("new Application!!! : "+form.getFirstName() + " " + form.getLastName() + " - "+form.getEmail());
+		System.out.println("new Application!!! : " + form.getFirstName() + " " + form.getLastName() + " - " + form.getEmail());
 		Application application = new Application(form.getFirstName(), form.getLastName(), form.getEmail(), form.getPlotId());
 		manager.add(application);
 
 		manager.printAllToConsole();
 
-		return "redirect:/plot/"+form.getPlotId();
+		return "redirect:/plot/" + form.getPlotId();
 	}
 
 	@GetMapping("/showApplications/{plotId}")
-	public String showApplications(Model model, @PathVariable String plotId){
+	public String showApplications(Model model, @PathVariable String plotId) {
 
 		model.addAttribute("plotId", plotId);
 
@@ -75,7 +67,7 @@ public class ApplicationController {
 
 		tenantManager.createNewTenant(manager.getById(Long.parseLong(appId)).getFirstName(), manager.getById(Long.parseLong(appId)).getLastName(), manager.getById(Long.parseLong(appId)).getEmail(), "application");
 
-		return "redirect:/showApplications/"+plotId;
+		return "redirect:/showApplications/" + plotId;
 	}
 
 	@PostMapping("/deny")
@@ -88,7 +80,7 @@ public class ApplicationController {
 
 		manager.save(app);
 
-		return "redirect:/showApplications/"+plotId;
+		return "redirect:/showApplications/" + plotId;
 	}
 
 }

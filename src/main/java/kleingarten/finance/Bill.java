@@ -1,9 +1,9 @@
 package kleingarten.finance;
 
+import org.springframework.util.Assert;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.util.Assert;
 
 
 public class Bill {
@@ -15,9 +15,9 @@ public class Bill {
 	 * Create a Bill with two given Procedures.
 	 *
 	 * @param mainProcedure The procedure of the current year.
-	 * @param oldProcedure The procedure of the year before. !! [to SangHyun] Decide if oldProcedure can be null or not. if not, write another constructor with just the mainProcedure.
+	 * @param oldProcedure  The procedure of the year before. !! [to SangHyun] Decide if oldProcedure can be null or not. if not, write another constructor with just the mainProcedure.
 	 */
-	public Bill(Procedure mainProcedure, Procedure oldProcedure){
+	public Bill(Procedure mainProcedure, Procedure oldProcedure) {
 
 		Assert.notNull(mainProcedure, "Main Procedure can not be null!");
 
@@ -32,7 +32,7 @@ public class Bill {
 	public static double getSum(List<Fee> feeList) {
 		double sum = 0d;
 
-		for(Fee fee : feeList) {
+		for (Fee fee : feeList) {
 			sum += fee.getPrice();
 		}
 
@@ -70,13 +70,13 @@ public class Bill {
 		feeList.add(powerFee);
 		Fee rent = new Fee("Miete", mainProcedure.getSize(), 0.18);
 		feeList.add(rent);
-		Fee penalty = new Fee("Strafgeld", Math.round(Math.max(0,(double)(240-mainProcedure.getWorkMinutes())/60)), 8);
+		Fee penalty = new Fee("Strafgeld", Math.round(Math.max(0, (double) (240 - mainProcedure.getWorkMinutes()) / 60)), 8);
 		feeList.add(penalty);
 
 	}
 
 	private void initDependentCost(Procedure mainProcedure, Procedure oldProcedure) {
-		if(oldProcedure == null) {
+		if (oldProcedure == null) {
 			initDependentCost(mainProcedure);
 			return;
 		}
@@ -88,7 +88,7 @@ public class Bill {
 		feeList.add(powerFee);
 		Fee rent = new Fee("Miete", mainProcedure.getSize(), 0.18);
 		feeList.add(rent);
-		Fee penalty = new Fee("Strafgeld", Math.round(Math.max(0,(double)(240-mainProcedure.getWorkMinutes())/60)), 8);
+		Fee penalty = new Fee("Strafgeld", Math.round(Math.max(0, (double) (240 - mainProcedure.getWorkMinutes()) / 60)), 8);
 		feeList.add(penalty);
 
 	}

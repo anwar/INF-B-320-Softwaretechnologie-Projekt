@@ -13,16 +13,18 @@ public class PlotService {
 
 	/**
 	 * Constructor of the class {@link PlotService} used by Spring
+	 *
 	 * @param plotCatalog repository of plots as {@link PlotCatalog}
 	 */
-	PlotService(PlotCatalog plotCatalog){
+	PlotService(PlotCatalog plotCatalog) {
 		this.plotCatalog = plotCatalog;
 	}
 
 	/**
 	 * Create a new object of type {@link Plot} and add it to the {@link PlotCatalog}
-	 * @param name name of the {@link Plot} as String
-	 * @param size size of the {@link Plot} as int
+	 *
+	 * @param name        name of the {@link Plot} as String
+	 * @param size        size of the {@link Plot} as int
 	 * @param description description of the {@link Plot} as String
 	 * @return {@link Plot} which is added
 	 */
@@ -35,6 +37,7 @@ public class PlotService {
 
 	/**
 	 * Check if there is a {@link Plot} with the given name in the {@link PlotCatalog}
+	 *
 	 * @param name name of the {@link Plot} as String
 	 * @return true, if {@link Plot} with the given name exists
 	 */
@@ -44,6 +47,7 @@ public class PlotService {
 
 	/**
 	 * Get the {@link Plot} object for a given Id of a {@link Plot} as {@link ProductIdentifier}
+	 *
 	 * @param plotId the id of the {@link Plot} as {@link ProductIdentifier}
 	 * @return associated {@link Plot}
 	 */
@@ -52,10 +56,11 @@ public class PlotService {
 			throw new IllegalArgumentException("Plot does not exist!");
 		}
 		return plotCatalog.findById(plotId).get();
-	}	
-	
+	}
+
 	/**
 	 * Get the {@link Plot} object for a given Id of a {@link Plot} as {@link ProductIdentifier}
+	 *
 	 * @param plotId the id of the {@link Plot} as {@link ProductIdentifier}
 	 * @return associated {@link Plot}
 	 */
@@ -68,6 +73,7 @@ public class PlotService {
 
 	/**
 	 * Get the {@link Plot}s which are administrated by the given {@link Tenant}
+	 *
 	 * @param chairman {@link Tenant} with {@link Role} "Obmann" who administrates {@link Plot}s
 	 * @return administrated {@link Plot}s as {@link Set}
 	 */

@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
@@ -22,12 +22,12 @@ public class WorkAssignmentsTest {
 	 * Set up for a mock {@link WorkAssignment} for each testing
 	 */
 	@BeforeEach
-	public void setUp(){
-		workAssignment = new WorkAssignment(LocalDateTime.now(), 0,"Test", "Test", null);
+	public void setUp() {
+		workAssignment = new WorkAssignment(LocalDateTime.now(), 0, "Test", "Test", null);
 	}
 
 	@Test
-	public void initialLocalDateTest(){
+	public void initialLocalDateTest() {
 		assertThat(workAssignment.getDate());
 	}
 
@@ -36,7 +36,7 @@ public class WorkAssignmentsTest {
 	 */
 
 	@Test
-	public void initialWorkHoursTest(){
+	public void initialWorkHoursTest() {
 		assertThat(workAssignment.getWorkHours());
 	}
 
@@ -45,7 +45,7 @@ public class WorkAssignmentsTest {
 	 */
 
 	@Test
-	public void setWorkHoursTest(){
+	public void setWorkHoursTest() {
 		workAssignment.setWorkHours(12);
 		assertThat(workAssignment.getWorkHours() == 12);
 	}
@@ -54,7 +54,7 @@ public class WorkAssignmentsTest {
 	 * Test for the Getter of the workHours
 	 */
 	@Test
-	public void getWorkHoursTest(){
+	public void getWorkHoursTest() {
 		assertThat(workAssignment.getWorkHours() == 0);
 	}
 
@@ -62,7 +62,7 @@ public class WorkAssignmentsTest {
 	 * Test for the initialization of the Title
 	 */
 	@Test
-	public void initialTitleTest(){
+	public void initialTitleTest() {
 		assertThat(workAssignment.getTitle());
 	}
 
@@ -70,7 +70,7 @@ public class WorkAssignmentsTest {
 	 * Test for the Setter of the Title
 	 */
 	@Test
-	public void setTitleTest(){
+	public void setTitleTest() {
 		workAssignment.setTitle("Test");
 		assertThat(workAssignment.getTitle().equals("Test"));
 	}
@@ -79,7 +79,7 @@ public class WorkAssignmentsTest {
 	 * Test for the Getter of the Title
 	 */
 	@Test
-	public void getTitleTest(){
+	public void getTitleTest() {
 		assertThat(workAssignment.getTitle().equals("Test"));
 	}
 
@@ -88,7 +88,7 @@ public class WorkAssignmentsTest {
 	 * Test for the initialization of the Description
 	 */
 	@Test
-	public void initialDescriptionTest(){
+	public void initialDescriptionTest() {
 		assertThat(workAssignment.getDescription());
 	}
 
@@ -96,7 +96,7 @@ public class WorkAssignmentsTest {
 	 * Test for the Setter of the Description
 	 */
 	@Test
-	public void setDescriptionTest(){
+	public void setDescriptionTest() {
 		workAssignment.setDescription("Test");
 		assertThat(workAssignment.getDescription().equals("Test"));
 	}
@@ -105,22 +105,22 @@ public class WorkAssignmentsTest {
 	 * Test for the Getter of the Description
 	 */
 	@Test
-	public void getDescription(){
+	public void getDescription() {
 		assertThat(workAssignment.getDescription().equals("Test"));
 	}
 
 	@Test
-	public void initialIDTest(){
+	public void initialIDTest() {
 		assertThat(workAssignment.getId());
 	}
 
 	@Test
-	public void getIDTest(){
+	public void getIDTest() {
 		assertThat(workAssignment.getId());
 	}
 
 	@Test
-	public void initialGetPlotsTest(){
+	public void initialGetPlotsTest() {
 		assertThat(workAssignment.getPlots());
 	}
 }

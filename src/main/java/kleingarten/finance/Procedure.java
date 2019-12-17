@@ -1,25 +1,19 @@
 package kleingarten.finance;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+import kleingarten.plot.Plot;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.lang.NonNull;
 
-import kleingarten.plot.Plot;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Procedure {
 
-
-	private @Id @GeneratedValue long id;
+	@Id
+	@GeneratedValue
+	private long id;
 
 	/**
 	 * Year is needed to get the prices for some items
@@ -58,7 +52,8 @@ public class Procedure {
 	/**
 	 * The main tenant id. Can not be null.
 	 */
-	private @NonNull long mainTenant;
+	private @NonNull
+	long mainTenant;
 
 	/**
 	 * Set of sub Tenant IDs.
@@ -75,8 +70,8 @@ public class Procedure {
 	/**
 	 * Constructor with some parsing, best to use this one.
 	 *
-	 * @param year as int
-	 * @param plot as {@link Plot}
+	 * @param year       as int
+	 * @param plot       as {@link Plot}
 	 * @param mainTenant as long
 	 */
 	public Procedure(int year, Plot plot, long mainTenant) {
@@ -89,9 +84,8 @@ public class Procedure {
 
 
 	public boolean isTenant(long tenantId) {
-		if(mainTenant==tenantId) return true;
-		if(subTenants.contains(tenantId)) return true;
-		return false;
+		if (mainTenant == tenantId) return true;
+		return subTenants.contains(tenantId);
 	}
 
 
@@ -100,7 +94,7 @@ public class Procedure {
 	}
 
 	public void setWatercount(double watercount) {
-		if(!editable()) return;
+		if (!editable()) return;
 		this.watercount = watercount;
 	}
 
@@ -109,7 +103,7 @@ public class Procedure {
 	}
 
 	public void setPowercount(double powercount) {
-		if(!editable()) return;
+		if (!editable()) return;
 		this.powercount = powercount;
 	}
 
@@ -118,7 +112,7 @@ public class Procedure {
 	}
 
 	public void setSize(double size) {
-		if(!editable()) return;
+		if (!editable()) return;
 		this.size = size;
 	}
 
@@ -127,7 +121,7 @@ public class Procedure {
 	}
 
 	public void setWorkMinutes(int workMinutes) {
-		if(!editable()) return;
+		if (!editable()) return;
 		this.workMinutes = workMinutes;
 	}
 
@@ -163,10 +157,10 @@ public class Procedure {
 	 * @return true when added, false if not
 	 */
 	public boolean addSubTenant(long tenantID) {
-		if(!editable()) return false;
+		if (!editable()) return false;
 
 		//should not set main Tenant as sub Tenant
-		if (tenantID==mainTenant) return false;
+		if (tenantID == mainTenant) return false;
 
 		//Set restricts duplicates
 		return subTenants.add(tenantID);
@@ -180,7 +174,7 @@ public class Procedure {
 	 * @return true if removed
 	 */
 	public boolean removeSubTenant(long tenantID) {
-		if(!editable()) return false;
+		if (!editable()) return false;
 
 		return subTenants.remove(tenantID);
 	}
@@ -193,8 +187,8 @@ public class Procedure {
 	 * @return false if tenant is already main tenant
 	 */
 	public boolean setMainTenant(long tenantID) {
-		if(!editable()) return false;
-		if(tenantID==mainTenant) return false;
+		if (!editable()) return false;
+		if (tenantID == mainTenant) return false;
 
 		mainTenant = tenantID;
 		return true;
@@ -208,13 +202,13 @@ public class Procedure {
 	 * @return false if its the same main Tenant as before
 	 */
 	public boolean setNewMainTenant(long tenantID) {
-		if(!editable()) return false;
+		if (!editable()) return false;
 
-		if(tenantID==mainTenant) {
+		if (tenantID == mainTenant) {
 			return false;
 		}
 
-		mainTenant=tenantID;
+		mainTenant = tenantID;
 		subTenants.clear();
 		return true;
 
@@ -232,9 +226,8 @@ public class Procedure {
 	 * Close the Procedure, it cant be edited anymore.
 	 */
 	public void close() {
-		isOpen=false;
+		isOpen = false;
 	}
-
 
 
 	public String toString() {

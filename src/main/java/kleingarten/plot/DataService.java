@@ -62,10 +62,7 @@ public class DataService {
 	 */
 	public boolean procedureExists(Plot plot) {
 		Procedure procedure = procedureManager.getActualProcedure(plot);
-		if (procedure == null) {
-			return false;
-		}
-		return true;
+		return procedure != null;
 	}
 
 	/**

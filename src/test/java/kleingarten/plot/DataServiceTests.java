@@ -25,17 +25,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @SpringBootTest
 @Transactional
 public class DataServiceTests {
-	private Plot firstPlot;
-	private Plot secondPlot;
-	private Procedure firstProcedure;
-	private Procedure secondProcedure;
-	private Tenant tenant;
-
 	private final DataService dataService;
 	private final PlotService plotService;
 	private final UserAccountManager userAccountManager;
 	private final ProcedureManager procedureManager;
 	private final TenantRepository tenantRepository;
+	private Plot firstPlot;
+	private Plot secondPlot;
+	private Procedure firstProcedure;
+	private Procedure secondProcedure;
+	private Tenant tenant;
 
 	/**
 	 * Constructor of class, used by Spring

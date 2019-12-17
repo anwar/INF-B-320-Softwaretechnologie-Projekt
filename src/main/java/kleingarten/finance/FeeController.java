@@ -2,8 +2,6 @@ package kleingarten.finance;
 
 import kleingarten.plot.Plot;
 import kleingarten.tenant.Tenant;
-import kleingarten.tenant.TenantRole;
-
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +9,12 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -35,11 +35,11 @@ public class FeeController {
 
 		Procedure mainProcedure = procedureManager.get(Long.parseLong(procedureId));
 
-		Procedure oldProcedure = procedureManager.getProcedure(mainProcedure.getYear()-1, mainProcedure.getPlotId());
+		Procedure oldProcedure = procedureManager.getProcedure(mainProcedure.getYear() - 1, mainProcedure.getPlotId());
 
 		Bill billToShow = new Bill(mainProcedure, oldProcedure);
 
-		ByteArrayInputStream bis = GeneratePDFBill.bill( billToShow.feeList , mainProcedure.getPlot(), procedureManager.getTenantManager().get(mainProcedure.getMainTenant()), mainProcedure.getYear() );
+		ByteArrayInputStream bis = GeneratePDFBill.bill(billToShow.feeList, mainProcedure.getPlot(), procedureManager.getTenantManager().get(mainProcedure.getMainTenant()), mainProcedure.getYear());
 
 		var headers = new HttpHeaders();
 		headers.add("Content-Disposition", "inline; filename=Rechnungen.pdf");
@@ -52,7 +52,7 @@ public class FeeController {
 	}
 
 	@GetMapping("bill/{plot}")
-	public String viewBill(Model model, @PathVariable Plot plot, @LoggedIn UserAccount userAccount){
+	public String viewBill(Model model, @PathVariable Plot plot, @LoggedIn UserAccount userAccount) {
 
 		model.addAttribute("plot", procedureManager.getPlotService().findById(plot.getId()));
 
@@ -61,11 +61,11 @@ public class FeeController {
 
 		Tenant tenant = procedureManager.getTenantManager().getTenantByUserAccount(userAccount);
 
-		if(tenant.hasRole("Vorstandsvorsitzender")) {
+		if (tenant.hasRole("Vorstandsvorsitzender")) {
 			model.addAttribute("procedures", procedures);
 		} else {
-			for(Procedure proc : procedures) {
-				if(proc.isTenant(tenant.getId())) {
+			for (Procedure proc : procedures) {
+				if (proc.isTenant(tenant.getId())) {
 					toDisplay.add(proc);
 				}
 			}
@@ -78,7 +78,7 @@ public class FeeController {
 	public String finalizeProcedures(Model model, @PathVariable String year) {
 
 		List<Procedure> procedures = procedureManager.getAllByYear(Integer.parseInt(year)).toList();
-		for(Procedure proc : procedures) {
+		for (Procedure proc : procedures) {
 			System.out.println(proc.toString());
 		}
 

@@ -1,19 +1,19 @@
 package kleingarten.finance;
 
-import java.util.*;
-
+import kleingarten.plot.Plot;
 import kleingarten.plot.PlotService;
 import kleingarten.plot.PlotStatus;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
-
 import org.salespointframework.catalog.ProductIdentifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import kleingarten.plot.Plot;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProcedureManager {
@@ -49,29 +49,29 @@ public class ProcedureManager {
 	/**
 	 * Find a Procedure by a given year and Plot.
 	 *
-	 * @param year for which to get the {@link Procedure}
+	 * @param year   for which to get the {@link Procedure}
 	 * @param plotId is the Id for the {@link Plot}
 	 * @return a {@link Procedure} or null if not found
 	 */
 	public Procedure getProcedure(int year, ProductIdentifier plotId) {
-		for(Procedure procedure:procedures.findByPlotProductIdentifier(plotId)) {
-			if(procedure.getYear() == year) return procedure;
+		for (Procedure procedure : procedures.findByPlotProductIdentifier(plotId)) {
+			if (procedure.getYear() == year) return procedure;
 		}
 
 		return null;
 	}
 
 	public Procedure getProcedure(int year, Plot plot) {
-		for(Procedure procedure:procedures.findByPlot(plot)) {
-			if(procedure.getYear() == year) return procedure;
+		for (Procedure procedure : procedures.findByPlot(plot)) {
+			if (procedure.getYear() == year) return procedure;
 		}
 
 		return null;
 	}
 
 	public Procedure getActualProcedure(Plot plot) {
-		for(Procedure proc:procedures.findByPlot(plot)) {
-			if(proc.isOpen()) return proc;
+		for (Procedure proc : procedures.findByPlot(plot)) {
+			if (proc.isOpen()) return proc;
 		}
 
 		return null;
@@ -80,15 +80,15 @@ public class ProcedureManager {
 	/**
 	 * Get all Procedures for the Tenant, if he is main or sub Tenant in it.
 	 *
-	 * @param year for which to get the {@link Procedure}s
+	 * @param year     for which to get the {@link Procedure}s
 	 * @param tenantId is the Id for the {@link Tenant}
 	 * @return Empty {@link Streamable} or {@link Procedure}s
 	 */
 	public Streamable<Procedure> getProcedures(int year, long tenantId) {
 		List<Procedure> procList = new LinkedList<Procedure>();
 
-		for(Procedure procedure:procedures.findByYear(year)) {
-			if(procedure.isTenant(tenantId)) procList.add(procedure);
+		for (Procedure procedure : procedures.findByYear(year)) {
+			if (procedure.isTenant(tenantId)) procList.add(procedure);
 		}
 		return Streamable.of(procList);
 	}
@@ -122,15 +122,15 @@ public class ProcedureManager {
 		return procedures.save(procedure);
 	}
 
-	public Streamable<Procedure> findByPlotName(String plotName){
+	public Streamable<Procedure> findByPlotName(String plotName) {
 		return procedures.findByPlotName(plotName);
 	}
 
-	public Streamable<Procedure> findByPlotId(String plotName){
+	public Streamable<Procedure> findByPlotId(String plotName) {
 		return null;//procedures.findByPlotsName(plotName);
 	}
 
-	public Procedure get(Long id){
+	public Procedure get(Long id) {
 		return procedures.findById(id).orElse(null);
 	}
 
@@ -145,12 +145,13 @@ public class ProcedureManager {
 	/**
 	 * Before Creating a bill, Need to check whether the procedure is still isOpen() or not.
 	 * If the isOpen == false, then bill will be created.
+	 *
 	 * @param plot as {@link Plot}
 	 * @return a {@link Procedure}
 	 */
-	public Procedure getCurrentBillAndFinalizeProcedure(Plot plot){
-		for(Procedure procedure :procedures.findByPlot(plot)) {
-			if(procedure.isOpen() == false) return procedure;
+	public Procedure getCurrentBillAndFinalizeProcedure(Plot plot) {
+		for (Procedure procedure : procedures.findByPlot(plot)) {
+			if (procedure.isOpen() == false) return procedure;
 		}
 		return null;
 	}

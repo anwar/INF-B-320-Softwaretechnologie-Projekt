@@ -22,10 +22,11 @@ public class PlotServiceIntegrationTests {
 
 	/**
 	 * Constructor of class, used by Spring
-	 * @param plotService {@link PlotService} class which should be set as class attribute
-	 * @param plotCatalog {@link PlotCatalog} class which should be set as class attribute
+	 *
+	 * @param plotService      {@link PlotService} class which should be set as class attribute
+	 * @param plotCatalog      {@link PlotCatalog} class which should be set as class attribute
 	 * @param procedureManager {@link ProcedureManager} class which should be set as class attribute
-	 * @param tenantManager {@link TenantManager} class which should be set as class attribute
+	 * @param tenantManager    {@link TenantManager} class which should be set as class attribute
 	 */
 	public PlotServiceIntegrationTests(@Autowired PlotService plotService, @Autowired PlotCatalog plotCatalog,
 									   @Autowired ProcedureManager procedureManager,

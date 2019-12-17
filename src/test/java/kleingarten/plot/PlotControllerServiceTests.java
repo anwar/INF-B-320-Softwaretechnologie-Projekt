@@ -15,27 +15,23 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 /**
  * Class with test cases for the methods implemented in {@link PlotControllerService}
  */
 @SpringBootTest
 @Transactional
 public class PlotControllerServiceTests {
-	private Tenant boss = null;
-	private Tenant replacement = null;
-	private Tenant chairman = null;
-
-	private Plot freePlot;
-	private Plot takenPlot;
-
 	private final PlotControllerService plotControllerService;
 	private final DataService dataService;
 	private final TenantManager tenantManager;
 	private final PlotService plotService;
 	private final PlotCatalog plotCatalog;
 	private final ProcedureManager procedureManager;
+	private Tenant boss = null;
+	private Tenant replacement = null;
+	private Tenant chairman = null;
+	private Plot freePlot;
+	private Plot takenPlot;
 
 	/**
 	 * Constructor of class, used by Spring

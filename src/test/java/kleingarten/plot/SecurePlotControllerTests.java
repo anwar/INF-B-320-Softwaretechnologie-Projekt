@@ -18,7 +18,7 @@ public class SecurePlotControllerTests {
 
 	//@Test
 	//public void cancelPlotIsAvailableForManager() {
-		//mvc.perform(get("/cancelPlot")).with(user("peter.klaus").roles("Vorstandsvorsitzender"))).param()
+	//mvc.perform(get("/cancelPlot")).with(user("peter.klaus").roles("Vorstandsvorsitzender"))).param()
 	//}
 
 	@Test

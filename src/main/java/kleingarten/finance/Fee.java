@@ -1,10 +1,5 @@
 package kleingarten.finance;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 public class Fee {
 
 	private String title;
@@ -15,11 +10,12 @@ public class Fee {
 
 	/**
 	 * Construct a Fee item. Used to generate a Bill as PDF.
-	 * @param title as String
-	 * @param count as double
+	 *
+	 * @param title     as String
+	 * @param count     as double
 	 * @param basePrice as double
 	 */
-	public Fee(String title, double count, double basePrice){
+	public Fee(String title, double count, double basePrice) {
 
 		this.title = title;
 		this.count = count;
@@ -28,11 +24,11 @@ public class Fee {
 
 	}
 
-	public String getTitle(){
+	public String getTitle() {
 		return title;
 	}
 
-	public double getPrice(){
+	public double getPrice() {
 		return basePrice * count;
 	}
 

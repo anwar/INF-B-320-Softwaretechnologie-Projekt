@@ -4,16 +4,13 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import kleingarten.tenant.Tenant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
-
-
-import kleingarten.plot.*;
-import kleingarten.tenant.Tenant;
 
 public class GeneratePDFBill {
 	private static final Logger logger = LoggerFactory.getLogger(GeneratePDFBill.class);
@@ -114,9 +111,9 @@ public class GeneratePDFBill {
 			document.add(company);
 			document.add(billFor);
 			document.add(billFor1);
-			document.add( Chunk.NEWLINE );
+			document.add(Chunk.NEWLINE);
 			document.add(table);
-			document.add( Chunk.NEWLINE );
+			document.add(Chunk.NEWLINE);
 			document.add(sum);
 
 			document.close();

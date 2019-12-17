@@ -23,15 +23,14 @@ public class CreateApplicationForm {
 	public String getEmail() {
 		return email;
 	}
-	
-	public void setPlotId(String plotId) {
-		this.plotId = plotId;
-	}
-	
+
 	public String getPlotId() {
 		return plotId;
 	}
-	
-	
+
+	public void setPlotId(String plotId) {
+		this.plotId = plotId;
+	}
+
 
 }
