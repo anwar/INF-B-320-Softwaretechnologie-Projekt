@@ -21,6 +21,7 @@
 | 0.1.6   | 20.11.2019        | Isabell Zorr
 | 0.1.7   | 21.11.2019        | Ylvi Bachmann
 | 0.1.8   | 10.12.2019        | Muhammad Talal Anwar
+| 0.2     | 17.01.2019        | Ylvi Bachmann
 |===
 
 toc::[]
@@ -350,13 +351,25 @@ image::models/analysis/PlotManagement.png[Parzellenverwaltung]
 |Plot
 |beschreibt die Parzelle mit ihren benötigten Daten
 
-|PlotService
-|Managementklasse, beinhaltet Methoden, die vom Controller genutzt werden, um diesen übersichtlich zu halten
+|PlotService und DataService
+|Managementklassen, beinhalten Methoden, die mit externen Klassen interagieren und erhaltene Informationen zur Nutzung aufbereiten
 
-|...Form
-|beschreiben die Formulare, mit welchen z.B. neue Parzellen angelegt und Daten einer bestehenden Parzelle verändert werden können +
-(werden hier vereinfacht zusammengefasst, um Übersichtlichkeit zu gewährleisten)
+|SecurePlotController
+|Controller, welcher alle Anfragen bearbeitet, wenn ein Nutzer angemeldet ist
+
+|InsecurePlotController
+|Controller, welcher alle Anfragen bearbeitet, wenn kein Nutzer angemeldet ist
+
+|PlotControllerService
+|Managementklasse, welche Methoden enthält, um die in den Controllern benötigten Funktionalitäten und Informationen auszulagern
+
+|PlotInformationBuffer
+|Hilfsklasse, welche alle Informationen einer Parzelle speichert, um diese zur übersichtlich darstellen zu können
 |===
+
+Aus Gründen der Übersichtlichkeit bzw. um die primäre Richtung des Zugriffes darzustellen, wurde die Klasse Procedure in
+das Package finance ausgelagert und die gerichtete Assoziation von einer Parzelle zu den zugehörigen Bewerbungen
+(vom Typ Appointment) gelöscht.
 
 === Finanzverwaltung
 image::models/analysis/FinanceManagement.png[]
