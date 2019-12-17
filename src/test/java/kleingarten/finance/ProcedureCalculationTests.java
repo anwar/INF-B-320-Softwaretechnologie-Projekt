@@ -52,6 +52,8 @@ public class ProcedureCalculationTests {
 						"tester@gmail.com", Role.of("Hauptpächter")));
 		tenantRepository.save(tenant);
 		testProcedure = procedureManager.add(new Procedure(2019, testPlot, tenant.getId()));
+		testProcedure.setWatercount(50);
+		testProcedure.setPowercount(100);
 	}
 
 	/**
@@ -79,22 +81,6 @@ public class ProcedureCalculationTests {
 	}
 
 	/**
-	 * check the waterCount in testProcedure. It should be 0 because it's not given
-	 */
-	@Test
-	public void checkWater(){
-		assertThat(testProcedure.getWatercount()).isEqualTo(0);
-	}
-
-	/**
-	 * check the powerCount in testProcedure. It should be 0 because it's not given
-	 */
-	@Test
-	public void checkPower(){
-		assertThat(testProcedure.getPowercount()).isEqualTo(0);
-	}
-
-	/**
 	 * check the rent Price of the testPlot
 	 */
 	@Test
@@ -103,15 +89,31 @@ public class ProcedureCalculationTests {
 	}
 
 	/**
+	 * check the waterCount in testProcedure.
+	 */
+	@Test
+	public void checkWater(){
+		assertThat(testProcedure.getWatercount()).isEqualTo(50);
+	}
+
+	/**
 	 * check the water price of the testPlot
 	 */
 	@Test
-	public void checkWaterPrice(){assertThat(testProcedure.getWatercount() * fee1.getBasePrice()).isEqualTo(0);}
+	public void checkWaterPrice(){assertThat(testProcedure.getWatercount() * fee1.getBasePrice()).isEqualTo(50);}
+
+	/**
+	 * check the powerCount in testProcedure.
+	 */
+	@Test
+	public void checkPower(){
+		assertThat(testProcedure.getPowercount()).isEqualTo(100);
+	}
 
 	/**
 	 * check the power price of the testPlot
 	 */
 	@Test
-	public void checkPowerPrice(){assertThat(testProcedure.getPowercount() * fee2.getBasePrice()).isEqualTo(0);}
+	public void checkPowerPrice(){assertThat(testProcedure.getPowercount() * fee2.getBasePrice()).isEqualTo(100);}
 
 }
