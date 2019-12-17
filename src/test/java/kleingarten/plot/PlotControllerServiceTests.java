@@ -4,9 +4,12 @@ import kleingarten.finance.Procedure;
 import kleingarten.finance.ProcedureManager;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
+import kleingarten.tenant.TenantRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.Role;
+import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -29,9 +32,16 @@ public class PlotControllerServiceTests {
 	private final PlotService plotService;
 	private final PlotCatalog plotCatalog;
 	private final ProcedureManager procedureManager;
+	private final UserAccountManager userAccountManager;
+	private final TenantRepository tenantRepository;
+
 	private Tenant boss = null;
 	private Tenant replacement = null;
 	private Tenant chairman = null;
+	private Tenant chashier = null;
+	private Tenant protocol = null;
+	private Tenant waterman = null;
+
 	private Plot freePlot;
 	private Plot takenPlot;
 
@@ -44,19 +54,25 @@ public class PlotControllerServiceTests {
 	 * @param plotService           {@link PlotService} class which should be set as class attribute
 	 * @param plotCatalog           {@link PlotCatalog} class which should be set as class attribute
 	 * @param procedureManager      {@link ProcedureManager} class which should be set as class attribute
+	 * @param userAccountManager    {@link UserAccountManager} class which should be set as class attribute
+	 * @param tenantRepository      {@link TenantRepository} class which should be set as class attribute
 	 */
 	public PlotControllerServiceTests(@Autowired PlotControllerService plotControllerService,
 									  @Autowired DataService dataService,
 									  @Autowired TenantManager tenantManager,
 									  @Autowired PlotService plotService,
 									  @Autowired PlotCatalog plotCatalog,
-									  @Autowired ProcedureManager procedureManager) {
+									  @Autowired ProcedureManager procedureManager,
+									  @Autowired UserAccountManager userAccountManager,
+									  @Autowired TenantRepository tenantRepository) {
 		this.plotControllerService = plotControllerService;
 		this.dataService = dataService;
 		this.tenantManager = tenantManager;
 		this.plotService = plotService;
 		this.plotCatalog = plotCatalog;
 		this.procedureManager = procedureManager;
+		this.userAccountManager = userAccountManager;
+		this.tenantRepository = tenantRepository;
 	}
 
 	/**
@@ -87,6 +103,12 @@ public class PlotControllerServiceTests {
 				this.replacement = tenant;
 			} else if (tenantManager.tenantHasRole(tenant, Role.of("Obmann"))) {
 				this.chairman = tenant;
+			} else if (tenantManager.tenantHasRole(tenant, Role.of("Kassierer"))) {
+				this.chashier = tenant;
+			} else if (tenantManager.tenantHasRole(tenant, Role.of("Protokollant"))) {
+				this.protocol = tenant;
+			} else if (tenantManager.tenantHasRole(tenant, Role.of("Wassermann"))) {
+				this.waterman = tenant;
 			}
 		}
 	}
@@ -196,6 +218,104 @@ public class PlotControllerServiceTests {
 		takenPlot = plotService.findById(renting.getPlotId());
 		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount())))
 				.isEqualTo(Map.of(takenPlot, "#E69138"));
+	}
+
+	/**
+	 * Test if access to the details page of a {@link Plot} is made correctly when no user is logged in; P-U-032
+	 */
+	@Test
+	public void insecureAccessRightsForPlots() {
+		assertThat(plotControllerService.setAccessRightForPlot(freePlot, Optional.empty()))
+				.isEqualTo(Map.of(freePlot, true));
+		assertThat(plotControllerService.setAccessRightForPlot(takenPlot, Optional.empty()))
+				.isEqualTo(Map.of(takenPlot, false));
+	}
+
+	/**
+	 * Test if access to the details page of a {@link Plot} is made correctly when a user with the {@link Role}
+	 * "Vorstandsvorsitzender" or "Stellvertreter" is logged in; P-U-033
+	 */
+	@Test
+	public void adminAccessRightsForPlots() {
+		assertThat(plotControllerService.setAccessRightForPlot(freePlot, Optional.of(boss.getUserAccount())))
+				.isEqualTo(Map.of(freePlot, true));
+		assertThat(plotControllerService.setAccessRightForPlot(takenPlot, Optional.of(boss.getUserAccount())))
+				.isEqualTo(Map.of(takenPlot, true));
+		assertThat(plotControllerService.setAccessRightForPlot(freePlot, Optional.of(replacement.getUserAccount())))
+				.isEqualTo(Map.of(freePlot, true));
+		assertThat(plotControllerService.setAccessRightForPlot(takenPlot, Optional.of(replacement.getUserAccount())))
+				.isEqualTo(Map.of(takenPlot, true));
+	}
+
+	/**
+	 * Test if access to the details page of a {@link Plot} is made correctly when a user with the {@link Role}
+	 * "Obmann" is logged in; P-U-033
+	 */
+	@Test
+	public void chairmanAccessRightsForPlots() {
+		assertThat(plotControllerService.setAccessRightForPlot(freePlot, Optional.of(chairman.getUserAccount())))
+				.isEqualTo(Map.of(freePlot, true));
+		assertThat(plotControllerService.setAccessRightForPlot(takenPlot, Optional.of(chairman.getUserAccount())))
+				.isEqualTo(Map.of(takenPlot, true));
+	}
+
+	/**
+	 * Test if access to the details page of a {@link Plot} is made correctly when a user with the {@link Role}
+	 * "Kassierer" is logged in; P-U-033
+	 */
+	@Test
+	public void chashierAccessRightsForPlots() {
+		assertThat(plotControllerService.setAccessRightForPlot(freePlot, Optional.of(chashier.getUserAccount())))
+				.isEqualTo(Map.of(freePlot, true));
+		assertThat(plotControllerService.setAccessRightForPlot(takenPlot, Optional.of(chashier.getUserAccount())))
+				.isEqualTo(Map.of(takenPlot, true));
+	}
+
+	/**
+	 * Test if access to the details page of a {@link Plot} is made correctly when a user with the {@link Role}
+	 * "Protokollant" is logged in; P-U-033
+	 */
+	@Test
+	public void protocolAccessRightsForPlots() {
+		assertThat(plotControllerService.setAccessRightForPlot(freePlot, Optional.of(protocol.getUserAccount())))
+				.isEqualTo(Map.of(freePlot, true));
+		assertThat(plotControllerService.setAccessRightForPlot(takenPlot, Optional.of(protocol.getUserAccount())))
+				.isEqualTo(Map.of(takenPlot, true));
+	}
+
+	/**
+	 * Test if access to the details page of a {@link Plot} is made correctly when a user with the {@link Role}
+	 * "Wassermann" is logged in; P-U-033
+	 */
+	@Test
+	public void watermanAccessRightsForPlots() {
+		assertThat(plotControllerService.setAccessRightForPlot(freePlot, Optional.of(waterman.getUserAccount())))
+				.isEqualTo(Map.of(freePlot, true));
+		assertThat(plotControllerService.setAccessRightForPlot(takenPlot, Optional.of(waterman.getUserAccount())))
+				.isEqualTo(Map.of(takenPlot, true));
+	}
+
+	/**
+	 * Test if access to the details page of a {@link Plot} is made correctly when a user with no special {@link Role}
+	 * is logged in; P-U-033
+	 */
+	@Test
+	public void tenantAccessRightsForPlots() {
+		Tenant tenant = new Tenant("Max", "Mustermann", "Am Berg 5, 12423 Irgendwo im Nirgendwo",
+				"01242354356", "13.04.1999",
+				userAccountManager.create("max.mustermann", Password.UnencryptedPassword.of("123"),
+						"max.mustermann@email.com", Role.of("Hauptpächter")));
+		tenantRepository.save(tenant);
+		assertThat(plotControllerService.setAccessRightForPlot(freePlot, Optional.of(tenant.getUserAccount())))
+				.isEqualTo(Map.of(freePlot, true));
+		assertThat(plotControllerService.setAccessRightForPlot(takenPlot, Optional.of(tenant.getUserAccount())))
+				.isEqualTo(Map.of(takenPlot, false));
+
+		Procedure procedure = new Procedure(2019, freePlot, tenant.getId());
+		procedureManager.add(procedure);
+		takenPlot = plotService.findById(procedure.getPlotId());
+		assertThat(plotControllerService.setAccessRightForPlot(takenPlot, Optional.of(tenant.getUserAccount())))
+				.isEqualTo(Map.of(takenPlot, true));
 	}
 
 	/**

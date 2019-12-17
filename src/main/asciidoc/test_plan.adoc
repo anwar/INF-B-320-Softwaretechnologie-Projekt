@@ -311,6 +311,23 @@ zuständig Ylvi Sarah Bachmann
 |Nutzer hat die Rolle Pächter
 |Parzelle
 |Model mit Rechnungen mit gegebenem Nutzer für die Parzelle
+
+|P-I-050
+|
+|
+|Anzeigen der Parzellenübersicht
+|Nutzer ist nicht angemeldet
+|
+|Model mit den benötigten Einträgen wird erstellt und es enthält nicht das Recht Parzellen hinzu zu fügen.
+
+|P-I-051
+|
+|
+|Anzeigen der Parzellenübersicht
+|Nutzer ist angemeldet
+|
+|Zugriff auf Detailseiten der Parzellen nach Rolle des Nutzers
+
 |===
 
 === FinanceDepartment

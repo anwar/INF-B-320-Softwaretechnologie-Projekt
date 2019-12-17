@@ -21,6 +21,42 @@ public class SecurePlotControllerTests {
 	//mvc.perform(get("/cancelPlot")).with(user("peter.klaus").roles("Vorstandsvorsitzender"))).param()
 	//}
 
+	/**
+	 * Test if a user with the {@link org.salespointframework.useraccount.Role} "Vorstandsvorsitzender"
+	 * or "Stellvertreter" can access the plot overview page; P-I-051
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void showPlotOverviewForAdminTest() throws Exception {
+		mvc.perform(get("/anlage")
+				.with(user("peter.klaus").roles("Vorstandsvorsitzender")))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("plotList", "plotColors", "colors", "userRights", "canAdd"))
+				.andExpect(view().name("plot/plotOverview"));
+
+		mvc.perform(get("/anlage")
+				.with(user("sophie").roles("Stellvertreter")))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("plotList", "plotColors", "colors", "userRights", "canAdd"))
+				.andExpect(view().name("plot/plotOverview"));
+	}
+
+	/**
+	 * Test if a logged in user can access the plot overview page; P-I-051
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void showPlotOverviewForLoggedInUser() throws Exception {
+		mvc.perform(get("/anlage")
+				.with(user("hubertgrumpel").roles("Obmann")))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("plotList", "plotColors", "colors", "userRights"))
+				.andExpect(model().attributeDoesNotExist("canAdd"))
+				.andExpect(view().name("plot/plotOverview"));
+	}
+
 	@Test
 	public void showPlotsForUserTest() throws Exception {
 		mvc.perform(get("/myPlot")

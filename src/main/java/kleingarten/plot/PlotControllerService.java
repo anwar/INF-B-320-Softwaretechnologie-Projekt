@@ -113,6 +113,10 @@ public class PlotControllerService {
 				rights.put(plot, true);
 			} else if (tenantManager.tenantHasRole(tenant, Role.of("Obmann"))) {
 				rights.put(plot, plot.getChairman().getId() == tenant.getId());
+			} else if (dataService.procedureExists(plot)) {
+				if (dataService.getProcedure(plot).isTenant(tenant.getId())) {
+					rights.put(plot, true);
+				}
 			}
 		}
 		return rights;
