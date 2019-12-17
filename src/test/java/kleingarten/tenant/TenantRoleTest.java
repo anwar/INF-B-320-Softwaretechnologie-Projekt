@@ -1,6 +1,5 @@
 package kleingarten.tenant;
 
-
 import org.junit.jupiter.api.Test;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;

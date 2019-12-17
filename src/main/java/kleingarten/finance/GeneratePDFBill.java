@@ -4,6 +4,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import kleingarten.plot.Plot;
 import kleingarten.tenant.Tenant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

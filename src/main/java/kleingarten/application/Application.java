@@ -7,7 +7,6 @@ import javax.persistence.Id;
 @Entity
 public class Application {
 
-
 	@Id
 	@GeneratedValue
 	private long id;

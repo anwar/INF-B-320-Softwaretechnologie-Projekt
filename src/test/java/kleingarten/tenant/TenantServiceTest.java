@@ -1,6 +1,5 @@
 package kleingarten.tenant;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.salespointframework.useraccount.AuthenticationManager;
