@@ -1,6 +1,17 @@
+// -- Table of Contents
+:toc:
+:toclevels: 3
+:toc-title: Inhaltsverzeichnis
+:toc-placement!:
+:sectanchors:
+:numbered:
+
+
 = Test-Plan
 
 Dieser Testplan stellt eine vereinfachte Version der IEEE 829-1998 Vorlage dar.
+
+toc::[]
 
 == Einführung
 Dieses Dokument soll einen Überblick geben, wie getestet werden soll, inwiefern die Qualität der Anwendung gewährleistet wird.
@@ -12,14 +23,32 @@ die Qualität der Anwendung einzuschätzen.
 == Aufbau der Testbezeichner
 Nach welchem Schema sind die Tests benannt?
 
-1. Buchstabe: Zugehörigkeit des Departments +
-T - TenantDepartment, P - PlotDepartment, F - FinanceDepartment, M - MessageDepartment
-2. Buchstabe: Art des Tests +
-U - UnitTest, I - Integrationstest
-3. fortlaufende  Zahl zu Identifikation des Tests im jeweiligen Department
+=== Department
+[options="headers"]
+|===
+| Buchstabe | Zugehörigkeit des Departments
+| T         | TenantDepartment
+| P         | PlotDepartment
+| F         | FinanceDepartment
+| N         | NewsDepartment
+| M         | MessageDepartment
+| C         | ComplaintDepartment
+| T         | TenantDepartment
+| A         | ApplicationDepartment
+| AP        | AppointmentDepartment
+|===
 
-Bsp. +
-U-U-01, P-U-02, F-I-03
+=== Art
+[options="headers"]
+|===
+| Buchstabe | Art des Tests
+| U         | UnitTest
+| I         | Integrationstest
+|===
+
+Die Test ID wird mit der fortlaufenden Zahl zur Identifikation des Tests im jeweiligen Department angehängt.
+
+Beispiel: AP-U-01, P-U-02, F-I-03
 
 == Test Gegenstände
 Test Gegenstände sind die jeweiligen Verwaltungsebenen, bzw. die ausführenden Klassen (z.B. Controller).
@@ -341,28 +370,47 @@ zuständig Ylvi Sarah Bachmann
 |===
 
 === FinanceDepartment
-zuständig: Sanghyun Lee und Sascha Seiffert
+zuständig: SangHyun Lee und Sascha Seiffert
 [options="headers"]
 |===
-|ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|F-U-003  |Rechnen Wasserkosten einer Parzelle      |Wasserzählerstand einer Parzelle      |Wasserzählerstand (und Wasserkosten pro Kubikmeter)  |Ein Preis von Wasserkost einer Parzelle wird gerechnet
-|F-U-005  |Rechnen Stromkosten einer Parzelle       |Stromzählerstand einer Parzelle       |Stromzählerstand (und Stromkosten pro Kilowatt)      |Ein Preis von Stromkost einer Parzelle wird gerechnet
-|F-U-007  |Rechnen Miete einer Parzelle             |Größe einer Parzelle                  |Größe der Parzelle (und Miete pro Quadratmeter)      |Eine jährliche Miete der Parzelle wird gerechnet
-|F-U-015  |Schätzen fehlender Rechnungspositionen   |Rechnung existiert, alle bekannten Positionen sind angelegt  |Alle Positionen  |Fehlende Kosten oder Verbräuche werden geschätzt
-|F-U-020  |Rechnen eine jährliche Rechnung einer Parzelle   |Parzelle enthält alle nötige Daten für Berechnung    |Wasser/Stromzählerstand und Größe der Parzelle        |Eine jährliche Rechnung der Parzelle wird erstellt
-|F-U-023  |Erstellen eine jährliche Rechnung in PDF         |Rechnung ist erstellt         |Button                |Eine jährliche Rechnung der Parzelle wird in PDF erstellt
-|F-I-030  |Versenden per E-Mail  |Rechnung ist erstellt     |Adressat und PDF  |Die Rechnung wird dem Empfänger zugestellt
+| ID      | Anwendungsfall                                 | Vorbedingungen                                              | Eingabe                                             | Ausgabe
+| F-U-003 | Rechnen Wasserkosten einer Parzelle            | Wasserzählerstand einer Parzelle                            | Wasserzählerstand (und Wasserkosten pro Kubikmeter) | Ein Preis von Wasserkost einer Parzelle wird gerechnet
+| F-U-005 | Rechnen Stromkosten einer Parzelle             | Stromzählerstand einer Parzelle                             | Stromzählerstand (und Stromkosten pro Kilowatt)     | Ein Preis von Stromkost einer Parzelle wird gerechnet
+| F-U-007 | Rechnen Miete einer Parzelle                   | Größe einer Parzelle                                        | Größe der Parzelle (und Miete pro Quadratmeter)     | Eine jährliche Miete der Parzelle wird gerechnet
+| F-U-015 | Schätzen fehlender Rechnungspositionen         | Rechnung existiert, alle bekannten Positionen sind angelegt | Alle Positionen                                     | Fehlende Kosten oder Verbräuche werden geschätzt
+| F-U-020 | Rechnen eine jährliche Rechnung einer Parzelle | Parzelle enthält alle nötige Daten für Berechnung           | Wasser/Stromzählerstand und Größe der Parzelle      | Eine jährliche Rechnung der Parzelle wird erstellt
+| F-U-023 | Erstellen eine jährliche Rechnung in PDF       | Rechnung ist erstellt                                       | Button                                              | Eine jährliche Rechnung der Parzelle wird in PDF erstellt
+|===
+
+=== NewsDepartment
+zuständig: Muhammad Talal Anwar
+[options="headers"]
+|===
+| ID      | Anwendungsfall                  | Vorbedingungen                                                                              | Eingabe           | Ausgabe
+| N-U-010 | Einen neuen News Eintrag machen | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender                            | Text des Eintrags | Eintrag wird gespeichert
+| N-U-020 | Einen News Eintrag bearbeiten   | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender, und die Eintrag existiert | Änderung          | Eintrag wird aktualisiert
+| N-U-030 | Einen News Eintrag löschen      | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender, und die Eintrag existiert |                   | Eintrag wird gelöscht
 |===
 
 === MessageDepartment
 zuständig: Muhammad Talal Anwar
 [options="headers"]
 |===
-| ID      | Anwendungsfall                        | Vorbedingungen                                                   | Eingabe           | Ausgabe
-| M-U-010 | einen neuen News Eintrag machen       | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender | Text des Eintrags | Eintrag wird gespeichert
-| M-U-020 | einen News Eintrag bearbeiten         | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender, und die Eintrag existiert | Änderung          | Eintrag wird aktualisiert
-| M-U-030 | einen News Eintrag löschen            | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender, und die Eintrag existiert |          | Eintrag wird gelöscht
-| M-I-040 | Nachricht ist ordnungsgemäß geschickt |                                                                  | Nachricht         | erfolgreich Assertion Test durch E-mail Test Server (https://asciidoctor.org[GreenMail])
+| ID      | Anwendungsfall                                        | Vorbedingungen | Eingabe                  | Ausgabe
+| M-I-010 | Eine normale Email ist ordnungsgemäß geschickt        |                | Nachricht                | erfolgreich Assertion Test durch E-mail Test Server (http://www.icegreen.com/greenmail/[GreenMail])
+| M-I-020 | Eine Email mit Attachment ist ordnungsgemäß geschickt |                | Nachricht mit Attachment | erfolgreich Assertion Test durch E-mail Test Server (http://www.icegreen.com/greenmail/[GreenMail])
+|===
+
+=== ComplaintDepartment
+zuständig: Muhammad Talal Anwar und Isabell Zorr
+[options="headers"]
+|===
+| ID      | Anwendungsfall                       | Vorbedingungen                                                               | Eingabe                  | Ausgabe
+| C-U-010 | Eine Beschwerde erstellen            | Benutzer ist eingeloggt und hat die Rolle: Haupt-/Nebenpächter               | Subjekt und Beschreibung | Beschwerde wird gespeichert und einem Obmann zugeordnet
+| C-U-020 | Eine Beschwerde bearbeiten           | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender oder Obmann | Änderung                 | Beschwerde wird aktualisiert
+| C-U-030 | Zustand der Beschwerde ändern        | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender oder Obmann | Änderung                 | Zustand wird aktualisiert
+| C-U-040 | Neuer Obmann zur Beschwerde zuordnen | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender             | Neuer Obmann auswählen   | Neuer Obmann wird zugeordnet
+| C-U-050 | Eine Beschwerde löschen              | Benutzer ist eingeloggt und hat die Rolle: Vorstandsvorsitzender             |                          | Beschwerde wird gelöscht
 |===
 
 === ApplicationDepartment
@@ -377,7 +425,7 @@ zuständig: Sascha Seiffert
 |===
 
 === AppointmentDepartment
-zuständig: Sascha Seiffert
+zuständig: Albert Wellerdt
 [options="headers"]
 |===
 | ID      | Anwendungsfall                        | Vorbedingungen                                                   | Eingabe           | Ausgabe
