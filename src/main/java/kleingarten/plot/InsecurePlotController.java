@@ -10,6 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
+/**
+ * Controller class which handles all requests taken by an user who is not logged in
+ */
 @Controller
 public class InsecurePlotController {
 	private final PlotService plotService;

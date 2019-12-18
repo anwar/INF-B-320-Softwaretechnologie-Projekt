@@ -21,6 +21,9 @@ import java.util.*;
 
 import static org.salespointframework.core.Currencies.EURO;
 
+/**
+ * Controller class which handles all requests taken by a user who is logged in
+ */
 @Controller
 public class SecurePlotController {
 	private final PlotService plotService;
@@ -218,12 +221,16 @@ public class SecurePlotController {
 	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')")
 	@PostMapping("/addchairman")
 	public String addChairman(@LoggedIn UserAccount user, String tenantID, Model model) {
+		if (tenantID.isEmpty()) {
+			return "redirect:/chairmenOverview";
+		}
 		Map<String, Object> modelMap = chairmenOverview(user).getModelMap();
 		for (String attribute :
 				modelMap.keySet()) {
 			model.addAttribute(attribute, modelMap.get(attribute));
 		}
-		model.addAttribute("administratedPlots", plotService.getPlotsFor(tenantManager.get(Long.parseLong(tenantID))));
+		model.addAttribute("administratedPlots", plotService.getPlotsFor(tenantManager
+				.get(Long.parseLong(tenantID))));
 		model.addAttribute("updateChairmanForm", new UpdateChairmanForm());
 		model.addAttribute("tenant", Long.parseLong(tenantID));
 		model.addAttribute("canAddChairman", true);

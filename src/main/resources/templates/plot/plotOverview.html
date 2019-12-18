@@ -33,7 +33,7 @@
         <td><form sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')" th:if="${modify}" method="post" th:action="@{/addchairman}">
             <label >
                 <select name="tenantID">
-                    <option th:value="null">---</option>
+                    <option value="">---</option>
                     <option th:each="tenant : ${chairmenList}" th:value="${tenant.id}"
                             th:text="${tenant.forename} + ' ' + ${tenant.surname}">
                     </option>

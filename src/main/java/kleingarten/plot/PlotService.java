@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
+/**
+ * Service class which provides information about {@link Plot}s which are used by other classes
+ */
 @Component
 public class PlotService {
 	private final PlotCatalog plotCatalog;

@@ -157,7 +157,7 @@ zuständig Ylvi Sarah Bachmann
 |
 |Erstellen einer Parzelle
 |Nutzer hat die Rolle Vorstand
-|Parzellengröße, Beschreibung, Schätzwert
+|Aufrufen des Formulars, Eingabe der Daten Parzellengröße, Beschreibung, Schätzwert
 |Parzelle wird erstellt, Attribute in passendem Format
 
 |P-U-011
@@ -165,7 +165,7 @@ zuständig Ylvi Sarah Bachmann
 |
 |Erstellen einer Parzelle
 |Nutzer hat andere Rolle als Admin
-|Parzellengröße, Beschreibung, Schätzwert
+|Aufrufen des Formulars
 |Fehlermeldung
 
 |P-U-020
@@ -239,6 +239,30 @@ zuständig Ylvi Sarah Bachmann
 |Parzelle ist vermietet, Nutzer ist angemeldet
 |gewünschte Parzelle
 |Model enthält Zugriffsrechte des Nutzers abhängig von seiner Rolle
+
+|P-U-043
+|
+|
+|Anzeigen der Informationen einer Parzelle
+|Parzelle ist vermietet, Nutzer mietet die Parzelle und ist angemeldet
+|gewünschte Parzelle
+|Model enthält Zugriffsrechte des Nutzers
+
+|P-U-050
+|
+|
+|Hinzufügen eines Obmanns
+|Nutzer hat die Rolle Vorstand
+|Aufrufen des Formulars
+|Formular wird angezeigt
+
+|P-U-051
+|
+|
+|Hinzufügen eines Obmanns
+|Nutzer hat andere Rolle als Admin
+|Aufrufen des Formulars
+|Fehlermeldung
 
 |P-I-010
 |**<<AT0010>>**
@@ -317,7 +341,7 @@ zuständig Ylvi Sarah Bachmann
 |
 |Anzeigen der Parzellenübersicht
 |Nutzer ist nicht angemeldet
-|
+|Nutzer lässt sich die Übersichtsseite aller Parzellen anzeigen
 |Model mit den benötigten Einträgen wird erstellt und es enthält nicht das Recht Parzellen hinzu zu fügen.
 
 |P-I-051
@@ -325,7 +349,7 @@ zuständig Ylvi Sarah Bachmann
 |
 |Anzeigen der Parzellenübersicht
 |Nutzer ist angemeldet
-|
+|Nutzer lässt sich die Übersichtsseite aller Parzellen anzeigen
 |Zugriff auf Detailseiten der Parzellen nach Rolle des Nutzers
 
 |===

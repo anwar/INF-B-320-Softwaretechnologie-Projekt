@@ -310,7 +310,19 @@ public class PlotControllerServiceTests {
 				.isEqualTo(Map.of(freePlot, true));
 		assertThat(plotControllerService.setAccessRightForPlot(takenPlot, Optional.of(tenant.getUserAccount())))
 				.isEqualTo(Map.of(takenPlot, false));
+	}
 
+	/**
+	 * Test if access to the details page of a {@link Plot} is made correctly when a user with no special {@link Role}
+	 * is logged in and rents the shown plot; P-U-033
+	 */
+	@Test
+	public void accessRightsForRentedPlotByTenant() {
+		Tenant tenant = new Tenant("Max", "Mustermann", "Am Berg 5, 12423 Irgendwo im Nirgendwo",
+				"01242354356", "13.04.1999",
+				userAccountManager.create("max.mustermann", Password.UnencryptedPassword.of("123"),
+						"max.mustermann@email.com", Role.of("Hauptpächter")));
+		tenantRepository.save(tenant);
 		Procedure procedure = new Procedure(2019, freePlot, tenant.getId());
 		procedureManager.add(procedure);
 		takenPlot = plotService.findById(procedure.getPlotId());

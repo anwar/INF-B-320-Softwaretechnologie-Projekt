@@ -12,6 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
+/**
+ * Service class which contains methods to get the needed information of {@link Plot}s and access rights to them which
+ * are used in the controller classes
+ */
 @Component
 public class PlotControllerService {
 	private final DataService dataService;
