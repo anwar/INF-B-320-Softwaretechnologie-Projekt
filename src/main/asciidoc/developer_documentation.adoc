@@ -318,28 +318,23 @@ image::models/design/user-interface.png[]
 == Bausteinsicht
 
 === Pächterverwaltung
-image::models/analysis/KleinGartenAnlage.tenant.png[Pächterverwaltung]
+image::models/analysis/TenantManagement.png[Pächterverwaltung]
 
 [options="header"]
 |===
 |Klasse/Enumeration |Description
 
 |Tenant
-|Die Pächerklasse beschreibt den Pächter der Parzelle und erbt vom Salespoint-UserAccount
+|Die Pächerklasse beschreibt den Pächter der Parzelle
 |TenantController
-|Ein Spring MVC Controller um neue Pächter hinzuzufügen und bereits bestehende anzuzeigen
+|Ein Spring MVC Controller um neue Pächter hinzuzufügen und bereits bestehende anzuzeigen und zu bearbeiten
 
 |TenantManager
 |Serviceklasse um Pächter zu managen
 
 |TenantRepository
-|Ein Repositoryinterface um Pächterinstanzen zu managen
+|Ein Repositoryinterface um Pächterinstanzen zu speichern
 
-|RegistrationForm
-|Dient der Registrierung eines neuen Pächters über das Bewerbungsformular
-
-|TenantDataInitializer
-|Eine Klasse zum Erzeugen vorhandener Nutzer zum Systemstart.
 |===
 
 === Parzellenverwaltung
@@ -423,6 +418,15 @@ image::models/analysis/kleingarten.appointment.png[]
 | AppointmentManager | Der AppointmentManager ist verantwortlich für die Aufbewahrung und Verwaltung der Termine.
 |===
 
+=== Beschwerden
+image::models/analysis/ComplainsManagement.png[]
+[options="header]
+|===
+| Klasse/Enumeration | Description
+| Complaint | Die Complaint Klasse beschreibt eine Beschwerde
+| ComplaintController | Klasse zum Bauen der Seiten für das Erstellen, Bearbeiten und Löschen einer Beschwerde
+| ComplaintManager | Klasse zum Aufbewahren und Verwalten der Beschwerden
+|===
 === Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
 
 [options="header"]
