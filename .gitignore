@@ -18,6 +18,7 @@ out/
 
 # MagicDraw
 *.mdzip.bak
+*.xml.bak
 
 # OS specific
 .DS_Store
