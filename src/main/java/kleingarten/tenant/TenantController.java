@@ -144,7 +144,7 @@ class TenantController {
 						   @RequestParam("repeat") String repeatedPassword) {
 		tenantService.changePassword(userAccount, oldPassword, newPassword, repeatedPassword);
 
-		return "redirect:/changePassword";
+		return "/tenant/successPassword";
 	}
 
 	/**
@@ -173,7 +173,7 @@ class TenantController {
 	String changedEmail(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldEmail, @RequestParam("new") String newEmai,
 						@RequestParam("repeat") String repeatedEmail) {
 		tenantService.changeEmail(tenantManager.getTenantByUserAccount(userAccount).getId(), oldEmail, newEmai, repeatedEmail);
-		return "redirect:/changeEmail";
+		return "/tenant/successEMail" ;
 	}
 
 	/**
