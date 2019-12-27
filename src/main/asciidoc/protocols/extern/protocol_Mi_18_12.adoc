@@ -1,0 +1,228 @@
+= Protokoll Gruppe 43
+
+Treffen am 18.12.2019
+
+Ort:      APB +
+Beginn:   07:30 Uhr +
+Ende:     08:40 Uhr
+
+__Schriftführer:__ Isabell Zorr
+
+*Nächstes Treffen:* +
+08.01.2020, 07:30 Uhr, APB
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Uwe Schmidt (Tutor)
+- Albert Wellerdt
+- Franziska Kiel
+- Muhammad Talal Anwar
+- Sanghyun Lee
+- Sascha Seiffert
+- Ylvi Sarah Bachmann
+- Isabell Zorr
+
+== Bemerkungen
+Wir haben von Uwe die Freigabe zum Cross-Testing bekommen. Das läuft bis Anfang Januar und endet mit der Abgabe
+der dazugehörigen Protokolle. Allgemein ist unsere Anwendung auf einem guten Stand, der jedoch noch etwas verbessert werden
+kann. Wir sollten darauf achten, dass wir bei Sonarqube auf einen grünen Stand kommen, um so ein gültiges Quality Gate zu haben.
+Auch sollte unsere JavaDoc plausibel sein. Die Controller können davon ausgeschlossen sein. Die Dokumente sollten vollständig
+sein und die Diagramme die Software im aktuellen Zustand beschreiben. Hier sollten wir auch die Unterschiede zwischen
+der Analysephase und der Entwurfsphase vergleichen und Schlussfolgerungen aus der Implementation bezuüglich unserer Analyse
+erklären. Das nötigste sollte vor Januar fertig sein. In der Anwenderdoku sollten die Zugangsdaten zum initialen Nutzer
+stehen und wie das Programm über die Kommandozeile ausgeführt werden kann.
+Abschliessend hatten wir noch eine kleine Feedback Runde. 
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#34
+|TenantDepartment
+| Issue to manage the TODOS for the tenantDepartment
+|Isabell
+|closed
+
+|#41
+|Edit and add classes and attributes to the appointment diagram
+|editing diagram for appointment diagram
+|Albert
+|open
+
+|#49
+|Show details of Plot
+|...
+|Ylvi
+|closed
+
+|#54
+|Show overview of plots
+|colours and html file for the plot overview
+|Ylvi
+|closed
+
+|#67
+|Overviwe table for appointments
+|table showing appointments and maybe editing them
+|Albert
+|closed
+
+|#68
+|Overview table for Bills
+|table showing bills and maybe editing them
+|Sanghyun
+|open
+
+|#71
+| Adding each Initializer to AppDataInitializer
+| ...
+| Sascha, Ylvi, Sanghyun
+|open
+
+|#74
+|Show overview of plots administrated by chairmen
+| add colour for each chairman, modify plotOverview.html, implement needed methods
+| Ylvi
+|closed
+
+|#75
+|update external framework usage table
+| ...
+| all
+| open
+
+|#76
+|Complains package
+|adding classes for package
+|all
+|closed
+
+|#77
+|Update user interface diagram
+|...
+|Talal
+|open
+
+|#79
+|PDF Rechnung sending through email
+| ...
+|Talal
+| closed
+
+|#80
+|Better format for generated PDF bill
+| ...
+|...
+|open
+
+|#81
+|Show details of plot rented by tenant
+| adding controller methods, write test for showing plot details
+| Ylvi
+| closed
+
+|#82
+|Add function to "Parzelle freigeben" button
+|add method to controller and write tests
+|Ylvi
+|closed
+
+|#83
+|Add functionality to "Parzelle hinzufügen" button
+|Ylvi
+|closed
+|===
+
+== Aktueller Stand
+Die Software hat die Freigabe zum Cross Testing bekommen. Damit stehen die Muss-Kriterien vollständig
+und werden im Cross Testing getestet. Dieses hat nun in dieser Woche begonnen und die
+Protokolle dazu werden Anfang Januar abgegeben.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#41
+|Edit and add classes and attributes to the appointment diagram
+|editing diagram for appointment diagram
+|Albert
+|open
+
+
+|#68
+|Overview table for Bills
+|table showing bills and maybe editing them
+|Sanghyun
+|open
+
+|#71
+| Adding each Initializer to AppDataInitializer
+| ...
+| Sascha, Ylvi, Sanghyun
+|open
+
+|#75
+|update external framework usage table
+| ...
+| all
+| open
+
+|#77
+|Update user interface diagram
+|...
+|Talal
+|open
+
+|#80
+|Better format for generated PDF bill
+| ...
+|...
+|open
+|===
+

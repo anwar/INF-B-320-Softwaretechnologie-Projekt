@@ -316,4 +316,6 @@ Dann beginnt nächste Woche das Cross Testing.
 
 |#83
 |Add functionality to "Parzelle hinzufügen" button
+|Ylvi
+|open
 |===
