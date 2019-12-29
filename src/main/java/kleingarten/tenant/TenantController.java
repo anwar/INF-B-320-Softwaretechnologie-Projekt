@@ -2,7 +2,6 @@ package kleingarten.tenant;
 
 
 import com.mysema.commons.lang.Assert;
-import org.salespointframework.useraccount.AuthenticationManager;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;

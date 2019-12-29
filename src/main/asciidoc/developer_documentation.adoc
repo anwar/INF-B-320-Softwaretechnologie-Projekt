@@ -281,9 +281,13 @@ image::models/design/user-interface.png[]
 |===
 | Externe Klasse                  | Pfad der externen Klasse                                   | Verwendet von (Klasse der eigenen Anwendung)
 | Salespoint.AbstractEntity       | org.salespointframework.core.AbstractEntity                | finance.Fee
+| Salespoint.AuthenticationManager | org.salespointframework.useraccount.AuthenticationManager | tenant.TenantService
 | Salespoint.Catalog              | org.salespointframework.catalog                            | plot.PlotCatalog
 | Salespoint.DataInitializer      | org.salespointframework.core.DataInitializer               | configuration.AppDataInitializer
 | Salespoint.Product              | org.salespointframework.catalog.Product                    | plot.Plot
+| Salespoint.Password             | org.salespointframework.useraccount.Password               a|
+ * tenant.TenantService +
+ *  tenant.TenantManager +
 | Salespoint.Role                 | org.salespointframework.useraccount.Role                  a|
 * tenant.Tenant +
 * tenant.TenantManager +
