@@ -65,7 +65,11 @@ public class ApplicationController {
 
 		manager.accept(manager.getById(Long.parseLong(appId)));
 
-		tenantManager.createNewTenant(manager.getById(Long.parseLong(appId)).getFirstName(), manager.getById(Long.parseLong(appId)).getLastName(), manager.getById(Long.parseLong(appId)).getEmail(), "application");
+		String password = tenantManager.generatedPassword(8);
+
+		System.out.println("Ihr Password ist: " + password);
+
+		tenantManager.createNewTenant(manager.getById(Long.parseLong(appId)).getFirstName(), manager.getById(Long.parseLong(appId)).getLastName(), manager.getById(Long.parseLong(appId)).getEmail(), password);
 
 		return "redirect:/showApplications/" + plotId;
 	}
