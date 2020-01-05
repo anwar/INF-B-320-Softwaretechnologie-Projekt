@@ -10,19 +10,29 @@ __Anwendung von Gruppe:__ 22
 Eine Anwendung zur Verwaltung eines Getränkeshops.
 Hierzu gehört das Kundenmanagement, die Rechnungsverwaltung,
 die Logistik der Lieferungen, eine Statistik über Auslastungen und
-ein Gutscheinsystem. 
+ein Gutscheinsystem.
 
 == Fehler-Report
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 |===
-|Pfad |Parameter |Beschreibung |Rückgabe
+|Pfad           |Parameter |Beschreibung |Rückgabe
+|/drivers       |-         |Wenn es eine oder mehrere freie Fahrer gibt und Admin 'Alle Fahrer zeigen' Taste klickt, kann Admin die Liste der Fahrer nicht sehen    | Fehler
+|/deliveries    |-         |Es liegt ein Fehler, wenn Admin, Employee oder Fahrer die "Aktionstaste" oder "blaue Taste" klickt (in Lieferstatus Unterwegs)          |Fehler, aber der Status wird bald "abgeschlossen" geändert
 | … | … | … | … |
+| … | … | … | … |
+| … | … | … | … |
+| … | … | … | … |
+
+
 |===
 
 == Sonstiges
 * Optik der Anwendung
+
 * Fehlende Features
+** "Alle Fahrer zeigen" funktioniert nicht.
+
 * Interaktion mit der Anwendung (Usability)
 
 == Verbesserungsvorschläge
