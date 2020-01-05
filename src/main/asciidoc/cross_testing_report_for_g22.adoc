@@ -42,6 +42,7 @@ ein Gutscheinsystem.
 | username = admin
 | Bestellungen werden nicht angezeigt. Website komplett verschoben. Sieht aus als wäre sie in sich selbst eingebettet.
 Unten steht dann eine halb ausgefüllte Tabelle.
+| -
 
 | /user/edit/self +
 (als Customer)
