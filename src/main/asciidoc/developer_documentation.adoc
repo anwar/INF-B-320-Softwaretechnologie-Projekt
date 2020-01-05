@@ -291,19 +291,26 @@ image::models/design/user-interface.png[]
 | Salespoint.Role                 | org.salespointframework.useraccount.Role                  a|
 * tenant.Tenant +
 * tenant.TenantManager +
-* tenant.TenantRole
+* tenant.TenantRole +
+* complaint.ComplaintController
 | Salespoint.SalespointIdentifier | org.salespointframework.core.SalespointIdentifier          | finance.Fee
-| Salespoint.UserAccount          | org.salespointframework.useraccount.UserAccount            | tenant.Tenant
+| Salespoint.UserAccount          | org.salespointframework.useraccount.UserAccount           a|
+* tenant.Tenant +
+* complaint.ComplaintController
 | Salespoint.UserAccountManager   | org.salespointframework.useraccount.UserAccountManager     | tenant.TenantManager
 | Spring.Assert                   | org.springframework.util.Assert                           a|
 * news.NewsEntry +
 * news.NewsController +
 * tenant.TenantController +
-* tenant.TenantManager
+* tenant.TenantManager +
+* complaint.Complaint +
+* complaint.ComplaintController +
+* complaint.ComplaintManager
 | Spring.CrudRepository           | org.springframework.data.repository.CrudRepository        a|
 * news.NewsRepository +
 * tenant.TenantRepository +
-* finance.FeeCatalog
+* finance.FeeCatalog +
+* complaint.ComplaintRepository
 | Spring.Errors                   | org.springframework.validation.Errors                     a|
 * news.NewsController
 | Spring.SimpleMailMessage        | org.springframework.mail.SimpleMailMessage                 | message.MessageService
@@ -313,10 +320,13 @@ image::models/design/user-interface.png[]
 * finance.FeeController +
 * news.NewsController +
 * plot.PlotController +
-* tenant.tenantController
+* tenant.tenantController +
+* complaint.ComplaintController
 | Spring.Streamable               | org.springframework.data.util.Streamable                  a|
 * tenant.TenantManager +
-* finance.FeeCatalog
+* finance.FeeCatalog +
+* complaint.ComplaintManager +
+* complaint.ComplaintRepository
 |===
 
 == Bausteinsicht
