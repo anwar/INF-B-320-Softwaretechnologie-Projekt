@@ -1,10 +1,16 @@
 = Cross-Testing Feedback
 
-__Durchführende Gruppe:__
-__Anwendung von Gruppe:__
+__Durchführende Gruppe:__ 43 +
+__Anwendung von Gruppe:__ 22
 
 == Getestetes System
-Welche Aufgabe/Problemstellung löst die Anwendung.
+
+=== Getränkeshop Schluck&Sohn
+
+Eine Anwendung zur Verwaltung eines Getränkeshops.
+Hierzu gehört das Kundenmanagement, die Rechnungsverwaltung,
+die Logistik der Lieferungen, eine Statistik über Auslastungen und
+ein Gutscheinsystem. 
 
 == Fehler-Report
 // See http://asciidoctor.org/docs/user-manual/#tables
