@@ -17,6 +17,12 @@ ein Gutscheinsystem.
 [options="header"]
 |===
 | Pfad | Parameter | Beschreibung | Rückgabe
+
+| /
+| -
+| Nach dem Hinzufügen eines neuen Getränks wird kein Bild angezeigt. (bei Wasser)
+| -
+
 | /drivers
 | -
 | Wenn es eine oder mehrere freie Fahrer gibt und Admin 'Alle Fahrer zeigen' Taste klickt, kann Admin die Liste der Fahrer nicht sehen.
@@ -32,12 +38,23 @@ ein Gutscheinsystem.
 | Wenn Adresse unter Profil geändert wird. Die Lieferadresse der alten Bestellungen wird auf die neue aktualisiert, obwohl der Status dieser Bestellungen als "Complete" angezeigt wird.
 | -
 
+| /orders
+| username = admin
+| Bestellungen werden nicht angezeigt. Website komplett verschoben. Sieht aus als wäre sie in sich selbst eingebettet.
+Unten steht dann eine halb ausgefüllte Tabelle.
+
 | /user/edit/self +
 (als Customer)
 | -
 | Beim Drücken der Löschen Taste wird einen "Leider ist etwas schiefgelaufen" Fehler angezeigt. Gleicher Fehler wird auf der Bestellaufträge Seite angezeigt. +
 Der Benutzer kann sich mit demselben Konto abmelden und wieder anmelden (was nicht möglich sein sollte). Der Fehler bleibt bei der erneuten Anmeldung bestehen.
 | Fehler.
+
+| /cart
+| -
+| Wählt man eine Menge Flaschen aus, fügt sie dem Warenkorb hinzu und fügt erneut eine Menge der gleichen Flaschen hinzu,
+addieren sich die Quantities nicht sondern werden ersetzt.
+| -
 
 |===
 
@@ -46,6 +63,7 @@ Der Benutzer kann sich mit demselben Konto abmelden und wieder anmelden (was nic
 
 * Fehlende Features
 ** "Alle Fahrer zeigen" funktioniert nicht.
+** Funktion zum Quantity ändern im Warenkorb wäre hilfreich.
 
 * Interaktion mit der Anwendung (Usability)
 ** Bei Profiländerungen werden eine Bestätigung und eine Fehlermeldung im Format `{CustomerEditForm.xxx.yyy}` angezeigt. Dies kann zu einem besser lesbaren/hilfreichen Format geändert werden.
@@ -53,3 +71,7 @@ Der Benutzer kann sich mit demselben Konto abmelden und wieder anmelden (was nic
 
 == Verbesserungsvorschläge
 * Was kann noch weiter verbessert werden?
+** Admin sollte keine Passwörter beim Erstellen eines neuen Kunden festlegen können. (Hier eventuell ein Standardpasswort
+nehmen und dem Kunden die Möglichkeit geben sein Passwort ändern zu können)
+** Abbrechenfunktion beim Registrieren.
+** Beim Verkleinern der Seitenleiste nur die Icons anzeigen lassen, sonst ergibt die Funktion keinen Sinn.
