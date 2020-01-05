@@ -311,8 +311,7 @@ image::models/design/user-interface.png[]
 * tenant.TenantRepository +
 * finance.FeeCatalog +
 * complaint.ComplaintRepository
-| Spring.Errors                   | org.springframework.validation.Errors                     a|
-* news.NewsController
+| Spring.ConfigurationProperties  | org.springframework.boot.context.properties.ConfigurationProperties | message.MessageProperties
 | Spring.SimpleMailMessage        | org.springframework.mail.SimpleMailMessage                 | message.MessageService
 | Spring.MimeMessageHelper        | org.springframework.mail.javamail.MimeMessageHelper        | message.MessageService
 | Spring.JavaMailSender           | org.springframework.mail.javamail.JavaMailSender           | message.MessageService
