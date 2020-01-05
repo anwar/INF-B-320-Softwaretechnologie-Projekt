@@ -16,14 +16,21 @@ ein Gutscheinsystem.
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 |===
-|Pfad           |Parameter |Beschreibung |Rückgabe
-|/drivers       |-         |Wenn es eine oder mehrere freie Fahrer gibt und Admin 'Alle Fahrer zeigen' Taste klickt, kann Admin die Liste der Fahrer nicht sehen    | Fehler
-|/deliveries    |-         |Es liegt ein Fehler, wenn Admin, Employee oder Fahrer die "Aktionstaste" oder "blaue Taste" klickt (in Lieferstatus Unterwegs)          |Fehler, aber der Status wird bald "abgeschlossen" geändert
-| … | … | … | … |
-| … | … | … | … |
-| … | … | … | … |
-| … | … | … | … |
+| Pfad | Parameter | Beschreibung | Rückgabe
+| /drivers
+| -
+| Wenn es eine oder mehrere freie Fahrer gibt und Admin 'Alle Fahrer zeigen' Taste klickt, kann Admin die Liste der Fahrer nicht sehen.
+| Fehler.
 
+| /deliveries
+| -
+| Es liegt ein Fehler, wenn Admin, Employee oder Fahrer die "Aktionstaste" oder "blaue Taste" klickt (in Lieferstatus Unterwegs).
+| Fehler, aber der Status wird bald "abgeschlossen" geändert.
+
+| /orders
+| -
+| Wenn Adresse unter Profil geändert wird. Die Lieferadresse der alten Bestellungen wird auf die neue aktualisiert, obwohl der Status dieser Bestellungen als "Complete" angezeigt wird.
+| -
 
 |===
 
@@ -34,6 +41,8 @@ ein Gutscheinsystem.
 ** "Alle Fahrer zeigen" funktioniert nicht.
 
 * Interaktion mit der Anwendung (Usability)
+** Bei Profiländerungen werden eine Bestätigung und eine Fehlermeldung im Format `{CustomerEditForm.xxx.yyy}` angezeigt. Dies kann in ein hilfreicheres Format geändert werden.
+** Das Datum auf der Bestellaufträge Seite wird im Format `2020-01-05T12: 26: 10.424662` angezeigt. Dies sollte in ein besser lesbares Format geändert werden.
 
 == Verbesserungsvorschläge
 * Was kann noch weiter verbessert werden?
