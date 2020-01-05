@@ -273,7 +273,7 @@ Die Anwendung verwendet *Hibernate Annotation basiertes Mapping*, um Java Klasse
 ....
 
 ==== Benutzeroberfläche
-image::models/design/user-interface.png[]
+image::models/design/user-interface.jpg[]
 
 ==== Verwendung externer Frameworks
 
