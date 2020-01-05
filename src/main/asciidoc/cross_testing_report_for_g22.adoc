@@ -32,7 +32,8 @@ ein Gutscheinsystem.
 | Wenn Adresse unter Profil geändert wird. Die Lieferadresse der alten Bestellungen wird auf die neue aktualisiert, obwohl der Status dieser Bestellungen als "Complete" angezeigt wird.
 | -
 
-| /user/edit/self
+| /user/edit/self +
+(als Customer)
 | -
 | Beim Drücken der Löschen Taste wird einen "Leider ist etwas schiefgelaufen" Fehler angezeigt. Gleicher Fehler wird auf der Bestellaufträge Seite angezeigt. +
 Der Benutzer kann sich mit demselben Konto abmelden und wieder anmelden (was nicht möglich sein sollte). Der Fehler bleibt bei der erneuten Anmeldung bestehen.
@@ -47,8 +48,8 @@ Der Benutzer kann sich mit demselben Konto abmelden und wieder anmelden (was nic
 ** "Alle Fahrer zeigen" funktioniert nicht.
 
 * Interaktion mit der Anwendung (Usability)
-** Bei Profiländerungen werden eine Bestätigung und eine Fehlermeldung im Format `{CustomerEditForm.xxx.yyy}` angezeigt. Dies kann in ein hilfreicheres Format geändert werden.
-** Das Datum auf der Bestellaufträge Seite wird im Format `2020-01-05T12: 26: 10.424662` angezeigt. Dies sollte in ein besser lesbares Format geändert werden.
+** Bei Profiländerungen werden eine Bestätigung und eine Fehlermeldung im Format `{CustomerEditForm.xxx.yyy}` angezeigt. Dies kann zu einem besser lesbaren/hilfreichen Format geändert werden.
+** Das Datum auf der Bestellaufträge Seite wird im Format `2020-01-05T12: 26: 10.424662` angezeigt. Dies sollte zu einem besser lesbaren Format geändert werden.
 
 == Verbesserungsvorschläge
 * Was kann noch weiter verbessert werden?
