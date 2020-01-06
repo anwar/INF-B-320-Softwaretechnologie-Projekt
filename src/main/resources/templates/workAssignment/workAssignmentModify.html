@@ -69,7 +69,7 @@
                         <td>  <input class="text_bgImage" id="description" name="description" minlength="1" th:value="${(workAssignment.getDescription())}"  type="text" required="required"/>
                     </tr>
                 </div>
-                <div sec:authorize="hasAnyRole('Obmann')">
+                <div>
                     <tr>
                         <th><label for="workHours">Arbeitsstunden</label></th>
                         <td><input class="text_bgImage" id="workHours" name="workHours" min="0" th:value="${(workAssignment.getWorkHours())}" type="number" required="required"/>

@@ -31,7 +31,7 @@
                     <label for="date">Datum</label>
                 </th>
                 <td>
-                    <input class="text_bgImage" id="date" th:field="*{date}" type="date" required="required" th:min="${dateNow}"/>
+                    <input class="text_bgImage" id="date" th:field="*{date}" type="date" required="required" th:min="${dateNow}" th:max="${dateMax}"/>
                 </td>
             </tr>
             <tr>

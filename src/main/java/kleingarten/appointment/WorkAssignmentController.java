@@ -29,8 +29,14 @@ public class WorkAssignmentController {
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	@GetMapping("/createAssignment")
 	public String appointmentList(Model model, CreateWorkAssignmentForm form) {
+		int year = LocalDate.now().getYear() + 10;
+		int month = 1;
+		int day = 1;
+		LocalDate localDate = LocalDate.of(year, month, day);
+		System.out.println(localDate);
 		model.addAttribute("dateNow", LocalDate.now());
 		model.addAttribute("timeNow", LocalTime.now());
+		model.addAttribute("dateMax", localDate);
 		model.addAttribute("form", form);
 		return "workAssignment/createAssignment";
 	}
