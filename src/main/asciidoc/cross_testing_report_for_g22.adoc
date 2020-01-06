@@ -66,6 +66,10 @@ addieren sich die Quantities nicht sondern werden ersetzt.
 
 == Sonstiges
 * Optik der Anwendung
+** Beim Verkleinern der Seitenleiste nur die Icons anzeigen lassen, sonst ergibt die Funktion keinen Sinn.
+** schönes schlichtes Design, was einfache Benutzung ermöglicht.
+** Unterschied zwischen Kunden und Benutzer nicht ersichtlich.
+** sehr anschauliches Design bei der Statistik.
 
 * Fehlende Features
 ** "Alle Fahrer zeigen" funktioniert nicht.
@@ -80,4 +84,4 @@ addieren sich die Quantities nicht sondern werden ersetzt.
 ** Admin sollte keine Passwörter beim Erstellen eines neuen Kunden festlegen können. (Hier eventuell ein Standardpasswort
 nehmen und dem Kunden die Möglichkeit geben sein Passwort ändern zu können)
 ** Abbrechenfunktion beim Registrieren.
-** Beim Verkleinern der Seitenleiste nur die Icons anzeigen lassen, sonst ergibt die Funktion keinen Sinn.
+
