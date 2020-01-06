@@ -57,6 +57,11 @@ Der Benutzer kann sich mit demselben Konto abmelden und wieder anmelden (was nic
 addieren sich die Quantities nicht sondern werden ersetzt.
 | -
 
+|/warehouse
+| -
+| Man kann im Lager den Vorrat, eines Produktes, auf einen Minus Wert ändern.
+| -
+
 |===
 
 == Sonstiges
