@@ -1,6 +1,8 @@
 package kleingarten.application;
 
+import kleingarten.message.MessageService;
 import kleingarten.tenant.TenantManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +19,14 @@ public class ApplicationController {
 
 	private final ApplicationManager manager;
 	private final TenantManager tenantManager;
+	private MessageService messageService;
 
-	public ApplicationController(ApplicationManager manager, TenantManager tenantManager) {
+	public ApplicationController(ApplicationManager manager,
+								 TenantManager tenantManager,
+								 @Autowired MessageService messageService) {
 		this.tenantManager = tenantManager;
 		this.manager = manager;
-
+		this.messageService = messageService;
 	}
 
 	@GetMapping("/createApplication/{plotId}")
@@ -63,13 +68,16 @@ public class ApplicationController {
 
 		System.out.println(plotId + " - " + appId);
 
-		manager.accept(manager.getById(Long.parseLong(appId)));
+		Application app = manager.getById(Long.parseLong(appId));
+		manager.accept(app);
 
 		String password = tenantManager.generatedPassword(8);
+		String passMessageStr = "Ihr Benuterzerkonto Passwort ist: " + password;
 
-		System.out.println("Ihr Password ist: " + password);
+		tenantManager.createNewTenant(app.getFirstName(), app.getLastName(), app.getEmail(), password);
 
-		tenantManager.createNewTenant(manager.getById(Long.parseLong(appId)).getFirstName(), manager.getById(Long.parseLong(appId)).getLastName(), manager.getById(Long.parseLong(appId)).getEmail(), password);
+		System.out.println(passMessageStr);
+		messageService.sendMessage(app.getEmail(), "Passwort für Benutzerkonto", passMessageStr);
 
 		return "redirect:/showApplications/" + plotId;
 	}
