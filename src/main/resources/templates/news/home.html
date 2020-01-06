@@ -17,6 +17,7 @@
             document.getElementById("edit-form-entry-" + id).style.display = "none";
             document.getElementById("entry-" + id).style.display = "inline";
             document.getElementById("news-entry-form").style.display = "inline";
+            location.reload();
         }
 
         function showNewsEditForm(id) {
@@ -77,23 +78,24 @@
                                 </div>
 
                                 <!-- style.display=none keeps this form hidden until showNewsEditForm() is called -->
-                                <form sec:authorize="hasRole('Vorstandsvorsitzender')" method="post"
-                                      style="display:none" class="ui form" th:id="'edit-form-entry-'+${entry.id}"
-                                      th:action="@{/home/news/editEntry/{id}(id=${entry.id})}">
-                                    <div class="field">
-                                        <label for="text" th:text="#{news.entryEdit.text}">Newseintrag
-                                            Bearbeiten</label><br/>
-                                        <textarea id="text" name="text" cols="45" rows="8" th:value="${entry.text}"
-                                                  th:text="${entry.text}" required="required"></textarea>
-                                    </div>
-                                    <button class="ui submit button"
+                                <div style="display:none" th:id="'edit-form-entry-'+${entry.id}">
+                                    <form sec:authorize="hasRole('Vorstandsvorsitzender')" method="post" class="ui form"
+                                          th:action="@{/home/news/editEntry/{id}(id=${entry.id})}">
+                                        <div class="field">
+                                            <label for="text" th:text="#{news.entryEdit.text}">Newseintrag
+                                                Bearbeiten</label><br/>
+                                            <textarea id="text" name="text" cols="45" rows="8" th:value="${entry.text}"
+                                                      th:text="${entry.text}" required="required"></textarea>
+                                        </div>
+                                        <input type="submit" class="ui submit button"
+                                               th:value="#{news.entryEdit.submit}"
+                                               value="Aktualisieren"/>
+                                    </form><br/>
+                                    <button class="ui button"
                                             th:onclick="'hideNewsEditForm(\'' + ${entry.id} + '\');'"
                                             th:value="#{news.entryEdit.back}">Zurück
                                     </button>
-                                    <input type="submit" class="ui submit button" th:value="#{news.entryEdit.submit}"
-                                           value="Aktualisieren"/>
-                                </form>
-
+                                </div>
                                 <br/>
                             </div>
                         </div>
