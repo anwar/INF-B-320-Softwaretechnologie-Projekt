@@ -119,6 +119,7 @@ public class SecurePlotControllerTests {
 	/**
 	 * Test if logged in user with the {@link Role} "Vorstandsvorsitzender" or "Stellvertreter" can access all
 	 * information of a {@link Plot}; P-U-042
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -151,6 +152,7 @@ public class SecurePlotControllerTests {
 
 	/**
 	 * Test if logged in user with the {@link Role} "Kassierer" can access all information of a {@link Plot}; P-U-042
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -167,6 +169,7 @@ public class SecurePlotControllerTests {
 
 	/**
 	 * Test if logged in user with the {@link Role} "Wassermann" can access all information of a {@link Plot}; P-U-042
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -203,6 +206,30 @@ public class SecurePlotControllerTests {
 				.andExpect(view().name("redirect:/chairmenOverview"));
 
 		assertThat(plotService.existsByName("300")).isEqualTo(true);
+	}
+
+	/**
+	 * Test if no duplicate of a existing {@link Plot} can be added
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void errorForAddingDuplicatedPlot() throws Exception {
+		showPlotOverviewForAdminTest();
+		mvc.perform(get("/plotRegistration")
+				.with(user("peter.klaus").roles("Vorstandsvorsitzender")))
+				.andExpect(status().isOk())
+				.andExpect(view().name("plot/addPlot"));
+
+		mvc.perform(post("/addPlot")
+				.with(user("peter.klaus").roles("Vorstandsvorsitzender"))
+				.param("name", "1")
+				.param("size", "500")
+				.param("description", "test"))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("error"))
+				.andExpect(model().attribute("error", "Parzelle mit der gewählten Nummer existiert bereits!"))
+				.andExpect(view().name("plot/addPlot"));
 	}
 
 

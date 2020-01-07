@@ -301,8 +301,7 @@ public class SecurePlotController {
 		try {
 			if (!plotService.existsByName(name)) {
 				plotService.addNewPlot(name, Integer.parseInt(size), description);
-			}
-			else {
+			} else {
 				model.addAttribute("error", "Parzelle mit der gewählten Nummer existiert bereits!");
 				return "plot/addPlot";
 			}
