@@ -1,5 +1,6 @@
 package kleingarten.plot;
 
+import kleingarten.appointment.WorkAssignmentTimer;
 import kleingarten.finance.Procedure;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
@@ -31,14 +32,17 @@ public class SecurePlotController {
 	private final TenantManager tenantManager;
 	private final DataService dataService;
 	private final PlotControllerService plotControllerService;
+	private final WorkAssignmentTimer workAssignmentTimer;
 
 	SecurePlotController(PlotService plotService, PlotCatalog plotCatalog, TenantManager tenantManager,
-						 DataService dataService, PlotControllerService plotControllerService) {
+						 DataService dataService, PlotControllerService plotControllerService,
+						 WorkAssignmentTimer workAssignmentTimer) {
 		this.plotService = plotService;
 		this.plotCatalog = plotCatalog;
 		this.tenantManager = tenantManager;
 		this.dataService = dataService;
 		this.plotControllerService = plotControllerService;
+		this.workAssignmentTimer = workAssignmentTimer;
 	}
 
 	/**
@@ -111,6 +115,7 @@ public class SecurePlotController {
 		}
 		model.addAttribute("plots", shownPlots);
 		model.addAttribute("rented", true);
+		model.addAttribute("nextAssignment", workAssignmentTimer.getPeriod(user));
 		return "plot/myPlot";
 	}
 

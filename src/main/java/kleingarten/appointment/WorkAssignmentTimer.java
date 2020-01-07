@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class WorkAssignmentTimer {
@@ -41,18 +42,23 @@ public class WorkAssignmentTimer {
 	}
 
 	public String getPeriod(UserAccount userAccount){
-		List<LocalDateTime> dateTimeList = new LinkedList<>();
+		SortedMap<LocalDateTime, List<WorkAssignment>> assignmentMap = new TreeMap<>();
 		for(Plot plot : dataService.getRentedPlots(tenantManager.getTenantByUserAccount(userAccount))){
 			for (WorkAssignment workAssignment : workAssignmentManager.getForPlotWorkAssignments(plot.getId())){
 				if(workAssignment.getDate().isAfter(LocalDateTime.now())){
-					dateTimeList.add(workAssignment.getDate());
+					if(!assignmentMap.containsKey(workAssignment.getDate())){
+						assignmentMap.put(workAssignment.getDate(), new LinkedList<>());
+					}
+					assignmentMap.get(workAssignment.getDate()).add(workAssignment);
 				}
 			}
 		}
-		if(dateTimeList.size() > 0) {
-			dateTimeList.sort(LocalDateTime::compareTo);
-			return timeDifference(LocalDateTime.now(), dateTimeList.get(0));
+		try {
+			String timeSpan = timeDifference(LocalDateTime.now(), assignmentMap.firstKey());
+			List<WorkAssignment> assignments = assignmentMap.get(assignmentMap.firstKey());
+			return assignments.stream().map(n -> timeSpan + ": " + n.getTitle()).collect(Collectors.joining(","));
+		}catch (NoSuchElementException e){
+			return null;
 		}
-		return "no pending assignments";
 	}
 }

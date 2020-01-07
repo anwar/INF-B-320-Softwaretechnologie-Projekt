@@ -86,6 +86,10 @@
                     <th>Arbeitsstunden</th>
                     <td align="center" th:text="${plot.workHours}"> Text </td>
                 </tr>
+            <tr th:if="${nextAssignment}">
+                <th>Nächster Termin</th>
+                <td align="center" th:text="${nextAssignment}"></td>
+            </tr>
             </tbody>
         </table>
     </div>
