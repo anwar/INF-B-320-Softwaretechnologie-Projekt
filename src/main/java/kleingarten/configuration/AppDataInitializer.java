@@ -238,27 +238,21 @@ public class AppDataInitializer implements DataInitializer {
 		LOG.info("Creating default plots");
 		Plot plot = plotService.addNewPlot("1", 300, "Kleine Parzelle mit angelegtem Teich.");
 		plot.setChairman(obmann);
-		LOG.info(plot.getId().toString());
 
 		Plot plot_2 = plotService.addNewPlot("2", 500, "Sehr große Parzelle.");
 		plot_2.setChairman(obmann);
-		LOG.info(plot_2.getId().toString());
 
 		Plot plot_3 = plotService.addNewPlot("3", 120, "Kleine Parzelle.");
 		plot_3.setChairman(obmann);
-		LOG.info(plot_3.getId().toString());
 
 		Plot plot_4 = plotService.addNewPlot("4", 1500, "Sehr, sehr große Parzelle.");
 		plot_4.setChairman(obmann);
-		LOG.info(plot_4.getId().toString());
 
 		Plot plot_5 = plotService.addNewPlot("5", 350, "Parzelle mit angelegtem Teich.");
 		plot_5.setChairman(obmann);
-		LOG.info(plot_5.getId().toString());
 
 		Plot plot_6 = plotService.addNewPlot("6", 200, "Große Parzelle.");
 		plot_6.setChairman(obmann);
-		LOG.info(plot_6.getId().toString());
 
 		plotCatalog.saveAll(List.of(plot, plot_2, plot_3, plot_4, plot_5, plot_6));
 
