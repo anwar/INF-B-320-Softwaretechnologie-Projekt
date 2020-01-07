@@ -29,6 +29,18 @@
     </div>
     </div>
 
+    <center> <div>
+        <table >
+            <div  th:each="color : ${colors.keySet()}"><td>&nbsp</td>
+                <td th:style="'background-color: ' + ${color} "> &nbsp &nbsp</td>
+
+                <td th:text="${colors.get(color)}"> Text &nbsp </td></div>
+
+
+        </table>
+    </div>
+    </center>
+
     <table align="center">
         <td><form sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')" th:if="${modify}" method="post" th:action="@{/addchairman}">
             <label >
@@ -70,17 +82,6 @@
             </div>
         </div>
 
-   <center> <div>
-        <table >
-           <div  th:each="color : ${colors.keySet()}"><td>&nbsp</td>
-                <td th:style="'background-color: ' + ${color} "> &nbsp &nbsp</td>
-
-                <td th:text="${colors.get(color)}"> Text &nbsp </td></div>
-
-
-        </table>
-    </div>
-   </center>
         <div class="button-section">
             <button class="button" th:if="${canAdd}" onclick="location.href='/plotRegistration'">Parzelle hinzufügen</button>
         </div>

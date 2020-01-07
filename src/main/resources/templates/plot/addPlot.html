@@ -21,13 +21,16 @@
 <div class="header-title">
     <h1>Parzelle hinzufügen</h1>
 </div>
+
+<div align="center" th:text="${error}"></div>
+
 <div>
     <form method="post" th:action="@{/addPlot}">
         <table  id="myTable">
 
             <tbody>
             <tr>
-                <td> <label for="size">Name</label> </td>
+                <td> <label for="name">Nummer</label> </td>
                 <td><input class="text_bgImage" id="name" name="name" type="number" min="1" required="required"/></td>
             </tr>
             <tr>

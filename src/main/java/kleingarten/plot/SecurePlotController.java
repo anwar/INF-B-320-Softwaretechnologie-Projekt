@@ -299,7 +299,13 @@ public class SecurePlotController {
 	public String addNewPlot(@LoggedIn UserAccount user, Model model, @RequestParam("name") String name,
 							 @RequestParam("size") String size, @RequestParam("description") String description) {
 		try {
-			plotService.addNewPlot(name, Integer.parseInt(size), description);
+			if (!plotService.existsByName(name)) {
+				plotService.addNewPlot(name, Integer.parseInt(size), description);
+			}
+			else {
+				model.addAttribute("error", "Parzelle mit der gewählten Nummer existiert bereits!");
+				return "plot/addPlot";
+			}
 			Map<String, Object> modelMap = plotOverview(user).getModelMap();
 		} catch (Exception e) {
 			model.addAttribute("error", e);
@@ -322,12 +328,12 @@ public class SecurePlotController {
 	@PostMapping("/editedPlot")
 	public String editedPlot(@LoggedIn UserAccount user, Model model, @RequestParam(name = "plotID") ProductIdentifier plotId,
 							 @RequestParam("size") String size, @RequestParam("description") String description,
-							 @RequestParam() String estimator) {
+							 @RequestParam("estimator") String estimator) {
 		Plot plot = plotService.findById(plotId);
 		try {
 			plot.setSize(Integer.parseInt(size));
 			plot.setDescription(description);
-			plot.setPrice(Money.of(Integer.parseInt(estimator), EURO));
+			plot.setPrice(Money.of(Double.parseDouble(estimator), EURO));
 			plotCatalog.save(plotService.findById(plotId));
 		} catch (Exception e) {
 			model.addAttribute("error", e);

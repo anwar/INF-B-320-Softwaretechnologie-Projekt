@@ -32,7 +32,7 @@
         <tbody>
         <tr>
             <th> <label for="size">Größe</label> </th>
-            <td><input class="text_bgImage" id="size" name="size" th:value="${plot.getSize()}" type="number" required="required"/></td>
+            <td><input class="text_bgImage" id="size" name="size" th:value="${plot.getSize()}" type="number" min="1" required="required"/></td>
         </tr>
         <tr>
             <th> <label for="description">Beschreibung</label> </th>
@@ -40,7 +40,7 @@
         </tr>
         <tr>
             <th> <label for="number">Schätzwert</label> </th>
-            <td><input class="text_bgImage" id="number"  name="estimator" th:value="${plot.getEstimator().getNumber()}" type="number" required="required"/></td>
+            <td><input class="text_bgImage" id="number"  name="estimator" th:value="${plot.getEstimator().getNumber()}" type="number" min="1.00" step="0.01" required="required"/></td>
             <input type="hidden" id="plotID" name="plotID" th:value="${plot.getId()}">
         </tr>
         </tbody>
