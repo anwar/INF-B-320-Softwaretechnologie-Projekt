@@ -21,7 +21,8 @@
 | 0.1.6   | 20.11.2019        | Isabell Zorr
 | 0.1.7   | 21.11.2019        | Ylvi Bachmann
 | 0.1.8   | 10.12.2019        | Muhammad Talal Anwar
-| 0.2     | 17.01.2019        | Ylvi Bachmann
+| 0.2     | 17.12.2019        | Ylvi Bachmann
+| 0.2.1   | 07.01.2020        | Ylvi Bachmann
 |===
 
 toc::[]
@@ -282,9 +283,16 @@ image::models/design/user-interface.jpg[]
 | Externe Klasse                  | Pfad der externen Klasse                                   | Verwendet von (Klasse der eigenen Anwendung)
 | Salespoint.AbstractEntity       | org.salespointframework.core.AbstractEntity                | finance.Fee
 | Salespoint.AuthenticationManager | org.salespointframework.useraccount.AuthenticationManager | tenant.TenantService
-| Salespoint.Catalog              | org.salespointframework.catalog                            | plot.PlotCatalog
+| Salespoint.Catalog              | org.salespointframework.catalog.Catalog                   a|
+* plot.PlotCatalog
 | Salespoint.DataInitializer      | org.salespointframework.core.DataInitializer               | configuration.AppDataInitializer
 | Salespoint.Product              | org.salespointframework.catalog.Product                    | plot.Plot
+| Salespoint.ProductIdentifier    | org.salespointframework.catalog.ProductIdentifier         a|
+* plot.PlotControllerService
+* plot.PlotInformationBuffer
+* plot.PlotService
+* plot.SecurePlotController
+* plot.UpdateChairmanForm
 | Salespoint.Password             | org.salespointframework.useraccount.Password               a|
  * tenant.TenantService +
  *  tenant.TenantManager +
@@ -293,10 +301,15 @@ image::models/design/user-interface.jpg[]
 * tenant.TenantManager +
 * tenant.TenantRole +
 * complaint.ComplaintController
+* plot.PlotControllerService
+* plot.PlotService
+* plot.SecurePlotController
 | Salespoint.SalespointIdentifier | org.salespointframework.core.SalespointIdentifier          | finance.Fee
 | Salespoint.UserAccount          | org.salespointframework.useraccount.UserAccount           a|
 * tenant.Tenant +
 * complaint.ComplaintController
+* plot.InsecurePlotController
+* plot.PlotControllerService
 | Salespoint.UserAccountManager   | org.salespointframework.useraccount.UserAccountManager     | tenant.TenantManager
 | Spring.Assert                   | org.springframework.util.Assert                           a|
 * news.NewsEntry +
@@ -306,6 +319,9 @@ image::models/design/user-interface.jpg[]
 * complaint.Complaint +
 * complaint.ComplaintController +
 * complaint.ComplaintManager
+| Salespoint.Currencies           | org.salespointframework.core.Currencies.EURO              a|
+* plot.Plot
+* plot.SecurePlotController
 | Spring.CrudRepository           | org.springframework.data.repository.CrudRepository        a|
 * news.NewsRepository +
 * tenant.TenantRepository +
@@ -318,14 +334,21 @@ image::models/design/user-interface.jpg[]
 | Spring.Model                    | org.springframework.ui.Model                              a|
 * finance.FeeController +
 * news.NewsController +
-* plot.PlotController +
+* plot.InsecurePlotController +
+* plot.PlotControllerService
+* plot.SecurePlotController
 * tenant.tenantController +
 * complaint.ComplaintController
+| Spring.ModelAndView             | org.springframework.web.servlet.ModelAndView               a|
+* plot.InsecurePlotController
+* plot.PlotControllerService
+* plot.SecurePlotController
 | Spring.Streamable               | org.springframework.data.util.Streamable                  a|
 * tenant.TenantManager +
 * finance.FeeCatalog +
 * complaint.ComplaintManager +
 * complaint.ComplaintRepository
+* plot.PlotCatalog
 |===
 
 == Bausteinsicht
