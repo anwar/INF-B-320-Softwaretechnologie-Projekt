@@ -1,6 +1,8 @@
 package kleingarten.appointment;
 
 import org.salespointframework.catalog.ProductIdentifier;
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +20,13 @@ public class WorkAssignmentController {
 
 	private WorkAssignmentManager workAssignmentManager;
 	private WorkAssignmentRepository workAssignmentRepository;
+	private WorkAssignmentTimer workAssignmentTimer;
 
 	public WorkAssignmentController(WorkAssignmentManager workAssignmentManager,
-									WorkAssignmentRepository workAssignmentRepository) {
+									WorkAssignmentRepository workAssignmentRepository, WorkAssignmentTimer workAssignmentTimer) {
 		this.workAssignmentManager = workAssignmentManager;
 		this.workAssignmentRepository = workAssignmentRepository;
+		this.workAssignmentTimer = workAssignmentTimer;
 	}
 
 
@@ -55,7 +59,8 @@ public class WorkAssignmentController {
 
 	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	@GetMapping("/listOfAssignments")
-	String listOfAssignments(Model model) {
+	String listOfAssignments(Model model, @LoggedIn UserAccount userAccount) {
+		System.out.println(workAssignmentTimer.getPeriod(userAccount));
 		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
 		return "workAssignment/listOfAssignments";
 	}
@@ -95,7 +100,8 @@ public class WorkAssignmentController {
 	}
 
 	@GetMapping("/listForPlotAssignments/{plotID}")
-	String getForPlotWorkAssignments(@PathVariable ProductIdentifier plotID, Model model) {
+	String getForPlotWorkAssignments(@PathVariable ProductIdentifier plotID, Model model, @LoggedIn UserAccount userAccount) {
+		System.out.println(workAssignmentTimer.getPeriod(userAccount));
 		model.addAttribute("ListWorkAssignmentsForPlot", workAssignmentManager.getForPlotWorkAssignments(plotID));
 		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
 		model.addAttribute("plotID", plotID);

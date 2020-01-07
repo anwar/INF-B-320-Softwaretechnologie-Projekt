@@ -15,6 +15,7 @@
  */
 package kleingarten.news;
 
+import kleingarten.appointment.WorkAssignmentTimer;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
