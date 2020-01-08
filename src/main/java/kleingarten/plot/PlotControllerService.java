@@ -229,16 +229,14 @@ public class PlotControllerService {
 	 *
 	 * @return {@link Map} of {@link Tenant}s and colors as {@link String}
 	 */
-	Map<Tenant, String> secureSetColorForChairman() {
-		Random randomColorGenerator = new Random();
+	public Map<Tenant, String> secureSetColorForChairman() {
 		Map<Tenant, String> colorsForChairman = new HashMap<>();
 
-		//Add random color for each tenant who has the role "Obmann"
+		//Get color for each tenant who has the role "Obmann"
 		for (Tenant chairman :
 				tenantManager.getAll()) {
 			if (tenantManager.tenantHasRole(chairman, Role.of("Obmann"))) {
-				int color = randomColorGenerator.nextInt(0x1000000);
-				colorsForChairman.put(chairman, String.format("#%06X", color));
+				colorsForChairman.put(chairman, chairman.getChairmanColor());
 			}
 		}
 		return colorsForChairman;

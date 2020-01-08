@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Random;
+
 @Controller
 class TenantController {
 	private final TenantManager tenantManager;
@@ -21,9 +23,9 @@ class TenantController {
 	/**
 	 * Constructor of class {@link TenantController}
 	 *
-	 * @param tenantManager         manager class {@link TenantManager} for managing {@link Tenant}s
-	 * @param tenantRepository      repository of tenants as {@link TenantRepository}
-	 * @param tenantService         service class {@link TenantService}
+	 * @param tenantManager    manager class {@link TenantManager} for managing {@link Tenant}s
+	 * @param tenantRepository repository of tenants as {@link TenantRepository}
+	 * @param tenantService    service class {@link TenantService}
 	 */
 	TenantController(TenantManager tenantManager, TenantRepository tenantRepository, TenantService tenantService) {
 		Assert.notNull(tenantManager, "TenantManager must not be null");
@@ -111,6 +113,11 @@ class TenantController {
 					t.removeRole(Role.of(role));
 				}
 			}
+			if (role.equals("Obmann")) {
+				Random randomColorGenerator = new Random();
+				int color = randomColorGenerator.nextInt(0x1000000);
+				tenantManager.get(id).setChairmanColor(String.format("#%06X", color));
+			}
 			tenantManager.get(id).addRole(Role.of(role));
 		}
 		tenantRepository.save(tenantManager.get(id));
@@ -172,7 +179,7 @@ class TenantController {
 	String changedEmail(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldEmail, @RequestParam("new") String newEmai,
 						@RequestParam("repeat") String repeatedEmail) {
 		tenantService.changeEmail(tenantManager.getTenantByUserAccount(userAccount).getId(), oldEmail, newEmai, repeatedEmail);
-		return "/tenant/successEMail" ;
+		return "/tenant/successEMail";
 	}
 
 	/**

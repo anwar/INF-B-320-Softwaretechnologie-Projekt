@@ -26,6 +26,7 @@ import kleingarten.news.NewsEntry;
 import kleingarten.news.NewsRepository;
 import kleingarten.plot.Plot;
 import kleingarten.plot.PlotCatalog;
+import kleingarten.plot.PlotControllerService;
 import kleingarten.plot.PlotService;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
@@ -41,6 +42,7 @@ import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 
 /**
  * A {@link DataInitializer} implementation that will create dummy data for the application
@@ -58,6 +60,7 @@ public class AppDataInitializer implements DataInitializer {
 	private final UserAccountManager userAccountManager;
 	private final PlotService plotService;
 	private final PlotCatalog plotCatalog;
+	private final PlotControllerService plotControllerService;
 	private final ProcedureManager procedureManager;
 	private final TenantManager tenantManager;
 	private final ComplaintRepository complaints;
@@ -65,7 +68,8 @@ public class AppDataInitializer implements DataInitializer {
 	AppDataInitializer(NewsRepository news,
 					   WorkAssignmentRepository workAssignmentRepo, WorkAssignmentManager workAssignmentManager,
 					   TenantRepository tenantRepository, UserAccountManager userAccountManager, ComplaintRepository complaints,
-					   PlotService plotService, PlotCatalog plotCatalog, ProcedureManager procedureManager,
+					   PlotService plotService, PlotCatalog plotCatalog, PlotControllerService plotControllerService,
+					   ProcedureManager procedureManager,
 					   TenantManager tenantManager) {
 
 		Assert.notNull(news, "news must not be null!");
@@ -86,6 +90,7 @@ public class AppDataInitializer implements DataInitializer {
 		this.plotService = plotService;
 		Assert.notNull(plotCatalog, "plotCatalog must not be null!");
 		this.plotCatalog = plotCatalog;
+		this.plotControllerService = plotControllerService;
 
 		Assert.notNull(procedureManager, "procedureManager must not be null!");
 		this.procedureManager = procedureManager;
@@ -209,6 +214,9 @@ public class AppDataInitializer implements DataInitializer {
 				"0980790789", "08.09.1567", userAccountManager.create("neptun", password, "neptuns.bart@fishmail.com", mainTenantRole));
 
 		obmann.addRole(obmannRole);
+		Random randomColorGenerator = new Random();
+		int color = randomColorGenerator.nextInt(0x1000000);
+		obmann.setChairmanColor(String.format("#%06X", color));
 		boss.addRole(vorstandRole);
 		cashier.addRole(financeRole);
 		replacement.addRole(stellvertreterRole);

@@ -18,6 +18,7 @@ public class Tenant {
 	public String address;
 	public String phonenumber;
 	public String birthdate;
+	public String chairmanColor;
 	//Siehe Dokumentation ElementCollection, wurde auch analog im Salespoint-Produkt verwendet.
 	@ElementCollection
 	protected Set<Role> roles = new HashSet();
@@ -261,4 +262,21 @@ public class Tenant {
 		return userAccount.hasRole(Role.of(role));
 	}
 
+	/**
+	 * Getter for the color of a {@link Tenant} with the {@link Role} "Obmann"
+	 *
+	 * @return color as String
+	 */
+	public String getChairmanColor() {
+		return chairmanColor;
+	}
+
+	/**
+	 * Setter for the chairmanColor of a {@link Tenant} with the {@link Role} "Obmann"
+	 *
+	 * @param chairmanColor as String
+	 */
+	public void setChairmanColor(String chairmanColor) {
+		this.chairmanColor = chairmanColor;
+	}
 }
