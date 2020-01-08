@@ -1,0 +1,70 @@
+= Cross-Testing Feedback
+
+__Durchführende Gruppe: 22__
+__Anwendung von Gruppe: 43__
+
+== Getestetes System
+Welche Aufgabe/Problemstellung löst die Anwendung.
+
+Automatisiertes Verwaltungssystem einer Kleingartenanlage für verschiedene Personengruppen (Vorstand, Pächter, Obmänner, Vereinsgaststätte, Gäste)
+
+== Fehler-Report
+// See http://asciidoctor.org/docs/user-manual/#tables
+[options="header"]
+|===
+|Pfad |Parameter |Beschreibung |Rückgabe
+| HomePage editieren mit dem StiftZeichen| Die Nachrichte Entfernen und auf Zurück Button drucken | Die Nachricht ist richtig gezeigt, aber die Nachricht Fomat ist dann nicht richtig gerendert. | … 
+| News editieren | Nachricht verändern (Wörter hinzufügen/entfernen), Zurück-Button |Nachricht wird trotzdem geändert |…
+| Anlage-Prozelle Hinzufügen | Name: 1, Größe: 2, Beschreibung: 3 | Fehler, weil Parzelle schon vorhanden | White Label Page 
+| Anlage - nach Obmann |Obmann: (keiner), Auswählen | … | White Label Page
+| Meine Parzelle Passwort ändern | … | … | White Label Page 
+| Meine Parzelle Email ändern | … | … | White Label Page 
+| Parzelle Bearbeiten - Größe bearbeiten | -500 | … | White Label Page  
+| Termin Erstellen | Datum: 19.12.2019, Zeit: 10:00, Titel: a, Beschreibung: a | … | White Label Page 
+| Pächter Hinzufügen| … | Auf dem Knopf drücken | White Label Page
+| Anlage | Rolle:Obmann | … |White Label Page 
+| Mitglieder | Rolle: Stellvertreter | … | White Label Page
+| Termine | Rolle: Stellvertreter | … | White Label Page
+
+| /plotregistration| Logged in as: peter.klaus@email.com | Namensfeld akzeptiert nur Zahlen, Komma, Punkt und den Buchstaben 'e/E'; Namenskonvention unklar -> Änderungsvorschlag 'ID' | -
+| /plotregistration| Logged in as: peter.klaus@email.com; Name: "1" | Versuch Namen einer bereits existierenden Parzelle zu übergeben | Whitelabel Error: null; There was an unexpected error (type=java.lang.IllegalArgumentException: Plot with the given name exists already!, status=null).
+| /createAssignment| Logged in as: peter.klaus@email.com; Jahr "120000" | Es ist möglich ein Jahr bis 9999 einzugeben, doch ab fünfstelligen Werten funktioniert es nicht mehr -> Ist es sinnvoll Termine anlegen zu können, die weiter als 10 Jahre in der Zukunft liegen? | Whitelabel Error: Validation failed for object='createWorkAssignmentForm'. Error count: 1
+| /workAssignmentModify?id=4 | Logged in as: peter.klaus@email.com; Titel: "Neujahrsputz"; Beschreibung: "Garten von Böllerresten und Müll befreien"| Der Termin wird effektiv nicht geändert, beim Klick auf "Änderungen speichern" flieg ein Error| Whitelabel Error: Required int parameter 'workHours' is not present
+| /myPlot | Logged in as: peter.klaus@email.com | Nach Freigabe des eigenen Kleingartens wird dieser immer noch unter "Meine Daten" angezeigt | -
+| /changePassword | Logged in as: peter.klaus@email.com | Seite nicht über "Meine Parzelle" erreichbar | WhitelabelError: Error resolving template [/tenant/changePassword], template might not exist or might not be accessible by any of the configured Template Resolvers
+| /changeEmail | Logged in as: peter.klaus@email.com | Seite nicht über "Meine Parzelle" erreichbar | WhitelabelError: Error resolving template [/tenant/changeEmail], template might not exist or might not be accessible by any of the configured Template Resolvers
+| /register| Logged in as: peter.klaus@email.com | Seite nicht erreichbar über "Mitglieder -> Pächter hinzufügen"| Whitelabel Error: Error resolving template [/tenant/register], template might not exist or might not be accessible by any of the configured Template Resolvers
+| /login | Email: "s.krimse@gmaile.com"; Passwort: "123" | Kein Login möglich | redirect: /login?error
+| /home | nicht authentifizierter Nutzer | Cookie Meldung wird wiederholt aufgerufen, selbst nach der Zustimmung. | …
+| /home | Rolle: Vorstandsvorsitzender; User: peter.klaus@email.com | Der "Zurück"-Button in der News-Bearbeitung hat die selbe Funktion wie "Aktualisieren" | geänderte News Anzeige
+| /complaints | Rolle: Kassierer, Protokollant; 
+User: billy,billbill@geld.com, francys@email.com | Beschwerden-Seite aufrufbar, doch nicht einsehbar | Leere Liste
+|===
+
+== Sonstiges
+* Optik der Anwendung
+ - gute freundliche Aufmachung
+ - einfaches überschaubares Design
+ 
+ - Zufallsfarben bei Parzellenbelegung verwirren
+ 
+* Fehlende Features
+- Nutzer hinzufügen
+- Nutzer löschen
+- Vorstand kann Bewerbungen bearbeiten, annehmen, löschen und ablehnen
+
+* Interaktion mit der Anwendung (Usability)
+ - Rollup für Parzellendetails ist mit sehr viel Geklicke verbunden
+ - Nach dem Logout muss man Cookies zustimmen…
+ 
+ *Sonstiges Sonstiges
+ - durch die Dummy-Beschwerden kann der Wassermann auf fremde Wasserstände zugreifen (z.B. Beschwerden --> Plot 2)
+
+== Verbesserungsvorschläge
+* Was kann noch weiter verbessert werden?
+
+- Responsiveness für kleinere Displays
+- News: Beitragsverfasser anzeigen
+- Terminbearbeitung: Zeit und Datum änderbar machen
+- "Mitglied werden" Button im Login-Bereich bzw. Startseite
+- [QoL][/anlage] Übersichtslegende - für bessere Sichtbarkeit - über Tabelle legen 
