@@ -15,15 +15,13 @@ import java.util.*;
  */
 @Controller
 public class InsecurePlotController {
-	private final PlotService plotService;
 	private final PlotCatalog plotCatalog;
 	private final PlotControllerService plotControllerService;
 	private final SecurePlotController securePlotController;
 
-	InsecurePlotController(PlotService plotService, PlotCatalog plotCatalog,
+	InsecurePlotController(PlotCatalog plotCatalog,
 						   PlotControllerService plotControllerService,
 						   SecurePlotController securePlotController) {
-		this.plotService = plotService;
 		this.plotCatalog = plotCatalog;
 		this.plotControllerService = plotControllerService;
 		this.securePlotController = securePlotController;
@@ -92,7 +90,7 @@ public class InsecurePlotController {
 	public ModelAndView insecurePlotOverview() {
 		ModelAndView mav = new ModelAndView();
 
-		Set<Plot> plots = plotCatalog.findAll().toSet();
+		List<Plot> plots = plotCatalog.getAll().toList();
 		Map<Plot, String> colors = new HashMap<>();
 		Map<Plot, Boolean> rights = new HashMap<>();
 		Map<String, String> usedColors = new HashMap<>();

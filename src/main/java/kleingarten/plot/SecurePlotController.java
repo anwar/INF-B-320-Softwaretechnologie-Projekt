@@ -128,7 +128,7 @@ public class SecurePlotController {
 	public ModelAndView plotOverview(@LoggedIn UserAccount user) {
 		ModelAndView mav = new ModelAndView();
 
-		Set<Plot> plots = plotCatalog.findAll().toSet();
+		List<Plot> plots = plotCatalog.getAll().toList();
 		Map<Plot, String> colors = new HashMap<>();
 		Map<Plot, Boolean> rights = new HashMap<>();
 		Map<String, String> usedColors = new HashMap<>();
@@ -176,7 +176,7 @@ public class SecurePlotController {
 	public ModelAndView chairmenOverview(@LoggedIn UserAccount user) {
 		ModelAndView mav = new ModelAndView();
 
-		Set<Plot> plots = plotCatalog.findAll().toSet();
+		List<Plot> plots = plotCatalog.getAll().toList();
 		Map<Plot, Boolean> rights = new HashMap<>();
 		Map<String, String> colors = new HashMap<>();
 
