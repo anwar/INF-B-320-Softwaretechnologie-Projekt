@@ -133,7 +133,7 @@ class TenantController {
 	@PreAuthorize("hasRole('Hauptpächter') || hasRole('Nebenpächter')")
 	@GetMapping("/changePassword")
 	String changePassword() {
-		return "/tenant/changePassword";
+		return "tenant/changePassword";
 	}
 
 	/**
@@ -150,7 +150,7 @@ class TenantController {
 						   @RequestParam("repeat") String repeatedPassword) {
 		tenantService.changePassword(userAccount, oldPassword, newPassword, repeatedPassword);
 
-		return "/tenant/successPassword";
+		return "tenant/successPassword";
 	}
 
 	/**
@@ -163,7 +163,7 @@ class TenantController {
 	@GetMapping("/changeEmail")
 	String changeEmail(@LoggedIn UserAccount userAccount, Model model) {
 		model.addAttribute("email", userAccount.getEmail());
-		return "/tenant/changeEmail";
+		return "tenant/changeEmail";
 	}
 
 	/**
@@ -188,7 +188,7 @@ class TenantController {
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	@GetMapping("/register")
 	String register() {
-		return "/tenant/register";
+		return "tenant/register";
 	}
 
 	/**
