@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
 
 @Controller
 public class WorkAssignmentController {
@@ -59,8 +60,12 @@ public class WorkAssignmentController {
 
 	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	@GetMapping("/listOfAssignments")
-	String listOfAssignments(Model model, @LoggedIn UserAccount userAccount) {
-		System.out.println(workAssignmentTimer.getPeriod(userAccount));
+	String listOfAssignments(Model model, @LoggedIn Optional<UserAccount> userAccount) {
+		if (userAccount.isEmpty()) {
+			return "redirect:/login";
+		}
+
+		System.out.println(workAssignmentTimer.getPeriod(userAccount.get()));
 		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
 		return "workAssignment/listOfAssignments";
 	}
@@ -100,8 +105,12 @@ public class WorkAssignmentController {
 	}
 
 	@GetMapping("/listForPlotAssignments/{plotID}")
-	String getForPlotWorkAssignments(@PathVariable ProductIdentifier plotID, Model model, @LoggedIn UserAccount userAccount) {
-		System.out.println(workAssignmentTimer.getPeriod(userAccount));
+	String getForPlotWorkAssignments(@PathVariable ProductIdentifier plotID, Model model, @LoggedIn Optional<UserAccount> userAccount) {
+		if (userAccount.isEmpty()) {
+			return "redirect:/login";
+		}
+
+		System.out.println(workAssignmentTimer.getPeriod(userAccount.get()));
 		model.addAttribute("ListWorkAssignmentsForPlot", workAssignmentManager.getForPlotWorkAssignments(plotID));
 		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
 		model.addAttribute("plotID", plotID);
