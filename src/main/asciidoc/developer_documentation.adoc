@@ -194,7 +194,7 @@ Nutzbare Internet Browser: +
 * Google Chrome
 * Mozilla Firefox
 
-=== Vorgaben zum Betrieb des Software
+=== Vorgaben zum Betrieb der Software
 
 Dieser Abschnitt verschafft einen Überblick über die vorgesehene Nutzung des Produktes nach Fertigstellung
 und unter welchen Umständen diese erfolgt.
