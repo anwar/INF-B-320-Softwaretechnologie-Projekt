@@ -330,7 +330,8 @@ public class SecurePlotController {
 	 * @return name of view as {@link String}
 	 */
 	@PostMapping("/editedPlot")
-	public String editedPlot(@LoggedIn UserAccount user, Model model, @RequestParam(name = "plotID") ProductIdentifier plotId,
+	public String editedPlot(@LoggedIn UserAccount user, Model model,
+							 @RequestParam(name = "plotID") ProductIdentifier plotId,
 							 @RequestParam("size") String size, @RequestParam("description") String description,
 							 @RequestParam("estimator") String estimator) {
 		Plot plot = plotService.findById(plotId);

@@ -166,7 +166,7 @@ public class PlotControllerService {
 	 */
 	void secureSetAccessRightForPlotDetails(Optional<Procedure> procedure, Tenant tenant, Model mav) {
 		List<Role> permitted = List.of(Role.of("Vorstandsvorsitzender"), Role.of("Stellvertreter"),
-				Role.of("Protokollant"), Role.of("Kassierer"), Role.of("Wassermann"));
+				Role.of("Protokollant"), Role.of("Obmann"), Role.of("Kassierer"), Role.of("Wassermann"));
 		boolean condition = tenant.getUserAccount().getRoles().stream().anyMatch(permitted::contains);
 
 		//Check if user has a special role and set access rights for plot information
@@ -191,12 +191,11 @@ public class PlotControllerService {
 				mav.addAttribute("canSeeApplications", true);
 				mav.addAttribute("canModify", true);
 				mav.addAttribute("canCancel", true);
-			} else if (procedure.isPresent()) {
-				if (tenant.getUserAccount().hasRole(Role.of("Obmann"))
-						&& plotService.findById(procedure.get().getPlotId()).getChairman().getId() == tenant.getId()) {
-					mav.addAttribute("canSeeWorkhours", true);
-					mav.addAttribute("canModify", true);
-				}
+			} else if (procedure.isPresent()
+					&& tenant.getUserAccount().hasRole(Role.of("Obmann"))
+					&& plotService.findById(procedure.get().getPlotId()).getChairman().getId() == tenant.getId()) {
+				mav.addAttribute("canSeeWorkhours", true);
+				mav.addAttribute("canModify", true);
 			}
 		}
 	}
