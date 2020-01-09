@@ -304,6 +304,17 @@ public class AppDataInitializer implements DataInitializer {
 			procedureManager.add(procedure_3);
 			var procedure_4 = new Procedure(2019, plots.get(3), waterman.getId());
 			procedureManager.add(procedure_4);
+			/**
+			 * Last Year Procedure Data Initializer
+			 */
+			var procedure_5 = new Procedure(2018, plots.get(0), boss.getId());
+			procedureManager.add(procedure_5);
+			var procedure_6 = new Procedure(2018, plots.get(1), obman.getId());
+			procedureManager.add(procedure_6);
+			var procedure_7 = new Procedure(2018, plots.get(2), protocol.getId());
+			procedureManager.add(procedure_7);
+			var procedure_8 = new Procedure(2018, plots.get(3), waterman.getId());
+			procedureManager.add(procedure_8);
 
 			LOG.info("Finished creating default procedures");
 		}
