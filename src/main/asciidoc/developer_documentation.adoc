@@ -23,6 +23,7 @@
 | 0.1.8   | 10.12.2019        | Muhammad Talal Anwar
 | 0.2     | 17.12.2019        | Ylvi Bachmann
 | 0.2.1   | 07.01.2020        | Ylvi Bachmann
+| 0.2.2   | 09.01.2020        | Ylvi Bachmann
 |===
 
 toc::[]
@@ -479,4 +480,24 @@ image::models/analysis/ComplainsManagement.png[]
 * Komponentenbezogene Sequenzdiagramme, welche darstellen, wie die Anwendung mit externen Frameworks (zB. Salespoint, Spring) interagiert.
 
 == Technische Schulden
-* Auflistung der nicht erreichten Quality Gates und der zugehörigen SonarQube Issues
+=== Quality Gates
+Bewertung: A (sehr gut) bis E (sehr schlecht)
+Alle in SonarQube voreingestellten Quality Gates werden von der Anwendung mit der Bewertung A erfüllt.
+Diese Ziele sind Zuverlässigkeit (Reliability), Sicherheit (Security), Wartbarkeit (Maintainability).
+Darüber hinaus enthält die Anwendung 0,0% duplizierte Codezeilen und die Testabdeckung liegt über dem eingestellten
+minimalen Prozentsatz.
+
+=== Parzellenmanagement
+Feedback aus dem Cross Test, welches nicht berücksichtigt wurde
+[options="header"]
+|===
+|Nummer |Pfad |Parameter |Beschreibung |Rückgabe
+|1| Anlage | Rolle:Obmann | - |White Label Page
+|2| /myPlot | Logged in as: peter.klaus@email.com | Nach Freigabe des eigenen Kleingartens wird dieser immer noch unter "Meine Daten" angezeigt | -
+|===
+
+__Begründung:__
+
+- 1: Fehler konnte leider nicht reproduziert werden.
+- 2: Nach Absprache mit dem Tutor soll ein Pächter so lange noch Zugriff auf seine gekündigte Parzelle haben, bis eine
+     Bewerbung eines neuen Pächters für diese Parzelle angenommen wurde.
