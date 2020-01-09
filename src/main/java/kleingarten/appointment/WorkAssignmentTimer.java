@@ -20,6 +20,12 @@ public class WorkAssignmentTimer {
 	private final TenantManager tenantManager;
 	private final DataService dataService;
 
+	/**
+	 * Constructor for the WorkAssingmentTimer
+	 * @param workAssignmentManager
+	 * @param tenantManager
+	 * @param dataService
+	 */
 	public WorkAssignmentTimer(WorkAssignmentManager workAssignmentManager, TenantManager tenantManager, DataService dataService){
 		this.workAssignmentManager = workAssignmentManager;
 		this.tenantManager = tenantManager;
@@ -30,6 +36,11 @@ public class WorkAssignmentTimer {
 		System.out.println(dataService);
 	}
 
+	/**
+	 * @param from
+	 * @param to
+	 * @return
+	 */
 	public static String timeDifference(LocalDateTime from, LocalDateTime to)
 	{
 		Long days, hours, minutes;
@@ -41,6 +52,10 @@ public class WorkAssignmentTimer {
 		return String.format("%dd %d:%02d", days, hours, minutes);
 	}
 
+	/**
+	 * @param userAccount
+	 * @return
+	 */
 	public String getPeriod(UserAccount userAccount){
 		SortedMap<LocalDateTime, List<WorkAssignment>> assignmentMap = new TreeMap<>();
 		for(Plot plot : dataService.getRentedPlots(tenantManager.getTenantByUserAccount(userAccount))){

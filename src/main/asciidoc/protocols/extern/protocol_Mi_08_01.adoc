@@ -1,0 +1,214 @@
+= Protokoll Gruppe 43
+
+Treffen am 08.01.2020
+
+Ort:      APB +
+Beginn:   07:30 Uhr +
+Ende:     08:40 Uhr
+
+__Schriftführer:__ Isabell Zorr
+
+*Nächstes Treffen:* +
+15.01.2020, 07:30 Uhr, APB
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Uwe Schmidt (Tutor)
+- Albert Wellerdt
+- Muhammad Talal Anwar
+- Sanghyun Lee
+- Ylvi Sarah Bachmann
+- Isabell Zorr
+
+== Bemerkungen
+Wir sollten dringend das Issue auf Sonarqube bearbeiten, da wir sonst nicht in den grünen Bereich kommen und so keine
+gültige Abgabe haben. Bis nächste Woche sollen auch die Fehler aus dem Cross-Test-Bericht der anderen Gruppe behoben sein.
+Am 17.01. ist die harte Deadline nach der Uwe uns die Schreibrechte auf Github entzieht und so die Abgabe eingeleitet wird.
+Wir sollten auch darauf achten, dass wir keine White-Label-Error-Pages in der .jar haben. Diese wird Uwe bei sich selbst testen.
+Doch er stellte es uns frei, ob wir das Projekt über IntelliJ oder als .jar vorstellen. Wichtig ist nur, dass es funktioniert.
+Am 22.01. gegen 07:30 wird die Abschlussprüfung mit der Präsentation sein. Für diese müssen wir uns noch eintragen, wenn wir
+die Prüfung ablegen wollen. Bei der Präsentation sollen wir darauf achten, dass die Folien eher zur Unterstützung unseres
+Gesagten genutzt werden. Hier können wir auf Klassendiagramme und Bilder aus der Anwendung zurückgreifen. Jede Folie muss
+eine Seitenzahl haben. Bei der Präsentation ist es gewünscht, dass wir uns am Anfang alle vorstellen obgleich nicht alle
+vorne stehen müssen. Diese wird ca. 30 Minuten dauern, mit der Vorstellung der Anwendung, einer Zusammenfassung unserer
+Probleme und anschliessender Fragerunde. Bis zum 17. sollten auch alle Abgaben da und vollständig sein. Für den Endteil
+der Entwicklerdoku nehmen wir die Altlasten aus dem Sonaeqube und Jenkins. Und die Berichte aus dem Cross-Testing wären
+hier angebracht und eine kurze Erläuterung wie wir sie bearbeitet haben und warum wir sie so bearbeiteten.
+
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#41
+|Edit and add classes and attributes to the appointment diagram
+|editing diagram for appointment diagram
+|Albert
+|open
+
+
+|#68
+|Overview table for Bills
+|table showing bills and maybe editing them
+|Sanghyun
+|open
+
+|#71
+| Adding each Initializer to AppDataInitializer
+| ...
+| Sascha, Ylvi, Sanghyun
+|open
+
+|#75
+|update external framework usage table
+| ...
+| all
+| open
+
+|#77
+|Update user interface diagram
+|...
+|Talal
+|closed
+
+|#80
+|Better format for generated PDF bill
+| ...
+|...
+|open
+
+|#81
+|Show details of plot rented by tenant
+|add controller methods, write test for showing plot details
+|Ylvi
+|closed
+
+|#82
+|Add function to "Parzelle freigeben" button
+|Add method to controller, write test
+|Ylvi
+|closed
+
+|#83
+|Add functionality to "Parzelle hinzufügen" Button
+|implement methods in controller, write tests
+|Ylvi
+|closed
+
+|#84
+|Add chairman to plot
+| add dropdown with chairmen to plot overview of chairmen,
+add needed form (class and in the html file),
+implement methods (get and postmapping), set access rights, write tests
+|Ylvi
+|closed
+
+|#85
+|Add improvements from test report
+|error message when trying to add a duplicate plot,
+error message when trying to add negative size to plot,
+rename plot name to number,
+fix access to plot overview page when chairman is logged in
+|Ylvi
+|closed
+
+|===
+
+== Aktueller Stand
+Die Cross Tests sind beendet und der Report der anderen Gruppe wurde von uns empfangen. Wir bessern nun die von der
+anderen Gruppe gefundenen Fehler an unserer Anwendung aus und verleihen den letzten Feinschliff. Mit der Vorbereitung
+der Präsentation beginnen wir nächste Woche. Wir beenden die Arbeiten an den Dokumenten und werden im Verlauf der
+nächsten Woche alle Dokumente auf ihre Vollständigkeit prüfen.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#41
+|Edit and add classes and attributes to the appointment diagram
+|editing diagram for appointment diagram
+|Albert
+|open
+
+
+|#68
+|Overview table for Bills
+|table showing bills and maybe editing them
+|Sanghyun
+|open
+
+|#71
+| Adding each Initializer to AppDataInitializer
+| ...
+| Sascha, Ylvi, Sanghyun
+|open
+
+|#75
+|update external framework usage table
+| ...
+| all
+| open
+
+|#80
+|Better format for generated PDF bill
+| ...
+|...
+|open
+
+|#86
+|ToDo for Sascha
+|issues from the cross testing report (also issues from the finance department),
+access rights for the modification of a plot for a normal tenant,
+correct headlines,
+feedback and your part of the developer documentation
+issues from sonar cube
+|Sascha
+|open
+
+|===
