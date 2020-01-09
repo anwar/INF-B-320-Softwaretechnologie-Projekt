@@ -140,7 +140,7 @@ public class ProcedureController {
 			mav.setViewName("error");
 			return mav;
 		}
-		Procedure proc = (plot == null) ? null : procedureManager.getActualProcedure(plot);
+		Procedure proc = procedureManager.getActualProcedure(plot);
 		//decide if user can change powercount
 		Tenant tenant = procedureManager.getTenantManager().getTenantByUserAccount(user);
 
