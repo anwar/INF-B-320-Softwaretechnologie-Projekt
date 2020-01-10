@@ -78,7 +78,7 @@ public class TenantRole implements Comparable {
 				return list.indexOf(l);
 			}
 		}
-		throw new NullPointerException();
+		throw new IllegalArgumentException();
 	}
 
 	/**

@@ -105,7 +105,8 @@ public class TenantManager {
 	 * @param password of the {@link Tenant} as {@link String}
 	 */
 	public void createNewTenant(String forename, String surname, String email, String password) {
-		Tenant tenant = new Tenant(forename, surname, "", "", "", userAccounts.create(email, Password.UnencryptedPassword.of(password), email));
+		Tenant tenant = new Tenant(forename, surname, "", "", "",
+				userAccounts.create(email, Password.UnencryptedPassword.of(password), email));
 		tenant.addRole(Role.of("Hauptpächter"));
 		tenants.save(tenant);
 	}
@@ -120,8 +121,10 @@ public class TenantManager {
 	 * @param birthdate   of the {@link Tenant} as {@link String}
 	 * @param email       of the {@link Tenant} as {@link String}
 	 */
-	public void createNewPerson(String forename, String surname, String address, String phonenumber, String birthdate, String email) {
-		Tenant tenant = new Tenant(forename, surname, address, phonenumber, birthdate, userAccounts.create(email, Password.UnencryptedPassword.of(phonenumber), email));
+	public void createNewPerson(String forename, String surname, String address, String phonenumber,
+								String birthdate, String email) {
+		Tenant tenant = new Tenant(forename, surname, address, phonenumber, birthdate, userAccounts.create(email,
+				Password.UnencryptedPassword.of(phonenumber), email));
 		tenants.save(tenant);
 	}
 

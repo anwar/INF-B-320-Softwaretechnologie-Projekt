@@ -41,10 +41,11 @@ public class Tenant {
 	 * @param address     address of the tenant for physical mailing service as String
 	 * @param phonenumber of the tenant as String
 	 * @param birthdate   of the tenant as String
-	 * @param userAccount userAccount of the tenant as class {@link UserAccount} given by the Salespoint-Framework containing and saving
-	 *                    user data (such as password, email and username)
+	 * @param userAccount userAccount of the tenant as class {@link UserAccount} given by the Salespoint-Framework
+	 *                    containing and saving user data (such as password, email and username)
 	 */
-	public Tenant(String forename, String surname, String address, String phonenumber, String birthdate, UserAccount userAccount) {
+	public Tenant(String forename, String surname, String address, String phonenumber, String birthdate,
+				  UserAccount userAccount) {
 		this.forename = forename;
 		this.surname = surname;
 		this.address = address;
@@ -191,7 +192,8 @@ public class Tenant {
 	 * @return roles in sorted joined String
 	 */
 	public String getRoles() {
-		return userAccount.getRoles().toList().stream().map(n -> new TenantRole(n)).sorted().map(n -> n.toString()).collect(Collectors.joining(", "));
+		return userAccount.getRoles().toList().stream().map(n -> new TenantRole(n)).sorted().map(n -> n.toString())
+				.collect(Collectors.joining(", "));
 	}
 
 	/**

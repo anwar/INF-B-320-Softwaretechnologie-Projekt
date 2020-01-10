@@ -41,8 +41,7 @@ public class WorkAssignmentTimer {
 	 * @param to
 	 * @return
 	 */
-	public static String timeDifference(LocalDateTime from, LocalDateTime to)
-	{
+	public static String timeDifference(LocalDateTime from, LocalDateTime to) {
 		Long days, hours, minutes;
 		days = Long.valueOf(from.until(to, ChronoUnit.DAYS));
 		to = to.minusDays(days);

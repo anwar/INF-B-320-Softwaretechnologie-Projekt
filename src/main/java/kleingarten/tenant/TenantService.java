@@ -22,7 +22,8 @@ public class TenantService {
 	 * @param tenants               repository of {@link Tenant}s as {@link TenantRepository}
 	 * @param authenticationManager service class of {@link AuthenticationManager}
 	 */
-	TenantService(TenantManager tenantManager, UserAccountManager userAccountManager, TenantRepository tenants, AuthenticationManager authenticationManager) {
+	TenantService(TenantManager tenantManager, UserAccountManager userAccountManager, TenantRepository tenants,
+				  AuthenticationManager authenticationManager) {
 		this.tenantManager = tenantManager;
 		this.userAccountManager = userAccountManager;
 		this.tenants = tenants;
@@ -46,7 +47,8 @@ public class TenantService {
 		if (!newPassword.equals(repeatedPassword)) {
 			throw new IllegalArgumentException("New Password and repeated Password are not identical");
 		}
-		userAccountManager.changePassword(tenantManager.getTenantByUserAccount(userAccount).getUserAccount(), Password.UnencryptedPassword.of(newPassword));
+		userAccountManager.changePassword(tenantManager.getTenantByUserAccount(userAccount).getUserAccount(),
+				Password.UnencryptedPassword.of(newPassword));
 	}
 
 	/**

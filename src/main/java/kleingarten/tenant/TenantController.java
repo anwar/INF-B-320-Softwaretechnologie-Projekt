@@ -146,8 +146,8 @@ class TenantController {
 	 * @return html to change the password
 	 */
 	@PostMapping("/changedPassword")
-	String changedPassword(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldPassword, @RequestParam("new") String newPassword,
-						   @RequestParam("repeat") String repeatedPassword) {
+	String changedPassword(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldPassword,
+						   @RequestParam("new") String newPassword, @RequestParam("repeat") String repeatedPassword) {
 		tenantService.changePassword(userAccount, oldPassword, newPassword, repeatedPassword);
 
 		return "tenant/successPassword";
@@ -171,14 +171,15 @@ class TenantController {
 	 *
 	 * @param userAccount   {@link UserAccount} of {@link Tenant} to change their email
 	 * @param oldEmail      of {@link Tenant} as {@link String}
-	 * @param newEmai       of {@link Tenant} as {@link String}
+	 * @param newEmail       of {@link Tenant} as {@link String}
 	 * @param repeatedEmail to check if {@link Tenant} had a typo in their new email
 	 * @return view to change the email
 	 */
 	@PostMapping("/changedEmail")
-	String changedEmail(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldEmail, @RequestParam("new") String newEmai,
-						@RequestParam("repeat") String repeatedEmail) {
-		tenantService.changeEmail(tenantManager.getTenantByUserAccount(userAccount).getId(), oldEmail, newEmai, repeatedEmail);
+	String changedEmail(@LoggedIn UserAccount userAccount, @RequestParam("old") String oldEmail,
+						@RequestParam("new") String newEmail, @RequestParam("repeat") String repeatedEmail) {
+		tenantService.changeEmail(tenantManager.getTenantByUserAccount(userAccount).getId(), oldEmail, newEmail,
+				repeatedEmail);
 		return "/tenant/successEMail";
 	}
 
@@ -203,8 +204,9 @@ class TenantController {
 	 * @return html of the {@link Tenant} overview
 	 */
 	@PostMapping("/registered")
-	String registered(@RequestParam("forename") String forename, @RequestParam("surname") String surname, @RequestParam("birthdate") String birthdate,
-					  @RequestParam("address") String address, @RequestParam("email") String email, @RequestParam("phone") String phone) {
+	String registered(@RequestParam("forename") String forename, @RequestParam("surname") String surname,
+					  @RequestParam("birthdate") String birthdate, @RequestParam("address") String address,
+					  @RequestParam("email") String email, @RequestParam("phone") String phone) {
 		tenantManager.createNewPerson(forename, surname, address, phone, birthdate, email);
 
 		return ("redirect:/tenants");
