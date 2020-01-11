@@ -482,7 +482,7 @@ image::models/analysis/ComplainsManagement.png[]
 
 == Technische Schulden
 === Quality Gates
-Bewertung: A (sehr gut) bis E (sehr schlecht)
+Bewertung: A (sehr gut) bis E (sehr schlecht) +
 Alle in SonarQube voreingestellten Quality Gates werden von der Anwendung mit der Bewertung A erfüllt.
 Diese Ziele sind Zuverlässigkeit (Reliability), Sicherheit (Security), Wartbarkeit (Maintainability).
 Darüber hinaus enthält die Anwendung 0,0% duplizierte Codezeilen und die Testabdeckung liegt über dem eingestellten
