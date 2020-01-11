@@ -205,17 +205,17 @@ public class PlotControllerServiceTests {
 	 */
 	@Test
 	public void securedGetColorForSpecialPlotTest() {
-		Procedure procedure = procedureManager.getAll(boss.getId()).toList().get(0);
-		procedure.addSubTenant(chairman.getId());
-		procedureManager.add(procedure);
-		takenPlot = plotService.findById(procedure.getPlotId());
+		Procedure bossProcedure = procedureManager.getAll().filter(procedure -> procedure.getMainTenant() == boss.getId()).toList().get(0);
+		bossProcedure.addSubTenant(chairman.getId());
+		procedureManager.add(bossProcedure);
+		takenPlot = plotService.findById(bossProcedure.getPlotId());
 		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount())))
 				.isEqualTo(Map.of(takenPlot, "#E69138"));
 
-		Procedure renting = procedureManager.getAll(chairman.getId()).toList().get(0);
-		renting.addSubTenant(boss.getId());
-		procedureManager.add(renting);
-		takenPlot = plotService.findById(renting.getPlotId());
+		Procedure chairmanProcedure = procedureManager.getAll().filter(procedure -> procedure.getMainTenant() == chairman.getId()).toList().get(0);
+		chairmanProcedure.addSubTenant(boss.getId());
+		procedureManager.add(chairmanProcedure);
+		takenPlot = plotService.findById(chairmanProcedure.getPlotId());
 		assertThat(plotControllerService.setPlotColor(takenPlot, Optional.of(chairman.getUserAccount())))
 				.isEqualTo(Map.of(takenPlot, "#E69138"));
 	}
