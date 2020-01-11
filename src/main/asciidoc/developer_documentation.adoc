@@ -311,6 +311,7 @@ image::models/design/user-interface.jpg[]
 * complaint.ComplaintController
 * plot.InsecurePlotController
 * plot.PlotControllerService
+* plot.SecurePlotController
 | Salespoint.UserAccountManager   | org.salespointframework.useraccount.UserAccountManager     | tenant.TenantManager
 | Spring.Assert                   | org.springframework.util.Assert                           a|
 * news.NewsEntry +
