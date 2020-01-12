@@ -116,17 +116,19 @@ public class ComplaintManager {
 
 		// then we get all complaints that were made by Obmann
 		Streamable<Complaint> complaintsByObmann = complaints.findByComplainant(obmann, Sort.by("id"));
-		if (!complaintsByObmann.isEmpty()) {
-			outerLoop:
-			for (Complaint c : complaintsByObmann) {
-				// only add it to the list if it doesn't exist already
-				for (Complaint cInList : allComplaints) {
-					if (cInList.getId() == c.getId()) {
-						continue outerLoop; // to next complaint in complaintsByObmann
-					}
+		if (complaintsByObmann.isEmpty()) {
+			return allComplaints;
+		}
+
+		outerLoop:
+		for (Complaint c : complaintsByObmann) {
+			// only add it to the list if it doesn't exist already
+			for (Complaint cInList : allComplaints) {
+				if (cInList.getId() == c.getId()) {
+					continue outerLoop; // to next complaint in complaintsByObmann
 				}
-				allComplaints.add(c);
 			}
+			allComplaints.add(c);
 		}
 
 		return allComplaints;
