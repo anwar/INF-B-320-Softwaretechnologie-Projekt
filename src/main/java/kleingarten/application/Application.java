@@ -60,19 +60,20 @@ public class Application {
 	}
 
 	public String getStateAsString() {
+		String str;
 		switch (state) {
 			case NEW:
-				return "neu";
+				str = "neu";
 			case ACCEPTED:
-				return "angenommen";
+				str = "angenommen";
 			case DENIED:
-				return "abgelehnt";
+				str = "abgelehnt";
 			case HIDDEN:
-				return "hidden";
-
+				str = "hidden";
 			default:
-				return "fehler";
+				str = "fehler";
 		}
+		return str;
 	}
 
 	public void deny() {

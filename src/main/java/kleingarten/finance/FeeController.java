@@ -75,7 +75,7 @@ public class FeeController {
 		return "finance/bill";
 	}
 
-	public String finalizeProcedures(Model model, @PathVariable String year) {
+	public String finalizeProcedures(@PathVariable String year) {
 
 		List<Procedure> procedures = procedureManager.getAllByYear(Integer.parseInt(year)).toList();
 		for (Procedure proc : procedures) {
