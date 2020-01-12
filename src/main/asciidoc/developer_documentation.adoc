@@ -282,6 +282,12 @@ image::models/design/user-interface.jpg[]
 [options="header", cols="1,3,3"]
 |===
 | Externe Klasse                  | Pfad der externen Klasse                                   | Verwendet von (Klasse der eigenen Anwendung)
+| slf4j.Logger                    | org.slf4j.Logger                                          a|
+* message.MessageService +
+* configuration.AppDataInitializer
+| slf4j.LoggerFactory             | org.slf4j.LoggerFactory                                   a|
+* message.MessageService +
+* configuration.AppDataInitializer
 | Salespoint.AbstractEntity       | org.salespointframework.core.AbstractEntity                | finance.Fee
 | Salespoint.AuthenticationManager | org.salespointframework.useraccount.AuthenticationManager | tenant.TenantService
 | Salespoint.Catalog              | org.salespointframework.catalog.Catalog                   a|
@@ -320,7 +326,8 @@ image::models/design/user-interface.jpg[]
 * tenant.TenantManager +
 * complaint.Complaint +
 * complaint.ComplaintController +
-* complaint.ComplaintManager
+* complaint.ComplaintManager +
+* configuration.AppDataInitializer
 | Salespoint.Currencies           | org.salespointframework.core.Currencies.EURO              a|
 * plot.Plot
 * plot.SecurePlotController
