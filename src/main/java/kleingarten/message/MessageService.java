@@ -70,7 +70,9 @@ public class MessageService {
 	 */
 	public void sendMessage(String to, String subject, String text) {
 		if (printToLog) {
-			LOG.info(String.format("Sending an email to \"%s\" with subject \"%s\" and message \"%s\"", to, subject, text));
+			LOG.info(String.format(
+					"Sending an email to \"%s\" with subject \"%s\" and message \"%s\"",
+					to, subject, text));
 		}
 
 		if (!enabled) {
@@ -104,7 +106,10 @@ public class MessageService {
 										  String attachmentFilename,
 										  DataSource attachmentDataSource) {
 		if (printToLog) {
-			LOG.info(String.format("Sending an email to \"%s\" with subject \"%s\" and message \"%s\" and an attachment with name \"%s\"", to, subject, text, attachmentFilename));
+			LOG.info(String.format(
+					"Sending an email to \"%s\" with subject \"%s\"" +
+							" and message \"%s\" and an attachment with name \"%s\"",
+					to, subject, text, attachmentFilename));
 		}
 
 		if (!enabled) {
