@@ -67,7 +67,8 @@ public class AppDataInitializer implements DataInitializer {
 
 	AppDataInitializer(NewsRepository news,
 					   WorkAssignmentRepository workAssignmentRepo, WorkAssignmentManager workAssignmentManager,
-					   TenantRepository tenantRepository, UserAccountManager userAccountManager, ComplaintRepository complaints,
+					   TenantRepository tenantRepository, UserAccountManager userAccountManager,
+					   ComplaintRepository complaints,
 					   PlotService plotService, PlotCatalog plotCatalog, PlotControllerService plotControllerService,
 					   ProcedureManager procedureManager,
 					   TenantManager tenantManager) {
@@ -119,9 +120,13 @@ public class AppDataInitializer implements DataInitializer {
 
 		LOG.info("Creating default news entries...");
 
-		news.save(new NewsEntry("Hört hört, werte Leute, am 13.09.2020 ist wieder Zeit für das jährliche Ritterfest im Lande K(l)einGarten. ⚔️"));
-		news.save(new NewsEntry("Wiener Schnitzel. Ihr habt richtig gelesen. It's time for a d-d-duel. Schnitzelwettessen. Wo? Na hier natürlich. Wann? Am 30.02.2020. \uD83E\uDD69"));
-		news.save(new NewsEntry("30.03.2019 Achtung: Bitte denkt daran, dass eure Stiefmütterchen auch wachsen können: Laub harken ist angesagt! \uD83C\uDF42 "));
+		news.save(new NewsEntry("Hört hört, werte Leute, am 13.09.2020 ist wieder Zeit"
+				+ "für das jährliche Ritterfest im Lande K(l)einGarten. ⚔️"));
+		news.save(new NewsEntry("Wiener Schnitzel. Ihr habt richtig gelesen." +
+				"It's time for a d-d-duel. Schnitzelwettessen. Wo? Na hier natürlich." +
+				"Wann? Am 30.02.2020. \uD83E\uDD69"));
+		news.save(new NewsEntry("30.03.2019 Achtung: Bitte denkt daran, dass eure" +
+				"Stiefmütterchen auch wachsen können: Laub harken ist angesagt! \uD83C\uDF42 "));
 	}
 
 
@@ -150,11 +155,17 @@ public class AppDataInitializer implements DataInitializer {
 		List<Plot> plots = plotCatalog.findAll().toList();
 
 		complaints.save(new Complaint(
-				plots.get(0), normalTenant, "Test subject", "This is text for the complaint description. Lorem ipsum tooty dooty doo.", ComplaintState.PENDING));
+				plots.get(0), normalTenant, "Test subject",
+				"This is text for the complaint description. Lorem ipsum tooty dooty doo.",
+				ComplaintState.PENDING));
 		complaints.save(new Complaint(
-				plots.get(1), wassermann, "Test subject2", "Lorem ipsum tooty dooty doo. This is text for the complaint description. ", ComplaintState.PENDING));
+				plots.get(1), wassermann, "Test subject2",
+				"Lorem ipsum tooty dooty doo. This is text for the complaint description. ",
+				ComplaintState.PENDING));
 		complaints.save(new Complaint(
-				plots.get(2), boss, "Another one", "Lorem ipsum tooty dooty doo. Lorem ipsum tooty dooty doo.", ComplaintState.FINISHED));
+				plots.get(2), boss, "Another one",
+				"Lorem ipsum tooty dooty doo. Lorem ipsum tooty dooty doo.",
+				ComplaintState.FINISHED));
 	}
 
 	void initializeWorkAssigment(WorkAssignmentRepository workAssignmentRepo) {
@@ -164,8 +175,12 @@ public class AppDataInitializer implements DataInitializer {
 			return;
 		}
 		LOG.info("create default Assignments");
-		var Appointment = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 1, 1, 1, 0), 0, "Neujahrsputz", "Garten von Böllerresten und Müll befreien", null);
-		var Appointment2 = this.workAssignmentManager.createAssignmentForInitializer(LocalDateTime.of(2020, 4, 25, 16, 0), 0, "In K(l)einanlage Müll aufsammeln", "Müll aufheben", null);
+		var Appointment = this.workAssignmentManager.createAssignmentForInitializer(
+				LocalDateTime.of(2020, 1, 1, 1, 0),
+				0, "Neujahrsputz", "Garten von Böllerresten und Müll befreien", null);
+		var Appointment2 = this.workAssignmentManager.createAssignmentForInitializer(
+				LocalDateTime.of(2020, 4, 25, 16, 0),
+				0, "In K(l)einanlage Müll aufsammeln", "Müll aufheben", null);
 		this.workAssignmentRepo.saveAll(List.of(Appointment));
 	}
 
@@ -193,25 +208,34 @@ public class AppDataInitializer implements DataInitializer {
 
 		Tenant boss = new Tenant("Peter", "Klaus", "Am Berg 5, 12423 Irgendwo im Nirgendwo",
 				"01242354356", "13.04.1999",
-				userAccountManager.create("peter.klaus", password, "peter.klaus@email.com", mainTenantRole));
+				userAccountManager.create("peter.klaus", password,
+						"peter.klaus@email.com", mainTenantRole));
 
 
 		Tenant obmann = new Tenant("Hubert", "Grumpel", "Hinter den 7 Bergen, 98766 Zwergenhausen",
 				"012345678", "04.09.1978",
-				userAccountManager.create("hubertgrumpel", password, "hubert.grumpel2@cloud.com", mainTenantRole));
+				userAccountManager.create("hubertgrumpel", password,
+						"hubert.grumpel2@cloud.com", mainTenantRole));
 
 		Tenant cashier = new Tenant("Bill", "Richart", "Am Bahnhof 25, 07875 Dorfdorf",
-				"0123098874326", "13.05.1968", userAccountManager.create("bill", password, "billy,billbill@geld.com", subTenantRole));
+				"0123098874326", "13.05.1968",
+				userAccountManager.create("bill", password,
+						"billy,billbill@geld.com", subTenantRole));
 
 		Tenant replacement = new Tenant("Sophie", "Kirmse", "Am Teichplatz 5, 67807 Meldetsichnie",
 				"034567892132", "08.12.1988",
-				userAccountManager.create("sophie", password, "s.krimse@gemaile.com", subTenantRole));
+				userAccountManager.create("sophie", password,
+						"s.krimse@gemaile.com", subTenantRole));
 
 		Tenant protocol = new Tenant("Franziska", "Kiel", "Bei Isa",
-				"0896548786890", "19.08.1998", userAccountManager.create("franziska", password, "francys@email.com", mainTenantRole));
+				"0896548786890", "19.08.1998",
+				userAccountManager.create("franziska", password,
+						"francys@email.com", mainTenantRole));
 
 		Tenant waterman = new Tenant("Atlas", "Neptunius", "An der Promenade 34, 01298 Atlantis",
-				"0980790789", "08.09.1567", userAccountManager.create("neptun", password, "neptuns.bart@fishmail.com", mainTenantRole));
+				"0980790789", "08.09.1567",
+				userAccountManager.create("neptun", password,
+						"neptuns.bart@fishmail.com", mainTenantRole));
 
 		obmann.addRole(obmannRole);
 		Random randomColorGenerator = new Random();
@@ -227,7 +251,8 @@ public class AppDataInitializer implements DataInitializer {
 
 		//this one is just for testing the method createNewTenant()
 		tenantManager.createNewTenant("Pascall", "Fahrenheit", "fahrenheit@web.de", "123");
-		tenantManager.createNewPerson("Fred", "Feuerstein", "Steinhausen", "12345678", "15.06.02", "fred.feuerstain@steinmail.com");
+		tenantManager.createNewPerson("Fred", "Feuerstein", "Steinhausen", "12345678",
+				"15.06.02", "fred.feuerstain@steinmail.com");
 	}
 
 	public void initializePlots(PlotCatalog plotCatalog, PlotService plotService, TenantRepository tenants) {
