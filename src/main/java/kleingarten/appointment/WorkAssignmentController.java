@@ -1,7 +1,6 @@
 package kleingarten.appointment;
 
 
-import kleingarten.tenant.Tenant;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -27,12 +26,14 @@ public class WorkAssignmentController {
 
 	/**
 	 * Constructor of class {@link WorkAssignmentController}
-	 * @param workAssignmentManager manager class {@link WorkAssignmentManager}
+	 *
+	 * @param workAssignmentManager    manager class {@link WorkAssignmentManager}
 	 * @param workAssignmentRepository repository of WorkAssignments as {@link WorkAssignmentRepository}
-	 * @param workAssignmentTimer workAssignmentTimer as Counter {@link WorkAssignmentTimer}
+	 * @param workAssignmentTimer      workAssignmentTimer as Counter {@link WorkAssignmentTimer}
 	 */
 	public WorkAssignmentController(WorkAssignmentManager workAssignmentManager,
-									WorkAssignmentRepository workAssignmentRepository, WorkAssignmentTimer workAssignmentTimer) {
+									WorkAssignmentRepository workAssignmentRepository,
+									WorkAssignmentTimer workAssignmentTimer) {
 		this.workAssignmentManager = workAssignmentManager;
 		this.workAssignmentRepository = workAssignmentRepository;
 		this.workAssignmentTimer = workAssignmentTimer;
@@ -41,8 +42,9 @@ public class WorkAssignmentController {
 
 	/**
 	 * create a {@link WorkAssignment}
+	 *
 	 * @param model view to show the date, the time of now. Show maximal Date.
-	 * @param form is the form for create a {@link WorkAssignment}
+	 * @param form  is the form for create a {@link WorkAssignment}
 	 * @return put the data from form {@link CreateWorkAssignmentForm} to the html template
 	 */
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
@@ -63,6 +65,7 @@ public class WorkAssignmentController {
 
 	/**
 	 * create a {@link WorkAssignment}
+	 *
 	 * @param form {@link CreateWorkAssignmentForm} is the form for create a {@link WorkAssignment}
 	 * @return link to "/createWorkAssignment" and add  {@link WorkAssignment} to {@link java.util.List} in
 	 * {@link WorkAssignmentManager}
@@ -80,7 +83,8 @@ public class WorkAssignmentController {
 
 	/**
 	 * Shows an overview of {@link WorkAssignment} as a list
-	 * @param model view to show list of {@link WorkAssignment}s as {@link Model}
+	 *
+	 * @param model       view to show list of {@link WorkAssignment}s as {@link Model}
 	 * @param userAccount is proof for the role of user
 	 * @return html to show list of {@link WorkAssignment}s
 	 */
@@ -99,7 +103,8 @@ public class WorkAssignmentController {
 
 	/**
 	 * View to edit a {@link WorkAssignment}s details
-	 * @param id is for identifying which work assignment should be changed
+	 *
+	 * @param id    is for identifying which work assignment should be changed
 	 * @param model shows the number of {@link kleingarten.plot.Plot}s in the {@link WorkAssignment}
 	 * @return html for editing a {@link WorkAssignment}
 	 */
@@ -114,18 +119,19 @@ public class WorkAssignmentController {
 
 	/**
 	 * Getter for the changed details of a {@link WorkAssignment} to save in the {@link WorkAssignment}
-	 * @param id identifier of {@link WorkAssignment} as {@link Long}
-	 * @param title input title as {@link String}
+	 *
+	 * @param id          identifier of {@link WorkAssignment} as {@link Long}
+	 * @param title       input title as {@link String}
 	 * @param description input description as {@link String}
-	 * @param workHours input workHours as {@link Integer}
+	 * @param workHours   input workHours as {@link Integer}
 	 * @return html of the {@link WorkAssignment}s html with saved new details of {@link WorkAssignment}
 	 */
 	@PostMapping("/modifiedWorkAssignment")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	public String modifiedWorkAssignment(@RequestParam("id") Long id,
-								  @RequestParam("title") String title,
-								  @RequestParam("description") String description,
-								  @RequestParam("workHours") int workHours) {
+										 @RequestParam("title") String title,
+										 @RequestParam("description") String description,
+										 @RequestParam("workHours") int workHours) {
 
 		workAssignmentManager.findByID(id).setTitle(title);
 		workAssignmentManager.findByID(id).setDescription(description);
@@ -135,15 +141,17 @@ public class WorkAssignmentController {
 		return "redirect:/listOfAssignments";
 	}
 
-	/** Remove a {@link kleingarten.plot.Plot} from a {@link WorkAssignment}
-	 * @param plotID to identifier the {@link kleingarten.plot.Plot}
+	/**
+	 * Remove a {@link kleingarten.plot.Plot} from a {@link WorkAssignment}
+	 *
+	 * @param plotID       to identifier the {@link kleingarten.plot.Plot}
 	 * @param assignmentID to identifier the {@link WorkAssignment}
 	 * @return update the new html template with new numbers of {@link kleingarten.plot.Plot}'s
 	 */
 	@PostMapping("/removePlotOfWorkAssignment")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	public String removePlot(@RequestParam("plotID") ProductIdentifier plotID,
-					  @RequestParam("assignmentID") Long assignmentID) {
+							 @RequestParam("assignmentID") Long assignmentID) {
 		workAssignmentManager.removePlotOutWorkAssignment(plotID, assignmentID);
 		System.out.println("debug after function in Controller");
 		return "redirect:/listOfAssignments";
@@ -151,14 +159,16 @@ public class WorkAssignmentController {
 
 	/**
 	 * gives the {@link WorkAssignment}'s from a specific {@link kleingarten.plot.Plot}
-	 * @param plotID to identifier the {@link kleingarten.plot.Plot}
-	 * @param model shows the {@link java.util.List} of all {@link WorkAssignment}'s
-	 * and shows all specific {@link WorkAssignment}'s of one {@link kleingarten.plot.Plot}
+	 *
+	 * @param plotID      to identifier the {@link kleingarten.plot.Plot}
+	 * @param model       shows the {@link java.util.List} of all {@link WorkAssignment}'s
+	 *                    and shows all specific {@link WorkAssignment}'s of one {@link kleingarten.plot.Plot}
 	 * @param userAccount is proof for the role of user
 	 * @return a {@link java.util.List} of all {@link WorkAssignment}'s of one {@link kleingarten.plot.Plot}
 	 */
 	@GetMapping("/listForPlotAssignments/{plotID}")
-	public String getForPlotWorkAssignments(@PathVariable ProductIdentifier plotID, Model model, @LoggedIn Optional<UserAccount> userAccount) {
+	public String getForPlotWorkAssignments(@PathVariable ProductIdentifier plotID, Model model,
+											@LoggedIn Optional<UserAccount> userAccount) {
 		if (userAccount.isEmpty()) {
 			return "redirect:/login";
 		}
@@ -172,8 +182,9 @@ public class WorkAssignmentController {
 
 	/**
 	 * add a {@link WorkAssignment} to a {@link kleingarten.plot.Plot}
+	 *
 	 * @param plotID to identifier the {@link kleingarten.plot.Plot}
-	 * @param id to identifier the {@link WorkAssignment}
+	 * @param id     to identifier the {@link WorkAssignment}
 	 * @return shows the new {@link WorkAssignment}'s, they be added, in "/myPlot"
 	 */
 	@PostMapping("/setWorkAssignment")
@@ -185,6 +196,7 @@ public class WorkAssignmentController {
 
 	/**
 	 * Getter for all {@link WorkAssignment}'s
+	 *
 	 * @param model gives the {@link java.util.List} of all {@link WorkAssignment}'s
 	 * @return the html template with all {@link WorkAssignment}'s
 	 */
@@ -197,14 +209,15 @@ public class WorkAssignmentController {
 
 	/**
 	 * Setter for WorkHours by all {@link WorkAssignment}'s
-	 * @param id to identifier the {@link WorkAssignment}
+	 *
+	 * @param id        to identifier the {@link WorkAssignment}
 	 * @param workHours gives the old value and set new value of work hour
 	 * @return show the updated html site with the new values of work hours
 	 */
 	@PostMapping("/changeWorkHours")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
 	public String setWorkHours(@RequestParam("id") Long id,
-						@RequestParam("workHours") String workHours) {
+							   @RequestParam("workHours") String workHours) {
 		int workHoursInt = Integer.parseInt(workHours);
 		workAssignmentManager.setWorkHours(workHoursInt, id);
 		return "redirect:/addWorkHours";
@@ -212,6 +225,7 @@ public class WorkAssignmentController {
 
 	/**
 	 * Remove a {@link WorkAssignment}
+	 *
 	 * @param id to identifier the {@link WorkAssignment}
 	 * @return shows the updated html site without the deleted {@link WorkAssignment}
 	 */
