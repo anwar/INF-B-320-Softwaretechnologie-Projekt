@@ -88,7 +88,8 @@ public class WorkAssignmentManager {
 
 
 	/**
-	 * The function gets {@param workAssigmentID} and @return a {@link WorkAssignment}
+	 * The function gets {@param workAssigmentID}
+	 * @return a {@link WorkAssignment}
 	 */
 	public WorkAssignment findByID(long workAssigmentID) {
 		for (WorkAssignment workAssignment : workAssignmentRepository.findAll()) {
@@ -101,7 +102,8 @@ public class WorkAssignmentManager {
 
 
 	/**
-	 * The function gets {@param plotID} and @return a {@link Plot}
+	 * The function gets {@param plotID}
+	 * @return a {@link Plot}
 	 */
 	public Plot findByID(ProductIdentifier plotID) {
 		return plotService.findById(plotID);
@@ -135,7 +137,8 @@ public class WorkAssignmentManager {
 	}
 
 	/**
-	 * The function gets a {@param plotID} and @return all {@link WorkAssignment}'s for a {@link Plot}
+	 * The function gets a {@param plotID}
+	 * @return all {@link WorkAssignment}'s for a {@link Plot}
 	 */
 	public List<WorkAssignment> getForPlotWorkAssignments(ProductIdentifier plotID) {
 		Plot plot = findByID(plotID);
@@ -162,7 +165,8 @@ public class WorkAssignmentManager {
 	}
 
 	/**
-	 * The function gets {@param plotID} and @return the {@param workHours} from a {@link Plot}
+	 * The function gets {@param plotID}
+	 * @return the {@param workHours} from a {@link Plot}
 	 */
 	public int getWorkHours(ProductIdentifier plotID) {
 		Plot plot = findByID(plotID);
@@ -184,8 +188,8 @@ public class WorkAssignmentManager {
 	} //nochmal überarbeiten
 
 	/**
-	 * The function gets {@param workAssignmentID} and @return a {@link List} of {@link Plot}'s from one
-	 * {@link WorkAssignment}
+	 * The function gets {@param workAssignmentID}
+	 * @return a {@link List} of {@link Plot}'s from one {@link WorkAssignment}
 	 */
 	public List<Plot> getPlotsInWorkAssignment(long workAssignmentID) {
 
