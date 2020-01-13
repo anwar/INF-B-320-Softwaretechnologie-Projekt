@@ -88,9 +88,14 @@ public class ProcedureController {
 		System.out.println("Plot ID:" + procedure.getPlotId());
 		System.out.println("Watercount:" + procedure.getWatercount());
 		System.out.println("Powercount:" + procedure.getPowercount());
+		System.out.println("ProcedureState:" + procedure.isOpen());
 		procedure.setWatercount(Double.parseDouble(water));
-		procedureManager.save(procedure);
-		return "redirect:/editPlot/" + procedure.getPlotId().toString();
+		if(procedure.isOpen()){
+			procedureManager.save(procedure);
+			//procedure.close();
+			return "redirect:/editPlot/" + procedure.getPlotId().toString();}
+		else{
+			return  "redirect:/home/";}
 	}
 
 	/**
@@ -103,8 +108,13 @@ public class ProcedureController {
 	public String savePowercount(Model model, @RequestParam("procedureId") String procedureId, @RequestParam String power) {
 		Procedure procedure = procedureManager.get(Long.parseLong(procedureId));
 		procedure.setPowercount(Double.parseDouble(power));
-		procedureManager.save(procedure);
-		return "redirect:/editPlot/" + procedure.getPlotId().toString();
+		System.out.println("ProcedureState:" + procedure.isOpen());
+		if(procedure.isOpen()){
+			procedureManager.save(procedure);
+			//procedure.close();
+			return "redirect:/editPlot/" + procedure.getPlotId().toString();}
+		else{
+			return  "redirect:/home/";}
 	}
 
 	/**
@@ -117,8 +127,13 @@ public class ProcedureController {
 		// those three lines are just for checking the value. Not necessary to exist.
 		System.out.println("Plot ID:" + procedure.getPlotId());
 		System.out.println("Powercount:" + procedure.getPowercount());
-		procedureManager.save(procedure);
-		return "redirect:/procedureDetails";
+		System.out.println("ProcedureState:" + procedure.isOpen());
+		if(procedure.isOpen()){
+			procedureManager.save(procedure);
+			//procedure.close();
+			return "redirect:/procedureDetails";}
+		else{
+			return  "redirect:/home/";}
 	}
 
 
