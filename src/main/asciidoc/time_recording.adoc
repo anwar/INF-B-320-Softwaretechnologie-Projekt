@@ -20,7 +20,7 @@ Werte in () beinhalten sowohl Einzelarbeitszeit, als auch Meetings der Gruppe 44
 | 9     | 1100   | 1010      | 1160    | 1000     | 1200  | 1025   | 780    | 290
 | 10    | …      | 200       | 480     | 240      | 300   | 462    | 120    | 70
 | 11    | …      | …         | 240     | …        | 240   | 540    |        | 70
-| 12    | …      | …         | …       | …        | …     | …      |        |
+| 12    | …      | …         | …       | …        | …     | 195    |        |
 |===
 
 Bitte tragen Sie am Ende des Praktikums noch folgende weitere Werte ein:
