@@ -74,8 +74,8 @@ public class WorkAssignmentManager {
 	}
 
 	/**
-	 * The function gets @param localDateTime and checks if it is already in the list and
-	 * @return a Boolean
+	 * The function gets {@param localDateTime} and checks if it is already in the list and
+	 * @return a {@link Boolean}
 	 */
 	public boolean containsListTheDate(LocalDateTime localDateTime) {
 		for (WorkAssignment workAssignment : workAssignmentRepository.findAll()) {
@@ -88,7 +88,7 @@ public class WorkAssignmentManager {
 
 
 	/**
-	 * The function gets @param workAssigmentID and @return a WorkAssignment
+	 * The function gets {@param workAssigmentID} and @return a {@link WorkAssignment}
 	 */
 	public WorkAssignment findByID(long workAssigmentID) {
 		for (WorkAssignment workAssignment : workAssignmentRepository.findAll()) {
@@ -101,7 +101,7 @@ public class WorkAssignmentManager {
 
 
 	/**
-	 * The function gets @param plotID and @return a Plot
+	 * The function gets {@param plotID} and @return a {@link Plot}
 	 */
 	public Plot findByID(ProductIdentifier plotID) {
 		return plotService.findById(plotID);
@@ -109,8 +109,8 @@ public class WorkAssignmentManager {
 
 
 	/**
-	 * The function gets a @param plotID and @param workAssignmentID and
-	 * adds the plot to the list. (Plot from plotID)
+	 * The function gets a {@param plotID} and {@param workAssignmentID} and
+	 * adds the plot to the {@link List}. (Plot from plotID)
 	 */
 	public void addPlotToWorkAssignment(ProductIdentifier plotID, long workAssignmentID) {
 		WorkAssignment workAssignment = findByID(workAssignmentID);
@@ -122,8 +122,8 @@ public class WorkAssignmentManager {
 	}
 
 	/**
-	 * The function gets @param plotID and @param workAssignmentID and
-	 * remove the plot from the list. (Plot from plotID)
+	 * The function gets {@param plotID} and {@param workAssignmentID} and
+	 * remove the plot from the {@link List}. (Plot from plotID)
 	 */
 	public void removePlotOutWorkAssignment(ProductIdentifier plotID, long workAssignmentID) {
 		WorkAssignment workAssignment = findByID(workAssignmentID);
@@ -135,7 +135,7 @@ public class WorkAssignmentManager {
 	}
 
 	/**
-	 * The function gets a @param plotID and @return all WorkAssignment's for a Plot.
+	 * The function gets a {@param plotID} and @return all {@link WorkAssignment}'s for a {@link Plot}
 	 */
 	public List<WorkAssignment> getForPlotWorkAssignments(ProductIdentifier plotID) {
 		Plot plot = findByID(plotID);
@@ -149,8 +149,8 @@ public class WorkAssignmentManager {
 	}
 
 	/**
-	 * The function gets @param workHours and @param workAssigmentID and set the workHours for
-	 * a @param WorkAssignemnt
+	 * The function gets {@param workHours} and {@param workAssigmentID} and set the {@param workHours} for
+	 * a {@param WorkAssignment}
 	 */
 	public void setWorkHours(int workHours, long workAssigmentID) {
 
@@ -162,7 +162,7 @@ public class WorkAssignmentManager {
 	}
 
 	/**
-	 * The function gets @param plotID and @return the WorkHours from a Plot
+	 * The function gets {@param plotID} and @return the {@param workHours} from a {@link Plot}
 	 */
 	public int getWorkHours(ProductIdentifier plotID) {
 		Plot plot = findByID(plotID);
@@ -184,7 +184,8 @@ public class WorkAssignmentManager {
 	} //nochmal überarbeiten
 
 	/**
-	 * The function gets @param workAssignmentID and @return a list of Plots from one WorkAssignment
+	 * The function gets {@param workAssignmentID} and @return a {@link List} of {@link Plot}'s from one
+	 * {@link WorkAssignment}
 	 */
 	public List<Plot> getPlotsInWorkAssignment(long workAssignmentID) {
 
@@ -201,7 +202,7 @@ public class WorkAssignmentManager {
 	}
 
 	/**
-	 * The function gets @param WorkAssignmentID and remove a WorkAssignment
+	 * The function gets {@param WorkAssignmentID} and remove a {@link WorkAssignment}
 	 */
 	public void removeWorkAssignment(long WorkAssignmentID) {
 		WorkAssignment workAssignment = findByID(WorkAssignmentID);
