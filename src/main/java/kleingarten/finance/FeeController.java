@@ -37,10 +37,6 @@ public class FeeController {
 
 		Procedure oldProcedure = procedureManager.getProcedure(mainProcedure.getYear() - 1, mainProcedure.getPlotId());
 
-		mainProcedure.close();
-
-		System.out.println("MainProcedure:" + mainProcedure.isOpen());
-
 		Bill billToShow = new Bill(mainProcedure, oldProcedure);
 
 		ByteArrayInputStream bis = GeneratePDFBill.bill(billToShow.feeList, mainProcedure.getPlot(), procedureManager.getTenantManager().get(mainProcedure.getMainTenant()), mainProcedure.getYear());
