@@ -171,7 +171,7 @@ class TenantController {
 	 *
 	 * @param userAccount   {@link UserAccount} of {@link Tenant} to change their email
 	 * @param oldEmail      of {@link Tenant} as {@link String}
-	 * @param newEmail       of {@link Tenant} as {@link String}
+	 * @param newEmail      of {@link Tenant} as {@link String}
 	 * @param repeatedEmail to check if {@link Tenant} had a typo in their new email
 	 * @return view to change the email
 	 */

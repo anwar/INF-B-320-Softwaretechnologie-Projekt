@@ -32,7 +32,7 @@ public class ProcedureCalculationTests {
 	private Fee fee2;
 
 	public ProcedureCalculationTests(@Autowired PlotService plotService, @Autowired ProcedureManager procedureManager,
-									 @Autowired UserAccountManager userAccountManager, @Autowired TenantRepository tenantRepository){
+									 @Autowired UserAccountManager userAccountManager, @Autowired TenantRepository tenantRepository) {
 		this.plotService = plotService;
 		this.procedureManager = procedureManager;
 		this.userAccountManager = userAccountManager;
@@ -40,7 +40,7 @@ public class ProcedureCalculationTests {
 	}
 
 	@BeforeEach
-	public void setup(){
+	public void setup() {
 		fee = new Fee("rent", 0, 2);
 		fee1 = new Fee("water", 0, 1);
 		fee2 = new Fee("power", 0, 1);
@@ -68,7 +68,7 @@ public class ProcedureCalculationTests {
 	 * check whether the created/added Procedure by testPlot is same as testProcedure
 	 */
 	@Test
-	public void getProcedureTest(){
+	public void getProcedureTest() {
 		assertThat(procedureManager.getProcedure(2019, testPlot)).isEqualTo(testProcedure);
 	}
 
@@ -76,7 +76,7 @@ public class ProcedureCalculationTests {
 	 * check the plot size in testProcedure (which is created by testPlot
 	 */
 	@Test
-	public void checkSize(){
+	public void checkSize() {
 		assertThat(testProcedure.getSize()).isEqualTo(300);
 	}
 
@@ -84,7 +84,7 @@ public class ProcedureCalculationTests {
 	 * check the rent Price of the testPlot
 	 */
 	@Test
-	public void checkRentPrice(){
+	public void checkRentPrice() {
 		assertThat(testProcedure.getSize() * fee.getBasePrice()).isEqualTo(600);
 	}
 
@@ -92,7 +92,7 @@ public class ProcedureCalculationTests {
 	 * check the waterCount in testProcedure.
 	 */
 	@Test
-	public void checkWater(){
+	public void checkWater() {
 		assertThat(testProcedure.getWatercount()).isEqualTo(50);
 	}
 
@@ -100,13 +100,15 @@ public class ProcedureCalculationTests {
 	 * check the water price of the testPlot
 	 */
 	@Test
-	public void checkWaterPrice(){assertThat(testProcedure.getWatercount() * fee1.getBasePrice()).isEqualTo(50);}
+	public void checkWaterPrice() {
+		assertThat(testProcedure.getWatercount() * fee1.getBasePrice()).isEqualTo(50);
+	}
 
 	/**
 	 * check the powerCount in testProcedure.
 	 */
 	@Test
-	public void checkPower(){
+	public void checkPower() {
 		assertThat(testProcedure.getPowercount()).isEqualTo(100);
 	}
 
@@ -114,6 +116,8 @@ public class ProcedureCalculationTests {
 	 * check the power price of the testPlot
 	 */
 	@Test
-	public void checkPowerPrice(){assertThat(testProcedure.getPowercount() * fee2.getBasePrice()).isEqualTo(100);}
+	public void checkPowerPrice() {
+		assertThat(testProcedure.getPowercount() * fee2.getBasePrice()).isEqualTo(100);
+	}
 
 }

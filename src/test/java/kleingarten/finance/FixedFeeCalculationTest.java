@@ -13,11 +13,15 @@ public class FixedFeeCalculationTest {
 	private Fee fee;
 
 	@BeforeEach
-	public void setup(){fee = new Fee("test", 10, 1.95);}
+	public void setup() {
+		fee = new Fee("test", 10, 1.95);
+	}
 
 
 	@Test
-	public void initialTitleTest(){assertThat(fee.getTitle()).isEqualTo("test");}
+	public void initialTitleTest() {
+		assertThat(fee.getTitle()).isEqualTo("test");
+	}
 
 	@Test
 	public void initialCountTest() {
@@ -30,7 +34,9 @@ public class FixedFeeCalculationTest {
 	}
 
 	@Test
-	public void initialPriceTest(){assertThat(fee.getPrice()).isEqualTo(19.5);}
+	public void initialPriceTest() {
+		assertThat(fee.getPrice()).isEqualTo(19.5);
+	}
 
 }
 
