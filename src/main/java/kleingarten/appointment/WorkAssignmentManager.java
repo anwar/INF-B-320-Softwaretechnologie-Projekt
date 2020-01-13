@@ -73,6 +73,10 @@ public class WorkAssignmentManager {
 		return workAssignmentRepository.save(new WorkAssignment(date, workHours, title, description, plots));
 	}
 
+	/**
+	 * The function gets @param localDateTime and checks if it is already in the list and
+	 * @return a Boolean
+	 */
 	public boolean containsListTheDate(LocalDateTime localDateTime) {
 		for (WorkAssignment workAssignment : workAssignmentRepository.findAll()) {
 			if (workAssignment.getDate().equals(localDateTime)) {
@@ -82,6 +86,10 @@ public class WorkAssignmentManager {
 		return false;
 	}
 
+
+	/**
+	 * The function gets @param workAssigmentID and @return a WorkAssignment
+	 */
 	public WorkAssignment findByID(long workAssigmentID) {
 		for (WorkAssignment workAssignment : workAssignmentRepository.findAll()) {
 			if (workAssignment.getId() == workAssigmentID) {
@@ -91,11 +99,19 @@ public class WorkAssignmentManager {
 		return null;
 	}
 
+
+	/**
+	 * The function gets @param plotID and @return a Plot
+	 */
 	public Plot findByID(ProductIdentifier plotID) {
 		return plotService.findById(plotID);
 	}
 
 
+	/**
+	 * The function gets a @param plotID and @param workAssignmentID and
+	 * adds the plot to the list. (Plot from plotID)
+	 */
 	public void addPlotToWorkAssignment(ProductIdentifier plotID, long workAssignmentID) {
 		WorkAssignment workAssignment = findByID(workAssignmentID);
 		Plot plot = findByID(plotID);
@@ -105,6 +121,10 @@ public class WorkAssignmentManager {
 		}
 	}
 
+	/**
+	 * The function gets @param plotID and @param workAssignmentID and
+	 * remove the plot from the list. (Plot from plotID)
+	 */
 	public void removePlotOutWorkAssignment(ProductIdentifier plotID, long workAssignmentID) {
 		WorkAssignment workAssignment = findByID(workAssignmentID);
 		Plot plot = findByID(plotID);
@@ -114,7 +134,9 @@ public class WorkAssignmentManager {
 		}
 	}
 
-
+	/**
+	 * The function gets a @param plotID and @return all WorkAssignment's for a Plot.
+	 */
 	public List<WorkAssignment> getForPlotWorkAssignments(ProductIdentifier plotID) {
 		Plot plot = findByID(plotID);
 		List<WorkAssignment> buffer = new ArrayList<>();
@@ -126,6 +148,10 @@ public class WorkAssignmentManager {
 		return buffer;
 	}
 
+	/**
+	 * The function gets @param workHours and @param workAssigmentID and set the workHours for
+	 * a @param WorkAssignemnt
+	 */
 	public void setWorkHours(int workHours, long workAssigmentID) {
 
 		WorkAssignment workAssignment = findByID(workAssigmentID);
@@ -135,6 +161,9 @@ public class WorkAssignmentManager {
 		workAssignmentRepository.save(workAssignment);
 	}
 
+	/**
+	 * The function gets @param plotID and @return the WorkHours from a Plot
+	 */
 	public int getWorkHours(ProductIdentifier plotID) {
 		Plot plot = findByID(plotID);
 		int actualYear = LocalDateTime.now().getYear();
@@ -154,6 +183,9 @@ public class WorkAssignmentManager {
 		return sumOfWorkHours;
 	} //nochmal überarbeiten
 
+	/**
+	 * The function gets @param workAssignmentID and @return a list of Plots from one WorkAssignment
+	 */
 	public List<Plot> getPlotsInWorkAssignment(long workAssignmentID) {
 
 		List<Plot> plotList = new ArrayList<>();
@@ -168,6 +200,9 @@ public class WorkAssignmentManager {
 		return plotList;
 	}
 
+	/**
+	 * The function gets @param WorkAssignmentID and remove a WorkAssignment
+	 */
 	public void removeWorkAssignment(long WorkAssignmentID) {
 		WorkAssignment workAssignment = findByID(WorkAssignmentID);
 
