@@ -242,6 +242,16 @@ public class SecurePlotController {
 		return "plot/plotOverview";
 	}
 
+	/**
+	 * Save new chairman for modified {@link Plot}s
+	 *
+	 * @param user     {@link UserAccount} of the logged in user
+	 * @param form     {@link UpdateChairmanForm} in which the {@link Plot}s administrated by the given {@link Tenant}
+	 *                 with the {@link Role} "Obmann"
+	 * @param tenantID id of the {@link Tenant} with the {@link Role} "Obmann"
+	 * @param model    {@link Model} to save the needed information for the view
+	 * @return URL of the view as {@link String}
+	 */
 	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')")
 	@PostMapping("/chairmenOverview")
 	public String saveChairman(@LoggedIn UserAccount user, UpdateChairmanForm form, long tenantID,

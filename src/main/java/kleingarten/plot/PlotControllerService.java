@@ -73,17 +73,19 @@ public class PlotControllerService {
 			Set<Role> administration = Set.of(Role.of("Vorstandsvorsitzender"), Role.of("Stellvertreter"));
 			Set<Role> chairman = Set.of(Role.of("Obmann"));
 
+			boolean isAdmin = rolesOfMainTenant.stream().anyMatch(administration::contains)
+					|| rolesOfSubTenants.stream().anyMatch(administration::contains);
+			boolean isChairman = rolesOfMainTenant.stream().anyMatch(chairman::contains)
+					|| rolesOfSubTenants.stream().anyMatch(chairman::contains);
+
 			//Check if the maintenant or the subtenants of the plot have the role "Vorstand" or "Obmann"
-			if (rolesOfMainTenant.stream().anyMatch(administration::contains)
-					|| rolesOfSubTenants.stream().anyMatch(administration::contains)) {
-				if (rolesOfMainTenant.stream().anyMatch(chairman::contains)
-						|| rolesOfSubTenants.stream().anyMatch(chairman::contains)) {
+			if (isAdmin) {
+				if (isChairman) {
 					colors.put(plot, "#E69138");
 					return colors;
 				}
 				colors.put(plot, "#FDD835");
-			} else if (rolesOfMainTenant.stream().anyMatch(chairman::contains)
-					|| rolesOfSubTenants.stream().anyMatch(chairman::contains)) {
+			} else if (isChairman) {
 				colors.put(plot, "#039BE5");
 			}
 		}
@@ -117,10 +119,9 @@ public class PlotControllerService {
 				rights.put(plot, true);
 			} else if (tenantManager.tenantHasRole(tenant, Role.of("Obmann"))) {
 				rights.put(plot, plot.getChairman().getId() == tenant.getId());
-			} else if (dataService.procedureExists(plot)) {
-				if (dataService.getProcedure(plot).isTenant(tenant.getId())) {
-					rights.put(plot, true);
-				}
+			} else if (dataService.procedureExists(plot)
+					&& dataService.getProcedure(plot).isTenant(tenant.getId())) {
+				rights.put(plot, true);
 			}
 		}
 		return rights;
