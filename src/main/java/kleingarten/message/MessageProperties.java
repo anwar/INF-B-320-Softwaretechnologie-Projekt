@@ -34,18 +34,38 @@ class MessageProperties {
 	// This is useful when we only want to debug and not send out any actual emails.
 	private boolean enabled = false;
 
+	/**
+	 * Getter for logging property.
+	 *
+	 * @return a boolean
+	 */
 	public boolean isLogging() {
 		return logging;
 	}
 
+	/**
+	 * Setter for logging property.
+	 *
+	 * @param logging as boolean
+	 */
 	public void setLogging(boolean logging) {
 		this.logging = logging;
 	}
 
+	/**
+	 * Getter for enabled property.
+	 *
+	 * @return a boolean
+	 */
 	public boolean isEnabled() {
 		return enabled;
 	}
 
+	/**
+	 * Setter for enabled property.
+	 *
+	 * @param enabled as boolean
+	 */
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
