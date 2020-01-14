@@ -75,7 +75,8 @@ public class WorkAssignmentTimer {
 		try {
 			String timeSpan = timeDifference(LocalDateTime.now(), assignmentMap.firstKey());
 			List<WorkAssignment> assignments = assignmentMap.get(assignmentMap.firstKey());
-			return assignments.stream().map(n -> timeSpan + ": " + n.getTitle()).collect(Collectors.joining(","));
+			return assignments.stream().map(n -> " Zeit: " + timeSpan + " | Titel: " + n.getTitle() + " | Parzellenanzahl: " +
+					n.getPlots().size()).collect(Collectors.joining(","));
 		} catch (NoSuchElementException e) {
 			return null;
 		}
