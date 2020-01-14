@@ -1,0 +1,68 @@
+= Nutzungsanleitung __{project_name}__
+:project_name: Kleingartenanlage
+:company_name: Kleingartenanlage eV.
+:toc:
+:toclevels: 3
+:toc-title: Inhaltsverzeichnis
+:toc-placement!:
+:sectanchors:
+:numbered:
+
+[options="header"]
+[cols="1, 3, 3"]
+|===
+| Version | Bearbeitungsdatum | Autor
+| 0.1     | 14.01.2020        | Ylvi Bachmann
+|===
+
+toc::[]
+
+== Nutzen des Dokumentes
+
+Dieses Dokument soll dem Nutzer als Hilfestellung und Nachschlagewerk über die unterstützten Funktionalitäten und den
+Umgang mit dem Verwaltungssystem der Kleingartenanlage dienen.
+
+== Vorgehensbeschreibung der Anwendungsfälle
+
+=== Informationen zu gemieteten Parzellen
+Der angemeldete Nutzer kann sich die gespeicherten Informationen zu seinen aktuell gemieteten Parzellen durch Auswahl des
+Punktes "Meine Parzelle" und "Meine Daten" in der Navigationsleiste anzeigen lassen. +
+Für jede seiner gemieteten Parzellen wird eine Tabelle mit den gespeicherten Daten angezeigt. Für den Fall, dass der
+angemeldete Nutzer im Moment keine Parzelle mietet wird ihm an dieser Stelle eine leere Seite angezeigt. +
+Bei Auswahl des Knopfes "Optionen", welcher sich oberhalb der Tabelle mit den Informationen der Parzelle befindet, wird
+ein Dropdown Menü mit folgenden Auswahlmöglichkeiten präsentiert:
+
+- Parzelle bearbeiten
+- Rechnungen anzeigen
+- Beschwerde schreiben
+- Termine anzeigen
+
+Ein Mieter kann nur die allgemeinen Informationen (Größe, Beschreibung, Schätzwert) und den Stromzählerstand seiner
+Parzelle verändern.
+Wenn er die Rolle "Wassermann" inne hat, kann er zusätzlich den Wasserzählerstand bearbeiten.
+
+=== Übersicht aller Parzellen
+Ein Nutzer kann sich eine Übersicht aller Parzellen anzeigen lassen, indem er in der Navigationsleiste "Anlage" und
+entweder "Allgemein" oder "nach Obmann" auswählt. Die Anlagenübersicht "nach Obmann" steht nur für angemeldete Nutzer
+zur Verfügung. +
+Die allgemeine Übersichtsseite stellt alle Parzellen farblich gekennzeichnet da, je nachdem ob sie frei,
+vermietet oder an einem Nutzer mit einer administrativen Rolle vermietet sind.
+Der Vorstandsvorsitzende und sein Stellvertreter können an dieser Stelle durch Klicken des entsprechenden Knopfes neue
+Parzellen hinzufügen und einen Obmann für diese festlegen. +
+Bei der Übersichtsseite "nach Obmann" wird die farbliche Kennzeichnung der Parzellen an Hand des jeweils zuständigen
+Obmanns festgelegt.
+Der Vorstandsvorsitzende und sein Stellvertreter können an dieser Stelle durch Auswahl eines Obmanns in dem angezeigten
+Dropdown Menü (Bestätigung durch Klicken des Knopfes "Auswählen") die zu verwaltenden Parzellen eines Obmanns ändern.
+Die Auswahl der Parzellen erfolgt durch Anklicken der zugehörigen Checkboxen und bestätigen durch Klicken des Knopfes
+"Hinzufügen". Dabei ist zu beachten, dass ein Obmann automatisch seine gemietete Parzelle verwaltet und diese somit nicht
+anderen Obmännern zugewiesen werden kann.
+
+=== Informationen einer Parzelle
+Nachdem der Nutzer sich die Übersicht aller Parzellen anzeigen lassen hat, kann er durch Klicken auf den Link (Nummer
+der Parzelle) zur Informationsseite dieser Parzelle gelangen. Diese ist mit ihren Funktionalitäten und Informationen der
+Informationsseite einer vom Nutzer gemieteten Parzelle ähnlich. +
+Der Vorstandsvorsitzende und sein Stellvertreter können für eine vermietete Parzelle die Option "Parzelle freigeben" auswählen
+und somit den bestehenden Mietvertrag für diese beenden. +
+Für den Fall, dass die anzuzeigende Parzelle momentan nicht vermietet wird hat der Nutzer unter "Optionen" des Weiteren
+die Möglichkeit, sich für diese zu bewerben. Der Vorstandsvorsitzende und sein Stellvertreter bekommen in diesem Fall die
+zusätzliche Auswahlmöglichkeit "Bewerbungen anzeigen" präsentiert.
