@@ -11,8 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -50,9 +49,9 @@ public class TenantTest {
 	 */
 	@Test
 	void initialUserAccountTest() {
-		assertThat(tenant.getUserAccount().getUsername().equals("jassi"));
-		assertThat(tenant.getUserAccount().getEmail().equals("jassis@email.com"));
-		assertThat(tenant.getUserAccount().getPassword().equals("123"));
+		assertEquals("jassi", tenant.getUserAccount().getUsername());
+		assertEquals("jassis@email.com", tenant.getUserAccount().getEmail());
+
 	}
 
 
@@ -61,7 +60,7 @@ public class TenantTest {
 	 */
 	@Test
 	void getAddress() {
-		assertThat(tenant.getAddress().equals("Neben Isa und Francy"));
+		assertEquals("Neben Isa und Francy",tenant.getAddress());
 	}
 
 	/**
@@ -69,7 +68,7 @@ public class TenantTest {
 	 */
 	@Test
 	void getForename() {
-		assertThat(tenant.getForename().equals("Jassi"));
+		assertEquals("Jassi", tenant.getForename());
 	}
 
 	/**
@@ -77,7 +76,7 @@ public class TenantTest {
 	 */
 	@Test
 	void getSurname() {
-		assertThat(tenant.getSurname().equals("Gepackert"));
+		 assertEquals("Gepackert",tenant.getSurname());
 	}
 
 	/**
@@ -85,7 +84,7 @@ public class TenantTest {
 	 */
 	@Test
 	void getPhonenumber() {
-		assertThat(tenant.getPhonenumber().equals("908964875734"));
+		assertEquals("908964875734", tenant.getPhonenumber());
 	}
 
 	/**
@@ -93,7 +92,7 @@ public class TenantTest {
 	 */
 	@Test
 	void getBirthdate() {
-		assertThat(tenant.getBirthdate().equals("13.05.1999"));
+		assertEquals("13.05.1999", tenant.getBirthdate());
 	}
 
 	/**
@@ -101,7 +100,7 @@ public class TenantTest {
 	 */
 	@Test
 	void getRoles() {
-		assertThat(tenant.getRoles().equals("Hauptpächter"));
+		assertEquals("Hauptpächter", tenant.getRoles());
 	}
 
 	/**
@@ -109,7 +108,7 @@ public class TenantTest {
 	 */
 	@Test
 	void getRole() {
-		assertThat(tenant.getRole().equals("Hauptpächter"));
+		assertEquals(Role.of("Hauptpächter"), tenant.getRole());
 	}
 
 	/**
@@ -117,7 +116,7 @@ public class TenantTest {
 	 */
 	@Test
 	void getEmail() {
-		assertThat(tenant.getEmail().equals("jassis@email.com"));
+		assertEquals("jassis@email.com", tenant.getEmail());
 	}
 
 	/**
@@ -126,7 +125,7 @@ public class TenantTest {
 	@Test
 	void setForename() {
 		tenant.setForename("Hans");
-		assertThat(tenant.getForename().equals("Hans"));
+		assertEquals("Hans", tenant.getForename());
 	}
 
 	/**
@@ -144,7 +143,7 @@ public class TenantTest {
 	@Test
 	void setSurname() {
 		tenant.setSurname("Wurst");
-		assertThat(tenant.getSurname().equals("Wurst"));
+		assertEquals("Wurst", tenant.getSurname());
 	}
 
 	/**
@@ -162,7 +161,7 @@ public class TenantTest {
 	@Test
 	void setAddress() {
 		tenant.setAddress("Drei Blöcke daneben");
-		assertThat(tenant.getAddress().equals("Drei Blöcke daneben"));
+		assertEquals("Drei Blöcke daneben", tenant.getAddress());
 	}
 
 	/**
@@ -180,7 +179,7 @@ public class TenantTest {
 	@Test
 	void setEmail() {
 		tenant.setEmail("Jasmins@email.com");
-		assertThat(tenant.getUserAccount().getEmail().equals("Jasmins@email.com"));
+		assertEquals("Jasmins@email.com", tenant.getUserAccount().getEmail());
 	}
 
 	/**
@@ -198,7 +197,7 @@ public class TenantTest {
 	@Test
 	void setPhonenumber() {
 		tenant.setPhonenumber("89765434568790");
-		assertThat(tenant.getPhonenumber().equals("89765434568790"));
+		assertEquals("89765434568790", tenant.getPhonenumber());
 	}
 
 	/**
@@ -216,7 +215,7 @@ public class TenantTest {
 	@Test
 	void setBirthdate() {
 		tenant.setBirthdate("16.09.678");
-		assertThat(tenant.getBirthdate().equals("16.09.678"));
+		assertEquals("16.09.678", tenant.getBirthdate());
 	}
 
 	/**
@@ -234,7 +233,7 @@ public class TenantTest {
 	@Test
 	void addRole() {
 		tenant.addRole(Role.of("Obmann"));
-		assertThat(tenant.getRoles().equals("Hauptpächchter, Obmann"));
+		assertEquals("Hauptpächter, Obmann", tenant.getRoles());
 	}
 
 	/**
@@ -243,13 +242,13 @@ public class TenantTest {
 	@Test
 	void removeRole() {
 		tenant.removeRole(Role.of("Hauptpächter"));
-		assertThat(tenant.getRoles().equals(""));
+		assertEquals("", tenant.getRoles());
 	}
 
 	@Test
 	void deleteRoles() {
 		tenant.deleteRoles();
-		assertThat(tenant.getRoles().equals(""));
+		assertEquals("", tenant.getRoles());
 	}
 
 	@Test

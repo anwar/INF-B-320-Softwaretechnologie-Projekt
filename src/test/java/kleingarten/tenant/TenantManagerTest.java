@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -28,7 +29,7 @@ public class TenantManagerTest {
 
 	@Test
 	void getTenantByUserAccount() {
-		assertThat(tenantManager.getTenantByUserAccount(userAccountManager.findByUsername("peter.klaus").get()).getForename().equals("Peter"));
+		assertEquals("Peter", tenantManager.getTenantByUserAccount(userAccountManager.findByUsername("peter.klaus").get()).getForename());
 	}
 
 	@Test
