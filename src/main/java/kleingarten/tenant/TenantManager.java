@@ -142,12 +142,13 @@ public class TenantManager {
 
 	/**
 	 * Generates random Password for a new {@link Tenant}
+	 *
 	 * @param n lenght of the password
 	 * @return random password as {@link String}
 	 * Source code found on https://www.geeksforgeeks.org/generate-random-string-of-given-size-in-java/
 	 * authored by Rajput-Ji https://auth.geeksforgeeks.org/user/Rajput-Ji/articles
 	 */
-	public String generatedPassword(int n){
+	public String generatedPassword(int n) {
 		String generatedPassword = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 				+ "0123456789"
 				+ "abcdefghijklmnopqrstuvwxyz";
@@ -156,7 +157,7 @@ public class TenantManager {
 
 		for (int i = 0; i < n; i++) {
 			int index
-					= (int)(generatedPassword.length()
+					= (int) (generatedPassword.length()
 					* Math.random());
 
 			sb.append(generatedPassword

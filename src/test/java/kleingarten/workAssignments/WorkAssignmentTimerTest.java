@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.time.Month;
 
 import static kleingarten.appointment.WorkAssignmentTimer.timeDifference;
-import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -17,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class WorkAssignmentTimerTest {
 
 	@Test
-	public void timeDifferenceTest(){
+	public void timeDifferenceTest() {
 		LocalDateTime from = LocalDateTime.of(2020, Month.APRIL, 13, 19, 48, 12, 0);
 		LocalDateTime to = LocalDateTime.of(2020, Month.APRIL, 14, 19, 48, 12, 0);
 		assertTrue(timeDifference(from, to).equals("1d 0:00"));

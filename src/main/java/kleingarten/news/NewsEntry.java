@@ -49,23 +49,48 @@ public class NewsEntry {
 		this.date = null;
 	}
 
+	/**
+	 * Getter for the id of a {@link NewsEntry}
+	 *
+	 * @return id of type {@link Long }
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * Getter for the date of a {@link NewsEntry}
+	 *
+	 * @return date of type {@link LocalDateTime }
+	 */
 	public LocalDateTime getDate() {
 		return date;
 	}
 
+	/**
+	 * Setter for the date of a {@link NewsEntry}
+	 *
+	 * @param date of type {@link LocalDateTime }
+	 */
 	public void setDate(LocalDateTime date) {
 		Assert.notNull(date, "date must not be null!");
 		this.date = date;
 	}
 
+	/**
+	 * Getter for the text of a {@link NewsEntry}
+	 *
+	 * @return text of type {@link String }
+	 */
 	public String getText() {
 		return text;
 	}
 
+	/**
+	 * Setter for the date of a {@link NewsEntry}
+	 *
+	 * @param text of type {@link String}
+	 */
 	public void setText(String text) {
 		Assert.hasText(text, "Text must not be null or empty!");
 		this.text = text;

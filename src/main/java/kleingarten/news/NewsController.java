@@ -15,7 +15,6 @@
  */
 package kleingarten.news;
 
-import kleingarten.appointment.WorkAssignmentTimer;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -46,8 +45,6 @@ class NewsController {
 
 	/**
 	 * Handles requests to the application root URI.
-	 * Note, that you can use {@code redirect:} as prefix to trigger a browser
-	 * redirect instead of simply rendering a view.
 	 *
 	 * @return a redirect string
 	 */
@@ -57,7 +54,8 @@ class NewsController {
 	}
 
 	/**
-	 * Handles requests to access the home page. Obtains all currently available {@link NewsEntry}s and puts them
+	 * Handles requests to access the home page.
+	 * Obtains all currently available {@link NewsEntry}s and puts them
 	 * into the {@link Model} that's used to render the view.
 	 *
 	 * @param model that's used to render the view
@@ -71,10 +69,7 @@ class NewsController {
 	}
 
 	/**
-	 * Handles requests to create a new {@link NewsEntry}. Spring MVC automatically validates and binds the
-	 * HTML form to the {@code form} parameter. Validation or binding errors, if any, are exposed via
-	 * the {@code errors} parameter.
-	 * This request can only be performed by authenticated users with "Vorstandsvorsitzender" role.
+	 * Handles requests to create a new {@link NewsEntry}.
 	 *
 	 * @param text for {@link NewsEntry}
 	 * @return a redirect string
@@ -90,7 +85,6 @@ class NewsController {
 
 	/**
 	 * Deletes a {@link NewsEntry}.
-	 * This request can only be performed by authenticated users with "Vorstandsvorsitzender" role.
 	 *
 	 * @param id of the {@link NewsEntry} to delete
 	 * @return a redirect string
@@ -107,7 +101,6 @@ class NewsController {
 
 	/**
 	 * Updates a {@link NewsEntry}.
-	 * This request can only be performed by authenticated users with "Vorstandsvorsitzender" role.
 	 *
 	 * @param id   of the {@link NewsEntry} to delete
 	 * @param text for the updated entry

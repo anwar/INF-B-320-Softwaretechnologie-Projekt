@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Integration tests for {@link MessageService}.
- * {@link GreenMail} is used to create a test server where we can send and retrieve
+ * GreenMail is used to create a test server where we can send and retrieve
  * our emails for testing purposes.
  * These tests are based on the examples provided on the official Greenmail website.
  * Link for reference:

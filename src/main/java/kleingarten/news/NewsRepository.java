@@ -19,7 +19,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * A repository to manage {@link NewsEntry} instances. The methods are dynamically implemented by Spring Data JPA.
+ * A repository to manage {@link NewsEntry} instances.
+ * The methods are dynamically implemented by Spring Data JPA.
  */
 @Repository
 public interface NewsRepository extends CrudRepository<NewsEntry, Long> {
