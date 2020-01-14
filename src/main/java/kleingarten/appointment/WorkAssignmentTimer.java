@@ -25,7 +25,9 @@ public class WorkAssignmentTimer {
 	 * @param tenantManager         manager class of {@link kleingarten.tenant.Tenant}s
 	 * @param dataService           service class of the plot package to work with {@link kleingarten.finance.Procedure}s
 	 */
-	public WorkAssignmentTimer(WorkAssignmentManager workAssignmentManager, TenantManager tenantManager, DataService dataService) {
+	public WorkAssignmentTimer(WorkAssignmentManager workAssignmentManager, TenantManager tenantManager,
+							   DataService dataService) {
+
 		this.workAssignmentManager = workAssignmentManager;
 		this.tenantManager = tenantManager;
 		this.dataService = dataService;
@@ -44,11 +46,11 @@ public class WorkAssignmentTimer {
 	 */
 	public static String timeDifference(LocalDateTime from, LocalDateTime to) {
 		Long days, hours, minutes;
-		days = Long.valueOf(from.until(to, ChronoUnit.DAYS));
+		days = from.until(to, ChronoUnit.DAYS);
 		to = to.minusDays(days);
-		hours = Long.valueOf(from.until(to, ChronoUnit.HOURS));
+		hours = from.until(to, ChronoUnit.HOURS);
 		to = to.minusHours(hours);
-		minutes = Long.valueOf(from.until(to, ChronoUnit.MINUTES));
+		minutes = from.until(to, ChronoUnit.MINUTES);
 		return String.format("%dd %d:%02d", days, hours, minutes);
 	}
 
