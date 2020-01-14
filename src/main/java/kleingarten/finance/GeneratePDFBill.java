@@ -82,19 +82,19 @@ public class GeneratePDFBill {
 				cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell);
 
-				cell = new PdfPCell(new Phrase(String.valueOf(fee.getCount())));
+				cell = new PdfPCell(new Phrase(String.format("%.2f", fee.getCount())));
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				cell.setPaddingRight(5);
 				table.addCell(cell);
 
-				cell = new PdfPCell(new Phrase(String.valueOf(fee.getBasePrice())));
+				cell = new PdfPCell(new Phrase(String.format("%.2f", fee.getBasePrice())));
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				cell.setPaddingRight(5);
 				table.addCell(cell);
 
-				cell = new PdfPCell(new Phrase(String.valueOf(fee.getPrice())));
+				cell = new PdfPCell(new Phrase(String.format("%.2f", fee.getPrice())));
 				cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 				cell.setPaddingRight(5);
