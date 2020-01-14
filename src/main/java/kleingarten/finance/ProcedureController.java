@@ -82,7 +82,8 @@ public class ProcedureController {
 	 * @return a redirect string
 	 */
 	@PostMapping("/procedureDetails/editWatercount")
-	public String saveWatercount(Model model, @RequestParam("procedureId") String procedureId, @RequestParam String water) {
+	public String saveWatercount(Model model, @RequestParam("procedureId") String procedureId,
+								 @RequestParam String water) {
 		// those three lines are just for checking the value. Not necessary to exist.
 		Procedure procedure = procedureManager.get(Long.parseLong(procedureId));
 		System.out.println("Plot ID:" + procedure.getPlotId());
@@ -100,7 +101,8 @@ public class ProcedureController {
 	 * @return a redirect string
 	 */
 	@PostMapping("/procedureDetails/editPowercount")
-	public String savePowercount(Model model, @RequestParam("procedureId") String procedureId, @RequestParam String power) {
+	public String savePowercount(Model model, @RequestParam("procedureId") String procedureId,
+								 @RequestParam String power) {
 		Procedure procedure = procedureManager.get(Long.parseLong(procedureId));
 		procedure.setPowercount(Double.parseDouble(power));
 		procedureManager.save(procedure);
@@ -147,8 +149,10 @@ public class ProcedureController {
 		boolean tenantOrBoss = false;
 
 		if (proc != null) { // Tenant ?
-			if (tenant.getId() == proc.getMainTenant() || proc.getSubTenants().contains(proc.getId()))
+			if (tenant.getId() == proc.getMainTenant()
+					|| proc.getSubTenants().contains(tenant.getId())) {
 				tenantOrBoss = true;
+			}
 		}
 
 		for (Role role : user.getRoles().toList()) { // Vorstand ?
@@ -158,7 +162,8 @@ public class ProcedureController {
 			}
 		}
 		mav.addObject("tenantOrBoss", tenantOrBoss);
-		Procedure oldProc = (proc == null) ? null : procedureManager.getProcedure(proc.getYear() - 1, procedureManager.getPlotService().findById(plot.getId()));
+		Procedure oldProc = procedureManager.getProcedure(proc.getYear() - 1,
+				procedureManager.getPlotService().findById(plot.getId()));
 		if (oldProc == null) { // Add old procedure information
 			try {
 				System.out.println("OLDPROC is null");
