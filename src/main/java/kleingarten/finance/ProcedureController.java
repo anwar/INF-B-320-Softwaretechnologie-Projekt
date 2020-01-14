@@ -153,6 +153,23 @@ public class ProcedureController {
 					|| proc.getSubTenants().contains(tenant.getId())) {
 				tenantOrBoss = true;
 			}
+			try { // add Procedure information
+				mav.addObject("procedure", proc);
+				mav.addObject("procedureExists", true);
+			} catch (Exception e) {
+				mav.addObject("error", e);
+				mav.setViewName("error");
+				return mav;
+			}
+		} else {
+			try {
+				System.out.println("PROC is null");
+				mav.addObject("procedureExists", false);
+			} catch (Exception e) {
+				mav.addObject("error", e);
+				mav.setViewName("error");
+				return mav;
+			}
 		}
 
 		for (Role role : user.getRoles().toList()) { // Vorstand ?
@@ -178,25 +195,6 @@ public class ProcedureController {
 			try {
 				mav.addObject("oldWater", "" + oldProc.getWatercount());
 				mav.addObject("oldPower", "" + oldProc.getPowercount());
-			} catch (Exception e) {
-				mav.addObject("error", e);
-				mav.setViewName("error");
-				return mav;
-			}
-		}
-		if (proc == null) {
-			try {
-				System.out.println("PROC is null");
-				mav.addObject("procedureExists", false);
-			} catch (Exception e) {
-				mav.addObject("error", e);
-				mav.setViewName("error");
-				return mav;
-			}
-		} else {
-			try { // add Procedure information
-				mav.addObject("procedure", proc);
-				mav.addObject("procedureExists", true);
 			} catch (Exception e) {
 				mav.addObject("error", e);
 				mav.setViewName("error");
