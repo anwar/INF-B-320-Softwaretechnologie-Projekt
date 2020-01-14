@@ -24,6 +24,7 @@
 | 0.2     | 17.12.2019        | Ylvi Bachmann
 | 0.2.1   | 07.01.2020        | Ylvi Bachmann
 | 0.2.2   | 09.01.2020        | Ylvi Bachmann
+| 0.2.3   | 14.01.2020        | Ylvi Bachmann
 |===
 
 toc::[]
@@ -257,9 +258,9 @@ Client-Server-Modell der Anwendung
 
 === Entwurfsentscheidungen
 
-* Hinzufügen der Assoziationsklasse Procedure zwischen den Klassen Plot und Tenant, um die Verbindung dieser Klassen
+* Hinzufügen der Assoziationsklasse Procedure zwischen die Klassen Plot und Tenant, um die Verbindung dieser Klassen
 zu modellieren und veränderliche Daten (z.B. Pächter, Wasserzähler, ...) der Parzelle für die jährliche Rechnungserstellung
-zu speichern
+zu speichern. In der finalen Anwendung erfolgt der Zugriff auf die Assoziationsklasse mit Hilfe der Klasse ProcedureManager
 * Hinzufügen weiterer Packages (Bewerbungsverwaltung und Terminverwaltung), um bessere Arbeitsteilung zu erreichen, damit
 Konflikte vermieden werden können
 
@@ -473,7 +474,8 @@ image::models/analysis/ComplainsManagement.png[]
 | ComplaintController | Klasse zum Bauen der Seiten für das Erstellen, Bearbeiten und Löschen einer Beschwerde
 | ComplaintManager | Klasse zum Aufbewahren und Verwalten der Beschwerden
 |===
-=== Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
+
+== Rückverfolgbarkeit zwischen Analyse- und Entwurfsmodell
 
 [options="header"]
 |===
@@ -485,7 +487,52 @@ image::models/analysis/ComplainsManagement.png[]
 |===
 
 == Laufzeitsicht
-* Komponentenbezogene Sequenzdiagramme, welche darstellen, wie die Anwendung mit externen Frameworks (zB. Salespoint, Spring) interagiert.
+=== Parzellenmanagement
+
+Aus Gründen der Übersichtlichkeit wurden in den folgenden Sequenzdiagrammen nur Interaktionen mit Salespoint und Spring
+berücksichtigt, welche innerhalb der Methoden der Controller des Parzellenmanagement Packages stattfinden.
+Falls weitere Informationen zum Verständnis des Workflows benötigt werden, sind diese entweder in das jeweilige
+Sequenzdiagramm oder dessen Beschreibungstext integriert.
+
+image::models/analysis/seq_plot_insecure.png[Workflow für unauthentifizierten Nutzer]
+
+Ein nicht authentifizierter Nutzer lässt sich zuerst die Übersichtsseite aller Parzellen und danach die Detailseite einer
+bestimmten Parzelle anzeigen. +
+Für einen angemeldeten Pächter werden beim Aufruf der Übersichtsseite der Parzellen ebenfalls die Schritte 1 bis 12
+ausgeführt. Die Zugriffsrechte für die Informationsseiten der Parzellen werden in diesem Fall anhand der Rolle
+(entnommen aus Salespoint; gespeichert in der Klasse UserAccount) des angemeldeten Pächters festgelegt und zum Model
+hinzugefügt. +
+
+In den folgenden Sequenzdiagrammen wird vor jedem Methodenaufruf anhand des angemeldeten UserAccounts
+(entnommen aus Salespoint) der zugehörige Pächter ermittelt, welcher gerade den jeweiligen Workflow durchführt.
+
+image::models/analysis/seq_plot_addPlot.png[Workflow beim Hinzufügen einer Parzelle]
+
+Ein authentifizierter Nutzer lässt sich die Übersichtsseite aller Parzellen anzeigen, fügt eine weitere Parzelle
+hinzu und legt anschließend für diese einen Pächter mit der Rolle "Obmann" (administrativer Verwalter) fest. +
+Der dargestellte Workflow kann nur durch einen Pächter mit der Rolle "Vorstandsvorsitzender" oder "Stellvertreter"
+durchgeführt werden. +
+Für einen angemeldeten Pächter mit einer anderen Rolle werden beim Aufruf der Übersichtsseite der Parzellen die Schritte
+12 und 13 nicht ausgeführt.
+
+image::models/analysis/seq_plot_cancelPlot.png[Workflow beim Löschen einer Parzelle]
+
+Ein authentifizierter Nutzer lässt sich zuerst die Übersichtsseite aller Parzellen, danach die Detailseite einer
+bestimmten gemieteten Parzelle anzeigen und beendet den bestehenden Mietvertrag. Die Parzelle steht somit zur Bewerbung
+frei. +
+Der dargestellte Workflow kann nur durch einen Pächter mit der Rolle "Vorstandsvorsitzender" oder "Stellvertreter"
+durchgeführt werden. +
+Beim Aufruf der Detailseite einer Parzelle (Schritte 13 bis 24) werden anhand der Rolle des angemeldeten Pächters die
+Zugriffsrechte auf die Informationen der Parzelle (z.B. geleistete Arbeitstunden, aktueller Mieter) und
+Bearbeitungsrechte festgelegt. +
+Dieser Ablauf findet für alle angemeldeten Pächter nach dem selben Schema statt.
+
+image::models/analysis/seq_plot_rentedPlots.png[Workflow für Zugriff auf gemietete Parzellen]
+
+Ein authentifizierter Nutzer lässt sich alle aktuell von ihm gemieteten Parzellen anzeigen. Es wird dabei ein Timer bis
+zum nächsten Termin, für den der Pächter angemeldet ist erstellt und dargestellt. +
+Durch die Überprüfung der Rollen des Pächters in den Schritten 10 und 11 können nach Bedarf erweiterte Bearbeitungsrechte
+(z.B. Eintragen des Wasserzählerstands, Freigeben der Parzelle) festgelegt werden.
 
 == Technische Schulden
 === Quality Gates
@@ -509,3 +556,7 @@ __Begründung:__
 - 1: Fehler konnte leider nicht reproduziert werden.
 - 2: Nach Absprache mit dem Tutor soll ein Pächter so lange noch Zugriff auf seine gekündigte Parzelle haben, bis eine
      Bewerbung eines neuen Pächters für diese Parzelle angenommen wurde.
+
+Des Weiteren wurde die Funktionalität Nebenpächter für eine gemietete Parzelle hinzuzufügen bzw. diese Pächter zu bearbeiten
+nicht vollständig implementiert. Mit dieser Aufgabe und der Anzeige des benötigten Formulars auf der Bearbeitungsseite
+einer Parzelle (editPlot.html) wurde Sascha Seiffert beauftragt.
