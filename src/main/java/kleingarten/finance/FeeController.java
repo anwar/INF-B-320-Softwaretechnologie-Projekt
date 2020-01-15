@@ -97,7 +97,9 @@ public class FeeController {
 			if (proc.getWorkMinutes() > 240) {
 				newProcedure.setWorkMinutes(proc.getWorkMinutes() - 240);
 			}
-			procedureManager.save(newProcedure);
+			if (procedureManager.getProcedure(year, plot) == null) {
+				procedureManager.save(newProcedure);
+			}
 		}
 		model.addAttribute("plot", plot);
 
