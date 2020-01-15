@@ -20,7 +20,6 @@ public class WorkAssignmentRepositoryTest {
 	/**
 	 * Test the persistence of {@link WorkAssignmentRepository}.
 	 */
-
 	@Test
 	void newsEntryPersistence() {
 		WorkAssignment workAssignment = workAssignmentRepository.save(new WorkAssignment(LocalDateTime.of(2020, 1, 1, 1, 0), 0, "Test", "Test", null));

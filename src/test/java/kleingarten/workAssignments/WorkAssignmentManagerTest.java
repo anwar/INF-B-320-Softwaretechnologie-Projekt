@@ -20,11 +20,18 @@ public class WorkAssignmentManagerTest {
 	private WorkAssignmentManager workAssignmentManager;
 	private WorkAssignmentRepository workAssignmentRepository;
 
+	/** Constructor for Test
+	 * @param workAssignmentManager represent {@link WorkAssignmentManager}
+	 * @param workAssignmentRepository represent {@link WorkAssignmentRepository}
+	 */
 	public WorkAssignmentManagerTest(@Autowired WorkAssignmentManager workAssignmentManager, @Autowired WorkAssignmentRepository workAssignmentRepository) {
 		this.workAssignmentManager = workAssignmentManager;
 		this.workAssignmentRepository = workAssignmentRepository;
 	}
 
+	/**
+	 * is the setup for a {@link WorkAssignment}
+	 */
 	@BeforeEach
 	public void setUp() {
 		workAssignment = new WorkAssignment(LocalDateTime.now(), 0, "Test", "Test", null);
