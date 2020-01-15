@@ -252,7 +252,7 @@ public class AppDataInitializer implements DataInitializer {
 		//this one is just for testing the method createNewTenant()
 		tenantManager.createNewTenant("Pascall", "Fahrenheit", "fahrenheit@web.de", "123");
 		tenantManager.createNewPerson("Fred", "Feuerstein", "Steinhausen", "12345678",
-				"15.06.02", "fred.feuerstain@steinmail.com");
+				"15.06.02", "fred.feuerstain@steinmail.com", "123" );
 	}
 
 	public void initializePlots(PlotCatalog plotCatalog, PlotService plotService, TenantRepository tenants) {

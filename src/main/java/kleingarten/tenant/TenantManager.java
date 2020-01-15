@@ -122,9 +122,9 @@ public class TenantManager {
 	 * @param email       of the {@link Tenant} as {@link String}
 	 */
 	public void createNewPerson(String forename, String surname, String address, String phonenumber,
-								String birthdate, String email) {
+								String birthdate, String email, String password) {
 		Tenant tenant = new Tenant(forename, surname, address, phonenumber, birthdate, userAccounts.create(email,
-				Password.UnencryptedPassword.of(phonenumber), email));
+				Password.UnencryptedPassword.of(password), email));
 		tenants.save(tenant);
 	}
 
