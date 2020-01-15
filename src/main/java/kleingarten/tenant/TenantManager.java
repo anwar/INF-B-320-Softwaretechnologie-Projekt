@@ -84,7 +84,7 @@ public class TenantManager {
 	 * @return Streamable of class {@link Tenant} of all {@link Tenant}s with enabled {@link UserAccount}s
 	 */
 	public Streamable<Tenant> findEnabled() {
-		return tenants.findAll().filter(c -> c.getUserAccount().isEnabled());
+		return getAll().filter(c -> c.getUserAccount().isEnabled());
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class TenantManager {
 	 * @return Streamable of class {@link Tenant} of all {@link Tenant}s with disabled {@link UserAccount}s
 	 */
 	public Streamable<Tenant> findDisabled() {
-		return tenants.findAll().filter(c -> !c.getUserAccount().isEnabled());
+		return getAll().filter(c -> !c.getUserAccount().isEnabled());
 	}
 
 	/**

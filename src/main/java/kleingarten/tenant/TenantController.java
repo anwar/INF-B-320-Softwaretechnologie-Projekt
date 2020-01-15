@@ -43,8 +43,25 @@ class TenantController {
 	@GetMapping("/tenants")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String tenants(Model model) {
-		model.addAttribute("tenantList", tenantManager.getAll());
+		model.addAttribute("tenantList", tenantManager.findEnabled());
 		return "tenant/tenants";
+	}
+
+	@GetMapping("/pretenants")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	String pretenants(Model model){
+		model.addAttribute("preTenantList", tenantManager.findDisabled());
+		return "tenant/pretenants";
+	}
+
+	@GetMapping("/deactivatetenant")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	String deactivatetenant(@RequestParam("id") String id){
+		System.out.println(tenantManager.get(Long.parseLong(id)).getForename());
+		System.out.println(tenantManager.get(Long.parseLong(id)).getUserAccount().isEnabled());
+		tenantService.makePreTenant(Long.parseLong(id));
+		System.out.println(tenantManager.get(Long.parseLong(id)).getUserAccount().isEnabled());
+		return "redirect:/tenants";
 	}
 
 	/**
