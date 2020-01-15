@@ -542,6 +542,34 @@ Diese Ziele sind Zuverlässigkeit (Reliability), Sicherheit (Security), Wartbark
 Darüber hinaus enthält die Anwendung 0,0% duplizierte Codezeilen und die Testabdeckung liegt über dem eingestellten
 minimalen Prozentsatz.
 
+=== SonarQube Issues
+Hier werden alle SonarQube issues aufgeführt, welche die Priorität *Blocker*, *Critical* oder *Major* besitzen,
+darüber hinaus auch häufige *Minor*-Issues.
+
+[options="header"]
+[options="header", cols="1, 2, 2, 2"]
+|===
+|Priority |Beschreibung |Vorkommen |entsprechendes Quality Gate
+|Minor |Zeilen sollen nicht länger sein als 120 Zeichen|
+* 1 Vorkommen in ApplicationController
+* 1 Vorkommen in FeeController
+* 1 Vorkommen in GeneratePDFBill |Keines
+|Minor |fehlende geschweifte Klammer |
+* 2 Vorkommen in ApplicationManager
+* 11 Vorkommen in Procedure
+* 5 Vorkommen in ProcedureManager |Keines
+|Minor |zwei Statements in einer Zeile|
+* 1 Vorkommen in ApplicationManager
+* 11 Vorkommen in Procedure
+* 5 Vorkommen in ProcedureManager|Keines
+|Critical|zu hohe kognitive Komplexität |
+* 1 Vorkommen in ProcedureController | Wartbarkeit
+|Major |zu viele return in einer Methode |
+* 1 Vorkommen in ProcedureController | Wartbarkeit
+|Major |ungenutzter Parameter |
+* 1 Vorkommen in ProcedureManager | Wartbarkeit
+|===
+
 === Parzellenmanagement
 Feedback aus dem Cross Test, welches nicht berücksichtigt wurde
 [options="header"]
@@ -560,3 +588,10 @@ __Begründung:__
 Des Weiteren wurde die Funktionalität Nebenpächter für eine gemietete Parzelle hinzuzufügen bzw. diese Pächter zu bearbeiten
 nicht vollständig implementiert. Mit dieser Aufgabe und der Anzeige des benötigten Formulars auf der Bearbeitungsseite
 einer Parzelle (editPlot.html) wurde Sascha Seiffert beauftragt.
+
+=== Bewerbungen
+Feedback aus dem Cross Test, welches nicht berücksichtigt wurde
+
+Die Funktionalitäten Vorstand kann Bewerbungen bearbeiten, annehmen, löschen und ablehnen sind nicht implementiert.
+Mit dieser Aufgabe wurde Sascha Seiffert beauftragt, der seit Anfang des Jahres nicht mehr aktiv am Projekt arbeitet,
+ohne das Team darüber informiert zu haben.

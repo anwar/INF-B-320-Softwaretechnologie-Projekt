@@ -324,9 +324,9 @@ zuständig Ylvi Sarah Bachmann
 |**<<AT0031>>**
 |**<<UC0030>>**
 |Aufrufen der Rechnungen
-|Nutzer hat die Rolle Kassierer
+|Nutzer hat die Rolle Vorstand
 |Parzelle
-|String "/listForPlotAssignments"
+|String "/bill/"
 
 |P-I-041
 |**<<AT0031>>**
