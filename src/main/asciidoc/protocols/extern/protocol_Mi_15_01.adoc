@@ -1,0 +1,200 @@
+= Protokoll Gruppe 43
+
+Treffen am 15.01.2020
+
+Ort:      APB +
+Beginn:   07:30 Uhr +
+Ende:     09:00 Uhr
+
+__Schriftführer:__ Isabell Zorr
+
+*Nächstes Treffen:* +
+22.01.2020, 07:30 Uhr, APB (Abschlusspräsentation)
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Uwe Schmidt (Tutor)
+- Albert Wellerdt
+- Sanghyun Lee
+- Ylvi Sarah Bachmann
+- Isabell Zorr
+
+== Bemerkungen
+Aufgrung aufgekommener Probleme müssen wir die Funktionen rund um die Vorpächter so lösen, dass es einen extra Button
+zum Deaktivieren eines Pächters und dass diese deaktivierten Pächter auf einer extra Seite angezeigt werden.
+Besonders sollten wir aber darauf achten, dass die Rechnungen funktioniern, da diese die Kernkomponenten unserer Anwendung
+sind. Zudem sollten alle Muss-Kriterien vorhanden sein, zu den Kann-Kriterien sollen wir im Vortrag sagen, warum wir
+welche wie gelöst haben und warum andere nicht bearbeitet wurden. Der Master muss bauen und das Quality-Gate grün sein
+für eine gültige Abgabe. Wichtig für den Vortrag wird auch sein, zu zeigen, dass eine Jahresabrechnung erstellt und
+Obmänner zu Parzellen hinzugefügt werden können. Im ersten Teil des Vortrages können wir unsere Entscheidungen erläutern
+und Revue über unsere Teamarbeit ziehen. Warum haben wir an manchen Stellen Salespoint verwendet und warum nicht. Welche
+weiteren Anforderungen haben wir an Salespoint. Auch das muss alles in der Entwicklerdokumentation stehen.
+Folgende Dokumente müssen wir noch vervollständigen oder zufügen: +
+
+* Prototyp (extern in einem eigenen Ordner im Root-Verzeichnis)
+* die letzten drei Teile der Entwicklerdokumentation (hier Altlasten aus dem ApplicationDepartment und SonarQube Issues)
+* JavaDoc (exportiert im Root-Verzeichnis)
+* Cross-Testing Ergebnisse
+* Einzelfeedbacks (gerne auch am Framework)
+* Time Recording mit den ausgerechneten Durchschnittsdaten
+* alle Protokolle
+
+Wenn wir mit den Folien unserer Präsentation fertig sind, können wir diese als PDF an Uwe schicken, damit er diese
+für uns auf den Master legen kann.
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#41
+|Edit and add classes and attributes to the appointment diagram
+|editing diagram for appointment diagram
+|Albert
+|open
+
+
+|#68
+|Overview table for Bills
+|table showing bills and maybe editing them
+|Sanghyun
+|open
+
+|#71
+| Adding each Initializer to AppDataInitializer
+| ...
+| Sascha, Ylvi, Sanghyun
+|open
+
+|#75
+|update external framework usage table
+| ...
+| all
+| open
+
+|#80
+|Better format for generated PDF bill
+| ...
+| ...
+|open
+
+|#86
+|ToDo for Sascha
+|issues from the cross testing report (also issues from the finance department),
+access rights for the modification of a plot for a normal tenant,
+correct headlines,
+feedback and your part of the developer documentation
+issues from sonar cube
+|Sascha
+|open
+
+|#87
+|Complete documentation for plot package
+|feedback, update and add class diagram, sequence diagram, description, SonarQube issues
+|Ylvi
+|closed
+
+
+|===
+
+== Aktueller Stand
+Da am Freitag Abgabe ist, befindet sich die Software im Finetuning. Wir beenden alle die Ergebnisse aus dem Cross Testing
+und arbeiten letzte Fehler aus. Die letzten Dokumente werden vervollständigt und die SonarQube Issues werden behoben.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#41
+|Edit and add classes and attributes to the appointment diagram
+|editing diagram for appointment diagram
+|Albert
+|open
+
+
+|#68
+|Overview table for Bills
+|table showing bills and maybe editing them
+|Sanghyun
+|open
+
+|#71
+| Adding each Initializer to AppDataInitializer
+| ...
+| Sascha, Ylvi, Sanghyun
+|open
+
+|#75
+|update external framework usage table
+| ...
+| all
+| open
+
+|#80
+|Better format for generated PDF bill
+| ...
+|...
+|open
+
+|#86
+|ToDo for Sascha
+|issues from the cross testing report (also issues from the finance department),
+access rights for the modification of a plot for a normal tenant,
+correct headlines,
+feedback and your part of the developer documentation
+issues from sonar cube
+|Sascha
+|open
+
+|#88
+|Finishing Touches
+|disable tenants and show on extra site, prototype on master, manual for tenantDepartment, survey, feedback,
+developer documentation, workAssignmentTimer SonarQube issues, complete java doc, tests
+|Isabell
+|open
+|===

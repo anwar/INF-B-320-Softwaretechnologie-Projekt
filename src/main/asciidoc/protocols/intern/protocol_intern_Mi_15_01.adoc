@@ -1,0 +1,185 @@
+= Protokoll Gruppe 43
+
+Treffen am 15.01.2020
+
+Ort:      APB +
+Beginn:   14:50 Uhr +
+Ende:     16:00 Uhr
+
+__Schriftführer:__ Isabell Zorr
+
+*Nächstes Treffen:* +
+19.01.2020, 13:00 Uhr, APB (vorraussichtlich)
+
+__Teilnehmer:__
+//Tabellarisch oder Aufzählung, Kennzeichnung von Teilnehmern mit besonderer Rolle (z.B. Kunde)
+
+- Albert Wellerdt
+- Muhammad Talal Anwar
+- Sanghyun Lee
+- Ylvi Sarah Bachmann
+- Isabell Zorr
+
+== Bemerkungen
+Beim heutigen Treffen haben wir die Aufteilung der Abschlusspräsentation gemacht. Franziska und Isabell werden zusammen
+die Einleitung und den ersten Teil der Präsentation übernehmen, Albert und Ylvi dann die Vorstellung der Anwendung und
+für die anschließenden Fragen werden wir alle zur Verfügung stehen. Zudem haben wir mit der Erstellung der Präsentationsfolien
+begonnen, welche bis Freitag im Groben fertig sein sollen. Das Problem mit der Procedure ließ sich lösen und zusammen
+wurden noch Ideen für die letzten Probleme gefunden und ausprobiert. Ein nächstes Treffen am Wochenende wurde besprochen.
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+// Wie ist der Status der im letzten Sprint erstellten Issues/veteilten Aufgaben?
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#41
+|Edit and add classes and attributes to the appointment diagram
+|editing diagram for appointment diagram
+|Albert
+|open
+
+
+|#68
+|Overview table for Bills
+|table showing bills and maybe editing them
+|Sanghyun
+|open
+
+|#71
+| Adding each Initializer to AppDataInitializer
+| ...
+| Sascha, Ylvi, Sanghyun
+|open
+
+|#75
+|update external framework usage table
+| ...
+| all
+| open
+
+|#80
+|Better format for generated PDF bill
+| ...
+|...
+|open
+
+|#86
+|ToDo for Sascha
+|issues from the cross testing report (also issues from the finance department),
+access rights for the modification of a plot for a normal tenant,
+correct headlines,
+feedback and your part of the developer documentation
+issues from sonar cube
+|Sascha
+|open
+
+|#87
+|Complete documentation for plot package
+|feedback, update and add class diagram, sequence diagram, description, SonarQube issues
+|Ylvi
+|closed
+
+|===
+
+== Aktueller Stand
+Da am Freitag Abgabe ist, befindet sich die Software im Finetuning. Wir beenden alle die Ergebnisse aus dem Cross Testing
+und arbeiten letzte Fehler aus. Die letzten Dokumente werden vervollständigt und die SonarQube Issues werden behoben.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#5
+|Entwurfsdiagramm Finanzverwaltung und kleine Integrationen im Code
+|Grobe Strukturen im Entwurfsdiagramm für die Finanzverwaltung und kleine Funktionen im Code
+|Sanghyun
+| open
+
+
+|#9
+|Integration HTML und CSS Code / Grobe Container
+|HTML Templates mit CSS Code/ Grobe Container und Seitenaufbau
+|Franziska
+| open
+
+|#29
+| Add diagram for applicationManagement
+| adding diagram for application package
+| Sascha
+| open
+
+|#41
+|Edit and add classes and attributes to the appointment diagram
+|editing diagram for appointment diagram
+|Albert
+|open
+
+
+|#68
+|Overview table for Bills
+|table showing bills and maybe editing them
+|Sanghyun
+|open
+
+|#71
+| Adding each Initializer to AppDataInitializer
+| ...
+| Sascha, Ylvi, Sanghyun
+|open
+
+|#75
+|update external framework usage table
+| ...
+| all
+| open
+
+|#80
+|Better format for generated PDF bill
+| ...
+|...
+|open
+
+|#86
+|ToDo for Sascha
+|issues from the cross testing report (also issues from the finance department),
+access rights for the modification of a plot for a normal tenant,
+correct headlines,
+feedback and your part of the developer documentation
+issues from sonar cube
+|Sascha
+|open
+
+|#88
+|Finishing Touches
+|disable tenants and show on extra site, prototype on master, manual for tenantDepartment, survey, feedback,
+developer documentation, workAssignmentTimer SonarQube issues, complete java doc, tests
+|Isabell
+|open
+
+|===
+

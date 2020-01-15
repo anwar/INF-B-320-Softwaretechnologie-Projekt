@@ -2,6 +2,7 @@ package kleingarten.tenant;
 
 
 import com.mysema.commons.lang.Assert;
+import kleingarten.message.MessageService;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -19,6 +20,7 @@ class TenantController {
 	private final TenantManager tenantManager;
 	private final TenantRepository tenantRepository;
 	private final TenantService tenantService;
+	private final MessageService messageService;
 
 	/**
 	 * Constructor of class {@link TenantController}
@@ -27,11 +29,13 @@ class TenantController {
 	 * @param tenantRepository repository of tenants as {@link TenantRepository}
 	 * @param tenantService    service class {@link TenantService}
 	 */
-	TenantController(TenantManager tenantManager, TenantRepository tenantRepository, TenantService tenantService) {
+	TenantController(TenantManager tenantManager, TenantRepository tenantRepository, TenantService tenantService,
+					 MessageService messageService) {
 		Assert.notNull(tenantManager, "TenantManager must not be null");
 		this.tenantManager = tenantManager;
 		this.tenantRepository = tenantRepository;
 		this.tenantService = tenantService;
+		this.messageService = messageService;
 	}
 
 	/**
@@ -43,8 +47,25 @@ class TenantController {
 	@GetMapping("/tenants")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String tenants(Model model) {
-		model.addAttribute("tenantList", tenantManager.getAll());
+		model.addAttribute("tenantList", tenantManager.findEnabled());
 		return "tenant/tenants";
+	}
+
+	@GetMapping("/pretenants")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	String pretenants(Model model){
+		model.addAttribute("preTenantList", tenantManager.findDisabled());
+		return "tenant/pretenants";
+	}
+
+	@GetMapping("/deactivatetenant")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	String deactivatetenant(@RequestParam("id") String id){
+		System.out.println(tenantManager.get(Long.parseLong(id)).getForename());
+		System.out.println(tenantManager.get(Long.parseLong(id)).getUserAccount().isEnabled());
+		tenantService.makePreTenant(Long.parseLong(id));
+		System.out.println(tenantManager.get(Long.parseLong(id)).getUserAccount().isEnabled());
+		return "redirect:/tenants";
 	}
 
 	/**
@@ -207,7 +228,12 @@ class TenantController {
 	String registered(@RequestParam("forename") String forename, @RequestParam("surname") String surname,
 					  @RequestParam("birthdate") String birthdate, @RequestParam("address") String address,
 					  @RequestParam("email") String email, @RequestParam("phone") String phone) {
-		tenantManager.createNewPerson(forename, surname, address, phone, birthdate, email);
+		String password = tenantManager.generatedPassword(8);
+		tenantManager.createNewPerson(forename, surname, address, phone, birthdate, email, password);
+
+		String passMessageStr = "Ihr Benuterzerkonto Passwort ist: " + password;
+		System.out.println(passMessageStr);
+		messageService.sendMessage(email, "Passwort für Benutzerkonto", passMessageStr);
 
 		return ("redirect:/tenants");
 	}

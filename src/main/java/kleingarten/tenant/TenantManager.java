@@ -84,7 +84,7 @@ public class TenantManager {
 	 * @return Streamable of class {@link Tenant} of all {@link Tenant}s with enabled {@link UserAccount}s
 	 */
 	public Streamable<Tenant> findEnabled() {
-		return tenants.findAll().filter(c -> c.getUserAccount().isEnabled());
+		return getAll().filter(c -> c.getUserAccount().isEnabled());
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class TenantManager {
 	 * @return Streamable of class {@link Tenant} of all {@link Tenant}s with disabled {@link UserAccount}s
 	 */
 	public Streamable<Tenant> findDisabled() {
-		return tenants.findAll().filter(c -> !c.getUserAccount().isEnabled());
+		return getAll().filter(c -> !c.getUserAccount().isEnabled());
 	}
 
 	/**
@@ -122,9 +122,9 @@ public class TenantManager {
 	 * @param email       of the {@link Tenant} as {@link String}
 	 */
 	public void createNewPerson(String forename, String surname, String address, String phonenumber,
-								String birthdate, String email) {
+								String birthdate, String email, String password) {
 		Tenant tenant = new Tenant(forename, surname, address, phonenumber, birthdate, userAccounts.create(email,
-				Password.UnencryptedPassword.of(phonenumber), email));
+				Password.UnencryptedPassword.of(password), email));
 		tenants.save(tenant);
 	}
 

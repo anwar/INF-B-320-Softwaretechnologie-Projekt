@@ -44,7 +44,12 @@
         </table>
 
         </div>
+    <div class="button-section">
 
+        <a th:href="'/deactivatetenant?id=' + ${tenant.getId()}">
+        <button class="button"  onclick="location.href='/deactivatetenant'">Pächter deaktivieren</button>
+        </a>
+    </div>
 
 
     </div>
