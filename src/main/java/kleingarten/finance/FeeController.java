@@ -1,7 +1,9 @@
 package kleingarten.finance;
 
+import kleingarten.message.MessageService;
 import kleingarten.plot.Plot;
 import kleingarten.tenant.Tenant;
+import kleingarten.tenant.TenantManager;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.mail.util.ByteArrayDataSource;
 import java.io.ByteArrayInputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,10 +29,15 @@ import java.util.List;
 public class FeeController {
 
 	private ProcedureManager procedureManager;
+	private MessageService messageService;
+	private TenantManager tenantManager;
 
-	@Autowired
-	public FeeController(ProcedureManager procedureManager) {
+	public FeeController(@Autowired ProcedureManager procedureManager,
+						 @Autowired MessageService messageService,
+						 @Autowired TenantManager tenantManager) {
 		this.procedureManager = procedureManager;
+		this.messageService = messageService;
+		this.tenantManager = tenantManager;
 	}
 
 	@PostMapping(value = "/PDF", produces = MediaType.APPLICATION_PDF_VALUE)
@@ -37,11 +45,7 @@ public class FeeController {
 
 		Procedure mainProcedure = procedureManager.get(Long.parseLong(procedureId));
 
-		Procedure oldProcedure = procedureManager.getProcedure(mainProcedure.getYear() - 1, mainProcedure.getPlotId());
-
-		Bill billToShow = new Bill(mainProcedure, oldProcedure);
-
-		ByteArrayInputStream bis = GeneratePDFBill.bill(billToShow.feeList, mainProcedure.getPlot(), procedureManager.getTenantManager().get(mainProcedure.getMainTenant()), mainProcedure.getYear());
+		ByteArrayInputStream bis = getBillPDFBytes(mainProcedure);
 
 		var headers = new HttpHeaders();
 		headers.add("Content-Disposition", "inline; filename=Rechnungen.pdf");
@@ -53,6 +57,43 @@ public class FeeController {
 				.body(new InputStreamResource(bis));
 	}
 
+	/**
+	 * Method to send Bill by Email.
+	 *
+	 * @param procedureId as {@link String}
+	 * @param plotId      as {@link String} needed to make a redirect to the bills of a plot
+	 * @return view as {@link String}
+	 */
+	@PostMapping(value = "/send-by-email")
+	public String sendBillByEmail(@RequestParam String procedureId,
+								  @RequestParam String plotId) {
+
+		Procedure mainProcedure = procedureManager.get(Long.parseLong(procedureId));
+		int currentYear = mainProcedure.getYear();
+		String tenantEmail = tenantManager.get(mainProcedure.getMainTenant()).getEmail();
+
+		byte[] pdfBytes = getBillPDFBytes(mainProcedure).readAllBytes();
+		ByteArrayDataSource attachmentDataSource = new ByteArrayDataSource(
+				pdfBytes, MediaType.APPLICATION_PDF.toString());
+
+
+		messageService.sendMessageWithAttachment(tenantEmail,
+				"Rechung fuer " + currentYear,
+				"Im Anhang dieser Email finden Sie Ihre Rechnung fuer " + currentYear,
+				"Rechnungen-" + currentYear + ".pdf",
+				attachmentDataSource);
+
+		return "redirect:/bill/" + plotId;
+	}
+
+	/**
+	 * Method to show Bill overview page.
+	 *
+	 * @param plot        as {@link Plot}
+	 * @param model       as {@link Model} to add needed information
+	 * @param userAccount as {@link UserAccount}
+	 * @return view as {@link String}
+	 */
 	@GetMapping("bill/{plot}")
 	public String viewBill(Model model, @PathVariable Plot plot, @LoggedIn UserAccount userAccount) {
 
@@ -79,7 +120,8 @@ public class FeeController {
 
 	/**
 	 * Method to close all {@link Procedure}s of the last year and create new ones
-	 * @param plot {@link Plot} needed to make a redirect to the bills of a plot
+	 *
+	 * @param plot  {@link Plot} needed to make a redirect to the bills of a plot
 	 * @param model {@link Model} to add needed information
 	 * @return view as {@link String}
 	 */
@@ -102,5 +144,14 @@ public class FeeController {
 		model.addAttribute("plot", plot);
 
 		return "redirect:/bill/" + plot.getId();
+	}
+
+	ByteArrayInputStream getBillPDFBytes(Procedure currentYearProcedure) {
+		Procedure oldProcedure = procedureManager.getProcedure(currentYearProcedure.getYear() - 1, currentYearProcedure.getPlotId());
+		Bill billToShow = new Bill(currentYearProcedure, oldProcedure);
+
+		return GeneratePDFBill.bill(
+				billToShow.feeList, currentYearProcedure.getPlot(),
+				procedureManager.getTenantManager().get(currentYearProcedure.getMainTenant()), currentYearProcedure.getYear());
 	}
 }

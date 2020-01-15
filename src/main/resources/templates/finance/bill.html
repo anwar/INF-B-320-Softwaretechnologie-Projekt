@@ -28,22 +28,31 @@
     <thead>
     <tr>
         <th>Rechnungen</th>
-        <th>Download</th>
+        <th>Herunterladen</th>
+        <th>Per Email schicken</th>
     </tr>
     </thead>
         <tbody th:remove="all-but-first">
 
            <tr  th:each="procedure : ${procedures}">
                <td> <label th:text="${procedure.getYear()}"> Paul</label> </td>
-			   <td><form method="post" th:action="@{/PDF}">
-		        <div >
-                    <input type="hidden" id="procedureId" name="procedureId" th:value="${procedure.getId()}">
-                    <input type="hidden" id="year" name="year" th:value="${procedure.getYear()}">
-			    <button  type="submit" style="width: 50px" class="button" > &#10515; </button>
-
-		        </div>
-        </form>
+			   <td>
+                   <form method="post" th:action="@{/PDF}">
+                        <div>
+                            <input type="hidden" id="procedureId" name="procedureId" th:value="${procedure.getId()}">
+                            <button  type="submit" style="width: 50px" class="button" > &#10515; </button>
+                        </div>
+                    </form>
 			   </td>
+               <td>
+                   <form method="post" th:action="@{/send-by-email}">
+                       <div>
+                           <input type="hidden" id="procedureId" name="procedureId" th:value="${procedure.getId()}">
+                           <input type="hidden" id="plotId" name="plotId" th:value="${plot.getId()}">
+                           <button  type="submit" style="width: 50px" class="button" > &#10515; </button>
+                       </div>
+                   </form>
+               </td>
 
 </tr>  </tbody>
 </table>
