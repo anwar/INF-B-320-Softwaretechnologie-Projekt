@@ -351,7 +351,7 @@ public class SecurePlotController {
 		try {
 			plot.setSize(Integer.parseInt(size));
 			plot.setDescription(description);
-			plot.setPrice(Money.of(Double.parseDouble(estimator), EURO));
+			plot.setEstimator(Money.of(Double.parseDouble(estimator), EURO));
 			plotCatalog.save(plotService.findById(plotId));
 		} catch (Exception e) {
 			model.addAttribute("error", e);
