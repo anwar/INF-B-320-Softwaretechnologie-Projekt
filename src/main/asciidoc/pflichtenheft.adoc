@@ -624,7 +624,7 @@ Mit der Navigationsleiste kann er auf die Überischt seiner Parzelle, der Anlage
 | 12 | Finanzen | Dieser Bereicht wird nur dem Kassierer angezeigt, der hier die Preise anpassen und Rechnungen einsehen kann.
 | 13 | Konflikte | Hier können Pächter ihre abgeschickten Beschwerden über andere Pächter einsehen
 | 14 | Bewerbung | Nachdem der Gast bei der Parzellenübersicht bei einer Parzelle auf Bewerbung geklickt hat, wird er auf dieses Formular geleitet, welches er mit seinen
-persönlichen Daten ausgefüllt abschickt. Dieses Formular wird dann an den Vorstandsvorsitzenden geschickt, der dieses dann bearbeiten kann. 
+persönlichen Daten ausgefüllt abschickt. Dieses Formular wird dann an den Vorstandsvorsitzenden geschickt, der dieses dann bearbeiten kann.
 
 |===
 
