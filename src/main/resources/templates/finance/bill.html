@@ -48,6 +48,8 @@
 </tr>  </tbody>
 </table>
 </div>
+<div class="button-section" sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')">
+    <a class="button" th:href="'/finalize/' + ${plot.getId()}">Rechnungen abschließen</a>
 </div>
 
 <div th:include="navigation :: footer"></div>

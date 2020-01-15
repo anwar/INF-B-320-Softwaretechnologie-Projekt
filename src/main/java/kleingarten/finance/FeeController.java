@@ -9,6 +9,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.ByteArrayInputStream;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,13 +77,30 @@ public class FeeController {
 		return "finance/bill";
 	}
 
-	public String finalizeProcedures(@PathVariable String year) {
-
-		List<Procedure> procedures = procedureManager.getAllByYear(Integer.parseInt(year)).toList();
+	/**
+	 * Method to close all {@link Procedure}s of the last year and create new ones
+	 * @param plot {@link Plot} needed to make a redirect to the bills of a plot
+	 * @param model {@link Model} to add needed information
+	 * @return view as {@link String}
+	 */
+	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')")
+	@GetMapping("/finalize/{plot}")
+	public String finalizeProcedures(@PathVariable Plot plot, Model model) {
+		int year = LocalDateTime.now().getYear();
+		List<Procedure> procedures = procedureManager.getAllByYear(year - 1).toList();
 		for (Procedure proc : procedures) {
-			System.out.println(proc.toString());
+			proc.close();
+			Procedure newProcedure = new Procedure(year, proc.getPlot(), proc.getMainTenant());
+			newProcedure.setSize(proc.getSize());
+			newProcedure.setPowercount(proc.getPowercount());
+			newProcedure.setWatercount(proc.getWatercount());
+			if (proc.getWorkMinutes() > 240) {
+				newProcedure.setWorkMinutes(proc.getWorkMinutes() - 240);
+			}
+			procedureManager.save(newProcedure);
 		}
+		model.addAttribute("plot", plot);
 
-		return "nix";
+		return "redirect:/bill/" + plot.getId();
 	}
 }
