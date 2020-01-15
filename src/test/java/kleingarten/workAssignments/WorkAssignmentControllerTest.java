@@ -23,6 +23,9 @@ public class WorkAssignmentControllerTest {
 	WorkAssignmentController workAssignmentController;
 
 
+	/**
+	 * @throws Exception test founding of listOfAssignments
+	 */
 	@Test
 	void preventsPublicAccessForListOfAssignments() throws Exception {
 
@@ -31,6 +34,9 @@ public class WorkAssignmentControllerTest {
 				.andExpect(header().string(HttpHeaders.LOCATION, endsWith("/login")));//
 	}
 
+	/**
+	 * @throws Exception test founding of createAssignment
+	 */
 	@Test
 	void preventsPublicAccessForCreateAssignment() throws Exception {
 
@@ -39,6 +45,9 @@ public class WorkAssignmentControllerTest {
 				.andExpect(header().string(HttpHeaders.LOCATION, endsWith("/login")));//
 	}
 
+	/**
+	 * @throws Exception test founding of workAssignmentModify
+	 */
 	@Test
 	void preventsPublicAccessForWorkAssignmentModify() throws Exception {
 
@@ -47,6 +56,9 @@ public class WorkAssignmentControllerTest {
 				.andExpect(header().string(HttpHeaders.LOCATION, endsWith("/login")));//
 	}
 
+	/**
+	 * @throws Exception test founding of addWorkHours
+	 */
 	@Test
 	void preventsPublicAccessAddWorkHours() throws Exception {
 
