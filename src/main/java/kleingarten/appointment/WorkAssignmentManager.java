@@ -199,9 +199,10 @@ public class WorkAssignmentManager {
 		}
 
 		int sumOfWorkHours = 0;
-
-		for (WorkAssignment workAssignment : buffer) {
-			sumOfWorkHours += workAssignment.getWorkHours();
+		if(!buffer.isEmpty()) {
+			for (WorkAssignment workAssignment : buffer) {
+				sumOfWorkHours += workAssignment.getWorkHours();
+			}
 		}
 		return sumOfWorkHours;
 	} //nochmal überarbeiten
