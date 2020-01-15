@@ -15,7 +15,7 @@ import java.util.Map;
 public class PlotInformationBuffer {
 	ProductIdentifier plotId;
 	String plotName;
-	int plotSize;
+	String plotSize;
 	String plotDescription;
 	String plotPrice;
 	Map<Tenant, String> mainTenantRoles;
@@ -30,9 +30,9 @@ public class PlotInformationBuffer {
 	public PlotInformationBuffer(final Plot plot) {
 		plotId = plot.getId();
 		plotName = plot.getName();
-		plotSize = plot.getSize();
+		plotSize = plot.getSize() + " m²";
 		plotDescription = plot.getDescription();
-		plotPrice = MonetaryFormats.getAmountFormat(Locale.GERMANY).format(plot.getPrice());
+		plotPrice = MonetaryFormats.getAmountFormat(Locale.GERMANY).format(plot.getPrice()) + " Euro";
 		mainTenantRoles = new HashMap<>();
 		subTenantRoles = new HashMap<>();
 	}
@@ -60,7 +60,7 @@ public class PlotInformationBuffer {
 	 *
 	 * @return size of the {@link Plot} as int
 	 */
-	public int getPlotSize() {
+	public String getPlotSize() {
 		return plotSize;
 	}
 
@@ -69,8 +69,8 @@ public class PlotInformationBuffer {
 	 *
 	 * @param plotSize size of the {@link Plot} as int
 	 */
-	public void setPlotSize(int plotSize) {
-		this.plotSize = plotSize;
+	public void setPlotSize(String plotSize) {
+		this.plotSize = plotSize + " m²";
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class PlotInformationBuffer {
 	 * @param plotPrice price of the {@link Plot} as {@link String}
 	 */
 	public void setPlotPrice(String plotPrice) {
-		this.plotPrice = plotPrice;
+		this.plotPrice = plotPrice + " Euro";
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class PlotInformationBuffer {
 	 * @param workHours work minutes of the {@link Plot} as {@link String}
 	 */
 	public void setWorkHours(String workHours) {
-		this.workHours = workHours;
+		this.workHours = workHours + " min";
 	}
 
 	/**
