@@ -1,6 +1,8 @@
 package kleingarten.plot;
 
+import kleingarten.appointment.WorkAssignmentManager;
 import kleingarten.finance.Procedure;
+import kleingarten.finance.ProcedureManager;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 import org.salespointframework.catalog.ProductIdentifier;
@@ -22,13 +24,18 @@ public class PlotControllerService {
 	private final TenantManager tenantManager;
 	private final PlotCatalog plotCatalog;
 	private final PlotService plotService;
+	private final WorkAssignmentManager workAssignmentManager;
+	private final ProcedureManager procedureManager;
 
 	PlotControllerService(DataService dataService, TenantManager tenantManager, PlotCatalog plotCatalog,
-						  PlotService plotService) {
+						  PlotService plotService, WorkAssignmentManager workAssignmentManager,
+						  ProcedureManager procedureManager) {
 		this.dataService = dataService;
 		this.tenantManager = tenantManager;
 		this.plotCatalog = plotCatalog;
 		this.plotService = plotService;
+		this.workAssignmentManager = workAssignmentManager;
+		this.procedureManager = procedureManager;
 	}
 
 	/**
@@ -153,7 +160,10 @@ public class PlotControllerService {
 				subTenantsInformation.put(tenant, tenant.getRoles());
 			}
 			buffer.setSubTenantRoles(subTenantsInformation);
-			buffer.setWorkHours(procedure.get().getWorkMinutes() + "min");
+			int sumOfWorkHours = workAssignmentManager.getWorkHours(plot.getId());
+			procedure.get().setWorkMinutes(sumOfWorkHours * 60);
+			procedureManager.save(procedure.get());
+			buffer.setWorkHours(String.valueOf(dataService.getProcedure(plot).getWorkMinutes()));
 		}
 		return buffer;
 	}

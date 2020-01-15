@@ -63,7 +63,8 @@ public class SecurePlotController {
 			Tenant tenant = tenantManager.getTenantByUserAccount(user);
 			if (dataService.procedureExists(plot)) {
 				Procedure procedure = dataService.getProcedure(plot);
-				plotsToShow.add(plotControllerService.addInformationOfPlotToPlotInformationBuffer(Optional.of(procedure), plot));
+				plotsToShow.add(plotControllerService.addInformationOfPlotToPlotInformationBuffer(Optional.of(procedure),
+						plot));
 
 				plotControllerService.secureSetAccessRightForPlotDetails(Optional.of(procedure), tenant, mav);
 				//Show different detail page if user rents the plot
@@ -71,7 +72,8 @@ public class SecurePlotController {
 					return "redirect:/myPlot";
 				}
 			} else {
-				plotsToShow.add(plotControllerService.addInformationOfPlotToPlotInformationBuffer(Optional.empty(), plot));
+				plotsToShow.add(plotControllerService.addInformationOfPlotToPlotInformationBuffer(Optional.empty(),
+						plot));
 				plotControllerService.secureSetAccessRightForPlotDetails(Optional.empty(), tenant, mav);
 			}
 			if (plot.getStatus() == PlotStatus.FREE) {
@@ -106,7 +108,8 @@ public class SecurePlotController {
 			for (Plot plot :
 					plots) {
 				Procedure procedure = dataService.getProcedure(plot);
-				shownPlots.add(plotControllerService.addInformationOfPlotToPlotInformationBuffer(Optional.of(procedure), plot));
+				shownPlots.add(plotControllerService.addInformationOfPlotToPlotInformationBuffer(Optional.of(procedure),
+						plot));
 				plotControllerService.secureSetAccessRightForPlotDetails(Optional.of(procedure), tenant, model);
 			}
 		} catch (Exception e) {

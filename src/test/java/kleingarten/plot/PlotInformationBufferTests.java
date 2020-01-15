@@ -29,9 +29,10 @@ public class PlotInformationBufferTests {
 	public void initialSetupTest() {
 		assertThat(buffer.getPlotId()).isEqualTo(plot.getId());
 		assertThat(buffer.getPlotName()).isEqualTo(plot.getName());
-		assertThat(buffer.getPlotSize()).isEqualTo(plot.getSize());
+		assertThat(buffer.getPlotSize()).isEqualTo(plot.getSize() + " m²");
 		assertThat(buffer.getPlotDescription()).isEqualTo(plot.getDescription());
-		assertThat(buffer.getPlotPrice()).isEqualTo(MonetaryFormats.getAmountFormat(Locale.GERMANY).format(plot.getPrice()));
+		assertThat(buffer.getPlotPrice()).isEqualTo(MonetaryFormats.getAmountFormat(Locale.GERMANY).
+				format(plot.getPrice()) + " Euro");
 
 		assertThat(buffer.getMainTenantRoles()).isEqualTo(new HashMap<>());
 		assertThat(buffer.getSubTenantRoles()).isEqualTo(new HashMap<>());
