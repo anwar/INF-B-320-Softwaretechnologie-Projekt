@@ -85,8 +85,8 @@ public class Procedure {
 	/**
 	 * Method to check whether a user is a tenant
 	 *
-	 * @param tenantId
-	 * @return
+	 * @param tenantId Id of the {@link kleingarten.tenant.Tenant}
+	 * @return {@link Boolean}
 	 */
 	public boolean isTenant(long tenantId) {
 		if (mainTenant == tenantId) return true;
@@ -282,7 +282,7 @@ public class Procedure {
 	 *  Method to check whether a procedure is opened
 	 *  Open means that the opened procedure can be edited
 	 *
-	 * @return
+	 * @return {@link Boolean}
 	 */
 	public boolean isOpen() {
 		return isOpen;
@@ -300,7 +300,7 @@ public class Procedure {
 	 *  if editable() is true, then the procedure is opened and can be edited
 	 *  if editable() is false, then the procedure is closed and can't be edited
 	 *
-	 * @return
+	 * @return {@link Boolean}
 	 */
 	private boolean editable() {
 		return isOpen;

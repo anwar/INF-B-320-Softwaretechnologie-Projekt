@@ -44,7 +44,7 @@ public class FeeController {
 	 * Method to create a bill in PDF format
 	 *
 	 * @param procedureId as {@link String}
-	 * @return
+	 * @return view as {@link String}
 	 */
 	@PostMapping(value = "/PDF", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> bill(@RequestParam String procedureId) {
