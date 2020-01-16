@@ -103,7 +103,8 @@ public class ProcedureManager {
 	 */
 	public Streamable<Procedure> getAll(long tenantId) {
 		//I am preventing duplicates here. however, a tenant should only be main or sub tenant, not both.
-		Set<Procedure> noDubes = procedures.findByMainTenant(tenantId).and(procedures.findBySubTenant(tenantId)).toSet();
+		Set<Procedure> noDubes =
+				procedures.findByMainTenant(tenantId).and(procedures.findBySubTenant(tenantId)).toSet();
 		return Streamable.of(noDubes);
 	}
 
