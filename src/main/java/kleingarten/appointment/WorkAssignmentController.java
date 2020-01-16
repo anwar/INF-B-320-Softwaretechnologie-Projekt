@@ -4,6 +4,8 @@ package kleingarten.appointment;
 import org.salespointframework.catalog.ProductIdentifier;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -178,6 +180,24 @@ public class WorkAssignmentController {
 		model.addAttribute("ListOfAssignments", workAssignmentManager.getAll());
 		model.addAttribute("plotID", plotID);
 		return "workAssignment/listForPlotAssignments";
+	}
+
+	class MessageResponse {
+		public String msg;
+	}
+
+	/**
+	 * get the timer for the next {@link WorkAssignment} of the logged in {@link kleingarten.tenant.Tenant} with the
+	 * {@link UserAccount}
+	 *
+	 * @param user logged in {@link kleingarten.tenant.Tenant} for which the {@link WorkAssignmentTimer} should be set
+	 * @return value of {@link WorkAssignmentTimer}
+	 */
+	@GetMapping("/nextWorkAssignmentTimer")
+	public ResponseEntity<MessageResponse> getWorkAssignmentTimerFor(@LoggedIn UserAccount user) {
+		MessageResponse msg = new MessageResponse();
+		msg.msg = workAssignmentTimer.getPeriod(user);
+		return new ResponseEntity<>(msg, HttpStatus.OK);
 	}
 
 	/**
