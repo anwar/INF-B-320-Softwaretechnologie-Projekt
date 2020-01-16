@@ -2,16 +2,16 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
     <script
             src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script
             src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
-          href="../static/resources/css/style.css" type="text/css"/>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="../static/resources/css/style.css" rel="stylesheet"
+          th:href="@{/resources/css/style.css}" type="text/css"/>
 
     <title>Kleingartenanlage</title>
 <body>
@@ -32,7 +32,8 @@
         <tr>
             <td>Fehlerbeschreibung</td>
             <td th:if="${error.getClass().getCanonicalName().equals('java.lang.String')}" th:text="${error}"></td>
-            <td th:unless="${error.getClass().getCanonicalName().equals('java.lang.String')}" th:text="${error.getMessage()}"></td>
+            <td th:text="${error.getMessage()}"
+                th:unless="${error.getClass().getCanonicalName().equals('java.lang.String')}"></td>
         </tr>
     </table>
     <div class="button-section">

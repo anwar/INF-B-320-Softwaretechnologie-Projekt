@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
 
     <script>
         function hideNewsEditForm(id) {
@@ -41,7 +41,7 @@
         <table>
             <tr>
                 <td>
-                    <img class="event-pics" src="../resources/css/pics/glasses-919071_1280.jpg" alt="fest"/>
+                    <img alt="fest" class="event-pics" src="../resources/css/pics/glasses-919071_1280.jpg"/>
                 </td>
                 <td>
 
@@ -49,13 +49,15 @@
                         <div class="header-title">
                             <h2>News</h2>
                         </div>
-                        <div id="entries" class="mx-auto">
+                        <div class="mx-auto" id="entries">
                             <div th:each="entry, it : ${newsEntries}" th:with="index = ${it.count}">
-                                <div style="box-shadow: 0px 0px 88px 3px rgba(0,0,0,0.05); padding: 5px; border-radius: 10px; border-color: #043353; border-width: 1px; border-style: solid; width: 550px; margin-left: 20px"
-                                     class="card" th:fragment="entry" th:id="'entry-'+${entry.id}">
+                                <div class="card"
+                                     style="box-shadow: 0px 0px 88px 3px rgba(0,0,0,0.05); padding: 5px; border-radius: 10px; border-color: #043353; border-width: 1px; border-style: solid; width: 550px; margin-left: 20px"
+                                     th:fragment="entry" th:id="'entry-'+${entry.id}">
                                     <div class="card-header">
-                                        <form style="display: inline-block"
-                                              sec:authorize="hasRole('Vorstandsvorsitzender')" method="post"
+                                        <form method="post"
+                                              sec:authorize="hasRole('Vorstandsvorsitzender')"
+                                              style="display: inline-block"
                                               th:action="@{/home/news/deleteEntry/{id}(id=${entry.id})}">
                                             <button class="btn btn-sm float-right"
                                                     style="font-size: 18px; background: white; border: none;"
@@ -63,8 +65,8 @@
                                             </button>
                                         </form>
 
-                                        <button sec:authorize="hasRole('Vorstandsvorsitzender')"
-                                                class="btn btn-sm float-right"
+                                        <button class="btn btn-sm float-right"
+                                                sec:authorize="hasRole('Vorstandsvorsitzender')"
                                                 style=" display: inline-block;font-size: 20px; background: white; border: none;"
                                                 th:onclick="'showNewsEditForm(\'' + ${entry.id} + '\');'">&#9998;
                                         </button>
@@ -79,18 +81,19 @@
 
                                 <!-- style.display=none keeps this form hidden until showNewsEditForm() is called -->
                                 <div style="display:none" th:id="'edit-form-entry-'+${entry.id}">
-                                    <form sec:authorize="hasRole('Vorstandsvorsitzender')" method="post" class="ui form"
+                                    <form class="ui form" method="post" sec:authorize="hasRole('Vorstandsvorsitzender')"
                                           th:action="@{/home/news/editEntry/{id}(id=${entry.id})}">
                                         <div class="field">
                                             <label for="text" th:text="#{news.entryEdit.text}">Newseintrag
                                                 Bearbeiten</label><br/>
-                                            <textarea id="text" name="text" cols="45" rows="8" th:value="${entry.text}"
-                                                      th:text="${entry.text}" required="required"></textarea>
+                                            <textarea cols="45" id="text" name="text" required="required" rows="8"
+                                                      th:text="${entry.text}" th:value="${entry.text}"></textarea>
                                         </div>
-                                        <input type="submit" class="ui submit button"
-                                               th:value="#{news.entryEdit.submit}"
+                                        <input class="ui submit button" th:value="#{news.entryEdit.submit}"
+                                               type="submit"
                                                value="Aktualisieren"/>
-                                    </form><br/>
+                                    </form>
+                                    <br/>
                                     <button class="ui button"
                                             th:onclick="'hideNewsEditForm(\'' + ${entry.id} + '\');'"
                                             th:value="#{news.entryEdit.back}">Zurück
@@ -102,14 +105,14 @@
 
                         <br/>
 
-                        <form sec:authorize="hasRole('Vorstandsvorsitzender')" method="post" class="ui form"
-                              id="news-entry-form"
+                        <form class="ui form" id="news-entry-form" method="post"
+                              sec:authorize="hasRole('Vorstandsvorsitzender')"
                               th:action="@{/home/news/addEntry}">
                             <div class="field">
                                 <label for="text" th:text="#{news.entryForm.text}">Neuer Newseintrag</label><br/>
-                                <textarea id="text" name="text" cols="45" rows="8" required="required"></textarea>
+                                <textarea cols="45" id="text" name="text" required="required" rows="8"></textarea>
                             </div>
-                            <input type="submit" class="ui submit button" th:value="#{news.entryForm.submit}"
+                            <input class="ui submit button" th:value="#{news.entryForm.submit}" type="submit"
                                    value="Abschicken"/>
                         </form>
                     </div>

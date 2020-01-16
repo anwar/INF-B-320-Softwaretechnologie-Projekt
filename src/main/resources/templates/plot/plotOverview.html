@@ -1,90 +1,102 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/dropdown.css}" rel="stylesheet"
-          href="../resources/css/dropdown.css" type="text/css">
-    <script th:src="@{../resources/css/js/dropdown.js}"
-            src="../resources/css/js/dropdown.js"> </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/dropdown.css" rel="stylesheet"
+          th:href="@{../resources/css/dropdown.css}" type="text/css">
+    <script src="../resources/css/js/dropdown.js"
+            th:src="@{../resources/css/js/dropdown.js}"></script>
 
     <title>Übersicht</title>
 </head>
 <body>
 
-    <nav th:include="navigation :: navigation"/>
-    <div >
+<nav th:include="navigation :: navigation"/>
+<div>
     <div class="header-title">
 
 
         <h1>Übersicht</h1>
     </div>
-    </div>
+</div>
 
-    <center> <div>
-        <table >
-            <div  th:each="color : ${colors.keySet()}"><td>&nbsp</td>
+<center>
+    <div>
+        <table>
+            <div th:each="color : ${colors.keySet()}">
+                <td>&nbsp</td>
                 <td th:style="'background-color: ' + ${color} "> &nbsp &nbsp</td>
 
-                <td th:text="${colors.get(color)}"> Text &nbsp </td></div>
+                <td th:text="${colors.get(color)}"> Text &nbsp</td>
+            </div>
 
 
         </table>
     </div>
-    </center>
+</center>
 
-    <table align="center">
-        <td><form sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')" th:if="${modify}" method="post" th:action="@{/addchairman}">
-            <label >
+<table align="center">
+    <td>
+        <form method="post" sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')"
+              th:action="@{/addchairman}"
+              th:if="${modify}">
+            <label>
                 <select name="tenantID">
                     <option value="">---</option>
-                    <option th:each="tenant : ${chairmenList}" th:value="${tenant.id}"
-                            th:text="${tenant.forename} + ' ' + ${tenant.surname}">
+                    <option th:each="tenant : ${chairmenList}" th:text="${tenant.forename} + ' ' + ${tenant.surname}"
+                            th:value="${tenant.id}">
                     </option>
                 </select>
             </label>
             <div class="button-section">
-                <input sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')" class="button" type="submit" value="Auswählen">
+                <input class="button" sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')"
+                       type="submit" value="Auswählen">
             </div>
-        </form></td>
-    </table>
+        </form>
+    </td>
+</table>
 
-    <form sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')" th:if="${canAddChairman}" method="post" role="form" th:action="@{/chairmenOverview}" th:object="${updateChairmanForm}">
-        <div class="plotOverview">
-            <div class="plotList" th:each="plot : ${plotList}">
-                <div class="plot" th:style="'background: ' + ${plotColors.get(plot)}">
-                    <a title="Details anzeigen" th:text="${plot.getName()}" th:if="${userRights.get(plot)}" th:href="'/plot/' + ${plot.getId()}"> Text </a>
-                    <span th:unless="${userRights.get(plot)}" th:text="${plot.getName()}"> Text </span>
-                    <input type="checkbox" th:name="updatedPlots" th:value="${plot.id}" th:checked="${administratedPlots.contains(plot)}">
-                </div>
+<form method="post" role="form" sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')"
+      th:action="@{/chairmenOverview}" th:if="${canAddChairman}" th:object="${updateChairmanForm}">
+    <div class="plotOverview">
+        <div class="plotList" th:each="plot : ${plotList}">
+            <div class="plot" th:style="'background: ' + ${plotColors.get(plot)}">
+                <a th:href="'/plot/' + ${plot.getId()}" th:if="${userRights.get(plot)}" th:text="${plot.getName()}"
+                   title="Details anzeigen"> Text </a>
+                <span th:text="${plot.getName()}" th:unless="${userRights.get(plot)}"> Text </span>
+                <input th:checked="${administratedPlots.contains(plot)}" th:name="updatedPlots" th:value="${plot.id}"
+                       type="checkbox">
             </div>
         </div>
-        <div class="button-section" sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')">
-            <input type="hidden" th:name="tenantID" th:value="${tenant}">
-            <button type="submit" class="ui button">Hinzufügen</button>
+    </div>
+    <div class="button-section" sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')">
+        <input th:name="tenantID" th:value="${tenant}" type="hidden">
+        <button class="ui button" type="submit">Hinzufügen</button>
+    </div>
+</form>
+<br>
+<div class="plotOverview" th:if="not ${canAddChairman}">
+    <div class="plotList" th:each="plot : ${plotList}">
+        <div class="plot" th:style="'background: ' + ${plotColors.get(plot)}">
+            <a th:href="'/plot/' + ${plot.getId()}" th:if="${userRights.get(plot)}" th:text="${plot.getName()}"
+               title="Details anzeigen"> Text </a>
+            <span th:text="${plot.getName()}" th:unless="${userRights.get(plot)}"> Text </span>
         </div>
-    </form>
-   <br>
-        <div class="plotOverview" th:if="not ${canAddChairman}">
-            <div class="plotList" th:each="plot : ${plotList}">
-              <div class="plot" th:style="'background: ' + ${plotColors.get(plot)}">
-                    <a title="Details anzeigen" th:text="${plot.getName()}" th:if="${userRights.get(plot)}" th:href="'/plot/' + ${plot.getId()}"> Text </a>
-                    <span th:unless="${userRights.get(plot)}" th:text="${plot.getName()}"> Text </span>
-              </div>
-            </div>
-        </div>
+    </div>
+</div>
 
-        <div class="button-section">
-            <button class="button" th:if="${canAdd}" onclick="location.href='/plotRegistration'">Parzelle hinzufügen</button>
-        </div>
+<div class="button-section">
+    <button class="button" onclick="location.href='/plotRegistration'" th:if="${canAdd}">Parzelle hinzufügen</button>
+</div>
 
 </div>
 <div th:include="navigation :: footer"></div>

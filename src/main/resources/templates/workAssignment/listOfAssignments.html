@@ -1,60 +1,67 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
-          href="../resources/css/tenantTable.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantTable.css}" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
     <title>Liste der Termine</title>
 </head>
 <body>
 
-    <div class="ui-container">
-        <nav th:include="navigation :: navigation"/>
-        <div class="header-title">
-            <h1>Liste aller Termine</h1>
-        </div>
+<div class="ui-container">
+    <nav th:include="navigation :: navigation"/>
+    <div class="header-title">
+        <h1>Liste aller Termine</h1>
     </div>
-    <center>
-            <table id="myTable">
-                <thead>
-                <tr>
-                    <th>Datum / Zeit</th>
-                    <th>Titel</th>
-                    <th>Beschreibung</th>
-                    <th>Arbeitsaufwand in Stunden</th>
-                    <th>Parzellen</th>
-                    <th>Bearbeiten</th>
-                    <th sec:authorize="hasAnyRole('Vorstandsvorsitzender,Stellvertreter')">Löschen</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="assignment : ${ListOfAssignments}">
-                    <td th:text="${assignment.date}">Datum</td>
-                    <td th:text="${assignment.title}">Titel</td>
-                    <td th:text="${assignment.description}">Beschreibung</td>
-                    <td th:text="${assignment.getWorkHours()}">Arbeitsaufwand</td>
-                    <td th:text="${assignment.plots.size()}">Parzellen</td>
-                    <td hidden><input class="text_bgImage" id="id" name="id" th:value="${(assignment.getId())}"  type="number" required="required"/></td>
-                    <td style="font-size:25px;"> <a th:title="Bearbeiten" th:href="'/workAssignmentModify?id=' +${assignment.getId()}" > &#9998; </a> </td>
-                    <form method="post" role="form" th:action="@{/removeWorkAssignment}">
-                        <td hidden><input class="text_bgImage" id="id" name="id" th:value="${(assignment.getId())}"  type="number" required="required"/></td>
-                        <td sec:authorize="hasAnyRole('Vorstandsvorsitzender,Stellvertreter')"><button type="submit"><i style="color: red" class="material-icons">delete</i></button></td>
-                    </form>
-                </tr>
-                </tr></tbody>
-            </table>
-    </center>
-    <div th:include="navigation :: footer"></div>
+</div>
+<center>
+    <table id="myTable">
+        <thead>
+        <tr>
+            <th>Datum / Zeit</th>
+            <th>Titel</th>
+            <th>Beschreibung</th>
+            <th>Arbeitsaufwand in Stunden</th>
+            <th>Parzellen</th>
+            <th>Bearbeiten</th>
+            <th sec:authorize="hasAnyRole('Vorstandsvorsitzender,Stellvertreter')">Löschen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="assignment : ${ListOfAssignments}">
+            <td th:text="${assignment.date}">Datum</td>
+            <td th:text="${assignment.title}">Titel</td>
+            <td th:text="${assignment.description}">Beschreibung</td>
+            <td th:text="${assignment.getWorkHours()}">Arbeitsaufwand</td>
+            <td th:text="${assignment.plots.size()}">Parzellen</td>
+            <td hidden><input class="text_bgImage" id="id" name="id" required="required"
+                              th:value="${(assignment.getId())}"
+                              type="number"/></td>
+            <td style="font-size:25px;"><a th:href="'/workAssignmentModify?id=' +${assignment.getId()}"
+                                           th:title="Bearbeiten"> &#9998; </a>
+            </td>
+            <form method="post" role="form" th:action="@{/removeWorkAssignment}">
+                <td hidden><input class="text_bgImage" id="id" name="id" required="required"
+                                  th:value="${(assignment.getId())}" type="number"/></td>
+                <td sec:authorize="hasAnyRole('Vorstandsvorsitzender,Stellvertreter')">
+                    <button type="submit"><i class="material-icons" style="color: red">delete</i></button>
+                </td>
+            </form>
+        </tr>
+        </tr></tbody>
+    </table>
+</center>
+<div th:include="navigation :: footer"></div>
 </body>
 </html>

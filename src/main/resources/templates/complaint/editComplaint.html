@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
@@ -28,8 +28,8 @@
 </div>
 
 <center>
-    <div sec:authorize="hasRole('Vorstandsvorsitzender')"  class="dropdown">
-        <button class="dropbtn" style="width: auto" onclick="myFunction()">&#9660; neuer Obmann zuordnen</button>
+    <div class="dropdown" sec:authorize="hasRole('Vorstandsvorsitzender')">
+        <button class="dropbtn" onclick="myFunction()" style="width: auto">&#9660; neuer Obmann zuordnen</button>
         <div class="dropdown-content" id="myDropdown">
             <span th:each="obmann : ${obmannList}">
                 <a th:href="'/change-assigned-obmann/' + ${complaint.id} + '/' + ${obmann.id}"
@@ -39,58 +39,59 @@
     </div>
 
 
-<form id="form"  method="post" role="form" th:action="@{/update-complaint/{id}(id=${complaint.id})}">
+    <form id="form" method="post" role="form" th:action="@{/update-complaint/{id}(id=${complaint.id})}">
 
-    <br>
-    <table>
-        <tr>
-            <th>
-                <label for="state">Zustand</label>
-            </th>
-            <td id="state" th:text="${complaint.state}">Zustand</td>
+        <br>
+        <table>
+            <tr>
+                <th>
+                    <label for="state">Zustand</label>
+                </th>
+                <td id="state" th:text="${complaint.state}">Zustand</td>
 
-        </tr>
-        <tr>
-            <th>
-                <label for="assigned-obmann">zugeordneter Obmann</label>
-            </th>
-            <td id="assigned-obmann" th:text="${complaint.assignedObmann.getFullName()}">zugeordneter Obmann</td>
-        </tr>
-        <tr>
-            <th>
-                <label for="plot-tenants-name">Name des Angeklagten</label>
-            </th>
-            <td id="plot-tenants-name" th:text="${plotTenants}">Name des Angeklagten</td>
-        </tr>
-        <tr>
-            <th>
-                <label for="subject">Grund der Beschwerde</label>
-            </th>
-            <td>
-                <input class="text_bgImage" id="subject" name="subject" required="required"
-                       th:value="${complaint.subject}"
-                       type="text"/>
-            </td>
-        </tr>
-        <tr>
-            <th>
-                <label for="description">Beschreibung</label>
-            </th>
-            <td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="assigned-obmann">zugeordneter Obmann</label>
+                </th>
+                <td id="assigned-obmann" th:text="${complaint.assignedObmann.getFullName()}">zugeordneter Obmann</td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="plot-tenants-name">Name des Angeklagten</label>
+                </th>
+                <td id="plot-tenants-name" th:text="${plotTenants}">Name des Angeklagten</td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="subject">Grund der Beschwerde</label>
+                </th>
+                <td>
+                    <input class="text_bgImage" id="subject" name="subject" required="required"
+                           th:value="${complaint.subject}"
+                           type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="description">Beschreibung</label>
+                </th>
+                <td>
                 <textarea cols="45" id="description" name="description" required="required" rows="8"
                           th:text="${complaint.description}" th:value="${complaint.description}"></textarea>
-            </td>
-        </tr>
-    </table>
-        <div class="button-section" >
-        <button style="display: inline-block;" class="button" type="submit">Beschwerde aktualisieren</button>
-    </div>
-</form>
+                </td>
+            </tr>
+        </table>
+        <div class="button-section">
+            <button class="button" style="display: inline-block;" type="submit">Beschwerde aktualisieren</button>
+        </div>
+    </form>
 
-<div class="button-section">
-<form method="post" style="display: inline-block" th:action="@{/change-complaint-state/{id}(id=${id})}">
-    <button class="button">Zustand ändern</button>
-</form></div>
+    <div class="button-section">
+        <form method="post" style="display: inline-block" th:action="@{/change-complaint-state/{id}(id=${id})}">
+            <button class="button">Zustand ändern</button>
+        </form>
+    </div>
 </center>
 <div th:include="navigation :: footer"></div>
 </body>

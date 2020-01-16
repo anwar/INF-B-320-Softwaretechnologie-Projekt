@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
-          href="../resources/css/tenantTable.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantTable.css}" type="text/css">
 
     <meta charset="UTF-8">
     <title>Bill</title>
@@ -24,43 +24,46 @@
     <h1>Rechnungen</h1>
 </div>
 
-<div><table>
-    <thead>
-    <tr>
-        <th>Rechnungen</th>
-        <th>Herunterladen</th>
-        <th>Per Email schicken</th>
-    </tr>
-    </thead>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Rechnungen</th>
+            <th>Herunterladen</th>
+            <th>Per Email schicken</th>
+        </tr>
+        </thead>
         <tbody th:remove="all-but-first">
 
-           <tr  th:each="procedure : ${procedures}">
-               <td> <label th:text="${procedure.getYear()}"> Paul</label> </td>
-			   <td>
-                   <form method="post" th:action="@{/PDF}">
-                        <div>
-                            <input type="hidden" id="procedureId" name="procedureId" th:value="${procedure.getId()}">
-                            <button  type="submit" style="width: 50px" class="button" > &#10515; </button>
-                        </div>
-                    </form>
-			   </td>
-               <td>
-                   <form method="post" th:action="@{/send-by-email}">
-                       <div>
-                           <input type="hidden" id="procedureId" name="procedureId" th:value="${procedure.getId()}">
-                           <input type="hidden" id="plotId" name="plotId" th:value="${plot.getId()}">
-                           <button  type="submit" style="width: 50px" class="button" > &#10515; </button>
-                       </div>
-                   </form>
-               </td>
+        <tr th:each="procedure : ${procedures}">
+            <td><label th:text="${procedure.getYear()}"> Paul</label></td>
+            <td>
+                <form method="post" th:action="@{/PDF}">
+                    <div>
+                        <input id="procedureId" name="procedureId" th:value="${procedure.getId()}" type="hidden">
+                        <button class="button" style="width: 50px" type="submit"> &#10515;</button>
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form method="post" th:action="@{/send-by-email}">
+                    <div>
+                        <input id="procedureId" name="procedureId" th:value="${procedure.getId()}" type="hidden">
+                        <input id="plotId" name="plotId" th:value="${plot.getId()}" type="hidden">
+                        <button class="button" style="width: 50px" type="submit"> &#10515;</button>
+                    </div>
+                </form>
+            </td>
 
-</tr>  </tbody>
-</table>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
-<form method="get" th:action="@{/finalize/{id}(id=${plot.getId()})}" sec:authorize="hasAnyRole('Vorstandsvorsitzender,Stellvertreter')">
+<form method="get" sec:authorize="hasAnyRole('Vorstandsvorsitzender,Stellvertreter')"
+      th:action="@{/finalize/{id}(id=${plot.getId()})}">
     <div class="button-section">
-        <button type="submit" style="display: inline-block;" class="button">
+        <button class="button" style="display: inline-block;" type="submit">
             Rechnungen abschließen
         </button>
     </div>

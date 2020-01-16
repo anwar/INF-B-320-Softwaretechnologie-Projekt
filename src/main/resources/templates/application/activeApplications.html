@@ -1,18 +1,18 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
-          href="../resources/css/tenantTable.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantTable.css}" type="text/css">
     <meta charset="UTF-8">
     <title>Applications</title>
 </head>
@@ -22,38 +22,40 @@
     <div class="header-title">
         <h1>Bewerbungen</h1>
     </div>
-    <div><table>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>E-Mail</th>
-            <th>Status</th>
-        </tr>
-        </thead>
-        <tbody th:remove="all-but-first">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>E-Mail</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody th:remove="all-but-first">
 
-           <tr  th:each="bewerbung : ${applications}">
-                <td> <input class="text_bgImage" th:value="${bewerbung.getFirstName() + ' ' + bewerbung.getLastName()}" type="text" readonly/></td>
-                <td> <input class="text_bgImage" th:value="${bewerbung.getEmail()}" type="text" readonly/></td>
-				<td> <input class="text_bgImage" th:value="${bewerbung.getStateAsString()}" type="text" readonly/></td>
+            <tr th:each="bewerbung : ${applications}">
+                <td><input class="text_bgImage" readonly
+                           th:value="${bewerbung.getFirstName() + ' ' + bewerbung.getLastName()}" type="text"/></td>
+                <td><input class="text_bgImage" readonly th:value="${bewerbung.getEmail()}" type="text"/></td>
+                <td><input class="text_bgImage" readonly th:value="${bewerbung.getStateAsString()}" type="text"/></td>
                 <td>
-					<form method="post" th:action="@{/accept}">
-                        <input type="hidden" name="plotId" value="0" th:value="${bewerbung.getPlotId()}"/>
-                        <input type="hidden" name="appId" value="0" th:value="${bewerbung.getId()}"/>
-						<button  type="submit" class="button" >Annehmen</button>
+                    <form method="post" th:action="@{/accept}">
+                        <input name="plotId" th:value="${bewerbung.getPlotId()}" type="hidden" value="0"/>
+                        <input name="appId" th:value="${bewerbung.getId()}" type="hidden" value="0"/>
+                        <button class="button" type="submit">Annehmen</button>
 
-					</form>
-					<form method="post" th:action="@{/deny}">
-                        <input type="hidden" name="plotId" value="0" th:value="${bewerbung.getPlotId()}"/>
-                        <input type="hidden" name="appId" value="0" th:value="${bewerbung.getId()}"/>
-						<button  type="submit" class="button" >Ablehnen</button>
+                    </form>
+                    <form method="post" th:action="@{/deny}">
+                        <input name="plotId" th:value="${bewerbung.getPlotId()}" type="hidden" value="0"/>
+                        <input name="appId" th:value="${bewerbung.getId()}" type="hidden" value="0"/>
+                        <button class="button" type="submit">Ablehnen</button>
 
-					</form>
-				</td>
+                    </form>
+                </td>
 
-			</tr>
-		</tbody>
-    </table>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <div th:include="navigation :: footer"></div>

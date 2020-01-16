@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantdetailsTable.css}" rel="stylesheet"
-          href="../resources/css/tenantdetailsTable.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantdetailsTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantdetailsTable.css}" type="text/css">
 
     <title>Um Parzelle bewerben</title>
 </head>
@@ -27,43 +27,43 @@
 </div>
 
 
-    <form method="post" role="form" id="form" th:action="@{/createApplication}" th:object="${form}">
-        <table>
-            <tr>
-                <th>
-                    <label for="firstName">Vorname</label>
-                </th>
-                <td>
-                    <input class="text_bgImage" id="firstName" th:field="*{firstName}" type="text" required="required"/>
-                </td>
+<form id="form" method="post" role="form" th:action="@{/createApplication}" th:object="${form}">
+    <table>
+        <tr>
+            <th>
+                <label for="firstName">Vorname</label>
+            </th>
+            <td>
+                <input class="text_bgImage" id="firstName" required="required" th:field="*{firstName}" type="text"/>
+            </td>
 
-            </tr>
-            <tr>
-                <th>
-                    <label for="lastName">Nachname</label>
-                </th>
-                <td>
-                    <input class="text_bgImage" id="lastName" th:field="*{lastName}" type="text" required="required"/>
-                </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="lastName">Nachname</label>
+            </th>
+            <td>
+                <input class="text_bgImage" id="lastName" required="required" th:field="*{lastName}" type="text"/>
+            </td>
 
-            </tr>
-            <br/>
-            <tr>
-                <th>
-                    <label for="email">E-Mail</label>
-                </th>
-                <td>
-                    <input class="text_bgImage" id="email" th:field="*{email}" type="email" required="required"/>
-                </td>
+        </tr>
+        <br/>
+        <tr>
+            <th>
+                <label for="email">E-Mail</label>
+            </th>
+            <td>
+                <input class="text_bgImage" id="email" required="required" th:field="*{email}" type="email"/>
+            </td>
 
-            </tr>
-        </table>
+        </tr>
+    </table>
     <div class="button-section">
-		<input  type="hidden" id="plotId" name="plotId" th:field="*{plotId}" th:value="${plotId}">
+        <input id="plotId" name="plotId" th:field="*{plotId}" th:value="${plotId}" type="hidden">
 
-        <button type="submit" class="button">Bewerbung abschicken</button>
+        <button class="button" type="submit">Bewerbung abschicken</button>
     </div>
-    </form>
+</form>
 
 <div th:include="navigation :: footer"></div>
 </body>

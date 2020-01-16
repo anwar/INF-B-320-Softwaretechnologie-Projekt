@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
-          href="../resources/css/tenantTable.css" type="text/css">
-    <script th:src="@{../resources/css/js/dropdown.js}"
-            src="../resources/css/js/dropdown.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantTable.css}" type="text/css">
+    <script src="../resources/css/js/dropdown.js"
+            th:src="@{../resources/css/js/dropdown.js}"></script>
 
     <meta charset="UTF-8">
 
@@ -36,7 +36,9 @@
             <th>Beschreibung</th>
             <th>Zustand</th>
             <th>zugeordneter Obmann</th>
-            <th sec:authorize="hasRole('Vorstandsvorsitzender') || hasRole('Obmann')|| hasRole('Stellvertreter')">Bearbeiten</th>
+            <th sec:authorize="hasRole('Vorstandsvorsitzender') || hasRole('Obmann')|| hasRole('Stellvertreter')">
+                Bearbeiten
+            </th>
             <th sec:authorize="hasRole('Vorstandsvorsitzender')|| hasRole('Stellvertreter')">Löschen</th>
         </tr>
         </thead>
@@ -44,8 +46,8 @@
         <tr th:each="c : ${complaints}">
             <td>
                 <a style="color: #043353; text-decoration: underline"
-                        th:text="'Plot ' + ${c.plot.getName()}"
-                   th:href="@{/plot/{plot_id}(plot_id=${c.plot.getId().toString()})}">gegen</a>
+                   th:href="@{/plot/{plot_id}(plot_id=${c.plot.getId().toString()})}"
+                   th:text="'Plot ' + ${c.plot.getName()}">gegen</a>
             </td>
             <td th:text="${c.complainant.getFullName()}">von</td>
             <td th:text="${c.subject}">Titel</td>
@@ -53,8 +55,8 @@
             <td th:text="${c.state}">Zustand</td>
             <td th:text="${c.assignedObmann.getFullName()}">zugeordneter Obmann</td>
             <td sec:authorize="hasRole('Vorstandsvorsitzender') || hasRole('Obmann') || hasRole('Stellvertreter')">
-                <form th:unless="${c.state} == ${finishedState}" method="post" style="display: inline-block"
-                      th:action="@{/edit-complaint/{id}(id=${c.id})}">
+                <form method="post" style="display: inline-block" th:action="@{/edit-complaint/{id}(id=${c.id})}"
+                      th:unless="${c.state} == ${finishedState}">
                     <button class="btn btn-sm float-center"
                             style="font-size: 18px; background: transparent; border: none;"
                             th:title="Bearbeiten">&#9998;

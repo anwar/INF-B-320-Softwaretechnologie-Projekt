@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
-          href="../static/resources/css/style.css" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../static/resources/css/style.css" rel="stylesheet"
+          th:href="@{/resources/css/style.css}" type="text/css"/>
 
     <title>Übersicht</title>
 </head>
@@ -24,14 +24,38 @@
     <div align="center">
         <table>
             <tbody>
-                <tr><th>Name</th> <td align="center" th:text="${plotName}"> Text </td></tr>
-                <tr><th>Größe</th> <td align="center" th:text="${plotSize}"> Text </td></tr>
-                <tr><th>Beschreibung</th> <td align="center" th:text="${plotDescription}"> Text </td></tr>
-                <tr><th>Schätzwert</th> <td align="center" th:text="${plotPrice}"> Text </td></tr>
-                <tr th:if="${canSee}"><th>Hauptpächter</th> <td align="center" th:text="${mainTenant}"> Text </td></tr>
-                <tr th:if="${canSee}"><th>Nebenpächter</th> <td></td></tr>
-                <tr th:if="${canSee}" th:each="tenant : ${subTenants}"><th></th> <td align="center" th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()}"> Text </td></tr>
-                <tr th:if="${canSee}"><th>Arbeitsstunden</th> <td align="center" th:text="${workHours}"> Text </td></tr>
+            <tr>
+                <th>Name</th>
+                <td align="center" th:text="${plotName}"> Text</td>
+            </tr>
+            <tr>
+                <th>Größe</th>
+                <td align="center" th:text="${plotSize}"> Text</td>
+            </tr>
+            <tr>
+                <th>Beschreibung</th>
+                <td align="center" th:text="${plotDescription}"> Text</td>
+            </tr>
+            <tr>
+                <th>Schätzwert</th>
+                <td align="center" th:text="${plotPrice}"> Text</td>
+            </tr>
+            <tr th:if="${canSee}">
+                <th>Hauptpächter</th>
+                <td align="center" th:text="${mainTenant}"> Text</td>
+            </tr>
+            <tr th:if="${canSee}">
+                <th>Nebenpächter</th>
+                <td></td>
+            </tr>
+            <tr th:each="tenant : ${subTenants}" th:if="${canSee}">
+                <th></th>
+                <td align="center" th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()}"> Text</td>
+            </tr>
+            <tr th:if="${canSee}">
+                <th>Arbeitsstunden</th>
+                <td align="center" th:text="${workHours}"> Text</td>
+            </tr>
             </tbody>
             <div class="button-section">
                 <button class="button" th:if="${canModify}">Zählerstände eintragen</button>
@@ -40,9 +64,11 @@
             </div>
         </table>
         <div class="button-section" th:if="!${rented}">
-            <button class="button"  onclick="location.href='/createApplication/${plotID}'" >Bewerben</button>
-            <button class="button" onclick="location.href= '/application'" th:if="${canSeeApplications}">Bewerbungen anzeigen</button>
-            <input type="hidden" id="plotID" name="plotID" th:value="${plotID}">
+            <button class="button" onclick="location.href='/createApplication/${plotID}'">Bewerben</button>
+            <button class="button" onclick="location.href= '/application'" th:if="${canSeeApplications}">Bewerbungen
+                anzeigen
+            </button>
+            <input id="plotID" name="plotID" th:value="${plotID}" type="hidden">
         </div>
     </div>
 </div>

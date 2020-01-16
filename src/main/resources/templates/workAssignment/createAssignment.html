@@ -1,73 +1,76 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantdetailsTable.css}" rel="stylesheet"
-          href="../resources/css/tenantdetailsTable.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantdetailsTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantdetailsTable.css}" type="text/css">
     <title>Termin erstellen</title>
 </head>
 <body>
 
-    <div >
-        <nav th:include="navigation :: navigation"></nav>
-        <div class="header-title">
-            <h1>Einsatz erstellen</h1>
-        </div>
+<div>
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="header-title">
+        <h1>Einsatz erstellen</h1>
     </div>
+</div>
 
-    <form method="post" role="form" id="form" th:action="@{/createAssignment}" th:object="${form}">
-        <table>
-            <tr>
-                <th>
-                    <label for="date">Datum</label>
-                </th>
-                <td>
-                    <input class="text_bgImage" id="date" th:field="*{date}" type="date" required="required" th:min="${dateNow}" th:max="${dateMax}"/>
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    <label for="time">Zeit</label>
-                </th>
+<form id="form" method="post" role="form" th:action="@{/createAssignment}" th:object="${form}">
+    <table>
+        <tr>
+            <th>
+                <label for="date">Datum</label>
+            </th>
+            <td>
+                <input class="text_bgImage" id="date" required="required" th:field="*{date}" th:max="${dateMax}"
+                       th:min="${dateNow}" type="date"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="time">Zeit</label>
+            </th>
 
-                  <td> <input class="text_bgImage" id="time" th:field="*{time}" type="time" required="required" th:min="${timeNow}"/>
-                </td>
-            </tr>
+            <td><input class="text_bgImage" id="time" required="required" th:field="*{time}" th:min="${timeNow}"
+                       type="time"/>
+            </td>
+        </tr>
 
-            <tr>
-                <th>
-                    <label for="title">Titel</label>
-                </th>
-                <td>
-                    <input  class="text_bgImage" id="title" th:field="*{title}"  type="text" required="required"/>
-                </td>
+        <tr>
+            <th>
+                <label for="title">Titel</label>
+            </th>
+            <td>
+                <input class="text_bgImage" id="title" required="required" th:field="*{title}" type="text"/>
+            </td>
 
-            </tr>
-            <br/>
-            <tr>
-                <th>
-                    <label for="description">Beschreibung</label>
-                </th>
-                <td>
-                    <input  class="text_bgImage" id="description" th:field="*{description}" type="text" required="required"/>
-                </td>
+        </tr>
+        <br/>
+        <tr>
+            <th>
+                <label for="description">Beschreibung</label>
+            </th>
+            <td>
+                <input class="text_bgImage" id="description" required="required" th:field="*{description}" type="text"/>
+            </td>
 
-            </tr>
-        </table>
-        <div class="button-section">
-        <button type="submit" class="button" >Neuen Termin hinzufügen</button></div>
-        </div>
-    </form>
+        </tr>
+    </table>
+    <div class="button-section">
+        <button class="button" type="submit">Neuen Termin hinzufügen</button>
+    </div>
+    </div>
+</form>
 
-    <div th:include="navigation :: footer"></div>
+<div th:include="navigation :: footer"></div>
 </body>
 </html>

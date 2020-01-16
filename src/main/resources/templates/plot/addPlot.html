@@ -1,18 +1,18 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
-          href="../resources/css/tenantTable.css" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantTable.css}" type="text/css"/>
 
     <meta charset="UTF-8">
     <title>editPlot</title>
@@ -26,28 +26,30 @@
 
 <div>
     <form method="post" th:action="@{/addPlot}">
-        <table  id="myTable">
+        <table id="myTable">
 
             <tbody>
             <tr>
-                <td> <label for="name">Nummer</label> </td>
-                <td><input class="text_bgImage" id="name" name="name" type="number" min="1" required="required"/></td>
+                <td><label for="name">Nummer</label></td>
+                <td><input class="text_bgImage" id="name" min="1" name="name" required="required" type="number"/></td>
             </tr>
             <tr>
-                <td> <label for="size">Größe</label> </td>
-                <td><input class="text_bgImage" id="size" name="size" type="number" min="1" required="required"/></td>
+                <td><label for="size">Größe</label></td>
+                <td><input class="text_bgImage" id="size" min="1" name="size" required="required" type="number"/></td>
             </tr>
             <tr>
-                <td> <label for="description">Beschreibung</label> </td>
-                <td><input class="text_bgImage" id="description" name="description" type="text" required="required"/></td>
+                <td><label for="description">Beschreibung</label></td>
+                <td><input class="text_bgImage" id="description" name="description" required="required" type="text"/>
+                </td>
             </tr>
             </tbody>
         </table>
         <div class="button-section">
 
-            <button  type="submit"  class="button" >Hinzufügen</button>
+            <button class="button" type="submit">Hinzufügen</button>
 
-        </div></form>
+        </div>
+    </form>
 </div>
 
 

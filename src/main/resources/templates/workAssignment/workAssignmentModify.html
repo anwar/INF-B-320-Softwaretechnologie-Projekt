@@ -1,20 +1,20 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantdetailsTable.css}" rel="stylesheet"
-          href="../resources/css/tenantdetailsTable.css" type="text/css">
-    <link th:href="@{../resources/css/modifyTenant.css}" rel="stylesheet"
-          href="../resources/css/modifyTenant.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantdetailsTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantdetailsTable.css}" type="text/css">
+    <link href="../resources/css/modifyTenant.css" rel="stylesheet"
+          th:href="@{../resources/css/modifyTenant.css}" type="text/css">
 </head>
 <body>
 <div class="ui container">
@@ -24,20 +24,26 @@
         <div class="header-title">
             <h1>Parzellen aus dem Termin entfernen</h1>
         </div>
-            <table>
-                <tr>
-                    <th>Parzelle</th>
-                    <th>Löschen</th>
-                </tr>
-                <tr th:each="plot: ${plotListForWorkAssignment}">
-                    <td th:text="${plot.getName()}">Plot</td>
-                    <form method="post" th:action="@{/removePlotOfWorkAssignment}">
-                        <td hidden><input hidden id="plotID" name="plotID" th:value="${plot.getId()}" required="required"/></td>
-                        <td hidden><input class="text_bgImage" id="assignmentID" name="assignmentID" th:value="${(workAssignment.getId())}"  type="number" required="required"/></td>
-                        <td><button style="font-size:13px; height: 35px; width: 120px" type="submit" class="ui button">Löschen</button></td>
-                    </form>
-                </tr>
-            </table>
+        <table>
+            <tr>
+                <th>Parzelle</th>
+                <th>Löschen</th>
+            </tr>
+            <tr th:each="plot: ${plotListForWorkAssignment}">
+                <td th:text="${plot.getName()}">Plot</td>
+                <form method="post" th:action="@{/removePlotOfWorkAssignment}">
+                    <td hidden><input hidden id="plotID" name="plotID" required="required" th:value="${plot.getId()}"/>
+                    </td>
+                    <td hidden><input class="text_bgImage" id="assignmentID" name="assignmentID"
+                                      required="required" th:value="${(workAssignment.getId())}" type="number"/></td>
+                    <td>
+                        <button class="ui button" style="font-size:13px; height: 35px; width: 120px" type="submit">
+                            Löschen
+                        </button>
+                    </td>
+                </form>
+            </tr>
+        </table>
 
     </div>
     <br/>
@@ -50,35 +56,43 @@
         <form method="post" th:action="@{/modifiedWorkAssignment}">
             <table>
 
-                <tr> </td><td style="font-size:25px; background-color: white;"> <a th:title="Abbrechen" th:href="'/listOfAssignments'" > &#10060; </a> </td></tr>
+                <tr> </td>
+                    <td style="font-size:25px; background-color: white;"><a th:href="'/listOfAssignments'"
+                                                                            th:title="Abbrechen">
+                        &#10060; </a></td>
+                </tr>
                 <div>
                     <tr>
-                        <td hidden> <label for="id">ID</label> </td>
-                        <td hidden><input class="text_bgImage" id="id" name="id" th:value="${(workAssignment.getId())}"  type="number" required="required"/></td>
+                        <td hidden><label for="id">ID</label></td>
+                        <td hidden><input class="text_bgImage" id="id" name="id" required="required"
+                                          th:value="${(workAssignment.getId())}" type="number"/></td>
                     </tr>
                 </div>
                 <div>
                     <tr>
                         <th><label for="title">Titel</label></th>
-                        <td>  <input class="text_bgImage" id="title" name="title" minlength="1" th:value="${(workAssignment.getTitle())}"  type="text" required="required"/>
+                        <td><input class="text_bgImage" id="title" minlength="1" name="title"
+                                   required="required" th:value="${(workAssignment.getTitle())}" type="text"/>
                     </tr>
                 </div>
                 <div>
                     <tr>
                         <th><label for="description">Beschreibung</label></th>
-                        <td>  <input class="text_bgImage" id="description" name="description" minlength="1" th:value="${(workAssignment.getDescription())}"  type="text" required="required"/>
+                        <td><input class="text_bgImage" id="description" minlength="1" name="description"
+                                   required="required" th:value="${(workAssignment.getDescription())}" type="text"/>
                     </tr>
                 </div>
                 <div>
                     <tr>
                         <th><label for="workHours">Arbeitsstunden</label></th>
-                        <td><input class="text_bgImage" id="workHours" name="workHours" min="0" th:value="${(workAssignment.getWorkHours())}" type="number" required="required"/>
+                        <td><input class="text_bgImage" id="workHours" min="0" name="workHours"
+                                   required="required" th:value="${(workAssignment.getWorkHours())}" type="number"/>
                     </tr>
                 </div>
             </table>
             <div class="button-section">
 
-                <button  type="submit" class="button" >Änderungen speichern</button>
+                <button class="button" type="submit">Änderungen speichern</button>
             </div>
         </form>
     </div>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
-          href="../resources/css/tenantTable.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantTable.css}" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
 
@@ -28,31 +28,37 @@
 </div>
 
 
-    <table id="myTable">
-        <thead>
-        <tr>
-            <th>Datum / Zeit</th>
-            <th>Titel</th>
-            <th>Beschreibung</th>
-            <th>Arbeitsstunden</th>
-            <th>Speichern</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="workAssignment : ${ListOfAssignments}">
-            <td th:text="${workAssignment.date}"></td>
-            <td th:text="${workAssignment.title}"></td>
-            <td th:text="${workAssignment.description}"></td>
-            <form method="post" th:action="@{/changeWorkHours}">
-                <td><input class="text_bgImage" style="width: 90px;" type="text" id="workHours" name="workHours" th:value="${workAssignment.getWorkHours()}"/></td>
-                <td hidden><input class="text_bgImage" id="id" name="id" th:value="${(workAssignment.getId())}"  type="number" required="required"/></td>
-                <td><button style="font-size:13px; height: 35px; width: 120px" type="submit" class="ui button">Speichern</button></td>
-            </form>
-        </tr>
-        </tbody>
-    </table>
-    <br/>
-    <br/>
+<table id="myTable">
+    <thead>
+    <tr>
+        <th>Datum / Zeit</th>
+        <th>Titel</th>
+        <th>Beschreibung</th>
+        <th>Arbeitsstunden</th>
+        <th>Speichern</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="workAssignment : ${ListOfAssignments}">
+        <td th:text="${workAssignment.date}"></td>
+        <td th:text="${workAssignment.title}"></td>
+        <td th:text="${workAssignment.description}"></td>
+        <form method="post" th:action="@{/changeWorkHours}">
+            <td><input class="text_bgImage" id="workHours" name="workHours" style="width: 90px;"
+                       th:value="${workAssignment.getWorkHours()}"
+                       type="text"/></td>
+            <td hidden><input class="text_bgImage" id="id" name="id" required="required"
+                              th:value="${(workAssignment.getId())}" type="number"/></td>
+            <td>
+                <button class="ui button" style="font-size:13px; height: 35px; width: 120px" type="submit">Speichern
+                </button>
+            </td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+<br/>
+<br/>
 <div th:include="navigation :: footer"></div>
 
 </body>
