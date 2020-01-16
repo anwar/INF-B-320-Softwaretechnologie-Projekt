@@ -66,3 +66,11 @@ und somit den bestehenden Mietvertrag für diese beenden. +
 Für den Fall, dass die anzuzeigende Parzelle momentan nicht vermietet wird hat der Nutzer unter "Optionen" des Weiteren
 die Möglichkeit, sich für diese zu bewerben. Der Vorstandsvorsitzende und sein Stellvertreter bekommen in diesem Fall die
 zusätzliche Auswahlmöglichkeit "Bewerbungen anzeigen" präsentiert.
+
+=== Informationen der Jahresabrechnung einer Parzelle
+Am Ende des Jahres werden Wassermänner die Wasserzählerstände für alle besetzte Parzelle eingeben und jeder Mieter
+kann den Stromzählerstand seiner Parzelle eingeben. Wenn alle benötige Zählerstand eingegeben werden, wird der Mieter
+seine aktuelle und vollständige Jahresabrechnung in "Meine Parzelle" -> "Meine Daten" -> "Option" ->
+"Rechnungen anzeigen" überprüfen. Er kann diese Jahresabrechnung in PDF herunterladen oder kann die Jahresabrechnung per
+seine angemeldete Email bekommen. Am Anfang des Jahres wird der Vorstandvorsitzender alle Jahresabrechnungen vom letzten
+Jahr abschließen um eine neue Rechnung für das nächste Jahr zu vorbereiten.
