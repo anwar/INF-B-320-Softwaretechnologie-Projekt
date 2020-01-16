@@ -25,6 +25,7 @@
 | 0.2.1   | 07.01.2020        | Ylvi Bachmann
 | 0.2.2   | 09.01.2020        | Ylvi Bachmann
 | 0.2.3   | 14.01.2020        | Ylvi Bachmann
+| 0.3.0   | 16.01.2020        | Muhammad Talal Anwar
 |===
 
 toc::[]
@@ -273,6 +274,33 @@ Die Anwendung verwendet *Hibernate Annotation basiertes Mapping*, um Java Klasse
 ....
 # spring.datasource.url=jdbc:h2:./db/kleingarten
 # spring.jpa.hibernate.ddl-auto=update
+....
+
+==== Email Service
+Die Anwendung verwendet *JavaMail*, um Email zu erzeugen und schicken. Die
+Email Service ist standardmäßig im Logging Modus gesetzt. Um den Service zu
+aktivieren, sodass Email(s) rausgeschickt können, muss das
+`app.messaging.enabled` property in der Datei `application.properties` zu
+`true` geändert werden:
+
+....
+app.messaging.enabled=true
+....
+
+Darüber hinaus, müssen die folgenden drei properties entsprechend konfiguriert
+werden:
+
+....
+spring.mail.username=your@email.com
+spring.mail.password=secret-password
+spring.mail.host=smtp.example-server.com
+....
+
+Um die Email Logging zu deaktivieren, muss das `app.messaging.logging` property
+zu `false` geändert werden:
+
+....
+app.messaging.logging=false
 ....
 
 ==== Benutzeroberfläche
