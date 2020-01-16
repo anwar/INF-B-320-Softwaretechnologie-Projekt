@@ -54,7 +54,7 @@ public class FeeController {
 		ByteArrayInputStream bis = getBillPDFBytes(mainProcedure);
 
 		var headers = new HttpHeaders();
-		headers.add("Content-Disposition", "inline; filename=Rechnungen.pdf");
+		headers.add("Content-Disposition", "inline; filename=Rechnung.pdf");
 
 		return ResponseEntity
 				.ok()
@@ -84,7 +84,7 @@ public class FeeController {
 
 
 		messageService.sendMessageWithAttachment(tenantEmail,
-				"Rechung fuer " + currentYear,
+				"Rechnung fuer " + currentYear,
 				"Im Anhang dieser Email finden Sie Ihre Rechnung fuer " + currentYear,
 				"Rechnungen-" + currentYear + ".pdf",
 				attachmentDataSource);
