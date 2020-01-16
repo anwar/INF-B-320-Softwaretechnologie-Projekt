@@ -32,7 +32,7 @@ public class Bill {
 	/**
 	 * Calculate all prices in List<Fee>
 	 *
-	 * @param feeList
+	 * @param feeList list of Fees 
 	 * @return sum as double
 	 */
 	public static double getSum(List<Fee> feeList) {
