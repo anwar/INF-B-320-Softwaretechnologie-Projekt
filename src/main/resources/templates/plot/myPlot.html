@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
-          href="../resources/css/tenantTable.css" type="text/css">
-    <link th:href="@{../resources/css/dropdown.css}" rel="stylesheet"
-          href="../resources/css/dropdown.css" type="text/css">
-    <script th:src="@{../resources/css/js/dropdown.js}"
-            src="../resources/css/js/dropdown.js"> </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantTable.css}" type="text/css">
+    <link href="../resources/css/dropdown.css" rel="stylesheet"
+          th:href="@{../resources/css/dropdown.css}" type="text/css">
+    <script src="../resources/css/js/dropdown.js"
+            th:src="@{../resources/css/js/dropdown.js}"></script>
 
 
     <title>Übersicht</title>
@@ -29,67 +29,82 @@
     </div>
 
     <div align="center" th:each="plot : ${plots}">
-     <center> <div class="dropdown">
-                        <button onclick="myFunction()" class="dropbtn">&#9660; Optionen</button>
-                        <div id="myDropdown" class="dropdown-content">
-                            <a th:if="${canModify}" th:href="'/editPlot/' + ${plot.getPlotId()}">Parzelle bearbeiten</a>
-                            <a th:if="${canSeeBills}" th:href="'/bill/' + ${plot.getPlotId()}" >Rechnungen anzeigen</a>
-                            <a th:if="not ${rented}" th:href="${'/createApplication/'} + ${plot.getPlotId()}" >Bewerben</a>
-                            <a th:if="not ${rented} and ${canSeeApplications}"  th:href="${'/showApplications/'} + ${plot.getPlotId()}">Bewerbungen anzeigen</a>
-                            <a th:if="${rented}" sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')" th:href="'/cancelPlot/' + ${plot.getPlotId()}">Parzelle freigeben</a>
-                            <a th:if="${rented}" th:href="'/add-complaint/' + ${plot.getPlotId().toString()}">Beschwerde schreiben</a>
-                            <a th:if="${rented} and ${rents}" th:href="'/listForPlotAssignments/' + ${plot.getPlotId()}">Termine anzeigen</a>
-                        </div>
-    </div></center>
+        <center>
+            <div class="dropdown">
+                <button class="dropbtn" onclick="myFunction()">&#9660; Optionen</button>
+                <div class="dropdown-content" id="myDropdown">
+                    <a th:href="'/editPlot/' + ${plot.getPlotId()}" th:if="${canModify}">Parzelle bearbeiten</a>
+                    <a th:href="'/bill/' + ${plot.getPlotId()}" th:if="${canSeeBills}">Rechnungen anzeigen</a>
+                    <a th:href="${'/createApplication/'} + ${plot.getPlotId()}" th:if="not ${rented}">Bewerben</a>
+                    <a th:href="${'/showApplications/'} + ${plot.getPlotId()}"
+                       th:if="not ${rented} and ${canSeeApplications}">Bewerbungen anzeigen</a>
+                    <a sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')"
+                       th:href="'/cancelPlot/' + ${plot.getPlotId()}"
+                       th:if="${rented}">Parzelle freigeben</a>
+                    <a th:href="'/add-complaint/' + ${plot.getPlotId().toString()}" th:if="${rented}">Beschwerde
+                        schreiben</a>
+                    <a th:href="'/listForPlotAssignments/' + ${plot.getPlotId()}" th:if="${rented} and ${rents}">Termine
+                        anzeigen</a>
+                </div>
+            </div>
+        </center>
         <br>
 
         <table>
             <thead>
-                <tr>
-                    <th>Informationen zu</th>
-                    <th>Gespeicherte Daten</th>
+            <tr>
+                <th>Informationen zu</th>
+                <th>Gespeicherte Daten</th>
 
-                </tr>
+            </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>Name</th>
-                    <td align="center" th:text="${plot.plotName}"> Text </td>
-                </tr>
+            <tr>
+                <th>Name</th>
+                <td align="center" th:text="${plot.plotName}"> Text</td>
+            </tr>
 
-                <tr>
-                    <th>Größe</th>
-                    <td align="center" th:text="${plot.plotSize}"> Text </td>
-                </tr>
+            <tr>
+                <th>Größe</th>
+                <td align="center" th:text="${plot.plotSize}"> Text</td>
+            </tr>
 
-                <tr>
-                    <th>Beschreibung</th>
-                    <td align="center" th:text="${plot.plotDescription}"> Text </td>
-                </tr>
+            <tr>
+                <th>Beschreibung</th>
+                <td align="center" th:text="${plot.plotDescription}"> Text</td>
+            </tr>
 
-                <tr th:if="not ${rented}">
-                    <th>Schätzwert</th>
-                    <td align="center" th:text="${plot.plotPrice}"> Text </td>
-                </tr>
+            <tr th:if="not ${rented}">
+                <th>Schätzwert</th>
+                <td align="center" th:text="${plot.plotPrice}"> Text</td>
+            </tr>
 
-                <tr th:if="${rented} and not ${plot.mainTenantRoles.isEmpty()}">
-                    <th>Hauptpächter</th>
-                    <td th:if="${rented} and not ${plot.mainTenantRoles.isEmpty()}" th:each="tenant : ${plot.getMainTenantRoles().keySet()}" th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()} +',  ' + ${plot.getMainTenantRoles().get(tenant)}"> Text </td>
-                </tr>
+            <tr th:if="${rented} and not ${plot.mainTenantRoles.isEmpty()}">
+                <th>Hauptpächter</th>
+                <td th:each="tenant : ${plot.getMainTenantRoles().keySet()}"
+                    th:if="${rented} and not ${plot.mainTenantRoles.isEmpty()}"
+                    th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()} +',  ' + ${plot.getMainTenantRoles().get(tenant)}">
+                    Text
+                </td>
+            </tr>
 
-                <tr th:if="${rented} and not ${plot.subTenantRoles.isEmpty()}" th:each="tenant : ${plot.getSubTenantRoles().keySet()}">
-                    <th>Nebenpächter</th>
-                    <td align="center" th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()} + ${plot.getSubTenantRoles().get(tenant)}"> Text </td>
-                </tr>
+            <tr th:each="tenant : ${plot.getSubTenantRoles().keySet()}"
+                th:if="${rented} and not ${plot.subTenantRoles.isEmpty()}">
+                <th>Nebenpächter</th>
+                <td align="center"
+                    th:text="${tenant.getForename()} + ' ' + ${tenant.getSurname()} + ${plot.getSubTenantRoles().get(tenant)}">
+                    Text
+                </td>
+            </tr>
 
-                <tr th:if="${rented} and ${canSeeWorkhours}">
-                    <th>Arbeitsstunden</th>
-                    <td align="center" th:text="${plot.workHours}"> Text </td>
-                </tr>
+            <tr th:if="${rented} and ${canSeeWorkhours}">
+                <th>Arbeitsstunden</th>
+                <td align="center" th:text="${plot.workHours}"> Text</td>
+            </tr>
             </tbody>
         </table>
     </div>
-    </div>
+</div>
 
 </div>
 <div th:include="navigation :: footer"></div>

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
 
 
     <title>changeEMail</title>
@@ -24,12 +24,14 @@
     <h1>Email ändern</h1>
 </div>
 
-<center><div style="background-color: darkseagreen; margin: auto;
+<center>
+    <div style="background-color: darkseagreen; margin: auto;
   width: 100%;
   padding: 10px; ">
-    <p >Ihre Email wurde erfolgreich geändert! &#128077;&#127995;</p>
+        <p>Ihre Email wurde erfolgreich geändert! &#128077;&#127995;</p>
 
-</div></center>
+    </div>
+</center>
 
 <div th:include="navigation :: footer"></div>
 </body>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantdetailsTable.css}" rel="stylesheet"
-          href="../resources/css/tenantdetailsTable.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantdetailsTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantdetailsTable.css}" type="text/css">
     <meta charset="UTF-8">
     <title>Beschwerde schreiben</title>
 </head>
@@ -21,7 +21,7 @@
 <div class="header-title">
     <h1>Beschwerde schreiben</h1>
 </div>
-<form method="post" role="form" id="form" th:action="@{/save-complaint/{plot_id}(plot_id=${plotId})}">
+<form id="form" method="post" role="form" th:action="@{/save-complaint/{plot_id}(plot_id=${plotId})}">
     <table>
         <tr>
             <th>
@@ -34,7 +34,7 @@
                 <label for="subject">Grund der Beschwerde</label>
             </th>
             <td>
-                <input class="text_bgImage" id="subject" name="subject" type="text" required="required"/>
+                <input class="text_bgImage" id="subject" name="subject" required="required" type="text"/>
             </td>
         </tr>
         <tr>
@@ -42,12 +42,12 @@
                 <label for="description">Beschreibung</label>
             </th>
             <td>
-                <textarea id="description" name="description" cols="45" rows="8" required="required"></textarea>
+                <textarea cols="45" id="description" name="description" required="required" rows="8"></textarea>
             </td>
         </tr>
     </table>
     <div class="button-section">
-        <button type="submit" class="button">Beschwerde abschicken</button>
+        <button class="button" type="submit">Beschwerde abschicken</button>
     </div>
 </form>
 

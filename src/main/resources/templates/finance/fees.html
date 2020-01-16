@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
-          href="../static/resources/css/style.css" type="text/css"/>
-    <link th:href="@{/resources/css/table.css}" rel="stylesheet"
-          href="../static/resources/css/table.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../static/resources/css/style.css" rel="stylesheet"
+          th:href="@{/resources/css/style.css}" type="text/css"/>
+    <link href="../static/resources/css/table.css" rel="stylesheet"
+          th:href="@{/resources/css/table.css}" type="text/css">
 
     <title>Fee</title>
 </head>
 <body>
 <nav th:include="navigation :: navigation"/>
-<center><div class="header-title">
-    <h1>Fee</h1>
-</div>
+<center>
+    <div class="header-title">
+        <h1>Fee</h1>
+    </div>
 
     <div class="plotRegistration">
         <table class="ui celled table">
@@ -31,8 +32,8 @@
                 <th>Mengen</th>
                 <th>Basispreis</th>
                 <th>Preis</th>
-                <th> </th>
-                <th> </th>
+                <th></th>
+                <th></th>
 
 
             </tr>
@@ -45,10 +46,11 @@
                 <td th:text="${fee.basePrice}">Basispreis</td>
                 <td th:text="${#numbers.formatDecimal(fee.price, 0, 2)}">Preis</td>
                 <td>
-                    <a type="ui-button" method="get" th:value="${fee.getId()}" th:href="@{/fees/{id}/delete (id=${fee.id})}">Löschen</a>
+                    <a method="get" th:href="@{/fees/{id}/delete (id=${fee.id})}" th:value="${fee.getId()}"
+                       type="ui-button">Löschen</a>
                 </td>
                 <td>
-                    <a type="ui-button" th:value="${fee.getId()}" th:href="@{/fees/{id}/edit (id=${fee.getId()})}">Bearbeiten</a>
+                    <a th:href="@{/fees/{id}/edit (id=${fee.getId()})}" th:value="${fee.getId()}" type="ui-button">Bearbeiten</a>
                 </td>
 
             </tr>
@@ -57,11 +59,13 @@
     </div>
     <p>
         <tr>
-            <td colspan="4" />
-            <td>Summe: <b th:text="${#aggregates.sum(feeList.![price])}" /></td>
-        </tr>µ
+            <td colspan="4"/>
+            <td>Summe: <b th:text="${#aggregates.sum(feeList.![price])}"/></td>
+        </tr>
+        µ
     <div class="button-section">
-        <button class="button" onclick="location.href='fees/add'">neue Gebühr erstellen</button></div>
+        <button class="button" onclick="location.href='fees/add'">neue Gebühr erstellen</button>
+    </div>
 
     </p>
 </center>

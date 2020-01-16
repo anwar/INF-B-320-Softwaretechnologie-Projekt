@@ -1,21 +1,21 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
 
-    <link th:href="@{../resources/css/tenantdetailsTable.css}" rel="stylesheet"
-          href="../resources/css/tenantdetailsTable.css" type="text/css">
-    <link th:href="@{../resources/css/modifyTenant.css}" rel="stylesheet"
-          href="../resources/css/modifyTenant.css" type="text/css">
+    <link href="../resources/css/tenantdetailsTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantdetailsTable.css}" type="text/css">
+    <link href="../resources/css/modifyTenant.css" rel="stylesheet"
+          th:href="@{../resources/css/modifyTenant.css}" type="text/css">
     <script src="../resources/css/test.js"></script>
 
 
@@ -29,82 +29,97 @@
     </div>
 
     <div>
-<form method="post" th:action="@{/modifiedTenant}">
-                <table>
+        <form method="post" th:action="@{/modifiedTenant}">
+            <table>
 
-                    <tr> </td><td style="font-size:25px; background-color: white;"> <a th:title="Abbrechen" th:href="'/tenantDetails?id=' +${tenant.getId()}" > &#10060; </a> </td></tr>
-                    <div>
-                        <tr>
-                            <td hidden> <label for="id">ID</label> </td>
-                            <td hidden><input class="text_bgImage" id="id" name="id" th:value="${tenant.getId()}"  type="number" required="required"/></td>
-                        </tr>
-                    </div>
-                    <div>
-                        <tr>
-                            <th><label for="forename">Vorname</label></th>
-                            <td>  <input class="text_bgImage" id="forename" name="forename" th:value="${tenant.getForename()}"  type="text" required="required"/>
-                        </tr>
-                    </div>
-                    <div>
-                        <tr>
-                            <th> <label for="surname">Nachname</label></th>
-                            <td> <input class="text_bgImage" id="surname" name="surname" th:value="${tenant.getSurname()}"  type="text" required="required"/></td>
-                        </tr>
-                    </div>
-                    <div>
-                        <tr>
-                            <th> <label for="birthdate">Geburtstag</label></th>
-                            <td> <input class="text_bgImage" id="birthdate" name="birthdate" th:value="${tenant.getBirthdate()}"  type="date" required="required"/></td>
-                        </tr>
-                    </div>
-                    <div>
-                        <tr>
-                            <th><label for="address">Adresse</label></th>
-                            <td> <input class="text_bgImage" id="address" name="address" th:value="${tenant.getAddress()}"  type="text" required="required"/></td>
-                        </tr>
-                    </div>
-                    <div>
-                        <tr>
-                            <th> <label for="email">Email</label></th>
-                            <td> <input class="text_bgImage" id="email" name="email" th:value="${tenant.getEmail()}"  type="email" required="required"/></td>
-                        </tr>
-                    </div>
-                    <div>
-                        <tr>
-                            <th> <label for="phone">Telefon</label></th>
-                            <td><input class="text_bgImage" id="phone" name="phone" th:value="${tenant.getPhonenumber()}"  type="number" required="required"/></td>
-                        </tr>
-                    </div>
-                    <div>
-                        <tr>
-                            <th><label > <!--for="roles"--> Rolle(n)</label></th>
-                            <td><br>
-                                <li style="display:block; background-color: #CED8F6;text-align: left" th:each="role : ${roles}">
-                                    <label th:inline="text"><input id="role" type="checkbox" th:checked="${tenant.hasRole(role)}" name="role" th:value="${role}"> [[${role}]]
-                                    </label>
-                                </li>
-
-                            <!-- <input class="text_bgImage" id="roles" name="roles" th:value="${tenant.getRoles()}"  type="search" list="roles" required="required"/> --></td>
-                           <!--<datalist id="roles" >
-                            <option value="1">
-                               <option value="2">
-                            </datalist> -->
-                        </tr>
-                    </div>
-                </table>
-                <div class="button-section">
-
-                    <button  type="submit" class="button" >Änderungen speichern</button>
+                <tr> </td>
+                    <td style="font-size:25px; background-color: white;"><a
+                            th:href="'/tenantDetails?id=' +${tenant.getId()}"
+                            th:title="Abbrechen">
+                        &#10060; </a></td>
+                </tr>
+                <div>
+                    <tr>
+                        <td hidden><label for="id">ID</label></td>
+                        <td hidden><input class="text_bgImage" id="id" name="id" required="required"
+                                          th:value="${tenant.getId()}" type="number"/></td>
+                    </tr>
                 </div>
-</form> </div>
+                <div>
+                    <tr>
+                        <th><label for="forename">Vorname</label></th>
+                        <td><input class="text_bgImage" id="forename" name="forename" required="required"
+                                   th:value="${tenant.getForename()}" type="text"/>
+                    </tr>
+                </div>
+                <div>
+                    <tr>
+                        <th><label for="surname">Nachname</label></th>
+                        <td><input class="text_bgImage" id="surname" name="surname" required="required"
+                                   th:value="${tenant.getSurname()}" type="text"/></td>
+                    </tr>
+                </div>
+                <div>
+                    <tr>
+                        <th><label for="birthdate">Geburtstag</label></th>
+                        <td><input class="text_bgImage" id="birthdate" name="birthdate"
+                                   required="required" th:value="${tenant.getBirthdate()}" type="date"/></td>
+                    </tr>
+                </div>
+                <div>
+                    <tr>
+                        <th><label for="address">Adresse</label></th>
+                        <td><input class="text_bgImage" id="address" name="address" required="required"
+                                   th:value="${tenant.getAddress()}" type="text"/></td>
+                    </tr>
+                </div>
+                <div>
+                    <tr>
+                        <th><label for="email">Email</label></th>
+                        <td><input class="text_bgImage" id="email" name="email" required="required"
+                                   th:value="${tenant.getEmail()}" type="email"/></td>
+                    </tr>
+                </div>
+                <div>
+                    <tr>
+                        <th><label for="phone">Telefon</label></th>
+                        <td><input class="text_bgImage" id="phone" name="phone" required="required"
+                                   th:value="${tenant.getPhonenumber()}" type="number"/></td>
+                    </tr>
+                </div>
+                <div>
+                    <tr>
+                        <th><label> <!--for="roles"--> Rolle(n)</label></th>
+                        <td><br>
+                            <li style="display:block; background-color: #CED8F6;text-align: left"
+                                th:each="role : ${roles}">
+                                <label th:inline="text"><input id="role" name="role"
+                                                               th:checked="${tenant.hasRole(role)}" th:value="${role}"
+                                                               type="checkbox"> [[${role}]]
+                                </label>
+                            </li>
 
+                            <!-- <input class="text_bgImage" id="roles" name="roles" th:value="${tenant.getRoles()}"  type="search" list="roles" required="required"/> -->
+                        </td>
+                        <!--<datalist id="roles" >
+                         <option value="1">
+                            <option value="2">
+                         </datalist> -->
+                    </tr>
+                </div>
+            </table>
+            <div class="button-section">
 
-
-        </div>
-
-
-
+                <button class="button" type="submit">Änderungen speichern</button>
+            </div>
+        </form>
     </div>
+
+
+</div>
+
+
+</div>
 
 </div>
 

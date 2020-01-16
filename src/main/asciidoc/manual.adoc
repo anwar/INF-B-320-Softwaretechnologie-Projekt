@@ -74,3 +74,11 @@ seine aktuelle und vollständige Jahresabrechnung in "Meine Parzelle" -> "Meine 
 "Rechnungen anzeigen" überprüfen. Er kann diese Jahresabrechnung in PDF herunterladen oder kann die Jahresabrechnung per
 seine angemeldete Email bekommen. Am Anfang des Jahres wird der Vorstandvorsitzender alle Jahresabrechnungen vom letzten
 Jahr abschließen um eine neue Rechnung für das nächste Jahr zu vorbereiten.
+
+=== Infos über geplante Veranstaltungen und Feste (News)
+
+Alle Nutzer und Gäste können die veröffentlichten Newseinträge auf der Homeseite der Anwendung
+lesen und sich über die geplante Veranstaltungen und Feste informieren.
+
+Nur der Vorstandvorsitzender kann neue Einträge hinzufügen oder die aktuellen
+verwalten (bearbeiten und löschen).

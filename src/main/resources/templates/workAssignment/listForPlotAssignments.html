@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
-          href="../resources/css/tenantTable.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantTable.css}" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
     <title>Für Termin eintragen</title>
@@ -26,33 +26,34 @@
     </div>
 </div>
 <center>
-        <table id="myTable">
-            <thead>
-            <tr>
-                <th>Datum / Zeit</th>
-                <th>Titel</th>
-                <th>Beschreibung</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="workAssignments : ${ListWorkAssignmentsForPlot}">
-                <td th:text="${workAssignments.date}"></td>
-                <td th:text="${workAssignments.title}"></td>
-                <td th:text="${workAssignments.description}"></td>
-            </tr>
-            </tbody>
-        </table>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+    <table id="myTable">
+        <thead>
+        <tr>
+            <th>Datum / Zeit</th>
+            <th>Titel</th>
+            <th>Beschreibung</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="workAssignments : ${ListWorkAssignmentsForPlot}">
+            <td th:text="${workAssignments.date}"></td>
+            <td th:text="${workAssignments.title}"></td>
+            <td th:text="${workAssignments.description}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     <hr/>
 
     <div class="header-title">
         <h1>Termine zum eintragen</h1>
     </div>
     <table id="myTable">
-        <thead><tr>
+        <thead>
+        <tr>
             <th>Datum / Zeit</th>
             <th>Titel</th>
             <th>Beschreibung</th>
@@ -67,10 +68,14 @@
             <td th:text="${workAssignment.description}">description</td>
             <td th:text="${workAssignment.id}">id</td>
 
-            <form method="post" role="form" id="form" th:action="@{/setWorkAssignment}" th:object="${form}">
-                <td hidden><input hidden id="assignmentID" name="assignmentID" th:value="${(workAssignment.getId())}"/></td>
+            <form id="form" method="post" role="form" th:action="@{/setWorkAssignment}" th:object="${form}">
+                <td hidden><input hidden id="assignmentID" name="assignmentID" th:value="${(workAssignment.getId())}"/>
+                </td>
                 <td hidden><input hidden id="plotID" name="plotID" th:value="${plotID}"/></td>
-                <td><button style="font-size:13px; height: 35px" type="submit" class="ui button">Zum Termin eintragen</button></td>
+                <td>
+                    <button class="ui button" style="font-size:13px; height: 35px" type="submit">Zum Termin eintragen
+                    </button>
+                </td>
             </form>
 
         </tr>

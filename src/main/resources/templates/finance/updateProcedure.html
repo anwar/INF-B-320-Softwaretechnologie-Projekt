@@ -1,20 +1,20 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
-          href="../resources/css/tenantTable.css" type="text/css"/>
-    <script th:src="@{../resources/css/js/search.js}"
-            src="../resources/css/js/search.js"> </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantTable.css}" type="text/css"/>
+    <script src="../resources/css/js/search.js"
+            th:src="@{../resources/css/js/search.js}"></script>
 
     <meta charset="UTF-8">
     <title>Zählerstände</title>
@@ -25,25 +25,29 @@
     <h1>Zählerstand</h1>
 </div>
 <div>
-    <table  id="myTable">
+    <table id="myTable">
         <thead>
-         <th>Zähler</th>
+        <th>Zähler</th>
         <th>Stand</th>
         </thead>
         <tbody>
         <tr th:each="procedure : ${procedure}">
-            <td> <label for="strom">Stromzählerstand</label> </td>
-            <td><input class="text_bgImage" id="strom" name="id" th:value="${procedure.getPowercount()}" type="number" required="required"/></td>
+            <td><label for="strom">Stromzählerstand</label></td>
+            <td><input class="text_bgImage" id="strom" name="id" required="required"
+                       th:value="${procedure.getPowercount()}"
+                       type="number"/></td>
         </tr>
         <tr th:each="procedure : ${procedure}">
-            <td> <label for="water">Wasserzählerstand</label> </td>
-            <td><input class="text_bgImage" id="water" name="id" th:value="${procedure.getWatercount()}" type="number" required="required"/></td>
+            <td><label for="water">Wasserzählerstand</label></td>
+            <td><input class="text_bgImage" id="water" name="id" required="required"
+                       th:value="${procedure.getWatercount()}"
+                       type="number"/></td>
         </tr>
         </tbody>
     </table>
     <div class="button-section">
 
-        <button  type="submit" onclick="location.href='/plot/${plot}'" class="button" >Speichern</button>
+        <button class="button" onclick="location.href='/plot/${plot}'" type="submit">Speichern</button>
     </div>
 </div>
 

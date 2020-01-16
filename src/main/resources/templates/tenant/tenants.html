@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
-          href="../resources/css/tenantTable.css" type="text/css">
-    <script th:src="@{../resources/css/js/search.js}"
-          src="../resources/css/js/search.js"> </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantTable.css}" type="text/css">
+    <script src="../resources/css/js/search.js"
+            th:src="@{../resources/css/js/search.js}"></script>
 
     <meta charset="UTF-8">
 
 
-
-    </head>
+</head>
 <body>
 <div class="ui container">
     <nav th:include="navigation :: navigation"></nav>
@@ -28,49 +27,49 @@
         <h1>Pächterliste</h1>
     </div>
 
-<!--unicode by: https://www.compart.com/de/unicode/U+1F50D -->
-       <center>
-           <input class="text_bgImage" type="text"  id="myInput" onkeyup="myFunction()" placeholder="&#128269; Suche nach Pächter">
-       </center>
+    <!--unicode by: https://www.compart.com/de/unicode/U+1F50D -->
+    <center>
+        <input class="text_bgImage" id="myInput" onkeyup="myFunction()" placeholder="&#128269; Suche nach Pächter"
+               type="text">
+    </center>
 
-        <div><br>
-            <table  id="myTable">
-
-
-       <thead>
-        <tr>
-           <!-- <th >ID</th>-->
-            <th>Vorname</th>
-            <th>Nachname</th>
-            <th>Email</th>
-            <th>Rolle</th>
+    <div><br>
+        <table id="myTable">
 
 
-        </tr>
-       </thead>
-      <tbody th:remove="all-but-first">
-
-       <tr  th:each="tenant : ${tenantList}">
-
-
-         <!--  <td th:text="${tenant.id}">1</td> -->
-            <td> <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.forename}">Paul</a> </td>
-            <td> <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.surname}">Paul</a> </td>
-            <td>  <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.email}">Paul</a> </td>
-            <td>  <a th:href="'/tenantDetails?id=' +${tenant.getId()}"  th:text="${tenant.getRoles()}">Paul</a> </td>
+            <thead>
+            <tr>
+                <!-- <th >ID</th>-->
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>Email</th>
+                <th>Rolle</th>
 
 
-        </tr>
+            </tr>
+            </thead>
+            <tbody th:remove="all-but-first">
+
+            <tr th:each="tenant : ${tenantList}">
 
 
+                <!--  <td th:text="${tenant.id}">1</td> -->
+                <td><a th:href="'/tenantDetails?id=' +${tenant.getId()}" th:text="${tenant.forename}">Paul</a></td>
+                <td><a th:href="'/tenantDetails?id=' +${tenant.getId()}" th:text="${tenant.surname}">Paul</a></td>
+                <td><a th:href="'/tenantDetails?id=' +${tenant.getId()}" th:text="${tenant.email}">Paul</a></td>
+                <td><a th:href="'/tenantDetails?id=' +${tenant.getId()}" th:text="${tenant.getRoles()}">Paul</a></td>
 
-      </tbody>
-    </table>
+
+            </tr>
+
+
+            </tbody>
+        </table>
     </div>
-        <div class="button-section">
+    <div class="button-section">
 
-            <button class="button"  onclick="location.href='/register'">Pächter hinzufügen</button>
-        </div>
+        <button class="button" onclick="location.href='/register'">Pächter hinzufügen</button>
+    </div>
 
 
 </div>

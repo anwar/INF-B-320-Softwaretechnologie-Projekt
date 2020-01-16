@@ -1,18 +1,18 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 
-    <script th:src="@{/webjars/jquery/jquery.min.js}"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
-            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
-          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
-    <link th:href="@{../resources/css/style.css}" rel="stylesheet"
-          href="../resources/css/style.css" type="text/css"/>
-    <link th:href="@{../resources/css/tenantTable.css}" rel="stylesheet"
-          href="../resources/css/tenantTable.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"
+            th:src="@{/webjars/Semantic-UI/semantic.min.js}"></script>
+    <link href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet"
+          th:href="@{/webjars/Semantic-UI/semantic.min.css}" type="text/css"/>
+    <link href="../resources/css/style.css" rel="stylesheet"
+          th:href="@{../resources/css/style.css}" type="text/css"/>
+    <link href="../resources/css/tenantTable.css" rel="stylesheet"
+          th:href="@{../resources/css/tenantTable.css}" type="text/css">
     <meta charset="UTF-8">
     <title>Procedure</title>
 </head>
@@ -26,15 +26,21 @@
 
                 <h1>Edit Powercount</h1>
             </div>
-            <form th:object="${procedure}" th:action="@{}" method="post">
+            <form method="post" th:action="@{}" th:object="${procedure}">
 
                 <table class="plotTable">
 
-                    <tr><th>Plot Number</th><td th:text="${procedure.getPlotId()}"></td></tr>
-                    <tr><th>Year</th><td th:text="${procedure.getYear()}"></td></tr>
+                    <tr>
+                        <th>Plot Number</th>
+                        <td th:text="${procedure.getPlotId()}"></td>
+                    </tr>
+                    <tr>
+                        <th>Year</th>
+                        <td th:text="${procedure.getYear()}"></td>
+                    </tr>
                     <tr>
                         <th>Powercount</th>
-                        <th>   <input type="number" min="0" step="0.01" th:field="*{procedure.getPowercount()}"></th>
+                        <th><input min="0" step="0.01" th:field="*{procedure.getPowercount()}" type="number"></th>
                     </tr>
 
                 </table>
