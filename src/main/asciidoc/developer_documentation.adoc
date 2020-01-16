@@ -553,6 +553,14 @@ bearbeitet werden können. Über Checkboxen können jetzt auch Rollen entfernt u
 Betätigt er nun den Button "Änderungen speichern" werden diese Änderungen gespeichert und er gelangt wieder auf die
 Detailseite.
 
+=== Finanzmanagement
+
+image::models/analysis/seq_procedure_createBill.png[Workflow für die Erstellung einer Jahresabrechnung]
+
+Der Vorstandsvorsitzender/Mieter navigiert zuerst auf die Seite, "Meine Parzelle" - "Meine Daten". In der "Option Knopf"
+ kann er "Rechnung anzeigen" finden. Wenn er den klickt, kann alle Jahresabrechnungen von seiner Parzelle. Bei Klicken
+kann er diese Jahresabrechnungen in PDF herunterladen.
+
 
 == Technische Schulden
 === Quality Gates
