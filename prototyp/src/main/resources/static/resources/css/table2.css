@@ -1,0 +1,14 @@
+
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+thead{background-color: #043353;
+    color: white;}
+tbody{background-color:#CED8F6;}
+th, td{
+    vertical-align: top;
+    text-align: left;
+    padding: 0.5em 1em;}
+tbody tr:hover { background-color:#EFF5FB;}
+th{background-color: #043353;
+    color: white;
+}
