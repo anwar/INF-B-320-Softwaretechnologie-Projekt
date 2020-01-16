@@ -75,7 +75,7 @@ public class TenantService {
 	 *
 	 * @param id Id of the {@link Tenant} we want to make a pre {@link Tenant}
 	 */
-	void makePreTenant(Long id) {
+	public void makePreTenant(Long id) {
 		tenantManager.get(id).getUserAccount().setEnabled(false);
 		tenantManager.get(id).setBirthdate("");
 		tenantManager.get(id).setPhonenumber("");
@@ -83,5 +83,6 @@ public class TenantService {
 		tenantManager.get(id).setForename("");
 		tenantManager.get(id).setSurname("");
 		tenantManager.get(id).deleteRoles();
+		tenants.save(tenantManager.get(id));
 	}
 }
