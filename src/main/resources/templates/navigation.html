@@ -57,11 +57,20 @@
                 <li><a href="" th:href="@{/listOfAssignments}">Termine einsehen</a></li>
 
             </ul>
+        </li>
         <li><a href="" sec:authorize="hasAnyRole('Obmann')" th:href="@{/listOfAssignments}">Termine einsehen</a></li>
         <li><a href="complaint/complaints.html" sec:authorize="isAuthenticated()"
                th:href="@{/complaints}">Beschwerden</a></li>
-        <li><a href="tenant/tenants.html" sec:authorize="hasAnyRole('Vorstandsvorsitzender, Stellvertreter')"
-               th:href="@{/tenants}"> Mitglieder</a></li>
+
+        <li><a href="#" sec:authorize="hasAnyRole('Vorstandsvorsitzender, Stellvertreter')">Mitglieder</a>
+            <ul>
+           <li> <a href="tenant/tenants.html" sec:authorize="hasAnyRole('Vorstandsvorsitzender, Stellvertreter')"
+               th:href="@{/tenants}"> aktive Mitglieder</a></li>
+                <li><a sec:authorize="hasAnyRole('Vorstandsvorsitzender, Stellvertreter')" th:href="@{/pretenants}">Vorpächter</a></li>
+            </ul>
+        </li>
+
+
         <li style="float:right"><a href="login.html" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
 
             <form method="post" sec:authorize="isAuthenticated()" th:action="@{/logout}">
