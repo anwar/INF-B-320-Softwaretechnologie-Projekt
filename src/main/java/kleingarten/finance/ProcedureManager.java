@@ -142,17 +142,4 @@ public class ProcedureManager {
 		return tenantManager;
 	}
 
-	/**
-	 * Before Creating a bill, Need to check whether the procedure is still isOpen() or not.
-	 * If the isOpen == false, then bill will be created.
-	 *
-	 * @param plot as {@link Plot}
-	 * @return a {@link Procedure}
-	 */
-	public Procedure getCurrentBillAndFinalizeProcedure(Plot plot) {
-		for (Procedure procedure : procedures.findByPlot(plot)) {
-			if (procedure.isOpen() == false) return procedure;
-		}
-		return null;
-	}
 }

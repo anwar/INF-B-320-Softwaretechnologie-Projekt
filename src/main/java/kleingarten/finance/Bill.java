@@ -12,7 +12,7 @@ public class Bill {
 
 
 	/**
-	 * Create a Bill with two given Procedures.
+	 * Create a Bill with two given Procedures
 	 *
 	 * @param mainProcedure The procedure of the current year.
 	 * @param oldProcedure  The procedure of the year before.
@@ -29,6 +29,12 @@ public class Bill {
 
 	}
 
+	/**
+	 * Calculate all prices in List<Fee>
+	 *
+	 * @param feeList
+	 * @return sum as double
+	 */
 	public static double getSum(List<Fee> feeList) {
 		double sum = 0d;
 
@@ -39,6 +45,10 @@ public class Bill {
 		return sum;
 	}
 
+	/**
+	 * Fees, which have a fixed number/amount and base price, will be saved in a List, feeList
+	 *
+	 */
 	private void initFixedCost() {
 
 		Fee membershipFee = new Fee("Mitgliedsbeitrag", 1, 17.25);
@@ -62,35 +72,63 @@ public class Bill {
 
 	}
 
+	/**
+	 * Fees, which need to receive numbers/amounts from a procedure, will be saved in a List, feeList
+	 *
+	 * @param mainProcedure as {@link Procedure}
+	 */
 	private void initDependentCost(Procedure mainProcedure) {
-		Fee waterFee = new Fee("Wasserkosten", mainProcedure.getWatercount(), 1.95);
+		Fee waterFee = new Fee("Wasserkosten",
+				mainProcedure.getWatercount(),
+				1.95);
 		feeList.add(waterFee);
 
-		Fee powerFee = new Fee("Stromkosten", mainProcedure.getPowercount(), 0.2);
+		Fee powerFee = new Fee("Stromkosten",
+				mainProcedure.getPowercount(),
+				0.2);
 		feeList.add(powerFee);
+
 		Fee rent = new Fee("Miete", mainProcedure.getSize(), 0.18);
 		feeList.add(rent);
-		Fee penalty = new Fee("Strafgeld", Math.round(Math.max(0, (double) (240 - mainProcedure.getWorkMinutes()) / 60)), 8);
+
+		Fee penalty = new Fee("Strafgeld",
+				Math.round(Math.max(0, (double) (240 - mainProcedure.getWorkMinutes()) / 60)),
+				8);
 		feeList.add(penalty);
 
 	}
 
+	/**
+	 * Fees, which need to receive numbers/amounts from a procedure, will be saved in a List, feeList
+	 *
+	 * @param mainProcedure as {@link Procedure}
+	 * @param oldProcedure  as {@link Procedure}
+	 */
 	private void initDependentCost(Procedure mainProcedure, Procedure oldProcedure) {
 		if (oldProcedure == null) {
 			initDependentCost(mainProcedure);
 			return;
 		}
 
-		Fee waterFee = new Fee("Wasserkosten", mainProcedure.getWatercount() - oldProcedure.getWatercount(), 1.95);
+		Fee waterFee = new Fee("Wasserkosten",
+				mainProcedure.getWatercount() - oldProcedure.getWatercount(),
+				1.95);
 		feeList.add(waterFee);
 
-		Fee powerFee = new Fee("Stromkosten", mainProcedure.getPowercount() - oldProcedure.getPowercount(), 0.2);
+		Fee powerFee = new Fee("Stromkosten",
+				mainProcedure.getPowercount() - oldProcedure.getPowercount(),
+				0.2);
 		feeList.add(powerFee);
-		Fee rent = new Fee("Miete", mainProcedure.getSize(), 0.18);
-		feeList.add(rent);
-		Fee penalty = new Fee("Strafgeld", Math.round(Math.max(0, (double) (240 - mainProcedure.getWorkMinutes()) / 60)), 8);
-		feeList.add(penalty);
 
+		Fee rent = new Fee("Miete",
+				mainProcedure.getSize(),
+				0.18);
+		feeList.add(rent);
+
+		Fee penalty = new Fee("Strafgeld",
+				Math.round(Math.max(0, (double) (240 - mainProcedure.getWorkMinutes()) / 60)),
+				8);
+		feeList.add(penalty);
 	}
 
 }

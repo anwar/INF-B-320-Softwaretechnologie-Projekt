@@ -28,6 +28,7 @@ public class GeneratePDFBill {
 		try {
 			Font font = FontFactory.getFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
 			Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 13, BaseColor.BLACK);
+
 			/**
 			 * Shows the K(l)eingarten's basic information
 			 */
@@ -36,18 +37,25 @@ public class GeneratePDFBill {
 					+ ("Deutschland") + "\n"
 					+ ("+49 123456789"), font);
 			company.setAlignment(Element.ALIGN_RIGHT);
+
 			/**
 			 * Shows recipient's basic information
 			 */
 			Paragraph billFor = new Paragraph((tenantName) + "\n" + (tenantAddress), font);
 			billFor.setAlignment(Element.ALIGN_LEFT);
 			billFor.setSpacingBefore(40);
+
 			/**
 			 * Shows Plot and year.
 			 */
-			Paragraph billFor1 = new Paragraph(("Rechnung im Jahr ") + (year) + " " + ("(Parzelle Nr. ") + (plotName) + (")"), headFont);
+			Paragraph billFor1 = new Paragraph(("Rechnung im Jahr ")
+					+ (year) + " "
+					+ ("(Parzelle Nr. ")
+					+ (plotName)
+					+ (")"), headFont);
 			billFor1.setAlignment(Element.ALIGN_CENTER);
 			billFor1.setSpacingBefore(40);
+
 			/**
 			 * Create a table with all Fees(include title, count, baseprice, price)
 			 */
@@ -100,10 +108,13 @@ public class GeneratePDFBill {
 				cell.setPaddingRight(5);
 				table.addCell(cell);
 			}
+
 			/**
 			 * Shows sum of all fees, which tenants should pay.
 			 */
-			Paragraph sum = new Paragraph(("Summe: ") + (String.format("%.2f", Bill.getSum(fees))) + (" Euro"), headFont);
+			Paragraph sum = new Paragraph(("Summe: ")
+					+ (String.format("%.2f", Bill.getSum(fees)))
+					+ (" Euro"), headFont);
 			sum.setAlignment(Element.ALIGN_CENTER);
 			sum.setSpacingBefore(5);
 

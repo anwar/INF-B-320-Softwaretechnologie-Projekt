@@ -40,6 +40,12 @@ public class FeeController {
 		this.tenantManager = tenantManager;
 	}
 
+	/**
+	 * Method to create a bill in PDF format
+	 *
+	 * @param procedureId as {@link String}
+	 * @return
+	 */
 	@PostMapping(value = "/PDF", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> bill(@RequestParam String procedureId) {
 
@@ -58,7 +64,7 @@ public class FeeController {
 	}
 
 	/**
-	 * Method to send Bill by Email.
+	 * Method to send Bill by Email
 	 *
 	 * @param procedureId as {@link String}
 	 * @param plotId      as {@link String} needed to make a redirect to the bills of a plot
@@ -86,8 +92,19 @@ public class FeeController {
 		return "redirect:/bill/" + plotId;
 	}
 
+	ByteArrayInputStream getBillPDFBytes(Procedure currentYearProcedure) {
+		Procedure oldProcedure = procedureManager.getProcedure(currentYearProcedure.getYear() - 1,
+				currentYearProcedure.getPlotId());
+		Bill billToShow = new Bill(currentYearProcedure, oldProcedure);
+
+		return GeneratePDFBill.bill(
+				billToShow.feeList, currentYearProcedure.getPlot(),
+				procedureManager.getTenantManager().get(currentYearProcedure.getMainTenant()),
+				currentYearProcedure.getYear());
+	}
+
 	/**
-	 * Method to show Bill overview page.
+	 * Method to show Bill overview page
 	 *
 	 * @param plot        as {@link Plot}
 	 * @param model       as {@link Model} to add needed information
@@ -128,17 +145,22 @@ public class FeeController {
 	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')")
 	@GetMapping("/finalize/{plot}")
 	public String finalizeProcedures(@PathVariable Plot plot, Model model) {
+
 		int year = LocalDateTime.now().getYear();
+
 		List<Procedure> procedures = procedureManager.getAllByYear(year - 1).toList();
+
 		for (Procedure proc : procedures) {
 			proc.close();
 			Procedure newProcedure = new Procedure(year, proc.getPlot(), proc.getMainTenant());
 			newProcedure.setSize(proc.getSize());
 			newProcedure.setPowercount(proc.getPowercount());
 			newProcedure.setWatercount(proc.getWatercount());
+
 			if (proc.getWorkMinutes() > 240) {
 				newProcedure.setWorkMinutes(proc.getWorkMinutes() - 240);
 			}
+
 			if (procedureManager.getProcedure(year, plot) == null) {
 				procedureManager.save(newProcedure);
 			}
@@ -146,14 +168,5 @@ public class FeeController {
 		model.addAttribute("plot", plot);
 
 		return "redirect:/bill/" + plot.getId();
-	}
-
-	ByteArrayInputStream getBillPDFBytes(Procedure currentYearProcedure) {
-		Procedure oldProcedure = procedureManager.getProcedure(currentYearProcedure.getYear() - 1, currentYearProcedure.getPlotId());
-		Bill billToShow = new Bill(currentYearProcedure, oldProcedure);
-
-		return GeneratePDFBill.bill(
-				billToShow.feeList, currentYearProcedure.getPlot(),
-				procedureManager.getTenantManager().get(currentYearProcedure.getMainTenant()), currentYearProcedure.getYear());
 	}
 }

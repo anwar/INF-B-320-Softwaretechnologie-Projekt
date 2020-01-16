@@ -82,61 +82,125 @@ public class Procedure {
 		this.plot = plot;
 	}
 
-
+	/**
+	 * Method to check whether a user is a tenant
+	 *
+	 * @param tenantId
+	 * @return
+	 */
 	public boolean isTenant(long tenantId) {
 		if (mainTenant == tenantId) return true;
 		return subTenants.contains(tenantId);
 	}
 
-
+	/**
+	 * Getter for the watercount
+	 *
+	 * @return watercount as double
+	 */
 	public double getWatercount() {
 		return watercount;
 	}
 
+	/**
+	 * Setter for the watercount
+	 *
+	 * @param watercount as double
+	 */
 	public void setWatercount(double watercount) {
 		if (!editable()) return;
 		this.watercount = watercount;
 	}
 
+	/**
+	 * Getter for the powercount
+	 *
+	 * @return powercount as double
+	 */
 	public double getPowercount() {
 		return powercount;
 	}
 
+	/**
+	 * Setter for the powercount
+	 *
+	 * @param powercount as double
+	 */
 	public void setPowercount(double powercount) {
 		if (!editable()) return;
 		this.powercount = powercount;
 	}
 
+	/**
+	 * Getter for the size
+	 *
+	 * @return size as double
+	 */
 	public double getSize() {
 		return size;
 	}
 
+	/**
+	 * Setter for the size
+	 *
+	 * @param size as double
+	 */
 	public void setSize(double size) {
 		if (!editable()) return;
 		this.size = size;
 	}
 
+	/**
+	 * Getter for the workMinutes
+	 *
+	 * @return workMinutes as double
+	 */
 	public int getWorkMinutes() {
 		return workMinutes;
 	}
 
+	/**
+	 * Setter for the workMinutes
+	 *
+	 * @param workMinutes as double
+	 */
 	public void setWorkMinutes(int workMinutes) {
 		if (!editable()) return;
 		this.workMinutes = workMinutes;
 	}
 
+	/**
+	 * Getter for the id
+	 *
+	 * @return id as long
+	 */
 	public long getId() {
 		return id;
 	}
 
+	/**
+	 * Getter for the year
+	 *
+	 * @return year as int
+	 */
 	public int getYear() {
 		return year;
 	}
 
+	/**
+	 * Getter for the mainTenant
+	 *
+	 * @return mainTenant as long
+	 */
 	public long getMainTenant() {
 		return mainTenant;
 	}
 
+	/**
+	 * Getter for the subTenant
+	 *
+	 * @return subTenant as long
+	 */
 	public Set<Long> getSubTenants() {
 		return subTenants;
 	}
@@ -214,21 +278,33 @@ public class Procedure {
 
 	}
 
-	private boolean editable() {
-		return isOpen;
-	} //this seems to be redundant, but it has internal use and may differ from isOpen later..
-
+	/**
+	 *  Method to check whether a procedure is opened
+	 *  Open means that the opened procedure can be edited
+	 *
+	 * @return
+	 */
 	public boolean isOpen() {
 		return isOpen;
 	}
 
 	/**
-	 * Close the Procedure, it cant be edited anymore.
+	 * Close the Procedure, it can't be edited anymore.
 	 */
 	public void close() {
 		isOpen = false;
 	}
 
+	/**
+	 *  Method to check whether a procedure is opened or closed
+	 *  if editable() is true, then the procedure is opened and can be edited
+	 *  if editable() is false, then the procedure is closed and can't be edited
+	 *
+	 * @return
+	 */
+	private boolean editable() {
+		return isOpen;
+	}
 
 	public String toString() {
 		return "Procedure Plot: " + plot.getName() + " Tenant: " + mainTenant + " isOpen? " + isOpen();
