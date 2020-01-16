@@ -30,7 +30,7 @@ public class Bill {
 	}
 
 	/**
-	 * Calculate all prices in List<Fee>
+	 * Calculate all prices in List of Fees
 	 *
 	 * @param feeList list of Fees
 	 * @return sum as double
