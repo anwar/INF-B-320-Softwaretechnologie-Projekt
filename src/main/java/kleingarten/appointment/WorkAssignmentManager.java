@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
 
 @Service
 public class WorkAssignmentManager {
@@ -199,13 +202,46 @@ public class WorkAssignmentManager {
 		}
 
 		int sumOfWorkHours = 0;
-		if(!buffer.isEmpty()) {
+		if (!buffer.isEmpty()) {
 			for (WorkAssignment workAssignment : buffer) {
 				sumOfWorkHours += workAssignment.getWorkHours();
 			}
 		}
 		return sumOfWorkHours;
 	} //nochmal überarbeiten
+
+	/**
+	 * The function gets the id as {@link ProductIdentifier} of a {@link Plot} and finds the workHours of this {@link Plot}
+	 *
+	 * @param plotID id as {@link ProductIdentifier} of the {@link Plot}
+	 * @param since  {@link LocalDateTime} since when the work hours of the {@link WorkAssignment}s should be used
+	 * @param until  {@link LocalDateTime} until when the work hours of the {@link WorkAssignment}s should be used
+	 * @return workHours as int from a {@link Plot}
+	 */
+	public int getWorkHours(ProductIdentifier plotID, LocalDateTime since, LocalDateTime until) {
+		Plot plot = findByID(plotID);
+		Set<WorkAssignment> workAssignments = new HashSet<>();
+		int sum = 0;
+
+		Stream<WorkAssignment> oldAssignments = workAssignmentRepository.findAll().stream()
+				.filter(workAssignment -> workAssignment.containsPlot(plot))
+				.filter(workAssignment -> workAssignment.getDate().getYear() == since.getYear())
+				.filter(workAssignment -> workAssignment.getDate().isAfter(since));
+		Stream<WorkAssignment> newAssignments = workAssignmentRepository.findAll().stream()
+				.filter(workAssignment -> workAssignment.containsPlot(plot))
+				.filter(workAssignment -> workAssignment.getDate().getYear() == until.getYear())
+				.filter(workAssignment -> workAssignment.getDate().isBefore(until));
+
+		oldAssignments.forEach(workAssignments::add);
+		newAssignments.forEach(workAssignments::add);
+
+		if (!workAssignments.isEmpty()) {
+			for (WorkAssignment workAssignment : workAssignments) {
+				sum += workAssignment.getWorkHours();
+			}
+		}
+		return sum;
+	}
 
 	/**
 	 * The function gets the id as long of a {@link WorkAssignment} and finds all {@link Plot}s for the {@link WorkAssignment}

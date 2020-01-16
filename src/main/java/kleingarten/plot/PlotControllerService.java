@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -160,7 +162,12 @@ public class PlotControllerService {
 				subTenantsInformation.put(tenant, tenant.getRoles());
 			}
 			buffer.setSubTenantRoles(subTenantsInformation);
-			int sumOfWorkHours = workAssignmentManager.getWorkHours(plot.getId());
+
+			LocalDateTime time = LocalDateTime.now();
+			LocalDateTime oldYear = time.withYear(time.getYear() - 1).withMonth(6).withDayOfMonth(1).withHour(23);
+			LocalDateTime newYear = time.withYear(time.getYear()).withMonth(5).withDayOfMonth(31).withHour(23);
+
+			int sumOfWorkHours = workAssignmentManager.getWorkHours(plot.getId(), oldYear, newYear);
 			procedure.get().setWorkMinutes(sumOfWorkHours * 60);
 			procedureManager.save(procedure.get());
 			buffer.setWorkHours(String.valueOf(dataService.getProcedure(plot).getWorkMinutes()));

@@ -117,7 +117,8 @@ public class FeeController {
 		model.addAttribute("plot", procedureManager.getPlotService().findById(plot.getId()));
 
 
-		List<Procedure> toDisplay = new ArrayList<Procedure>(), procedures = procedureManager.getAllByPlot(plot).toList();
+		List<Procedure> toDisplay = new ArrayList<Procedure>();
+		List<Procedure> procedures = procedureManager.getAllByPlot(plot).toList();
 
 		Tenant tenant = procedureManager.getTenantManager().getTenantByUserAccount(userAccount);
 
