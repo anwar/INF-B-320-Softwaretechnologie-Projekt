@@ -428,20 +428,21 @@ image::models/analysis/FinanceManagement.png[]
 |ProcedureManagement
 |ProcedureManagement Klasse ist verantwortlich für die Verwaltung der Procedure
 
+|ProcedureController
+|Die ProcedureController Klasse ist verantwortlich für die Aufrufe der verschiedene (Html) Seiten
+
 |ProcedureRepository
 |ProcedureRepository verwaltet alle empfangene Dateien von Plot- und TenantManager
 
 |Bill
 |Die Bill Klasse beschreibt eine jährliche Rechnung mit benötigen Information
 
-|BillCatalog
-|Die BillCatalog filtert Rechnungen unter Parzelle, Hauptpächter und Pächter
+|FeeController
+|Die FeeController Klasse ist verantwortlich für die Aufrufe der verschiedene (Html) Seiten.
+ Beispielsweise die Übersicht der jahresabrechnung von einer bestimmten Parzelle,
+ die jahresabrechnung in PDF erstellen,
+ und die jahresabrechnung per Email schicken
 
-|BillController
-|Die BillController Klasse ist verantwortlich für die Aufrufe der verschiedene (Html) Seiten
-
-|BillManagement
-|BillManagement Klasse ist für Berechnungen und ist verantwortlich für die Erstellung der jährlichen Rechnung
 
 |===
 
