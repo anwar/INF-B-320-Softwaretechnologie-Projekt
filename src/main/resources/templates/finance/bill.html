@@ -57,7 +57,8 @@
 </tr>  </tbody>
 </table>
 </div>
-<form method="get" th:action="@{/finalize/{id}(id=${plot.getId()})}">
+
+<form method="get" th:action="@{/finalize/{id}(id=${plot.getId()})}" sec:authorize="hasAnyRole('Vorstandsvorsitzender,Stellvertreter')">
     <div class="button-section">
         <button type="submit" style="display: inline-block;" class="button">
             Rechnungen abschließen
