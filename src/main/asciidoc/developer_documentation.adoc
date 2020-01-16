@@ -561,6 +561,9 @@ Der Vorstandsvorsitzender/Mieter navigiert zuerst auf die Seite, "Meine Parzelle
  kann er "Rechnung anzeigen" finden. Wenn er den klickt, kann alle Jahresabrechnungen von seiner Parzelle. Bei Klicken
 kann er diese Jahresabrechnungen in PDF herunterladen.
 
+=== News
+
+image::models/analysis/seq_news.png[Workflow für die Newseinträge]
 
 == Technische Schulden
 === Quality Gates
@@ -636,4 +639,3 @@ Feedback aus dem Cross Test, welches nicht berücksichtigt wurde
 __Begründung:__
 
 - 1: Email wurde für das Cross Testing falsch abgeschrieben.
-
