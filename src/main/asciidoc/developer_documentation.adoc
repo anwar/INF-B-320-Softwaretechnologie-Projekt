@@ -535,6 +535,25 @@ zum nächsten Termin, für den der Pächter angemeldet ist erstellt und dargeste
 Durch die Überprüfung der Rollen des Pächters in den Schritten 10 und 11 können nach Bedarf erweiterte Bearbeitungsrechte
 (z.B. Eintragen des Wasserzählerstands, Freigeben der Parzelle) festgelegt werden.
 
+=== Pächtermanagement
+
+image::models/analysis/seq_tenant_registerNew.png[Workflow für das Hinzufügen eines neuen Pächters]
+
+Der Vorstandsvorsitzender navigiert zuerst auf die Übersichtsseite ("Mitglieder") aller Pächter und betätigt den Button
+"Pächter hinzufügen". +
+Nun erscheint ein Formular zum Aussfüllen. Hier füllt er die erbetenen Daten aus und betätigt "Pächter hinzufügen".
+Ein neuer Pächter ohne Rollen wurde hinzugefügt.
+
+image::models/analysis/seq_tenant_editTenant.png[Workflow zum Bearbeiten eines Pächters]
+Der Vorstandsvorsitzender navigiert zuerst auf die Übersichtsseite ("Mitglieder") aller Pächter und klickt auf den Namen
+oder die Email eines Pächters. So gelangt er auf die Detailseite dieses Pächters mit allen gespeicherten Informationen,
+wie "Adresse", "Geburtstag", "Rollen", "Telefonnummer".
+Klickt er jetzt auf den Stift-Button, erscheint ein vorausgefülltes Formular mit den Daten des Pächters, welche jetzt
+bearbeitet werden können. Über Checkboxen können jetzt auch Rollen entfernt und hinzugefügt werden. +
+Betätigt er nun den Button "Änderungen speichern" werden diese Änderungen gespeichert und er gelangt wieder auf die
+Detailseite.
+
+
 == Technische Schulden
 === Quality Gates
 Bewertung: A (sehr gut) bis E (sehr schlecht) +
@@ -542,6 +561,7 @@ Alle in SonarQube voreingestellten Quality Gates werden von der Anwendung mit de
 Diese Ziele sind Zuverlässigkeit (Reliability), Sicherheit (Security), Wartbarkeit (Maintainability).
 Darüber hinaus enthält die Anwendung 0,0% duplizierte Codezeilen und die Testabdeckung liegt über dem eingestellten
 minimalen Prozentsatz.
+
 
 === SonarQube Issues
 Hier werden alle SonarQube issues aufgeführt, welche die Priorität *Blocker*, *Critical* oder *Major* besitzen,
@@ -596,3 +616,16 @@ Feedback aus dem Cross Test, welches nicht berücksichtigt wurde
 Die Funktionalitäten Vorstand kann Bewerbungen bearbeiten, annehmen, löschen und ablehnen sind nicht implementiert.
 Mit dieser Aufgabe wurde Sascha Seiffert beauftragt, der seit Anfang des Jahres nicht mehr aktiv am Projekt arbeitet,
 ohne das Team darüber informiert zu haben.
+
+=== Pächtermanagement
+Feedback aus dem Cross Test, welches nicht berücksichtigt wurde
+[options="header"]
+|===
+|Nummer |Pfad |Parameter |Beschreibung |Rückgabe
+| 1 | /login | Email: "s.krimse@gmaile.com"; Passwort: "123" | kein Login möglich | redirect: /login?error
+|===
+
+__Begründung:__
+
+- 1: Email wurde für das Cross Testing falsch abgeschrieben.
+
