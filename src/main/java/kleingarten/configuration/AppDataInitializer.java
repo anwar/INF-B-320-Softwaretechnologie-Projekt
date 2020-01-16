@@ -31,6 +31,7 @@ import kleingarten.plot.PlotService;
 import kleingarten.tenant.Tenant;
 import kleingarten.tenant.TenantManager;
 import kleingarten.tenant.TenantRepository;
+import kleingarten.tenant.TenantService;
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Password;
 import org.salespointframework.useraccount.Role;
@@ -63,6 +64,7 @@ public class AppDataInitializer implements DataInitializer {
 	private final PlotControllerService plotControllerService;
 	private final ProcedureManager procedureManager;
 	private final TenantManager tenantManager;
+	private final TenantService tenantService;
 	private final ComplaintRepository complaints;
 
 	AppDataInitializer(NewsRepository news,
@@ -71,7 +73,7 @@ public class AppDataInitializer implements DataInitializer {
 					   ComplaintRepository complaints,
 					   PlotService plotService, PlotCatalog plotCatalog, PlotControllerService plotControllerService,
 					   ProcedureManager procedureManager,
-					   TenantManager tenantManager) {
+					   TenantManager tenantManager, TenantService tenantService) {
 
 		Assert.notNull(news, "news must not be null!");
 		this.news = news;
@@ -86,6 +88,8 @@ public class AppDataInitializer implements DataInitializer {
 		Assert.notNull(userAccountManager, "userAccountManager must not be null!");
 		this.userAccountManager = userAccountManager;
 		this.tenantManager = tenantManager;
+		Assert.notNull(tenantService, "complaints must not be null!");
+		this.tenantService = tenantService;
 
 		Assert.notNull(plotService, "plotService must not be null!");
 		this.plotService = plotService;
@@ -236,6 +240,10 @@ public class AppDataInitializer implements DataInitializer {
 				"0980790789", "08.09.1567",
 				userAccountManager.create("neptun", password,
 						"neptuns.bart@fishmail.com", mainTenantRole));
+		Tenant pretenant = new Tenant("Manny", "Mannfred", "Mannheim",
+				"85797567586", "09.08.1987", userAccountManager.create("manny", password,
+				"mannMail@mail.com", mainTenantRole));
+
 
 		obmann.addRole(obmannRole);
 		Random randomColorGenerator = new Random();
@@ -247,7 +255,8 @@ public class AppDataInitializer implements DataInitializer {
 		protocol.addRole(protocolRole);
 		waterman.addRole(waterRole);
 
-		tenantRepository.saveAll(List.of(boss, obmann, cashier, replacement, protocol, waterman));
+		tenantRepository.saveAll(List.of(boss, obmann, cashier, replacement, protocol, waterman, pretenant));
+		tenantService.makePreTenant(pretenant.getId());
 
 		//this one is just for testing the method createNewTenant()
 		tenantManager.createNewTenant("Pascall", "Fahrenheit", "fahrenheit@web.de", "123");

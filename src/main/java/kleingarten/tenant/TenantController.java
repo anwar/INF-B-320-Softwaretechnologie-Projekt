@@ -61,10 +61,7 @@ class TenantController {
 	@GetMapping("/deactivatetenant")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String deactivatetenant(@RequestParam("id") String id){
-		System.out.println(tenantManager.get(Long.parseLong(id)).getForename());
-		System.out.println(tenantManager.get(Long.parseLong(id)).getUserAccount().isEnabled());
 		tenantService.makePreTenant(Long.parseLong(id));
-		System.out.println(tenantManager.get(Long.parseLong(id)).getUserAccount().isEnabled());
 		return "redirect:/tenants";
 	}
 

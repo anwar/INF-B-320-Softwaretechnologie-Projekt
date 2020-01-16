@@ -9,8 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -39,10 +38,19 @@ public class TenantManagerTest {
 
 	@Test
 	void findEnabled() {
+		for (Tenant tenant : tenantManager.findEnabled()){
+			assertTrue(tenant.getUserAccount().isEnabled());
+		}
+		assertEquals(8, tenantManager.findEnabled().toList().size());
 	}
 
 	@Test
 	void findDisabled() {
+		assertEquals(1, tenantManager.findDisabled().toList().size());
+
+		for (Tenant tenant : tenantManager.findDisabled()){
+			assertFalse(tenant.getUserAccount().isEnabled());
+		}
 	}
 
 	@Test
