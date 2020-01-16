@@ -64,12 +64,13 @@ public class WorkAssignmentTimer {
 		SortedMap<LocalDateTime, List<WorkAssignment>> assignmentMap = new TreeMap<>();
 		for (Plot plot : dataService.getRentedPlots(tenantManager.getTenantByUserAccount(userAccount))) {
 			for (WorkAssignment workAssignment : workAssignmentManager.getForPlotWorkAssignments(plot.getId())) {
-				if (workAssignment.getDate().isAfter(LocalDateTime.now())) {
-					if (!assignmentMap.containsKey(workAssignment.getDate())) {
-						assignmentMap.put(workAssignment.getDate(), new LinkedList<>());
-					}
-					assignmentMap.get(workAssignment.getDate()).add(workAssignment);
+				if (workAssignment.getDate().isBefore(LocalDateTime.now())) {
+					continue;
 				}
+				if (!assignmentMap.containsKey(workAssignment.getDate())) {
+					assignmentMap.put(workAssignment.getDate(), new LinkedList<>());
+				}
+				assignmentMap.get(workAssignment.getDate()).add(workAssignment);
 			}
 		}
 		try {
