@@ -10,9 +10,9 @@ public class Fee {
 	/**
 	 * Construct a Fee item. Used to generate a Bill as PDF.
 	 *
-	 * @param title     as String
-	 * @param count     as double
-	 * @param basePrice as double
+	 * @param title     as {@link String}
+	 * @param count     as {@link Double}
+	 * @param basePrice as {@link Double}
 	 */
 	public Fee(String title, double count, double basePrice) {
 

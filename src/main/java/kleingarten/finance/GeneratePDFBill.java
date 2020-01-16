@@ -16,6 +16,14 @@ import java.util.List;
 public class GeneratePDFBill {
 	private static final Logger logger = LoggerFactory.getLogger(GeneratePDFBill.class);
 
+	/**
+	 *
+	 * @param fees as {@link Fee}
+	 * @param plot as {@link Plot}
+	 * @param tenant as {@link Tenant}
+	 * @param year as {@link Integer}
+	 * @return ByteArrayInputStream as {@link ByteArrayInputStream}
+	 */
 	public static ByteArrayInputStream bill(List<Fee> fees, Plot plot, Tenant tenant, int year) {
 
 		Document document = new Document();

@@ -70,9 +70,9 @@ public class Procedure {
 	/**
 	 * Constructor with some parsing, best to use this one.
 	 *
-	 * @param year       as int
+	 * @param year       as {@link Integer}
 	 * @param plot       as {@link Plot}
-	 * @param mainTenant as long
+	 * @param mainTenant as {@link Long}
 	 */
 	public Procedure(int year, Plot plot, long mainTenant) {
 		this.year = year;
@@ -94,18 +94,18 @@ public class Procedure {
 	}
 
 	/**
-	 * Getter for the watercount
+	 * Getter for the watercount as {@link Double}
 	 *
-	 * @return watercount as double
+	 * @return watercount as {@link Double}
 	 */
 	public double getWatercount() {
 		return watercount;
 	}
 
 	/**
-	 * Setter for the watercount
+	 * Setter for the watercount as {@link Double}
 	 *
-	 * @param watercount as double
+	 * @param watercount as {@link Double}
 	 */
 	public void setWatercount(double watercount) {
 		if (!editable()) return;
@@ -113,18 +113,18 @@ public class Procedure {
 	}
 
 	/**
-	 * Getter for the powercount
+	 * Getter for the powercount as {@link Double}
 	 *
-	 * @return powercount as double
+	 * @return powercount as {@link Double}
 	 */
 	public double getPowercount() {
 		return powercount;
 	}
 
 	/**
-	 * Setter for the powercount
+	 * Setter for the powercount as {@link Double}
 	 *
-	 * @param powercount as double
+	 * @param powercount as {@link Double}
 	 */
 	public void setPowercount(double powercount) {
 		if (!editable()) return;
@@ -132,18 +132,18 @@ public class Procedure {
 	}
 
 	/**
-	 * Getter for the size
+	 * Getter for the size as {@link Double}
 	 *
-	 * @return size as double
+	 * @return size as {@link Double}
 	 */
 	public double getSize() {
 		return size;
 	}
 
 	/**
-	 * Setter for the size
+	 * Setter for the size as {@link Double}
 	 *
-	 * @param size as double
+	 * @param size as {@link Double}
 	 */
 	public void setSize(double size) {
 		if (!editable()) return;
@@ -151,18 +151,18 @@ public class Procedure {
 	}
 
 	/**
-	 * Getter for the workMinutes
+	 * Getter for the workMinutes as {@link Integer}
 	 *
-	 * @return workMinutes as double
+	 * @return workMinutes as {@link Integer}
 	 */
 	public int getWorkMinutes() {
 		return workMinutes;
 	}
 
 	/**
-	 * Setter for the workMinutes
+	 * Setter for the workMinutes as {@link Integer}
 	 *
-	 * @param workMinutes as double
+	 * @param workMinutes as {@link Integer}
 	 */
 	public void setWorkMinutes(int workMinutes) {
 		if (!editable()) return;
@@ -170,36 +170,36 @@ public class Procedure {
 	}
 
 	/**
-	 * Getter for the id
+	 * Getter for the id as {@link Long}
 	 *
-	 * @return id as long
+	 * @return id as {@link Long}
 	 */
 	public long getId() {
 		return id;
 	}
 
 	/**
-	 * Getter for the year
+	 * Getter for the year as {@link Integer}
 	 *
-	 * @return year as int
+	 * @return year as {@link Integer}
 	 */
 	public int getYear() {
 		return year;
 	}
 
 	/**
-	 * Getter for the mainTenant
+	 * Getter for the mainTenant as {@link kleingarten.tenant.Tenant}
 	 *
-	 * @return mainTenant as long
+	 * @return mainTenant as {@link Long}
 	 */
 	public long getMainTenant() {
 		return mainTenant;
 	}
 
 	/**
-	 * Getter for the subTenant
+	 * Getter for the subTenant as {@link kleingarten.tenant.Tenant}
 	 *
-	 * @return subTenant as long
+	 * @return subTenant as {@link Long}
 	 */
 	public Set<Long> getSubTenants() {
 		return subTenants;
@@ -217,8 +217,8 @@ public class Procedure {
 	/**
 	 * Add a new Sub Tenant to the Procedure.
 	 *
-	 * @param tenantID as long
-	 * @return true when added, false if not
+	 * @param tenantID as {@link Long}
+	 * @return true when added, false if not as {@link Long}
 	 */
 	public boolean addSubTenant(long tenantID) {
 		if (!editable()) return false;
@@ -234,8 +234,8 @@ public class Procedure {
 	/**
 	 * Remove a sub Tenant out of Tenant List, will not affect main Tenant.
 	 *
-	 * @param tenantID of Tenant to be removed
-	 * @return true if removed
+	 * @param tenantID of Tenant to be removed as {@link Long}
+	 * @return true if removed as {@link Long}
 	 */
 	public boolean removeSubTenant(long tenantID) {
 		if (!editable()) return false;
@@ -247,8 +247,8 @@ public class Procedure {
 	 * Set a main Tenant for the Process, the old Tenant will be overwritten.
 	 * Also keep the subTenants as they are.
 	 *
-	 * @param tenantID as long
-	 * @return false if tenant is already main tenant
+	 * @param tenantID as {@link Long}
+	 * @return false if tenant is already main tenant as {@link Boolean}
 	 */
 	public boolean setMainTenant(long tenantID) {
 		if (!editable()) return false;
@@ -262,8 +262,8 @@ public class Procedure {
 	 * Set the new main Tenant for the Process.
 	 * Will also remove all sub Tenants.
 	 *
-	 * @param tenantID as long
-	 * @return false if its the same main Tenant as before
+	 * @param tenantID as {@link Long}
+	 * @return as {@link Boolean}
 	 */
 	public boolean setNewMainTenant(long tenantID) {
 		if (!editable()) return false;
@@ -289,7 +289,7 @@ public class Procedure {
 	}
 
 	/**
-	 * Close the Procedure, it can't be edited anymore.
+	 * Close the Procedure, it can't be edited anymore
 	 */
 	public void close() {
 		isOpen = false;

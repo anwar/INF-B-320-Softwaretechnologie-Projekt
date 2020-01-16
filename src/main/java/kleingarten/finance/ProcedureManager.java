@@ -99,7 +99,7 @@ public class ProcedureManager {
 	 * Main Teanant Procedures will come first.
 	 *
 	 * @param tenantId is the Id for the {@link Tenant}
-	 * @return (mainTenantProcedures):(subTenantProcedures)
+	 * @return (mainTenantProcedures):(subTenantProcedures) as {@link Procedure}
 	 */
 	public Streamable<Procedure> getAll(long tenantId) {
 		//I am preventing duplicates here. however, a tenant should only be main or sub tenant, not both.
