@@ -587,7 +587,7 @@ image::models/analysis/seq_procedure_createBill.png[Workflow für die Erstellung
 
 Der Vorstandsvorsitzender/Mieter navigiert zuerst auf die Seite, "Meine Parzelle" - "Meine Daten". In der "Option Knopf"
  kann er "Rechnung anzeigen" finden. Wenn er den klickt, kann alle Jahresabrechnungen von seiner Parzelle. Bei Klicken
-kann er diese Jahresabrechnungen in PDF herunterladen.
+kann er diese Jahresabrechnungen in PDF herunterladen oder kann er diese Rechnungen per Email abschicken.
 
 === News
 
