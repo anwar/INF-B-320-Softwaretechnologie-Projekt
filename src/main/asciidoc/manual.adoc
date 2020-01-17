@@ -13,6 +13,7 @@
 |===
 | Version | Bearbeitungsdatum | Autor
 | 0.1     | 14.01.2020        | Ylvi Bachmann
+| 0.2     | 17.01.2020        | Ylvi Bachmann
 |===
 
 toc::[]
@@ -68,17 +69,17 @@ die Möglichkeit, sich für diese zu bewerben. Der Vorstandsvorsitzende und sein
 zusätzliche Auswahlmöglichkeit "Bewerbungen anzeigen" präsentiert.
 
 === Informationen der Jahresabrechnung einer Parzelle
-Am Ende des Jahres werden Wassermänner die Wasserzählerstände für alle besetzte Parzelle eingeben und jeder Mieter
-kann den Stromzählerstand seiner Parzelle eingeben. Wenn alle benötige Zählerstand eingegeben werden, wird der Mieter
+Am Ende des Abrechnungsjahres werden Wassermänner die Wasserzählerstände für alle besetzten Parzellen eingeben und jeder Mieter
+kann den Stromzählerstand seiner Parzelle eingeben. Wenn alle benötigten Zählerstände eingegeben wurden, wird der Mieter
 seine aktuelle und vollständige Jahresabrechnung in "Meine Parzelle" -> "Meine Daten" -> "Option" ->
-"Rechnungen anzeigen" überprüfen. Er kann diese Jahresabrechnung in PDF herunterladen oder kann die Jahresabrechnung per
-seine angemeldete Email bekommen. Am Anfang des Jahres wird der Vorstandvorsitzender alle Jahresabrechnungen vom letzten
-Jahr abschließen um eine neue Rechnung für das nächste Jahr zu vorbereiten.
+"Rechnungen anzeigen" überprüfen. Er kann diese Jahresabrechnung als PDF herunterladen oder kann die Jahresabrechnung an
+seine angemeldete Email bekommen. Am Ende des Abrechnungszeitraums wird der Vorstandsvorsitzende alle Jahresabrechnungen vom letzten
+Jahr abschließen, um eine neue Rechnung für das nächste Jahr vorzubereiten.
 
 === Infos über geplante Veranstaltungen und Feste (News)
 
 Alle Nutzer und Gäste können die veröffentlichten Newseinträge auf der Homeseite der Anwendung
-lesen und sich über die geplante Veranstaltungen und Feste informieren.
+lesen und sich über die geplanten Veranstaltungen und Feste informieren.
 
 Nur der Vorstandvorsitzender kann neue Einträge hinzufügen oder die aktuellen
 verwalten (bearbeiten und löschen).
