@@ -51,6 +51,10 @@ class TenantController {
 		return "tenant/tenants";
 	}
 
+	/**
+	 * @param model view to show list of {@link Tenant}s as {@link Model}
+	 * @return view of the {@link Tenant} list as {@link String}
+	 */
 	@GetMapping("/pretenants")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String pretenants(Model model){
@@ -58,6 +62,10 @@ class TenantController {
 		return "tenant/pretenants";
 	}
 
+	/**
+	 * @param id Id of the {@link Tenant} to be deactivated
+	 * @return view of the {@link Tenant} list as {@link String}
+	 */
 	@GetMapping("/deactivatetenant")
 	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
 	String deactivatetenant(@RequestParam("id") String id){
