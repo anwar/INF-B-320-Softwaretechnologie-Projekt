@@ -25,11 +25,23 @@ Umgang mit dem Verwaltungssystem der Kleingartenanlage dienen.
 
 == Vorgehensbeschreibung der Anwendungsfälle
 
+=== Informationen zum Login
+Zum Einloggen auf den Boss-Account gelten folgende Login-Daten: +
+Email: peter.klaus@email.com +
+Password: 123
+
+Der Boss-Account (oder auch Vorstandsvorsitzender) hat Berechtigung auf alle Seiten zuzugreifen.
+
+=== Informationen zur Mitgliederverwaltung
+Über die Navigationsleiste "Mitglieder" erscheint eine Übersicht aller Mitglieder der Kleingartenanlage. Hier können
+wichtige Daten wie Namen, Emails und Rollen entnommen und neue Pächter hinzugefügt werden. Wird nun der Name oder
+die Email eines Pächters angeklickt, erscheint die Detailseite mit ausführlicheren Daten des Pächters. 
+
 === Informationen zu gemieteten Parzellen
 Der angemeldete Nutzer kann sich die gespeicherten Informationen zu seinen aktuell gemieteten Parzellen durch Auswahl des
 Punktes "Meine Parzelle" und "Meine Daten" in der Navigationsleiste anzeigen lassen. +
 Für jede seiner gemieteten Parzellen wird eine Tabelle mit den gespeicherten Daten angezeigt. Für den Fall, dass der
-angemeldete Nutzer im Moment keine Parzelle mietet wird ihm an dieser Stelle eine leere Seite angezeigt. +
+angemeldete Nutzer im Moment keine Parzelle mietet, wird ihm an dieser Stelle eine leere Seite angezeigt. +
 Bei Auswahl des Knopfes "Optionen", welcher sich oberhalb der Tabelle mit den Informationen der Parzelle befindet, wird
 ein Dropdown Menü mit folgenden Auswahlmöglichkeiten präsentiert:
 
