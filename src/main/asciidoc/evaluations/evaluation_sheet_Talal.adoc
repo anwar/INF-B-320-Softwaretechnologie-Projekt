@@ -1,0 +1,68 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2019/20
+
+**Von:** Muhammad Talal Anwar
+
+**Gruppe:** 43
+
+== Was habe ich gelernt?
+
+- Objektorientierte Programmierung. Ich habe bereits Erfahrung mit prozeduralen
+	Programmiersprachen wie C und Golang und dies war die erste Software, die ich
+	in einer OOC Programmiersprache geschrieben habe.
+- Zeitmanagement. Dieses Projekt ist ein 15 Stunden pro Woche Projekt und ich
+	habe neben meinem Studium auch einen Teilzeitjob. Dadurch, habe ich gelernt,
+	wie ich meine Zeit besser managen kann.
+
+== Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+
+Ich habe gelernt, dass man die Dinge im Voraus planen muss, anstatt an ihnen zu
+arbeiten, wenn es nötig ist.
+
+Das ist etwas, woran ich in der Zukunft arbeiten werde.
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+
+Die Frameworks sind gut gestaltet.
+
+Dies ist gut, da sie die Feinheiten der Programmierung einer Webanwendung
+abstrahieren, z.B.: wie Sessions für verschiedene Benutzer verwaltet werden.
+
+und das bedeutet, dass wir (die Studenten) uns auf der Konzepte der
+Software-Programmierung konzentrieren können, z.B.:
+
+- wie man die Datenstrukturen und Klassen am besten gestaltet
+- vorauszudenken, wie diese Strukturen mit der Arbeit unserer anderen
+	Teammitglieder integriert werden
+- usw.
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+
+Was die Verbesserungsvorschläge betrifft, leider kann ich nichts anbieten.
+
+Allerdings, da es von uns erwartet wird, ehrlich zu sein und auch negatives
+Feedback zu geben, werde ich dies sagen:
+
+Meiner Meinung nach sollte dieses Praktikum eher fakultativ als obligatorisch
+sein.
+
+Mir würde es besser abschneiden, wenn diese 6 Leistungspunkte für ein Modul
+verwendet würden, der mir etwas nützliches und viel interessantes lehrt, wie
+zum Beispiel ein Modul über kognitive Informatik oder künstliche Intelligenz.
+
+Das ist natürlich eine reine subjektive Ansicht. Ich verstehe, dass es Leute
+gibt, die sich auf diesen Kurs freuen. Diese Leute hätten denn immer noch diese
+Wahl, wenn dieser Kurs fakultativ wäre.
+
+Allerdings wäre es nicht falsch, eine solche Meinung zu haben, da wir an einer
+TU-Universität studieren, die mehr auf der theoretischen Seite der Informatik
+als auf der praktischen Seite stehen soll.
+
+== Feedback für den Tutor
+
+Der Tutor (Uwe) ist meiner Meinung nach einer der besten, die der Lehrstuhl zur
+Verfügung hat.
+
+Uwe ist ein sehr geduldig Mensch und weiß genau, wann er die Studenten in eine
+bestimmte Richtung drängen muss, damit sie die besten Ergebnisse erzielen.
+
+== Sonstiges und Anmerkungen
