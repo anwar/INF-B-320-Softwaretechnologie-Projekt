@@ -615,6 +615,17 @@ wem sie gestellt wurden und was die Gründe waren. Nachdem er sich abseits der S
 ihren Status auf "FINISHED" setzen, um die Abarbeitung der Beschwerde zu verdeutlichen. Dies kann auch der Nutzer sehen,
 der die Beschwerde verfasste. Dem Vorstandsvorsitzendem und dem Stellvertreter obliegt die Möglichkeit Beschwerden zu löschen.
 
+
+image::models/analysis/seq_workAssignment_create.png[]
+Dieses Diagramm zeigt den Vorgang wenn ein Admin einen Termin erstellt. Es wird das Formular angefordert. Der Nutzer gelangt auf die
+entsprechende Seite und kann dort seine Daten eintragen. Dann drückt er auf Speichern und nun wird der Termin im
+Manager abgespeichert und am Ende kann sich der Nutzer über die Seite listOfAssignments alle Termine anzeigen lassen.
+
+image::models/analysis/seq_workAssignment_user.png[]
+Dieses Diagramm zeigt den Vorgang wenn sich ein User in einen Termin einträgt. Er geht als erstes auf die Detail Seite seiner
+Parzelle. Klickt dann im DropDown Menü auf Termine anzeigen und gelangt dann auf eine neue Seite wo alle Termine angezeigt werden.
+Dann meldet er sich für einen Termin an und wird dann auf die Detail Seite seiner Parzelle zurück geleitet.
+
 == Technische Schulden
 
 === JavaDoc
