@@ -593,6 +593,27 @@ kann er diese Jahresabrechnungen in PDF herunterladen oder kann er diese Rechnun
 
 image::models/analysis/seq_news.png[Workflow für die Newseinträge]
 
+=== Beschwerden
+
+image::models/analysis/seq_complains_user.png[Workflow für die Erstellung einer Beschwerde durch einen eingeloggten Nutzer]
+
+Im Diagramm wird der Workflow zur Erstellung einer Beschwerde durch einen eingeloggten Nutzer beschrieben. Dieser
+navigiert zunächst über die Ansicht der Parzellen zur Detailseite einer Parzelle über die er eine Beschwerde verfassen
+möchte (nicht im Diagramm abgebildet, aufgrund zu hoher Komplexität im Diagramm). Dort navigiert er über das auf der
+Seite befindliche Drop-Down-Menü auf "Beschwerde verfassen". Hier gelangt er nun zum Formular zur Erstellung einer Beschwerde.
+Nach dem Ausfüllen aller Felder, geht er auf Beschwerde abschicken. Diese wird gespeichert und er gelangt zur Übersichtsseite
+seiner Beschwerden, die er verfasst hat. Hat er noch keine Beschwerden verfasst, ist die Liste leer.
+
+image::models/analysis/seq_complains_obmann.png[Workflow für das Managen der Beschwerden durch einen Obmann/Vorstandsvorsitzenden]
+
+Dieses Diagramm beschreibt den Ablauf der Bearbeitung und Verwaltung der Beschwerden durch einen Obmann oder den
+Vorstandsvorsitzenden/Stellvertreter (im Diagramm nur durch den Obmann repräsentiert). Über den Reiter "Beschwerden"
+erhält der Obmann alle ihm zugeordneten Beschwerden. Der Vorstandsvorsitzende und der Stellvertreter sehen eine
+Übersicht aller Beschwerden. Hier hat der Obmann nun die Möglichkeit die Beschwerden zu Bearbeiten, einzusehen, von
+wem sie gestellt wurden und was die Gründe waren. Nachdem er abseits der Software um diese gekümmert hat, kann er
+ihren Status auf "FINISHED" setzen, um die Abarbeitung der Beschwerde zu verdeutlichen. Dies kann auch der Nutzer sehen,
+der die Beschwerde verfasste. Ihm obliegt auch die Möglichkeit Beschwerden zu löschen. 
+
 == Technische Schulden
 === Quality Gates
 Bewertung: A (sehr gut) bis E (sehr schlecht) +
