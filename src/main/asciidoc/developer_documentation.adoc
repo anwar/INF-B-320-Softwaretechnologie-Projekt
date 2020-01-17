@@ -26,6 +26,7 @@
 | 0.2.2   | 09.01.2020        | Ylvi Bachmann
 | 0.2.3   | 14.01.2020        | Ylvi Bachmann
 | 0.3.0   | 16.01.2020        | Muhammad Talal Anwar
+| 0.4.0   | 17.01.2020        | Isabell Zorr
 |===
 
 toc::[]
@@ -610,11 +611,17 @@ Dieses Diagramm beschreibt den Ablauf der Bearbeitung und Verwaltung der Beschwe
 Vorstandsvorsitzenden/Stellvertreter (im Diagramm nur durch den Obmann repräsentiert). Über den Reiter "Beschwerden"
 erhält der Obmann alle ihm zugeordneten Beschwerden. Der Vorstandsvorsitzende und der Stellvertreter sehen eine
 Übersicht aller Beschwerden. Hier hat der Obmann nun die Möglichkeit die Beschwerden zu Bearbeiten, einzusehen, von
-wem sie gestellt wurden und was die Gründe waren. Nachdem er abseits der Software um diese gekümmert hat, kann er
+wem sie gestellt wurden und was die Gründe waren. Nachdem er sich abseits der Software um diese gekümmert hat, kann er
 ihren Status auf "FINISHED" setzen, um die Abarbeitung der Beschwerde zu verdeutlichen. Dies kann auch der Nutzer sehen,
-der die Beschwerde verfasste. Ihm obliegt auch die Möglichkeit Beschwerden zu löschen. 
+der die Beschwerde verfasste. Dem Vorstandsvorsitzendem und dem Stellvertreter obliegt die Möglichkeit Beschwerden zu löschen.
 
 == Technische Schulden
+
+=== JavaDoc
+
+Im gesamten Package Application fehlen die JavaDoc-Kommentare für die Methoden. Dieses Package wurde Sascha Seiffert
+zugeteilt, der dieser Aufgabe bis zur Abgabe nicht nachkam.
+
 === Quality Gates
 Bewertung: A (sehr gut) bis E (sehr schlecht) +
 Alle in SonarQube voreingestellten Quality Gates werden von der Anwendung mit der Bewertung A erfüllt.

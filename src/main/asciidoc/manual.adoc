@@ -14,6 +14,7 @@
 | Version | Bearbeitungsdatum | Autor
 | 0.1     | 14.01.2020        | Ylvi Bachmann
 | 0.2     | 17.01.2020        | Ylvi Bachmann
+|0.3      | 17.01.2020        | Isabell Zorr
 |===
 
 toc::[]
@@ -32,10 +33,22 @@ Password: 123
 
 Der Boss-Account (oder auch Vorstandsvorsitzender) hat Berechtigung auf alle Seiten zuzugreifen.
 
+=== Informationen zum Ändern des Passworts und der Email Adresse
+Unter dem Reiter "Meine Daten" befindet sich sowohl ein Unterpunkt "Email ändern" als auch "Passwort ändern".
+Der Nutzer navigiert einfach zu dieser Seite, gibt die gewünschten Daten ein und speichert diese. Beim nächsten
+Login kann er sich mit seinen neuen Login Daten anmelden.
+
 === Informationen zur Mitgliederverwaltung
 Über die Navigationsleiste "Mitglieder" erscheint eine Übersicht aller Mitglieder der Kleingartenanlage. Hier können
 wichtige Daten wie Namen, Emails und Rollen entnommen und neue Pächter hinzugefügt werden. Wird nun der Name oder
-die Email eines Pächters angeklickt, erscheint die Detailseite mit ausführlicheren Daten des Pächters. 
+die Email eines Pächters angeklickt, erscheint die Detailseite mit ausführlicheren Daten des Pächters. Durch das
+Betätigen des Stift-Buttons über der oberen linken Ecke der Tabelle kann der Pächter bearbeitet werden. In der Bearbeitungsansicht
+ist an der gleichen Stelle wie vorher der Stift-Button nun ein roter Kreuz-Button. Durch Betätigung diesens wird die
+Bearbeitung des Pächters abgebrochen und die Übersichtsseite dieses Pächters erscheint wieder. Sollen doch Änderungen
+gespeichert werden, befindet sich unter der Tabelle ein Button mit "Änderungen speichern". Danach gelangt man ebenfalls
+auf die Detailseite des Pächters. Soll der Pächter deaktiviert werden, so ist unter der Tabelle mit seinen Details ein
+Button "Pächter deaktivieren". Dieser anonymisiert alle Daten des Pächters bis auf seine Email für etwaige Rücksprachen.
+
 
 === Informationen zu gemieteten Parzellen
 Der angemeldete Nutzer kann sich die gespeicherten Informationen zu seinen aktuell gemieteten Parzellen durch Auswahl des
@@ -88,10 +101,26 @@ seine aktuelle und vollständige Jahresabrechnung in "Meine Parzelle" -> "Meine 
 seine angemeldete Email bekommen. Am Ende des Abrechnungszeitraums wird der Vorstandsvorsitzende alle Jahresabrechnungen vom letzten
 Jahr abschließen, um eine neue Rechnung für das nächste Jahr vorzubereiten.
 
-=== Infos über geplante Veranstaltungen und Feste (News)
+=== Informationen über geplante Veranstaltungen und Feste (News)
 
 Alle Nutzer und Gäste können die veröffentlichten Newseinträge auf der Homeseite der Anwendung
 lesen und sich über die geplanten Veranstaltungen und Feste informieren.
 
 Nur der Vorstandvorsitzender kann neue Einträge hinzufügen oder die aktuellen
 verwalten (bearbeiten und löschen).
+
+=== Informationen über die Erstellung einer Beschwerde
+
+Ein eingeloggter Nutzer kann Beschwerden über eine Parzelle erstellen
+Dazu navigiert er zunächst über die Ansicht der Parzellen zur Detailseite einer Parzelle über die er eine Beschwerde verfassen
+möchte. Dort geht er über das auf der
+Seite befindliche Drop-Down-Menü auf "Beschwerde verfassen". Hier gelangt er nun zum Formular zur Erstellung einer Beschwerde.
+Nach dem Ausfüllen aller Felder, geht er auf Beschwerde abschicken. Diese wird gespeichert und er gelangt zur Übersichtsseite
+seiner Beschwerden, die er verfasst hat. Hat er noch keine Beschwerden verfasst, ist die Liste leer.
+
+=== Informationen über die Verwaltung und Bearbeitung der Beschwerden durch einen Obmann oder dem Vorstandsvorsitzenden oder seinem Stellvertreter
+Über den Reiter "Beschwerden" erhält der Obmann alle ihm zugeordneten Beschwerden. Der Vorstandsvorsitzende und der Stellvertreter sehen eine
+Übersicht aller Beschwerden. Hier hat der Obmann nun die Möglichkeit die Beschwerden zu Bearbeiten, einzusehen, von
+wem sie gestellt wurden und was die Gründe waren. Nachdem er sich abseits der Software um diese gekümmert hat, kann er
+ihren Status auf "FINISHED" setzen, um die Abarbeitung der Beschwerde zu verdeutlichen. Dies kann auch der Nutzer sehen,
+der die Beschwerde verfasste. Dem Vorstandsvorsitzendem und dem Stellvertreter obliegt die Möglichkeit Beschwerden zu löschen.
