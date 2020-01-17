@@ -1,0 +1,76 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2019/20
+// Auch wenn der Bogen nicht anonymisiert ist, dürfen Sie gern Ihre Meinung offen kundtun.
+// Sowohl positive als auch negative Anmerkungen werden gern gesehen und zur stetigen Verbesserung genutzt.
+// Versuchen Sie in dieser Auswertung also stets sowohl Positives wie auch Negatives zu erwähnen.
+
+**Von:** Ylvi Bachmann
+
+**Gruppe:** 43
+
+== Was habe ich gelernt?
+// Ausführung der positiven und negativen Erfahrungen, die im Softwarepraktikum gesammelt wurden
+Die größte Weiterentwicklung während des Praktikums, denke ich, hatte ich im Bereich der Kommunikation und effektiven
+Zusammenarbeit mit den anderen Gruppenmitgliedern. Leider musste ich verstellen, dass nicht alle in der Gruppe genauso
+motiviert waren wie ich bzw. deutlich andere Ansprüche an ihre geleistete Arbeit stellten. Für mich war der Umgang damit
+ein großes Problem, an welchem ich auch in Zukunft weiter arbeiten werde. +
+Ich habe gelernt, dass eine gute Organisation in einem großen Projekt über Erfolg oder Misserfolg entscheiden kann und
+dabei sowohl eine klare Aufgabenstellung und gute Problemanalyse als auch eine koordinierte Teamarbeit wichtig ist. +
+Darüber hinaus konnte ich während des Projekts meine Programmiererfahrung vertiefen und aus den gemachten Fehlern
+Vorgehensweisen für weitere Projekte lernen. Dazu gehört auch der effektive Einsatz von externen Frameworks, wobei das
+Praktikum mich dazu angeregt hat - bedingt durch die zeitweisen Probleme mit meinem Aufgabenbereich - in Zukunft mich
+mehr darauf zu konzentrieren bereits vorhandene Lösungen für ein Problem als Inspiration zu nehmen und nicht das
+sprichwörtliche Rad neu erfinden zu wollen. +
+Insgesamt kann ich sagen, dass ich mit meinem Beitrag zum Projekt zufrieden bin, auch wenn dieser nicht "perfekt" ist.
+Ich denke, ich habe zu jedem Zeitpunkt gemäß meiner Fähigkeiten und Möglichkeiten den größtmöglichen Einsatz für das
+Team gebracht, so dass auch die anderen Teammitglieder unter anderem durch meine Hilfe neue Erfahrungen bzw. Wissen sammeln
+und ihre Fähigkeiten ausbauen konnten. Ebenso habe ich durch sie in den genannten Bereichen dazulernen und mich verbessern können.
+
+== Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+// Kurze Beschreibung der Zusammenarbeit im Team. Was lief gut? Was war verbesserungswürdig? Was würden Sie das nächste Mal anders machen?
+Anfangs habe ich mich schwer getan, mich in die Gruppe zu integrieren, da meine ehemalige Gruppe (Gruppe 44) sich
+aufgelöst hat und ich mit Sascha verspätet zur Gruppe 43 hinzukam, nachdem diese schon einen guten Zusammenhalt
+entwickelt hatte. Während des Praktikums musste ich leider verstellen, dass ich mit meinen Aufgaben unerwartet schlecht
+voran komme - sei es auf Grund von geringen Erfahrungen im Umgang mit einem großen
+Projekt, oder einer mittelmäßigen Analysephase, welche wichtige Fragen nicht klären konnte - und nicht die benötigte
+Unterstützung bzw. Hilfe von den anderen Teammitgliedern bekommen konnte. Dabei denke ich lag ihre eingeschränkte
+Hilfsbereitschaft daran, dass ich zu Beginn des Projekts ein missverständliches Bild von mir und meinen Fähigkeiten bei
+den anderen erzeugt habe und später nicht genug auf mich aufmerksam gemacht habe. Nach einigen Gesprächen mit unserem
+Tutor Uwe und unserer ScrumMasterin Isabell konnte meine Situation im restlichen Verlauf des Praktikums verbessert werden. +
+Leider waren die Vorkenntnisse, Arbeitsweisen und auch die Motivation in unserer Gruppe sehr unterschiedlich, was ein
+effektives und koordiniertes Arbeiten teilweise sehr beeinträchtigt hat. Nachdem Isabell die Position des ScrumMasters
+übernommen hat, konnte auch dieses Missverhältnis meistens gut ausgeglichen werden.
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+// Einschätzung der Arbeit mit den bereitgestellten und zusätzlich genutzten Frameworks. Was War gut? Was war verbesserungswürdig?
+Wie bereits im ersten Absatz geschildert, haben mir externe Frameworks während des Projekts an mehreren Stellen
+weitergeholfen. Dabei konnte ich auch meinen Umgang mit diesen vertiefen, beispielsweise das effektive Suchen nach
+Schlagwörtern zur Problemlösung (im Internet, der Dokumentation des Frameworks oder in Beispielprojekten). +
+Leider konnten wir in unserer Anwendung an mehreren Stellen nicht auf das SalesPointFramework zurückgreifen, da unsere
+Aufgabenstellung kein "klassischer" Onlineshop war. Darüber hinaus ist die Dokumentation des Frameworks an manchen Stellen
+zu umfangreich oder verwirrend gestaltet, während ich mich an anderen Stellen über ausführlichere Informationen zur
+Funktionsweise bzw. Verwendung gefreut hätte.
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+// Möglichst mit Beschreibung, warum die Umsetzung des von Ihnen angebrachten Vorschlages nötig ist.
+Sofern es sich realisieren lässt, wäre eine Aufteilung nach Kenntnissen der Teilnehmer hilfreich, so dass in einer Gruppe
+Fortgeschrittene und Programmieranfänger zusammenkommen. Sobald eine gute Mischung der Kenntnisse vorhanden ist, können
+sich die Gruppenmitglieder gegenseitig sehr gut unterstützen, ohne dass beispielsweise eine Person für alle anderen als
+Unterstützung da sein muss und ihre Aufgaben nur eingeschränkt erledigen kann.
+
+== Feedback für den Tutor
+// Fühlten Sie sich durch den vom Lehrstuhl bereitgestellten Tutor gut betreut? Was war positiv? Was war verbesserungswürdig?
+Unser Tutor hat sich sehr für uns eingesetzt und sich bemüht uns tatkräftig zu unterstützen, wenn es Probleme gab.
+Anfangs waren seine Erwartungen an unsere Teamleistung sehr hoch, wodurch ich mich teilweise unter Druck gesetzt fühlte,
+da ich meinte diese nicht erfüllen zu können. Im Laufe des Praktikums konnte dies verbessert werden, da Uwe uns auf
+Nachfrage offen seine Vorstellungen mitgeteilt hat. Positiv zur Atmosphäre des Projekts hat auch beigetragen, dass er
+stets bemüht war seine Erfahrungen in der Softwareentwicklung mit uns zu teilen, um unsere Fortschritte zu vergrößern und
+uns Praxiswissen näher zu bringen. +
+Teilweise fand ich es etwas schwierig ihn außerhalb der "üblichen Arbeitszeit" zu erreichen. Diese Beobachtung hängt
+sicher damit zusammen, dass er sich Zeit für seine zukünftige Familie genommen hat.
+
+== Sonstiges und Anmerkungen
+// Welche Aspekte fanden in den oben genannten Punkten keine Erwähnung?
+Während des Praktikum fand ich es sehr belastend, dass man als Teammitglied wenig Einfluss auf die Arbeit der anderen hat.
+So hat Sascha seine Arbeit am Projekt schließlich komplett eingestellt und wir standen hilflos da und mussten sehen, wie
+wir weiterarbeiten können. In solchen Situationen wäre es hilfreich, wenn die Gruppenmitglieder besser dagegen vorgehen
+könnten, dass sich jemand auf der Arbeit der anderen ausruht.

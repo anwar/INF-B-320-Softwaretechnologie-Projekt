@@ -611,23 +611,21 @@ darüber hinaus auch häufige *Minor*-Issues.
 |===
 |Priority |Beschreibung |Vorkommen |entsprechendes Quality Gate
 |Minor |Zeilen sollen nicht länger sein als 120 Zeichen|
-* 1 Vorkommen in ApplicationController
-* 1 Vorkommen in FeeController
-* 1 Vorkommen in GeneratePDFBill |Keines
+- 1 Vorkommen in ApplicationController |Keines
 |Minor |fehlende geschweifte Klammer |
-* 2 Vorkommen in ApplicationManager
-* 11 Vorkommen in Procedure
-* 5 Vorkommen in ProcedureManager |Keines
+- 2 Vorkommen in ApplicationManager
+- 11 Vorkommen in Procedure
+- 4 Vorkommen in ProcedureManager |Keines
 |Minor |zwei Statements in einer Zeile|
-* 1 Vorkommen in ApplicationManager
-* 11 Vorkommen in Procedure
-* 5 Vorkommen in ProcedureManager|Keines
+- 1 Vorkommen in ApplicationManager
+- 11 Vorkommen in Procedure
+- 4 Vorkommen in ProcedureManager|Keines
 |Critical|zu hohe kognitive Komplexität |
-* 1 Vorkommen in ProcedureController | Wartbarkeit
+- 1 Vorkommen in ProcedureController | Wartbarkeit
 |Major |zu viele return in einer Methode |
-* 1 Vorkommen in ProcedureController | Wartbarkeit
+- 1 Vorkommen in ProcedureController | Wartbarkeit
 |Major |ungenutzter Parameter |
-* 1 Vorkommen in ProcedureManager | Wartbarkeit
+- 1 Vorkommen in ProcedureManager | Wartbarkeit
 |===
 
 === Parzellenmanagement
@@ -652,7 +650,7 @@ einer Parzelle (editPlot.html) wurde Sascha Seiffert beauftragt.
 === Bewerbungen
 Feedback aus dem Cross Test, welches nicht berücksichtigt wurde
 
-Die Funktionalitäten Vorstand kann Bewerbungen bearbeiten, annehmen, löschen und ablehnen sind nicht implementiert.
+Die Funktionalitäten Vorstand kann Bewerbungen bearbeiten, annehmen, löschen und ablehnen sind nicht vollständig implementiert.
 Mit dieser Aufgabe wurde Sascha Seiffert beauftragt, der seit Anfang des Jahres nicht mehr aktiv am Projekt arbeitet,
 ohne das Team darüber informiert zu haben.
 
