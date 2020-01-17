@@ -124,3 +124,30 @@ seiner Beschwerden, die er verfasst hat. Hat er noch keine Beschwerden verfasst,
 wem sie gestellt wurden und was die Gründe waren. Nachdem er sich abseits der Software um diese gekümmert hat, kann er
 ihren Status auf "FINISHED" setzen, um die Abarbeitung der Beschwerde zu verdeutlichen. Dies kann auch der Nutzer sehen,
 der die Beschwerde verfasste. Dem Vorstandsvorsitzendem und dem Stellvertreter obliegt die Möglichkeit Beschwerden zu löschen.
+
+
+=== Termine einsehen und bearbeiten
+Vorstandsvorsitzende und Obmänner können über den Reiter Termine, in der Navigationsleiste, auf "Termine einsehen" klicken
+um sich dort alle aktuellen Termine anzeigen zu lassen. Sie können auf die rote Mülltonne klicken um den Termin zu löschen.
+Wenn Sie auf den "Stift" in der Tabellenleiste klicken, dann gelangen zum Editor für den angeklickten Termin.
+
+Dort können Sie oben alle eingetragen Parzellen einsehen, diese auch aus dem Termin entfernen. Im Unteren Abschnitt auf
+dieser Seite können Sie die Daten von einem Termin ändern. (Titel, Beschreibung, Arbeitsstunden)
+
+=== Termine erstellen
+Als Vorstandsvorsitzender können Sie über den Reiter Termine, in der Navigationsleiste, auf "Termin erstellen" klicken.
+Dadurch gelangen Sie auf eine neue Seite wo Sie nun alle Daten für einen neuen Termin eintragen können.
+(Datum, Zeit, Titel, Beschreibung)
+
+
+=== In einen Termin eintragen
+Um sich in einen Termin einzutragen müssen Sie als ein Nutzer angemeldet sein. Dann gehen Sie auf den Reiter
+"Meine Parzelle", in der Navigationsleiste und klicken danach auf "Meine Daten". Dann gelangen Sie auf die Detail Seite
+ihrer Parzelle. Dann können Sie über Tabelle auf das Optionen Feld klicken und danach klicken Sie weiter auf Termine
+anzeigen. Dann kommen Sie auf die Eintragungsseite für einen Termin. Im oberen Bereich der Seite stehen ihre Termine für
+die Sie sich eingetragen haben. Im unteren Bereich der Seite stehen die Termine für die Sie sich noch eintragen können.
+Wenn Sie sich in einen Termin eingetragen haben dann sehen den nächsten Termin, mit einer Zeitangabe wann dieser ist, im
+Bild oben bei jeder Seite.
+
+
+
