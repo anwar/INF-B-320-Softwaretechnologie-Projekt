@@ -74,7 +74,7 @@ class NewsController {
 	 * @param text for {@link NewsEntry}
 	 * @return a redirect string
 	 */
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Stellvertreter')")
 	@PostMapping(path = "/home/news/addEntry")
 	String addEntry(@RequestParam("text") String text) {
 		NewsEntry entry = new NewsEntry(text);
@@ -89,7 +89,7 @@ class NewsController {
 	 * @param id of the {@link NewsEntry} to delete
 	 * @return a redirect string
 	 */
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Stellvertreter')")
 	@PostMapping(path = "/home/news/deleteEntry/{id}")
 	String deleteEntry(@PathVariable("id") long id) {
 		NewsEntry entry = news.findById(id)
@@ -106,7 +106,7 @@ class NewsController {
 	 * @param text for the updated entry
 	 * @return a redirect string
 	 */
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Stellvertreter')")
 	@PostMapping(path = "/home/news/editEntry/{id}")
 	String editEntry(@PathVariable("id") long id, @RequestParam("text") String text) {
 		NewsEntry entry = news.findById(id)

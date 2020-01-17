@@ -88,7 +88,7 @@ public class ComplaintController {
 		Tenant tenant = tenantManager.getTenantByUserAccount(user.get());
 
 		List<Complaint> complaints = null;
-		if (tenant.hasRole("Vorstandsvorsitzender")) {
+		if (tenant.hasRole("Vorstandsvorsitzender") || tenant.hasRole("Stellvertreter")) {
 			complaints = complaintManager.getAll().toList();
 		} else if (tenant.hasRole("Obmann")) {
 			complaints = complaintManager.getForObmann(tenant);
@@ -151,7 +151,7 @@ public class ComplaintController {
 	 * @param model as {@link Model}
 	 * @return html as {@link String}
 	 */
-	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann') || hasRole('Stellvertreter')")
 	@PostMapping("/edit-complaint/{id}")
 	String showComplaintUpdateForm(@PathVariable("id") long id, Model model) {
 		Complaint complaint = complaintManager.get(id);
@@ -172,7 +172,7 @@ public class ComplaintController {
 	 * @param description of the {@link Complaint} as {@link String}
 	 * @return html as {@link String}
 	 */
-	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann') || hasRole('Stellvertreter')")
 	@PostMapping("/update-complaint/{id}")
 	String updateComplaint(@PathVariable("id") long id,
 						   @RequestParam("subject") String subject,
@@ -192,7 +192,7 @@ public class ComplaintController {
 	 * @param id identifier of {@link Complaint} as {@link Long}
 	 * @return html as {@link String}
 	 */
-	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Obmann') || hasRole('Stellvertreter')")
 	@PostMapping("/change-complaint-state/{id}")
 	String changeState(@PathVariable("id") long id) {
 		Complaint complaint = complaintManager.get(id);
@@ -215,7 +215,7 @@ public class ComplaintController {
 	 * @param obmannId identifier of the new obmann as {@link Long}
 	 * @return html as {@link String}
 	 */
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Stellvertreter')")
 	@GetMapping("/change-assigned-obmann/{id}/{obmann_id}")
 	String changeAssignedObmann(@PathVariable("id") long id,
 								@PathVariable("obmann_id") Long obmannId) {
@@ -234,7 +234,7 @@ public class ComplaintController {
 	 * @param id identifier of a {@link Complaint} as {@link Long}
 	 * @return html as {@link String}
 	 */
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Stellvertreter')")
 	@PostMapping("/delete-complaint/{id}")
 	String deleteComplaint(@PathVariable("id") long id) {
 		complaintManager.delete(id);

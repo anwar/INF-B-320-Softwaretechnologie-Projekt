@@ -45,7 +45,7 @@ class TenantController {
 	 * @return html to show list of {@link Tenant}s
 	 */
 	@GetMapping("/tenants")
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Stellvertreter')")
 	String tenants(Model model) {
 		model.addAttribute("tenantList", tenantManager.findEnabled());
 		return "tenant/tenants";
@@ -56,7 +56,7 @@ class TenantController {
 	 * @return view of the {@link Tenant} list as {@link String}
 	 */
 	@GetMapping("/pretenants")
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Stellvertreter')")
 	String pretenants(Model model){
 		model.addAttribute("preTenantList", tenantManager.findDisabled());
 		return "tenant/pretenants";
@@ -67,7 +67,7 @@ class TenantController {
 	 * @return view of the {@link Tenant} list as {@link String}
 	 */
 	@GetMapping("/deactivatetenant")
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Stellvertreter')")
 	String deactivatetenant(@RequestParam("id") String id){
 		tenantService.makePreTenant(Long.parseLong(id));
 		return "redirect:/tenants";
@@ -81,7 +81,7 @@ class TenantController {
 	 * @return html view to show the details of {@link Tenant}
 	 */
 	@GetMapping("/tenantDetails")
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Stellvertreter')")
 	String tenantDetails(@RequestParam("id") String id, Model model) {
 		model.addAttribute("tenant", tenantManager.get(Long.parseLong(id)));
 		return "tenant/tenantDetails";
@@ -95,7 +95,7 @@ class TenantController {
 	 * @return html for editing a {@link Tenant}
 	 */
 	@GetMapping("/modifyTenant")
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Stellvertreter')")
 	String modifyTenant(@RequestParam("id") Long id, Model model) {
 		model.addAttribute("tenant", tenantManager.get(id));
 		model.addAttribute("roles", TenantRole.getRoleList());
@@ -116,7 +116,7 @@ class TenantController {
 	 * @return html of the {@link Tenant}s html with saved new details of {@link Tenant}
 	 */
 	@PostMapping("/modifiedTenant")
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Stellvertreter')")
 	String modifiedTenant(@RequestParam("id") Long id,
 						  @RequestParam("forename") String forename,
 						  @RequestParam("surname") String surname,
@@ -212,7 +212,7 @@ class TenantController {
 	/**
 	 * @return View to register a new {@link Tenant} as {@link String}
 	 */
-	@PreAuthorize("hasRole('Vorstandsvorsitzender')")
+	@PreAuthorize("hasRole('Vorstandsvorsitzender') || hasRole('Stellvertreter')")
 	@GetMapping("/register")
 	String register() {
 		return "tenant/register";
