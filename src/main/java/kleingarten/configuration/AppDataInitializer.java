@@ -224,7 +224,7 @@ public class AppDataInitializer implements DataInitializer {
 		Tenant cashier = new Tenant("Bill", "Richart", "Am Bahnhof 25, 07875 Dorfdorf",
 				"0123098874326", "13.05.1968",
 				userAccountManager.create("bill", password,
-						"billy,billbill@geld.com", subTenantRole));
+						"billy.billbill@geld.com", subTenantRole));
 
 		Tenant replacement = new Tenant("Sophie", "Kirmse", "Am Teichplatz 5, 67807 Meldetsichnie",
 				"034567892132", "08.12.1988",
