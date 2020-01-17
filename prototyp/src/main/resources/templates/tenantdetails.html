@@ -1,0 +1,53 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+
+    <link th:href="@{/resources/css/table2.css}" rel="stylesheet"
+          href="../static/resources/css/table2.css" type="text/css">
+
+
+</head>
+<body>
+
+<div class="ui container">
+    <nav th:include="navigation :: navigation"></nav>
+    <div class="header-title">
+        <h1> Details</h1>
+    </div>
+    <center><div>
+
+
+        <table>
+            <tr  th:each="tenant : ${tenant}">
+                <th >ID</th>  <td th:text="${tenant.getId()}">1</td> </tr>
+            <tr>   <th>Name</th><td th:text="${tenant.getName()}">1</td> </tr>
+            <tr><th>Geburtstag</th> <td th:text="${tenant.getBirthdate()}">1</td></tr>
+            <tr><th>Adresse</th> <td th:text="${tenant.getAddress()}">1</td></tr>
+            <tr><th>Email</th> <td th:text="${tenant.getEmail()}">1</td></tr>
+            <tr><th>Telefon</th> <td th:text="${tenant.getPhonenumber()}">1</td></tr>
+
+        </table>
+    </div>
+</div>
+<div class="button-section">
+
+    <button class="button"  onclick="location.href='/modifyTenant'">Pächter bearbeiten</button>
+</div>
+
+
+    </center>
+
+</div>
+
+</body>
+</html>

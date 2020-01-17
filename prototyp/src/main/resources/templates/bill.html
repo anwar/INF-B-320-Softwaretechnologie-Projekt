@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+    <link th:href="@{/resources/css/table.css}" rel="stylesheet"
+          href="../static/resources/css/table.css" type="text/css">
+
+    <title>Rechnungen</title>
+</head>
+<body>
+<nav th:include="navigation :: navigation"/>
+<div class="header-title">
+    <h1>Rechnungen</h1>
+</div>
+<center><h2 th:text="'Nummer: ' + ${billID}" >Rechnungsnummer</h2></center>
+<div class="plotRegistration">
+    <table class="ui celled table">
+
+        <thead>
+        <tr>
+            <th scope="col" th:text = "Name"> Name </th>
+            <th scope="col" th:text = "Preis"> Preis </th>
+            <th></th>
+
+
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody th:remove="all-but-first">
+        <tr th:each=" fee : ${feeCatalog}">
+            <td scope="row" th:text="${fee.name}">Name</td>
+
+            <td th:text="${fee.prices}">Preis</td>
+            <td>
+
+                <a type="ui-button" method="get" th:value="${fee.getId()}" th:href="@{/bill/{Id}/delete (Id=${fee.id})}">Löschen</a>
+            </td>
+            <td>
+                <a type="ui-button" th:value="${fee.getId()}" th:href="@{/bill/{Id}/edit (Id=${fee.getId()})}">Bearbeiten</a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+<p>
+<div class="button-section">
+    <button class="button" onclick="location.href='/bill/add'">neue Gebühr erstellen</button></div>
+</p>
+
+</body>
+</html>

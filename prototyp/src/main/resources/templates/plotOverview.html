@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+    <link th:href="@{/resources/css/table3.css}" rel="stylesheet"
+          href="../static/resources/css/table3.css" type="text/css">
+
+
+    <title>Parzellenübersicht</title>
+</head>
+<body>
+<nav th:include="navigation :: navigation"/>
+<div class="plotRegistration">
+
+    <div class="header-title">
+        <h1>Parzellenübersicht</h1>
+    </div>
+
+    <form method="post" th:action="@{''}">
+        <div align="center">
+             <br>
+             <table >
+             <thead>
+             <tr>
+                 <th>Name</th>
+                 <th>Größe</th>
+                 <th>Beschreibung</th>
+                 <th sec:authorize="hasAnyRole('ROLE_VORSTAND')">Pächter</th>
+                 <th>Besetzt/Frei</th>
+             </tr>
+             </thead>
+             <tbody th:remove="all-but-first">
+
+             <tr th:each="plot : ${plotList}">
+
+             <td th:text="${plot.name}">Identifikator</td>
+             <td th:text="${plot.size}">20</td>
+             <td th:text="${plot.description}">Beschreibung</td>
+             <td sec:authorize="hasAnyRole('ROLE_VORSTAND')">
+                 <input type="hidden" name="plotName" th:value="${plot.name}">
+                 <select name="tenantID">
+                     <option th:value="null">---</option>
+                     <option th:each="tenant : ${tenantList}" th:value="${tenant.id}"
+                               th:text="${tenant.name}" th:selected="${plot.matchesTenant(tenant)}"></option>
+                </select>
+             </td>
+             </tr>
+             </tbody>
+             </table>
+            <div class="button-section">
+                <input sec:authorize="hasAnyRole('ROLE_VORSTAND')" class="button" type="submit" value="Speichern"> </div>
+        </div>
+    </form>
+</div>
+            <div class="button-section" sec:authorize="hasAnyRole('ROLE_VORSTAND')">
+                <button class="button" onclick="location.href='/createPlot'" >Parzelle hinzufügen</button>
+            </div>
+</body>
+</html>

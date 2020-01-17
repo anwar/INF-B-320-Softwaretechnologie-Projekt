@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"
+            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script th:src="@{/webjars/Semantic-UI/semantic.min.js}"
+            src="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+    <link th:href="@{/webjars/Semantic-UI/semantic.min.css}" rel="stylesheet"
+          href="http://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css" type="text/css"/>
+    <link th:href="@{/resources/css/style.css}" rel="stylesheet"
+          href="../static/resources/css/style.css" type="text/css"/>
+    <title>Pächter hinzufügen</title>
+</head>
+<body>
+<nav th:include="navigation :: navigation"/>
+
+<div class="header-title">
+    <h1>Pächter hinzufügen</h1>
+</div>
+
+<center><div>
+    <form method="post" role="form" class="plotRegistration" id="form"  th:action="@{/RegistrationForm}" th:object="${form}">
+        <h3 style="font-size: 25px">Pächterdaten</h3>
+
+        <table class="tenantTable">
+            <tr>
+                <td><label for="name">Name</label></td>
+                <td><input id="name" class="text_bgImage" name="name" th:field="*{name}" type="text" required="required"/></td>
+            </tr>
+            <tr>
+                <td><label for="birthdate">Geburtstag</label></td>
+                <td><input id="birthdate" class="text_bgImage" name="birthdate" th:field="*{birthdate}" type="birthdate" required="required"/></td>
+            </tr>
+            <tr>
+                <td><label for="address">Adresse</label></td>
+                <td><input id="address"  class="text_bgImage" name="address" th:field="*{address}" type="text" required="required"/></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email</label></td>
+                <td><input id="email" class="text_bgImage" name="email" th:field="*{email}" type="text" required="required"/></td>
+            </tr>
+
+            <tr>
+                <td><label for="phonenumber">Telefon</label></td>
+                <td><input id="phonenumber" class="text_bgImage" name="phonenumber" th:field="*{phonenumber}" type="number" required="required"/></td>
+            </tr>
+
+            <!-- <tr>
+                <td><label for="status">Status</label></td>
+                <td>
+                    <select id=status th:field="*{status}">
+                        <option th:value="'frei'">Frei</option>
+                        <option th:value="'besetzt'">Besetzt</option>
+                    </select>
+                </td>
+            </tr> -->
+        </table>
+        <div class="button-section">
+        <button type="submit" class="ui button">Neue Pächter hinzufügen</button></div>
+        <br/>
+        <br/>
+    </form>
+</div></center>
+</body>
+</html>
