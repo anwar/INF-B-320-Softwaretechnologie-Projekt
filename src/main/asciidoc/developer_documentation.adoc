@@ -490,9 +490,10 @@ image::models/analysis/kleingarten.appointment.png[]
 [options="header"]
 |===
 | Klasse/Enumeration | Description
-| Appointment            | Die Appointment Klasse beschreibt einen Termin.
-| AppointmentController  | Die AppointmentController Klasse ist verantwortlich für das Erzeugen, Löschen und Bearbeiten eines Termins.
-| AppointmentManager | Der AppointmentManager ist verantwortlich für die Aufbewahrung und Verwaltung der Termine.
+| WorkAssignment            | Die WorkAssignment Klasse beschreibt einen Termin.
+| WorkAssignmentController  | Die WorkAssignmentController Klasse ist verantwortlich für das Erzeugen, Löschen und Bearbeiten eines Termins.
+| WorkAssignmentManager | Der WorkAssignmentManager ist verantwortlich für die Aufbewahrung und Verwaltung der Termine.
+| WorkAssignmentTimer | Der WorkAssignmentTimer ist verantwortlich die Berechnung und Erstellung des Timers zum nächsten Termin.
 |===
 
 === Beschwerden
@@ -615,13 +616,15 @@ wem sie gestellt wurden und was die Gründe waren. Nachdem er sich abseits der S
 ihren Status auf "FINISHED" setzen, um die Abarbeitung der Beschwerde zu verdeutlichen. Dies kann auch der Nutzer sehen,
 der die Beschwerde verfasste. Dem Vorstandsvorsitzendem und dem Stellvertreter obliegt die Möglichkeit Beschwerden zu löschen.
 
+image::models/analysis/seq_workAssignemts_user.png[]
 
-image::models/analysis/seq_workAssignment_create.png[]
+
 Dieses Diagramm zeigt den Vorgang wenn ein Admin einen Termin erstellt. Es wird das Formular angefordert. Der Nutzer gelangt auf die
 entsprechende Seite und kann dort seine Daten eintragen. Dann drückt er auf Speichern und nun wird der Termin im
 Manager abgespeichert und am Ende kann sich der Nutzer über die Seite listOfAssignments alle Termine anzeigen lassen.
 
-image::models/analysis/seq_workAssignment_user.png[]
+image::models/analysis/seq_workAssignment_create.png[]
+
 Dieses Diagramm zeigt den Vorgang wenn sich ein User in einen Termin einträgt. Er geht als erstes auf die Detail Seite seiner
 Parzelle. Klickt dann im DropDown Menü auf Termine anzeigen und gelangt dann auf eine neue Seite wo alle Termine angezeigt werden.
 Dann meldet er sich für einen Termin an und wird dann auf die Detail Seite seiner Parzelle zurück geleitet.
