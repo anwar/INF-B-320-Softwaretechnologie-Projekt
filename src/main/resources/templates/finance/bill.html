@@ -60,7 +60,7 @@
     </table>
 </div>
 
-<form method="get" sec:authorize="hasAnyRole('Vorstandsvorsitzender,Stellvertreter')"
+<form method="get" sec:authorize="hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter', 'Kassierer')"
       th:action="@{/finalize/{id}(id=${plot.getId()})}">
     <div class="button-section">
         <button class="button" style="display: inline-block;" type="submit">
