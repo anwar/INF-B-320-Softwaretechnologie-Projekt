@@ -143,7 +143,7 @@ public class FeeController {
 	 * @param model {@link Model} to add needed information
 	 * @return view as {@link String}
 	 */
-	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter')")
+	@PreAuthorize("hasAnyRole('Vorstandsvorsitzender', 'Stellvertreter', 'Kassierer')")
 	@GetMapping("/finalize/{plot}")
 	public String finalizeProcedures(@PathVariable Plot plot, Model model) {
 
