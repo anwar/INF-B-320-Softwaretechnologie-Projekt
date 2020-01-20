@@ -631,6 +631,22 @@ Dann meldet er sich für einen Termin an und wird dann auf die Detail Seite sein
 
 == Technische Schulden
 
+=== Bewerbungen Package
+Dieses Package wurde Sascha Seiffert zugeordnet. Es beinhaltet die Erstellung von Bewerbungen auf eine freie Parzelle, sowie
+Annahme und Löschung dieser Bewerbungen durch den Vorstandsvorsitzenden und dessen Stellvertreter. Durch Annahme einer
+Bewerbung sollte der vorherige Pächter zu einem Vorpächter werden, also seine Daten anonymisiert und er selbst in der Liste
+der Vorpächter in der Parzelle aufgenommen werden, und durch die bei der Bewerbung eingegebenen Daten ein neuer Pächter
+erstellt. Diesem sollte die Parzelle, auf die er sich beworben hat, zugeordnet. Letztendlich sollte der
+Status der Parzelle von "frei" auf "belegt" gesetzt werden. +
+Aufgrund der Arbeitsverweigerung durch Sascha Seiffert fehlt ein Großteil dieser Funktionalitäten. +
+Es ist möglich eine Bewerbung anzunehmen und mit den Daten einen neuen Pächter zu erstellen. Jedoch wird weder der
+Status der Parzelle geändert, noch
+dem Pächter die Parzelle zugeordnet, noch der alte Pächter zu einem Vorpächter gemacht. +
+Letzte Funktionalität haben
+wir durch einen extra Button "Pächter deaktivieren" auf der Pächterdetailseite und einer weiteren Seite "Vorpächter" gelöst.
+Die restlichen Funktionalitäten des Packages konnten wir aus Zeitgründen leider nicht umsetzen.
+
+
 === JavaDoc
 
 Im gesamten Package Application fehlen die JavaDoc-Kommentare für die Methoden. Dieses Package wurde Sascha Seiffert
