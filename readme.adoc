@@ -1,3 +1,5 @@
+> swt19w43
+
 = Kickstart
 
 The kickstart module is a template project to bootstrap the Java project in the Software Engineering lab.
